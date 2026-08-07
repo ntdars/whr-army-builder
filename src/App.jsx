@@ -8,6 +8,15 @@ import { storage } from "./storage.js";
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+body {
+  background: #ECE0C4;
+}
+
 .whr-root {
   --paper: #ECE0C4;
   --paper-2: #E2D3A9;
@@ -1629,6 +1638,10 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
             </div>
           )}
         </section>
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: 48 }}>
+        <p className="whr-serif-italic" style={{ fontSize: 13, color: "var(--ink-faint)" }}>Maintained by ntdars</p>
       </div>
     </div>
   );
