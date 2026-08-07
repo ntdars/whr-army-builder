@@ -340,6 +340,73 @@ const STATS = {
   "Arbaal the Undefeated": { M: 4, WS: 9, BS: 8, S: 6, T: 5, W: 3, I: 8, A: "2D6", Ld: 10 },
   "Egrimm van Horstmann": { M: 4, WS: 6, BS: 6, S: 5, T: 5, W: 4, I: 9, A: 4, Ld: 10 },
   "Khorne's Hound": { M: 8, WS: 6, BS: 0, S: 6, T: 5, W: 3, I: 10, A: 4, Ld: 10 },
+  "Beastman Lord": { M: 4, WS: 7, BS: 6, S: 4, T: 5, W: 4, I: 6, A: 4, Ld: 9 },
+  "Beastman Hero": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 3, I: 5, A: 3, Ld: 8 },
+  "Beastman BSB": { M: 4, WS: 5, BS: 4, S: 4, T: 4, W: 3, I: 4, A: 2, Ld: 7 },
+  "Beastman Shaman Lord": { M: 4, WS: 4, BS: 3, S: 4, T: 5, W: 5, I: 6, A: 3, Ld: 8 },
+  "Beastman Master Shaman": { M: 4, WS: 4, BS: 3, S: 4, T: 5, W: 4, I: 5, A: 2, Ld: 7 },
+  "Beastman Shaman Champion": { M: 4, WS: 4, BS: 3, S: 4, T: 5, W: 3, I: 4, A: 1, Ld: 7 },
+  "Beastman Shaman": { M: 4, WS: 4, BS: 3, S: 3, T: 5, W: 2, I: 4, A: 1, Ld: 7 },
+  "Minotaur Lord": { M: 6, WS: 7, BS: 6, S: 6, T: 5, W: 5, I: 6, A: 5, Ld: 10 },
+  "Minotaur Hero": { M: 6, WS: 6, BS: 5, S: 6, T: 5, W: 4, I: 5, A: 4, Ld: 9 },
+  "Minotaur BSB": { M: 6, WS: 5, BS: 4, S: 6, T: 4, W: 4, I: 4, A: 3, Ld: 8 },
+  "Dragon Ogre Lord": { M: 7, WS: 7, BS: 5, S: 6, T: 6, W: 6, I: 5, A: 6, Ld: 9 },
+  "Dragon Ogre Hero": { M: 7, WS: 6, BS: 4, S: 6, T: 6, W: 5, I: 4, A: 5, Ld: 8 },
+  "Centaur Lord": { M: 8, WS: 6, BS: 7, S: 5, T: 4, W: 4, I: 6, A: 5, Ld: 9 },
+  "Centaur Hero": { M: 8, WS: 5, BS: 6, S: 5, T: 4, W: 3, I: 5, A: 4, Ld: 8 },
+  "Centaur BSB": { M: 8, WS: 4, BS: 5, S: 5, T: 3, W: 3, I: 4, A: 3, Ld: 7 },
+  "Beastmen Ungors": { M: 4, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 3, A: 1, Ld: 6 },
+  "Beastmen Gors": { M: 4, WS: 4, BS: 3, S: 3, T: 4, W: 2, I: 3, A: 1, Ld: 7 },
+  "Beastmen Bestigors": { M: 4, WS: 5, BS: 3, S: 4, T: 4, W: 2, I: 3, A: 1, Ld: 7 },
+  "Gor Beastmasters": { M: 5, WS: 4, BS: 3, S: 3, T: 5, W: 2, I: 3, A: 1, Ld: 7 },
+  "Minotaurs": { M: 6, WS: 4, BS: 3, S: 5, T: 4, W: 3, I: 3, A: 2, Ld: 8 },
+  "Dragon Ogres": { M: 7, WS: 4, BS: 2, S: 5, T: 5, W: 4, I: 2, A: 3, Ld: 7 },
+  "Trolls": { M: 6, WS: 3, BS: 1, S: 5, T: 4, W: 3, I: 1, A: 3, Ld: 4 },
+  "Centaurs": { M: 8, WS: 3, BS: 4, S: 4, T: 3, W: 2, I: 3, A: 2, Ld: 7 },
+  "Beastmen Champion": { M: 4, WS: 5, BS: 4, S: 4, T: 4, W: 2, I: 4, A: 2, Ld: 7 },
+  "Minotaur Champion": { M: 6, WS: 5, BS: 4, S: 6, T: 4, W: 3, I: 4, A: 3, Ld: 8 },
+  "Dragon Ogre Champion": { M: 7, WS: 5, BS: 3, S: 6, T: 5, W: 4, I: 3, A: 4, Ld: 7 },
+  "Centaur Champion": { M: 8, WS: 4, BS: 5, S: 5, T: 3, W: 2, I: 4, A: 3, Ld: 7 },
+  "Tuskgors": { M: 7, WS: 3, BS: 0, S: 4, T: 4, W: 1, I: 2, A: 1, Ld: 3 },
+  "Extra Heavy Chariot": { M: "-", WS: "-", BS: "-", S: 5, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
+  "Giants and Cyclopes": { M: 6, WS: 3, BS: 3, S: 7, T: 6, W: 6, I: 3, A: "Spec", Ld: 6 },
+  "Jabberslythe": { M: 8, WS: 4, BS: 4, S: 5, T: 5, W: 5, I: 4, A: 5, Ld: 9 },
+  "Bloodthirster": { M: 8, WS: 10, BS: 10, S: 8, T: 7, W: 10, I: 8, A: 11, Ld: 10 },
+  "Lord of Change": { M: 8, WS: 9, BS: 10, S: 7, T: 7, W: 7, I: 10, A: 6, Ld: 10 },
+  "Great Unclean One": { M: 4, WS: 7, BS: 7, S: 7, T: 8, W: 10, I: 4, A: 7, Ld: 10 },
+  "Keeper of Secrets": { M: 6, WS: 9, BS: 10, S: 7, T: 7, W: 8, I: 7, A: 6, Ld: 10 },
+  "Daemon Prince": { M: 6, WS: 7, BS: 7, S: 6, T: 5, W: 4, I: 8, A: 5, Ld: 9 },
+  "Gargoyles": { M: 4, WS: 3, BS: 0, S: 4, T: 3, W: 1, I: 4, A: 1, Ld: 2 },
+  "Bloodletters of Khorne": { M: 4, WS: 5, BS: 5, S: 5, T: 3, W: 1, I: 6, A: 2, Ld: 8 },
+  "Flesh Hounds of Khorne": { M: 10, WS: 5, BS: 0, S: 5, T: 4, W: 2, I: 6, A: 1, Ld: 8 },
+  "Pink Horrors of Tzeentch": { M: 4, WS: 5, BS: 5, S: 4, T: 3, W: 1, I: 6, A: 2, Ld: 8 },
+  "Blue Horrors of Tzeentch": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 7, A: 1, Ld: 8 },
+  "Flamers of Tzeentch": { M: 9, WS: 3, BS: 5, S: 5, T: 4, W: 2, I: 4, A: 2, Ld: 8 },
+  "Plaguebearers of Nurgle": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 1, I: 4, A: 2, Ld: 8 },
+  "Nurglings": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 3, I: 4, A: 3, Ld: 8 },
+  "Daemonettes of Slaanesh": { M: 5, WS: 6, BS: 6, S: 4, T: 3, W: 1, I: 6, A: 3, Ld: 8 },
+  "Fiends of Slaanesh": { M: 10, WS: 4, BS: 0, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 8 },
+  "Bloodletter Champion": { M: 4, WS: 6, BS: 6, S: 6, T: 3, W: 1, I: 7, A: 3, Ld: 8 },
+  "Pink Horror Champion": { M: 4, WS: 6, BS: 6, S: 5, T: 3, W: 1, I: 7, A: 3, Ld: 8 },
+  "Plaguebearer Champion": { M: 4, WS: 6, BS: 6, S: 5, T: 4, W: 1, I: 5, A: 3, Ld: 8 },
+  "Daemonette Champion": { M: 5, WS: 7, BS: 7, S: 5, T: 3, W: 1, I: 7, A: 4, Ld: 8 },
+  "Chaos Dwarf Crewman": { M: 4, WS: 4, BS: 3, S: 3, T: 4, W: 1, I: 2, A: 1, Ld: 9 },
+  "Hellcannon Daemon": { M: "2D6", WS: 4, BS: 3, S: 5, T: 6, W: 5, I: 8, A: 5, Ld: 4 },
+  "Valkia the Bloody": { M: 4, WS: 10, BS: 9, S: 5, T: 5, W: 3, I: 9, A: 5, Ld: 10 },
+  "Prince Sigvald": { M: 4, WS: 9, BS: 9, S: 5, T: 5, W: 3, I: 9, A: 5, Ld: 10 },
+  "Vilitch the Curseling": { M: 4, WS: 6, BS: 6, S: 5, T: 5, W: 4, I: 9, A: 4, Ld: 9 },
+  "Festus the Leechlord": { M: 4, WS: 6, BS: 6, S: 5, T: 6, W: 2, I: 7, A: 2, Ld: 8 },
+  "Galrauch": { M: 6, WS: 6, BS: 6, S: 7, T: 7, W: 7, I: 6, A: 8, Ld: 8 },
+  "Kholek Suneater": { M: 7, WS: 7, BS: 5, S: 6, T: 6, W: 6, I: 5, A: 6, Ld: 10 },
+  "Skulltaker": { M: 4, WS: 6, BS: 6, S: 6, T: 3, W: 2, I: 7, A: 3, Ld: 8 },
+  "Karanak": { M: 10, WS: 6, BS: 0, S: 6, T: 4, W: 3, I: 7, A: 3, Ld: 8 },
+  "Skarbrand": { M: 6, WS: 10, BS: 10, S: 8, T: 7, W: 10, I: 8, A: 11, Ld: 10 },
+  "The Blue Scribes": { M: 4, WS: 6, BS: 6, S: 5, T: 3, W: 2, I: 7, A: 3, Ld: 8 },
+  "The Changeling": { M: 4, WS: 3, BS: 4, S: 3, T: 3, W: 2, I: 3, A: 1, Ld: 8 },
+  "Epidemius": { M: 4, WS: 6, BS: 6, S: 5, T: 4, W: 1, I: 5, A: 3, Ld: 8 },
+  "Ku'Gath Plaguefather": { M: 4, WS: 7, BS: 7, S: 7, T: 8, W: 10, I: 4, A: 7, Ld: 10 },
+  "The Masque of Slaanesh": { M: 5, WS: 7, BS: 7, S: 5, T: 3, W: 2, I: 7, A: 4, Ld: 8 },
+  "Belakor": { M: 6, WS: 7, BS: 7, S: 6, T: 5, W: 4, I: 8, A: 5, Ld: 10 },
   "Elven Prince": { M: 5, WS: 7, BS: 7, S: 4, T: 4, W: 3, I: 9, A: 4, Ld: 10 },
   "Elven Hero (High Elf)": { M: 5, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
   "Elven BSB (High Elf)": { M: 5, WS: 5, BS: 5, S: 4, T: 3, W: 2, I: 7, A: 2, Ld: 8 },
@@ -395,7 +462,7 @@ const WOOD_ELVES_MAGIC_ITEMS = [
   { id: "sp-netlings", name: "An Annoyance of Netlings", cost: 50, cat: "sprite", desc: "In a challenge, bearer can only be hit on natural 6s." },
   { id: "sp-despairs", name: "A Lamentation of Despairs", cost: 60, cat: "sprite", desc: "Bound spell, one use. One model anywhere tests LD or suffers 1D6 wounds, no save, no LoS required." },
 ];
-const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars" };
+const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners" };
 const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 /* ============================================================================
@@ -1029,24 +1096,105 @@ const EMPIRE = {
 const MARKS_WARRIOR = ["Khorne", "Tzeentch", "Nurgle", "Slaanesh", "Chaos Undivided"];
 const MARKS_SORCERER = ["Tzeentch", "Nurgle", "Slaanesh", "Chaos Undivided"];
 const CHAOS_ARMOUR_OPTIONS = ["Chaos Armour (default)", "No armour", "Light armour", "Heavy armour"];
+const CHAOS_CHAMPION_ITEM_CATEGORIES = ["weapon", "armour", "enchanted", "arcane", "banner", "chaosbanner", "reward"];
+
+const CHAOS_MAGIC_ITEMS = [
+  { id: "cx-swordofrust", name: "Sword of Rust", cost: 10, cat: "weapon", desc: "-2 to armour save. Enemy wounded loses all mundane (non-magic) armour, including steed barding." },
+  { id: "cx-axesofkhorgor", name: "Axes of Khorgor", cost: 25, cat: "weapon", desc: "Beastmen characters only. Additional hand weapon. Re-roll failed to-hit rolls." },
+  { id: "cx-chaosrunesword", name: "Chaos Runesword", cost: 35, cat: "weapon", desc: "+1 WS, +1 S, +1 attack." },
+  { id: "cx-whipofecstasy", name: "Whip of Ecstasy", cost: 40, cat: "weapon", desc: "Mark of Slaanesh only. Additional hand weapon; one extra special attack — if it hits, that enemy model can't strike again this combat round." },
+  { id: "cx-huntingspear", name: "Hunting Spear", cost: 40, cat: "weapon", desc: "Beastmen characters only. Missile, range 24\", S6, no armour save, 1D3 wounds, penetrates like a bolt thrower shot." },
+  { id: "cx-swordofchange", name: "Sword of Change", cost: 60, cat: "weapon", desc: "Mark of Chaos Undivided only. An enemy wounded but not killed by this blade turns into a Chaos Spawn under your control." },
+  { id: "cx-helmmanyeyes", name: "Helm of Many Eyes", cost: 10, cat: "armour", desc: "Chaos Champions only. Always strikes first." },
+  { id: "cx-hideoftheenemy", name: "Hide of the Enemy", cost: 20, cat: "armour", desc: "Beastmen characters only. Light armour, +2 to armour save." },
+  { id: "cx-crimsonarmour", name: "Crimson Armour of Dargan", cost: 30, cat: "armour", desc: "Chaos Champions only. Chaos Armour (4+ save). Enemies attacking the bearer must pass an Ld test on their own basic Ld or forfeit all attacks that round." },
+  { id: "cx-chaosruneshield", name: "Chaos Runeshield", cost: 40, cat: "armour", desc: "All magic melee weapons used against the bearer lose their magic properties." },
+  { id: "cx-redamulet", name: "Red Amulet", cost: 25, cat: "enchanted", desc: "Mark of Khorne only. Armies with no wizards/bound spells only. Dispels as a Dispel Magic Scroll, one use. Only one per army." },
+  { id: "cx-spellbreakeridol", name: "Spell Breaker Idol", cost: 75, cat: "enchanted", desc: "Mark of Khorne only. Armies with no wizards/bound spells only. Casts and dispels like a level 4 wizard." },
+  { id: "cx-ritualdagger", name: "Ritual Dagger", cost: 10, cat: "arcane", desc: "Beastmen Shamans only. Magic weapon, +1S. Each enemy killed by it grants one extra magic card next magic phase." },
+  { id: "cx-crystalskull", name: "Crystal Skull", cost: 30, cat: "arcane", desc: "Chaos Sorcerers only. Once/magic phase, cast a spell without power cards. Roll after each use — cumulative chance to turn into a Chaos Spawn." },
+  { id: "cx-staffofnurgle", name: "Staff of Nurgle", cost: 100, cat: "arcane", desc: "Chaos Sorcerer with Mark of Nurgle only. Bound spell, 12\" range, auto-slays the target (no save, no Look Out Sir). Cumulative chance to exhaust each use. Doesn't work vs. Great Unclean One, Lord Skrolk, or Nurgle-marked models." },
+  { id: "cx-herdstoneshard", name: "Herdstone Shard", cost: 100, cat: "arcane", desc: "Beastmen Shamans only. One extra magic card per magic phase." },
+  { id: "cx-painandpleasure", name: "Banner of Pain and Pleasure", cost: 10, cat: "banner", desc: "Mark of Slaanesh regiments only. An enemy that could charge this unit must pass an Ld test on 3D6 (2D6 if immune to psychology) or is forced to charge it." },
+  { id: "cx-barelysuppressed", name: "Banner of Barely Suppressed Fury", cost: 10, cat: "banner", desc: "Mark of Khorne regiments only. Unbreakable on the turn they charge." },
+  { id: "cx-pestilentstandard", name: "Pestilent Standard", cost: 25, cat: "banner", desc: "Mark of Nurgle regiments only. Casts Cloud of Flies as a bound spell (12\" range, victim can't move/shoot, remains in play)." },
+  { id: "cx-iconendlesswar", name: "Icon of Endless War", cost: 50, cat: "banner", desc: "Mark of Khorne regiments only. +1D6 to charge move; frenzied models must attempt any possible charge." },
+  { id: "cx-iconbloodgod", name: "Icon of the Blood God", cost: 50, cat: "banner", desc: "Mark of Khorne regiments only. Natural dispel 2+." },
+  { id: "cx-fleshbanner", name: "Flesh Banner", cost: 50, cat: "banner", desc: "Mark of Tzeentch regiments only. Enemies in base contact with the standard bearer suffer 1D6 S4 hits at the start of each melee phase (counts toward combat res)." },
+  { id: "cx-witheringeye", name: "Withering Eye Banner", cost: 50, cat: "banner", desc: "Mark of Tzeentch regiments only. Enemies charging this unit must pass an Ld test on 3D6 (2D6 if immune to psychology) or don't move that turn." },
+  { id: "cx-bannerofbeast", name: "Banner of the Beast", cost: 60, cat: "banner", desc: "Ungor/Gor/Bestigor regiments and Beastmen characters only. +1 Strength." },
+  { id: "cx-soporificmusk", name: "Banner of Soporific Musk", cost: 75, cat: "banner", desc: "Mark of Slaanesh regiments only. Enemies in melee with this regiment suffer -1 to hit." },
+  { id: "cx-thousandpoxes", name: "Banner of a Thousand Poxes", cost: 100, cat: "banner", desc: "Mark of Nurgle regiments only. +1 Toughness." },
+  { id: "cb-rapturous", name: "Rapturous Standard", cost: 10, cat: "chaosbanner", desc: "BSB with Mark of Slaanesh only, single-Power army only. The regiment and BSB become unbreakable." },
+  { id: "cb-rage", name: "Banner of Rage", cost: 20, cat: "chaosbanner", desc: "BSB with Mark of Khorne only, single-Power army only. The regiment and BSB gain frenzy (double-attack bonus doesn't apply to mounts)." },
+  { id: "cb-iron", name: "Iron Standard", cost: 30, cat: "chaosbanner", desc: "BSB with Mark of Chaos Undivided only, single-Power army only. The regiment and BSB may re-roll any failed save." },
+  { id: "cb-blasted", name: "Blasted Standard", cost: 40, cat: "chaosbanner", desc: "BSB with Mark of Tzeentch only, single-Power army only. Casts Blue Fire of Tzeentch as a bound spell once/magic phase (18\", D6 S4 hits, normal saves)." },
+  { id: "cb-disease", name: "Disease Banner", cost: 50, cat: "chaosbanner", desc: "BSB with Mark of Nurgle only, single-Power army only. When the regiment/BSB suffers a melee wound, on a 5-6 the attacker also suffers a wound, no save." },
+  { id: "cb-hellonearth", name: "Hell on Earth", cost: 60, cat: "chaosbanner", desc: "BSB only, single-Power army only. All friendly Daemons on the table gain +1 to Daemonic/armour save while the banner stands." },
+  { id: "cr-manyarms", name: "Many Arms", cost: 10, cat: "reward", desc: "Chaos Reward (all Marks). Three hand weapons for +2 attacks, OR two shields + hand weapon for +2 armour save, OR shield + two hand weapons for +1 save and +1 attack." },
+  { id: "cr-scalyskin", name: "Scaly Skin", cost: 10, cat: "reward", desc: "Chaos Reward (all Marks). +1 armour save." },
+  { id: "cr-macetail", name: "Mace Tail", cost: 15, cat: "reward", desc: "Chaos Reward (all Marks). +1 extra attack at S5." },
+  { id: "cr-massivehorns", name: "Massive Horns", cost: 20, cat: "reward", desc: "Chaos Reward (all Marks). +1 attack on profile." },
+  { id: "cr-scorpiontail", name: "Scorpion Tail", cost: 20, cat: "reward", desc: "Chaos Reward (all Marks). +1 extra attack at S4, no armour save allowed." },
+  { id: "cr-hideousappearance", name: "Hideous Appearance", cost: 10, cat: "reward", desc: "Chaos Reward, Mark of Chaos Undivided only. Causes fear." },
+  { id: "cr-ironhardskin", name: "Iron Hard Skin", cost: 25, cat: "reward", desc: "Chaos Reward, Mark of Chaos Undivided only. +2 armour save." },
+  { id: "cr-regeneration", name: "Regeneration", cost: 40, cat: "reward", desc: "Chaos Reward, Mark of Chaos Undivided only. Regenerate on 4+." },
+  { id: "cr-wings", name: "Wings", cost: 60, cat: "reward", desc: "Chaos Reward, Mark of Chaos Undivided only. Grants the fly ability." },
+  { id: "cr-battlefury", name: "Battle Fury of Khorne", cost: 25, cat: "reward", desc: "Chaos Reward, Mark of Khorne only. +2 attacks on the charge." },
+  { id: "cr-collarofkhorne", name: "Collar of Khorne", cost: 40, cat: "reward", desc: "Chaos Reward, Mark of Khorne only. Natural dispel 3+." },
+  { id: "cr-khornechosen", name: "Khorne's Chosen", cost: 125, cat: "reward", desc: "Chaos Reward, Mark of Khorne only. Wounded enemies are slain outright." },
+  { id: "cr-breathefire", name: "Breathe Fire", cost: 50, cat: "reward", desc: "Chaos Reward, Mark of Tzeentch only. Breathe fire in the shooting phase (teardrop template, S4 flaming), even while engaged in melee." },
+  { id: "cr-destinytzeentch", name: "Destiny of Tzeentch", cost: 70, cat: "reward", desc: "Chaos Reward, Mark of Tzeentch only. When wounded, roll a D6: 1-3 negates the wound and loses this reward, 4-6 negates the wound and keeps it." },
+  { id: "cr-nurglerot", name: "Nurgle's Rot", cost: 25, cat: "reward", desc: "Chaos Reward, Mark of Nurgle only. After striking in melee, enemies in base contact suffer a wound (no save) on a 6." },
+  { id: "cr-cloudofflies", name: "Nurgle's Cloud of Flies", cost: 40, cat: "reward", desc: "Chaos Reward, Mark of Nurgle only. Enemies in base contact suffer -1 to hit against any target." },
+  { id: "cr-foulodour", name: "Nurgle's Foul Odour", cost: 50, cat: "reward", desc: "Chaos Reward, Mark of Nurgle only. Enemies in base contact with the champion or his regiment suffer -2 WS." },
+  { id: "cr-gazeofslaanesh", name: "Gaze of Slaanesh", cost: 25, cat: "reward", desc: "Chaos Reward, Mark of Slaanesh only. Models trying to strike the champion in melee suffer -1 attack." },
+  { id: "cr-allureofslaanesh", name: "Allure of Slaanesh (Chaos Reward)", cost: 25, cat: "reward", desc: "Chaos Reward, Mark of Slaanesh only. Enemies trying to hit the champion must pass an Ld test on 3D6 (2D6 if immune to psychology) or pick another target." },
+  { id: "dr-small", name: "Small", cost: 0, cat: "daemonicreward", desc: "Daemonic Reward, Daemon Prince only. Infantry-size base, M reduced to 5, may join a Daemon regiment of the same Power. Can't take Wings, but may carry the battle standard." },
+  { id: "dr-chaosarmour", name: "Chaos Armour (Daemonic)", cost: 10, cat: "daemonicreward", desc: "Daemonic Reward (all). Replaces Daemonic Save with a 4+ armour save (3+ if mounted)." },
+  { id: "dr-battlemaster", name: "Battle Master", cost: 10, cat: "daemonicreward", desc: "Daemonic Reward (all). WS10." },
+  { id: "dr-daemonicstrength", name: "Daemonic Strength", cost: 20, cat: "daemonicreward", desc: "Daemonic Reward (all). +1 Strength." },
+  { id: "dr-magicresistant", name: "Magic Resistant", cost: 25, cat: "daemonicreward", desc: "Daemonic Reward (all). 4+ natural dispel." },
+  { id: "dr-massivestature", name: "Massive Stature", cost: 25, cat: "daemonicreward", desc: "Daemonic Reward (all). +1 Wound." },
+  { id: "dr-dispelmagic", name: "Dispel Magic", cost: 25, cat: "daemonicreward", desc: "Daemonic Reward (all), spellcasters only, pure Daemon armies only. Works as a Dispel Magic Scroll, one use, one per army." },
+  { id: "dr-radiancedarkglory", name: "Radiance of Dark Glory", cost: 25, cat: "daemonicreward", desc: "Daemonic Reward (all). Living enemies within 8\" suffer -1 Ld." },
+  { id: "dr-daemonicrobes", name: "Daemonic Robes", cost: 40, cat: "daemonicreward", desc: "Daemonic Reward (all). Enemy attacks against the bearer suffer -1 Strength." },
+  { id: "dr-wardofchaos", name: "Ward of Chaos", cost: 40, cat: "daemonicreward", desc: "Daemonic Reward (all). 4+ ward save vs shooting." },
+  { id: "dr-daemonicarrogance", name: "Daemonic Arrogance", cost: 10, cat: "daemonicreward", desc: "Daemonic Reward, Chaos Undivided only. Ld12." },
+  { id: "dr-trulychosen", name: "Truly Chosen of Khorne", cost: 75, cat: "daemonicreward", desc: "Daemonic Reward, Khorne only. Bearer and nearby (3\") Khorne Daemons are unaffected by spells; remains-in-play spells touching the bearer are dispelled." },
+  { id: "dr-whipandaxe", name: "Whip and Axe of Khorne", cost: 75, cat: "daemonicreward", desc: "Daemonic Reward, Khorne only. +1 attack, all wounds multiply into 1D3." },
+  { id: "dr-destroyermagic", name: "Destroyer of Magic", cost: 75, cat: "daemonicreward", desc: "Daemonic Reward, Khorne only, mono-Khorne armies only. Works like a Dispel Scroll but auto-destroys the spell (or on 4+ if bound). One use, one per army." },
+  { id: "dr-witheringgaze", name: "Withering Gaze", cost: 50, cat: "daemonicreward", desc: "Daemonic Reward, Tzeentch only. Shooting-phase gaze attack, 18\", S5, no save, ignores Look Out Sir. Not while engaged in melee." },
+  { id: "dr-allseeingeye", name: "All-Seeing Eye of Tzeentch", cost: 50, cat: "daemonicreward", desc: "Daemonic Reward, Tzeentch only. At battle start, the enemy reveals all hidden objects (items, spells, rewards, etc.)." },
+  { id: "dr-flamestzeentch", name: "Flames of Tzeentch", cost: 75, cat: "daemonicreward", desc: "Daemonic Reward, Tzeentch only. Shoot 2D6 S4 flaming missiles at one target, 18\", BS to hit." },
+  { id: "dr-streamofcorruption", name: "Stream of Corruption", cost: 50, cat: "daemonicreward", desc: "Daemonic Reward, Nurgle only. Breath weapon (teardrop template); models more than half covered test Initiative or die outright (T7+ take 1D6 wounds instead), no save." },
+  { id: "dr-cloudofflies", name: "Cloud of Flies (Daemonic)", cost: 50, cat: "daemonicreward", desc: "Daemonic Reward, Nurgle only. Enemies in base contact suffer -1 to hit in melee, even against others." },
+  { id: "dr-tormentor", name: "Tormentor", cost: 10, cat: "daemonicreward", desc: "Daemonic Reward, Slaanesh only. Killing an enemy character in a challenge forces a panic test on all enemies within 8\" (engaged or not)." },
+  { id: "dr-allureofslaanesh", name: "Allure of Slaanesh (Daemonic Reward)", cost: 25, cat: "daemonicreward", desc: "Daemonic Reward, Slaanesh only. Enemies trying to hit the bearer must pass an Ld test on 3D6 (2D6 if immune to psychology) or pick another target." },
+  { id: "dr-razorpincers", name: "Razor Sharp Pincers", cost: 25, cat: "daemonicreward", desc: "Daemonic Reward, Slaanesh only. Magic weapon, no armour save allowed." },
+];
 
 const CHAOS = {
   key: "chaos",
   name: "Chaos",
-  tagline: "Warriors, sorcerers, and daemon-touched hosts of the Dark Powers",
-  magicItems: [],
+  tagline: "Warriors, sorcerers, beastmen, and daemon-touched hosts of the Dark Powers",
+  magicItems: CHAOS_MAGIC_ITEMS,
   armyWideRules: [
-    "A Chaos army is either a specific faction — Chaos Warriors, Beastmen, or Daemons — or a Chaos Warband (may mix all three factions, but the general must be a Chaos Warrior character, and the army must include a Chaos Warrior or Chaos Knight regiment; a Warband BSB must come from the Chaos Warrior section). Warbands and single-faction armies are dedicated to one Chaos Power (Khorne/Tzeentch/Nurgle/Slaanesh/Undivided), except single-faction armies may mix Powers. At 2000+ points a Chaos Warhost may mix Chaos Powers like a Warband. This builder currently only models the Chaos Warriors faction — Beastmen and Daemons army lists weren't in the provided rules text.",
+    "A Chaos army is either a specific faction — Chaos Warriors, Beastmen, or Daemons — or a Chaos Warband (mixes all three, general must be a Chaos Warrior character, and the army must include a Chaos Warrior or Chaos Knight regiment; a Warband BSB must come from the Chaos Warrior section). Warbands and single-faction armies are dedicated to one Chaos Power, except single-faction armies may mix Powers. At 2000+ points, a Chaos Warhost mixes Powers like a Warband. This builder's catalog includes all three factions together (a Warband/Warhost build) — for a pure single-faction army, just stick to the relevant subsection.",
     "Marks of Chaos: characters with opposing Marks never join the same regiment, nor a regiment carrying a banner dedicated to a different Power. Khorne grants +1 WS and frenzy (no sorcerer may take it); Tzeentch lets the bearer re-roll one personal die roll (±1 after); Nurgle grants +1T and immunity to poison/disease effects; Slaanesh makes the bearer unbreakable (but still driven off if flying and beaten); Chaos Undivided grants +1 Ld, and if the general bears it, the army may include a Chaos Abomination.",
-    "Chaos Rewards / Daemonic Rewards and Chaos Banners: this PDF excerpt didn't include the actual Chaos magic item/reward/banner list (it cut off before that section), so magic item slots exist on characters but currently have nothing to pick from — let me know if you have that section.",
-    "Chaos Armour: Chaos Champions (in the broad sense — Chaos Warrior character section characters and regimental Chaos Champions) are automatically equipped with Chaos Armour (+1 armour save) for free; it doesn't use a magic item slot and can be freely exchanged for no armour, light, or heavy armour.",
+    "Chaos Armour: Chaos Champions (Chaos Warrior character-section characters and regimental Chaos Champions) are automatically equipped with Chaos Armour (+1 armour save) for free; it doesn't use a magic item slot and can be freely exchanged for no armour, light, or heavy armour.",
+    "Chaos Rewards (Chaos Champions only) and Daemonic Rewards (Daemons only) share the same magic-item-slot pool as ordinary magic items, but are otherwise unique per army like any magic item. Chaos Banners can only be taken by a Battle Standard Bearer, and only if the whole army worships a single Chaos Power — even a Daemon BSB may then take one.",
+    "Beastmen: Ungor, Gor, and Centaur (Centigor) regiments are Unruly (animosity-equivalent) — before the movement phase, an unengaged/non-fleeing regiment of these types rolls a die; on a 1, roll again, and on that second roll a 1-5 freezes the unit for the turn (immune to psychology, can't move/shoot/cast, though wizards may still dispel) while a 6 forces a 2D6\" move toward the nearest visible enemy and a mandatory charge next turn. Pure Beastmen armies (no Warriors/Daemons) may Ambush with Gor regiments, up to 25% of the army.",
+    "Daemons: cause fear, count as magical attacks, immune to poison and to living-only effects, immune to psychology and never flee (vanish instead of fleeing), and have a 4+ Daemonic Save that's negated by magical attacks. Only a (small) Daemon Prince can join a Daemon regiment, and only one of the same Chaos Power. In a Warband/Warhost, Daemons of different Powers within 12\" of each other test Daemonic Animosity each turn (on a 1, they're moved into combat with the nearest rival Daemon unit). Musk/stench -1-to-hit effects (Nurgle, Slaanesh) don't stack and don't affect models with the same kind of effect.",
     "Chaos Gifts are an optional physical-card mini-game (draw 2 cards/turn, 1 below 2000pts) layered on top of the rules — not simulated in this builder, since it's a play-time mechanic rather than a list-building one.",
     "Chaos Spawn: models turned into Chaos Spawn during a battle lose all gear/rules; this is a battle-phase mechanic and isn't simulated here either.",
     "In armies under 2000pts, the general may be a regimental champion (or even a Chaos Spawn, though that's ill-advised) if no other character could fill the role.",
+    "The Hellcannon is a house-rule/optional unit (primarily for siege battles) requiring the opponent's permission before including it — flagged in its own entry below.",
+    "A block of special characters (Valkia, Sigvald, Vilitch, Festus, Galrauch, Kholek, and all the Daemon named characters) come from later game editions and aren't official Warhammer Renaissance — both players need to agree to their use.",
   ],
   characters: [
     {
-      id: "chaoslord", name: "Chaos Lord", cost: 208, stat: "Chaos Lord", magicItemSlots: 3,
+      id: "chaoslord", name: "Chaos Lord", cost: 208, stat: "Chaos Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
       gearNote: "Wears Chaos Armour and carries a shield by default.",
       markGroup: { options: MARKS_WARRIOR },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -1065,7 +1213,7 @@ const CHAOS = {
       ],
     },
     {
-      id: "chaoshero", name: "Chaos Hero", cost: 135, stat: "Chaos Hero", magicItemSlots: 2,
+      id: "chaoshero", name: "Chaos Hero", cost: 135, stat: "Chaos Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
       gearNote: "Wears Chaos Armour and carries a shield by default.",
       markGroup: { options: MARKS_WARRIOR },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -1084,7 +1232,7 @@ const CHAOS = {
       ],
     },
     {
-      id: "chaosbsb", name: "Chaos Battle Standard Bearer", cost: 116, stat: "Chaos BSB", magicItemSlots: 1, restriction: "0-1",
+      id: "chaosbsb", name: "Chaos Battle Standard Bearer", cost: 116, stat: "Chaos BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
       gearNote: "Wears Chaos Armour. The one Chaos Reward or magic item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -1098,7 +1246,7 @@ const CHAOS = {
       ],
     },
     {
-      id: "chaossorcererlord", name: "Chaos Sorcerer Lord (level 4)", cost: 388, stat: "Chaos Sorcerer Lord", magicItemSlots: 4,
+      id: "chaossorcererlord", name: "Chaos Sorcerer Lord (level 4)", cost: 388, stat: "Chaos Sorcerer Lord", magicItemSlots: 4, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
       gearNote: "Wears Chaos Armour (may give up for free). May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (4).",
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -1116,7 +1264,7 @@ const CHAOS = {
       ],
     },
     {
-      id: "chaosmastersorcerer", name: "Master Chaos Sorcerer (level 3)", cost: 272, stat: "Chaos Master Sorcerer", magicItemSlots: 3,
+      id: "chaosmastersorcerer", name: "Master Chaos Sorcerer (level 3)", cost: 272, stat: "Chaos Master Sorcerer", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
       gearNote: "Wears Chaos Armour (may give up for free). May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (3).",
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -1130,7 +1278,7 @@ const CHAOS = {
       ],
     },
     {
-      id: "chaossorcererchampion", name: "Chaos Sorcerer Champion (level 2)", cost: 184, stat: "Chaos Sorcerer Champion", magicItemSlots: 2,
+      id: "chaossorcererchampion", name: "Chaos Sorcerer Champion (level 2)", cost: 184, stat: "Chaos Sorcerer Champion", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
       gearNote: "Wears Chaos Armour (may give up for free). May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (2).",
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -1144,7 +1292,7 @@ const CHAOS = {
       ],
     },
     {
-      id: "chaossorcerer", name: "Chaos Sorcerer (level 1)", cost: 96, stat: "Chaos Sorcerer", magicItemSlots: 1,
+      id: "chaossorcerer", name: "Chaos Sorcerer (level 1)", cost: 96, stat: "Chaos Sorcerer", magicItemSlots: 1, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
       gearNote: "Wears Chaos Armour (may give up for free). May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (1).",
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -1156,6 +1304,135 @@ const CHAOS = {
         { id: "palanquin", name: "Palanquin of Nurgle (+4 Attacks, +4 Wounds; becomes a large model)", cost: 100, requiresMark: "Nurgle" },
         { id: "steed", name: "Steed of Slaanesh", cost: 30, stat: "Steed of Slaanesh", requiresMark: "Slaanesh" },
       ],
+    },
+    {
+      id: "beastmanlord", name: "Beastman Lord", cost: 148, stat: "Beastman Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "Beastmen are infantry. May take light armour and a shield for free, or heavy armour for free.",
+      markGroup: { options: MARKS_WARRIOR },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      mounts: [
+        { id: "chariot", name: "Beastman Chariot (for the price of the chariot)", cost: 0, stat: "Extra Heavy Chariot" },
+      ],
+    },
+    {
+      id: "beastmanhero", name: "Beastman Hero", cost: 89, stat: "Beastman Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "Beastmen are infantry. May take light armour and a shield for free, or heavy armour for free.",
+      markGroup: { options: MARKS_WARRIOR },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      mounts: [
+        { id: "chariot", name: "Beastman Chariot (for the price of the chariot)", cost: 0, stat: "Extra Heavy Chariot" },
+      ],
+    },
+    {
+      id: "minotaurlord", name: "Minotaur Lord", cost: 256, stat: "Minotaur Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "Monstrous model, causes fear. After a won combat with an enemy casualty, must gorge on the dead (no pursuit/overrun unless hatred/frenzy). Charged before its next move while feasting, it becomes frenzied. May take light armour and a shield for free.",
+      markGroup: { options: MARKS_WARRIOR },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
+    },
+    {
+      id: "minotaurhero", name: "Minotaur Hero", cost: 168, stat: "Minotaur Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "Monstrous model, causes fear. Same gorging/frenzy rule as the Minotaur Lord. May take light armour and a shield for free.",
+      markGroup: { options: MARKS_WARRIOR },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
+    },
+    {
+      id: "dragonogrelord", name: "Dragon Ogre Lord", cost: 400, stat: "Dragon Ogre Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "Large model, causes terror, immune to psychology, becomes frenzied if hit by enemy lightning, 5+ armour save from scaly skin. Mark of Slaanesh costs +25pts for Dragon Ogres. May take light armour and a shield for free.",
+      markGroup: { options: MARKS_WARRIOR },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
+    },
+    {
+      id: "dragonogrehero", name: "Dragon Ogre Hero", cost: 300, stat: "Dragon Ogre Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "Large model, causes terror, immune to psychology, becomes frenzied if hit by enemy lightning, 5+ armour save from scaly skin. Mark of Slaanesh costs +25pts for Dragon Ogres. May take light armour and a shield for free.",
+      markGroup: { options: MARKS_WARRIOR },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
+    },
+    {
+      id: "centaurlord", name: "Centaur Lord", cost: 184, stat: "Centaur Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "Centaurs are cavalry. May take light armour and a shield for free.",
+      markGroup: { options: MARKS_WARRIOR },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
+    },
+    {
+      id: "centaurhero", name: "Centaur Hero", cost: 110, stat: "Centaur Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "Centaurs are cavalry. May take light armour and a shield for free.",
+      markGroup: { options: MARKS_WARRIOR },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
+    },
+    {
+      id: "beastmanshamanlord", name: "Beastman Shaman Lord (level 4)", cost: 318, stat: "Beastman Shaman Lord", magicItemSlots: 4, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (4).",
+      markGroup: { options: MARKS_WARRIOR },
+      mounts: [
+        { id: "chariot", name: "Beastman Chariot (for the price of the chariot)", cost: 0, stat: "Extra Heavy Chariot" },
+      ],
+    },
+    {
+      id: "beastmanmastershaman", name: "Master Beastman Shaman (level 3)", cost: 232, stat: "Beastman Master Shaman", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (3).",
+      markGroup: { options: MARKS_WARRIOR },
+      mounts: [
+        { id: "chariot", name: "Beastman Chariot (for the price of the chariot)", cost: 0, stat: "Extra Heavy Chariot" },
+      ],
+    },
+    {
+      id: "beastmanshamanchampion", name: "Beastman Shaman Champion (level 2)", cost: 154, stat: "Beastman Shaman Champion", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (2).",
+      markGroup: { options: MARKS_WARRIOR },
+      mounts: [
+        { id: "chariot", name: "Beastman Chariot (for the price of the chariot)", cost: 0, stat: "Extra Heavy Chariot" },
+      ],
+    },
+    {
+      id: "beastmanshaman", name: "Beastman Shaman (level 1)", cost: 76, stat: "Beastman Shaman", magicItemSlots: 1, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES,
+      gearNote: "May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (1).",
+      markGroup: { options: MARKS_WARRIOR },
+      mounts: [
+        { id: "chariot", name: "Beastman Chariot (for the price of the chariot)", cost: 0, stat: "Extra Heavy Chariot" },
+      ],
+    },
+    {
+      id: "beastmanbsb", name: "Beastman Battle Standard Bearer", cost: 96, stat: "Beastman BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES],
+      gearNote: "0-1 slot shared with the Minotaur/Centaur BSB below — pick only one. May take light armour for free, or heavy armour for free. May take a Beastman Chariot for the price of the chariot. The one item may be a magic banner.",
+      markGroup: { options: MARKS_WARRIOR },
+      mounts: [
+        { id: "chariot", name: "Beastman Chariot (for the price of the chariot)", cost: 0, stat: "Extra Heavy Chariot" },
+      ],
+    },
+    {
+      id: "minotaurbsb", name: "Minotaur Battle Standard Bearer", cost: 132, stat: "Minotaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES],
+      gearNote: "0-1 slot shared with the Beastman/Centaur BSB — pick only one. Monstrous model, causes fear. The one item may be a magic banner.",
+      markGroup: { options: MARKS_WARRIOR },
+    },
+    {
+      id: "centaurbsb", name: "Centaur Battle Standard Bearer", cost: 108, stat: "Centaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES],
+      gearNote: "0-1 slot shared with the Beastman/Minotaur BSB — pick only one. Centaurs are cavalry. The one item may be a magic banner.",
+      markGroup: { options: MARKS_WARRIOR },
+    },
+    {
+      id: "daemonprince", name: "Daemon Prince", cost: 200, stat: "Daemon Prince", magicItemSlots: 2, magicItemCategoryFilter: ["daemonicreward", "chaosbanner"],
+      gearNote: "Large, causes terror. Comes with a free Mark of Chaos. May take up to four magic levels for +60pts each (Chaos Undivided uses Dark Magic; other Marks use their own lore) — unless he bears the Mark of Khorne. May become the army's Battle Standard Bearer for free if he doesn't take Wings (not separately modeled — just don't also buy the BSB character). Takes 2 Daemonic Rewards; if he's the BSB in a single-Power army, he may take a Chaos Banner instead of losing a Daemonic Reward slot.",
+      markGroup: { options: MARKS_WARRIOR },
+      wingsOption: { label: "Wings (can fly)", cost: 100 },
+      magicLevelOption: { label: "Magic levels", costPerLevel: 60, max: 4, forbiddenMark: "Khorne" },
+    },
+    {
+      id: "bloodthirster", name: "Bloodthirster, Greater Daemon of Khorne", cost: 666, stat: "Bloodthirster", magicItemSlots: 0,
+      gearNote: "Large, causes terror, can fly. Bears the Mark of Khorne. Wears Chaos Armour (replaces the 4+ Daemonic Save with a 4+ armour save) and The Whip and Axe of Khorne (fixed — already reflected in his profile's 11 attacks and 1D3-wound multiplier).",
+    },
+    {
+      id: "lordofchange", name: "Lord of Change, Greater Daemon of Tzeentch", cost: 725, stat: "Lord of Change", magicItemSlots: 1, magicItemCategoryFilter: ["daemonicreward"],
+      gearNote: "Large, causes terror, can fly. Bears the Mark of Tzeentch. A level 5 wizard using Tzeentch Magic (fixed). May take 1 Daemonic Reward.",
+    },
+    {
+      id: "greatuncleanone", name: "Great Unclean One, Greater Daemon of Nurgle", cost: 375, stat: "Great Unclean One", magicItemSlots: 0,
+      gearNote: "Large, causes terror. Bears the Mark of Nurgle. Surrounded by the Cloud of Flies (-1 to hit for enemies in base contact), immune to stench/insect/disease to-hit penalties and disease effects. Can breathe a Stream of Corruption each shooting phase (teardrop template, Initiative test or die outright, T7+ take 1D6 wounds instead, no save).",
+      magicLevelOption: { label: "Magic levels (Nurgle Magic)", costPerLevel: 60, max: 4 },
+    },
+    {
+      id: "keeperofsecrets", name: "Keeper of Secrets, Greater Daemon of Slaanesh", cost: 325, stat: "Keeper of Secrets", magicItemSlots: 0,
+      gearNote: "Large, causes terror. Bears the Mark of Slaanesh. Surrounded by the Allure of Slaanesh (enemies in melee must pass an Ld test on 3D6, 2D6 if immune to psychology, or pick another target). Has Razor Sharp Pincers (no armour save allowed).",
+      magicLevelOption: { label: "Magic levels (Slaanesh Magic)", costPerLevel: 60, max: 4 },
     },
   ],
   regiments: [
@@ -1176,7 +1453,7 @@ const CHAOS = {
         { id: "heavy", group: "melee", label: "Swap shield for double handed weapon or flail (+3pt/model)", cost: 3, per: "model" },
         { id: "bows", group: "melee", label: "Give up armour & shield, take bows instead (free)", cost: 0, per: "model" },
       ],
-      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion" },
+      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
     },
     {
       id: "marauderhorsemen", name: "Chaos Marauder Horsemen", perModel: 23, minSize: 5, stat: "Chaos Marauder", command: "fastCavalry",
@@ -1184,7 +1461,7 @@ const CHAOS = {
       options: [
         { id: "flails", group: null, label: "Swap spears & shields for flails (+2pt/model)", cost: 2, per: "model" },
       ],
-      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion" },
+      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
     },
     {
       id: "chaoswarriors", name: "Chaos Warriors", perModel: 18, minSize: 5, stat: "Chaos Warrior", command: "standard",
@@ -1193,11 +1470,11 @@ const CHAOS = {
         { id: "halberdahw", group: "melee", label: "Swap shield for halberd or additional hand weapon (+2pt/model)", cost: 2, per: "model" },
         { id: "dhw", group: "melee", label: "Swap shield for double handed weapon (+4pt/model)", cost: 4, per: "model" },
       ],
-      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion" },
+      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
     },
     {
       id: "chaosknights", name: "Chaos Knights", perModel: 45, minSize: 5, statNote: "Chaos Warriors on barded Chaos Warhorses, with Chaos Armour, shields, and lances.", command: "standard",
-      champion: { name: "Chaos Champion (with Mark of Chaos, mounted)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion" },
+      champion: { name: "Chaos Champion (with Mark of Chaos, mounted)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
     },
     {
       id: "ogremercenaries", name: "Ogre Mercenaries", perModel: 24, minSize: 3, stat: "Ogre", command: "monstrous",
@@ -1207,7 +1484,142 @@ const CHAOS = {
         { id: "ahw", group: "melee", label: "Additional hand weapons (+6pt/model)", cost: 6, per: "model" },
         { id: "dhw", group: "melee", label: "Double handed weapons or flails (+8pt/model)", cost: 8, per: "model" },
       ],
-      champion: { name: "Ogre Champion", baseCost: 50, magicItemSlots: 1, stat: "Ogre Champion" },
+      champion: { name: "Ogre Champion", baseCost: 50, magicItemSlots: 1, stat: "Ogre Champion", magicItemCategoryFilter: ["weapon", "armour", "enchanted", "arcane"] },
+    },
+    {
+      id: "beastmengors", name: "Beastmen Gors", perModel: 9, minSize: 5, stat: "Beastmen Gors", command: "standard",
+      note: "Shields by default. Unruly.",
+      options: [
+        { id: "halberds", group: "melee", label: "Swap shield for halberd (+2pt/model)", cost: 2, per: "model" },
+        { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon (+2pt/model)", cost: 2, per: "model" },
+        { id: "dhw", group: "melee", label: "Swap shield for double handed weapon (+4pt/model)", cost: 4, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Beastmen Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
+    },
+    {
+      id: "beastmenbestigors", name: "Beastmen Bestigors", perModel: 17, minSize: 5, stat: "Beastmen Bestigors", command: "standard",
+      note: "Halberds and heavy armour by default. Not unruly.",
+      options: [
+        { id: "dhw", group: null, label: "Swap halberds for double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 25, magicItemSlots: 1, stat: "Beastmen Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
+    },
+    {
+      id: "beastmenungors", name: "Beastmen Ungors", perModel: 5, minSize: 5, stat: "Beastmen Ungors", command: "standard",
+      note: "Unruly. If this is an independent Beastmen army, may take short bows instead of any other equipment (+1pt/model; may then skirmish).",
+      options: [
+        { id: "spears", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "shortbows", group: null, label: "Short bows instead of any other equipment, independent Beastmen army only (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 35, magicItemSlots: 1, stat: "Beastmen Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
+    },
+    {
+      id: "centaursregiment", name: "Centaurs", perModel: 16, minSize: 5, stat: "Centaurs", command: "fastCavalry",
+      note: "Also called Centigors. Unruly fast cavalry. If this is an independent Beastmen army, may take bows (+2pt/model) or throwing spears (+1pt/model) instead of any other equipment; either may then skirmish.",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "spears", group: "melee", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "bows", group: "melee", label: "Bows instead of any other equipment, independent Beastmen army only (+2pt/model)", cost: 2, per: "model" },
+        { id: "throwingspears", group: "melee", label: "Throwing spears instead of any other equipment, independent Beastmen army only (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Centaur Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Centaur Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
+    },
+    {
+      id: "harpies", name: "Harpies", perModel: 22, minSize: 5, stat: "Gargoyles", command: "none", restriction: "0-1",
+      note: "Flying infantry (not monstrous bases — 25x25mm, and may rank up). May skirmish. Cannot be joined by characters, cannot take a standard bearer, musician, or champion.",
+    },
+    {
+      id: "minotaursregiment", name: "Minotaurs", perModel: 26, minSize: 3, stat: "Minotaurs", command: "monstrous",
+      note: "Additional hand weapons by default. Monstrous, causes fear. After a won combat with an enemy casualty, must gorge on the dead (no pursuit/overrun unless hatred/frenzy); charged before their next move while feasting, they become frenzied.",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+2pt/model)", cost: 2, per: "model" },
+        { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Minotaur Champion (with Mark of Chaos)", baseCost: 50, magicItemSlots: 1, stat: "Minotaur Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
+    },
+    {
+      id: "dragonogresregiment", name: "Dragon Ogres", perModel: 56, minSize: 3, stat: "Dragon Ogres", command: "monstrous",
+      note: "Monstrous, causes fear. 5+ armour save from scaly skin. Becomes frenzied if struck by enemy lightning.",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+4pt/model)", cost: 4, per: "model" },
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+8pt/model)", cost: 8, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+12pt/model)", cost: 12, per: "model" },
+      ],
+      champion: { name: "Dragon Ogre Champion (with Mark of Chaos; +25pt if Mark of Slaanesh)", baseCost: 50, magicItemSlots: 1, stat: "Dragon Ogre Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
+    },
+    {
+      id: "trolls", name: "Trolls", perModel: 40, minSize: 3, stat: "Trolls", command: "none",
+      note: "Must be River Trolls (free), Stone Trolls (free), or Chaos Trolls (+5pt/model). Monstrous, stupid, immune to psychology, cause fear, regenerate on 4+; may vomit instead of attacking (auto-hit, S5, no save, 1D3 wounds). Cannot take a standard bearer, musician, or champion. River: crosses water freely, enemies -1 to hit in melee (living only). Stone: 2+ natural dispel. Chaos: +1 Attack.",
+      options: [
+        { id: "chaostrolls", group: null, label: "Chaos Trolls, +1 Attack (+5pt/model)", cost: 5, per: "model" },
+      ],
+    },
+    {
+      id: "gargoyles", name: "Gargoyles", perModel: 18, minSize: 5, stat: "Gargoyles", command: "none", restriction: "0-1",
+      note: "Also called Furies. Flying infantry, like Harpies. May skirmish. Cannot take a standard bearer or musician, or be joined by characters. Counts as Chaos Undivided.",
+    },
+    {
+      id: "bloodlettersfoot", name: "Bloodletters of Khorne", perModel: 16, minSize: 5, stat: "Bloodletters of Khorne", command: "standard",
+      note: "Daemon blades: no armour save, 1 wound = 1D3.",
+      champion: { name: "Bloodletter Champion", baseCost: 36, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
+    },
+    {
+      id: "bloodlettersjuggernaut", name: "Bloodletters riding Juggernauts of Khorne", perModel: 86, minSize: 5, statNote: "Rider: Bloodletters of Khorne (Daemonic Save 3+ as cavalry). Mount: Juggernaut of Khorne (auto-hits/wounds with one of its two attacks).", command: "monstrous",
+      note: "Unique monstrous-cavalry hybrid. Cannot enter buildings unless dismounted (removes the Juggernaut); kill the mount to kill the whole model.",
+      champion: { name: "Bloodletter Champion (mounted)", baseCost: 126, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
+    },
+    {
+      id: "fleshhounds", name: "Flesh Hounds of Khorne", perModel: 35, minSize: 5, stat: "Flesh Hounds of Khorne", command: "none",
+      note: "Move as fast cavalry. Cannot take a standard bearer or musician, or be joined by characters. Magic weapons affect them only for their mundane value; they dispel all spells cast on them.",
+    },
+    {
+      id: "pinkhorrors", name: "Pink Horrors of Tzeentch", perModel: 19, minSize: 5, stat: "Pink Horrors of Tzeentch", command: "standard",
+      note: "No Daemonic Save — when slain, place two Blue Horrors at the back instead (not simulated as separate models here; treat the unit as a single pool of points).",
+      champion: { name: "Pink Horror Champion", baseCost: 39, magicItemSlots: 1, stat: "Pink Horror Champion", magicItemCategoryFilter: ["daemonicreward"] },
+    },
+    {
+      id: "discsoftzeentch", name: "(Unridden) Discs of Tzeentch", perModel: 30, minSize: 5, stat: "Disc of Tzeentch", command: "skirmisher", restriction: "0-1",
+      note: "Also called Screamers. Flying monstrous regiment (skirmishers). May fly over unengaged enemy units in the remaining-moves phase for a S5 hit each (each target only once). May fly high (unlike ridden Discs).",
+    },
+    {
+      id: "flamers", name: "Flamers of Tzeentch", perModel: 40, minSize: 5, stat: "Flamers of Tzeentch", command: "none",
+      note: "Move as fast cavalry; cross obstacles freely but not woods. Cannot take a standard bearer or musician. Each model makes 1D6 flaming shooting attacks (range 6\", BS to hit, S3); in melee, wounds multiply into 1D3.",
+    },
+    {
+      id: "nurglings", name: "Nurglings", perModel: 20, minSize: 5, stat: "Nurglings", command: "none",
+      note: "Monstrous regiment. May skirmish. Cannot take a standard bearer or musician, or be joined by characters.",
+    },
+    {
+      id: "plaguebearersbeasts", name: "Plaguebearers of Nurgle riding Beasts of Nurgle", perModel: 88, minSize: 5, statNote: "Rider: Plaguebearers of Nurgle (Daemonic Save 3+ as cavalry; wounded living models are automatically slain). Mount: Beast of Nurgle (hits allow no armour save; enemies in base contact -1 to hit).", command: "monstrous",
+      note: "Unique monstrous-cavalry hybrid. Cannot enter buildings unless dismounted; kill the mount to kill the whole model.",
+      champion: { name: "Plaguebearer Champion (mounted)", baseCost: 128, magicItemSlots: 1, stat: "Plaguebearer Champion", magicItemCategoryFilter: ["daemonicreward"] },
+    },
+    {
+      id: "plaguebearersfoot", name: "Plaguebearers of Nurgle", perModel: 18, minSize: 5, stat: "Plaguebearers of Nurgle", command: "standard",
+      note: "Wounded living models are automatically slain. Enemies in base contact suffer -1 to hit.",
+      champion: { name: "Plaguebearer Champion", baseCost: 38, magicItemSlots: 1, stat: "Plaguebearer Champion", magicItemCategoryFilter: ["daemonicreward"] },
+    },
+    {
+      id: "beastsofnurgle", name: "Beasts of Nurgle", perModel: 45, minSize: 3, stat: "Beast of Nurgle", command: "none",
+      note: "Monstrous regiment. Cannot take a standard bearer or musician, or be joined by characters. Hits allow no armour save; enemies in base contact suffer -1 to hit.",
+    },
+    {
+      id: "fiendsofslaanesh", name: "Fiends of Slaanesh", perModel: 65, minSize: 3, stat: "Fiends of Slaanesh", command: "none",
+      note: "Monstrous regiment. Cannot take a standard bearer or musician, or be joined by characters. Move as fast cavalry. Soporific Musk: enemies in base contact suffer -1 to hit.",
+    },
+    {
+      id: "daemonettesfoot", name: "Daemonettes of Slaanesh", perModel: 15, minSize: 5, stat: "Daemonettes of Slaanesh", command: "standard",
+      champion: { name: "Daemonette Champion", baseCost: 35, magicItemSlots: 1, stat: "Daemonette Champion", magicItemCategoryFilter: ["daemonicreward"] },
+    },
+    {
+      id: "daemonettessteeds", name: "Daemonettes riding Steeds of Slaanesh", perModel: 30, minSize: 5, statNote: "Rider: Daemonettes of Slaanesh. Mount: Steed of Slaanesh (hits don't wound but grant the rider an automatic hit; 3+ Daemonic Save as cavalry, fast cavalry).", command: "fastCavalry",
+      champion: { name: "Daemonette Champion (mounted)", baseCost: 60, magicItemSlots: 1, stat: "Daemonette Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
   ],
   chariotsMonsters: [
@@ -1238,6 +1650,48 @@ const CHAOS = {
       id: "chaosabomination", name: "Chaos Abomination", stat: "Chaos Abomination", kind: "abomination", restriction: "0-1",
       note: "Only for a Chaos Warrior/Beastmen army whose general bears the Mark of Chaos Undivided. Base 30pts, minimum 100pts total. Large & causes terror instead of fear once S, T, or W is upgraded at all.",
     },
+    {
+      id: "giantscyclopes", name: "Giant / Cyclops", perUnit: 200, stat: "Giants and Cyclopes", kind: "quantity",
+      note: "Follows the main-rulebook Giant rules. Upgrading to a Cyclops (+50pts) lets it hurl boulders like a small stone thrower if it didn't march (max range 48\"; a misfire sends the shot 1D6x10\" in a random direction from the Cyclops).",
+      variantOptions: [
+        { id: "cyclops", label: "Upgrade to a Cyclops (stone-thrower boulders)", cost: 50 },
+      ],
+    },
+    {
+      id: "beastmanchariots", name: "Beastman Chariot", perUnit: 70, stat: "Extra Heavy Chariot", kind: "chariot",
+      note: "Extra Heavy Chariot (T6) pulled by two Tuskgors (+2S on the charge), crewed by two Gor Beastmen with spears, light armour, shields (4+ combined save from the Tuskgors' hide).",
+      extraCrewCost: 7, extraCrewLabel: "extra Gor Beastmen crew", extraSteedCost: 8, extraSteedLabel: "extra Tuskgors",
+      scythedWheelsCost: 20, commanderCost: 42, commanderLabel: "One crewman is a Gor Beastman Champion (with Mark of Chaos)", commanderMagicItemSlots: 1,
+    },
+    {
+      id: "jabberslythe", name: "Jabberslythe", perUnit: 225, stat: "Jabberslythe", kind: "quantity", restriction: "0-1",
+      note: "Large monster, causes terror, immune to psychology. 10\" fly move (can't fly high), 5+ armour save. Aura of Madness: enemies within 12\" that can see it test Ld each enemy turn, taking 1 wound per point failed by (no save; doesn't affect psychology-immune units). Spurting Bile-blood: each wound landed on it in melee hits the attacker with a S4 hit. Slithery Tongue: 12\" shooting attack, S4, auto-hits, swallows whole any man-sized model that takes a wound (counts as slain, no Look Out Sir).",
+    },
+    {
+      id: "daemonicchariotkhorne", name: "Daemonic Chariot of Khorne", perUnit: 90, stat: "Heavy Chariot", kind: "quantity",
+      statNote: "Heavy Chariot pulled by one Juggernaut of Khorne, crewed by two Bloodletters. 4+ Daemonic Save.",
+      variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
+    },
+    {
+      id: "daemonicchariotnurgle", name: "Daemonic Chariot of Nurgle", perUnit: 110, stat: "Heavy Chariot", kind: "quantity",
+      statNote: "Heavy Chariot pulled by one Beast of Nurgle, crewed by two Plaguebearers. 4+ Daemonic Save. Enemies suffer -1 to hit in melee against it.",
+      variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
+    },
+    {
+      id: "daemonicchariotslaanesh", name: "Daemonic Chariot of Slaanesh", perUnit: 130, stat: "Heavy Chariot", kind: "quantity",
+      statNote: "Heavy Chariot pulled by two Steeds of Slaanesh, crewed by two Daemonettes. 4+ Daemonic Save.",
+      variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
+    },
+    {
+      id: "daemonicchariottzeentch", name: "Daemonic Chariot of Tzeentch", perUnit: 150, stat: "Heavy Chariot", kind: "quantity",
+      statNote: "Heavy Chariot pulled by two Discs of Tzeentch, crewed by two Pink Horrors (don't split into Blue Horrors when slain in a chariot). Can fly, not fly high. 4+ Daemonic Save.",
+      variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
+    },
+    {
+      id: "hellcannon", name: "Hellcannon", perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine",
+      note: "House rule / optional — ask your opponent's permission before including it, primarily meant for Siege Battles. A Daemon that works as a war machine, crewed by three Chaos Dwarfs in heavy armour. Shoots like a large stone thrower; any regiment losing even one model to it must take a panic test; shots count as magical. A misfire eats 1D3 crew instead of firing; if all crew die, it becomes an independent monster with random movement that charges the nearest model each turn (friend or foe), following normal Daemon rules — and still defends itself if charged.",
+      extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
+    },
   ],
   specialCharacters: [
     { id: "aekoldhelbrass", name: "Aekold Helbrass", cost: 200, stat: "Aekold Helbrass", role: "Hero",
@@ -1254,6 +1708,39 @@ const CHAOS = {
       note: "Must always issue challenges in Khorne's name; becomes a Chaos Spawn if he flees. Not subject to frenzy despite being a Champion of Khorne. Immune to psychology, 2D6 attacks/round. Chaos Armour. Rides the Hound of Khorne (small Daemonic monster, immune to magic weapons, dispels spells targeting it/Arbaal/his regiment; vanishes if Arbaal dies)." },
     { id: "mordrek", name: "Count Mordrek the Damned", cost: 300, stat: "Count Mordrek", role: "Lord",
       note: "Characteristics rolled randomly each battle (WS 1D6+4, S 1D3+3, T 1D3+3, A 1D6+1). Mark of Chaos Undivided. Equipped with Chaos Armour, the Chaos Runeshield, and the Sword of Change. Rides a barded Chaos Warhorse." },
+    { id: "valkia", name: "Valkia the Bloody", cost: 384, stat: "Valkia the Bloody", role: "Chaos Lord — not official WHR, needs opponent's agreement",
+      note: "Mark of Khorne (in profile). If present, no BSB may be taken — instead, all units within 12\" re-roll any failed Ld test. May not take a magic/Chaos Banner. Re-rolls the initial die on any Eye of the God test.",
+      items: "Carries: Daemonshield (acts as a Parrying shield), the Spear of Slaupnir (+2S charge; on a 6 to wound while charging, man-sized victims are slain outright, no save, else 1D3 wounds), the Scarlet Armour (magic Chaos Armour, -1S to attacks against her; combined with the Daemonshield gives a 3+ save)." },
+    { id: "sigvald", name: "Prince Sigvald", cost: 308, stat: "Prince Sigvald", role: "Chaos Lord — not official WHR, needs opponent's agreement",
+      note: "Mark of Slaanesh. Treats difficult terrain, steep slopes, and water as open ground for movement (can't see through it though) — extends to any unit he joins.",
+      items: "Carries: The Auric Armour (1+ save combined with his Mirrored Shield, plus Regeneration 4+), Sliverslash (+2 attacks, always strikes first), the Mirrored Shield (mundane — grants Sigvald Stupidity while carried)." },
+    { id: "vilitch", name: "Vilitch the Curseling", cost: 503, stat: "Vilitch the Curseling", role: "Chaos Sorcerer Lord — not official WHR, needs opponent's agreement",
+      note: "Mark of Tzeentch. Chaos Armour. His Fused Twin acts as a Spell Familiar without needing an extra model. If he dispels an enemy spell (targeting him or his unit) with a Dispel card, he keeps the power used to cast it. If an enemy wizard's Dispel card fails against his spell, he takes that card into his own hand.", extraMagicItemSlots: 2 },
+    { id: "festus", name: "Festus the Leechlord", cost: 359, stat: "Festus the Leechlord", role: "Chaos Sorcerer Champion — not official WHR, needs opponent's agreement",
+      note: "Mark of Nurgle (in profile). Chaos Armour, Regeneration 4+. He and any unit he joins only pursue 1D6\" (binding captives), but captured units are worth double victory points. Pestilent Potions: a unit he joins gains a 5+ regeneration save and poisoned attacks (including his own) while he's with them." },
+    { id: "galrauch", name: "Galrauch, The Great Drake", cost: 640, stat: "Galrauch", role: "Two-Headed Chaos Dragon — not official WHR, needs opponent's agreement",
+      note: "Large monster, flies, causes terror, 4+ scaly skin save. Mark of Tzeentch. A level 4 wizard (Tzeentch Magic). One head breathes fire (S4) or poison (S3, no save) each shooting phase; once per battle one head may instead breathe the Breath of Change (teardrop template, failed Toughness test on 1D6 removes the model from play) while the other head can't breathe that phase. Each turn, a failed Ld test makes the ancient Dragon spirit surface: no move/spells/breath, half his attacks turn on himself that phase (added to the enemy's combat res if already in combat)." },
+    { id: "kholek", name: "Kholek Suneater", cost: 485, stat: "Kholek Suneater", role: "Dragon Ogre Lord — not official WHR, needs opponent's agreement",
+      note: "Large monster, causes terror, immune to psychology, 5+ scaly-skin save, frenzied if hit by enemy lightning. Mark of Chaos Undivided (in profile). In the shooting phase, targets an unengaged visible enemy unit: on 2-6 it takes 1D6 S6 lightning hits, on a 1 Kholek is hit instead. Lightning-based spells targeting a unit within 12\" of him are redirected to him instead.",
+      items: "Carries: Starcrusher (magic weapon, 1 wound = D3 wounds), Armour of the Storm (heavy armour, immune to lightning attacks, becomes frenzied if struck by lightning anyway)." },
+    { id: "skulltaker", name: "Skulltaker", cost: 107, stat: "Skulltaker", role: "Unique Bloodletter Champion (0-1) — not official WHR, needs opponent's agreement",
+      note: "The Slayer Sword: flaming attacks; on a 6 to wound, man-sized victims are slain outright (no save), else 1D3 wounds ignoring armour. The Cloak of Skulls: counts as the Chaos Armour Daemonic Reward (4+ armour save instead of Daemonic Save)." },
+    { id: "karanak", name: "Karanak", cost: 125, stat: "Karanak", role: "Unique Flesh Hound Champion (0-1) — not official WHR, needs opponent's agreement",
+      note: "Must join a Flesh Hounds unit (exception to the normal rule). Magic weapons only affect him for their mundane value; dispels all spells cast on him. Nominate an enemy model as his quarry at battle start — re-rolls failed to-hit and to-wound rolls against it." },
+    { id: "skarbrand", name: "Skarbrand", cost: 610, stat: "Skarbrand", role: "Bloodthirster — not official WHR, needs opponent's agreement",
+      note: "Large, causes terror, frenzy (can never lose it — while alive, ALL units on the table, friend and foe, are subject to Hatred). Chaos Armour (4+ save instead of Daemonic Save). Slaughter and Carnage: paired axes (a Daemonic Reward, not a magic weapon) granting an extra attack (in profile) and ignoring armour saves. Once/turn in the shooting phase may bellow (teardrop template, S5), even while engaged." },
+    { id: "bluescribes", name: "The Blue Scribes", cost: 109, stat: "The Blue Scribes", role: "Unique Pink Horror Champion (0-1) — not official WHR, needs opponent's agreement",
+      note: "Already two Blue Horrors — doesn't split further when slain. Treat rider+mount as one model; mounted on a Disc of Tzeentch, 4+ Daemonic Save, can't join a unit. In the magic phase, may cast one spell from any college — roll a D10 to see which spell is selected (no choice of the spell itself); cast as a bound spell." },
+    { id: "changeling", name: "The Changeling", cost: 130, stat: "The Changeling", role: "Unique Daemonic Hero of Tzeentch — not official WHR, needs opponent's agreement",
+      note: "A level 1 wizard (Lore of Tzeentch). At the start of each melee phase, may raise any of his WS/S/T/I/A to match an enemy model in base contact (the higher value if that model has more than one). Can't match a model fighting a challenge unless he's in that challenge too." },
+    { id: "epidemius", name: "Epidemius", cost: 288, stat: "Epidemius", role: "Unique Plaguebearer Champion (0-1) — not official WHR, needs opponent's agreement",
+      note: "Rides a Palanquin of Nurgle. Tracks all unsaved wounds caused by Nurgle Daemons/spells (friend or foe) as the Tally of Pestilence — cumulative, army-wide bonuses for all Nurgle Daemons at 7+/14+/21+/28+ wounds (Ld, then S, then T, then re-roll failed saves). Lost if Epidemius dies." },
+    { id: "kugath", name: "Ku'Gath Plaguefather", cost: 515, stat: "Ku'Gath Plaguefather", role: "Great Unclean One — not official WHR, needs opponent's agreement",
+      note: "Large, causes terror, Cloud of Flies, Stream of Corruption breath. A level 1 wizard (Nurgle Magic), hates Dwarfs. A Nurgling base within 6\" auto-regenerates D3 wounds each of his turns. Once/shooting phase, Nurglings may burst from him as a small-stone-thrower shooting attack (may move but not march while firing; a misfire does nothing)." },
+    { id: "masqueofslaanesh", name: "The Masque of Slaanesh", cost: 95, stat: "The Masque of Slaanesh", role: "Unique Daemonette Champion (0-1) — not official WHR, needs opponent's agreement",
+      note: "Can't join any unit. 3+ Daemonic Save (not the usual 4+). Each of her melee phases, picks one dance targeting an enemy unit within 12\" (no LoS needed): Dance of Dreaming (-1 Ld), Fleshspasm Polka (-1 S), or Waltz of Lethargy (-1 I), to a minimum of 1, until end of phase." },
+    { id: "belakor", name: "Be'lakor, The Dark Master", cost: 650, stat: "Belakor", role: "Daemon Prince of Chaos Undivided — not official WHR, needs opponent's agreement",
+      note: "Mark of Chaos Undivided (in profile). Large, causes terror (permanently — units never become immune to it), flies. A level 4 wizard (Dark Magic). All enemies suffer -1 Ld when rallying anywhere; living enemies within 6\" of him suffer an extra -1 Ld (cumulative). Enemy shooting at him or his army suffers -1 to hit. Each turn, a failed Ld test forces him to charge the nearest visible enemy if in range, or move toward the nearest enemy model (stopping 1\" short if it would overshoot)." },
   ],
 };
 
@@ -1558,6 +2045,11 @@ function characterCost(inst, def, armyData) {
   if (inst.bow && def.bowOption) total += def.bowOption.cost;
   if (def.missileGroup && inst.missile && inst.missile !== def.missileGroup.options[0]) total += def.missileGroup.cost;
   if (def.experimentalMissileGroup && inst.experimentalMissile && inst.experimentalMissile !== def.experimentalMissileGroup.options[0] && !mount) total += def.experimentalMissileGroup.cost;
+  if (def.magicLevelOption) {
+    const forbidden = def.magicLevelOption.forbiddenMark && inst.mark === def.magicLevelOption.forbiddenMark;
+    if (!forbidden) total += (inst.magicLevel || 0) * def.magicLevelOption.costPerLevel;
+  }
+  if (def.wingsOption && inst.wings) total += def.wingsOption.cost;
   (inst.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   return total;
 }
@@ -2069,6 +2561,8 @@ function resolveUnitTags(kind, unit, def, armyData) {
     if (unit.bow && def.bowOption) tags.push(def.bowOption.label);
     if (unit.missile && unit.missile !== "None (default)" && def.missileGroup) tags.push(unit.missile);
     if (unit.experimentalMissile && unit.experimentalMissile !== "None (default)" && def.experimentalMissileGroup) tags.push(unit.experimentalMissile);
+    if (def.wingsOption && unit.wings) tags.push("Wings");
+    if (def.magicLevelOption && unit.magicLevel > 0) tags.push(`+${unit.magicLevel} magic levels`);
     (unit.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
   } else if (kind === "regiment") {
     if (def.kind === "composite") {
@@ -2348,6 +2842,34 @@ function CharacterDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
+      {def.wingsOption && (
+        <div style={{ marginTop: 8 }}>
+          <label className="whr-opt-row whr-opt-label">
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input type="checkbox" checked={!!unit.wings} onChange={(e) => updateUnit({ ...unit, wings: e.target.checked })} />
+              {def.wingsOption.label}
+            </span>
+            <span className="whr-opt-cost">+{def.wingsOption.cost}pts</span>
+          </label>
+        </div>
+      )}
+
+      {def.magicLevelOption && (() => {
+        const forbidden = def.magicLevelOption.forbiddenMark && (unit.mark || def.markGroup?.options?.[0]) === def.magicLevelOption.forbiddenMark;
+        if (forbidden) return <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 8 }}>No magic levels — forbidden with the {def.magicLevelOption.forbiddenMark} Mark.</p>;
+        return (
+          <div style={{ marginTop: 14 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+              <span className="whr-label" style={{ marginBottom: 0 }}>{def.magicLevelOption.label}</span>
+              <span className="whr-opt-cost">+{def.magicLevelOption.costPerLevel}pts/level</span>
+            </div>
+            <div style={{ marginTop: 6 }}>
+              <Stepper value={unit.magicLevel || 0} min={0} max={def.magicLevelOption.max} onChange={(v) => updateUnit({ ...unit, magicLevel: v })} />
+            </div>
+          </div>
+        );
+      })()}
+
       {def.mounts && def.mounts.length > 0 && (
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">Mount{def.markGroup ? " (filtered by Mark)" : ""}</span>
@@ -2372,6 +2894,7 @@ function CharacterDetail({ def, unit, roster, updateUnit, armyData }) {
       {def.magicItemSlots > 0 && (
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
+            categoryFilter={def.magicItemCategoryFilter}
             onToggle={(id) => {
               const cur = unit.magicItemIds || [];
               const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
@@ -2535,6 +3058,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
           </label>
           {unit.championIncluded && def.champion.magicItemSlots > 0 && (
             <MagicItemPicker items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={def.champion.magicItemSlots} usedElsewhere={usedElsewhere}
+              categoryFilter={def.champion.magicItemCategoryFilter}
               onToggle={(id) => {
                 const cur = unit.championMagicItemIds || [];
                 const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
