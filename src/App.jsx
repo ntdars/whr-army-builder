@@ -340,6 +340,29 @@ const STATS = {
   "Arbaal the Undefeated": { M: 4, WS: 9, BS: 8, S: 6, T: 5, W: 3, I: 8, A: "2D6", Ld: 10 },
   "Egrimm van Horstmann": { M: 4, WS: 6, BS: 6, S: 5, T: 5, W: 4, I: 9, A: 4, Ld: 10 },
   "Khorne's Hound": { M: 8, WS: 6, BS: 0, S: 6, T: 5, W: 3, I: 10, A: 4, Ld: 10 },
+  "Elven Prince": { M: 5, WS: 7, BS: 7, S: 4, T: 4, W: 3, I: 9, A: 4, Ld: 10 },
+  "Elven Hero (High Elf)": { M: 5, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
+  "Elven BSB (High Elf)": { M: 5, WS: 5, BS: 5, S: 4, T: 3, W: 2, I: 7, A: 2, Ld: 8 },
+  "Dragon (High Elf)": { M: 6, WS: 6, BS: 0, S: 6, T: 6, W: 7, I: 8, A: 7, Ld: 7 },
+  "Great Dragon": { M: 6, WS: 7, BS: 0, S: 7, T: 7, W: 8, I: 7, A: 8, Ld: 8 },
+  "Emperor Dragon": { M: 6, WS: 8, BS: 0, S: 8, T: 8, W: 9, I: 6, A: 9, Ld: 9 },
+  "Elven Warriors (High Elf)": { M: 5, WS: 4, BS: 4, S: 3, T: 3, W: 1, I: 6, A: 1, Ld: 8 },
+  "White Lions": { M: 5, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 6, A: 1, Ld: 8 },
+  "Sword Masters": { M: 5, WS: 6, BS: 4, S: 3, T: 3, W: 1, I: 7, A: 1, Ld: 8 },
+  "Hand Maidens": { M: 5, WS: 5, BS: 5, S: 3, T: 3, W: 1, I: 6, A: 1, Ld: 8 },
+  "Elven Elite": { M: 5, WS: 5, BS: 4, S: 3, T: 3, W: 1, I: 7, A: 1, Ld: 8 },
+  "Elven Champion (High Elf)": { M: 5, WS: 5, BS: 5, S: 4, T: 3, W: 1, I: 7, A: 2, Ld: 8 },
+  "Elven Commander (High Elf)": { M: 5, WS: 6, BS: 5, S: 4, T: 3, W: 1, I: 7, A: 2, Ld: 9 },
+  "White Lion Steed": { M: 8, WS: 5, BS: 0, S: 5, T: 4, W: 1, I: 4, A: 2, Ld: 5 },
+  "Young Dragon": { M: 6, WS: 5, BS: 0, S: 5, T: 5, W: 6, I: 9, A: 6, Ld: 6 },
+  "Korhil": { M: 5, WS: 7, BS: 6, S: 5, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
+  "Belannaer": { M: 5, WS: 6, BS: 4, S: 4, T: 4, W: 4, I: 9, A: 4, Ld: 10 },
+  "Imrik or Tyrion": { M: 5, WS: 8, BS: 7, S: 4, T: 4, W: 3, I: 10, A: 4, Ld: 10 },
+  "Eltharion or Alith Anar": { M: 5, WS: 7, BS: 7, S: 4, T: 4, W: 3, I: 9, A: 4, Ld: 10 },
+  "Teclis": { M: 5, WS: 4, BS: 4, S: 4, T: 4, W: 4, I: 9, A: 3, Ld: 10 },
+  "The Everqueen": { M: 5, WS: 10, BS: 10, S: 3, T: 4, W: 4, I: 10, A: 1, Ld: 10 },
+  "Caradryan": { M: 5, WS: 6, BS: 5, S: 4, T: 3, W: 2, I: 7, A: 2, Ld: 9 },
+  "Malhandir": { M: 10, WS: 4, BS: 0, S: 4, T: 3, W: 1, I: 5, A: 2, Ld: 7 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -539,7 +562,7 @@ const WOOD_ELVES = {
     },
     {
       id: "lords", name: "Wood Elf Lords", perModel: 20, minSize: 5, stat: "Wood Elf Lords",
-      command: "fastCavalry", isLords: true,
+      command: "fastCavalry", fastCavalryToggleOption: "barding",
       note: "Lords riding Elven Steeds with light armour, shields and lances. Fast cavalry.",
       options: [
         { id: "barding", group: null, label: "Barding — free (loses fast cavalry, -1M, free standard bearer, save improves 4+\u21923+)", cost: 0, per: "flat" },
@@ -1234,9 +1257,270 @@ const CHAOS = {
   ],
 };
 
+const HIGH_ELF_MAGIC_ITEMS = [
+  { id: "he-forenrond", name: "Forenrond's Sword", cost: 0, cat: "weapon", desc: "Bearer becomes general by birthright regardless of Ld. 4 attacks hitting/wounding on 2+, no save, 1 wound=1D3. But: never chooses sides, always deploys first, never takes first turn, no scout/vanguard. 2000+pt armies only." },
+  { id: "he-bowoldworld", name: "Bow of the Old-World Colonies", cost: 20, cat: "weapon", desc: "Longbow. May shoot as many shots as bearer has attacks, at bearer's strength." },
+  { id: "he-defierofchaos", name: "Defier of Chaos", cost: 20, cat: "weapon", desc: "No armour save. Chaos models suffer double wounds." },
+  { id: "he-arrowsofisha", name: "Arrows of Isha", cost: 25, cat: "weapon", desc: "Shield Maiden of the Everqueen only. Whole regiment gets magic flaming arrows, S4. Can't be nullified, doesn't vanish if bearer dies." },
+  { id: "he-fangsword", name: "Fangsword of Eltharion", cost: 40, cat: "weapon", desc: "-3 to armour save. All models in base contact with bearer suffer -1A." },
+  { id: "he-moonbow", name: "Moonbow", cost: 40, cat: "weapon", desc: "Longbow. S6, no armour save, 1 wound=1D3. Penetrates like a bolt thrower shot. Dark Elf casualties force an immediate panic test." },
+  { id: "he-beladebelkorhadris", name: "Blade of Bel-Korhadris", cost: 50, cat: "weapon", desc: "Mages only. Always strikes first, no armour save. Once/battle: 1D6 extra attacks." },
+  { id: "he-helmyvresse", name: "Helm of Yvresse", cost: 10, cat: "armour", desc: "May always re-roll Ld tests." },
+  { id: "he-armourcaledor", name: "Armour of Caledor", cost: 40, cat: "armour", desc: "Dragon Armour. +1 armour save, 5+ ward save. Immune to all dragon breath attacks and fire-based attacks." },
+  { id: "he-goldencrown", name: "Golden Crown of Atrazar", cost: 100, cat: "armour", desc: "3+ ward save." },
+  { id: "he-hornofvalour", name: "Horn of Valour", cost: 25, cat: "enchanted", desc: "General only, one use. Whole army may re-roll Ld tests until the next High Elf turn; stops if the bearer is killed." },
+  { id: "he-stoneofmidnight", name: "Stone of Midnight", cost: 100, cat: "enchanted", desc: "Models on foot only. Melee attacks against the bearer must re-roll successful to-hit and to-wound rolls." },
+  { id: "he-talismanhoeth", name: "Talisman of Hoeth", cost: 100, cat: "enchanted", desc: "Cannot be taken by mages. Bearer casts as a level 2 mage (any college), may wear armour/two-handed weapons and still cast, but can't take arcane items." },
+  { id: "he-cloakofstars", name: "Cloak of Stars", cost: 25, cat: "arcane", desc: "Hits against the bearer have S reduced by 2. First spell cast directly at the bearer/regiment is auto-dispelled unless Total Power." },
+  { id: "he-warcrown", name: "War Crown of Saphery", cost: 50, cat: "arcane", desc: "+1 magic level. Doesn't increase the number of items the bearer can carry." },
+  { id: "he-bookphoenix", name: "Book of the Phoenix", cost: 250, cat: "arcane", desc: "Once per magic phase, cast a spell without using power cards." },
+  { id: "he-regalstandard", name: "Regal Standard", cost: 0, cat: "banner", desc: "Free. Troops with bows/longbows may move and shoot without the -1 moving penalty." },
+  { id: "he-imperialresolve", name: "Standard of Imperial Resolve", cost: 10, cat: "banner", desc: "Unengaged spearmen get +1S when receiving a charge to the front." },
+  { id: "he-bannerellyrion", name: "Banner of Ellyrion", cost: 30, cat: "banner", desc: "Elven Warriors/Archers/Spearmen/Reaver Knights/Silver Helms/BSB only. Ignores difficult ground movement penalty; may march with enemies within 8\"." },
+  { id: "he-whitelionstandard", name: "White Lion Standard", cost: 40, cat: "banner", desc: "White Lions only. If the general joins, they auto-pass all Ld tests including break tests (may still break from fear-causing outnumbering etc.)." },
+  { id: "he-worlddragon", name: "Banner of the World Dragon", cost: 80, cat: "banner", desc: "Dragon Princes only. Armour saves vs shooting treated as a fixed 2+ ward-style save, even against save-cancelling sources." },
+  { id: "he-bannersorcery", name: "Banner of Sorcery", cost: 100, cat: "banner", desc: "Generates one extra magic card per magic phase, usable by any wizard in the army." },
+];
+
+const HIGH_ELVES = {
+  key: "highelves",
+  name: "High Elves",
+  tagline: "The fading, feuding nobility of Ulthuan, holding the line against the dark",
+  magicItems: HIGH_ELF_MAGIC_ITEMS,
+  armyWideRules: [
+    "Elven stoicism: High Elves (excluding non-elf entities in the army) remain resolute against Dark Elves — when a resolute unit takes an Ld-based test, roll an extra 1D6 and discard the highest result.",
+    "Lightweight barding: High Elf cavalry suffer no movement reduction for wearing barding.",
+    "Dragon armour: when a High Elf BSB, Hero, Lord, or Dragon Prince wears non-magical heavy armour, it's always Dragon Armour, granting immunity to fire and flaming attacks.",
+    "Dragon rage: High Elf Dragons roll 3D6 (not the usual 2D6) on the Monster Reaction Table.",
+  ],
+  characters: [
+    {
+      id: "elvenprince", name: "Elven Prince", cost: 124, stat: "Elven Prince", magicItemSlots: 3,
+      gearNote: "May take a shield and either light armour or Dragon Armour for free (Dragon Armour grants immunity to fire/flaming attacks).",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
+      bowOption: { label: "Bow or Longbow", cost: 10 },
+      mounts: [
+        { id: "steed", name: "Elven Steed (may take barding free)", cost: 27, stat: "Elven Steed" },
+        { id: "pegasus", name: "Pegasus", cost: 61, stat: "Pegasus" },
+        { id: "eagle", name: "Great Eagle", cost: 69, stat: "Great Eagle" },
+        { id: "griffon", name: "Griffon", cost: 181, stat: "Griffon" },
+        { id: "dragon", name: "Red/White/Blue Dragon", cost: 321, stat: "Dragon (High Elf)" },
+        { id: "greatdragon", name: "Great Red/White/Blue Dragon", cost: 446, stat: "Great Dragon" },
+        { id: "emperordragon", name: "Red/White/Blue Emperor Dragon", cost: 571, stat: "Emperor Dragon" },
+      ],
+    },
+    {
+      id: "elvenhero", name: "Elven Hero", cost: 74, stat: "Elven Hero (High Elf)", magicItemSlots: 2,
+      gearNote: "May take a shield and either light armour or Dragon Armour for free (Dragon Armour grants immunity to fire/flaming attacks).",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
+      bowOption: { label: "Bow or Longbow", cost: 10 },
+      mounts: [
+        { id: "steed", name: "Elven Steed (may take barding free)", cost: 20, stat: "Elven Steed" },
+        { id: "pegasus", name: "Pegasus", cost: 54, stat: "Pegasus" },
+        { id: "eagle", name: "Great Eagle", cost: 62, stat: "Great Eagle" },
+        { id: "griffon", name: "Griffon", cost: 174, stat: "Griffon" },
+        { id: "dragon", name: "Red/White/Blue Dragon", cost: 314, stat: "Dragon (High Elf)" },
+      ],
+    },
+    {
+      id: "elvenbsb", name: "Elven Battle Standard Bearer", cost: 88, stat: "Elven BSB (High Elf)", magicItemSlots: 1, restriction: "0-1",
+      gearNote: "May take either light armour or Dragon Armour for free. The one magic item may be a magic banner.",
+      mounts: [
+        { id: "steed", name: "Elven Steed (may take barding free)", cost: 13, stat: "Elven Steed" },
+      ],
+    },
+    {
+      id: "magelord", name: "Mage Lord (level 4)", cost: 264, stat: "Mage Lord", magicItemSlots: 4,
+      gearNote: "May take College Magic and High Magic. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+        { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
+        { id: "griffon", name: "Griffon", cost: 160, stat: "Griffon" },
+        { id: "dragon", name: "Red/White/Blue Dragon", cost: 300, stat: "Dragon (High Elf)" },
+        { id: "greatdragon", name: "Great Red/White/Blue Dragon", cost: 425, stat: "Great Dragon" },
+      ],
+    },
+    {
+      id: "mastermage", name: "Master Mage (level 3)", cost: 186, stat: "Master Mage", magicItemSlots: 3,
+      gearNote: "May take College Magic and High Magic. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+        { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
+      ],
+    },
+    {
+      id: "magechampion", name: "Mage Champion (level 2)", cost: 122, stat: "Mage Champion", magicItemSlots: 2,
+      gearNote: "May take College Magic and High Magic. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+        { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
+      ],
+    },
+    {
+      id: "mage", name: "Mage (level 1)", cost: 58, stat: "Mage", magicItemSlots: 1,
+      gearNote: "May take College Magic and High Magic. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+        { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
+      ],
+    },
+  ],
+  regiments: [
+    {
+      id: "spearmen", name: "Elven Spearmen", perModel: 8, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
+      note: "Light armour, shields and spears.",
+      options: [
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion (High Elf)" },
+    },
+    {
+      id: "warriors", name: "Elven Warriors", perModel: 7, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
+      note: "Warriors with shields.",
+      options: [
+        { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon (free)", cost: 0, per: "model" },
+        { id: "dhw", group: "melee", label: "Swap shield for double handed weapon (+2pt/model)", cost: 2, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion (High Elf)" },
+    },
+    {
+      id: "archers", name: "Elven Archers", perModel: 9, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
+      note: "Warriors with longbows.",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion (High Elf)" },
+    },
+    {
+      id: "silverhelms", name: "Silver Helm Knights", perModel: 20, minSize: 5, stat: "Elven Elite", command: "fastCavalry", fastCavalryToggleOption: "heavyarmour",
+      note: "Elven Elite on Elven Steeds, light armour, shields, lances. Fast cavalry (as long as no armour upgrade is taken).",
+      options: [
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+7pt/model) — loses fast cavalry, standard bearer becomes free", cost: 7, per: "model" },
+      ],
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
+    },
+    {
+      id: "reaverknights", name: "Reaver Knights", perModel: 22, minSize: 5, statNote: "Warriors on Elven Steeds, light armour, spears, and bows.", command: "fastCavalry",
+      note: "Fast Cavalry. May skirmish, act as Vanguard, and Fire & Flee as a charge reaction.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+2pt/model)", cost: 2, per: "model" },
+        { id: "longbows", group: null, label: "Upgrade bows to longbows (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion (High Elf)" },
+    },
+    {
+      id: "swordmasters", name: "Sword Masters of Hoeth", perModel: 12, minSize: 5, stat: "Sword Masters", command: "standard", restriction: "0-1",
+      note: "Light armour, double handed weapons. Ignore \"double handed weapons strike last.\" Parry: -1 to hit vs S4-or-less missiles targeting their front (if 50%+ of the shooters are in the Sword Masters' front zone).",
+      options: [
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
+    },
+    {
+      id: "dragonprinces", name: "Dragon Princes of Caledor", perModel: 27, minSize: 5, statNote: "Elven Elite on barded Elven Steeds, Dragon Armour, shields, and lances.", command: "standard", restriction: "0-1",
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
+    },
+    {
+      id: "lothernseaguard", name: "Lothern Sea Guard", perModel: 10, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
+      note: "Light armour, shields, spear, and bows.",
+      options: [
+        { id: "longbows", group: null, label: "Upgrade bows to longbows (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion (High Elf)" },
+    },
+    {
+      id: "shadowwarriors", name: "Shadow Warriors", perModel: 15, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
+      note: "Light armour, shields, longbows. May skirmish. May scout. Hate Dark Elves.",
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion (High Elf)" },
+    },
+    {
+      id: "phoenixguards", name: "Phoenix Guards", perModel: 10, minSize: 5, stat: "Elven Elite", command: "standard", restriction: "0-1",
+      note: "Light armour and halberds. Immune to psychology.",
+      options: [
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
+    },
+    {
+      id: "handmaidens", name: "Hand Maidens of the Everqueen", perModel: 13, minSize: 5, stat: "Hand Maidens", command: "standard", restriction: "0-1",
+      note: "Light armour, spears, and longbows.",
+      champion: { name: "Shield Maiden of the Everqueen (Elven Commander)", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
+    },
+    {
+      id: "whitelions", name: "White Lions of Chrace", perModel: 14, minSize: 5, stat: "White Lions", command: "standard", restriction: "0-1",
+      note: "Light armour, lion pelts, double handed weapons. Ignore woods movement penalty (even with foot characters attached). Lion cloaks: +2 armour save vs shooting. Lion Rampant: -1 to hit against them and their characters when charged. Lion Leaping: engaged enemies lose 1 attack when the Lions charge. Lion's Claw (default): 1 wound becomes D3 wounds (not for attached independent characters).",
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "greateagles", name: "Great Eagles", perUnit: 60, stat: "Great Eagle", kind: "quantity",
+      note: "Small monster that can fly.",
+    },
+    {
+      id: "boltthrowers", name: "Repeating Bolt Throwers", perUnit: 74, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Crewed by two Elven Warriors. Crew may take light armour for +1pt each (not modeled individually here — folded into the flat crew cost).",
+      extraCrewCost: 7, extraCrewMax: 3, extraCrewLabel: "extra Elven Warrior crew",
+    },
+    {
+      id: "tiranocchariots", name: "Tiranoc Chariot", perUnit: 60, stat: "Heavy Chariot", kind: "chariot", countsAsFirstRegiment: true,
+      note: "Heavy Chariot pulled by two Elven Steeds, crewed by two Elven Warriors with light armour, spears, shields and longbows (5+ armour save; crew may swap spears/shields for halberds instead, 6+ save). The first Tiranoc Chariot counts toward Regiments; further ones count toward Chariots & Monsters.",
+      extraCrewCost: 10, extraCrewLabel: "extra Elven Warrior crew", extraSteedCost: 5, extraSteedLabel: "extra Elven Steeds",
+      scythedWheelsCost: 20, commanderCost: 43, commanderLabel: "One crewman is an Elven Commander", commanderMagicItemSlots: 1,
+      variantGroupLabel: "Variants",
+      variantOptions: [
+        { id: "halberdcrew", label: "Crew use halberds instead of spears/shields (6+ save instead of 5+)", cost: 0 },
+        { id: "whitelionsteeds", label: "Switch to White Lion Steeds — requires a White Lions regiment in the army (total +20pts)", cost: 20 },
+        { id: "whitelionbarding", label: "Barding for White Lion Steeds (+5pts; 4+ save, or 5+ with halberd crew)", cost: 5 },
+      ],
+    },
+    {
+      id: "dragonprincesdragons", name: "Dragon Princes on Dragons", perUnit: 225, stat: "Young Dragon", kind: "quantity",
+      statNote: "Rider: Supreme Elven Lord (lance, shield, Dragon Armour, 4+ save). Mount: Young Dragon (Red/White/Blue — see Dragon rules above). Not a character — follows ridden-monster rules; if the rider is slain, roll on the Monster Reaction Table (3D6).",
+    },
+  ],
+  specialCharacters: [
+    { id: "teclis", name: "Teclis, High Elf Mage Lord", cost: 400, stat: "Teclis", role: "Mage Lord",
+      note: "May hand-pick his spells.",
+      items: "Carries: The Moon Staff of Lileath (once/battle, draw 2D6 extra magic cards for personal use — but Teclis' characteristics are halved, rounding up, for the rest of the battle), War Crown of Saphery, The Sword of Teclis, Power Scroll, Dispel Magic Scroll." },
+    { id: "tyrion", name: "Tyrion, High Elf Prince", cost: 400, stat: "Imrik or Tyrion", role: "Lord",
+      note: "Rides the steed Malhandir.",
+      items: "Carries: Sunfang (magic weapon — 1D3 wounds vs Daemons no save, else +3S and 1 wound=1D3; once/battle a flaming breath attack, 4+ to wound models more than half covered), Dragon Armour of Aenarion (magic heavy armour, unmodifiable 1+ save, immune to fire/breath attacks), The Heart of Avelorn (4+ ward, natural dispel 4+; if Tyrion dies, the Heart is destroyed but he's resurrected on 1 wound)." },
+    { id: "alarielle", name: "Alarielle, Everqueen of Averlorn", cost: 400, stat: "The Everqueen", role: "Mage Lord",
+      note: "Cannot inflict wounds; anything she hits doesn't strike back that turn. Chaos Daemons within 8\" suffer a wound on 4+ at the start of the High Elf shooting phase, no save. If she joins a Handmaidens regiment, it becomes unbreakable (or gains hatred if she dies); their standard bearer may then take The Banner of Avelorn for +50pts.",
+      items: "Carries (unique to her): Star of Avelorn (heals a wounded character within 8\", herself only if no one else is wounded), Stave of Avelorn (holds 3 bound spells from her own lore, castable once each — may be claimed as her own at the cost of one of her original spells), The Shieldstone of Isha (4+ ward)." },
+    { id: "caradryan", name: "Caradryan, Captain of the Phoenix Guard", cost: 40, stat: "Caradryan", role: "Phoenix Guard alternative champion",
+      note: "Anyone who slays Caradryan must pass a Ld test on their own basic Ld or die (even if immune to psychology)." },
+    { id: "korhil", name: "Korhil, Hunter Captain of the White Lions", cost: 100, stat: "Korhil", role: "Hero — cannot be the general",
+      note: "Must stay with a White Lions regiment like a regimental champion; all White Lion rules apply to him. In base contact with another character, he may act as their bodyguard (enemy can't hit the protected model; neither may issue/accept challenges while he does).",
+      items: "Carries: The Axe of Chayal (double handed weapon, always strikes first), The Pelt of Charandis (unmodifiable 3+ save, immune to poison)." },
+    { id: "alithanar", name: "Alith Anar, The Shadow King", cost: 300, stat: "Eltharion or Alith Anar", role: "Lord",
+      note: "Hates Dark Elves and all Chaos. If he's the general, Spearmen/Archers/Warriors/Shadow Warriors also hate Dark Elves and Chaos. Any infantry regiment he joins may skirmish; he may use the scout rule. Light armour and a shield.",
+      items: "Carries: the Stone of Midnight, Moonbow, and the Shadow Crown (always march, and leave melee in the movement phase if there's room)." },
+    { id: "imrik", name: "Imrik, Lord of Dragons", cost: 777, stat: "Imrik or Tyrion", role: "Lord",
+      note: "Rides a Red/White/Blue Emperor Dragon.",
+      items: "Carries: Armour of Caledor, Star Lance (S10 on the charge), and the Dragonhorn (once/battle in melee, his dragon fights with 1D6 extra attacks that turn)." },
+    { id: "belannaer", name: "Belannaer, Loremaster of Hoeth", cost: 555, stat: "Belannaer", role: "Mage Lord",
+      note: "Enemies charging Belannaer (or a regiment he joins) have their charge distance reduced by 1D3\".",
+      items: "Carries: Cloak of Stars, Blade of Bel-Korhadris, The Book of the Phoenix.", extraMagicItemSlots: 1 },
+    { id: "eltharion", name: "Eltharion the Grim, Warden of Tor Yvresse", cost: 444, stat: "Eltharion or Alith Anar", role: "Lord",
+      note: "Hates goblins of all kinds; +1 to hit and +1S in a challenge against Grom the Paunch. Lance, shield, heavy armour. Rides a Griffon.",
+      items: "Carries: the Fangsword of Eltharion, the Helm of Yvresse, and the Talisman of Hoeth." },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
-  { key: "highelves", name: "High Elves" },
+  { key: "highelves", name: "High Elves", data: HIGH_ELVES },
   { key: "orcsgoblins", name: "Orcs & Goblins" },
   { key: "dwarfs", name: "Dwarfs" },
   { key: "skaven", name: "Skaven" },
@@ -1255,7 +1539,7 @@ const FACTION_LIST = [
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
@@ -1307,8 +1591,8 @@ function regimentCost(inst, def, armyData) {
     const selected = opt.group ? inst.gearSelections?.[opt.group] === opt.id : !!inst.gearSelections?.[opt.id];
     if (selected) total += opt.cost;
   });
-  const lordsBarding = def.isLords && inst.gearSelections?.barding;
-  if (inst.standard && !lordsBarding) {
+  const toggleFreeStandard = def.fastCavalryToggleOption && inst.gearSelections?.[def.fastCavalryToggleOption];
+  if (inst.standard && !toggleFreeStandard) {
     total += (def.command === "fastCavalry" || def.command === "monstrous") ? 10 : 0;
   }
   if (inst.standard && inst.magicBannerId) {
@@ -2131,12 +2415,12 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
 
   const size = unit.size ?? def.minSize;
   const gearSelections = unit.gearSelections || {};
-  const lordsBarding = def.isLords && gearSelections.barding;
+  const toggleFreeStandard = def.fastCavalryToggleOption && gearSelections[def.fastCavalryToggleOption];
   const autoStandard = def.command === "standard" || def.command === "special";
   const paidStandardCommand = def.command === "fastCavalry" || def.command === "monstrous";
   const standardAllowed = autoStandard || paidStandardCommand;
-  const standardFree = autoStandard || lordsBarding;
-  const standardCost = paidStandardCommand && !lordsBarding ? 10 : 0;
+  const standardFree = autoStandard || toggleFreeStandard;
+  const standardCost = paidStandardCommand && !toggleFreeStandard ? 10 : 0;
 
   const detachments = unit.detachments || [];
   const detachmentSizeUsed = detachments.reduce((s, d) => s + d.size, 0);
