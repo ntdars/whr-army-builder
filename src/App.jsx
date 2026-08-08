@@ -618,6 +618,44 @@ const STATS = {
   "Malekith The Witch King": { M: 5, WS: 7, BS: 7, S: 5, T: 5, W: 4, I: 9, A: 4, Ld: 10 },
   "Tullaris of Har Ganeth": { M: 5, WS: 6, BS: 6, S: 5, T: 5, W: 2, I: 6, A: 3, Ld: 9 },
   "Shadowblade, Master Assassin": { M: 5, WS: 10, BS: 10, S: 4, T: 4, W: 2, I: 10, A: 3, Ld: 10 },
+  // --- Skaven ---
+  "Vermin Lord": { M: 8, WS: 8, BS: 8, S: 8, T: 7, W: 7, I: 10, A: 8, Ld: 10 },
+  "Skaven Warlord": { M: 5, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 7, A: 4, Ld: 7 },
+  "Skaven Hero": { M: 5, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 6, A: 3, Ld: 6 },
+  "Skaven BSB": { M: 5, WS: 4, BS: 4, S: 4, T: 3, W: 2, I: 5, A: 2, Ld: 5 },
+  "Clan Pestilens Plague Priest": { M: 5, WS: 5, BS: 5, S: 4, T: 5, W: 2, I: 6, A: 3, Ld: 6 },
+  "Clan Eshin Assassin": { M: 6, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 5, A: 2, Ld: 7 },
+  "Grey Seer": { M: 5, WS: 6, BS: 6, S: 4, T: 4, W: 4, I: 7, A: 4, Ld: 7 },
+  "Master Warlock": { M: 5, WS: 3, BS: 3, S: 4, T: 4, W: 3, I: 6, A: 2, Ld: 7 },
+  "Warlock Champion": { M: 5, WS: 3, BS: 3, S: 4, T: 4, W: 2, I: 5, A: 1, Ld: 6 },
+  "Warlock": { M: 5, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 5, A: 1, Ld: 5 },
+  "Clanrat Warriors": { M: 5, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 4 },
+  "Skaven Weapon Team": { M: 5, WS: 3, BS: 3, S: 3, T: 3, W: 2, I: 4, A: 1, Ld: 4 },
+  "Plague Monks": { M: 5, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 4, A: 1, Ld: 4 },
+  "Stormvermin": { M: 5, WS: 4, BS: 3, S: 4, T: 3, W: 1, I: 5, A: 1, Ld: 6 },
+  "Gutter Runners": { M: 6, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 5, A: 1, Ld: 6 },
+  "Night Runners": { M: 6, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 5 },
+  "Skaven Packmasters": { M: 6, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 4, A: 1, Ld: 7 },
+  "Rat Ogres": { M: 6, WS: 4, BS: 0, S: 5, T: 5, W: 3, I: 5, A: 2, Ld: 5 },
+  "Giant Rats": { M: 6, WS: 2, BS: 0, S: 2, T: 2, W: 1, I: 3, A: 1, Ld: 2 },
+  "Skaven Slaves": { M: 5, WS: 2, BS: 2, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 2 },
+  "Poison Wind Globadiers": { M: 5, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 7 },
+  "Plague Censer Bearers": { M: 5, WS: 4, BS: 0, S: 4, T: 4, W: 1, I: 4, A: 1, Ld: 7 },
+  "Skaven Champion": { M: 5, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 5, A: 2, Ld: 5 },
+  "Plague Acolyte": { M: 5, WS: 4, BS: 4, S: 4, T: 4, W: 1, I: 5, A: 2, Ld: 5 },
+  "Stormvermin Champion": { M: 5, WS: 5, BS: 4, S: 5, T: 3, W: 1, I: 6, A: 2, Ld: 7 },
+  "Gutter Runner Champion": { M: 6, WS: 5, BS: 4, S: 5, T: 3, W: 1, I: 6, A: 2, Ld: 7 },
+  "Night Runner Champion": { M: 6, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 5, A: 2, Ld: 6 },
+  "Doomwheel": { M: "3D6", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
+  "Screaming Bell": { M: "-", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
+
+  "Rat Swarms": { M: 6, WS: 3, BS: 0, S: 3, T: 2, W: 5, I: 1, A: 5, Ld: 10 },
+  "Chief Assassin Deathmaster Snikch": { M: 6, WS: 8, BS: 6, S: 4, T: 4, W: 3, I: 10, A: 4, Ld: 9 },
+  "Plaguelord Lord Skrolk": { M: 5, WS: 6, BS: 4, S: 4, T: 5, W: 3, I: 7, A: 4, Ld: 7 },
+  "Chief Warlock Ikit Claw": { M: 5, WS: 5, BS: 3, S: 5, T: 4, W: 4, I: 8, A: 3, Ld: 9 },
+  "Throt the Unclean": { M: 5, WS: 5, BS: 3, S: 5, T: 4, W: 2, I: 6, A: 4, Ld: 8 },
+  "Warlord Queek Head-Taker": { M: 5, WS: 7, BS: 6, S: 4, T: 4, W: 3, I: 7, A: 5, Ld: 8 },
+  "Boneripper": { M: 6, WS: 5, BS: 0, S: 5, T: 5, W: 3, I: 6, A: 3, Ld: 5 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -4382,12 +4420,202 @@ const DARK_ELVES = {
   ],
 };
 
+const SKAVEN_MAGIC_ITEMS = [
+  { id: "sk-fellblade", name: "Fellblade", cost: 50, cat: "weapon", desc: "Wounds automatically. No armour save. 1 wound = 1D6 wounds. At the start of each Skaven turn, roll a die — on a 1, the bearer suffers a wound with no save of any kind possible (not even ward or regeneration)." },
+  { id: "sk-warpstormscroll", name: "Warpstorm Scroll", cost: 10, cat: "enchanted", desc: "Bound spell, one use. All creatures flying high — friend and foe alike — suffer 1D6 wounds. Wounds on ridden monsters are randomised as per shooting." },
+  { id: "sk-warpstonecharm", name: "Warpstone Charm", cost: 25, cat: "enchanted", desc: "Once per battle, the bearer may re-roll a single personal die roll and add or deduct 1 from the result." },
+  { id: "sk-warpdustamulet", name: "Warpdust Amulet", cost: 50, cat: "enchanted", desc: "Enemies suffer -1 to hit and -1 to wound against the bearer." },
+  { id: "sk-skavenbrew", name: "Skavenbrew", cost: 50, cat: "enchanted", desc: "Fed to the whole bearer's unit at the start of the battle. Roll 1D6: 1 no effect, 2-3 the unit hates all enemies, 4-5 the unit gains frenzy, 6 an extreme frenzy that doubles the unit's Movement and Attacks (1D3 models die from exhaustion at the end of each Skaven turn)." },
+  { id: "sk-sacredstandard", name: "Sacred Standard of the Horned Rat", cost: 60, cat: "banner", desc: "Ld 8 for the regiment (before rank-bonus Ld is added). Natural dispel 4+ — if a spell is dispelled this way, the power used to cast it goes to the Skaven player's hand." },
+  { id: "sk-stormbanner", name: "Storm Banner", cost: 60, cat: "banner", desc: "One use, activated at the start of any Skaven turn. For the rest of that turn: all BS-based shooting is at -2 to hit, all other shooting only succeeds on a 4+, and flying is impossible (ground move only) — all creatures flying high are driven off." },
+];
+
+const SKAVEN = {
+  key: "skaven",
+  name: "Skaven",
+  tagline: "The Under-Empire's rat-men — treacherous clans united only by the will of the Horned Rat",
+  magicItems: SKAVEN_MAGIC_ITEMS,
+  armyWideRules: [
+    "Strength in numbers: Skaven regiments add their rank bonus to their Ld for all tests (panic, break, fear, etc.) — use the highest Ld present (the general's, if within 12\") plus the rank bonus. Doesn't apply if the regiment can't claim a rank bonus (fleeing, skirmishing, lost to a flank attack, etc.).",
+    "Lead from the back: Skaven characters may stand in the rear rank of a regiment. Even if a Skaven character refuses a challenge, the regiment may still use his Ld and other special rules, including spellcasting.",
+    "Warpstone counts as magical: Assassins'/Gutter Runners' poisoned weapons, Poisoned Wind Globes, Plague Censers, pistol/handgun/Jezzail/Warpfire Thrower/Ratling Gun shots, and Lightning from Lightning Cannons/Doomwheels all count as magical attacks.",
+    "Clanrat Warriors are mainstay: the number of Clanrat Warrior regiments caps the max number of any other regiment type or war machine (e.g. two Clanrat regiments allow up to two Plague Monk regiments, up to two Ratling Gun Teams, up to two Doomwheels, each counted separately). Not hard-enforced by this builder — track it yourself.",
+    "Run to fight another day: all Skaven units flee an extra inch.",
+    "Lesser breed: Rat Swarms, Giant Rats, and Skaven Slaves don't cause panic in other Skaven units when destroyed or broken (though they themselves still panic from each other).",
+    "Warpstone tokens: a Skaven Wizard (not a Vermin Lord) carries as many Warpstone Tokens as he has levels, usable as a power card when casting. Consuming one forces a roll: on a 1, a Warlock becomes a mindless Chaos Spawn (a Grey Seer instead rolls 2D6 and only turns on double 1s). This is a battle-phase mechanic, not simulated here.",
+    "Some Skaven spells are Grey Seer only (including for Vermin Lords) and are removed from the deck when Warlocks are dealt spells — a deck-building detail, not modeled in this points-based builder.",
+  ],
+  characters: [
+    {
+      id: "verminlord", name: "Vermin Lord (level 4)", cost: 600, stat: "Vermin Lord", magicItemSlots: 0, tags: ["wizard"],
+      gearNote: "A large terror-causing Greater Daemon wielding a Doom Glaive (1D3 wounds). A level 4 wizard using the Skaven or Dark Magic spell decks. Daemon: immune to poison and to damage that only affects living models, attacks count as magical, immune to psychology and never flees (vanishes into the Realm of Chaos — counts as slain — if forced to). Daemonic Save 4+ (works as an armour save, but is cancelled by magical attacks, spells and items alike).",
+    },
+    {
+      id: "skavenwarlord", name: "Skaven Warlord", cost: 88, stat: "Skaven Warlord", magicItemSlots: 3,
+      gearNote: "May take a shield and light armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon, magical bullets (+10pts)", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
+    },
+    {
+      id: "skavenhero", name: "Skaven Hero", cost: 53, stat: "Skaven Hero", magicItemSlots: 2,
+      gearNote: "May take a shield and light armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon, magical bullets (+10pts)", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
+    },
+    {
+      id: "skavenbsb", name: "Skaven Battle Standard Bearer", cost: 76, stat: "Skaven BSB", magicItemSlots: 1, restriction: "0-1",
+      gearNote: "May take light armour for free. The one magic item may be a magic banner.",
+    },
+    {
+      id: "greyseer", name: "Grey Seer (level 4)", cost: 325, stat: "Grey Seer", magicItemSlots: 4, tags: ["wizard"],
+      gearNote: "A level 4 wizard using the Skaven Spell Deck. Carries four Warpstone Tokens. May fire a missile weapon and still cast spells that phase.",
+      missileGroup: { label: "Missile weapon, magical bullets (+10pts)", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
+      mounts: [
+        { id: "screamingbell", name: "Screaming Bell", cost: 175, stat: "Screaming Bell" },
+      ],
+    },
+    {
+      id: "masterwarlock", name: "Master Warlock (level 3)", cost: 172, stat: "Master Warlock", magicItemSlots: 3, tags: ["wizard"],
+      gearNote: "Uses the Skaven Spell Deck. Carries as many Warpstone Tokens as levels (3). May fire a missile weapon and still cast spells that phase.",
+      missileGroup: { label: "Missile weapon, magical bullets (+10pts)", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
+    },
+    {
+      id: "warlockchampion", name: "Warlock Champion (level 2)", cost: 104, stat: "Warlock Champion", magicItemSlots: 2, tags: ["wizard"],
+      gearNote: "Uses the Skaven Spell Deck. Carries as many Warpstone Tokens as levels (2). May fire a missile weapon and still cast spells that phase.",
+      missileGroup: { label: "Missile weapon, magical bullets (+10pts)", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
+    },
+    {
+      id: "warlock", name: "Warlock (level 1)", cost: 46, stat: "Warlock", magicItemSlots: 1, tags: ["wizard"],
+      gearNote: "Uses the Skaven Spell Deck. Carries as many Warpstone Tokens as levels (1). May fire a missile weapon and still cast spells that phase.",
+      missileGroup: { label: "Missile weapon, magical bullets (+10pts)", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
+    },
+    {
+      id: "plaguepriest", name: "Plague Priest", cost: 73, stat: "Clan Pestilens Plague Priest", magicItemSlots: 2,
+      gearNote: "Subject to frenzy. May only join regiments of Plague Monks. May take a shield and light armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+    },
+    {
+      id: "assassin", name: "Assassin", cost: 40, stat: "Clan Eshin Assassin", magicItemSlots: 0,
+      gearNote: "The first Assassin in the army counts toward Regiments, not Characters — subsequent ones count as Characters. Conceals itself as an ordinary trooper in a Skaven infantry regiment (only one per regiment), revealed on entering melee, replacing a trooper — in the first combat round it strikes before Always-Strikes-First models and before challenges are declared. Equipped with light armour and two poisoned hand weapons (+1S; each wound multiplies into 1D3). Fights normally (no strike-first) in later rounds, and becomes a free-roaming independent character once that combat ends. Can never be the general, and nobody may use its Ld.",
+    },
+  ],
+  regiments: [
+    {
+      id: "clanratwarriors", name: "Clanrat Warriors", perModel: 4, minSize: 5, stat: "Clanrat Warriors", command: "standard",
+      note: "Equipped with shields.",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "spears", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Skaven Champion", baseCost: 10, magicItemSlots: 1, stat: "Skaven Champion" },
+    },
+    {
+      id: "skavenslaves", name: "Skaven Slaves", perModel: 2.5, minSize: 5, stat: "Skaven Slaves", command: "standard",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "spears", group: null, label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "slings", group: null, label: "Slings (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Skaven Champion", baseCost: 10, magicItemSlots: 1, stat: "Skaven Champion" },
+    },
+    {
+      id: "plaguemonks", name: "Plague Monks", perModel: 8, minSize: 5, stat: "Plague Monks", command: "standard",
+      note: "Frenzy. Equipped with light armour and additional hand weapons.",
+      champion: { name: "Plague Acolyte", baseCost: 20, magicItemSlots: 1, stat: "Plague Acolyte" },
+    },
+    {
+      id: "stormvermin", name: "Stormvermin", perModel: 8, minSize: 5, stat: "Stormvermin", command: "standard",
+      note: "Equipped with light armour and halberds.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Stormvermin Champion", baseCost: 20, magicItemSlots: 1, stat: "Stormvermin Champion" },
+    },
+    {
+      id: "gutterrunners", name: "Gutter Runners", perModel: 15, minSize: 5, stat: "Gutter Runners", command: "skirmisher",
+      note: "Light armour, additional hand weapons, and poisoned throwing stars (a light thrown weapon). May scout; must skirmish.",
+      champion: { name: "Gutter Runner Champion", baseCost: 20, magicItemSlots: 1, stat: "Gutter Runner Champion" },
+    },
+    {
+      id: "nightrunners", name: "Night Runners", perModel: 8, minSize: 5, stat: "Night Runners", command: "skirmisher",
+      note: "Additional hand weapons. Must skirmish. May take a Vanguard move (a march move after scouts deploy, before turn 1).",
+      champion: { name: "Night Runner Champion", baseCost: 10, magicItemSlots: 1, stat: "Night Runner Champion" },
+    },
+    {
+      id: "poisonwindglobadiers", name: "Poison Wind Globadiers", perModel: 10, minSize: 5, stat: "Poison Wind Globadiers", command: "none",
+      note: "Cannot take a standard bearer, musician, or regimental champion. Must skirmish. A Globadier may throw a Poison Wind Globe 6\" using BS to hit (no long-range penalty) — hits cause one automatic wound, no armour save. A natural 1 to hit shatters the globe early; the Globadier suffers a wound on a 5+ (counts as slain, only has one wound). Poison Wind Globes won't affect troops immune to poison.",
+    },
+    {
+      id: "plaguecenserbearers", name: "Plague Censer Bearers", perModel: 20, minSize: 5, stat: "Plague Censer Bearers", command: "none",
+      note: "Cannot take a standard bearer, musician, or regimental champion. Must skirmish. Enemies suffer -2 to hit them when shooting (including the skirmisher bonus). Frenzied and hate all enemies. In melee the censer works as a flail; additionally, everyone (friend and foe) in base contact with a Censer Bearer tests Toughness at the start of the melee phase or suffers a wound with no armour save (the Bearer himself only fails on a 6, having built up resistance). Fumes won't affect troops immune to poison.",
+    },
+    {
+      id: "packmasterpack", name: "Skaven Packmasters, Giant Rats & Rat Ogres", perModel: 0, minSize: 1, kind: "composite", command: "none",
+      note: "Follows the main-rulebook Beastmaster rules. Giant Rats (infantry) always pursue and fight one extra rank to the front; packs of Giant Rats move as fast cavalry (but can't cross water, being infantry). Rat Ogres (monstrous) cause fear and don't move as fast cavalry. Cannot take a standard bearer, musician, or regimental champion. Giant Rats and Rat Ogres count as two different regiment types for the Clanrat-mainstay cap — your army may include as many of each as you have Clanrat Warrior regiments.",
+      composition: [
+        { id: "packmaster", label: "Skaven Packmasters", cost: 11, stat: "Skaven Packmasters" },
+        { id: "giantrat", label: "Giant Rats", cost: 2, stat: "Giant Rats" },
+        { id: "ratogre", label: "Rat Ogres", cost: 20, stat: "Rat Ogres" },
+      ],
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "ratswarm", name: "Rat Swarm", perUnit: 40, stat: "Rat Swarms", kind: "quantity", countsAsFirstRegiment: true,
+      note: "The cheapest Rat Swarm base counts toward Regiments; further bases count toward Chariots, Monsters, and War Machines. Follow the main-rulebook rules for Swarms. Priced per base.",
+    },
+    {
+      id: "doomwheel", name: "Doomwheel", perUnit: 125, stat: "Doomwheel", kind: "chariot",
+      note: "A large chariot ridden by an Engineer (statistics of a Skaven Champion). Moves unpredictably: in the compulsory movement phase, face any direction and move 3D6\" straight — contact with any unit counts as a charge, delivering 1D6 S6 impact hits. While the rider lives, it may fire a lightning bolt in the shooting phase at the nearest enemy within 12\" (or everyone in base contact): 2D6 hits at a Strength set by the artillery die (a misfire wounds the Doomwheel itself once). The rider fights normally in melee, but attackers other than large targets/flyers suffer -2 to hit him, and he's immune to psychology. If the rider dies, the Doomwheel scatters randomly each turn (unless engaged) and auto-fails any Ld test.",
+    },
+    {
+      id: "lightningcannon", name: "Lightning Cannon", perUnit: 100, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Crewed by three Skaven. Fires a lightning bolt 1D6x10\" directly away from the muzzle — everything under the line suffers one hit at a Strength set by the artillery die, no armour save, 1 wound = 1D6 wounds. First misfire: no shot, can't fire next turn. Second misfire: the cannon explodes. The beam is blocked by hills, rocky outcrops, and building walls, but not by forests, obstacles, or other difficult/impassable terrain.",
+    },
+    {
+      id: "warpfirethrower", name: "Warpfire Thrower Team", perUnit: 50, stat: "Skaven Weapon Team", kind: "warmachine",
+      note: "Weapon Team: two Skaven on one 25x50mm base, using the regular Clanrat Warrior statline but functioning as a single model with 2 Wounds, skirmisher-style (360° LoS, no facing when charged by flyers, can't move-and-fire, may stand & shoot). Guess up to 6\" plus the artillery die; a misfire destroys the team. Otherwise, the teardrop template (small end at the hit point) — models more than half covered suffer a S5 hit, 1 wound=1D3. Any casualty forces a panic test.",
+    },
+    {
+      id: "ratlinggun", name: "Ratling Gun Team", perUnit: 75, stat: "Skaven Weapon Team", kind: "warmachine",
+      note: "Weapon Team, built as above (regular Clanrat Warrior statline, single model with 2 Wounds). Range 18\", 2D6 shots, S3 armour piercing (-1 save). On any double, fires in a random (scatter die) direction instead, hitting the first unit in its path within range — each shot then hits automatically.",
+    },
+    {
+      id: "jezzailteam", name: "Warplock Jezzail Team", perUnit: 25, stat: "Skaven Weapon Team", kind: "quantity", countsAsFirstRegiment: true, restriction: "0-5",
+      note: "Up to five Warplock Jezzails team together as one unit, working just like a skirmish regiment (one choice for the Clanrat-mainstay cap). The cheapest unit counts toward Regiments; further units count toward Chariots, Monsters, and War Machines. Uses the regular Clanrat Warrior statline, but functions as a single model with 2 Wounds. A Jezzail is a potent hand gun: fires as normal using BS, range 36\", S5 armour piercing, and any wound inflicted multiplies into 1D3.",
+    },
+  ],
+  specialCharacters: [
+    { id: "thanquol", name: "Grey Seer Thanquol and Boneripper", cost: 500, stat: "Grey Seer", role: "Grey Seer (level 4)",
+      note: "Thanquol must stand next to Boneripper, his bodyguard — if they're separated or Thanquol dies, Boneripper becomes subject to stupidity. Thanquol may use one Warpstone Token each magic phase and never has to test for turning into a Chaos Spawn. 4+ ward save. May take four magic items.",
+      mounts: [
+        { id: "boneripper", name: "Boneripper (bodyguard, always present)", cost: 0, stat: "Boneripper" },
+      ] },
+    { id: "snikch", name: "Deathmaster Snikch, Chief Assassin of Clan Eshin", cost: 225, stat: "Chief Assassin Deathmaster Snikch", role: "Follows the Assassin rules, with a twist — cannot be the army general",
+      note: "Wields three poisoned blades as Assassins' weapons, +2 attacks for 6 total per round. Instead of infiltrating, may Scout (alone or with a Gutter Runners regiment). 4+ ward save. May take one additional magic item.",
+      items: "Carries poisoned throwing stars and the Cloak of Shadows (if at least 4\" from the enemy at the start of the turn, cannot be charged, shot at, or targeted by a spell unless the opponent rolls a 6 to spot him — they may pick another target on a fail; if he's blocking a unit from being charged, simply move him aside to let the charge through) and the Bands of Power (enchanted, bound spell — if cast successfully, doubles the wielder's Strength until the next magic phase)." },
+    { id: "ikitclaw", name: "Ikit Claw, Chief Warlock of Clan Skryre", cost: 450, stat: "Chief Warlock Ikit Claw", role: "Warlord and Grey Seer",
+      note: "May use any spell deck except Waaagh Magic (as a Grey Seer, may use Grey-Seer-only spells; comes with four Warpstone Tokens). Unbreakable, but must flee along if his regiment flees. In the shooting phase, choose one: fire his pistol (magical warpstone bullets), cast Poison Wind Globes at double range (his high Strength), or fire his small Warpfire Thrower as a S4 breath weapon from his base (runs out on a preceding roll of 1-2 on a D6). May use all his gear and still cast spells. His mechanical claw's +1S is already reflected in his profile. May take three additional magic items.",
+      items: "Carries the Storm Daemon, a magic halberd with a bound spell — may cast Warp Lightning (24\", 1D6 S5 hits, no armour save); after use, roll a die, on a 1 it's exhausted for the rest of the game (still counts as a magic halberd)." },
+    { id: "skrolk", name: "Lord Skrolk, Plaguelord of Clan Pestilens", cost: 325, stat: "Plaguelord Lord Skrolk", role: "Lord",
+      note: "Frenzy. Terror. Can only join regiments of Plague Monks. Enemies in base contact suffer -1 to hit him in melee. If he's the general, Plague Monks count as the mainstay regiment type instead of Clanrat Warriors. May take one more magic item, which may be an arcane item.",
+      items: "Carries the Liber Bubonicus (makes him a level 2 wizard who may pick spells from Skaven's Putrefy/Plague/Pestilent Breath/Wither or Nurgle's Stream of Corruption/Miasma of Pestilence/Stench of Nurgle — when he casts Nurgle spells, Clan Pestilens models get the same immunities Nurgle followers would) and the Rod of Corruption (magic weapon — living models hit must pass a Toughness test or die instantly with no save of any kind; only tests once per melee phase; if passed, wound normally)." },
+    { id: "queek", name: "Warlord Queek Head-Taker", cost: 225, stat: "Warlord Queek Head-Taker", role: "Lord",
+      note: "Hates Orcs & Goblins and Dwarfs. +1 to hit and to wound in challenges. May take two additional magic items.",
+      items: "Wields Dwarf-Gouger (magic weapon, no armour save, 1 wound = D3 wounds, always wounds Dwarfs on 2+) and wears the Warpstone Armour (light armour, 4+ ward save — each wound saved this way inflicts a S3 hit back on the attacker)." },
+    { id: "throt", name: "Throt the Unclean", cost: 100, stat: "Throt the Unclean", role: "Cannot be the army general — may be used as a Packmaster",
+      note: "May take one additional magic item.",
+      items: "Wields a man catcher (against man-sized models, skip the wound roll — each model hit tests Toughness, once per melee round; on a fail, it's slain instantly with no saves of any kind) and carries a Warpstone Charm." },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
   { key: "orcsgoblins", name: "Orcs & Goblins", data: ORCS_GOBLINS },
   { key: "dwarfs", name: "Dwarfs", data: DWARFS },
-  { key: "skaven", name: "Skaven" },
+  { key: "skaven", name: "Skaven", data: SKAVEN },
   { key: "undead", name: "Undead" },
   { key: "woodElves", name: "Wood Elves", data: WOOD_ELVES },
   { key: "chaos", name: "Chaos", data: CHAOS },
@@ -4403,7 +4631,7 @@ const FACTION_LIST = [
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
@@ -4722,6 +4950,13 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
         <h1 className="whr-h1" style={{ fontSize: 46, margin: 0 }}>WARHAMMER RENAISSANCE</h1>
         <LeafDivider />
         <p className="whr-eyebrow" style={{ margin: 0 }}>Army List Builder</p>
+        <div style={{
+          marginTop: 18, padding: "10px 16px", background: "var(--burgundy)", color: "#F3E4BC",
+          fontFamily: "var(--font-display-sc)", letterSpacing: "0.03em", fontSize: 14.5,
+          borderRadius: 2, display: "inline-block",
+        }}>
+          This builder is still a WIP. Contact Turhan in the WHR Facebook Group to provide feedback.
+        </div>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 28 }} className="whr-builder-grid">
