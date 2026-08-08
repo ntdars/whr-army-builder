@@ -3746,13 +3746,21 @@ const CHAOS_DWARFS = {
   name: "Chaos Dwarfs",
   tagline: "High Hats from the Dark Lands — bound to Hashut, forging chains for the weak",
   magicItems: [...CHAOS_DWARF_MAGIC_ITEMS, ...ORC_MAGIC_ITEMS],
+  themes: {
+    default: "core",
+    options: [
+      { id: "core", name: "Core", desc: "Base Chaos Dwarf army." },
+      { id: "oldschool", name: "Old School Addendum", desc: "Blunderbusses replaced with Crossbows. Hobgoblin Archers can upgrade to Crossbows for +2 points per model. Adds Weapon Teams, Juggernaut, Whirlwind and Tenderizer War Engines." },
+      { id: "modern", name: "Modern Stuff", desc: "Adds Fireglaives, Naphtha Bombs, Blood of Hashut, Bull Centaur Renders, K'daii Fireborn, Chaos Siege Giant, The Iron Daemon, Magma Cannons, and the Hellcannon." },
+    ],
+  },
   armyWideRules: [
     "The master race: the army general must be a Chaos Dwarf character, and the army must include at least one regiment of Chaos Dwarf Warriors, Tower Guards, or Blunderbusses. Chaos Dwarfs don't hate Orcs & Goblins, don't suffer Elf Grudge, and get no dispel bonus. They have no Gromril Armour, but Chaos Dwarf characters and elite troops may take Chaos Armour instead (4+ armour save on its own, doesn't cost a magic item slot, and may be worn by wizards while casting). Chaos Dwarfs and Bull Centaurs never take panic tests caused by greenskins of any kind.",
     "Greenskin slaves: the army may include enslaved Common Goblins, Common Orcs, and Black Orcs. Common Goblins/Orcs are subject to animosity; Black Orcs are immune to it and ignore panic from Common Orcs/Goblins; Black Orc characters joining a non-Black-Orc regiment quell its animosity. Common Goblins fear Elves they don't outnumber 2:1. Greenskin characters can't join Chaos Dwarf ranks generally — Black Orc/Common Orc/Goblin characters act alone or join their own kind's regiments (Black Orcs will only heed Black Orc or Chaos Dwarf leadership); Chaos Dwarf characters may join Black Orc/Common Orc/Goblin regiments but never Hobgoblins.",
     "Hobgoblins: function as slave-masters over the other greenskins rather than being enslaved themselves. They suffer animosity like Common Orcs/Goblins, but nearby Orcs/Goblins (within 12\" of a Hobgoblin regiment) don't test it themselves that turn. Orc/Goblin/Black Orc units don't panic when nearby Hobgoblins break, flee, or die — it's cause for celebration. No character but a Hobgoblin may join a Hobgoblin regiment, and Hobgoblin characters can't join anyone else's regiment either.",
     "Animosity: at the start of the turn (before movement), each not-fleeing, not-engaged Orc/Goblin/Hobgoblin regiment not within 12\" of a friendly Hobgoblin regiment (Orcs/Goblins only) rolls a die — on a 1, roll again: 1-5 the unit squabbles (immune to psychology, can't move/shoot/cast that turn, though wizards may still dispel), 6 the unit moves 2D6\" toward the nearest enemy and must charge it next turn if possible. This builder doesn't simulate animosity rolls turn-to-turn — it's a battle-phase mechanic, not a list-building one, same treatment as Orcs & Goblins.",
-    "This builder starts from the core Chaos Dwarf High Hats army and includes both optional supplements from the book — the Old School Addendum (crossbows/Weapon Teams/Juggernaut-Whirlwind-Tenderizer) and Modern Stuff (no Orc/Goblin slaves; Fireglaives/Naphtha Bombs/Blood of Hashut; Bull Centaur Renders, K'daii, Chaos Siege Giant, Iron Daemon) — as extra selectable entries, each labeled with its source. Per the book you can only pick one of the two supplements for a given army (not both) — this isn't hard-enforced, so police that yourself. The Fireglaive/Naphtha Bomb/Blood of Hashut upgrades for Chaos Dwarf Lords/Heroes aren't wired up as toggles (no clean slot for flat per-character extras in this engine yet) — add their points (+10/+10/+20 each, Blood of Hashut stacks) by hand if you take them.",
-    "Hellcannon: the Chaos army book's version — a Daemon that fights as a war machine, crewed by Chaos Dwarfs — is already available under Modern Stuff, listed below as 'Hellcannon (from the Chaos army book)'.",
+    "Army Theme: pick Core, Old School Addendum, or Modern Stuff at the top of the left-hand sidebar — the book only allows one of the two supplements per army, never both, so picking a theme swaps in that supplement's units and hides the other's. Core units (Chaos Dwarf Warriors, Tower Guard, Bull Centaurs, Hobgoblins, the greenskin slave regiments, all the standard characters, etc.) stay available under every theme. Note the book also says a Modern Stuff army can't include the Black Orc/Common Orc/Common Goblin slave options at all — this builder doesn't hide those automatically when Modern Stuff is picked, so leave them out yourself if you're playing strictly RAW. The Fireglaive/Naphtha Bomb/Blood of Hashut upgrades for Chaos Dwarf Lords/Heroes aren't wired up as toggles (no clean slot for flat per-character extras in this engine yet) — add their points (+10/+10/+20 each, Blood of Hashut stacks) by hand if you take them.",
+    "Hellcannon: the Chaos army book's version — a Daemon that fights as a war machine, crewed by Chaos Dwarfs — is already available under the Modern Stuff theme, listed below as 'Hellcannon (from the Chaos army book)'.",
   ],
   characters: [
     {
@@ -3952,7 +3960,7 @@ const CHAOS_DWARFS = {
     },
     // --- Modern Stuff regiments ---
     {
-      id: "bullcentaurrenders", name: "Bull Centaur Renders", perModel: 54, minSize: 3, stat: "Bull Centaur Renders", statNote: "Bull Centaur Renders wear heavy armour. Monstrous, cause fear. (Modern Stuff)", command: "monstrous",
+      id: "bullcentaurrenders", name: "Bull Centaur Renders", perModel: 54, minSize: 3, stat: "Bull Centaur Renders", statNote: "Bull Centaur Renders wear heavy armour. Monstrous, cause fear.", command: "monstrous", theme: "modern",
       note: "Cannot take a standard bearer or musician.",
       options: [
         { id: "shields", group: null, label: "Shields (+4pt/model)", cost: 4, per: "model" },
@@ -3961,8 +3969,8 @@ const CHAOS_DWARFS = {
       champion: { name: "Bull Centaur Render Champion", baseCost: 50, magicItemSlots: 1, stat: "Bull Centaur Render Champion", tags: ["bullCentaur"] },
     },
     {
-      id: "kdaiifireborn", name: "K'daii Fireborn", perModel: 41, minSize: 3, stat: "K'daii Fireborn", command: "none",
-      note: "(Modern Stuff) Requires a Sorcerer elsewhere in the army (not hard-enforced — track it yourself). Monstrous; flaming attacks, immune to fire, regenerate 4+ (not cancelled by flaming, but is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit that doesn't count toward combat resolution. Count as Daemons in all regards: cause fear, magical attacks, immune to poison/living-only effects/psychology, never flee (exorcised — counts as slain — if forced to). Cannot take a standard bearer or musician; only Daemonic characters may join.",
+      id: "kdaiifireborn", name: "K'daii Fireborn", perModel: 41, minSize: 3, stat: "K'daii Fireborn", command: "none", theme: "modern",
+      note: "Requires a Sorcerer elsewhere in the army (not hard-enforced — track it yourself). Monstrous; flaming attacks, immune to fire, regenerate 4+ (not cancelled by flaming, but is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit that doesn't count toward combat resolution. Count as Daemons in all regards: cause fear, magical attacks, immune to poison/living-only effects/psychology, never flee (exorcised — counts as slain — if forced to). Cannot take a standard bearer or musician; only Daemonic characters may join.",
       champion: { name: "K'daii Manburner", baseCost: 50, magicItemSlots: 0, stat: "K'daii Manburner", note: "May take one Daemonic Reward from the Chaos army book's Daemonic Rewards (All) section (not modeled in this builder — apply on paper)." },
     },
   ],
@@ -3984,46 +3992,46 @@ const CHAOS_DWARFS = {
     },
     // --- Old School Addendum war machines ---
     {
-      id: "flamethrowerteam", name: "Flame Thrower Team (Old School Addendum)", perUnit: 60, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      id: "flamethrowerteam", name: "Flame Thrower Team", perUnit: 60, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "oldschool",
       note: "Weapon Team: two Chaos Dwarf Warriors in heavy armour on one 25x50mm base, skirmisher-style (360° LoS, no facing when charged by flyers, can't move-and-fire, may stand & shoot). Guess up to 6\" plus the artillery die; on a misfire the team is destroyed. Otherwise place the teardrop template (small end at the hit point) — models more than half covered suffer a flaming S5 hit, 1 wound=1D3. Any casualty forces a panic test. If it blows up during a stand & shoot, the charge counts as failed.",
     },
     {
-      id: "swivelgunteam", name: "Swivel Gun Team (Old School Addendum)", perUnit: 85, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      id: "swivelgunteam", name: "Swivel Gun Team", perUnit: 85, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "oldschool",
       note: "Weapon Team: two Chaos Dwarf Warriors in heavy armour on one 25x50mm base, skirmisher-style. Range 18\", 2D6 shots, S3 armour piercing (-1 save). On any double, fires in a random (scatter die) direction instead, hitting the first unit in its path within range — each shot then hits automatically.",
     },
     {
-      id: "cdjuggernaut", name: "Chaos Dwarf Juggernaut (Old School Addendum)", perUnit: 200, stat: "Chaos Dwarf Juggernaut", kind: "chariot", restriction: "0-1",
+      id: "cdjuggernaut", name: "Chaos Dwarf Juggernaut", perUnit: 200, stat: "Chaos Dwarf Juggernaut", kind: "chariot", restriction: "0-1", theme: "oldschool",
       note: "Unbreakable large chariot pushed by a Bull Centaur (M8; only the crew fights in melee, not the Centaur). Can't pursue/overrun, doesn't double movement on the charge, and doesn't halve movement at one wound. Crewed by six Chaos Dwarf Warriors in heavy armour with crossbows. Front-mounted organ-gun variant: S7, 1D3 wounds, no armour save, guess range up to 36\", may fire even after moving, can't pivot to shoot, only two barrels fire per round (never needs reloading). First misfire (non-bounce): can't shoot this turn or next, can still move. Second misfire (non-bounce): gun and Juggernaut both explode.",
     },
     {
-      id: "cdwhirlwind", name: "Chaos Dwarf Whirlwind (Old School Addendum)", perUnit: 75, stat: "Whirlwind/Tenderizer", kind: "chariot", restriction: "0-1",
+      id: "cdwhirlwind", name: "Chaos Dwarf Whirlwind", perUnit: 75, stat: "Whirlwind/Tenderizer", kind: "chariot", restriction: "0-1", theme: "oldschool",
       note: "Scythed light chariot pushed by a Bull Centaur (WS4, M8). Can't pursue/overrun, doesn't double movement on the charge, doesn't halve movement at one wound, and is immune to psychology. The Centaur operates the machine rather than fighting; each combat round it deals 1D6 automatic S4 hits to its front, in addition to any charge impact hits.",
     },
     {
-      id: "cdtenderizer", name: "Chaos Dwarf Tenderizer (Old School Addendum)", perUnit: 75, stat: "Whirlwind/Tenderizer", kind: "chariot", restriction: "0-1",
+      id: "cdtenderizer", name: "Chaos Dwarf Tenderizer", perUnit: 75, stat: "Whirlwind/Tenderizer", kind: "chariot", restriction: "0-1", theme: "oldschool",
       note: "Scythed light chariot pushed by a Bull Centaur (WS4, M8). Can't pursue/overrun, doesn't double movement on the charge, doesn't halve movement at one wound, and is immune to psychology. The Centaur operates the machine rather than fighting; each combat round it deals one automatic S7 hit, no armour save, causing 1D6 wounds to its front, in addition to any charge impact hits.",
     },
     // --- Modern Stuff monsters/chariots ---
     {
-      id: "magmacannon", name: "Magma Cannon (Modern Stuff)", perUnit: 90, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      id: "magmacannon", name: "Magma Cannon", perUnit: 90, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "modern",
       note: "Follows Dwarf Flame Cannon rules: guesses range like a cannon (max 12\") plus the artillery die; teardrop template, S5 hit (1 wound = 1D3). Any casualty forces a panic test. May stand & shoot (resolved before the enemy unit moves). Crewed by three Chaos Dwarfs.",
       extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
     },
     {
-      id: "cdhellcannon", name: "Hellcannon (Modern Stuff, from the Chaos army book)", perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine",
-      note: "House rule / optional — ask your opponent's permission before including it, primarily meant for Siege Battles. A Daemon that works as a war machine, crewed by three Chaos Dwarfs in heavy armour. Shoots like a large stone thrower; any regiment losing even one model to it must take a panic test; shots count as magical. A misfire eats 1D3 crew instead of firing; if all crew die, it becomes an independent monster with random movement that charges the nearest model each turn (friend or foe), following normal Daemon rules — and still defends itself if charged.",
+      id: "cdhellcannon", name: "Hellcannon", perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine", theme: "modern",
+      note: "From the Chaos army book. House rule / optional — ask your opponent's permission before including it, primarily meant for Siege Battles. A Daemon that works as a war machine, crewed by three Chaos Dwarfs in heavy armour. Shoots like a large stone thrower; any regiment losing even one model to it must take a panic test; shots count as magical. A misfire eats 1D3 crew instead of firing; if all crew die, it becomes an independent monster with random movement that charges the nearest model each turn (friend or foe), following normal Daemon rules — and still defends itself if charged.",
       extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
     },
     {
-      id: "kdaiidestroyer", name: "K'daii Destroyer (Modern Stuff)", perUnit: 300, stat: "K'daii Destroyer", kind: "monster",
+      id: "kdaiidestroyer", name: "K'daii Destroyer", perUnit: 300, stat: "K'daii Destroyer", kind: "monster", theme: "modern",
       note: "Requires a Sorcerer elsewhere in the army (not hard-enforced — track it yourself). Large monster, causes Terror, flaming attacks, immune to fire, regenerates 4+ (not cancelled by flaming, is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit not counting toward combat resolution. Counts as a Daemon in all regards: magical attacks, immune to poison/living-only effects/psychology, never flees (exorcised — counts as slain — if forced to).",
     },
     {
-      id: "chaossiegegiant", name: "Chaos Siege Giant (Modern Stuff)", perUnit: 275, stat: "Chaos Siege Giant", kind: "monster",
+      id: "chaossiegegiant", name: "Chaos Siege Giant", perUnit: 275, stat: "Chaos Siege Giant", kind: "monster", theme: "modern",
       note: "Follows the rulebook Giant with exceptions: Siege Armour (5+ save, 3+ vs. shooting). May take Runes of Hate for +25pts flat (add by hand — not wired up as a toggle here). Has Frenzy, and re-rolls (must keep the second result) whenever rolling for a random number of attacks. Special attacks each turn (choose one): Legbreaker (opposed D6+S roll vs. a model in contact, D3 wounds no save per point of margin, and anyone else in contact must pass Initiative or take an automatic wound), Smash with Pick (target fails Initiative or suffers 2D6 wounds no save — buildings auto-fail; on a double the pick jams and the Giant skips its next combat round), Head Butt Large Target (automatic S7 hit, wounded models knocked unconscious — auto-hit until they wake at the end of the next melee phase), Yell and Bawl (no attack, but automatically wins combat resolution by 2 if the Giant survives the round), Flail and Crush on a man-sized regiment (take the fall-over test; if it stands, 1D6 S8 hits), Ripping Blades (2D6 automatic S6 hits on a unit in contact; double 6 adds the extra hits but forces a fall-over test, double 1 does nothing and costs the Giant D3 wounds no save plus a fall).",
     },
     {
-      id: "irondaemon", name: "The Iron Daemon (Modern Stuff)", perUnit: 350, stat: "Iron Daemon", kind: "chariot",
+      id: "irondaemon", name: "The Iron Daemon", perUnit: 350, stat: "Iron Daemon", kind: "chariot", theme: "modern",
       note: "Large chariot with a unique profile, 3+ armour save, causes terror, unbreakable, crewed by three Chaos Dwarf Warriors (only they fight in melee). Auto-passes all characteristic tests except Initiative (always fails those). Chariots that charge it suffer 1D6 S7 impact hits themselves; Night Goblin Fanatics touching it are slain. Moves like a chariot but can't free-pivot, obliterates obstacles, can't pursue/overrun/flee (unbreakable)/march, and doesn't double its charge move — instead add 1D6\" to its Movement (on a 1, it stalls for the rest of that turn). Doesn't halve movement at one wound. Front-mounted steam cannonade (organ gun): range 24\", fires 2D6 (two Artillery dice) shots, halved beyond half range, S5 AP at short range / S4 AP at long range, may fire after moving, can't pivot to shoot, two barrels per round, never reloads. First misfire: the Iron Daemon suffers a wound. Second misfire: it explodes (counts as slain). Doesn't fight in melee itself, but deals 1D6+1 S8 impact hits on the charge, may always disengage, and once per turn may grind its wheels for another 1D6+1 S8 impact hits while engaged. For +10pts flat, the cannonade may be swapped for a skullcracker (2D6+2 impact hits, armour piercing) — add by hand, not wired up as a toggle here.",
     },
   ],
@@ -4495,9 +4503,12 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
    BUILDER SCREEN
    ========================================================================== */
 
-function Sidebar({ armyData, roster, onAdd }) {
-  const [openSection, setOpenSection] = useState("characters");
+function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
+  const hasThemes = !!armyData.themes;
+  const [openSection, setOpenSection] = useState(hasThemes ? "armytheme" : "characters");
   const [rulesOpen, setRulesOpen] = useState(false);
+  const currentTheme = roster.armyTheme || armyData.themes?.default || null;
+  const themeVisible = (item) => !hasThemes || !item.theme || item.theme === currentTheme;
 
   const Section = ({ id, title, children }) => (
     <div style={{ marginBottom: 4 }}>
@@ -4535,8 +4546,21 @@ function Sidebar({ armyData, roster, onAdd }) {
       )}
 
       <div className="whr-scroll" style={{ overflowY: "auto", flex: 1, paddingRight: 4 }}>
+        {hasThemes && (
+          <Section id="armytheme" title="Army Theme">
+            {armyData.themes.options.map((t) => (
+              <label key={t.id} className="whr-opt-row" style={{ alignItems: "flex-start", gap: 10, cursor: "pointer" }}>
+                <input type="radio" name="army-theme" checked={currentTheme === t.id} onChange={() => onSetTheme(t.id)} style={{ marginTop: 4 }} />
+                <span style={{ flex: 1 }}>
+                  <div style={{ fontFamily: "var(--font-display-sc)", fontSize: 15.5, letterSpacing: "0.02em" }}>{t.name}</div>
+                  {t.desc && <div style={{ fontSize: 12, color: "var(--ink-soft)", marginTop: 2, lineHeight: 1.35 }}>{t.desc}</div>}
+                </span>
+              </label>
+            ))}
+          </Section>
+        )}
         <Section id="characters" title="Characters">
-          {armyData.characters.map((c) => {
+          {armyData.characters.filter(themeVisible).map((c) => {
             const limit = restrictionLimit(c.restriction);
             const count = countOfDef(roster, "character", c.id);
             const atLimit = count >= limit;
@@ -4553,7 +4577,7 @@ function Sidebar({ armyData, roster, onAdd }) {
           })}
         </Section>
         <Section id="regiments" title="Regiments">
-          {armyData.regiments.map((r) => {
+          {armyData.regiments.filter(themeVisible).map((r) => {
             const limit = r.knightGroup ? knightGroupLimit(r, roster, armyData) : restrictionLimit(r.restriction);
             const count = countOfDef(roster, "regiment", r.id);
             const atLimit = count >= limit;
@@ -4570,7 +4594,7 @@ function Sidebar({ armyData, roster, onAdd }) {
           })}
         </Section>
         <Section id="chariots" title="Chariots & Monsters">
-          {armyData.chariotsMonsters.map((c) => {
+          {armyData.chariotsMonsters.filter(themeVisible).map((c) => {
             const limit = restrictionLimit(c.restriction);
             const count = roster.chariots.filter((u) => u.defId === c.id).length;
             const atLimit = count >= limit;
@@ -4581,7 +4605,7 @@ function Sidebar({ armyData, roster, onAdd }) {
           })}
         </Section>
         <Section id="specials" title="Special Characters">
-          {armyData.specialCharacters.map((s) => {
+          {armyData.specialCharacters.filter(themeVisible).map((s) => {
             const count = countOfDef(roster, "special", s.id);
             return (
               <AddRow
@@ -5609,13 +5633,42 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     setSelectedId(inst.instanceId);
   }
 
+  function setArmyTheme(themeId) {
+    const keep = (list, defs) => list.filter((u) => {
+      const def = defs.find((d) => d.id === u.defId);
+      return !def || !def.theme || def.theme === themeId;
+    });
+    const isRemoved = (list, defs) => {
+      const u = list.find((x) => x.instanceId === selectedId);
+      if (!u) return false;
+      const def = defs.find((d) => d.id === u.defId);
+      return !!(def && def.theme && def.theme !== themeId);
+    };
+    if (selectedId && (
+      isRemoved(roster.characters, armyData.characters) ||
+      isRemoved(roster.regiments, armyData.regiments) ||
+      isRemoved(roster.chariots, armyData.chariotsMonsters) ||
+      isRemoved(roster.specials, armyData.specialCharacters)
+    )) {
+      setSelectedId(null);
+    }
+    setRoster((r) => ({
+      ...r,
+      armyTheme: themeId,
+      characters: keep(r.characters, armyData.characters),
+      regiments: keep(r.regiments, armyData.regiments),
+      chariots: keep(r.chariots, armyData.chariotsMonsters),
+      specials: keep(r.specials, armyData.specialCharacters),
+    }));
+  }
+
   function removeUnit(instanceId) {
     setRoster((r) => ({
+      ...r,
       characters: r.characters.filter((u) => u.instanceId !== instanceId),
       regiments: r.regiments.filter((u) => u.instanceId !== instanceId),
       chariots: r.chariots.filter((u) => u.instanceId !== instanceId),
       specials: r.specials.filter((u) => u.instanceId !== instanceId),
-      name: r.name, pointLimit: r.pointLimit, factionKey: r.factionKey, id: r.id,
     }));
     if (selectedId === instanceId) setSelectedId(null);
   }
@@ -5643,7 +5696,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
 
       <div className="whr-builder-grid" style={{ display: "grid", gridTemplateColumns: "280px 1fr 340px", gap: 18, flex: 1, minHeight: 0 }}>
         <div className="whr-panel whr-builder-col" style={{ padding: 14, minHeight: 0 }}>
-          <Sidebar armyData={armyData} roster={roster} onAdd={addUnit} />
+          <Sidebar armyData={armyData} roster={roster} onAdd={addUnit} onSetTheme={setArmyTheme} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
@@ -5688,7 +5741,8 @@ export default function App() {
   useEffect(() => { refreshIndex(); }, [refreshIndex]);
 
   function handleMuster({ name, pointLimit, factionKey }) {
-    const newRoster = { id: uid("roster"), name, pointLimit, factionKey, ...emptyRosterUnits() };
+    const armyTheme = getArmyData(factionKey)?.themes?.default || null;
+    const newRoster = { id: uid("roster"), name, pointLimit, factionKey, armyTheme, ...emptyRosterUnits() };
     setRoster(newRoster);
     setView("builder");
   }
