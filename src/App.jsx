@@ -569,6 +569,42 @@ const STATS = {
   "Marco Colombo": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 10 },
   "Asarnil the Dragonlord": { M: 5, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
   "Asarnil's Dragon": { M: 6, WS: 6, BS: 0, S: 6, T: 6, W: 7, I: 8, A: 7, Ld: 7 },
+  // --- Chaos Dwarfs ---
+  "Chaos Dwarf Lord": { M: 4, WS: 7, BS: 6, S: 4, T: 5, W: 3, I: 5, A: 4, Ld: 11 },
+  "Chaos Dwarf Hero": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 2, I: 4, A: 3, Ld: 10 },
+  "Chaos Dwarf BSB": { M: 4, WS: 5, BS: 4, S: 4, T: 4, W: 2, I: 3, A: 2, Ld: 9 },
+  "Chaos Dwarf Sorcerer Lord": { M: 4, WS: 4, BS: 3, S: 4, T: 5, W: 4, I: 5, A: 3, Ld: 10 },
+  "Chaos Dwarf Master Sorcerer": { M: 4, WS: 4, BS: 3, S: 4, T: 5, W: 3, I: 4, A: 2, Ld: 9 },
+  "Chaos Dwarf Sorcerer Champion": { M: 4, WS: 4, BS: 3, S: 4, T: 5, W: 2, I: 3, A: 1, Ld: 9 },
+  "Chaos Dwarf Sorcerer": { M: 4, WS: 4, BS: 3, S: 3, T: 5, W: 1, I: 3, A: 1, Ld: 9 },
+  "Bull Centaur Lord": { M: 8, WS: 7, BS: 6, S: 5, T: 5, W: 4, I: 6, A: 5, Ld: 11 },
+  "Bull Centaur Hero": { M: 8, WS: 6, BS: 5, S: 5, T: 5, W: 3, I: 5, A: 4, Ld: 10 },
+  "Bull Centaur BSB": { M: 8, WS: 5, BS: 4, S: 5, T: 4, W: 3, I: 4, A: 3, Ld: 9 },
+  "Hobgoblin Hero": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 4, A: 3, Ld: 7 },
+  "Hobgoblin Assassin": { M: 4, WS: 7, BS: 7, S: 4, T: 4, W: 1, I: 6, A: 2, Ld: 8 },
+  "Chaos Dwarf Warriors": { M: 4, WS: 4, BS: 3, S: 3, T: 4, W: 1, I: 2, A: 1, Ld: 9 },
+  "Chaos Dwarf Tower Guards": { M: 4, WS: 5, BS: 3, S: 4, T: 4, W: 1, I: 3, A: 1, Ld: 9 },
+  "Bull Centaurs": { M: 8, WS: 4, BS: 3, S: 4, T: 4, W: 2, I: 3, A: 2, Ld: 9 },
+  "Hobgoblin (CD)": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 6 },
+  "Chaos Dwarf Champion": { M: 4, WS: 5, BS: 4, S: 4, T: 4, W: 1, I: 3, A: 2, Ld: 9 },
+  "Commander of the Tower": { M: 4, WS: 6, BS: 4, S: 4, T: 4, W: 1, I: 4, A: 2, Ld: 10 },
+  "Bull Centaur Champion": { M: 8, WS: 5, BS: 4, S: 5, T: 4, W: 2, I: 4, A: 3, Ld: 9 },
+  "Hobgoblin Champion (CD)": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 3, A: 2, Ld: 6 },
+  "Great Taurus": { M: 6, WS: 6, BS: 0, S: 6, T: 6, W: 5, I: 7, A: 4, Ld: 8 },
+  "Lammasu": { M: 6, WS: 6, BS: 0, S: 6, T: 7, W: 5, I: 6, A: 3, Ld: 8 },
+  "Zhatan The Black": { M: 4, WS: 8, BS: 6, S: 4, T: 5, W: 4, I: 6, A: 4, Ld: 11 },
+  "Gorduz Backstabber": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 5, A: 4, Ld: 8 },
+  "Astragoth": { M: 8, WS: 6, BS: 3, S: 5, T: 5, W: 4, I: 5, A: 3, Ld: 10 },
+  "Drazhoath The Ashen": { M: 4, WS: 6, BS: 4, S: 4, T: 5, W: 4, I: 5, A: 3, Ld: 10 },
+  "Bull Centaur Renders": { M: 7, WS: 4, BS: 2, S: 5, T: 5, W: 3, I: 2, A: 3, Ld: 8 },
+  "Bull Centaur Render Champion": { M: 7, WS: 5, BS: 3, S: 6, T: 5, W: 3, I: 3, A: 4, Ld: 8 },
+  "K'daii Fireborn": { M: 6, WS: 4, BS: 2, S: 5, T: 4, W: 2, I: 4, A: 3, Ld: 8 },
+  "K'daii Manburner": { M: 6, WS: 5, BS: 3, S: 6, T: 4, W: 2, I: 5, A: 4, Ld: 8 },
+  "K'daii Destroyer": { M: 6, WS: 5, BS: 3, S: 7, T: 6, W: 6, I: 5, A: 6, Ld: 9 },
+  "Chaos Siege Giant": { M: 6, WS: 3, BS: 3, S: 7, T: 6, W: 6, I: 3, A: "Spec", Ld: 10 },
+  "Iron Daemon": { M: 5, WS: "-", BS: "-", S: 8, T: 7, W: 7, I: "-", A: "-", Ld: "-" },
+  "Chaos Dwarf Juggernaut": { M: "-", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
+  "Whirlwind/Tenderizer": { M: "-", WS: "-", BS: "-", S: 4, T: 4, W: 4, I: "-", A: "-", Ld: "-" },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -3681,6 +3717,338 @@ const DOGS_OF_WAR = {
   ],
 };
 
+const CD_ARMOUR_OPTIONS = ["Heavy armour (default)", "Chaos Armour"];
+const CD_BULLCENTAUR_ARMOUR_OPTIONS = ["Light armour (default)", "Heavy armour", "Chaos Armour"];
+
+const CHAOS_DWARF_MAGIC_ITEMS = [
+  { id: "cd-whipobedience", name: "Whip of Obedience", cost: 10, cat: "weapon", desc: "Hobgoblin characters on foot only. Additional hand weapon, +1 Ld, may re-roll failed panic tests.", restrictedTo: [{ tags: ["hobgoblin"] }] },
+  { id: "cd-darkforged", name: "Darkforged Weapon", cost: 15, cat: "weapon", desc: "Magic hand weapon. After deployment, roll 1D6 for its attribute for the game: 1 flaming attacks, 2 Hatred (all enemies), 3 1 wound=1D3, 4 wounds inflicted may restore the bearer's own lost wounds, 5 +1S, 6 no armour save allowed." },
+  { id: "cd-gravensceptre", name: "Graven Sceptre", cost: 25, cat: "weapon", desc: "+1S. To Wound rolls of 4+ with this weapon are always successful, regardless of the enemy's toughness." },
+  { id: "cd-daggermalice", name: "Dagger of Malice", cost: 25, cat: "weapon", desc: "Bearer gains Hatred (all enemies) and Frenzy — unlike other Frenzied models, he can never lose it." },
+  { id: "cd-blackhammer", name: "Black Hammer of Hashut", cost: 25, cat: "weapon", desc: "Chaos Dwarfs and Bull Centaurs only. Double handed weapon, no armour saves allowed. Flammable targets suffering one wound from it are killed instantly.", restrictedTo: [{ tags: ["chaosDwarf"] }, { tags: ["bullCentaur"] }] },
+  { id: "cd-maskfurnace", name: "Mask of the Furnace", cost: 15, cat: "armour", desc: "Causes fear. +1 armour save." },
+  { id: "cd-midnight", name: "Armour of Midnight", cost: 50, cat: "armour", desc: "Heavy armour. 1+ armour save, which cannot be improved further." },
+  { id: "cd-bazrakkarmour", name: "Armour of Bazrakk the Cruel", cost: 75, cat: "armour", desc: "A suit of Chaos Armour. Bearer and his regiment are immune to psychology and have natural dispel 4+." },
+  { id: "cd-mantlestone", name: "Mantle of Stone", cost: 20, cat: "enchanted", desc: "+1 Toughness, strikes last (-1 to hit as well if combined with a double handed weapon)." },
+  { id: "cd-chalicedarkness", name: "Chalice of Darkness", cost: 20, cat: "enchanted", desc: "Use at the start of any magic phase before rolling for power cards: roll 1D6 and remove that many cards from each side's share. Up to three uses per game." },
+  { id: "cd-gauntletbazrakk", name: "Gauntlet of Bazrakk the Cruel", cost: 20, cat: "enchanted", desc: "+2 strength. On an unmodified roll of 1 to hit in melee, the blow strikes a random friendly model in base contact instead (even on automatic hits)." },
+  { id: "cd-hellshard", name: "Hellshard Amulet", cost: 50, cat: "enchanted", desc: "5+ ward save. Each successful melee wound the amulet fails to stop inflicts a S2 hit back on the attacker automatically." },
+  { id: "cd-flamingring", name: "Flaming Ring of Azgorh", cost: 10, cat: "arcane", desc: "Wizard only. May swap any spell received in spell selection (that wasn't already received) for the Flames of Azgorh spell. When cast by the ringbearer, use the larger ~11\" flame template instead of the usual 8\" one.", restrictedTo: [{ tags: ["wizard"] }] },
+  { id: "cd-obsidianpearl", name: "Obsidian Pearl of Zhar Naggrund", cost: 100, cat: "arcane", desc: "Wizard only. One extra magic card per magic phase, for personal use only.", restrictedTo: [{ tags: ["wizard"] }] },
+  { id: "cd-cowardice", name: "Banner of Feigned Cowardice", cost: 10, cat: "banner", desc: "Hobgoblins only. When about to take a break test after losing a combat, may flee voluntarily instead of rolling — and keeps the standard even though fleeing from melee. If caught, destroyed as usual; if not caught, rallies immediately.", restrictedTo: [{ tags: ["hobgoblin"] }] },
+  { id: "cd-sneakiness", name: "Banner of Sneakiness", cost: 50, cat: "banner", desc: "Hobgoblins only. May re-roll missed to-hit rolls, shooting and melee alike (not for mounts).", restrictedTo: [{ tags: ["hobgoblin"] }] },
+  { id: "cd-slavebanner", name: "Slave Banner", cost: 100, cat: "banner", desc: "Must be carried by the Battle Standard Bearer. All Orc, Black Orc, Goblin, and Hobgoblin regiments within 12\" become stubborn.", restrictedTo: [{ tags: ["bsb"] }] },
+  { id: "cd-shroudobscurity", name: "Shroud of Obscurity", cost: 100, cat: "banner", desc: "Enemy to-hit rolls against this regiment (shooting or melee) can never beat 5+. No effect vs. automatically-hitting magic weapons, chariot impact hits, spells, or war machines." },
+];
+
+const CHAOS_DWARFS = {
+  key: "chaosdwarfs",
+  name: "Chaos Dwarfs",
+  tagline: "High Hats from the Dark Lands — bound to Hashut, forging chains for the weak",
+  magicItems: [...CHAOS_DWARF_MAGIC_ITEMS, ...ORC_MAGIC_ITEMS],
+  armyWideRules: [
+    "The master race: the army general must be a Chaos Dwarf character, and the army must include at least one regiment of Chaos Dwarf Warriors, Tower Guards, or Blunderbusses. Chaos Dwarfs don't hate Orcs & Goblins, don't suffer Elf Grudge, and get no dispel bonus. They have no Gromril Armour, but Chaos Dwarf characters and elite troops may take Chaos Armour instead (4+ armour save on its own, doesn't cost a magic item slot, and may be worn by wizards while casting). Chaos Dwarfs and Bull Centaurs never take panic tests caused by greenskins of any kind.",
+    "Greenskin slaves: the army may include enslaved Common Goblins, Common Orcs, and Black Orcs. Common Goblins/Orcs are subject to animosity; Black Orcs are immune to it and ignore panic from Common Orcs/Goblins; Black Orc characters joining a non-Black-Orc regiment quell its animosity. Common Goblins fear Elves they don't outnumber 2:1. Greenskin characters can't join Chaos Dwarf ranks generally — Black Orc/Common Orc/Goblin characters act alone or join their own kind's regiments (Black Orcs will only heed Black Orc or Chaos Dwarf leadership); Chaos Dwarf characters may join Black Orc/Common Orc/Goblin regiments but never Hobgoblins.",
+    "Hobgoblins: function as slave-masters over the other greenskins rather than being enslaved themselves. They suffer animosity like Common Orcs/Goblins, but nearby Orcs/Goblins (within 12\" of a Hobgoblin regiment) don't test it themselves that turn. Orc/Goblin/Black Orc units don't panic when nearby Hobgoblins break, flee, or die — it's cause for celebration. No character but a Hobgoblin may join a Hobgoblin regiment, and Hobgoblin characters can't join anyone else's regiment either.",
+    "Animosity: at the start of the turn (before movement), each not-fleeing, not-engaged Orc/Goblin/Hobgoblin regiment not within 12\" of a friendly Hobgoblin regiment (Orcs/Goblins only) rolls a die — on a 1, roll again: 1-5 the unit squabbles (immune to psychology, can't move/shoot/cast that turn, though wizards may still dispel), 6 the unit moves 2D6\" toward the nearest enemy and must charge it next turn if possible. This builder doesn't simulate animosity rolls turn-to-turn — it's a battle-phase mechanic, not a list-building one, same treatment as Orcs & Goblins.",
+    "This builder starts from the core Chaos Dwarf High Hats army and includes both optional supplements from the book — the Old School Addendum (crossbows/Weapon Teams/Juggernaut-Whirlwind-Tenderizer) and Modern Stuff (no Orc/Goblin slaves; Fireglaives/Naphtha Bombs/Blood of Hashut; Bull Centaur Renders, K'daii, Chaos Siege Giant, Iron Daemon) — as extra selectable entries, each labeled with its source. Per the book you can only pick one of the two supplements for a given army (not both) — this isn't hard-enforced, so police that yourself. The Fireglaive/Naphtha Bomb/Blood of Hashut upgrades for Chaos Dwarf Lords/Heroes aren't wired up as toggles (no clean slot for flat per-character extras in this engine yet) — add their points (+10/+10/+20 each, Blood of Hashut stacks) by hand if you take them.",
+    "Hellcannon: the Chaos army book's version — a Daemon that fights as a war machine, crewed by Chaos Dwarfs — is already available under Modern Stuff, listed below as 'Hellcannon (from the Chaos army book)'.",
+  ],
+  characters: [
+    {
+      id: "chaosdwarflord", name: "Chaos Dwarf Lord", cost: 136, stat: "Chaos Dwarf Lord", magicItemSlots: 3, tags: ["chaosDwarf"],
+      gearNote: "May take a shield and either heavy armour or Chaos Armour for free. May ride a Great Taurus for +224pts.",
+      armourGroup: { options: CD_ARMOUR_OPTIONS },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Hand gun", "Crossbow", "Two pistols"] },
+      mounts: [
+        { id: "greattaurus", name: "Great Taurus", cost: 224, stat: "Great Taurus" },
+      ],
+    },
+    {
+      id: "chaosdwarfhero", name: "Chaos Dwarf Hero", cost: 82, stat: "Chaos Dwarf Hero", magicItemSlots: 2, tags: ["chaosDwarf"],
+      gearNote: "May take a shield and either heavy armour or Chaos Armour for free. May ride a Great Taurus for +216pts.",
+      armourGroup: { options: CD_ARMOUR_OPTIONS },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Hand gun", "Crossbow", "Two pistols"] },
+      mounts: [
+        { id: "greattaurus", name: "Great Taurus", cost: 216, stat: "Great Taurus" },
+      ],
+    },
+    {
+      id: "chaosdwarfbsb", name: "Chaos Dwarf Battle Standard Bearer", cost: 92, stat: "Chaos Dwarf BSB", magicItemSlots: 1, restriction: "0-1", tags: ["chaosDwarf", "bsb"],
+      gearNote: "0-1 — the army's single BSB slot may be this OR the Bull Centaur BSB below, not both. May take heavy armour or Chaos Armour for free. The one item may be a magic banner.",
+      armourGroup: { options: CD_ARMOUR_OPTIONS },
+    },
+    {
+      id: "bullcentaurbsb", name: "Bull Centaur Battle Standard Bearer", cost: 120, stat: "Bull Centaur BSB", magicItemSlots: 1, restriction: "0-1", tags: ["bullCentaur", "bsb"],
+      gearNote: "0-1 — the army's single BSB slot may be this OR the Chaos Dwarf BSB above, not both. May take light armour, heavy armour, or Chaos Armour for free. The one item may be a magic banner.",
+      armourGroup: { options: CD_BULLCENTAUR_ARMOUR_OPTIONS },
+    },
+    {
+      id: "sorcererlord", name: "Chaos Dwarf Sorcerer Lord (level 4)", cost: 276, stat: "Chaos Dwarf Sorcerer Lord", magicItemSlots: 4, tags: ["chaosDwarf", "wizard"],
+      gearNote: "Uses Chaos Dwarf Magic. May wear Chaos Armour for +10pts. May take as many magic items as levels (4). May ride a Lammasu for +180pts.",
+      mounts: [
+        { id: "lammasu", name: "Lammasu", cost: 180, stat: "Lammasu" },
+      ],
+    },
+    {
+      id: "mastersorcerer", name: "Master Chaos Dwarf Sorcerer (level 3)", cost: 194, stat: "Chaos Dwarf Master Sorcerer", magicItemSlots: 3, tags: ["chaosDwarf", "wizard"],
+      gearNote: "Uses Chaos Dwarf Magic. May wear Chaos Armour for +10pts. May take as many magic items as levels (3).",
+    },
+    {
+      id: "sorcererchampion", name: "Chaos Dwarf Sorcerer Champion (level 2)", cost: 128, stat: "Chaos Dwarf Sorcerer Champion", magicItemSlots: 2, tags: ["chaosDwarf", "wizard"],
+      gearNote: "Uses Chaos Dwarf Magic. May wear Chaos Armour for +10pts. May take as many magic items as levels (2).",
+    },
+    {
+      id: "sorcerer", name: "Chaos Dwarf Sorcerer (level 1)", cost: 62, stat: "Chaos Dwarf Sorcerer", magicItemSlots: 1, tags: ["chaosDwarf", "wizard"],
+      gearNote: "Uses Chaos Dwarf Magic. May wear Chaos Armour for +10pts. May take as many magic items as levels (1).",
+    },
+    {
+      id: "bullcentaurlord", name: "Bull Centaur Lord", cost: 208, stat: "Bull Centaur Lord", magicItemSlots: 3, tags: ["bullCentaur"],
+      gearNote: "May take a shield and either light armour, heavy armour, or Chaos Armour for free.",
+      armourGroup: { options: CD_BULLCENTAUR_ARMOUR_OPTIONS },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+    },
+    {
+      id: "bullcentaurhero", name: "Bull Centaur Hero", cost: 135, stat: "Bull Centaur Hero", magicItemSlots: 2, tags: ["bullCentaur"],
+      gearNote: "May take a shield and either light armour, heavy armour, or Chaos Armour for free.",
+      armourGroup: { options: CD_BULLCENTAUR_ARMOUR_OPTIONS },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+    },
+    {
+      id: "blackorchero", name: "Black Orc Hero", cost: 89, stat: "Black Orc Hero", magicItemSlots: 2, tags: ["blackOrc"],
+      gearNote: "Your army must include a Black Orc regiment to field this Hero (not hard-enforced — track it yourself). Quells animosity. May take a shield and either light armour or heavy armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+    },
+    {
+      id: "commonorchero", name: "Common Orc Hero", cost: 60, stat: "Orc Hero", magicItemSlots: 2, tags: ["commonOrc"],
+      gearNote: "Your army must include a Common Orc regiment to field this Hero (not hard-enforced — track it yourself). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+    },
+    {
+      id: "commongoblinhero", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"],
+      gearNote: "Your army must include a Common Goblin regiment to field this Hero (not hard-enforced — track it yourself). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Short bow"] },
+    },
+    {
+      id: "hobgoblinhero", name: "Hobgoblin Hero", cost: 53, stat: "Hobgoblin Hero", magicItemSlots: 2, tags: ["hobgoblin"],
+      gearNote: "Your army must include a Hobgoblin regiment to field this Hero (not hard-enforced — track it yourself). May take light armour and a shield for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Bow", "Crossbow"] },
+      mounts: [
+        { id: "giantwolf", name: "Giant Wolf", cost: 14, stat: "Giant Wolf" },
+      ],
+    },
+    {
+      id: "hobgoblinassassin", name: "Hobgoblin Assassin", cost: 50, stat: "Hobgoblin Assassin", magicItemSlots: 0, tags: ["hobgoblin"],
+      gearNote: "The first Assassin in the army counts toward Regiments, not Characters — subsequent ones count as Characters. May not take magic items. Conceals itself as an ordinary trooper in a Hobgoblin infantry regiment (only one per regiment) and is revealed on entering melee, replacing a trooper — in the first combat round it strikes before Always Strikes First models and before challenges are declared. Fights with two poisoned hand weapons (+1S; each wound multiplies into 1D3). Fights normally (no strike-first) in later rounds, and becomes a free-roaming independent character once that combat ends. Can never be the general, and nobody may use its Ld.",
+    },
+  ],
+  regiments: [
+    {
+      id: "cdwarriors", name: "Chaos Dwarf Warriors", perModel: 9, minSize: 5, stat: "Chaos Dwarf Warriors", statNote: "Chaos Dwarf Warriors with heavy armour.", command: "standard",
+      options: [
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "fireglaives", group: null, label: "Fireglaives (Modern Stuff) — range 18\" S4 armour piercing, or +1S two-handed in melee (+5pt/model)", cost: 5, per: "model" },
+      ],
+      champion: { name: "Chaos Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Chaos Dwarf Champion", tags: ["chaosDwarf"] },
+    },
+    {
+      id: "cdblunderbusses", name: "Chaos Dwarf Blunderbusses", perModel: 12, minSize: 5, stat: "Chaos Dwarf Warriors", statNote: "Chaos Dwarf Warriors with heavy armour and Blunderbusses (Old School Addendum: may be reflavored as crossbows instead — same points and profile).", command: "standard",
+      note: "Fires even after moving, in a 12\" x (unit width) firing zone ahead of the regiment, hitting every model whose base is more than half within it (friend and foe alike). Hits are S3, rising to S4 with two full ranks or S5 with three-plus. No long-range/skirmisher penalty; normal cover and move-and-shoot penalties apply. Joined characters count as armed with Blunderbusses for strength purposes even if they aren't. May stand & shoot against distant chargers, hitting the charging unit only (no area effect on that reaction).",
+      options: [
+        { id: "shields", group: null, label: "Shields (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Chaos Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Chaos Dwarf Champion", tags: ["chaosDwarf"] },
+    },
+    {
+      id: "towerguard", name: "Chaos Dwarf Tower Guard", perModel: 11, minSize: 5, stat: "Chaos Dwarf Tower Guards", statNote: "Chaos Dwarf Tower Guards with heavy armour.", command: "standard", restriction: "0-1",
+      options: [
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "chaosarmour", group: null, label: "Upgrade heavy armour to Chaos Armour (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Commander of the Tower", baseCost: 30, magicItemSlots: 1, stat: "Commander of the Tower", tags: ["chaosDwarf"] },
+    },
+    {
+      id: "hobgoblinwarriors", name: "Hobgoblin Warriors", perModel: 4, minSize: 5, stat: "Hobgoblin (CD)", statNote: "Hobgoblin Warriors with shields.", command: "standard", tags: ["hobgoblin"],
+      options: [
+        { id: "spears", group: "melee", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
+    },
+    {
+      id: "hobgoblinarchers", name: "Hobgoblin Archers", perModel: 5, minSize: 5, stat: "Hobgoblin (CD)", statNote: "Hobgoblin Warriors with bows.", command: "standard", tags: ["hobgoblin"],
+      options: [
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "crossbows", group: null, label: "Upgrade bows to crossbows (Old School Addendum) (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
+    },
+    {
+      id: "hobgoblinwolfriders", name: "Hobgoblin Wolf Riders", perModel: 11, minSize: 5, stat: "Hobgoblin (CD)", statNote: "Hobgoblin Warriors riding Giant Wolves. Fast cavalry. May skirmish if armed with bows/short bows.", command: "fastCavalry", tags: ["hobgoblin"],
+      options: [
+        { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat)", cost: 10, per: "flat" },
+        { id: "spears", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "shortbows", group: "missile", label: "Short bows (+1pt/model)", cost: 1, per: "model" },
+        { id: "bows", group: "missile", label: "Bows (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
+    },
+    {
+      id: "sneakygits", name: "Hobgoblin Sneaky Gits", perModel: 8, minSize: 5, stat: "Hobgoblin (CD)", statNote: "Hobgoblin Warriors with two poisoned daggers and light armour.", command: "standard", tags: ["hobgoblin"],
+      note: "After the first round of melee, any number of models may leave the unengaged rear ranks to lap around the enemy unit's flank/rear, expanding the front rank. If five or more end up engaged to a flank/rear this way, the Sneaky Gits get the flank/rear combat resolution bonus (and the enemy loses its rank bonus) — but the Sneaky Gits also lose their own rank bonus once models leave the rear ranks.",
+      champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
+    },
+    {
+      id: "bullcentaurs", name: "Bull Centaurs", perModel: 24, minSize: 5, stat: "Bull Centaurs", statNote: "Bull Centaurs with light armour. Fast cavalry (unless given heavy armour).", command: "fastCavalry", tags: ["bullCentaur"],
+      options: [
+        { id: "standard", group: null, label: "Standard bearer, one model (free if heavy armour taken, otherwise +10pts flat)", cost: 10, per: "flat" },
+        { id: "shields", group: null, label: "Shields (+2pt/model)", cost: 2, per: "model" },
+        { id: "heavyarmour", group: null, label: "Upgrade to heavy armour, free (loses fast cavalry)", cost: 0, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Bull Centaur Champion", baseCost: 30, magicItemSlots: 1, stat: "Bull Centaur Champion", tags: ["bullCentaur"] },
+    },
+    {
+      id: "orcslaves", name: "Orc Slave Warriors", perModel: 5, minSize: 5, stat: "Common Orc", statNote: "Common Orcs with light armour.", command: "standard", tags: ["commonOrc"],
+      options: [
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+1pt/model)", cost: 1, per: "model" },
+        { id: "spears", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
+        { id: "halberds", group: "melee", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Common Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Common Orc Champion", tags: ["commonOrc"] },
+    },
+    {
+      id: "blackorcslaves", name: "Black Orc Slave Warriors", perModel: 9, minSize: 5, stat: "Black Orc", statNote: "Black Orcs with light armour.", command: "standard", tags: ["blackOrc"],
+      options: [
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "spears", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
+        { id: "halberds", group: "melee", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+        { id: "heavyarmour", group: null, label: "Swap light for heavy armour (+2pt/model)", cost: 2, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Black Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Black Orc Champion", tags: ["blackOrc"] },
+    },
+    {
+      id: "goblinslaves", name: "Common Goblin Slave Warriors", perModel: 2.5, minSize: 5, stat: "Common Goblin", command: "standard", tags: ["commonGoblin"],
+      options: [
+        { id: "spears", group: "melee", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "shortbows", group: "missile", label: "Short bows — no shields if taken (+1pt/model)", cost: 1, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "shields", group: null, label: "Shields — only if not armed with short bows (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Common Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Common Goblin Champion", tags: ["commonGoblin"] },
+    },
+    // --- Modern Stuff regiments ---
+    {
+      id: "bullcentaurrenders", name: "Bull Centaur Renders", perModel: 54, minSize: 3, stat: "Bull Centaur Renders", statNote: "Bull Centaur Renders wear heavy armour. Monstrous, cause fear. (Modern Stuff)", command: "monstrous",
+      note: "Cannot take a standard bearer or musician.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+4pt/model)", cost: 4, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+12pt/model)", cost: 12, per: "model" },
+      ],
+      champion: { name: "Bull Centaur Render Champion", baseCost: 50, magicItemSlots: 1, stat: "Bull Centaur Render Champion", tags: ["bullCentaur"] },
+    },
+    {
+      id: "kdaiifireborn", name: "K'daii Fireborn", perModel: 41, minSize: 3, stat: "K'daii Fireborn", command: "none",
+      note: "(Modern Stuff) Requires a Sorcerer elsewhere in the army (not hard-enforced — track it yourself). Monstrous; flaming attacks, immune to fire, regenerate 4+ (not cancelled by flaming, but is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit that doesn't count toward combat resolution. Count as Daemons in all regards: cause fear, magical attacks, immune to poison/living-only effects/psychology, never flee (exorcised — counts as slain — if forced to). Cannot take a standard bearer or musician; only Daemonic characters may join.",
+      champion: { name: "K'daii Manburner", baseCost: 50, magicItemSlots: 0, stat: "K'daii Manburner", note: "May take one Daemonic Reward from the Chaos army book's Daemonic Rewards (All) section (not modeled in this builder — apply on paper)." },
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "earthshaker", name: "Chaos Dwarf Earth Shaker Cannon", perUnit: 165, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Works like a Large Stone Thrower. Units hit by the template (even without a wound) can't move, shoot, or cast spells through the next magic phase and their next movement/shooting phases (compulsory/flee moves and spell-forced moves still happen). Crewed by three Chaos Dwarfs in heavy armour.",
+      extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
+    },
+    {
+      id: "deathrockets", name: "Chaos Dwarf Death Rockets", perUnit: 85, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Works like a Small Stone Thrower. Crewed by two Chaos Dwarf Warriors in heavy armour.",
+      extraCrewCost: 10, extraCrewMax: 3, extraCrewLabel: "extra Chaos Dwarf crew",
+    },
+    {
+      id: "hobgoblinboltthrowers", name: "Hobgoblin Bolt Throwers", perUnit: 43, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Requires a Hobgoblin regiment in the army (not hard-enforced — track it yourself). Bolt thrower crewed by two Hobgoblins.",
+      extraCrewCost: 4, extraCrewMax: 3, extraCrewLabel: "extra Hobgoblin crew",
+    },
+    // --- Old School Addendum war machines ---
+    {
+      id: "flamethrowerteam", name: "Flame Thrower Team (Old School Addendum)", perUnit: 60, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Weapon Team: two Chaos Dwarf Warriors in heavy armour on one 25x50mm base, skirmisher-style (360° LoS, no facing when charged by flyers, can't move-and-fire, may stand & shoot). Guess up to 6\" plus the artillery die; on a misfire the team is destroyed. Otherwise place the teardrop template (small end at the hit point) — models more than half covered suffer a flaming S5 hit, 1 wound=1D3. Any casualty forces a panic test. If it blows up during a stand & shoot, the charge counts as failed.",
+    },
+    {
+      id: "swivelgunteam", name: "Swivel Gun Team (Old School Addendum)", perUnit: 85, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Weapon Team: two Chaos Dwarf Warriors in heavy armour on one 25x50mm base, skirmisher-style. Range 18\", 2D6 shots, S3 armour piercing (-1 save). On any double, fires in a random (scatter die) direction instead, hitting the first unit in its path within range — each shot then hits automatically.",
+    },
+    {
+      id: "cdjuggernaut", name: "Chaos Dwarf Juggernaut (Old School Addendum)", perUnit: 200, stat: "Chaos Dwarf Juggernaut", kind: "chariot", restriction: "0-1",
+      note: "Unbreakable large chariot pushed by a Bull Centaur (M8; only the crew fights in melee, not the Centaur). Can't pursue/overrun, doesn't double movement on the charge, and doesn't halve movement at one wound. Crewed by six Chaos Dwarf Warriors in heavy armour with crossbows. Front-mounted organ-gun variant: S7, 1D3 wounds, no armour save, guess range up to 36\", may fire even after moving, can't pivot to shoot, only two barrels fire per round (never needs reloading). First misfire (non-bounce): can't shoot this turn or next, can still move. Second misfire (non-bounce): gun and Juggernaut both explode.",
+    },
+    {
+      id: "cdwhirlwind", name: "Chaos Dwarf Whirlwind (Old School Addendum)", perUnit: 75, stat: "Whirlwind/Tenderizer", kind: "chariot", restriction: "0-1",
+      note: "Scythed light chariot pushed by a Bull Centaur (WS4, M8). Can't pursue/overrun, doesn't double movement on the charge, doesn't halve movement at one wound, and is immune to psychology. The Centaur operates the machine rather than fighting; each combat round it deals 1D6 automatic S4 hits to its front, in addition to any charge impact hits.",
+    },
+    {
+      id: "cdtenderizer", name: "Chaos Dwarf Tenderizer (Old School Addendum)", perUnit: 75, stat: "Whirlwind/Tenderizer", kind: "chariot", restriction: "0-1",
+      note: "Scythed light chariot pushed by a Bull Centaur (WS4, M8). Can't pursue/overrun, doesn't double movement on the charge, doesn't halve movement at one wound, and is immune to psychology. The Centaur operates the machine rather than fighting; each combat round it deals one automatic S7 hit, no armour save, causing 1D6 wounds to its front, in addition to any charge impact hits.",
+    },
+    // --- Modern Stuff monsters/chariots ---
+    {
+      id: "magmacannon", name: "Magma Cannon (Modern Stuff)", perUnit: 90, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Follows Dwarf Flame Cannon rules: guesses range like a cannon (max 12\") plus the artillery die; teardrop template, S5 hit (1 wound = 1D3). Any casualty forces a panic test. May stand & shoot (resolved before the enemy unit moves). Crewed by three Chaos Dwarfs.",
+      extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
+    },
+    {
+      id: "cdhellcannon", name: "Hellcannon (Modern Stuff, from the Chaos army book)", perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine",
+      note: "House rule / optional — ask your opponent's permission before including it, primarily meant for Siege Battles. A Daemon that works as a war machine, crewed by three Chaos Dwarfs in heavy armour. Shoots like a large stone thrower; any regiment losing even one model to it must take a panic test; shots count as magical. A misfire eats 1D3 crew instead of firing; if all crew die, it becomes an independent monster with random movement that charges the nearest model each turn (friend or foe), following normal Daemon rules — and still defends itself if charged.",
+      extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
+    },
+    {
+      id: "kdaiidestroyer", name: "K'daii Destroyer (Modern Stuff)", perUnit: 300, stat: "K'daii Destroyer", kind: "monster",
+      note: "Requires a Sorcerer elsewhere in the army (not hard-enforced — track it yourself). Large monster, causes Terror, flaming attacks, immune to fire, regenerates 4+ (not cancelled by flaming, is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit not counting toward combat resolution. Counts as a Daemon in all regards: magical attacks, immune to poison/living-only effects/psychology, never flees (exorcised — counts as slain — if forced to).",
+    },
+    {
+      id: "chaossiegegiant", name: "Chaos Siege Giant (Modern Stuff)", perUnit: 275, stat: "Chaos Siege Giant", kind: "monster",
+      note: "Follows the rulebook Giant with exceptions: Siege Armour (5+ save, 3+ vs. shooting). May take Runes of Hate for +25pts flat (add by hand — not wired up as a toggle here). Has Frenzy, and re-rolls (must keep the second result) whenever rolling for a random number of attacks. Special attacks each turn (choose one): Legbreaker (opposed D6+S roll vs. a model in contact, D3 wounds no save per point of margin, and anyone else in contact must pass Initiative or take an automatic wound), Smash with Pick (target fails Initiative or suffers 2D6 wounds no save — buildings auto-fail; on a double the pick jams and the Giant skips its next combat round), Head Butt Large Target (automatic S7 hit, wounded models knocked unconscious — auto-hit until they wake at the end of the next melee phase), Yell and Bawl (no attack, but automatically wins combat resolution by 2 if the Giant survives the round), Flail and Crush on a man-sized regiment (take the fall-over test; if it stands, 1D6 S8 hits), Ripping Blades (2D6 automatic S6 hits on a unit in contact; double 6 adds the extra hits but forces a fall-over test, double 1 does nothing and costs the Giant D3 wounds no save plus a fall).",
+    },
+    {
+      id: "irondaemon", name: "The Iron Daemon (Modern Stuff)", perUnit: 350, stat: "Iron Daemon", kind: "chariot",
+      note: "Large chariot with a unique profile, 3+ armour save, causes terror, unbreakable, crewed by three Chaos Dwarf Warriors (only they fight in melee). Auto-passes all characteristic tests except Initiative (always fails those). Chariots that charge it suffer 1D6 S7 impact hits themselves; Night Goblin Fanatics touching it are slain. Moves like a chariot but can't free-pivot, obliterates obstacles, can't pursue/overrun/flee (unbreakable)/march, and doesn't double its charge move — instead add 1D6\" to its Movement (on a 1, it stalls for the rest of that turn). Doesn't halve movement at one wound. Front-mounted steam cannonade (organ gun): range 24\", fires 2D6 (two Artillery dice) shots, halved beyond half range, S5 AP at short range / S4 AP at long range, may fire after moving, can't pivot to shoot, two barrels per round, never reloads. First misfire: the Iron Daemon suffers a wound. Second misfire: it explodes (counts as slain). Doesn't fight in melee itself, but deals 1D6+1 S8 impact hits on the charge, may always disengage, and once per turn may grind its wheels for another 1D6+1 S8 impact hits while engaged. For +10pts flat, the cannonade may be swapped for a skullcracker (2D6+2 impact hits, armour piercing) — add by hand, not wired up as a toggle here.",
+    },
+  ],
+  specialCharacters: [
+    { id: "zhatan", name: "Zhatan the Black, Commander of the Tower of Zharr", cost: 200, stat: "Zhatan The Black", role: "Chaos Dwarf Lord",
+      note: "Chaos Armour, a shield, and a double handed weapon. Hates all enemies — and so does any Chaos Dwarf regiment he joins. May take four magic items.",
+      mounts: [
+        { id: "greattaurus", name: "Great Taurus", cost: 200, stat: "Great Taurus" },
+      ] },
+    { id: "gorduz", name: "Gorduz Backstabber", cost: 100, stat: "Gorduz Backstabber", role: "Hobgoblin Lord",
+      note: "Light armour; carries a shield (may swap for an additional hand weapon for free). Ward save against losing his last wound: 2+ the first time he needs it, then 3+, then 4+, and so on — if he actually makes five successful saves this way, the ability is gone for good. May wield a spear for free if mounted. May take three magic items.",
+      mounts: [
+        { id: "giantwolf", name: "Giant Wolf", cost: 20, stat: "Giant Wolf" },
+      ] },
+    { id: "astragoth", name: "Astragoth, High Priest of Hashut", cost: 300, stat: "Astragoth", role: "Chaos Dwarf Sorcerer Lord",
+      note: "Partly petrified — 3+ armour save. If all three of his attacks hit, he gets three additional attacks (no further generation after that). Movement can never exceed 8\", even marching or charging. May take four magic items." },
+    { id: "drazhoath", name: "Drazhoath The Ashen, Prophet of Hashut", cost: 450, stat: "Drazhoath The Ashen", role: "Chaos Dwarf Sorcerer Lord — must be the army general",
+      note: "All Chaos Dwarf units (including Drazhoath) get +1 combat resolution within 12\" of him. May ride a Great Taurus for +224pts.",
+      items: "Carries Chaos Armour, the Hellshard Amulet, the Graven Sceptre, and the Daemonspite Crucible (casts one spell per turn for one less power card than normal; if Drazhoath or his mount kills an enemy wizard in melee, that drops to two less power cards for the rest of the game — further slain wizards don't stack further). May take one additional magic item.",
+      mounts: [
+        { id: "greattaurus", name: "Great Taurus", cost: 224, stat: "Great Taurus" },
+      ] },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
@@ -3690,7 +4058,7 @@ const FACTION_LIST = [
   { key: "undead", name: "Undead" },
   { key: "woodElves", name: "Wood Elves", data: WOOD_ELVES },
   { key: "chaos", name: "Chaos", data: CHAOS },
-  { key: "chaosdwarfs", name: "Chaos Dwarfs" },
+  { key: "chaosdwarfs", name: "Chaos Dwarfs", data: CHAOS_DWARFS },
   { key: "darkelves", name: "Dark Elves" },
   { key: "bretonnia", name: "The Grand Army of Bretonnia", data: BRETONNIA },
   { key: "lizardmen", name: "Lizardmen" },
@@ -3702,7 +4070,7 @@ const FACTION_LIST = [
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
@@ -4235,13 +4603,19 @@ function Sidebar({ armyData, roster, onAdd }) {
 function resolveUnitStat(kind, unit, def) {
   if (kind === "character") {
     const mount = def.mounts?.find((m) => m.id === unit.mountId);
-    return { statKey: mount ? mount.stat : def.stat, statNote: null };
+    if (mount) return { statKey: def.stat, statNote: null, mountStatKey: mount.stat, charLabel: def.name, mountLabel: mount.name.replace(/\s*\([^)]*\)\s*$/, "") };
+    return { statKey: def.stat, statNote: null, mountStatKey: null };
   }
   if (kind === "regiment") {
     if (def.kind === "composite") return { statKey: null, statNote: null };
     return { statKey: def.statNote ? null : def.stat, statNote: def.statNote || null };
   }
-  if (kind === "chariot" || kind === "special") return { statKey: def.stat, statNote: null };
+  if (kind === "chariot") return { statKey: def.stat, statNote: null };
+  if (kind === "special") {
+    const mount = def.mounts?.find((m) => m.id === unit.mountId);
+    if (mount) return { statKey: def.stat, statNote: null, mountStatKey: mount.stat, charLabel: def.name, mountLabel: mount.name.replace(/\s*\([^)]*\)\s*$/, "") };
+    return { statKey: def.stat, statNote: null, mountStatKey: null };
+  }
   return { statKey: null, statNote: null };
 }
 
@@ -4324,7 +4698,7 @@ function resolveUnitTags(kind, unit, def, armyData) {
 }
 
 function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData }) {
-  const { statKey, statNote } = resolveUnitStat(kind, unit, def);
+  const { statKey, statNote, mountStatKey, charLabel, mountLabel } = resolveUnitStat(kind, unit, def);
   const tags = resolveUnitTags(kind, unit, def, armyData);
   return (
     <div className={`whr-card ${selected ? "whr-card-selected" : ""}`} style={{ marginBottom: 10, cursor: "pointer" }} onClick={onSelect}>
@@ -4339,7 +4713,16 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
       {models != null && <div style={{ fontSize: 12.5, color: "var(--ink-soft)", marginBottom: 6 }}>{models} Models</div>}
       {(statKey || statNote) && (
         <div style={{ marginTop: 6, marginBottom: tags.length ? 8 : 0 }}>
+          {mountStatKey && (
+            <div className="whr-eyebrow" style={{ fontSize: 11.5, marginBottom: 2 }}>{charLabel}</div>
+          )}
           <StatBlock statKey={statKey} statNote={statNote} />
+          {mountStatKey && (
+            <>
+              <div className="whr-eyebrow" style={{ fontSize: 11.5, margin: "6px 0 2px" }}>{mountLabel}</div>
+              <StatBlock statKey={mountStatKey} statNote={null} />
+            </>
+          )}
         </div>
       )}
       {tags.length > 0 && (
