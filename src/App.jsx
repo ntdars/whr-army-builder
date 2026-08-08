@@ -785,8 +785,7 @@ const WOOD_ELVES = {
       branchWraith: { name: "Branch Wraith", cost: 70, note: "Regimental champion & level 1 wizard (Jade or Amber magic). May not take a magic item, but may take one Sprite.", spriteSlots: 1 },
     },
     {
-      id: "warhawkriders", name: "Wood Elf Warhawk Riders", perModel: 32, minSize: 5,
-      statNote: "Rider: as Wood Elf Warriors. Mount: Giant Warhawk.",
+      id: "warhawkriders", name: "Wood Elf Warhawk Riders", perModel: 32, minSize: 5, stat: "Wood Elf Warriors", mountStat: "Giant Warhawk", mountLabel: "Giant Warhawk",
       restriction: "0-1", command: "skirmisher",
       note: "Warriors riding Giant Warhawks — skirmishing monstrous cavalry.",
       options: [
@@ -804,7 +803,7 @@ const WOOD_ELVES = {
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
-      id: "lords", name: "Wood Elf Lords", perModel: 20, minSize: 5, stat: "Wood Elf Lords",
+      id: "lords", name: "Wood Elf Lords", perModel: 20, minSize: 5, stat: "Wood Elf Lords", mountStat: "Elven Steed", mountLabel: "Elven Steed",
       command: "fastCavalry", fastCavalryToggleOption: "barding",
       note: "Lords riding Elven Steeds with light armour, shields and lances. Fast cavalry.",
       options: [
@@ -813,7 +812,7 @@ const WOOD_ELVES = {
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
     },
     {
-      id: "gladeriders", name: "Wood Elf Glade Riders", perModel: 22, minSize: 5, stat: "Wood Elf Warriors",
+      id: "gladeriders", name: "Wood Elf Glade Riders", perModel: 22, minSize: 5, stat: "Wood Elf Warriors", mountStat: "Elven Steed", mountLabel: "Elven Steed",
       command: "fastCavalry",
       note: "Warriors on Elven Steeds with light armour, spears & bows. Fast Cavalry, may skirmish, may Vanguard, may Fire & Flee as a charge reaction.",
       options: [
@@ -1070,17 +1069,17 @@ const EMPIRE = {
       champion: { name: "Empire Champion", baseCost: 20, magicItemSlots: 1, stat: "Empire Champion" },
     },
     {
-      id: "pistoliers", name: "Pistoliers", perModel: 17, minSize: 5, stat: "State Trooper", command: "fastCavalry",
+      id: "pistoliers", name: "Pistoliers", perModel: 17, minSize: 5, stat: "State Trooper", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry",
       note: "State Troops in light armour with two pistols, on Normal Horses. Fast cavalry. May skirmish.",
       champion: { name: "Empire Captain", baseCost: 20, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "outriders", name: "Outriders", perModel: 17, minSize: 5, stat: "State Trooper", command: "standard",
+      id: "outriders", name: "Outriders", perModel: 17, minSize: 5, stat: "State Trooper", mountStat: "Normal Horse", mountLabel: "Normal Horse (barded)", command: "standard",
       note: "State Troops in light armour with repeating handguns, on barded Normal Horses.",
       champion: { name: "Empire Captain", baseCost: 20, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "whitewolf", name: "Knights of the White Wolf", perModel: 20, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      id: "whitewolf", name: "Knights of the White Wolf", perModel: 20, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
       note: "Knights with barded warhorses, full plate armour, and double handed weapons.",
       knightGroup: "whiteWolf",
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
@@ -1092,13 +1091,13 @@ const EMPIRE = {
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "panther", name: "Knights Panther", perModel: 25, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      id: "panther", name: "Knights Panther", perModel: 25, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
       note: "Knights with barded warhorses, full plate armour, shields, and lances.",
       knightGroup: "panther",
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "blazingsun", name: "Knights of the Blazing Sun", perModel: 25, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      id: "blazingsun", name: "Knights of the Blazing Sun", perModel: 25, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
       note: "Knights with barded warhorses, full plate armour, shields, and lances. Can alternatively represent a lesser Knightly Order of your own design.",
       knightGroup: "blazingSun",
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
@@ -1113,7 +1112,7 @@ const EMPIRE = {
       champion: { name: "Grand Commander", baseCost: 50, magicItemSlots: 1, stat: "Grand Commander" },
     },
     {
-      id: "reiksguardmounted", name: "Mounted Reiksguard Knights", perModel: 25, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      id: "reiksguardmounted", name: "Mounted Reiksguard Knights", perModel: 25, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
       note: "Knights with barded warhorses, full plate armour, shields, and lances.",
       knightGroup: "reiksguard",
       champion: { name: "Grand Commander", baseCost: 50, magicItemSlots: 1, stat: "Grand Commander" },
@@ -1127,7 +1126,7 @@ const EMPIRE = {
       champion: { name: "Prophet of Doom", baseCost: 20, magicItemSlots: 0, stat: "Prophet of Doom" },
     },
     {
-      id: "kislevlancers", name: "Kislev Winged Lancers", perModel: 17, minSize: 5, stat: "Kislev Winged Lancer", command: "fastCavalry", auxiliary: true,
+      id: "kislevlancers", name: "Kislev Winged Lancers", perModel: 17, minSize: 5, stat: "Kislev Winged Lancer", mountStat: "Warhorse", mountLabel: "Warhorse", command: "fastCavalry", auxiliary: true,
       note: "Warhorses, light armour, shields, and lances. Fast cavalry.",
       options: [
         { id: "shrieking", group: null, label: "Shrieking back banners — causes fear on the charge turn (+3pt/model)", cost: 3, per: "model" },
@@ -1140,7 +1139,7 @@ const EMPIRE = {
       champion: { name: "Fighter Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion" },
     },
     {
-      id: "kislevhorsearchers", name: "Kislev Horse Archers", perModel: 10, minSize: 5, stat: "Fighter", command: "fastCavalry", auxiliary: true,
+      id: "kislevhorsearchers", name: "Kislev Horse Archers", perModel: 10, minSize: 5, stat: "Fighter", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry", auxiliary: true,
       note: "Bows, on Normal Horses. Fast cavalry. May skirmish.",
       champion: { name: "Fighter Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion" },
     },
@@ -1639,7 +1638,7 @@ const CHAOS = {
       champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
     },
     {
-      id: "marauderhorsemen", name: "Chaos Marauder Horsemen", perModel: 23, minSize: 5, stat: "Chaos Marauder", command: "fastCavalry",
+      id: "marauderhorsemen", name: "Chaos Marauder Horsemen", perModel: 23, minSize: 5, stat: "Chaos Marauder", mountStat: "Chaos Warhorse", mountLabel: "Warhorse", command: "fastCavalry",
       note: "Also called Chaos Thug Horsemen. Fast cavalry. Light armour, shields, spears, on Warhorses.",
       options: [
         { id: "flails", group: null, label: "Swap spears & shields for flails (+2pt/model)", cost: 2, per: "model" },
@@ -1656,7 +1655,8 @@ const CHAOS = {
       champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
     },
     {
-      id: "chaosknights", name: "Chaos Knights", perModel: 45, minSize: 5, statNote: "Chaos Warriors on barded Chaos Warhorses, with Chaos Armour, shields, and lances.", command: "standard",
+      id: "chaosknights", name: "Chaos Knights", perModel: 45, minSize: 5, stat: "Chaos Warrior", mountStat: "Chaos Warhorse", mountLabel: "Chaos Warhorse (barded)", command: "standard",
+      note: "Chaos Warriors on barded Chaos Warhorses, with Chaos Armour, shields, and lances.",
       champion: { name: "Chaos Champion (with Mark of Chaos, mounted)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
     },
     {
@@ -1753,8 +1753,8 @@ const CHAOS = {
       champion: { name: "Bloodletter Champion", baseCost: 36, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
     {
-      id: "bloodlettersjuggernaut", name: "Bloodletters riding Juggernauts of Khorne", perModel: 86, minSize: 5, statNote: "Rider: Bloodletters of Khorne (Daemonic Save 3+ as cavalry). Mount: Juggernaut of Khorne (auto-hits/wounds with one of its two attacks).", command: "monstrous",
-      note: "Unique monstrous-cavalry hybrid. Cannot enter buildings unless dismounted (removes the Juggernaut); kill the mount to kill the whole model.",
+      id: "bloodlettersjuggernaut", name: "Bloodletters riding Juggernauts of Khorne", perModel: 86, minSize: 5, stat: "Bloodletters of Khorne", mountStat: "Juggernaut of Khorne", mountLabel: "Juggernaut of Khorne", command: "monstrous",
+      note: "Unique monstrous-cavalry hybrid. Daemonic Save 3+ as cavalry; the Juggernaut auto-hits/wounds with one of its two attacks. Cannot enter buildings unless dismounted (removes the Juggernaut); kill the mount to kill the whole model.",
       champion: { name: "Bloodletter Champion (mounted)", baseCost: 126, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
     {
@@ -1779,8 +1779,8 @@ const CHAOS = {
       note: "Monstrous regiment. May skirmish. Cannot take a standard bearer or musician, or be joined by characters.",
     },
     {
-      id: "plaguebearersbeasts", name: "Plaguebearers of Nurgle riding Beasts of Nurgle", perModel: 88, minSize: 5, statNote: "Rider: Plaguebearers of Nurgle (Daemonic Save 3+ as cavalry; wounded living models are automatically slain). Mount: Beast of Nurgle (hits allow no armour save; enemies in base contact -1 to hit).", command: "monstrous",
-      note: "Unique monstrous-cavalry hybrid. Cannot enter buildings unless dismounted; kill the mount to kill the whole model.",
+      id: "plaguebearersbeasts", name: "Plaguebearers of Nurgle riding Beasts of Nurgle", perModel: 88, minSize: 5, stat: "Plaguebearers of Nurgle", mountStat: "Beast of Nurgle", mountLabel: "Beast of Nurgle", command: "monstrous",
+      note: "Unique monstrous-cavalry hybrid. Daemonic Save 3+ as cavalry; wounded living models are automatically slain; the Beast's hits allow no armour save and enemies in base contact suffer -1 to hit. Cannot enter buildings unless dismounted; kill the mount to kill the whole model.",
       champion: { name: "Plaguebearer Champion (mounted)", baseCost: 128, magicItemSlots: 1, stat: "Plaguebearer Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
     {
@@ -1801,7 +1801,8 @@ const CHAOS = {
       champion: { name: "Daemonette Champion", baseCost: 35, magicItemSlots: 1, stat: "Daemonette Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
     {
-      id: "daemonettessteeds", name: "Daemonettes riding Steeds of Slaanesh", perModel: 30, minSize: 5, statNote: "Rider: Daemonettes of Slaanesh. Mount: Steed of Slaanesh (hits don't wound but grant the rider an automatic hit; 3+ Daemonic Save as cavalry, fast cavalry).", command: "fastCavalry",
+      id: "daemonettessteeds", name: "Daemonettes riding Steeds of Slaanesh", perModel: 30, minSize: 5, stat: "Daemonettes of Slaanesh", mountStat: "Steed of Slaanesh", mountLabel: "Steed of Slaanesh", command: "fastCavalry",
+      note: "The Steed's hits don't wound but grant the rider an automatic hit; 3+ Daemonic Save as cavalry, fast cavalry.",
       champion: { name: "Daemonette Champion (mounted)", baseCost: 60, magicItemSlots: 1, stat: "Daemonette Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
   ],
@@ -2071,7 +2072,7 @@ const HIGH_ELVES = {
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion (High Elf)" },
     },
     {
-      id: "silverhelms", name: "Silver Helm Knights", perModel: 20, minSize: 5, stat: "Elven Elite", command: "fastCavalry", fastCavalryToggleOption: "heavyarmour",
+      id: "silverhelms", name: "Silver Helm Knights", perModel: 20, minSize: 5, stat: "Elven Elite", mountStat: "Elven Steed", mountLabel: "Elven Steed", command: "fastCavalry", fastCavalryToggleOption: "heavyarmour",
       note: "Elven Elite on Elven Steeds, light armour, shields, lances. Fast cavalry (as long as no armour upgrade is taken).",
       options: [
         { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+7pt/model) — loses fast cavalry, standard bearer becomes free", cost: 7, per: "model" },
@@ -2079,8 +2080,8 @@ const HIGH_ELVES = {
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
     },
     {
-      id: "reaverknights", name: "Reaver Knights", perModel: 22, minSize: 5, statNote: "Warriors on Elven Steeds, light armour, spears, and bows.", command: "fastCavalry",
-      note: "Fast Cavalry. May skirmish, act as Vanguard, and Fire & Flee as a charge reaction.",
+      id: "reaverknights", name: "Reaver Knights", perModel: 22, minSize: 5, stat: "Elven Warriors (High Elf)", mountStat: "Elven Steed", mountLabel: "Elven Steed", command: "fastCavalry",
+      note: "Warriors on Elven Steeds, light armour, spears, and bows. Fast Cavalry. May skirmish, act as Vanguard, and Fire & Flee as a charge reaction.",
       options: [
         { id: "shields", group: null, label: "Shields (+2pt/model)", cost: 2, per: "model" },
         { id: "longbows", group: null, label: "Upgrade bows to longbows (+2pt/model)", cost: 2, per: "model" },
@@ -2096,7 +2097,8 @@ const HIGH_ELVES = {
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
     },
     {
-      id: "dragonprinces", name: "Dragon Princes of Caledor", perModel: 27, minSize: 5, statNote: "Elven Elite on barded Elven Steeds, Dragon Armour, shields, and lances.", command: "standard", restriction: "0-1",
+      id: "dragonprinces", name: "Dragon Princes of Caledor", perModel: 27, minSize: 5, stat: "Elven Elite", mountStat: "Elven Steed", mountLabel: "Elven Steed (barded)", command: "standard", restriction: "0-1",
+      note: "Elven Elite on barded Elven Steeds, Dragon Armour, shields, and lances.",
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
     },
     {
@@ -2624,7 +2626,8 @@ const BRETONNIA = {
       champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
     },
     {
-      id: "chasseursdelamort", name: "Chasseurs de la Mort", perModel: 9, minSize: 5, statNote: "Men-at-Arms riding Normal Horses.", command: "fastCavalry",
+      id: "chasseursdelamort", name: "Chasseurs de la Mort", perModel: 9, minSize: 5, stat: "Man-at-Arms", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry",
+      note: "Men-at-Arms riding Normal Horses.",
       options: [
         { id: "armour", group: null, label: "Light armour (+1pt/model)", cost: 1, per: "model" },
         { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
@@ -2634,29 +2637,31 @@ const BRETONNIA = {
       champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
     },
     {
-      id: "chevalierserrant", name: "Chevaliers Errant", perModel: 18, minSize: 5, statNote: "Young Knights with heavy armour, shields, and lances, on Warhorses.", command: "standard", restriction: "0-1",
-      note: "Unbreakable while accompanied by a living unmarried female wizard.",
+      id: "chevalierserrant", name: "Chevaliers Errant", perModel: 18, minSize: 5, stat: "Bretonnian Knight", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard", restriction: "0-1",
+      note: "Young Knights with heavy armour, shields, and lances, on Warhorses. Unbreakable while accompanied by a living unmarried female wizard.",
       options: [
         { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
       ],
       champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
     },
     {
-      id: "chevaliersfeodaux", name: "Chevaliers Féodaux", perModel: 22, minSize: 5, statNote: "Knights with heavy armour, shields, and lances, on Warhorses.", command: "standard",
+      id: "chevaliersfeodaux", name: "Chevaliers Féodaux", perModel: 22, minSize: 5, stat: "Bretonnian Knight", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
+      note: "Knights with heavy armour, shields, and lances, on Warhorses.",
       options: [
         { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
       ],
       champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
     },
     {
-      id: "chevaliersenquete", name: "Chevaliers en Quête", perModel: 17, minSize: 5, statNote: "Knights with heavy armour and double handed weapons, on Warhorses.", command: "standard", restriction: "0-1",
+      id: "chevaliersenquete", name: "Chevaliers en Quête", perModel: 17, minSize: 5, stat: "Bretonnian Knight", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard", restriction: "0-1",
+      note: "Knights with heavy armour and double handed weapons, on Warhorses.",
       options: [
         { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
       ],
       champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
     },
     {
-      id: "chevaliersdhonneur", name: "Chevaliers D'Honneur", perModel: 35, minSize: 5, stat: "Elite Knight", command: "standard", restriction: "0-1",
+      id: "chevaliersdhonneur", name: "Chevaliers D'Honneur", perModel: 35, minSize: 5, stat: "Elite Knight", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard", restriction: "0-1",
       note: "Barding, heavy armour, shields, and lances, on Warhorses.",
       champion: { name: "The King's Champion", baseCost: 30, magicItemSlots: 1, stat: "The King's Champion", tags: ["knightly"] },
     },
@@ -4656,7 +4661,9 @@ function resolveUnitStat(kind, unit, def) {
   }
   if (kind === "regiment") {
     if (def.kind === "composite") return { statKey: null, statNote: null };
-    return { statKey: def.statNote ? null : def.stat, statNote: def.statNote || null };
+    const base = { statKey: def.statNote ? null : def.stat, statNote: def.statNote || null };
+    if (def.mountStat) return { ...base, mountStatKey: def.mountStat, charLabel: def.riderLabel || def.name, mountLabel: def.mountLabel || def.mountStat };
+    return base;
   }
   if (kind === "chariot") return { statKey: def.stat, statNote: null };
   if (kind === "special") {
