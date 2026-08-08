@@ -464,6 +464,57 @@ const STATS = {
   "Jasperre le'Beu Dragonslayer": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
   "Morgiana le Fay": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 3, I: 6, A: 1, Ld: 9 },
   "Repanse de Lyonesse": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 9 },
+  "Black Orc Warlord": { M: 4, WS: 7, BS: 6, S: 5, T: 5, W: 3, I: 5, A: 4, Ld: 10 },
+  "Orc Warlord": { M: 4, WS: 6, BS: 6, S: 4, T: 5, W: 3, I: 5, A: 4, Ld: 9 },
+  "Goblin Warlord": { M: 4, WS: 5, BS: 6, S: 4, T: 4, W: 3, I: 5, A: 4, Ld: 7 },
+  "Black Orc Hero": { M: 4, WS: 6, BS: 5, S: 5, T: 5, W: 2, I: 4, A: 3, Ld: 9 },
+  "Orc Hero": { M: 4, WS: 5, BS: 5, S: 4, T: 5, W: 2, I: 4, A: 3, Ld: 8 },
+  "Goblin Hero": { M: 4, WS: 4, BS: 5, S: 4, T: 4, W: 2, I: 4, A: 3, Ld: 6 },
+  "Black Orc BSB": { M: 4, WS: 5, BS: 4, S: 5, T: 4, W: 2, I: 3, A: 2, Ld: 8 },
+  "Orc BSB": { M: 4, WS: 4, BS: 4, S: 4, T: 4, W: 2, I: 3, A: 2, Ld: 7 },
+  "Goblin BSB": { M: 4, WS: 3, BS: 4, S: 4, T: 3, W: 2, I: 3, A: 2, Ld: 5 },
+  "Orc Shaman Lord": { M: 4, WS: 3, BS: 3, S: 4, T: 5, W: 4, I: 5, A: 3, Ld: 8 },
+  "Orc Master Shaman": { M: 4, WS: 3, BS: 3, S: 4, T: 5, W: 3, I: 4, A: 2, Ld: 7 },
+  "Orc Shaman Champion": { M: 4, WS: 3, BS: 3, S: 4, T: 5, W: 2, I: 3, A: 1, Ld: 7 },
+  "Orc Shaman": { M: 4, WS: 3, BS: 3, S: 3, T: 5, W: 1, I: 3, A: 1, Ld: 7 },
+  "Goblin Shaman Lord": { M: 4, WS: 2, BS: 3, S: 4, T: 4, W: 4, I: 5, A: 3, Ld: 6 },
+  "Goblin Master Shaman": { M: 4, WS: 2, BS: 3, S: 4, T: 4, W: 3, I: 4, A: 2, Ld: 5 },
+  "Goblin Shaman Champion": { M: 4, WS: 2, BS: 3, S: 4, T: 4, W: 2, I: 3, A: 1, Ld: 5 },
+  "Goblin Shaman": { M: 4, WS: 2, BS: 3, S: 3, T: 4, W: 1, I: 3, A: 1, Ld: 5 },
+  "War Boar": { M: 7, WS: 4, BS: 0, S: 3, T: 4, W: 1, I: 3, A: 1, Ld: 3 },
+  "Giant Wolf": { M: 9, WS: 4, BS: 0, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 3 },
+  "Giant Spider": { M: 7, WS: 3, BS: 0, S: 3, T: 3, W: 1, I: 1, A: 1, Ld: 5 },
+  "Monstrous Spider": { M: 7, WS: 3, BS: 0, S: 4, T: 4, W: 4, I: 1, A: 2, Ld: 5 },
+  "Wyvern (Orc)": { M: 6, WS: 5, BS: 0, S: 5, T: 6, W: 4, I: 4, A: 3, Ld: 5 },
+  "Common Orc": { M: 4, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 2, A: 1, Ld: 7 },
+  "Orc Big'un": { M: 4, WS: 4, BS: 3, S: 4, T: 4, W: 1, I: 3, A: 1, Ld: 7 },
+  "Savage Orc": { M: 4, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 2, A: 1, Ld: 7 },
+  "Black Orc": { M: 4, WS: 4, BS: 3, S: 4, T: 4, W: 1, I: 2, A: 1, Ld: 8 },
+  "Common Goblin": { M: 4, WS: 2, BS: 3, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 5 },
+  "Forest Goblin": { M: 4, WS: 2, BS: 3, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 5 },
+  "Night Goblin": { M: 4, WS: 2, BS: 3, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 5 },
+  "Night Goblin Fanatic": { M: "2D6", WS: 2, BS: 3, S: 5, T: 3, W: 1, I: 1, A: "1D6", Ld: 5 },
+  "Cave Squig": { M: "2D6", WS: 4, BS: 0, S: 5, T: 3, W: 1, I: 5, A: 2, Ld: 2 },
+  "Snotling Base": { M: 4, WS: 2, BS: 2, S: 2, T: 2, W: 3, I: 3, A: 3, Ld: 4 },
+  "Black Orc Champion": { M: 4, WS: 5, BS: 4, S: 5, T: 4, W: 1, I: 3, A: 2, Ld: 8 },
+  "Savage Orc Champion": { M: 4, WS: 4, BS: 4, S: 4, T: 4, W: 1, I: 3, A: 2, Ld: 7 },
+  "Common Orc Champion": { M: 4, WS: 4, BS: 4, S: 4, T: 4, W: 1, I: 3, A: 2, Ld: 7 },
+  "Orc Big'un Champion": { M: 4, WS: 5, BS: 4, S: 4, T: 4, W: 1, I: 4, A: 2, Ld: 7 },
+  "Common Goblin Champion": { M: 4, WS: 3, BS: 4, S: 4, T: 3, W: 1, I: 3, A: 2, Ld: 5 },
+  "Forest Goblin Champion": { M: 4, WS: 3, BS: 4, S: 4, T: 3, W: 1, I: 3, A: 2, Ld: 5 },
+  "Night Goblin Champion": { M: 4, WS: 3, BS: 4, S: 4, T: 3, W: 1, I: 3, A: 2, Ld: 5 },
+  "Light Chariot": { M: "-", WS: "-", BS: "-", S: 4, T: 4, W: 4, I: "-", A: "-", Ld: "-" },
+  "Giant (Orc)": { M: 6, WS: 3, BS: 3, S: 7, T: 6, W: 6, I: 3, A: "Spec", Ld: 6 },
+  "Spider Swarm": { M: 4, WS: 2, BS: 0, S: 3, T: 2, W: 5, I: 1, A: 5, Ld: 10 },
+  "Gargantuan Spider": { M: 7, WS: 4, BS: 0, S: 5, T: 5, W: 8, I: 4, A: 8, Ld: 6 },
+  "Azhag the Slaughterer": { M: 4, WS: 6, BS: 6, S: 4, T: 5, W: 3, I: 5, A: 4, Ld: 10 },
+  "Gorfang Rotgut": { M: 4, WS: 5, BS: 5, S: 5, T: 5, W: 3, I: 4, A: 3, Ld: 8 },
+  "Gorbad Ironclaw": { M: 4, WS: 6, BS: 6, S: 4, T: 5, W: 3, I: 5, A: 4, Ld: 10 },
+  "Grom the Paunch": { M: 4, WS: 5, BS: 6, S: 4, T: 4, W: 3, I: 5, A: 4, Ld: 9 },
+  "Morglum Necksnapper": { M: 4, WS: 7, BS: 6, S: 5, T: 5, W: 3, I: 5, A: 4, Ld: 10 },
+  "Oglok the 'Orrible": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 2, I: 4, A: 4, Ld: 9 },
+  "Skarsnik of the Eight Peaks": { M: 4, WS: 5, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 9 },
+  "Gobbla": { M: "-", WS: 6, BS: 0, S: 6, T: 4, W: 3, I: 6, A: 4, Ld: 2 },
   "Elven Prince": { M: 5, WS: 7, BS: 7, S: 4, T: 4, W: 3, I: 9, A: 4, Ld: 10 },
   "Elven Hero (High Elf)": { M: 5, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
   "Elven BSB (High Elf)": { M: 5, WS: 5, BS: 5, S: 4, T: 3, W: 2, I: 7, A: 2, Ld: 8 },
@@ -2624,10 +2675,660 @@ const BRETONNIA = {
   ],
 };
 
+const ORC_MAGIC_ITEMS = [
+  { id: "og-wollopa", name: "Wollopa's One Hit Wunda", cost: 10, cat: "weapon", desc: "Common Goblins only. In the first melee round the bearer fights, all hits resolve at S10. One use.", restrictedTo: [{ tags: ["commonGoblin"] }] },
+  { id: "og-swordofbork", name: "Sword of Bork", cost: 40, cat: "weapon", desc: "Common Orcs only, only benefits Common Orc regiments. The bearer's regiment ignores animosity.", restrictedTo: [{ tags: ["commonOrc"] }] },
+  { id: "og-axeofgrom", name: "Axe of Grom", cost: 50, cat: "weapon", desc: "Common Goblins only. Double handed weapon, no armour save, 1D3 wounds.", restrictedTo: [{ tags: ["commonGoblin"] }] },
+  { id: "og-battleaxewaaagh", name: "Battle-Axe of the Last Waaagh!", cost: 75, cat: "weapon", desc: "Common Orcs only. +1S and +1 attack per rank of 4+ models behind the front rank (no limit), recalculated when attacks are made.", restrictedTo: [{ tags: ["commonOrc"] }] },
+  { id: "og-morgor", name: "Morgor the Mangler", cost: 100, cat: "weapon", desc: "Common Orcs only. +1 WS, +1 S, +1 T, always strikes first, no armour save.", restrictedTo: [{ tags: ["commonOrc"] }] },
+  { id: "og-hornedhelmet", name: "Horned Helmet", cost: 10, cat: "armour", desc: "Common Orcs only. One use. On the bearer's first melee wound, roll a D6: 4+ rebounds the wound onto the attacker, 3 or less it turns out to be an ordinary helmet.", restrictedTo: [{ tags: ["commonOrc"] }] },
+  { id: "og-shinyhelm", name: "Shiny Helm of Nob", cost: 20, cat: "armour", desc: "Common Goblins only. +1 armour save, 5+ ward save.", restrictedTo: [{ tags: ["commonGoblin"] }] },
+  { id: "og-trickstrinket", name: "Tricksy Trinket", cost: 10, cat: "enchanted", desc: "Common Goblins only. Enemies in base contact with the bearer must re-roll successful armour/ward/regeneration saves.", restrictedTo: [{ tags: ["commonGoblin"] }] },
+  { id: "og-collarzorga", name: "The Collar of Zorga", cost: 10, cat: "enchanted", desc: "Common Orcs only. The bearer can't be hit by monsters. May not be worn while riding a monster.", restrictedTo: [{ tags: ["commonOrc"] }] },
+  { id: "og-warpaint", name: "Magic War Paint", cost: 20, cat: "enchanted", desc: "Forest Goblins only. 5+ ward vs melee, 3+ ward vs any missile attack. Also protects the rider's mount.", restrictedTo: [{ tags: ["forestGoblin"] }] },
+  { id: "og-stafflightning", name: "Staff of Lightning", cost: 50, cat: "arcane", desc: "Common Orc Shamans only. Bound spell — as Gaze of Mork (range 24\", S6 hit to anything in the path, normal saves). Roll after use: on a 1, the staff is exhausted for the rest of the battle.", restrictedTo: [{ tags: ["commonOrcShaman"] }] },
+  { id: "og-totemtalisman", name: "Totem Talisman", cost: 100, cat: "arcane", desc: "Savage Orc Shamans only. An extra magic card each magic phase, personal use only.", restrictedTo: [{ tags: ["savageOrcShaman"] }] },
+  { id: "og-skarsnikprodder", name: "Skarsnik's Prodder", cost: 100, cat: "arcane", desc: "Night Goblin Shamans only (besides Skarsnik, who carries his own for free). +1S. Also casts a bound spell each magic phase (18\" range & LoS, 1D6 S3 hits, no save).", restrictedTo: [{ tags: ["nightGoblinShaman"] }] },
+  { id: "og-bannergobbo", name: "Banner of Gobbo Awesomeness", cost: 20, cat: "banner", desc: "Common Goblins only. +3 WS for the whole regiment in the first melee round of every combat.", restrictedTo: [{ tags: ["commonGoblin"] }] },
+  { id: "og-spiderbanner", name: "Spider Banner", cost: 20, cat: "banner", desc: "Forest Goblins only. +1 attack for every front-rank model (riders only for cavalry) in the first melee round of every combat.", restrictedTo: [{ tags: ["forestGoblin"] }] },
+  { id: "og-gorkswarbanner", name: "Gork's War Banner", cost: 20, cat: "banner", desc: "Common Goblins only. +1 to hit for every front-rank model (riders only for cavalry) in the first melee round of every combat.", restrictedTo: [{ tags: ["commonGoblin"] }] },
+  { id: "og-badmoonbanner", name: "Bad Moon Banner", cost: 20, cat: "banner", desc: "Night Goblins only. Always strikes first.", restrictedTo: [{ tags: ["nightGoblin"] }] },
+  { id: "og-evilsunbanner", name: "Evil Sun Banner", cost: 40, cat: "banner", desc: "Night Goblins only. May re-roll a failed animosity roll.", restrictedTo: [{ tags: ["nightGoblin"] }] },
+  { id: "og-stalkerbanner", name: "Stalker Banner", cost: 40, cat: "banner", desc: "Forest Goblins only. Once/battle in the movement phase, before charges, may pivot on the spot and still take a full move/charge that turn (counts as having moved for shooting purposes).", restrictedTo: [{ tags: ["forestGoblin"] }] },
+  { id: "og-morkswarbanner", name: "Mork's War Banner", cost: 100, cat: "banner", desc: "Orc infantry only, any type. Dispels all spells (even Total Power, including friendly ones) cast at the unit; any wizard touching the unit is slain instantly. No spells (even bound) may be cast from the unit.", restrictedTo: [{ regimentIds: ["orcboyz", "orcarrerboyz", "orcbiguns", "orcbigunarrerboyz", "savageorcs", "savageorcarrerboyz", "blackorcs"] }] },
+];
+
+const ORCS_GOBLINS = {
+  key: "orcsgoblins",
+  name: "Orcs & Goblins",
+  tagline: "An unstoppable, uncontrollable storm of green promising destruction wherever it goes",
+  magicItems: ORC_MAGIC_ITEMS,
+  armyWideRules: [
+    "Difficult to Master: this is arguably the most complex army to play, full of animosity tests, compulsory moves, exploding Shamans, and units that barely listen to orders. Most of that is battle-phase behavior rather than list-building, so this builder tracks points/composition faithfully but doesn't simulate dice-driven chaos like Fanatic scatter, Squig-Hopper bouncing, or Doom Diver misfires — those are called out as rules text on the relevant entries instead.",
+    "Animosity: at the start of the turn, before movement, each Orc & Goblin regiment not engaged/fleeing (Trolls, Ogres, and similar excepted) tests animosity — 1 in 6 triggers a re-roll; a bad second roll (1-5) freezes the unit for the turn, a 6 forces it 2D6\" toward the nearest visible enemy and a mandatory charge next turn. War machines, chariots, and other non-regiment units never test.",
+    "Fielding a type requires a regiment of that type: you can't field characters, war machine crew, or chariots of a given Orc/Goblin type unless the army already includes at least one regiment of that type (infantry or cavalry). This isn't hard-enforced by the builder — keep it in mind when building your list.",
+    "Common Orcs ignore panic caused by Goblins. Big'uns are just larger, fiercer Common Orcs, not a separate race.",
+    "Savage Orcs are frenzied (and still ignore Goblin-caused panic even without frenzy), never wear armour beyond a shield (relying on magic tattoos instead — treated as light armour, plus a 6+ ward save that improves to 5+ if a Savage Orc Shaman joins the regiment, benefiting the Shaman too).",
+    "Black Orcs are immune to animosity and quell it in any non-Black-Orc regiment a Black Orc character joins. They ignore panic from Goblins and other Orc types, and only heed the leadership of Black Orc characters or the general.",
+    "War Boars grant the rider a barded-equivalent armour save with no movement penalty, but Boar Riders can never count as fast cavalry. Boars grant +2S on the charge.",
+    "All Goblins (Common, Night, Forest) fear Elves unless they outnumber them two-to-one. Without any Orcs in the army, Common Goblin character Ld all increase by 1 (this includes Grom) — not enforced by the builder. Night Goblins hate Dwarfs but not Chaos Dwarfs. Forest Goblins (including Spider Riders) cross woods without movement penalty, and in an army with no Orcs at all, Forest Goblin short bows may be upgraded to poisoned arrows — offered here as a normal purchasable option without enforcing the no-Orcs condition.",
+    "Night Goblin Shamans carry a magic mushroom (eat it for 1D6 extra magic cards, risking an explosive death on a failed Waaagh test) — a battle-phase mechanic, not modeled here.",
+  ],
+  characters: [
+    {
+      id: "blackorcwarlord", name: "Black Orc Warlord", cost: 148, stat: "Black Orc Warlord", magicItemSlots: 3, tags: ["blackOrc"],
+      gearNote: "May take a shield and either light or heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 33, stat: "War Boar" },
+        { id: "wyvern", name: "Wyvern", cost: 167, stat: "Wyvern (Orc)" },
+      ],
+    },
+    {
+      id: "blackorchero", name: "Black Orc Hero", cost: 89, stat: "Black Orc Hero", magicItemSlots: 2, tags: ["blackOrc"],
+      gearNote: "May take a shield and either light or heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 24, stat: "War Boar" },
+        { id: "wyvern", name: "Wyvern", cost: 158, stat: "Wyvern (Orc)" },
+      ],
+    },
+    {
+      id: "blackorcbsb", name: "Black Orc Battle Standard Bearer", cost: 96, stat: "Black Orc BSB", magicItemSlots: 1, restriction: "0-1", tags: ["blackOrc"],
+      gearNote: "May take light or heavy armour for free. The one item may be a magic banner.",
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 15, stat: "War Boar" },
+      ],
+    },
+    {
+      id: "commonorcwarlord", name: "Common Orc Warlord", cost: 100, stat: "Orc Warlord", magicItemSlots: 3, tags: ["commonOrc"],
+      gearNote: "May take a shield and light armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Crossbow"] },
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 21, stat: "War Boar" },
+        { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
+        { id: "wyvern", name: "Wyvern", cost: 155, stat: "Wyvern (Orc)" },
+      ],
+    },
+    {
+      id: "commonorchero", name: "Common Orc Hero", cost: 60, stat: "Orc Hero", magicItemSlots: 2, tags: ["commonOrc"],
+      gearNote: "May take a shield and light armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Crossbow"] },
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 16, stat: "War Boar" },
+        { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
+        { id: "wyvern", name: "Wyvern", cost: 150, stat: "Wyvern (Orc)" },
+      ],
+    },
+    {
+      id: "commonorcbsb", name: "Common Orc Battle Standard Bearer", cost: 80, stat: "Orc BSB", magicItemSlots: 1, restriction: "0-1", tags: ["commonOrc"],
+      gearNote: "May take light armour for free. The one item may be a magic banner.",
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 11, stat: "War Boar" },
+        { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "commonorcshamanlord", name: "Common Orc Shaman Lord (level 4)", cost: 220, stat: "Orc Shaman Lord", magicItemSlots: 4, tags: ["commonOrc", "commonOrcShaman"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
+        { id: "wyvern", name: "Wyvern", cost: 140, stat: "Wyvern (Orc)" },
+      ],
+    },
+    {
+      id: "commonorcmastershaman", name: "Common Orc Master Shaman (level 3)", cost: 155, stat: "Orc Master Shaman", magicItemSlots: 3, tags: ["commonOrc", "commonOrcShaman"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "commonorcshamanchampion", name: "Common Orc Shaman Champion (level 2)", cost: 100, stat: "Orc Shaman Champion", magicItemSlots: 2, tags: ["commonOrc", "commonOrcShaman"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "commonorcshaman", name: "Common Orc Shaman (level 1)", cost: 45, stat: "Orc Shaman", magicItemSlots: 1, tags: ["commonOrc", "commonOrcShaman"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "savageorcwarlord", name: "Savage Orc Warlord", cost: 130, stat: "Orc Warlord", magicItemSlots: 3, tags: ["savageOrc"],
+      gearNote: "Adorned with magic tattoos (as light armour, plus a 6+/5+ ward — see army-wide rules). May take a shield for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      bowOption: { label: "Bow", cost: 10 },
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 27, stat: "War Boar" },
+        { id: "wyvern", name: "Wyvern", cost: 161, stat: "Wyvern (Orc)" },
+      ],
+    },
+    {
+      id: "savageorchero", name: "Savage Orc Hero", cost: 90, stat: "Orc Hero", magicItemSlots: 2, tags: ["savageOrc"],
+      gearNote: "Adorned with magic tattoos (as light armour, plus a 6+/5+ ward — see army-wide rules). May take a shield for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      bowOption: { label: "Bow", cost: 10 },
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 20, stat: "War Boar" },
+        { id: "wyvern", name: "Wyvern", cost: 154, stat: "Wyvern (Orc)" },
+      ],
+    },
+    {
+      id: "savageorcbsb", name: "Savage Orc Battle Standard Bearer", cost: 90, stat: "Orc BSB", magicItemSlots: 1, restriction: "0-1", tags: ["savageOrc"],
+      gearNote: "Adorned with magic tattoos. The one item may be a magic banner.",
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 13, stat: "War Boar" },
+      ],
+    },
+    {
+      id: "savageorcshamanlord", name: "Savage Orc Shaman Lord (level 4)", cost: 250, stat: "Orc Shaman Lord", magicItemSlots: 4, tags: ["savageOrc", "savageOrcShaman"],
+      gearNote: "Adorned with magic tattoos. Takes Waaagh! Spells. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "wyvern", name: "Wyvern", cost: 140, stat: "Wyvern (Orc)" },
+      ],
+    },
+    {
+      id: "savageorcmastershaman", name: "Savage Orc Master Shaman (level 3)", cost: 185, stat: "Orc Master Shaman", magicItemSlots: 3, tags: ["savageOrc", "savageOrcShaman"],
+      gearNote: "Adorned with magic tattoos. Takes Waaagh! Spells. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+      ],
+    },
+    {
+      id: "savageorcshamanchampion", name: "Savage Orc Shaman Champion (level 2)", cost: 130, stat: "Orc Shaman Champion", magicItemSlots: 2, tags: ["savageOrc", "savageOrcShaman"],
+      gearNote: "Adorned with magic tattoos. Takes Waaagh! Spells. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+      ],
+    },
+    {
+      id: "savageorcshaman", name: "Savage Orc Shaman (level 1)", cost: 75, stat: "Orc Shaman", magicItemSlots: 1, tags: ["savageOrc", "savageOrcShaman"],
+      gearNote: "Adorned with magic tattoos. Takes Waaagh! Spells. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+      ],
+    },
+    {
+      id: "commongoblinwarlord", name: "Common Goblin Warlord", cost: 60, stat: "Goblin Warlord", magicItemSlots: 3, tags: ["commonGoblin"],
+      gearNote: "May take a shield and light armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      bowOption: { label: "Short bow", cost: 10 },
+      mounts: [
+        { id: "wolf", name: "Giant Wolf", cost: 14, stat: "Giant Wolf" },
+        { id: "chariot", name: "Wolf Chariot (for the price of the chariot)", cost: 0, stat: "Light Chariot" },
+        { id: "spider", name: "Monstrous Spider", cost: 40, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "commongoblinhero", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"],
+      gearNote: "May take a shield and light armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      bowOption: { label: "Short bow", cost: 10 },
+      mounts: [
+        { id: "wolf", name: "Giant Wolf", cost: 11, stat: "Giant Wolf" },
+        { id: "chariot", name: "Wolf Chariot (for the price of the chariot)", cost: 0, stat: "Light Chariot" },
+        { id: "spider", name: "Monstrous Spider", cost: 37, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "commongoblinbsb", name: "Common Goblin Battle Standard Bearer", cost: 60, stat: "Goblin BSB", magicItemSlots: 1, restriction: "0-1", tags: ["commonGoblin"],
+      gearNote: "May take light armour for free. The one item may be a magic banner.",
+      mounts: [
+        { id: "wolf", name: "Giant Wolf", cost: 9, stat: "Giant Wolf" },
+        { id: "chariot", name: "Wolf Chariot (for the price of the chariot)", cost: 0, stat: "Light Chariot" },
+      ],
+    },
+    {
+      id: "commongoblinshamanlord", name: "Common Goblin Shaman Lord (level 4)", cost: 170, stat: "Goblin Shaman Lord", magicItemSlots: 4, tags: ["commonGoblin"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
+        { id: "chariot", name: "Wolf Chariot (for the price of the chariot)", cost: 0, stat: "Light Chariot" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "commongoblinmastershaman", name: "Common Goblin Master Shaman (level 3)", cost: 120, stat: "Goblin Master Shaman", magicItemSlots: 3, tags: ["commonGoblin"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "commongoblinshamanchampion", name: "Common Goblin Shaman Champion (level 2)", cost: 75, stat: "Goblin Shaman Champion", magicItemSlots: 2, tags: ["commonGoblin"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "commongoblinshaman", name: "Common Goblin Shaman (level 1)", cost: 30, stat: "Goblin Shaman", magicItemSlots: 1, tags: ["commonGoblin"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "forestgoblinwarlord", name: "Forest Goblin Warlord", cost: 60, stat: "Goblin Warlord", magicItemSlots: 3, tags: ["forestGoblin"],
+      gearNote: "May take a shield for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      bowOption: { label: "Short bow", cost: 10 },
+      mounts: [
+        { id: "spidersteed", name: "Giant Spider", cost: 13, stat: "Giant Spider" },
+        { id: "spider", name: "Monstrous Spider", cost: 40, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "forestgoblinhero", name: "Forest Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["forestGoblin"],
+      gearNote: "May take a shield for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      bowOption: { label: "Short bow", cost: 10 },
+      mounts: [
+        { id: "spidersteed", name: "Giant Spider", cost: 10, stat: "Giant Spider" },
+        { id: "spider", name: "Monstrous Spider", cost: 37, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "forestgoblinbsb", name: "Forest Goblin Battle Standard Bearer", cost: 60, stat: "Goblin BSB", magicItemSlots: 1, restriction: "0-1", tags: ["forestGoblin"],
+      gearNote: "The one item may be a magic banner.",
+      mounts: [
+        { id: "spidersteed", name: "Giant Spider", cost: 8, stat: "Giant Spider" },
+      ],
+    },
+    {
+      id: "forestgoblinshamanlord", name: "Forest Goblin Shaman Lord (level 4)", cost: 170, stat: "Goblin Shaman Lord", magicItemSlots: 4, tags: ["forestGoblin"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "spidersteed", name: "Giant Spider (free)", cost: 0, stat: "Giant Spider" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "forestgoblinmastershaman", name: "Forest Goblin Master Shaman (level 3)", cost: 120, stat: "Goblin Master Shaman", magicItemSlots: 3, tags: ["forestGoblin"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "spidersteed", name: "Giant Spider (free)", cost: 0, stat: "Giant Spider" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "forestgoblinshamanchampion", name: "Forest Goblin Shaman Champion (level 2)", cost: 75, stat: "Goblin Shaman Champion", magicItemSlots: 2, tags: ["forestGoblin"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "spidersteed", name: "Giant Spider (free)", cost: 0, stat: "Giant Spider" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "forestgoblinshaman", name: "Forest Goblin Shaman (level 1)", cost: 30, stat: "Goblin Shaman", magicItemSlots: 1, tags: ["forestGoblin"],
+      gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "spidersteed", name: "Giant Spider (free)", cost: 0, stat: "Giant Spider" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "nightgoblinwarlord", name: "Night Goblin Warlord", cost: 60, stat: "Goblin Warlord", magicItemSlots: 3, tags: ["nightGoblin"],
+      gearNote: "May take a shield for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      bowOption: { label: "Short bow", cost: 10 },
+      mounts: [
+        { id: "spider", name: "Monstrous Spider", cost: 40, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "nightgoblinhero", name: "Night Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["nightGoblin"],
+      gearNote: "May take a shield for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      bowOption: { label: "Short bow", cost: 10 },
+      mounts: [
+        { id: "spider", name: "Monstrous Spider", cost: 37, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "nightgoblinbsb", name: "Night Goblin Battle Standard Bearer", cost: 60, stat: "Goblin BSB", magicItemSlots: 1, restriction: "0-1", tags: ["nightGoblin"],
+      gearNote: "The one item may be a magic banner.",
+    },
+    {
+      id: "nightgoblinshamanlord", name: "Night Goblin Shaman Lord (level 4)", cost: 180, stat: "Goblin Shaman Lord", magicItemSlots: 4, tags: ["nightGoblin", "nightGoblinShaman"],
+      gearNote: "Comes with a magic mushroom (see army-wide rules). Takes Waaagh! Spells. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "nightgoblinmastershaman", name: "Night Goblin Master Shaman (level 3)", cost: 130, stat: "Goblin Master Shaman", magicItemSlots: 3, tags: ["nightGoblin", "nightGoblinShaman"],
+      gearNote: "Comes with a magic mushroom (see army-wide rules). Takes Waaagh! Spells. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "nightgoblinshamanchampion", name: "Night Goblin Shaman Champion (level 2)", cost: 85, stat: "Goblin Shaman Champion", magicItemSlots: 2, tags: ["nightGoblin", "nightGoblinShaman"],
+      gearNote: "Comes with a magic mushroom (see army-wide rules). Takes Waaagh! Spells. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+    {
+      id: "nightgoblinshaman", name: "Night Goblin Shaman (level 1)", cost: 40, stat: "Goblin Shaman", magicItemSlots: 1, tags: ["nightGoblin", "nightGoblinShaman"],
+      gearNote: "Comes with a magic mushroom (see army-wide rules). Takes Waaagh! Spells. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+      ],
+    },
+  ],
+  regiments: [
+    {
+      id: "orcboyz", name: "Orc Boyz", perModel: 5, minSize: 5, stat: "Common Orc", command: "standard",
+      note: "Light armour. Ignore panic caused by Goblins.",
+      options: [
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+1pt/model)", cost: 1, per: "model" },
+        { id: "spear", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
+        { id: "halberd", group: "melee", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Common Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Common Orc Champion", tags: ["commonOrc"] },
+    },
+    {
+      id: "orcarrerboyz", name: "Orc Arrer Boyz", perModel: 7, minSize: 5, stat: "Common Orc", command: "standard",
+      note: "Bows. Ignore panic caused by Goblins.",
+      options: [
+        { id: "crossbows", group: null, label: "Crossbows instead of bows (+2pt/model)", cost: 2, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Common Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Common Orc Champion", tags: ["commonOrc"] },
+    },
+    {
+      id: "orcboarboyz", name: "Orc Boar Boyz", perModel: 15, minSize: 5, statNote: "Common Orcs with light armour and shields on War Boars (barded-equivalent save with no movement penalty; can't be fast cavalry; boars grant +2S on the charge).", command: "standard",
+      note: "Ignore panic caused by Goblins.",
+      options: [
+        { id: "spear", group: null, label: "Spears (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Common Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Common Orc Champion", tags: ["commonOrc"] },
+    },
+    {
+      id: "orcbiguns", name: "Orc Big'uns", perModel: 7, minSize: 5, stat: "Orc Big'un", command: "standard",
+      note: "Light armour. Ignore panic caused by Goblins.",
+      options: [
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "spear", group: "melee", label: "Spears (+3pt/model)", cost: 3, per: "model" },
+        { id: "halberd", group: "melee", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Orc Big'un Champion", baseCost: 20, magicItemSlots: 1, stat: "Orc Big'un Champion", tags: ["commonOrc"] },
+    },
+    {
+      id: "orcbigunarrerboyz", name: "Orc Big'un Arrer Boyz", perModel: 9, minSize: 5, stat: "Orc Big'un", command: "standard",
+      note: "Bows. Ignore panic caused by Goblins.",
+      options: [
+        { id: "crossbows", group: null, label: "Crossbows instead of bows (+2pt/model)", cost: 2, per: "model" },
+        { id: "armour", group: null, label: "Armour (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Orc Big'un Champion", baseCost: 20, magicItemSlots: 1, stat: "Orc Big'un Champion", tags: ["commonOrc"] },
+    },
+    {
+      id: "orcbigunboarboyz", name: "Orc Big'un Boar Boyz", perModel: 18, minSize: 5, statNote: "Big'uns with light armour and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge).", command: "standard",
+      note: "Ignore panic caused by Goblins.",
+      options: [
+        { id: "spear", group: null, label: "Spears (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Orc Big'un Champion", baseCost: 20, magicItemSlots: 1, stat: "Orc Big'un Champion", tags: ["commonOrc"] },
+    },
+    {
+      id: "savageorcs", name: "Savage Orcs", perModel: 8, minSize: 5, stat: "Savage Orc", command: "standard",
+      note: "Magic tattoos (see army-wide rules). Frenzied; still ignore Goblin panic even without frenzy.",
+      options: [
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+1pt/model)", cost: 1, per: "model" },
+        { id: "spear", group: "melee", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+4pt/model)", cost: 4, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Savage Orc Champion", baseCost: 30, magicItemSlots: 1, stat: "Savage Orc Champion", tags: ["savageOrc"] },
+    },
+    {
+      id: "savageorcarrerboyz", name: "Savage Orc Arrer Boyz", perModel: 10, minSize: 5, stat: "Savage Orc", command: "standard",
+      note: "Magic tattoos and bows. Frenzied; still ignore Goblin panic even without frenzy.",
+      champion: { name: "Savage Orc Champion", baseCost: 30, magicItemSlots: 1, stat: "Savage Orc Champion", tags: ["savageOrc"] },
+    },
+    {
+      id: "savageorcboarboyz", name: "Savage Orc Boar Boyz", perModel: 20, minSize: 5, statNote: "Savage Orcs with magic tattoos and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge).", command: "standard",
+      note: "Frenzied; still ignore Goblin panic even without frenzy.",
+      options: [
+        { id: "spear", group: null, label: "Spears (+3pt/model)", cost: 3, per: "model" },
+        { id: "bows", group: null, label: "Bows (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Savage Orc Champion", baseCost: 30, magicItemSlots: 1, stat: "Savage Orc Champion", tags: ["savageOrc"] },
+    },
+    {
+      id: "blackorcs", name: "Black Orcs", perModel: 9, minSize: 5, stat: "Black Orc", command: "standard",
+      note: "Light armour. Immune to animosity; ignore panic from Goblins and other Orc types; only heed Black Orc / general leadership.",
+      options: [
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "spear", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
+        { id: "halberd", group: "melee", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+2pt/model)", cost: 2, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Black Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Black Orc Champion", tags: ["blackOrc"] },
+    },
+    {
+      id: "commongoblininfantry", name: "Common Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Common Goblin", command: "standard",
+      note: "Fear Elves unless outnumbering them two-to-one.",
+      options: [
+        { id: "spear", group: "melee", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "shortbows", group: null, label: "Short bows (+1pt/model)", cost: 1, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Common Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Common Goblin Champion", tags: ["commonGoblin"] },
+    },
+    {
+      id: "commongoblinwolfriders", name: "Common Goblin Wolf Riders", perModel: 9, minSize: 5, statNote: "Common Goblins on Giant Wolves.", command: "fastCavalry",
+      note: "Fear Elves unless outnumbering them two-to-one. Fast cavalry.",
+      options: [
+        { id: "spear", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "shortbows", group: null, label: "Short bows (+1pt/model)", cost: 1, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Common Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Common Goblin Champion", tags: ["commonGoblin"] },
+    },
+    {
+      id: "forestgoblinspiderriders", name: "Forest Goblin Spider Riders", perModel: 8, minSize: 5, statNote: "Forest Goblins on Giant Spiders (poisonous +1S attacks, cross terrain freely).", command: "fastCavalry",
+      note: "Fear Elves unless outnumbering them two-to-one. Fast cavalry.",
+      options: [
+        { id: "spear", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "shortbows", group: null, label: "Short bows (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Forest Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Forest Goblin Champion", tags: ["forestGoblin"] },
+    },
+    {
+      id: "forestgoblininfantry", name: "Forest Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Forest Goblin", command: "standard",
+      note: "Fear Elves unless outnumbering them two-to-one. Cross woods without movement penalty.",
+      options: [
+        { id: "spear", group: "melee", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "shortbows", group: "melee", label: "Short bows (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields, only if not armed with short bows (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Forest Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Forest Goblin Champion", tags: ["forestGoblin"] },
+    },
+    {
+      id: "nightgoblininfantry", name: "Night Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Night Goblin", command: "standard",
+      note: "Fear Elves unless outnumbering them two-to-one. Hate Dwarfs (not Chaos Dwarfs). May conceal up to 3 hidden Fanatics — released and scattering wildly the moment an enemy comes within 8\" (see the full rules in the book); Fanatics don't count toward the regiment's 50pt minimum.",
+      options: [
+        { id: "spear", group: "melee", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "shortbows", group: "melee", label: "Short bows (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields, only if not armed with short bows (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "madcap", group: null, label: "One concealed Fanatic gets a Mad Cap Mushroom (2D6 S5 hits instead of 1D6) — requires at least one Fanatic below", cost: 20, per: "flat" },
+      ],
+      extraOption: { label: "Hidden Night Goblin Fanatics", cost: 30, max: 3 },
+      champion: { name: "Night Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Night Goblin Champion", tags: ["nightGoblin"] },
+    },
+    {
+      id: "nightgoblinsquighoppers", name: "Night Goblin Squig-Hoppers", perModel: 25, minSize: 1, stat: "Cave Squig", command: "none",
+      note: "Cannot take a standard bearer, musician, or champion, and no characters may join. All deploy within 2\" of each other, then each acts as an independent unit — immune to psychology, no animosity tests, bounces 2D6\" each turn, auto-hits anything it bounces onto (the rider never fights). See the full bounce/scatter rules in the book.",
+    },
+    {
+      id: "nightgoblinsquighunters", name: "Night Goblin Squig-Hunters", perModel: 0, minSize: 4, kind: "composite", command: "none",
+      note: "Cannot take a standard bearer, musician, or champion, and no characters may join. Needs at least 1 Night Goblin (with a prodder) per 3 Cave Squigs to start; if Squigs ever outnumber that ratio, the excess go wild (bounce like a Squig-Hopper, in a random direction). Moves at the Night Goblins' M4 and uses their Ld5. While in ranks, the Squigs are unbreakable; if the regiment panics/breaks, only the Night Goblins flee — the Squigs go wild instead.",
+      composition: [
+        { id: "goblin", label: "Night Goblins (with prodders)", cost: 6, stat: "Night Goblin" },
+        { id: "squig", label: "Cave Squigs", cost: 12, stat: "Cave Squig" },
+      ],
+    },
+    {
+      id: "nightgoblinnettersclubbers", name: "Night Goblin Netters and Clubbers", perModel: 6, minSize: 5, stat: "Night Goblin", command: "standard",
+      note: "Nets and clubs — treated as double handed weapons that strike first (the net effect stacks with itself, so they strike first twice over, not just cancelling the double-handed-weapon strike-last penalty).",
+      champion: { name: "Night Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Night Goblin Champion", tags: ["nightGoblin"] },
+    },
+    {
+      id: "trolls", name: "Trolls", perModel: 40, minSize: 3, stat: "Trolls", command: "none",
+      note: "Must be River Trolls (free), Stone Trolls (free), or Chaos Trolls (+5pt/model). Cannot take a standard bearer, musician, or champion. Monstrous, stupid, immune to psychology, cause fear, regenerate on 4+; may vomit instead of attacking (auto-hit S5, no save, 1D3 wounds). River: crosses water freely, enemies -1 to hit in melee (living only). Stone: 2+ natural dispel. Chaos: +1 Attack.",
+      options: [
+        { id: "chaostrolls", group: null, label: "Chaos Trolls, +1 Attack (+5pt/model)", cost: 5, per: "model" },
+      ],
+    },
+    {
+      id: "snotlings", name: "Snotlings", perModel: 15, minSize: 5, stat: "Snotling Base", command: "none", restriction: "0-1",
+      note: "Priced per 40x40mm base. Cannot take a standard bearer, musician, or be joined by characters, but still counts as a full rank-and-file regiment (front/flank/rear, can claim/cancel rank bonus). Never causes panic if destroyed/fleeing. Mimics the nearest friendly unit within 12\" (idles if none, charges/rushes if that unit fights, flees or turns frenzied alongside it). Unbreakable in combat as long as the nearest friendly unit isn't fleeing.",
+    },
+    {
+      id: "ogremercenaries", name: "Ogre Mercenaries", perModel: 24, minSize: 3, stat: "Ogre", command: "monstrous",
+      note: "Light armour. Monstrous regiment. Causes fear.",
+      options: [
+        { id: "heavyarmour", group: "armour", label: "Heavy armour instead of light (+4pt/model)", cost: 4, per: "model" },
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+6pt/model)", cost: 6, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons or flails (+8pt/model)", cost: 8, per: "model" },
+      ],
+      champion: { name: "Ogre Champion", baseCost: 50, magicItemSlots: 1, stat: "Ogre Champion" },
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "giants", name: "Giants", perUnit: 200, stat: "Giant (Orc)", kind: "quantity", countsAsFirstRegiment: true,
+      note: "Follows the main-rulebook Giant rules. The first Giant counts toward Regiments; further ones count toward Monsters.",
+    },
+    {
+      id: "goblinwolfchariots", name: "Goblin Wolf Chariot", perUnit: 44, stat: "Light Chariot", kind: "chariot",
+      note: "Light Chariot pulled by two Giant Wolves, crewed by two Common Goblins with light armour, spears, shields and short bows (5+ combined save).",
+      extraCrewCost: 6, extraCrewLabel: "extra Common Goblin crew", extraSteedCost: 8, extraSteedLabel: "extra Giant Wolves",
+      scythedWheelsCost: 10, commanderCost: 15, commanderLabel: "One crewman is a Common Goblin Champion", commanderMagicItemSlots: 1,
+    },
+    {
+      id: "orcboarchariots", name: "Orc Boar Chariot", perUnit: 52, stat: "Heavy Chariot", kind: "chariot",
+      note: "Heavy Chariot pulled by two War Boars, crewed by two Common Orcs with light armour, spears, shields and bows (4+ combined save).",
+      extraCrewCost: 8, extraCrewLabel: "extra Common Orc crew", extraSteedCost: 5, extraSteedLabel: "extra War Boars",
+      scythedWheelsCost: 20, commanderCost: 30, commanderLabel: "One crewman is a Common Orc Champion", commanderMagicItemSlots: 1,
+    },
+    {
+      id: "spiderswarm", name: "Spider Swarm", perUnit: 40, stat: "Spider Swarm", kind: "quantity", restriction: "0-1",
+      note: "Requires at least one Forest Goblin regiment (Infantry or Spider Riders) in the army. Follows the main-rulebook Swarm rules. Priced per base.",
+    },
+    {
+      id: "monstrousspiders", name: "Monstrous Spiders", perUnit: 40, stat: "Monstrous Spider", kind: "quantity",
+      note: "A Monstrous Spider is a small monster — follows the main-rulebook rules for Monstrous Spiders.",
+    },
+    {
+      id: "gargantuanspider", name: "Gargantuan Spider", perUnit: 225, stat: "Gargantuan Spider", kind: "quantity", restriction: "0-1",
+      note: "Only summonable if the general is a Forest Goblin and the army includes a Forest Goblin Shaman. Large monster, causes terror, 4+ armour save, immune to psychology, poisonous (+1S vs living). Too large to be a forester or scale buildings like regular spiders. Carries a howdah of 8 Forest Goblins with poisoned short bows shooting in a 360° arc with no movement penalty; damage always goes to the spider, and its death slays the whole model.",
+    },
+    {
+      id: "spearchukkasgoblins", name: "Spear Chukkas (Goblin crew)", perUnit: 42.5, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Bolt thrower with three Common Goblin crewmen.",
+      extraCrewCost: 2.5, extraCrewMax: 2, extraCrewLabel: "extra Common Goblin crew",
+    },
+    {
+      id: "spearchukkasorcs", name: "Spear Chukkas (Orc crew)", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Bolt thrower with three Common Orc crewmen.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Common Orc crew",
+    },
+    {
+      id: "smallrocklobbersgoblins", name: "Small Rock Lobbers (Goblin crew)", perUnit: 72.5, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Stone Thrower with three Common Goblin crewmen.",
+      extraCrewCost: 2.5, extraCrewMax: 2, extraCrewLabel: "extra Common Goblin crew",
+    },
+    {
+      id: "smallrocklobbersorcs", name: "Small Rock Lobbers (Orc crew)", perUnit: 80, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Stone Thrower with three Common Orc crewmen.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Common Orc crew",
+    },
+    {
+      id: "largerocklobbersgoblins", name: "Large Rock Lobbers (Goblin crew)", perUnit: 87.5, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Stone Thrower with three Common Goblin crewmen.",
+      extraCrewCost: 2.5, extraCrewMax: 2, extraCrewLabel: "extra Common Goblin crew",
+    },
+    {
+      id: "largerocklobbersorcs", name: "Large Rock Lobbers (Orc crew)", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Stone Thrower with three Common Orc crewmen.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Common Orc crew",
+    },
+    {
+      id: "goblindoomdivers", name: "Goblin Doom Divers", perUnit: 67.5, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "An endless supply of Common Goblins eager to fly (counts as three Goblin crew). Shoots like a large stone thrower but with a 2\" template; only the model dead-center of the template suffers a S10 hit (1D6 wounds, no save), others under the template take an ordinary S5 hit. Scatter/steering and misfire rules apply — see the book.",
+    },
+    {
+      id: "snotlingpumpwagons", name: "Snotling Pump Wagon", perUnit: 50, stat: "Snotling Base", kind: "quantity",
+      note: "A scythed light chariot crewed by Snotlings. Unbreakable, never causes panic if destroyed. Moves 3D6\" the first turn, 2D6\" afterward, self-directed each compulsory movement phase (scatters on a double/triple). Counts as charging on contact (disengages immediately if it hits a friendly unit); deals 2D6+2 S4 impact hits instead of the usual 1D6 for a light chariot.",
+    },
+  ],
+  specialCharacters: [
+    { id: "azhag", name: "Azhag the Slaughterer", cost: 450, stat: "Azhag the Slaughterer", role: "Common Orc Warlord",
+      note: "Wears light armour, carries a shield, rides a Wyvern. Wears the Crown of Sorcery, making him a level 3 wizard (Dark Magic) who may wear armour and still cast; he never needs to take Waaagh tests. No Orcs & Goblins regiment within 12\" of him needs to test animosity.", extraMagicItemSlots: 2 },
+    { id: "gorfang", name: "Gorfang Rotgut", cost: 90, stat: "Gorfang Rotgut", role: "Common Orc Hero",
+      note: "Hates Dwarfs — and so does any Common Orc regiment he joins (Big'uns included). Has the same mount/weapon/armour options as a normal Common Orc Hero.", extraMagicItemSlots: 2,
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 16 },
+        { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0 },
+        { id: "wyvern", name: "Wyvern", cost: 150 },
+      ] },
+    { id: "skarsnik", name: "Skarsnik, Warlord of the Eight Peaks", cost: 200, stat: "Skarsnik of the Eight Peaks", role: "Night Goblin Warlord",
+      note: "Always accompanied by Gobbla, a giant Cave Squig, who moves and fights alongside him (if Skarsnik dies, roll on the Monster Reaction Table for Gobbla; if acting alone Gobbla moves 2D6\"/turn). Carries Skarsnik's Prodder for free.", extraMagicItemSlots: 2 },
+    { id: "oglok", name: "Oglok the 'Orrible", cost: 85, stat: "Oglok the 'Orrible", role: "Common Orc Hero",
+      note: "Has the same mount/weapon/armour options as a normal Common Orc Hero.", extraMagicItemSlots: 2,
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 16 },
+        { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0 },
+        { id: "wyvern", name: "Wyvern", cost: 150 },
+      ] },
+    { id: "gorbad", name: "Gorbad Ironclaw", cost: 250, stat: "Gorbad Ironclaw", role: "Common Orc Warlord",
+      note: "Wears light armour, carries a shield and Morgor the Mangler. Rides a War Boar.", extraMagicItemSlots: 2 },
+    { id: "grom", name: "Grom the Paunch of Misty Mountain", cost: 225, stat: "Grom the Paunch", role: "Common Goblin Warlord",
+      note: "Regenerates on 4+. Wears light armour, carries a shield and the Axe of Grom. Rides a heavy scythed Wolf Chariot (100x75mm base) with three wolves and two Common Goblin crew besides Grom. A Common Goblin Battle Standard Bearer (Niblit) may join as a fourth crew member, purchased separately as normal.", extraMagicItemSlots: 2 },
+    { id: "morglum", name: "Morglum Necksnapper", cost: 175, stat: "Morglum Necksnapper", role: "Black Orc Warlord",
+      note: "Immune to psychology, as is any regiment he joins. Has the same mount/weapon/armour options as a normal Black Orc Warlord.", extraMagicItemSlots: 3,
+      mounts: [
+        { id: "boar", name: "War Boar", cost: 33 },
+        { id: "wyvern", name: "Wyvern", cost: 167 },
+      ] },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
-  { key: "orcsgoblins", name: "Orcs & Goblins" },
+  { key: "orcsgoblins", name: "Orcs & Goblins", data: ORCS_GOBLINS },
   { key: "dwarfs", name: "Dwarfs", data: DWARFS },
   { key: "skaven", name: "Skaven" },
   { key: "undead", name: "Undead" },
@@ -2645,7 +3346,7 @@ const FACTION_LIST = [
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
