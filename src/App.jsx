@@ -1853,22 +1853,22 @@ const CHAOS = {
     },
     {
       id: "daemonicchariotkhorne", name: "Daemonic Chariot of Khorne", perUnit: 90, stat: "Heavy Chariot", kind: "quantity",
-      statNote: "Heavy Chariot pulled by one Juggernaut of Khorne, crewed by two Bloodletters. 4+ Daemonic Save.",
+      note: "Heavy Chariot pulled by one Juggernaut of Khorne, crewed by two Bloodletters. 4+ Daemonic Save.",
       variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
     },
     {
       id: "daemonicchariotnurgle", name: "Daemonic Chariot of Nurgle", perUnit: 110, stat: "Heavy Chariot", kind: "quantity",
-      statNote: "Heavy Chariot pulled by one Beast of Nurgle, crewed by two Plaguebearers. 4+ Daemonic Save. Enemies suffer -1 to hit in melee against it.",
+      note: "Heavy Chariot pulled by one Beast of Nurgle, crewed by two Plaguebearers. 4+ Daemonic Save. Enemies suffer -1 to hit in melee against it.",
       variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
     },
     {
       id: "daemonicchariotslaanesh", name: "Daemonic Chariot of Slaanesh", perUnit: 130, stat: "Heavy Chariot", kind: "quantity",
-      statNote: "Heavy Chariot pulled by two Steeds of Slaanesh, crewed by two Daemonettes. 4+ Daemonic Save.",
+      note: "Heavy Chariot pulled by two Steeds of Slaanesh, crewed by two Daemonettes. 4+ Daemonic Save.",
       variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
     },
     {
       id: "daemonicchariottzeentch", name: "Daemonic Chariot of Tzeentch", perUnit: 150, stat: "Heavy Chariot", kind: "quantity",
-      statNote: "Heavy Chariot pulled by two Discs of Tzeentch, crewed by two Pink Horrors (don't split into Blue Horrors when slain in a chariot). Can fly, not fly high. 4+ Daemonic Save.",
+      note: "Heavy Chariot pulled by two Discs of Tzeentch, crewed by two Pink Horrors (don't split into Blue Horrors when slain in a chariot). Can fly, not fly high. 4+ Daemonic Save.",
       variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
     },
     {
@@ -2156,8 +2156,8 @@ const HIGH_ELVES = {
       ],
     },
     {
-      id: "dragonprincesdragons", name: "Dragon Princes on Dragons", perUnit: 225, stat: "Young Dragon", kind: "quantity",
-      statNote: "Rider: Supreme Elven Lord (lance, shield, Dragon Armour, 4+ save). Mount: Young Dragon (Red/White/Blue — see Dragon rules above). Not a character — follows ridden-monster rules; if the rider is slain, roll on the Monster Reaction Table (3D6).",
+      id: "dragonprincesdragons", name: "Dragon Princes on Dragons", perUnit: 225, stat: "Elven Prince", mountStat: "Dragon (High Elf)", mountLabel: "Young Dragon", kind: "quantity",
+      note: "Supreme Elven Lords with lances, shields, Dragon Armour (4+ save total) riding Young Dragons (Red/White/Blue — see Dragon rules above). Act as normal Monstrous Cavalry. Not a character — follows ridden-monster rules; if the rider is slain, roll on the Monster Reaction Table (3D6).",
     },
   ],
   specialCharacters: [
@@ -2666,14 +2666,16 @@ const BRETONNIA = {
       champion: { name: "The King's Champion", baseCost: 30, magicItemSlots: 1, stat: "The King's Champion", tags: ["knightly"] },
     },
     {
-      id: "chevaliersapied", name: "Chevaliers á Pied", perModel: 10, minSize: 5, statNote: "Knights with heavy armour and shields (on foot).", command: "standard", restriction: "0-1",
+      id: "chevaliersapied", name: "Chevaliers á Pied", perModel: 10, minSize: 5, stat: "Bretonnian Knight", command: "standard", restriction: "0-1",
+      note: "Knights with heavy armour and shields (on foot).",
       options: [
         { id: "dhw", group: null, label: "Swap shields for double handed weapons (+2pt/model)", cost: 2, per: "model" },
       ],
       champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
     },
     {
-      id: "chevaliersvolants", name: "Chevaliers Volants", perModel: 55, minSize: 3, statNote: "Flying monstrous regiment. Knights with heavy armour, shields, and lances, on Pegasi.", command: "monstrous", restriction: "0-1",
+      id: "chevaliersvolants", name: "Chevaliers Volants", perModel: 55, minSize: 3, stat: "Bretonnian Knight", mountStat: "Pegasus", mountLabel: "Pegasus", command: "monstrous", restriction: "0-1",
+      note: "Flying monstrous regiment. Knights with heavy armour, shields, and lances, on Pegasi.",
       champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
     },
     {
@@ -3135,8 +3137,8 @@ const ORCS_GOBLINS = {
       champion: { name: "Common Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Common Orc Champion", tags: ["commonOrc"] },
     },
     {
-      id: "orcboarboyz", name: "Orc Boar Boyz", perModel: 15, minSize: 5, statNote: "Common Orcs with light armour and shields on War Boars (barded-equivalent save with no movement penalty; can't be fast cavalry; boars grant +2S on the charge).", command: "standard",
-      note: "Ignore panic caused by Goblins.",
+      id: "orcboarboyz", name: "Orc Boar Boyz", perModel: 15, minSize: 5, stat: "Common Orc", mountStat: "War Boar", mountLabel: "War Boar", command: "standard",
+      note: "Common Orcs with light armour and shields on War Boars (barded-equivalent save with no movement penalty; can't be fast cavalry; boars grant +2S on the charge). Ignore panic caused by Goblins.",
       options: [
         { id: "spear", group: null, label: "Spears (+2pt/model)", cost: 2, per: "model" },
       ],
@@ -3164,8 +3166,8 @@ const ORCS_GOBLINS = {
       champion: { name: "Orc Big'un Champion", baseCost: 20, magicItemSlots: 1, stat: "Orc Big'un Champion", tags: ["commonOrc"] },
     },
     {
-      id: "orcbigunboarboyz", name: "Orc Big'un Boar Boyz", perModel: 18, minSize: 5, statNote: "Big'uns with light armour and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge).", command: "standard",
-      note: "Ignore panic caused by Goblins.",
+      id: "orcbigunboarboyz", name: "Orc Big'un Boar Boyz", perModel: 18, minSize: 5, stat: "Orc Big'un", mountStat: "War Boar", mountLabel: "War Boar", command: "standard",
+      note: "Big'uns with light armour and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge). Ignore panic caused by Goblins.",
       options: [
         { id: "spear", group: null, label: "Spears (+2pt/model)", cost: 2, per: "model" },
       ],
@@ -3188,8 +3190,8 @@ const ORCS_GOBLINS = {
       champion: { name: "Savage Orc Champion", baseCost: 30, magicItemSlots: 1, stat: "Savage Orc Champion", tags: ["savageOrc"] },
     },
     {
-      id: "savageorcboarboyz", name: "Savage Orc Boar Boyz", perModel: 20, minSize: 5, statNote: "Savage Orcs with magic tattoos and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge).", command: "standard",
-      note: "Frenzied; still ignore Goblin panic even without frenzy.",
+      id: "savageorcboarboyz", name: "Savage Orc Boar Boyz", perModel: 20, minSize: 5, stat: "Savage Orc", mountStat: "War Boar", mountLabel: "War Boar", command: "standard",
+      note: "Savage Orcs with magic tattoos and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge). Frenzied; still ignore Goblin panic even without frenzy.",
       options: [
         { id: "spear", group: null, label: "Spears (+3pt/model)", cost: 3, per: "model" },
         { id: "bows", group: null, label: "Bows (+2pt/model)", cost: 2, per: "model" },
@@ -3222,7 +3224,7 @@ const ORCS_GOBLINS = {
       champion: { name: "Common Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Common Goblin Champion", tags: ["commonGoblin"] },
     },
     {
-      id: "commongoblinwolfriders", name: "Common Goblin Wolf Riders", perModel: 9, minSize: 5, statNote: "Common Goblins on Giant Wolves.", command: "fastCavalry",
+      id: "commongoblinwolfriders", name: "Common Goblin Wolf Riders", perModel: 9, minSize: 5, stat: "Common Goblin", mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "fastCavalry",
       note: "Fear Elves unless outnumbering them two-to-one. Fast cavalry.",
       options: [
         { id: "spear", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
@@ -3233,8 +3235,8 @@ const ORCS_GOBLINS = {
       champion: { name: "Common Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Common Goblin Champion", tags: ["commonGoblin"] },
     },
     {
-      id: "forestgoblinspiderriders", name: "Forest Goblin Spider Riders", perModel: 8, minSize: 5, statNote: "Forest Goblins on Giant Spiders (poisonous +1S attacks, cross terrain freely).", command: "fastCavalry",
-      note: "Fear Elves unless outnumbering them two-to-one. Fast cavalry.",
+      id: "forestgoblinspiderriders", name: "Forest Goblin Spider Riders", perModel: 8, minSize: 5, stat: "Forest Goblin", mountStat: "Giant Spider", mountLabel: "Giant Spider", command: "fastCavalry",
+      note: "Forest Goblins on Giant Spiders (poisonous +1S attacks, cross terrain freely). Fear Elves unless outnumbering them two-to-one. Fast cavalry.",
       options: [
         { id: "spear", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
         { id: "shortbows", group: null, label: "Short bows (+1pt/model)", cost: 1, per: "model" },
@@ -3558,7 +3560,7 @@ const DOGS_OF_WAR = {
       champion: { name: "Elite Human Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["human"] },
     },
     {
-      id: "cavalryretainers", name: "Human Cavalry Retainers", perModel: 9, minSize: 5, stat: "State Trooper", command: "fastCavalry",
+      id: "cavalryretainers", name: "Human Cavalry Retainers", perModel: 9, minSize: 5, stat: "State Trooper", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry",
       note: "Human Mercenary Soldiers riding normal horses. Fast cavalry — lost if heavy armour is taken.",
       options: [
         { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat, free if heavy armour taken)", cost: 10, per: "flat" },
@@ -3573,7 +3575,8 @@ const DOGS_OF_WAR = {
       champion: { name: "Human Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion", tags: ["human"] },
     },
     {
-      id: "humanknights", name: "Human Knights", perModel: 20, minSize: 5, statNote: "Elite Human Soldiers with heavy armour, shields, and lances riding Warhorses.", command: "standard",
+      id: "humanknights", name: "Human Knights", perModel: 20, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse", command: "standard",
+      note: "Elite Human Soldiers with heavy armour, shields, and lances riding Warhorses.",
       options: [
         { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
       ],
@@ -3669,7 +3672,7 @@ const DOGS_OF_WAR = {
       note: "Regiment of Renown. Four Duelists plus Vespero their leader, all with an additional hand weapon, throwing knives, and a cloak (as light armour). Causes fear; must skirmish. Vespero may take two magic items.",
     },
     {
-      id: "oglahkhanwolfboyz", name: "Oglah Khan's Wolfboyz", stat: "Oglah Khan's Hobgoblin", command: "standard", restriction: "0-1",
+      id: "oglahkhanwolfboyz", name: "Oglah Khan's Wolfboyz", stat: "Oglah Khan's Hobgoblin", mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "standard", restriction: "0-1",
       tieredPricing: { baseCost: 145, baseSize: 4, extraPerModel: 17 },
       note: "Regiment of Renown. At least four Hobgoblins with a standard bearer and musician, plus Oglah Khan their leader, all riding Giant Wolves with spear, shield, light armour, and bow. While Oglah Khan lives, the regiment ignores animosity and quells it in nearby allied Orcs & Goblins. The regiment's banner, the Pelt of Wulfag, adds 1D6\" to overrun/pursuit moves; the regiment may skirmish but forfeits the banner if so. Oglah Khan may take two magic items, which may be from the Chaos Dwarfs army book (not modeled in this builder).",
     },
@@ -3923,7 +3926,7 @@ const CHAOS_DWARFS = {
       champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
     },
     {
-      id: "hobgoblinwolfriders", name: "Hobgoblin Wolf Riders", perModel: 11, minSize: 5, stat: "Hobgoblin (CD)", command: "fastCavalry", tags: ["hobgoblin"],
+      id: "hobgoblinwolfriders", name: "Hobgoblin Wolf Riders", perModel: 11, minSize: 5, stat: "Hobgoblin (CD)", mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "fastCavalry", tags: ["hobgoblin"],
       note: "Rides Giant Wolves. Fast cavalry. May skirmish if armed with bows/short bows.",
       options: [
         { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat)", cost: 10, per: "flat" },
@@ -4665,7 +4668,11 @@ function resolveUnitStat(kind, unit, def) {
     if (def.mountStat) return { ...base, mountStatKey: def.mountStat, charLabel: def.riderLabel || def.name, mountLabel: def.mountLabel || def.mountStat };
     return base;
   }
-  if (kind === "chariot") return { statKey: def.stat, statNote: null };
+  if (kind === "chariot") {
+    const base = { statKey: def.statNote ? null : def.stat, statNote: def.statNote || null };
+    if (def.mountStat) return { ...base, mountStatKey: def.mountStat, charLabel: def.riderLabel || def.name, mountLabel: def.mountLabel || def.mountStat };
+    return base;
+  }
   if (kind === "special") {
     const mount = def.mounts?.find((m) => m.id === unit.mountId);
     if (mount) return { statKey: def.stat, statNote: null, mountStatKey: mount.stat, charLabel: def.name, mountLabel: mount.name.replace(/\s*\([^)]*\)\s*$/, "") };
