@@ -3860,7 +3860,7 @@ const CHAOS_DWARFS = {
       options: [
         { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
         { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
-        { id: "fireglaives", group: null, label: "Fireglaives (Modern Stuff) — range 18\" S4 armour piercing, or +1S two-handed in melee (+5pt/model)", cost: 5, per: "model" },
+        { id: "fireglaives", group: null, label: "Fireglaives — range 18\" S4 armour piercing, or +1S two-handed in melee (+5pt/model)", cost: 5, per: "model", theme: "modern" },
       ],
       champion: { name: "Chaos Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Chaos Dwarf Champion", tags: ["chaosDwarf"] },
     },
@@ -3893,7 +3893,7 @@ const CHAOS_DWARFS = {
       id: "hobgoblinarchers", name: "Hobgoblin Archers", perModel: 5, minSize: 5, stat: "Hobgoblin (CD)", statNote: "Hobgoblin Warriors with bows.", command: "standard", tags: ["hobgoblin"],
       options: [
         { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
-        { id: "crossbows", group: null, label: "Upgrade bows to crossbows (Old School Addendum) (+2pt/model)", cost: 2, per: "model" },
+        { id: "crossbows", group: null, label: "Upgrade bows to crossbows (+2pt/model)", cost: 2, per: "model", theme: "oldschool" },
       ],
       champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
     },
@@ -5037,6 +5037,8 @@ function CharacterDetail({ def, unit, roster, updateUnit, armyData }) {
 
 function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
   const usedElsewhere = allUsedMagicItemIds(roster, unit.instanceId);
+  const currentTheme = roster.armyTheme || armyData.themes?.default || null;
+  const themeOptionVisible = (o) => !armyData.themes || !o.theme || o.theme === currentTheme;
 
   if (def.kind === "composite") {
     const comp = unit.composition || {};
@@ -5096,49 +5098,53 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       </div>
 
-      {(def.options || []).length > 0 && (
-        <div style={{ marginTop: 14 }}>
-          <span className="whr-label">Wargear</span>
-          {(() => {
-            const groups = {};
-            const singles = [];
-            def.options.forEach((o) => { if (o.group) { groups[o.group] = groups[o.group] || []; groups[o.group].push(o); } else singles.push(o); });
-            return (
-              <>
-                {Object.entries(groups).map(([g, opts]) => (
-                  <div key={g} style={{ marginBottom: 6 }}>
-                    {opts.map((o) => (
-                      <label key={o.id} className="whr-opt-row whr-opt-label">
+      {(() => {
+        const visibleOptions = (def.options || []).filter(themeOptionVisible);
+        if (visibleOptions.length === 0) return null;
+        return (
+          <div style={{ marginTop: 14 }}>
+            <span className="whr-label">Wargear</span>
+            {(() => {
+              const groups = {};
+              const singles = [];
+              visibleOptions.forEach((o) => { if (o.group) { groups[o.group] = groups[o.group] || []; groups[o.group].push(o); } else singles.push(o); });
+              return (
+                <>
+                  {Object.entries(groups).map(([g, opts]) => (
+                    <div key={g} style={{ marginBottom: 6 }}>
+                      {opts.map((o) => (
+                        <label key={o.id} className="whr-opt-row whr-opt-label">
+                          <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                            <input type="radio" name={`${g}-${unit.instanceId}`} checked={(gearSelections[g] || "") === o.id}
+                              onChange={() => updateUnit({ ...unit, gearSelections: { ...gearSelections, [g]: o.id } })} />
+                            {o.label}
+                          </span>
+                          <span className="whr-opt-cost">{o.cost ? `+${o.cost}/model` : "free"}</span>
+                        </label>
+                      ))}
+                      <label className="whr-opt-row whr-opt-label" style={{ fontSize: 13, color: "var(--ink-faint)" }}>
                         <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                          <input type="radio" name={`${g}-${unit.instanceId}`} checked={(gearSelections[g] || "") === o.id}
-                            onChange={() => updateUnit({ ...unit, gearSelections: { ...gearSelections, [g]: o.id } })} />
-                          {o.label}
+                          <input type="radio" name={`${g}-${unit.instanceId}`} checked={!gearSelections[g]} onChange={() => { const n = { ...gearSelections }; delete n[g]; updateUnit({ ...unit, gearSelections: n }); }} />
+                          None of the above (default)
                         </span>
-                        <span className="whr-opt-cost">{o.cost ? `+${o.cost}/model` : "free"}</span>
                       </label>
-                    ))}
-                    <label className="whr-opt-row whr-opt-label" style={{ fontSize: 13, color: "var(--ink-faint)" }}>
+                    </div>
+                  ))}
+                  {singles.map((o) => (
+                    <label key={o.id} className="whr-opt-row whr-opt-label">
                       <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <input type="radio" name={`${g}-${unit.instanceId}`} checked={!gearSelections[g]} onChange={() => { const n = { ...gearSelections }; delete n[g]; updateUnit({ ...unit, gearSelections: n }); }} />
-                        None of the above (default)
+                        <input type="checkbox" checked={!!gearSelections[o.id]} onChange={(e) => updateUnit({ ...unit, gearSelections: { ...gearSelections, [o.id]: e.target.checked } })} />
+                        {o.label}
                       </span>
+                      <span className="whr-opt-cost">{o.cost ? `+${o.cost}${o.per === "model" ? "/model" : ""}` : "free"}</span>
                     </label>
-                  </div>
-                ))}
-                {singles.map((o) => (
-                  <label key={o.id} className="whr-opt-row whr-opt-label">
-                    <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <input type="checkbox" checked={!!gearSelections[o.id]} onChange={(e) => updateUnit({ ...unit, gearSelections: { ...gearSelections, [o.id]: e.target.checked } })} />
-                      {o.label}
-                    </span>
-                    <span className="whr-opt-cost">{o.cost ? `+${o.cost}${o.per === "model" ? "/model" : ""}` : "free"}</span>
-                  </label>
-                ))}
-              </>
-            );
-          })()}
-        </div>
-      )}
+                  ))}
+                </>
+              );
+            })()}
+          </div>
+        );
+      })()}
 
       {def.command !== "none" && (
         <div style={{ marginTop: 14 }}>
@@ -5638,6 +5644,17 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
       const def = defs.find((d) => d.id === u.defId);
       return !def || !def.theme || def.theme === themeId;
     });
+    const stripThemedGear = (list, defs) => list.map((u) => {
+      const def = defs.find((d) => d.id === u.defId);
+      const themedOptions = (def?.options || []).filter((o) => o.theme && o.theme !== themeId);
+      if (themedOptions.length === 0 || !u.gearSelections) return u;
+      const gearSelections = { ...u.gearSelections };
+      themedOptions.forEach((o) => {
+        if (o.group) { if (gearSelections[o.group] === o.id) delete gearSelections[o.group]; }
+        else delete gearSelections[o.id];
+      });
+      return { ...u, gearSelections };
+    });
     const isRemoved = (list, defs) => {
       const u = list.find((x) => x.instanceId === selectedId);
       if (!u) return false;
@@ -5656,7 +5673,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
       ...r,
       armyTheme: themeId,
       characters: keep(r.characters, armyData.characters),
-      regiments: keep(r.regiments, armyData.regiments),
+      regiments: stripThemedGear(keep(r.regiments, armyData.regiments), armyData.regiments),
       chariots: keep(r.chariots, armyData.chariotsMonsters),
       specials: keep(r.specials, armyData.specialCharacters),
     }));
