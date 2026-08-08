@@ -538,6 +538,37 @@ const STATS = {
   "The Everqueen": { M: 5, WS: 10, BS: 10, S: 3, T: 4, W: 4, I: 10, A: 1, Ld: 10 },
   "Caradryan": { M: 5, WS: 6, BS: 5, S: 4, T: 3, W: 2, I: 7, A: 2, Ld: 9 },
   "Malhandir": { M: 10, WS: 4, BS: 0, S: 4, T: 3, W: 1, I: 5, A: 2, Ld: 7 },
+  // --- Dogs of War ---
+  "Human Mercenary Lord": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 10 },
+  "Ogre Mercenary Hero": { M: 6, WS: 5, BS: 4, S: 5, T: 6, W: 4, I: 5, A: 4, Ld: 8 },
+  "Norse Huscarls": { M: 4, WS: 5, BS: 3, S: 4, T: 3, W: 1, I: 4, A: 1, Ld: 7 },
+  "Norse Champion": { M: 4, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 7 },
+  "Marksmen of Miragliano": { M: 4, WS: 3, BS: 4, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Maximillian": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 7 },
+  "Long Drong's Pirate": { M: 4, WS: 4, BS: 3, S: 3, T: 4, W: 1, I: 2, A: 1, Ld: 9 },
+  "Long Drong": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 2, I: 4, A: 3, Ld: 10 },
+  "Birdman of Catrazza": { M: 4, WS: 4, BS: 4, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Dadallo": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 7 },
+  "Ruglud's Orc": { M: 4, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 2, A: 1, Ld: 7 },
+  "Ruglud": { M: 4, WS: 5, BS: 5, S: 4, T: 5, W: 2, I: 5, A: 3, Ld: 8 },
+  "Mengil's Dark Elf Shade": { M: 5, WS: 4, BS: 4, S: 3, T: 3, W: 1, I: 6, A: 1, Ld: 8 },
+  "Mengil Manhide": { M: 5, WS: 5, BS: 5, S: 4, T: 3, W: 1, I: 7, A: 2, Ld: 8 },
+  "Braganza's Besieger": { M: 4, WS: 3, BS: 4, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Braganza": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Vespero's Duelist": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 3, A: 1, Ld: 8 },
+  "Vespero": { M: 4, WS: 7, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Oglah Khan's Hobgoblin": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 6 },
+  "Oglah Khan": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 4, A: 3, Ld: 7 },
+  "Cursed Company Skeleton": { M: 4, WS: 2, BS: 2, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 5 },
+  "Richter Kreugar": { M: 4, WS: 5, BS: 0, S: 5, T: 5, W: 2, I: 5, A: 3, Ld: 9 },
+  "Leonardo da Miragliano": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 2, I: 4, A: 2, Ld: 7 },
+  "Lucrezzia Belladonna": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 3, I: 5, A: 2, Ld: 7 },
+  "Borgio the Besieger": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 10 },
+  "Myrdas the Mean": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Lorenzo Lupo": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 10 },
+  "Marco Colombo": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 10 },
+  "Asarnil the Dragonlord": { M: 5, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
+  "Asarnil's Dragon": { M: 6, WS: 6, BS: 0, S: 6, T: 6, W: 7, I: 8, A: 7, Ld: 7 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -3325,6 +3356,331 @@ const ORCS_GOBLINS = {
   ],
 };
 
+const DOGS_OF_WAR_MAGIC_ITEMS = [
+  // Human items (drawn from the Empire, Kislev, and Bretonnia army books — Kislev isn't modeled in this builder yet)
+  { id: "dow-swordofjustice", name: "Sword of Justice", cost: 50, cat: "weapon", desc: "Human only. Re-roll missed to-hit rolls. No armour save allowed.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-fearfrost", name: "Fearfrost", cost: 60, cat: "weapon", desc: "Human only. No armour save. 1 wound = 1D6 wounds.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-dragonbow", name: "Dragon Bow", cost: 25, cat: "weapon", desc: "Human only. Bow. Fires three magical shots per shooting phase, range 36\", S5.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-swordoflucan", name: "Sword of Lucan", cost: 65, cat: "weapon", desc: "Human only. No saves of any kind allowed (neither armour nor ward).", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-helmmandred", name: "Helm of Count Mandred", cost: 10, cat: "armour", desc: "Human only. Bearer hates Skaven, and Skaven fear the bearer. +1 armour save.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-armourtarnus", name: "Armour of Tarnus", cost: 25, cat: "armour", desc: "Human wizards only. Full plate armour — may cast while wearing it. Re-roll armour saves.", restrictedTo: [{ tags: ["human", "wizard"] }] },
+  { id: "dow-iconmagnus", name: "Icon of Magnus", cost: 10, cat: "enchanted", desc: "Human only. Bearer and bearer's regiment are immune to fear.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-talismanulric", name: "Talisman of Ulric", cost: 15, cat: "enchanted", desc: "Human only. Bearer recovers one wound at the start of each player turn.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-laurels", name: "Laurels of Victory", cost: 25, cat: "enchanted", desc: "Human only. Each wound scored by the bearer/mount in a challenge counts double toward combat resolution.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-ringofluccina", name: "Ring of Luccina", cost: 20, cat: "enchanted", desc: "Human only. The bearer and his regiment automatically succeed at any attempts to rally.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-shieldofmyrmidia", name: "Shield of Myrmidia", cost: 25, cat: "enchanted", desc: "Human only. All melee opponents attacking the bearer lose two attacks.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-acolytes", name: "Acolytes", cost: 10, cat: "arcane", desc: "Human wizards only, foot only. Casts one spell per phase for one less power card. Costs a magic item slot but can't be nullified.", restrictedTo: [{ tags: ["human", "wizard"] }] },
+  { id: "dow-antlertotem", name: "Antler Totem", cost: 15, cat: "arcane", desc: "Human wizards only. Wizard using Amber or Jade magic may choose spells.", restrictedTo: [{ tags: ["human", "wizard"] }] },
+  { id: "dow-devotion", name: "Standard of Devotion", cost: 20, cat: "banner", desc: "Human regiments only. The regiment is immune to panic.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-defiance", name: "Banner of Defiance", cost: 80, cat: "banner", desc: "Human regiments only. Double rank bonus (max +6). Never pursues, overruns, or flees voluntarily. Nullifies hatred/frenzy in the regiment.", restrictedTo: [{ tags: ["human"] }] },
+  // Sea Elf items (drawn from the High Elf army book)
+  { id: "dow-bowoldworld", name: "Bow of the Old-World Colonies", cost: 20, cat: "weapon", desc: "Sea Elf only. Longbow. May shoot as many shots as bearer has attacks, at bearer's strength.", restrictedTo: [{ tags: ["seaelf"] }] },
+  { id: "dow-moonbow", name: "Moonbow", cost: 40, cat: "weapon", desc: "Sea Elf only. Longbow. S6, no armour save, 1 wound=1D3. Penetrates like a bolt thrower shot.", restrictedTo: [{ tags: ["seaelf"] }] },
+  { id: "dow-armourcaledor", name: "Armour of Caledor", cost: 40, cat: "armour", desc: "Sea Elf only. Dragon Armour. +1 armour save, 5+ ward save. Immune to fire-based attacks.", restrictedTo: [{ tags: ["seaelf"] }] },
+  { id: "dow-goldencrown", name: "Golden Crown of Atrazar", cost: 100, cat: "armour", desc: "Sea Elf only. 3+ ward save.", restrictedTo: [{ tags: ["seaelf"] }] },
+  { id: "dow-stoneofmidnight", name: "Stone of Midnight", cost: 100, cat: "enchanted", desc: "Sea Elf only, foot only. Melee attacks against the bearer must re-roll successful to-hit and to-wound rolls.", restrictedTo: [{ tags: ["seaelf"] }] },
+  { id: "dow-cloakofstars", name: "Cloak of Stars", cost: 25, cat: "enchanted", desc: "Sea Elf only. Hits against the bearer have S reduced by 2. First spell cast directly at the bearer/regiment is auto-dispelled unless Total Power.", restrictedTo: [{ tags: ["seaelf"] }] },
+  { id: "dow-regalstandard", name: "Regal Standard", cost: 0, cat: "banner", desc: "Free. Sea Elf regiments only. May move and shoot bows/longbows without the -1 moving penalty.", restrictedTo: [{ tags: ["seaelf"] }] },
+  // Dwarf items (runic, drawn from the Dwarf army book)
+  { id: "dow-axeofgrimnir", name: "The Axe of Grimnir", cost: 100, cat: "weapon", desc: "Dwarf only. Always wounds on 2+. No armour save. 1 wound = 1D3 wounds (1D6 vs monstrous).", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-runestriking", name: "Rune of Striking", cost: 10, cat: "weapon", desc: "Dwarf only. Weapon Rune. +2 WS (may be taken more than once).", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-runefury", name: "Rune of Fury", cost: 10, cat: "weapon", desc: "Dwarf only. Weapon Rune. +1 attack (may be taken more than once).", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-runecleaving", name: "Rune of Cleaving", cost: 15, cat: "weapon", desc: "Dwarf only. Weapon Rune. +1 strength (may be taken more than once).", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-runesmiting", name: "Rune of Smiting", cost: 25, cat: "weapon", desc: "Dwarf only. Weapon Rune. 1 wound = 1D6 wounds.", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-mradamant", name: "Master Rune of Adamant", cost: 30, cat: "armour", desc: "Dwarf only. Master Armour Rune. +2 armour save.", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-runeiron", name: "Rune of Iron", cost: 30, cat: "armour", desc: "Dwarf only. Armour Rune. +1 toughness (may be taken more than once).", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-runeresistance", name: "Rune of Resistance", cost: 30, cat: "armour", desc: "Dwarf only. Armour Rune. 5+ ward save (4+ if taken twice; can't be taken thrice).", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-bugmanstankard", name: "Bugman's Tankard", cost: 10, cat: "enchanted", desc: "Dwarf only. The bearer or one model in his unit recovers one lost wound after a phase ends. Three uses.", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-goldensceptre", name: "Golden Sceptre of Nogrim", cost: 50, cat: "enchanted", desc: "Dwarf only. +1 armour save to the bearer and his unit.", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-runeluck", name: "Rune of Luck", cost: 20, cat: "enchanted", desc: "Dwarf only. Talismanic Rune. Re-roll one personal die roll, one use (may be taken several times).", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-runewarding", name: "Rune of Warding", cost: 25, cat: "banner", desc: "Dwarf only. Rune of Protection. Natural dispel 4+ (multiple instances: roll more dice, take highest).", restrictedTo: [{ tags: ["dwarf"] }] },
+  { id: "dow-runefear", name: "Rune of Fear", cost: 40, cat: "banner", desc: "Dwarf only. Rune of Protection. Causes fear.", restrictedTo: [{ tags: ["dwarf"] }] },
+  // Halfling items (drawn from the Empire army book)
+  { id: "dow-hallucent", name: "Icon of Magnus (Halfling)", cost: 10, cat: "enchanted", desc: "Halfling only. Bearer and bearer's regiment are immune to fear.", restrictedTo: [{ tags: ["halfling"] }] },
+  { id: "dow-hallucky", name: "Talisman of Ulric (Halfling)", cost: 15, cat: "enchanted", desc: "Halfling only. Bearer recovers one wound at the start of each player turn.", restrictedTo: [{ tags: ["halfling"] }] },
+];
+
+const DOGS_OF_WAR = {
+  key: "dogsofwar",
+  name: "Dogs of War",
+  tagline: "A mercenary brotherhood — every sword, spear, and cannon sold to the highest bidder",
+  magicItems: DOGS_OF_WAR_MAGIC_ITEMS,
+  armyWideRules: [
+    "A Dogs of War army fights for a mercenary Warlord based in the Old World, typically (but not necessarily) of Tilean origin. The General and the Paymaster must both be Human Characters, and the army must include at least one Human Regiment of Old World origin (this excludes Norse — Norsca isn't considered part of the Old World).",
+    "Human Old World Regiments are the mainstay: the number of such regiments caps the maximum number of any other single regiment type or war machine (e.g. two Human Old World regiments allow up to two Halfling Bowmen, up to two Cannons, and so on, each counted separately). This builder does not hard-enforce that cap — track it yourself.",
+    "Paymasters, not Battle Standard Bearers: the regiment containing the Paymaster (only one may be fielded) is unbreakable while he lives, and Dogs of War units within 12\" of him get +1 Ld. Unlike a BSB he suffers no equipment restrictions, but he can never be mounted.",
+    "Regimental Banners and Champion Items: a Sea Elf regiment's champion may take High Elf magic items/banners, Dwarfs may take Dwarf runic items, Halflings may take from the Empire, and Humans may take from the Empire, Kislev, and Bretonnia (items only, not Virtues). Only unit champions may take items from other army books — independent Dogs of War characters (Lord/Hero/Paymaster/Wizards) cannot, per the rules as written. The source text doesn't include a dedicated Dogs of War-only item list, so as a practical simplification this builder lets independent Human and Wizard characters draw from the same Human item pool as Human champions — adjust to taste if you're playing strictly RAW.",
+    "Ogre magic items (from the Ogre army book), Norse magic items (from the Norse army book), and Kislev magic items aren't modeled in this builder yet, since those army books aren't built out here. Ogre and Norse characters/champions have their magic item slots but no dedicated pool to pick from — track any such items on paper.",
+  ],
+  characters: [
+    {
+      id: "mercenarylord", name: "Human Mercenary Lord", cost: 110, stat: "Human Mercenary Lord", magicItemSlots: 3, tags: ["human"],
+      gearNote: "May take a shield and either light armour or heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
+      mounts: [
+        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 20, stat: "Warhorse" },
+        { id: "pegasus", name: "Pegasus", cost: 55, stat: "Pegasus" },
+      ],
+    },
+    {
+      id: "mercenaryhero", name: "Human Mercenary Hero", cost: 60, stat: "Empire Hero", magicItemSlots: 2, tags: ["human"],
+      gearNote: "May take a shield and either light armour or heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
+      mounts: [
+        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 15, stat: "Warhorse" },
+        { id: "pegasus", name: "Pegasus", cost: 50, stat: "Pegasus" },
+      ],
+    },
+    {
+      id: "ogremercenaryhero", name: "Ogre Mercenary Hero", cost: 171, stat: "Ogre Mercenary Hero", magicItemSlots: 2, tags: ["ogre"],
+      gearNote: "Your army must include an Ogre Mercenaries regiment to field this Hero (not hard-enforced by this builder — track it yourself). Ogres are monstrous models that cause fear. May take light armour or heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Halberd", "Flail", "Double handed weapon"] },
+    },
+    {
+      id: "paymaster", name: "Human Mercenary Paymaster", cost: 80, stat: "Empire BSB", magicItemSlots: 1, restriction: "0-1", tags: ["human"],
+      gearNote: "The Dogs of War equivalent of a Battle Standard Bearer: carries the Pay Chest. His regiment is unbreakable while he lives, and Dogs of War units within 12\" get +1 Ld. Suffers no restriction on equipment, but can never be mounted. May take a shield and either light armour or heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
+    },
+    {
+      id: "wizardlord", name: "Human Hireling Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4, tags: ["human", "wizard"],
+      gearNote: "May take College Magic. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+    {
+      id: "masterwizard", name: "Human Hireling Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3, tags: ["human", "wizard"],
+      gearNote: "May take College Magic. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+    {
+      id: "wizardchampion", name: "Human Hireling Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2, tags: ["human", "wizard"],
+      gearNote: "May take College Magic. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+    {
+      id: "wizard", name: "Human Hireling Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1, tags: ["human", "wizard"],
+      gearNote: "May take College Magic. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+  ],
+  regiments: [
+    {
+      id: "humanfoot", name: "Human Foot Soldiers", perModel: 5, minSize: 5, stat: "State Trooper", command: "standard",
+      note: "Human Mercenary Soldiers.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "ahw", group: "melee", label: "Additional hand weapon (+1pt/model)", cost: 1, per: "model" },
+        { id: "spears", group: "melee", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "halberds", group: "melee", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapon (+2pt/model)", cost: 2, per: "model" },
+        { id: "pikes", group: "melee", label: "Pikes (+3pt/model)", cost: 3, per: "model" },
+        { id: "longbows", group: "missile", label: "Longbows — light armour only, no other weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "crossbows", group: "missile", label: "Crossbows — light armour only, no other weapons (+4pt/model)", cost: 4, per: "model" },
+        { id: "handguns", group: "missile", label: "Hand guns — light armour only, no other weapons (+4pt/model)", cost: 4, per: "model" },
+        { id: "pavise", group: null, label: "Pavise for crossbowmen — 5+ save vs shooting (4+ combined with light armour) (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Human Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion", tags: ["human"] },
+    },
+    {
+      id: "elitehumanfoot", name: "Elite Human Foot Soldiers", perModel: 7, minSize: 5, stat: "Knight (Empire)", statNote: "Elite Human Mercenary Soldiers with light armour.", command: "standard",
+      options: [
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "heavyarmour", group: null, label: "Upgrade to heavy armour (+2pt/model)", cost: 2, per: "model" },
+        { id: "halberds", group: "melee", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+        { id: "pikes", group: "melee", label: "Pikes (+4pt/model)", cost: 4, per: "model" },
+      ],
+      champion: { name: "Elite Human Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["human"] },
+    },
+    {
+      id: "cavalryretainers", name: "Human Cavalry Retainers", perModel: 9, minSize: 5, stat: "State Trooper", statNote: "Human Mercenary Soldiers riding normal horses. Fast cavalry — lost if heavy armour is taken.", command: "fastCavalry",
+      options: [
+        { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat, free if heavy armour taken)", cost: 10, per: "flat" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "armour", group: "armour", label: "Light armour (+1pt/model)", cost: 1, per: "model" },
+        { id: "heavyarmour", group: "armour", label: "Heavy armour — loses fast cavalry (+4pt/model)", cost: 4, per: "model" },
+        { id: "spears", group: "melee", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "lances", group: "melee", label: "Lances (+3pt/model)", cost: 3, per: "model" },
+        { id: "bows", group: "missile", label: "Bows (+2pt/model)", cost: 2, per: "model" },
+        { id: "crossbows", group: "missile", label: "Crossbows (+4pt/model)", cost: 4, per: "model" },
+      ],
+      champion: { name: "Human Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion", tags: ["human"] },
+    },
+    {
+      id: "humanknights", name: "Human Knights", perModel: 20, minSize: 5, statNote: "Elite Human Soldiers with heavy armour, shields, and lances riding Warhorses.", command: "standard",
+      options: [
+        { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Elite Human Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["human"] },
+    },
+    {
+      id: "norsehuscarls", name: "Norse Huscarls", perModel: 8, minSize: 5, stat: "Norse Huscarls", statNote: "Huscarls with light armour. Fighting with shields, may form a Shieldwall as a charge reaction (-1 to hit the charging enemy; forfeits fighting with double handed weapons that combat).", command: "standard", tags: ["norse"],
+      options: [
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Norse Champion", baseCost: 20, magicItemSlots: 1, stat: "Norse Champion", tags: ["norse"] },
+    },
+    {
+      id: "seaelves", name: "Sea Elf Mercenaries", perModel: 10, minSize: 5, stat: "Elven Warriors (High Elf)", statNote: "Elven Warriors with light armour, shields, spear and bows.", command: "standard", tags: ["seaelf"],
+      options: [
+        { id: "longbows", group: null, label: "Upgrade bows to longbows (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Sea Elf Champion", baseCost: 20, magicItemSlots: 1, stat: "Knightly Champion", tags: ["seaelf"] },
+    },
+    {
+      id: "halflingmilitia", name: "Halfling Militia", perModel: 2.5, minSize: 5, stat: "Halfling", statNote: "Halflings with light armour and shields. Foresters — move through woods without penalty.", command: "standard", tags: ["halfling"],
+      options: [
+        { id: "spears", group: null, label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion", tags: ["halfling"] },
+    },
+    {
+      id: "halflingbowmen", name: "Halfling Bowmen", perModel: 7, minSize: 5, stat: "Halfling", statNote: "Halflings with bows. May skirmish; foresters even if not skirmishing.", command: "skirmisher", tags: ["halfling"],
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion", tags: ["halfling"] },
+    },
+    {
+      id: "ogremercenaries", name: "Ogre Mercenaries", perModel: 24, minSize: 3, stat: "Ogre", statNote: "Ogres with light armour. Monstrous models that cause fear.", command: "monstrous", tags: ["ogre"],
+      options: [
+        { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat)", cost: 10, per: "flat" },
+        { id: "heavyarmour", group: null, label: "Swap light for heavy armour (+4pt/model)", cost: 4, per: "model" },
+        { id: "ahw", group: "melee", label: "Additional hand weapons (+6pt/model)", cost: 6, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons or flails (+8pt/model)", cost: 8, per: "model" },
+      ],
+      champion: { name: "Ogre Champion", baseCost: 50, magicItemSlots: 1, stat: "Ogre Champion", tags: ["ogre"] },
+    },
+    {
+      id: "dwarfmercenaries", name: "Dwarf Mercenary Warriors", perModel: 8, minSize: 5, stat: "Dwarf Soldier", statNote: "Dwarfs with light armour.", command: "standard", tags: ["dwarf"],
+      options: [
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "heavyarmour", group: null, label: "Swap light for heavy armour (+2pt/model)", cost: 2, per: "model" },
+        { id: "spears", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+        { id: "crossbows", group: "missile", label: "Crossbows or hand guns — only if taking no other weapons/shields (+4pt/model)", cost: 4, per: "model" },
+      ],
+      champion: { name: "Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Dwarf Champion", tags: ["dwarf"] },
+    },
+    // --- Regiments of Renown: unique regiments, one of each per army, come with their leader baked into the base cost ---
+    {
+      id: "marksmenmiragliano", name: "Marksmen of Miragliano", stat: "Marksmen of Miragliano", command: "standard", restriction: "0-1",
+      tieredPricing: { baseCost: 130, baseSize: 9, extraPerModel: 11 },
+      note: "Regiment of Renown. At least nine Marksmen with a standard bearer and musician, plus Maximillian their leader (a Human Champion, may take one magic item), all with crossbows. Base cost includes the standard/musician and Maximillian; extra models beyond the first nine are bought at the per-model rate.",
+    },
+    {
+      id: "longdrongpirates", name: "Long Drong Slayer's Pirates", stat: "Long Drong's Pirate", command: "standard", restriction: "0-1", tags: ["dwarf"],
+      tieredPricing: { baseCost: 195, baseSize: 9, extraPerModel: 15 },
+      note: "Regiment of Renown. At least nine Dwarf Pirates with a standard bearer and musician, plus Long Drong their leader, all with two pistols. Follow all Dwarf rules; as Slayers they're unbreakable and wound on 4+ or better regardless of toughness (except with pistols). Long Drong may take one magic weapon, which may be a Dwarf runic item.",
+    },
+    {
+      id: "birdmencatrazza", name: "The Birdmen of Catrazza", stat: "Birdman of Catrazza", command: "skirmisher", restriction: "0-1",
+      tieredPricing: { baseCost: 95, baseSize: 2, extraPerModel: 25 },
+      note: "Regiment of Renown. At least two Birdmen plus Dadallo their leader, all with crossbows. Fly and must skirmish; may shoot while flying (not on a ground move), and may shoot other units flying high while flying high themselves. Dadallo may take one magic item.",
+    },
+    {
+      id: "rugludsarmouredorcs", name: "Ruglud's Armoured Orcs", stat: "Ruglud's Orc", command: "standard", restriction: "0-1",
+      tieredPricing: { baseCost: 177, baseSize: 9, extraPerModel: 13 },
+      note: "Regiment of Renown. At least nine Orcs with a standard bearer and musician, plus Ruglud their leader, all with heavy armour, halberd, and crossbow. Subject to animosity. Ruglud may take two magic items, which may be Orcs-only items from the Orcs & Goblins army book.",
+    },
+    {
+      id: "mengilcompany", name: "Mengil Manhide's Dark Elf Company", stat: "Mengil's Dark Elf Shade", command: "skirmisher", restriction: "0-1",
+      tieredPricing: { baseCost: 110, baseSize: 4, extraPerModel: 18 },
+      note: "Regiment of Renown. At least four Dark Elf Shades plus Mengil Manhide their leader, all with light armour, repeating crossbow, and an additional hand weapon. Hate High Elves; may skirmish and scout. High Elves will never fight alongside Mengil's company. Mengil may take one Dark Elf-only magic item from the Dark Elves army book.",
+    },
+    {
+      id: "braganzasbesiegers", name: "Braganza's Besiegers", stat: "Braganza's Besieger", command: "standard", restriction: "0-1",
+      tieredPricing: { baseCost: 186, baseSize: 9, extraPerModel: 14 },
+      note: "Regiment of Renown. At least nine Besiegers with a standard bearer and musician, plus Braganza their leader, all with crossbow, heavy armour, and a pavise (3+ save vs shooting, 5+ vs melee). Braganza may take two magic items.",
+    },
+    {
+      id: "vesperosvendetta", name: "Vespero's Vendetta", stat: "Vespero's Duelist", command: "skirmisher", restriction: "0-1",
+      tieredPricing: { baseCost: 120, baseSize: 4, extraPerModel: 15 },
+      note: "Regiment of Renown. Four Duelists plus Vespero their leader, all with an additional hand weapon, throwing knives, and a cloak (as light armour). Causes fear; must skirmish. Vespero may take two magic items.",
+    },
+    {
+      id: "oglahkhanwolfboyz", name: "Oglah Khan's Wolfboyz", stat: "Oglah Khan's Hobgoblin", command: "standard", restriction: "0-1",
+      tieredPricing: { baseCost: 145, baseSize: 4, extraPerModel: 17 },
+      note: "Regiment of Renown. At least four Hobgoblins with a standard bearer and musician, plus Oglah Khan their leader, all riding Giant Wolves with spear, shield, light armour, and bow. While Oglah Khan lives, the regiment ignores animosity and quells it in nearby allied Orcs & Goblins. The regiment's banner, the Pelt of Wulfag, adds 1D6\" to overrun/pursuit moves; the regiment may skirmish but forfeits the banner if so. Oglah Khan may take two magic items, which may be from the Chaos Dwarfs army book (not modeled in this builder).",
+    },
+    {
+      id: "cursedcompany", name: "The Cursed Company", stat: "Cursed Company Skeleton", command: "standard", restriction: "0-1", tags: ["undead"],
+      tieredPricing: { baseCost: 145, baseSize: 9, extraPerModel: 7 },
+      note: "Regiment of Renown. At least nine Skeletons with a standard bearer and musician, plus Richter Kreugar their leader (follows Wight rules), all with heavy armour and halberd. Ordinary troops follow Skeleton rules. May march normally; the whole regiment crumbles to dust if Kreugar is slain. Kreugar may take two magic items besides his Wight Blade, which may be Undead-only items from the Undead army book (not modeled in this builder).",
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "boltthrowers", name: "Bolt Throwers", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Crewed by three Human Mercenary Soldiers.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Human Mercenary Soldier crew",
+    },
+    {
+      id: "smallstonethrowers", name: "Small Stone Throwers", perUnit: 80, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Crewed by three Human Mercenary Soldiers.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Human Mercenary Soldier crew",
+    },
+    {
+      id: "largestonethrowers", name: "Large Stone Throwers", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Crewed by three Human Mercenary Soldiers.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Human Mercenary Soldier crew",
+    },
+    {
+      id: "cannons", name: "Cannons", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Normal cannon crewed by three Human Mercenary Soldiers.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Human Mercenary Soldier crew",
+    },
+    {
+      id: "gallopergun", name: "Galloper Guns", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Small cannon crewed by three Human Mercenary Soldiers and a horse. Unlike normal war machines, the crew may flee with the gun and may march. The horse only raises movement to 8\".",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Human Mercenary Soldier crew",
+    },
+    {
+      id: "halflinghotpot", name: "Halfling Hot-Pot", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
+      note: "Requires a Halfling regiment in the army. Shoots like a stone thrower, range 36\", S5, allows normal armour save but no regeneration. Cannot enter a wood (it's a war machine, unlike its foresting crew). Crewed by three Halflings.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Halfling crew",
+    },
+  ],
+  specialCharacters: [
+    { id: "leonardo", name: "Leonardo da Miragliano", cost: 100, stat: "Leonardo da Miragliano", role: "Hero",
+      note: "While in the army, all war machines may re-roll misfires, and all bolt throwers may re-roll failed to-hit rolls. Rides a Warhorse.",
+      items: "Carries three scientific items: the Sphere of Alchemy (thrown weapon, BS to hit, range 6\", no long-range penalty; on a hit, a 3\" template — models more than half under it suffer a S3 hit with no armour save — one use), the Prism of Power (each enemy magic phase, they lose a random magic card on a 4+), and the Compass of Meteoric Silver (at battle start, the enemy must reveal the model carrying their single most expensive magic item)." },
+    { id: "borgio", name: "Borgio the Besieger", cost: 150, stat: "Borgio the Besieger", role: "Lord",
+      note: "Rides a barded Warhorse, heavy armour, lance, shield. May take a 4+ ward save against losing his last wound.",
+      items: "Carries the Monstrous Mask Helm (causes fear), the Mace of Might (natural 6s to hit strike at S10), and the Armour of Brazen Bronze (his armour save can never be reduced except by save-ignoring weapons — he always saves on 5+ or better)." },
+    { id: "lucrezzia", name: "Lucrezzia Belladonna", cost: 250, stat: "Lucrezzia Belladonna", role: "Master Wizard",
+      note: "All friendly units within 8\" auto-pass rally tests (as long as she isn't fleeing). Rides a Warhorse.",
+      items: "Carries three poisonous items: the Phial of Poison (before battle, roll for each enemy character cheapest-to-most-expensive — the first to roll a 1 suffers two wounds, no save), the Poisoned Stiletto (all successful hits wound automatically), and the Potion of Pavona (usable on any friendly character before battle, or drunk by Lucrezzia — +1D6 to one characteristic for the game, but a roll of 1 also inflicts a wound with no save)." },
+    { id: "myrdas", name: "Myrdas the Mean and Sheik Yadosh", cost: 200, stat: "Myrdas the Mean", role: "Paymaster (200pts for Myrdas, Sheik Yadosh, and five Bodyguards)",
+      note: "Myrdas the Mean is always accompanied by Sheik Yadosh (stats as a normal Human Mercenary Soldier, 5+ armour save) and five Bodyguards with halberds and light armour (stats as Elite Human Mercenary Soldiers). Extra Bodyguards cost +8pts/model. Myrdas wears heavy armour and a shield (4+ save) and carries the pay chest. He also carries a treasure map: after deployment but before battle, roll 1D6 — 1-2: bodyguards get +1 to hit; 3-4: the pay chest's aura increases to 18\"; 5-6: all Dogs of War regiments get +1 combat resolution." },
+    { id: "lorenzo", name: "Lorenzo Lupo", cost: 250, stat: "Lorenzo Lupo", role: "Lord",
+      note: "Inspiring leader — any regiment he leads gets +1 combat resolution. A mighty Athlete — before battle roll 1D6: 1-2 = +1T, 3-4 = +1A, 5-6 = +1S. Comes with heavy armour and a shield.",
+      items: "Carries the Sword of Lucan (no saves of any kind allowed), the Ring of Luccina (he and his regiment auto-pass rally attempts), and the Shield of Myrmidia (melee opponents attacking him lose two attacks)." },
+    { id: "marco", name: "Marco Colombo", cost: 120, stat: "Marco Colombo", role: "Lord",
+      note: "Rides a Warhorse; light armour, lance, shield, and a crossbow he can fire even after moving (as a normal bow). His high-power telescope spots all hidden assassins, fanatics, Wood Elf Way Watchers, and other hidden enemies, which must be revealed before battle begins.",
+      items: "Carries the Gem of Lustria (re-roll one failed armour save each melee phase), the Gourd of Lustrian Wine (drink before a Strength test or to-wound roll for +1D6 S, one use), and the Scroll of Araby (4+ natural dispel, one use)." },
+    { id: "asarnil", name: "Asarnil the Dragonlord", cost: 450, stat: "Asarnil the Dragonlord", role: "High Elf Hero",
+      note: "Will never fight alongside Dark Elves; becomes resolute when fighting a Dark Elf army. Wears heavy Dragon Armour (immune to fire) and a shield, wields a lance. Rides a Dragon (player's choice of red/white/blue — takes Monster Reaction tests on 3D6). Enemy Dragons must pass an Ld test at the start of the engagement or won't strike any creature in it unless attacked first.",
+      items: "Wears the Amulet of the Dragonheart (reduces the WS of any enemy in base contact to 1).",
+      mounts: [
+        { id: "dragon", name: "Dragon (red/white/blue — breathes fire/frost/lightning respectively)", cost: 0, stat: "Asarnil's Dragon" },
+      ] },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
@@ -3338,7 +3694,7 @@ const FACTION_LIST = [
   { key: "darkelves", name: "Dark Elves" },
   { key: "bretonnia", name: "The Grand Army of Bretonnia", data: BRETONNIA },
   { key: "lizardmen", name: "Lizardmen" },
-  { key: "dogsofwar", name: "Dogs of War" },
+  { key: "dogsofwar", name: "Dogs of War", data: DOGS_OF_WAR },
   { key: "halflings", name: "Halflings of the Moot" },
   { key: "ogres", name: "Ogre Mercenaries" },
   { key: "kislev", name: "Kislev" },
@@ -3346,7 +3702,7 @@ const FACTION_LIST = [
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
