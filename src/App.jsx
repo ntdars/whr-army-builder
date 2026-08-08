@@ -407,6 +407,29 @@ const STATS = {
   "Ku'Gath Plaguefather": { M: 4, WS: 7, BS: 7, S: 7, T: 8, W: 10, I: 4, A: 7, Ld: 10 },
   "The Masque of Slaanesh": { M: 5, WS: 7, BS: 7, S: 5, T: 3, W: 2, I: 7, A: 4, Ld: 8 },
   "Belakor": { M: 6, WS: 7, BS: 7, S: 6, T: 5, W: 4, I: 8, A: 5, Ld: 10 },
+  "Dwarf Lord": { M: 4, WS: 7, BS: 6, S: 4, T: 5, W: 3, I: 5, A: 4, Ld: 11 },
+  "Dwarf Hero": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 2, I: 4, A: 3, Ld: 10 },
+  "Dwarf BSB": { M: 4, WS: 5, BS: 4, S: 4, T: 4, W: 2, I: 3, A: 2, Ld: 9 },
+  "Daemon Slayer": { M: 4, WS: 7, BS: 6, S: 4, T: 5, W: 3, I: 5, A: 4, Ld: 11 },
+  "Dragon Slayer": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 2, I: 4, A: 3, Ld: 10 },
+  "Runelord": { M: 4, WS: 8, BS: 6, S: 5, T: 6, W: 4, I: 5, A: 2, Ld: 11 },
+  "Master Runesmith": { M: 4, WS: 7, BS: 5, S: 4, T: 6, W: 3, I: 4, A: 2, Ld: 10 },
+  "Runesmith": { M: 4, WS: 6, BS: 4, S: 4, T: 5, W: 2, I: 3, A: 2, Ld: 9 },
+  "Dwarf Soldier": { M: 4, WS: 4, BS: 3, S: 3, T: 4, W: 1, I: 2, A: 1, Ld: 9 },
+  "Troll Slayer": { M: 4, WS: 4, BS: 3, S: 3, T: 4, W: 1, I: 2, A: 1, Ld: 9 },
+  "Dwarf Elite Soldier": { M: 4, WS: 5, BS: 3, S: 4, T: 4, W: 1, I: 3, A: 1, Ld: 9 },
+  "Dwarf Champion": { M: 4, WS: 5, BS: 4, S: 4, T: 4, W: 1, I: 3, A: 2, Ld: 9 },
+  "Giant Slayer": { M: 4, WS: 5, BS: 4, S: 4, T: 4, W: 1, I: 3, A: 2, Ld: 9 },
+  "Dwarf Commander": { M: 4, WS: 6, BS: 4, S: 4, T: 4, W: 1, I: 4, A: 2, Ld: 10 },
+  "Gyrocopter": { M: 20, WS: 4, BS: 3, S: 3, T: 4, W: 4, I: 2, A: 1, Ld: 9 },
+  "King Kazador of Karak Azul": { M: 4, WS: "7 (+2 from Hammer)", BS: 6, S: "5 (+1 from Hammer)", T: 5, W: 3, I: 5, A: 4, Ld: 11 },
+  "Ungrim Ironfist": { M: 4, WS: 7, BS: 6, S: "4 (+1 from Axe)", T: "5 (+1 from Crown)", W: 3, I: 5, A: 4, Ld: 11 },
+  "Runelord Kragg the Grim": { M: 4, WS: 8, BS: 6, S: "5 (10 w/ Hammer)", T: 6, W: 4, I: 5, A: "2 (+1 from Hammer)", Ld: 11 },
+  "Gotrek Gurnisson": { M: 4, WS: 8, BS: 6, S: 4, T: 5, W: 3, I: 5, A: 4, Ld: 11 },
+  "Felix Jaeger": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 3, I: 5, A: 3, Ld: 8 },
+  "High King Thorgrim Grudgebearer": { M: 4, WS: 7, BS: 6, S: 4, T: 5, W: 3, I: 5, A: 4, Ld: 11 },
+  "Josef Bugman": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 2, I: 4, A: 3, Ld: 10 },
+  "Burlok Dammnison": { M: 4, WS: 6, BS: 1, S: 7, T: 5, W: 3, I: 4, A: 3, Ld: 10 },
   "Elven Prince": { M: 5, WS: 7, BS: 7, S: 4, T: 4, W: 3, I: 9, A: 4, Ld: 10 },
   "Elven Hero (High Elf)": { M: 5, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
   "Elven BSB (High Elf)": { M: 5, WS: 5, BS: 5, S: 4, T: 3, W: 2, I: 7, A: 2, Ld: 8 },
@@ -462,7 +485,7 @@ const WOOD_ELVES_MAGIC_ITEMS = [
   { id: "sp-netlings", name: "An Annoyance of Netlings", cost: 50, cat: "sprite", desc: "In a challenge, bearer can only be hit on natural 6s." },
   { id: "sp-despairs", name: "A Lamentation of Despairs", cost: 60, cat: "sprite", desc: "Bound spell, one use. One model anywhere tests LD or suffers 1D6 wounds, no save, no LoS required." },
 ];
-const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners" };
+const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners", engineering: "Engineering Runes" };
 const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 /* ============================================================================
@@ -2005,11 +2028,292 @@ const HIGH_ELVES = {
   ],
 };
 
+const DWARF_MAGIC_ITEMS = [
+  { id: "dw-redaxe", name: "Red Axe of Karak Eight Peaks", cost: 10, cat: "weapon", desc: "Double handed weapon. Not truly magical — can't be destroyed/nullified. Bearer hates Orcs & Goblins and Skaven; re-rolls to-hit against them every round, not just the first." },
+  { id: "dw-axequeenhelga", name: "Axe of Queen Helga", cost: 10, cat: "weapon", desc: "Double wounds against the first character hit (lasts the whole game)." },
+  { id: "dw-axeofgrimnir", name: "The Axe of Grimnir", cost: 100, cat: "weapon", desc: "Always wounds on 2+. No armour save. 1 wound = 1D3 wounds (1D6 vs monstrous regiments/characters)." },
+  { id: "dw-mrflight", name: "Master Rune of Flight", cost: 20, cat: "weapon", desc: "Master Weapon Rune. Thrown up to 12\", auto-hits, returns to hand. May stand & shoot as a charge reaction and target characters in regiments." },
+  { id: "dw-mrsnorri", name: "Snorri Spangelhelm's Master Rune", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Hits automatically." },
+  { id: "dw-mrskalf", name: "Skalf Blackhammer's Master Rune", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Wounds automatically." },
+  { id: "dw-mralaric", name: "Alaric the Mad's Master Rune", cost: 30, cat: "weapon", desc: "Master Weapon Rune. No armour save." },
+  { id: "dw-mrtrygg", name: "Master Rune of Trygg Trollslayer", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Bearer hates Trolls; against Trolls, one wound kills (no regeneration)." },
+  { id: "dw-mrangrim", name: "Master Rune of Angrim Redbeard", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Daemons, one wound kills." },
+  { id: "dw-mrhaki", name: "Master Rune of Haki Skullsplitter", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Skaven and Beastmen (Ungors/Gors/Bestigors/Centigors/Minotaurs), one wound kills." },
+  { id: "dw-mrbaldrik", name: "Master Rune of Baldrik the Bad", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Elves and Dragons of all kinds, one wound kills." },
+  { id: "dw-mreric", name: "Master Rune of Eric Cleric", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Undead, one wound kills." },
+  { id: "dw-mrdeath", name: "Master Rune of Death", cost: 60, cat: "weapon", desc: "Master Weapon Rune. All wounds kill." },
+  { id: "dw-runefire", name: "Rune of Fire", cost: 10, cat: "weapon", desc: "Weapon Rune. Flaming attacks." },
+  { id: "dw-runestriking", name: "Rune of Striking", cost: 10, cat: "weapon", desc: "Weapon Rune. +2 WS (can be taken several times)." },
+  { id: "dw-runeswiftness", name: "Rune of Swiftness", cost: 10, cat: "weapon", desc: "Weapon Rune. Always strikes first." },
+  { id: "dw-runeparrying", name: "Rune of Parrying", cost: 10, cat: "weapon", desc: "Weapon Rune. One enemy in base contact has -1 attack (all of them if taken twice)." },
+  { id: "dw-runefury", name: "Rune of Fury", cost: 10, cat: "weapon", desc: "Weapon Rune. +1 attack (can be taken several times)." },
+  { id: "dw-runecutting", name: "Rune of Cutting", cost: 10, cat: "weapon", desc: "Weapon Rune. -1 armour save (can be taken several times)." },
+  { id: "dw-runemight", name: "Rune of Might", cost: 15, cat: "weapon", desc: "Weapon Rune. Double strength vs enemies with equal or higher toughness than the bearer's." },
+  { id: "dw-runecleaving", name: "Rune of Cleaving", cost: 15, cat: "weapon", desc: "Weapon Rune. +1 strength (can be taken several times)." },
+  { id: "dw-runesmiting", name: "Rune of Smiting", cost: 25, cat: "weapon", desc: "Weapon Rune. 1 wound = 1D6 wounds (multiple instances: roll more dice, take the highest)." },
+  { id: "dw-armourofskaldour", name: "Armour of Skaldour", cost: 80, cat: "armour", desc: "Gromril armour. 2+ save (unmodifiable). 4+ ward save. Immune to fire-based attacks." },
+  { id: "dw-mradamant", name: "Master Rune of Adamant", cost: 30, cat: "armour", desc: "Master Armour Rune. +2 armour save." },
+  { id: "dw-mrgromril", name: "Master Rune of Gromril", cost: 100, cat: "armour", desc: "Master Armour Rune. Toughness 10." },
+  { id: "dw-runestone", name: "Rune of Stone", cost: 10, cat: "armour", desc: "Armour Rune. +1 armour save (can be taken several times)." },
+  { id: "dw-runefortitude", name: "Rune of Fortitude", cost: 20, cat: "armour", desc: "Armour Rune. +1 wound (can be taken several times)." },
+  { id: "dw-runeiron", name: "Rune of Iron", cost: 30, cat: "armour", desc: "Armour Rune. +1 toughness (can be taken several times)." },
+  { id: "dw-runeresistance", name: "Rune of Resistance", cost: 30, cat: "armour", desc: "Armour Rune. 5+ ward save (4+ if taken twice; can't be taken thrice)." },
+  { id: "dw-runespelleating", name: "Rune of Spell Eating", cost: 60, cat: "armour", desc: "Armour Rune. Natural dispel 3+; dispelled spells are destroyed on 3+ (multiple instances: roll more dice, take highest)." },
+  { id: "dw-bugmanstankard", name: "Bugman's Tankard", cost: 10, cat: "enchanted", desc: "The bearer or one model in his unit recovers one lost wound after a phase ends. Doesn't work on dead models. Three uses." },
+  { id: "dw-dragoncrown", name: "Dragon Crown of Karaz", cost: 25, cat: "enchanted", desc: "Dwarf Lord only. Bearer and his unit are immune to psychology.", restrictedTo: [{ tags: ["dwarfLord"] }] },
+  { id: "dw-fieryring", name: "Firery Ring of Thori", cost: 25, cat: "enchanted", desc: "After a normal move, creates a wall of flame around the bearer's unit (can't shoot but can be shot at; nothing can charge it). Lasts until the Dwarf player's next turn. Models entering it by accident are destroyed. One use." },
+  { id: "dw-greatbookgrudges", name: "Great Book of Grudges", cost: 50, cat: "enchanted", desc: "Dwarf Lord only. Bearer and his unit hate all enemies.", restrictedTo: [{ tags: ["dwarfLord"] }] },
+  { id: "dw-goldensceptre", name: "Golden Sceptre of Nogrim", cost: 50, cat: "enchanted", desc: "+1 armour save to the bearer and his unit." },
+  { id: "dw-mrdismay", name: "Master Rune of Dismay", cost: 25, cat: "enchanted", desc: "Talismanic Master Rune, must be on a war horn. One use. Sound it at the start of an enemy turn — all enemy units test Ld (unless immune to psychology) or can't charge that turn." },
+  { id: "dw-mrdisdain", name: "Master Runes of Disdain", cost: 50, cat: "enchanted", desc: "Talismanic Master Rune. Dispels and destroys a spell cast at the bearer or his unit. One use." },
+  { id: "dw-mrspite", name: "Master Rune of Spite", cost: 50, cat: "enchanted", desc: "Talismanic Master Rune. Ward save with a twist — rebounds wounds on 5+ (only unmodified saves apply to rebounded wounds)." },
+  { id: "dw-runeluck", name: "Rune of Luck", cost: 20, cat: "enchanted", desc: "Talismanic Rune. Re-roll one personal die roll, one use (may be taken several times)." },
+  { id: "dw-runespellbreaking", name: "Rune of Spellbreaking", cost: 25, cat: "enchanted", desc: "Talismanic Rune, Runesmiths only. Works exactly as a Dispel Magic Scroll. Max two per army (one if using the 'Veto One Spell' house rule).", restrictedTo: [{ tags: ["dwarfRunesmith"] }] },
+  { id: "dw-mrstubbornness", name: "Master Rune of Sheer Damn Stubbornness", cost: 10, cat: "banner", desc: "Master Rune of Protection, BSB only. Unbreakable." },
+  { id: "dw-mrchallenge", name: "Master Rune of Challenge", cost: 10, cat: "banner", desc: "Master Rune of Protection, BSB only. An enemy that could charge this regiment must pass an Ld test on 3D6 (2D6 if immune to psychology) or is forced to charge it." },
+  { id: "dw-mrbattle", name: "Master Rune of Battle", cost: 75, cat: "banner", desc: "Master Rune of Protection, BSB only. The regiment adds 1D6 to combat resolution." },
+  { id: "dw-mrstromni", name: "Master Rune of Stromni Redbeard", cost: 75, cat: "banner", desc: "Master Rune of Protection, BSB only. All friendly Dwarf units within 12\" add +1 to combat resolution." },
+  { id: "dw-mrgroth", name: "Master Rune of Groth One-Eye", cost: 125, cat: "banner", desc: "Master Rune of Protection, BSB only. All friendly Dwarf units within 12\" take Ld/break tests without modifiers." },
+  { id: "dw-mrvalaya", name: "Master Rune of Valaya", cost: 150, cat: "banner", desc: "Master Rune of Protection, BSB only. Natural dispel 4+ against all spells on the battlefield (incl. allied wizards/Anvil of Doom); remains-in-play spells auto-dispel at end of magic phase." },
+  { id: "dw-runecourage", name: "Rune of Courage", cost: 10, cat: "banner", desc: "Rune of Protection, Longbeards only. Immune to panic.", restrictedTo: [{ regimentIds: ["longbeards"] }] },
+  { id: "dw-runeurgency", name: "Rune of Urgency", cost: 25, cat: "banner", desc: "Rune of Protection. The regiment may take a Vanguard move before the battle begins." },
+  { id: "dw-runeslowness", name: "Rune of Slowness", cost: 25, cat: "banner", desc: "Rune of Protection. Charging enemies have their charge move reduced by 1D6\" (multiple instances: roll more dice, take highest)." },
+  { id: "dw-runewarding", name: "Rune of Warding", cost: 25, cat: "banner", desc: "Rune of Protection. Natural dispel 4+ (multiple instances: roll more dice, take highest)." },
+  { id: "dw-runepassage", name: "Rune of Passage", cost: 25, cat: "banner", desc: "Rune of Protection. The bearer and his unit may march even with enemies within 8\"; treats difficult terrain as open." },
+  { id: "dw-runeoathkeeping", name: "Rune of Oath-Keeping", cost: 25, cat: "banner", desc: "Rune of Protection. The regiment never loses its rank bonus when hit to the flank/rear (step-up is still cancelled, enemy still gets their combat res bonus)." },
+  { id: "dw-runeguarding", name: "Rune of Guarding", cost: 40, cat: "banner", desc: "Rune of Protection, Hammerers only. If the general joins, they auto-pass Ld/break tests (may still break from fear-causing outnumbering etc.).", restrictedTo: [{ regimentIds: ["hammerers"] }] },
+  { id: "dw-runefear", name: "Rune of Fear", cost: 40, cat: "banner", desc: "Rune of Protection. Causes fear." },
+  { id: "dw-runeburning", name: "Rune of Burning", cost: 10, cat: "engineering", desc: "Engineering Rune. Ammunition counts as flaming." },
+  { id: "dw-runeseeking", name: "Rune of Seeking", cost: 10, cat: "engineering", desc: "Engineering Rune, Bolt Throwers only. May shoot at fliers flying high with no long-range/large-target penalty.", restrictedTo: [{ regimentIds: ["boltthrowers"] }] },
+  { id: "dw-runeforging", name: "Rune of Forging", cost: 10, cat: "engineering", desc: "Engineering Rune, Flame Cannons & Cannons only (not Organ Guns). Doesn't miss a turn on its first misfire (still blows up on a second).", restrictedTo: [{ regimentIds: ["cannons", "flamecannons"] }] },
+  { id: "dw-runepenetrating", name: "Rune of Penetrating", cost: 10, cat: "engineering", desc: "Engineering Rune. +1 strength. Cost doubles if inscribed on a Gyrocopter (not modeled — apply manually)." },
+  { id: "dw-runedisguise", name: "Rune of Disguise", cost: 15, cat: "engineering", desc: "Engineering Rune. The machine is invisible until an enemy comes within 1\" or it shoots. Cost doubles if inscribed on a Gyrocopter (not modeled — apply manually)." },
+  { id: "dw-runetargeting", name: "Rune of Targeting", cost: 15, cat: "engineering", desc: "Engineering Rune, Bolt Throwers/Goblin Hewer/Cannons only. Bolt Throwers & Goblin Hewer get +1 to hit; Cannons may re-roll the first artillery die.", restrictedTo: [{ regimentIds: ["boltthrowers", "goblinhewer", "cannons"] }] },
+  { id: "dw-runedemolishing", name: "Rune of Demolishing", cost: 15, cat: "engineering", desc: "Engineering Rune, Cannons only (not Flame Cannons/Organ Guns). Deals +1 wound (D3+1 total).", restrictedTo: [{ regimentIds: ["cannons"] }] },
+  { id: "dw-runeimmolation", name: "Rune of Immolation", cost: 15, cat: "engineering", desc: "Engineering Rune. Self-destruct at will (including when the crew dies or fails a break test) — the crew and any enemy engaged with the machine suffer 1D6 S6 hits, no save." },
+  { id: "dw-runeaccuracy", name: "Rune of Accuracy", cost: 30, cat: "engineering", desc: "Engineering Rune, Stone Throwers only. Re-roll the artillery die and/or scatter die after measuring the guessed distance.", restrictedTo: [{ regimentIds: ["smallstonethrowers", "largestonethrowers"] }] },
+];
+
+const DWARFS = {
+  key: "dwarfs",
+  name: "Dwarfs",
+  tagline: "Stoic, ironclad holds standing against the dark and the endless grudge",
+  magicItems: DWARF_MAGIC_ITEMS,
+  armyWideRules: [
+    "Dwarfs hate all Orcs & Goblins — Orcs, Goblins, Snotlings, and Hobgoblins (but not Ogres, Trolls, or Giants).",
+    "Dwarfs suffer -1 Ld if they fight within 8\" of elven allies (High Elves or Wood Elves).",
+    "Dwarfs cannot use bound spells or arcane items — no Arcane Items category is available to any Dwarf character.",
+    "Some Dwarfs may wear Gromril Armour — heavy armour with a 4+ save, which combines with a shield as normal.",
+    "Movement Allowance is 4 for all Dwarfs in Warhammer Renaissance (already reflected in every profile below) — this compensates for a now-removed early-edition rule that let Dwarfs wear heavy armour with no movement penalty.",
+    "Runes: this builder models each individual rune as its own selectable item (in the normal Weapons/Armour/Enchanted/Banner/Engineering categories), and each rune is unique per army just like any other magic item. What ISN'T mechanized is the finer rune-combo rules: up to 3 runes may be combined onto one weapon/armour/talisman/banner/war machine, no two items may share the exact same combination, and only one Master Rune may sit on a given item (though the game-wide 'no Master Rune twice in the same army' rule already falls out naturally from normal item uniqueness). In practice this builder will let a character's item slots be filled with any mix of runes rather than strictly grouping them onto one weapon/one armour/one banner — keep the fluff-accurate grouping in mind yourself when building a list.",
+    "Slayers (Troll Slayers, Giant Slayers, Daemon Slayers, Dragon Slayers) are unbreakable, never wear armour or carry shields, and always wound on 4+ regardless of the target's toughness. No Slayer character may be the army general or carry the battle standard, and they may only take magic weapons, never other item types.",
+  ],
+  characters: [
+    {
+      id: "dwarflord", name: "Dwarf Lord", cost: 136, stat: "Dwarf Lord", magicItemSlots: 3, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfLord"],
+      gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Handgun", "Crossbow", "Two pistols"] },
+      mounts: [
+        { id: "shield", name: "Carried atop a shield (general only) — +2 attacks, first wound ignored; takes the place of two infantrymen", cost: 25 },
+        { id: "throne", name: "Carried atop a Throne of Power (general only) — +4 attacks, ignores first two wounds, cannot march; takes the place of six or nine infantrymen", cost: 50 },
+      ],
+    },
+    {
+      id: "dwarfhero", name: "Dwarf Hero", cost: 82, stat: "Dwarf Hero", magicItemSlots: 2, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"],
+      gearNote: "May join a war machine (except Organ Guns) and act as an Engineer — the machine may use his BS and re-roll misfires (except bouncing cannon balls); he can't shoot his own weapons while operating it. May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Handgun", "Crossbow", "Two pistols"] },
+    },
+    {
+      id: "dwarfbsb", name: "Dwarf Battle Standard Bearer", cost: 92, stat: "Dwarf BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"],
+      gearNote: "May take light armour, heavy armour, or Gromril Armour for free. The one item may be a magic banner.",
+    },
+    {
+      id: "daemonslayer", name: "Daemon Slayer", cost: 100, stat: "Daemon Slayer", magicItemSlots: 1, magicItemCategoryFilter: ["weapon"],
+      gearNote: "Unbreakable; never wears armour or carries a shield; always wounds on 4+ regardless of toughness. Must walk alone or join a Slayer regiment. Cannot be the general or carry the battle standard. The one item must be a magic weapon.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+    },
+    {
+      id: "dragonslayer", name: "Dragon Slayer", cost: 60, stat: "Dragon Slayer", magicItemSlots: 1, magicItemCategoryFilter: ["weapon"],
+      gearNote: "Unbreakable; never wears armour or carries a shield; always wounds on 4+ regardless of toughness. Must walk alone or join a Slayer regiment. Cannot be the general or carry the battle standard. The one item must be a magic weapon.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+    },
+    {
+      id: "runelord", name: "Runelord", cost: 160, stat: "Runelord", magicItemSlots: 3, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfRunesmith"],
+      gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free. One Runesmith in the army may bring an Anvil of Doom (attended by two Anvil Guard Hammerers) — while operating it, he casts as a level 4 wizard using Bright Magic's Blast/Fireball/Piercing Bolts of Burning/The Burning Head, expending power cards as normal.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      anvilOption: { label: "Anvil of Doom (+2 Anvil Guard Hammerers)", cost: 100 },
+    },
+    {
+      id: "masterrunesmith", name: "Master Runesmith", cost: 120, stat: "Master Runesmith", magicItemSlots: 2, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfRunesmith"],
+      gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      anvilOption: { label: "Anvil of Doom (+2 Anvil Guard Hammerers)", cost: 110 },
+    },
+    {
+      id: "runesmith", name: "Runesmith", cost: 80, stat: "Runesmith", magicItemSlots: 1, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfRunesmith"],
+      gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
+      anvilOption: { label: "Anvil of Doom (+2 Anvil Guard Hammerers)", cost: 120 },
+    },
+  ],
+  regiments: [
+    {
+      id: "hammerers", name: "Hammerers", perModel: 15, minSize: 5, stat: "Dwarf Elite Soldier", command: "standard", restriction: "0-1",
+      note: "Gromril Armour and double handed weapons.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Dwarf Commander", baseCost: 30, magicItemSlots: 1, stat: "Dwarf Commander" },
+    },
+    {
+      id: "ironbreakers", name: "Iron Breakers", perModel: 15, minSize: 5, stat: "Dwarf Elite Soldier", command: "standard", restriction: "0-1",
+      note: "Gromril Armour and shields — inscribed with a Rune of Stone, +1 armour save (2+ total combined with the shield).",
+      champion: { name: "Dwarf Commander", baseCost: 30, magicItemSlots: 1, stat: "Dwarf Commander" },
+    },
+    {
+      id: "longbeards", name: "Longbeards", perModel: 13, minSize: 5, stat: "Dwarf Elite Soldier", command: "standard", restriction: "0-1",
+      note: "Gromril Armour and shields.",
+      options: [
+        { id: "dhw", group: null, label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Dwarf Commander", baseCost: 30, magicItemSlots: 1, stat: "Dwarf Commander" },
+    },
+    {
+      id: "trollslayers", name: "Troll Slayers", perModel: 13, minSize: 5, stat: "Troll Slayer", command: "standard",
+      note: "Additional hand weapons by default. Unbreakable, never armoured or shielded, always wound on 4+ regardless of toughness.",
+      options: [
+        { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons (free)", cost: 0, per: "model" },
+      ],
+      extraOption: { label: "Slayer-Berserkers (work like Night Goblin Fanatics)", cost: 30, max: 3, note: "Unofficial — needs your opponent's consent to field." },
+      champion: { name: "Giant Slayer", baseCost: 20, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"] },
+    },
+    {
+      id: "dwarfcrossbowmen", name: "Dwarf Crossbowmen", perModel: 11, minSize: 5, stat: "Dwarf Soldier", command: "standard",
+      note: "Crossbows and light armour.",
+      options: [
+        { id: "heavyarmour", group: "armourshield", label: "Heavy armour instead of light (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: "armourshield", label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "both", group: "armourshield", label: "Heavy armour and shields (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Dwarf Champion" },
+    },
+    {
+      id: "dwarfrangers", name: "Dwarf Rangers", perModel: 16, minSize: 5, stat: "Dwarf Soldier", command: "standard", restriction: "0-1",
+      note: "Crossbows, light armour, shields. May skirmish and use the scout special rules.",
+      options: [
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+2pt/model)", cost: 2, per: "model" },
+        { id: "dhw", group: null, label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Dwarf Champion" },
+    },
+    {
+      id: "dwarfminers", name: "Dwarf Miners", minSize: 5, stat: "Dwarf Soldier", command: "standard", restriction: "0-1",
+      note: "Double handed weapons and light armour. May Ambush (arrive from a table edge on turn 2 instead of deploying, as if pursuing out of the table).",
+      tieredPricing: { baseCost: 80, baseSize: 5, extraPerModel: 11 },
+      options: [
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Dwarf Champion" },
+    },
+    {
+      id: "dwarfwarriors", name: "Dwarf Warriors", perModel: 7, minSize: 5, stat: "Dwarf Soldier", command: "standard",
+      note: "Light armour by default. Costs 1pt more (8pts) if fielded as allies for another army.",
+      options: [
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "spears", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Dwarf Champion" },
+    },
+    {
+      id: "dwarfthunderers", name: "Dwarf Thunderers", perModel: 11, minSize: 5, stat: "Dwarf Soldier", command: "standard",
+      note: "Hand guns and light armour.",
+      options: [
+        { id: "heavyarmour", group: "armourshield", label: "Heavy armour instead of light (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: "armourshield", label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "both", group: "armourshield", label: "Heavy armour and shields (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Dwarf Champion" },
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "boltthrowers", name: "Bolt Throwers", perUnit: 55, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Manned by three Dwarf Soldiers. Crew may take light or heavy armour (not modeled individually — folded into the flat cost).",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
+      magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+    },
+    {
+      id: "smallstonethrowers", name: "Small Stone Throwers", perUnit: 85, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Manned by three Dwarf Soldiers.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
+      magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+    },
+    {
+      id: "largestonethrowers", name: "Large Stone Throwers", perUnit: 100, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Manned by three Dwarf Soldiers.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
+      magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+    },
+    {
+      id: "cannons", name: "Cannons", perUnit: 100, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Normal cannon. Manned by three Dwarf Soldiers.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
+      magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+    },
+    {
+      id: "organgun", name: "Organ Gun", perUnit: 155, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
+      note: "Manned by three Dwarf Soldiers.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
+      magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+    },
+    {
+      id: "flamecannons", name: "Flame Cannons", perUnit: 90, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Guess range like a cannon (max 12\") plus the artillery die; teardrop template, S5 hit (1 wound = 1D3). Any casualty forces a panic test. Uniquely, Flame Cannons may stand & shoot (resolved before the enemy unit moves). Manned by three Dwarf Soldiers.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
+      magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+    },
+    {
+      id: "gyrocopters", name: "Gyrocopter", perUnit: 100, stat: "Gyrocopter", kind: "quantity",
+      note: "Works like a flying light chariot with no steeds and one Dwarf Soldier crewman. Won't charge but can be charged; if beaten or broken it scatters 2D6\" and crashes for 2D6 S4 hits on whatever it lands on (counts as slain). Fires once per turn — either a bomb (3\" template, scatters on a miss, S5, panic test on any casualty) or its steam cannon (teardrop template, S3, no save; unusable after flying high or 10\"+ that turn).",
+    },
+    {
+      id: "goblinhewer", name: "Goblin Hewer", perUnit: 90, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
+      note: "Manned by three Slayers with two hand weapons each. Rolls to hit with BS; on a hit, rolls 1D3 wounds per rank in the target (or per model in the widest rank, if hitting a flank). Range 48\", S4.",
+      extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Slayer crew",
+      magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+    },
+  ],
+  specialCharacters: [
+    { id: "kingkazador", name: "King Kazador of Karak Azul", cost: 300, stat: "King Kazador of Karak Azul", role: "Dwarf Lord",
+      note: "Carries the Hammer of Karak Azul (+2 WS, +1S, one wound kills), a shield, the Gromril Armour of the King of Karak Azul (2+ save total, 5+ ward), and the Thunderhorn (sound once, at the start of an enemy turn — all enemy units test Ld unless immune to psychology; failures can't charge that turn)." },
+    { id: "ungrim", name: "Ungrim Ironfist, The Slayer King of Karak Kadrin", cost: 300, stat: "Ungrim Ironfist", role: "Daemon Slayer",
+      note: "Unlike normal Slayers, Ungrim may carry magic items, join any regiment, and be the army general.",
+      items: "Carries: the Axe of Dargo (one enemy loses 1 attack, +1S, 1 wound = 1D6 wounds), the Slayer Crown (+1T, 2+ armour save), the Dragon Cloak (a ward save that rebounds wounds on 5+, unmodified saves only on rebounds; may take two re-rolls during the battle)." },
+    { id: "kragg", name: "Runelord Kragg the Grim", cost: 300, stat: "Runelord Kragg the Grim", role: "Runelord",
+      note: "Carries Kragg's Hammer (S10, +1A, 1 wound = 1D6 wounds), Kragg's Gromril Armour (2+ save, re-rollable), and the Runestaff (immune to fire, may auto-dispel two spells during the battle)." },
+    { id: "gotrekfelix", name: "Gotrek Gurnisson and Felix Jaeger", cost: 300, stat: "Gotrek Gurnisson", role: "Daemon Slayer + companion (300pts for the pair)",
+      note: "Represents both models together — Felix (stat line: Felix Jaeger) is human and doesn't hate Orcs & Goblins. They must stay together and may join any regiment. While Gotrek lives, both benefit from Gotrek's Doom (4+ ward save, 4+ natural dispel).",
+      items: "Gotrek carries Gotrek's Axe (always wounds on 2+, no save, 1 wound = 1D3, 1D6 vs Dragons/Daemons). Felix carries a Blade of Leaping Bronze (+2A, a common magic item)." },
+    { id: "thorgrim", name: "High King Thorgrim Grudgebearer", cost: 500, stat: "High King Thorgrim Grudgebearer", role: "Dwarf Lord — must be the army general",
+      note: "Rides atop a Throne of Power.",
+      items: "Carries: the Great Book of Grudges, the Armour of Skaldour, the Dragon Crown of Karaz, the Axe of Grimnir." },
+    { id: "josefbugman", name: "Josef Bugman", cost: 100, stat: "Josef Bugman", role: "Dwarf Hero",
+      note: "May scout alongside a regiment of Rangers. Carries a crossbow, light or heavy armour, a shield, a double handed weapon, and Bugman's Tankard.", extraMagicItemSlots: 1 },
+    { id: "burlok", name: "Engineer Guildmaster Burlok Damnison", cost: 150, stat: "Burlok Dammnison", role: "Dwarf Hero",
+      note: "Carries Gromril Armour.", extraMagicItemSlots: 2 },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
   { key: "orcsgoblins", name: "Orcs & Goblins" },
-  { key: "dwarfs", name: "Dwarfs" },
+  { key: "dwarfs", name: "Dwarfs", data: DWARFS },
   { key: "skaven", name: "Skaven" },
   { key: "undead", name: "Undead" },
   { key: "woodElves", name: "Wood Elves", data: WOOD_ELVES },
@@ -2026,7 +2330,7 @@ const FACTION_LIST = [
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
@@ -2050,6 +2354,7 @@ function characterCost(inst, def, armyData) {
     if (!forbidden) total += (inst.magicLevel || 0) * def.magicLevelOption.costPerLevel;
   }
   if (def.wingsOption && inst.wings) total += def.wingsOption.cost;
+  if (def.anvilOption && inst.anvil) total += def.anvilOption.cost;
   (inst.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   return total;
 }
@@ -2077,12 +2382,19 @@ function regimentCost(inst, def, armyData) {
     return total;
   }
   const size = inst.size || def.minSize;
-  let total = regimentTrooperUnitCost(def, inst.gearSelections || {}) * size;
+  let total;
+  if (def.tieredPricing) {
+    const tp = def.tieredPricing;
+    total = tp.baseCost + Math.max(0, size - tp.baseSize) * tp.extraPerModel;
+  } else {
+    total = regimentTrooperUnitCost(def, inst.gearSelections || {}) * size;
+  }
   (def.options || []).forEach((opt) => {
     if (opt.per === "model") return;
     const selected = opt.group ? inst.gearSelections?.[opt.group] === opt.id : !!inst.gearSelections?.[opt.id];
     if (selected) total += opt.cost;
   });
+  if (def.extraOption && inst.extraOptionCount) total += inst.extraOptionCount * def.extraOption.cost;
   const toggleFreeStandard = def.fastCavalryToggleOption && inst.gearSelections?.[def.fastCavalryToggleOption];
   if (inst.standard && !toggleFreeStandard) {
     total += (def.command === "fastCavalry" || def.command === "monstrous") ? 10 : 0;
@@ -2115,6 +2427,7 @@ function chariotCost(inst, def, armyData) {
   if (def.kind === "warmachine") {
     let total = def.perUnit;
     total += (inst.extraCrew || 0) * (def.extraCrewCost || 0);
+    (inst.extraMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
     return total;
   }
   // full chariot
@@ -2601,6 +2914,7 @@ function resolveUnitTags(kind, unit, def, armyData) {
       tags.push(def.branchWraith.name);
       (unit.branchWraithSpriteIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
     }
+    if (def.extraOption && unit.extraOptionCount) tags.push(`${unit.extraOptionCount} ${def.extraOption.label}`);
     if (def.detachmentParent) {
       (unit.detachments || []).forEach((d) => {
         const dtype = (armyData.detachmentTypes || []).find((t) => t.id === d.defId);
@@ -2619,6 +2933,7 @@ function resolveUnitTags(kind, unit, def, armyData) {
       (def.variantOptions || []).forEach((o) => { if (unit.variantSelections?.[o.id]) tags.push(o.label); });
     } else if (def.kind === "warmachine") {
       if (unit.extraCrew) tags.push(`+${unit.extraCrew} ${def.extraCrewLabel || "crew"}`);
+      (unit.extraMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
     } else if (def.kind === "quantity" && def.variantOptions) {
       (def.variantOptions || []).forEach((o) => { if (unit.variantSelections?.[o.id]) tags.push(o.label); });
     } else if (def.kind === "abomination") {
@@ -2876,6 +3191,18 @@ function CharacterDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
+      {def.anvilOption && (
+        <div style={{ marginTop: 8 }}>
+          <label className="whr-opt-row whr-opt-label">
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input type="checkbox" checked={!!unit.anvil} onChange={(e) => updateUnit({ ...unit, anvil: e.target.checked })} />
+              {def.anvilOption.label}
+            </span>
+            <span className="whr-opt-cost">+{def.anvilOption.cost}pts</span>
+          </label>
+        </div>
+      )}
+
       {def.magicLevelOption && (() => {
         const forbidden = def.magicLevelOption.forbiddenMark && (unit.mark || def.markGroup?.options?.[0]) === def.magicLevelOption.forbiddenMark;
         if (forbidden) return <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 8 }}>No magic levels — forbidden with the {def.magicLevelOption.forbiddenMark} Mark.</p>;
@@ -3120,6 +3447,19 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
+      {def.extraOption && (
+        <div style={{ marginTop: 14 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <span className="whr-label" style={{ marginBottom: 0 }}>{def.extraOption.label}</span>
+            <span className="whr-opt-cost">+{def.extraOption.cost}pts each</span>
+          </div>
+          <div style={{ marginTop: 6 }}>
+            <Stepper value={unit.extraOptionCount || 0} min={0} max={def.extraOption.max} onChange={(v) => updateUnit({ ...unit, extraOptionCount: v })} />
+          </div>
+          {def.extraOption.note && <p style={{ fontSize: 12.5, color: "var(--burgundy)", marginTop: 4 }}>{def.extraOption.note}</p>}
+        </div>
+      )}
+
       {def.detachmentParent && (
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">Detachments (max 2, combined ≤ {size} models)</span>
@@ -3262,6 +3602,18 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
           <div style={{ marginTop: 14 }}>
             <span className="whr-label">{def.extraCrewLabel || "Extra crew"} (max {def.extraCrewMax || 2}, +{def.extraCrewCost}pts/model)</span>
             <Stepper value={unit.extraCrew || 0} min={0} max={def.extraCrewMax || 2} onChange={(v) => updateUnit({ ...unit, extraCrew: v })} />
+          </div>
+        )}
+        {def.magicItemSlots > 0 && (
+          <div style={{ marginTop: 14 }}>
+            <MagicItemPicker items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
+              categoryFilter={def.magicItemCategoryFilter}
+              context={{ regimentId: def.id }}
+              onToggle={(id) => {
+                const cur = unit.extraMagicItemIds || [];
+                const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
+                updateUnit({ ...unit, extraMagicItemIds: next });
+              }} />
           </div>
         )}
       </div>
@@ -3491,7 +3843,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     } else if (kind === "chariot") {
       const def = armyData.chariotsMonsters.find((x) => x.id === defId);
       if (def.kind === "quantity") inst = { instanceId: uid("cm"), kind: "chariot", defId, qty: 1, variantSelections: {} };
-      else if (def.kind === "warmachine") inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0 };
+      else if (def.kind === "warmachine") inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraMagicItemIds: [] };
       else if (def.kind === "abomination") inst = { instanceId: uid("cm"), kind: "chariot", defId, charUpgrades: {}, specialRules: {}, rider: "sorcererLord" };
       else inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraSteeds: 0, commander: false, commanderMagicItemIds: [], scythedWheels: false, variantSelections: {} };
       setRoster((r) => ({ ...r, chariots: [...r.chariots, inst] }));
