@@ -606,6 +606,18 @@ const STATS = {
   "Iron Daemon": { M: 5, WS: "-", BS: "-", S: 8, T: 7, W: 7, I: "-", A: "-", Ld: "-" },
   "Chaos Dwarf Juggernaut": { M: "-", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
   "Whirlwind/Tenderizer": { M: "-", WS: "-", BS: "-", S: 4, T: 4, W: 4, I: "-", A: "-", Ld: "-" },
+  // --- Dark Elves ---
+  "Dark Elf Assassin": { M: 5, WS: 9, BS: 9, S: 4, T: 4, W: 1, I: 10, A: 2, Ld: 10 },
+  "Cold One": { M: 8, WS: 3, BS: 0, S: 4, T: 4, W: 1, I: 1, A: 2, Ld: 3 },
+  "War Hydra": { M: 6, WS: 4, BS: 0, S: 5, T: 6, W: 7, I: 3, A: 5, Ld: 8 },
+  "Black Dragon": { M: 6, WS: 6, BS: 0, S: 6, T: 6, W: 7, I: 8, A: 7, Ld: 7 },
+  "Dark Elf Harpies": { M: 4, WS: 4, BS: 0, S: 4, T: 4, W: 2, I: 2, A: 1, Ld: 6 },
+  "Dark Elf Warhounds": { M: 6, WS: 3, BS: 0, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 6 },
+  "Dark Elf Executioners": { M: 5, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 6, A: 1, Ld: 8 },
+  "Spite": { M: 8, WS: 3, BS: 0, S: 4, T: 4, W: 1, I: 1, A: 2, Ld: 3 },
+  "Malekith The Witch King": { M: 5, WS: 7, BS: 7, S: 5, T: 5, W: 4, I: 9, A: 4, Ld: 10 },
+  "Tullaris of Har Ganeth": { M: 5, WS: 6, BS: 6, S: 5, T: 5, W: 2, I: 6, A: 3, Ld: 9 },
+  "Shadowblade, Master Assassin": { M: 5, WS: 10, BS: 10, S: 4, T: 4, W: 2, I: 10, A: 3, Ld: 10 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -4089,6 +4101,287 @@ const CHAOS_DWARFS = {
   ],
 };
 
+const DARK_ELF_MAGIC_ITEMS = [
+  { id: "de-whipofagony", name: "Whip of Agony", cost: 10, cat: "weapon", desc: "Additional hand weapon. Makes the extra attack separately — if it hits, the target must pass an Ld test (3D6, or 2D6 if immune to psychology) on its own basic Ld or it cannot strike back that phase. No roll to wound. Ridden monsters use their own Ld, not the rider's." },
+  { id: "de-darksword", name: "Dark Sword", cost: 10, cat: "weapon", desc: "Wounded targets lose all attacks on their profile for the rest of the game." },
+  { id: "de-chillblade", name: "Chill Blade", cost: 10, cat: "weapon", desc: "Any model wounded by this blade rolls a die at the start of each of its subsequent turns — on a 4+, it suffers an additional wound with no armour save allowed." },
+  { id: "de-lifetaker", name: "Lifetaker", cost: 25, cat: "weapon", desc: "Repeating crossbow. May fire 1D6 magical shots at the same target each shooting phase, always hitting on 2+." },
+  { id: "de-heartrender", name: "Heartrender", cost: 25, cat: "weapon", desc: "Lance. On the charge, a natural 6 to wound slays the target outright with no armour save (roughly man-sized models only, not on 40x40mm+ bases)." },
+  { id: "de-deathsword", name: "Deathsword", cost: 80, cat: "weapon", desc: "S10." },
+  { id: "de-burningsword", name: "Burning Sword of Khaine", cost: 120, cat: "weapon", desc: "Flaming attacks, +1D6 attacks, +2 strength." },
+  { id: "de-helmkraken", name: "Helm of The Kraken", cost: 40, cat: "armour", desc: "4+ regeneration save. Causes terror." },
+  { id: "de-armourhotek", name: "Armour of Hotek", cost: 50, cat: "armour", desc: "Heavy armour. 1+ armour save that cannot be improved further. Wounds that cause an instant kill or multiple wounds count as one wound only." },
+  { id: "de-amberamulet", name: "Amber Amulet", cost: 15, cat: "enchanted", desc: "The bearer recovers one lost wound at the start of each player turn." },
+  { id: "de-heartofwoe", name: "Heart of Woe", cost: 25, cat: "enchanted", desc: "If the bearer is slain in melee, the heart explodes: all models within a radius equal to the bearer's original wounds suffer one automatic hit at the bearer's Strength +1D6. Any wound inflicted multiplies into 1D6 wounds. Normal armour saves apply." },
+  { id: "de-blackdragonegg", name: "Black Dragon Egg", cost: 35, cat: "enchanted", desc: "May be consumed at the start of any player turn. For the rest of that turn, the bearer has S and T 6, plus a Black Dragon's corrosive breath attack (models hit take a Toughness test and suffer wounds equal to the margin of failure, -1 armour save). One use only." },
+  { id: "de-blackamulet", name: "Black Amulet", cost: 100, cat: "enchanted", desc: "Ward save 4+. Any wound saved during melee is rebounded against the attacker, no armour save allowed." },
+  { id: "de-tomeoffurion", name: "Tome of Furion", cost: 20, cat: "arcane", desc: "Grants one additional spell, but not an additional magic level.", restrictedTo: [{ tags: ["wizard"] }] },
+  { id: "de-sacrificialdagger", name: "Sacrificial Dagger", cost: 25, cat: "arcane", desc: "Once per magic phase, the wizard may sacrifice a member of their own unit to cast a spell for one power card less than required.", restrictedTo: [{ tags: ["wizard"] }] },
+  { id: "de-gemofspite", name: "The Gem of Spite", cost: 30, cat: "arcane", desc: "Any successful dispel made by the wizard carrying this gem inflicts a S6 hit on the caster, if within 12\" and the dispel used a winds of magic card. Normal armour saves apply.", restrictedTo: [{ tags: ["wizard"] }] },
+  { id: "de-nagarythe", name: "Banner of Nagarythe", cost: 10, cat: "banner", desc: "Must be carried by the Battle Standard Bearer. The bearer's regiment is unbreakable — this also applies to any High Elf Shadow Warriors within 12\" of the banner.", restrictedTo: [{ characterIds: ["elvenbsb"] }] },
+  { id: "de-expertrider", name: "Expert Rider Banner", cost: 10, cat: "banner", desc: "Dark Riders only. May move and shoot without the usual -1 to hit penalty for moving.", restrictedTo: [{ regimentIds: ["darkriders"] }] },
+  { id: "de-haggraef", name: "Standard of Hag Graef", cost: 40, cat: "banner", desc: "Except against a charging unit, the regiment Always Strikes First (not the mount). With double handed weapons, this simply cancels striking last — attacks resolve at normal Initiative." },
+  { id: "de-bannerofmurder", name: "Banner of Murder", cost: 50, cat: "banner", desc: "+1D6 to charge move. Frenzied units carrying this banner must attempt a charge on a roll of 6 if contact with the enemy is possible; a failed charge moves as a normal failed charge." },
+  { id: "de-bloodbanner", name: "Blood Banner", cost: 75, cat: "banner", desc: "Cold One Knights only. The Cold Ones become frenzied instead of stupid (the riders don't gain frenzy, but the regiment must still charge if possible).", restrictedTo: [{ regimentIds: ["coldoneriders"] }] },
+];
+
+const DARK_ELVES = {
+  key: "darkelves",
+  name: "Dark Elves",
+  tagline: "The Druchii — cruel raiders and slavers of Naggaroth, sworn to Malekith and the Cult of Khaine",
+  magicItems: DARK_ELF_MAGIC_ITEMS,
+  armyWideRules: [
+    "All Dark Elves (i.e. not their mounts, nor Harpies or Hydras) hate all High Elves (but not Wood Elves).",
+  ],
+  characters: [
+    {
+      id: "firstamongequals", name: "First Among Equals", cost: 124, stat: "Elven Prince", magicItemSlots: 3,
+      gearNote: "May take a shield and either light armour or heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
+      missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Repeating crossbow"] },
+      mounts: [
+        { id: "steed", name: "Elven Steed (may take barding free)", cost: 27, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One", cost: 30, stat: "Cold One" },
+        { id: "spider", name: "Monstrous Spider", cost: 53, stat: "Monstrous Spider" },
+        { id: "pegasus", name: "Dark Pegasus", cost: 61, stat: "Pegasus" },
+        { id: "hydra", name: "War Hydra", cost: 181, stat: "War Hydra" },
+        { id: "manticore", name: "Manticore", cost: 221, stat: "Manticore" },
+        { id: "dragon", name: "Black Dragon", cost: 321, stat: "Black Dragon" },
+      ],
+    },
+    {
+      id: "elvenhero", name: "Elven Hero", cost: 74, stat: "Elven Hero (High Elf)", magicItemSlots: 2,
+      gearNote: "May take a shield and either light armour or heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
+      missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Repeating crossbow"] },
+      mounts: [
+        { id: "steed", name: "Elven Steed (may take barding free)", cost: 20, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One", cost: 23, stat: "Cold One" },
+        { id: "spider", name: "Monstrous Spider", cost: 46, stat: "Monstrous Spider" },
+        { id: "pegasus", name: "Dark Pegasus", cost: 54, stat: "Pegasus" },
+        { id: "hydra", name: "War Hydra", cost: 174, stat: "War Hydra" },
+        { id: "manticore", name: "Manticore", cost: 214, stat: "Manticore" },
+        { id: "dragon", name: "Black Dragon", cost: 314, stat: "Black Dragon" },
+      ],
+    },
+    {
+      id: "witchelfhero", name: "Witch Elf Hero", cost: 104, stat: "Elven Hero (High Elf)", magicItemSlots: 2,
+      gearNote: "Subject to frenzy. Comes with light armour and two poisoned hand weapons by default — may forfeit all weapons and armour for free.",
+      mounts: [
+        { id: "steed", name: "Elven Steed (may take barding free)", cost: 20, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One", cost: 23, stat: "Cold One" },
+        { id: "spider", name: "Monstrous Spider", cost: 46, stat: "Monstrous Spider" },
+        { id: "pegasus", name: "Dark Pegasus", cost: 54, stat: "Pegasus" },
+        { id: "hydra", name: "War Hydra", cost: 174, stat: "War Hydra" },
+        { id: "manticore", name: "Manticore", cost: 214, stat: "Manticore" },
+        { id: "dragon", name: "Black Dragon", cost: 314, stat: "Black Dragon" },
+      ],
+    },
+    {
+      id: "elvenbsb", name: "Elven Battle Standard Bearer", cost: 88, stat: "Elven BSB (High Elf)", magicItemSlots: 1, restriction: "0-1",
+      gearNote: "May take light armour or heavy armour for free. The one magic item may be a magic banner.",
+      mounts: [
+        { id: "steed", name: "Elven Steed (may take barding free)", cost: 13, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One", cost: 16, stat: "Cold One" },
+      ],
+    },
+    {
+      id: "assassin", name: "Dark Elf Assassin", cost: 60, stat: "Dark Elf Assassin", magicItemSlots: 1,
+      gearNote: "The first Assassin in the army counts toward Regiments, not Characters — subsequent ones count as Characters. Conceals itself as an ordinary trooper in a Dark Elf infantry regiment (only one per regiment), revealed on entering melee, replacing a trooper — in the first combat round it strikes before Always-Strikes-First models and before challenges are declared. Fights with two poisoned hand weapons (+1S; each wound multiplies into 1D3). Fights normally (no strike-first) in later rounds, and becomes a free-roaming independent character once that combat ends. Can never be the general, and nobody may use its Ld. Dark Elf Assassins are the only type of Assassin that may take a magic item.",
+    },
+    {
+      id: "sorcererlord", name: "Sorcerer Lord (level 4)", cost: 264, stat: "Mage Lord", magicItemSlots: 4, tags: ["wizard"],
+      gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+        { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
+        { id: "hydra", name: "War Hydra", cost: 160, stat: "War Hydra" },
+        { id: "manticore", name: "Manticore", cost: 200, stat: "Manticore" },
+        { id: "dragon", name: "Black Dragon", cost: 300, stat: "Black Dragon" },
+      ],
+    },
+    {
+      id: "mastersorcerer", name: "Master Sorcerer (level 3)", cost: 186, stat: "Master Mage", magicItemSlots: 3, tags: ["wizard"],
+      gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+        { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+    {
+      id: "sorcererchampion", name: "Sorcerer Champion (level 2)", cost: 122, stat: "Mage Champion", magicItemSlots: 2, tags: ["wizard"],
+      gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+        { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+    {
+      id: "sorcerer", name: "Sorcerer (level 1)", cost: 58, stat: "Mage", magicItemSlots: 1, tags: ["wizard"],
+      gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
+        { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+  ],
+  regiments: [
+    {
+      id: "harpies", name: "Harpies", perModel: 22, minSize: 5, stat: "Dark Elf Harpies", command: "none", restriction: "0-1",
+      note: "Flying infantry. May skirmish. Cannot be joined by characters, and cannot take a standard bearer, musician, or regimental champion.",
+    },
+    {
+      id: "beastmasterpack", name: "Chaos Hounds / Warhounds & Dark Elf Beastmasters", perModel: 0, minSize: 1, kind: "composite", restriction: "0-1",
+      note: "Follows the main-rulebook rules for Beastmasters. Chaos Hounds and Warhounds do not mix in the same pack — pick one or the other. Warhounds stand on infantry bases but function as fast cavalry.",
+      composition: [
+        { id: "chaoshound", label: "Chaos Hounds", cost: 12, stat: "Chaos Hound" },
+        { id: "warhound", label: "Warhounds", cost: 4, stat: "Dark Elf Warhounds" },
+        { id: "beastmaster", label: "Dark Elf Beastmasters", cost: 14, stat: "Elven Warriors (High Elf)" },
+      ],
+    },
+    {
+      id: "elvenwarriors", name: "Elven Warriors", perModel: 7, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
+      note: "Elven Warriors with shields.",
+      options: [
+        { id: "spears", group: null, label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "ahw", group: "melee2", label: "Swap shield for additional hand weapon (free)", cost: 0, per: "model" },
+        { id: "dhw", group: "melee2", label: "Swap shield for double handed weapon (+2pt/model)", cost: 2, per: "model" },
+        { id: "armour", group: "armour", label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "heavyarmour", group: "armour", label: "Heavy armour (+2.5pt/model)", cost: 2.5, per: "model" },
+        { id: "crossbows", group: null, label: "Repeating crossbows (+4pt/model)", cost: 4, per: "model" },
+      ],
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
+    },
+    {
+      id: "elvencrossbowmen", name: "Elven Crossbowmen", perModel: 10, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
+      note: "Elven Warriors with repeating crossbows.",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
+    },
+    {
+      id: "executioners", name: "Executioners of Har Ganeth", perModel: 14, minSize: 5, stat: "Dark Elf Executioners", command: "standard", restriction: "0-1",
+      note: "Executioners equipped with double handed weapons and heavy armour. Wounds dealt with their great axes multiply into 1D3 wounds.",
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
+    },
+    {
+      id: "blackguard", name: "Black Guard of Naggaroth", perModel: 13, minSize: 5, stat: "Wood Elf Lords", command: "standard", restriction: "0-1",
+      note: "Black Guard equipped with halberds and heavy armour. They hate all enemies.",
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
+    },
+    {
+      id: "coldoneriders", name: "Cold One Riders", perModel: 27, minSize: 5, stat: "Wood Elf Lords", mountStat: "Cold One", mountLabel: "Cold One", command: "standard",
+      note: "Elven Lords equipped with heavy armour, shields and lances, riding Cold Ones. Since Cold Ones are stupid, the whole regiment suffers from stupidity.",
+      options: [
+        { id: "crossbows", group: null, label: "Repeating crossbows (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
+    },
+    {
+      id: "blackarccorsairs", name: "Black Arc Corsairs", perModel: 10, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
+      note: "Elven Warriors with additional hand weapons and Sea Dragon Cloaks — a 5+ armour save that cannot be modified (not a ward save, and is cancelled by save-ignoring attacks).",
+      options: [
+        { id: "crossbows", group: null, label: "Repeating crossbows (+4pt/model)", cost: 4, per: "model" },
+      ],
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
+    },
+    {
+      id: "witchelves", name: "Witch Elves", perModel: 12, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
+      note: "Witch Elves with light armour and two poisoned hand weapons (+1 strength). Subject to frenzy.",
+      champion: { name: "Witch Elf Champion", baseCost: 30, magicItemSlots: 1, stat: "Elven Champion" },
+    },
+    {
+      id: "darkriders", name: "Dark Riders", perModel: 24, minSize: 5, stat: "Wood Elf Warriors", mountStat: "Elven Steed", mountLabel: "Elven Steed", command: "fastCavalry",
+      note: "Warriors riding Elven Steeds, equipped with light armour, spears, and bows. Fast Cavalry. May skirmish, act as Vanguard troops, and Fire & Flee as a charge reaction (resolve a Stand & Shoot, then flee as normal — rallies automatically if not caught, unless below 25% of original size). Fire & Flee is lost if joined by characters other than the unit champion.",
+      options: [
+        { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat)", cost: 10, per: "flat" },
+        { id: "shields", group: null, label: "Shields (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
+    },
+    {
+      id: "shades", name: "Dark Elf Shades", perModel: 18, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
+      note: "Shades with light armour, additional hand weapons and repeating crossbows. May skirmish and scout.",
+      champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "boltthrowers", name: "Repeating Bolt Throwers", perUnit: 74, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Crewed by two Elven Warriors. Crewmen may take light armour for +1pt each (not wired up as a toggle here — add by hand if taken).",
+      extraCrewCost: 7, extraCrewMax: 3, extraCrewLabel: "extra Elven Warrior crew",
+    },
+    {
+      id: "monstrousspiders", name: "Monstrous Spiders / Scorpions", perUnit: 40, stat: "Monstrous Spider", kind: "quantity",
+      note: "Monstrous Spiders are small monsters — follow the main-rulebook rules for Monstrous Spiders.",
+    },
+    {
+      id: "cauldronofblood", name: "Witch Elf Cauldron of Blood", perUnit: 64, stat: "Wood Elf Warriors", kind: "warmachine", restriction: "0-1",
+      note: "The cauldron itself is indestructible and causes terror (not represented by the crew's stat line above, which is shown only because the crew fights). Crewed by three Witch Elves with light armour and two poisoned hand weapons. While accompanying the cauldron, the crew doesn't have to charge or pursue despite being frenzied. If the cauldron hasn't moved and doesn't fight, the crew may perform unholy rituals — as long as maintained, all Witch Elf units within 24\" get an extra attack on top of frenzy.",
+      extraCrewCost: 12, extraCrewMax: 2, extraCrewLabel: "extra Witch Elf crew",
+    },
+    {
+      id: "warhydra", name: "War Hydra", perUnit: 200, stat: "War Hydra", kind: "monster",
+      note: "Causes terror, immune to psychology when on its own, and has a flaming breath attack with strength equal to its current wounds. Scaly skin confers a 5+ armour save that cannot be modified.",
+    },
+    {
+      id: "coldonechariots", name: "Cold One Chariots", perUnit: 66, stat: "Heavy Chariot", kind: "chariot",
+      note: "Heavy Chariot pulled by two Cold Ones, crewed by two Elven Warriors with light armour, spears, shields and repeating crossbows (4+ armour save). Since Cold Ones are stupid, the chariot suffers from stupidity.",
+      extraCrewCost: 9, extraCrewLabel: "extra Elven Warrior crew", extraSteedCost: 12, extraSteedLabel: "extra Cold One steeds",
+      commanderCost: 43, commanderLabel: "One crewman is an Elven Commander", commanderMagicItemSlots: 1,
+      scythedWheelsCost: 20,
+    },
+  ],
+  specialCharacters: [
+    { id: "malekith", name: "Malekith the Witch King", cost: 500, stat: "Malekith The Witch King", role: "Lord",
+      note: "Immune to psychology. Causes fear. Casts spells as a Sorcerer Lord (magic level 4).",
+      items: "Carries Circlet of Iron (arcane — grants an extra power or dispel card each magic phase), the Witch King's Armour (3+ armour save; enemies suffer -1 to hit him and his mount in both melee and shooting; may be worn along with the Spellshield and still cast spells), the Spellshield (a shield with 4+ natural dispel — a successful dispel with it inflicts a S6 hit, no save, on Malekith per power card spent), and Destroyer (a magic weapon — on a hit against a model with items or spells, roll a D6 per hit, on 4+ steal a random item or spell, usable until a new one is stolen, only one power stolen per melee phase).",
+      mounts: [
+        { id: "coldonechariot", name: "Cold One Chariot with Scythed Wheels (free)", cost: 0, stat: "Heavy Chariot" },
+        { id: "blackdragon", name: "Black Dragon", cost: 321, stat: "Black Dragon" },
+      ] },
+    { id: "tullaris", name: "Tullaris of Har Ganeth", cost: 200, stat: "Tullaris of Har Ganeth", role: "Hero",
+      note: "Wears heavy armour.",
+      items: "Carries the Executioner's Axe (unique to Tullaris — a double handed weapon; a natural 6 to wound slays the target outright with no armour save, roughly man-sized models only; otherwise wounds multiply into 1D3) and the Black Amulet (4+ ward save; any wound saved in melee rebounds on the attacker, no armour save allowed)." },
+    { id: "rakarth", name: "The Beastlord Rakarth of Karond Kar", cost: 420, stat: "Elven Hero (High Elf)", role: "Hero",
+      note: "Cannot be harmed by unridden monsters. Unique in being able to carry two pieces of magic armour.",
+      items: "Carries the Whip of Agony (additional hand weapon — a separate hit forces an Ld test at 3D6/2D6 or the target can't strike back that phase, no wound roll), the Armour of Fortune (heavy armour, 5+ ward save), and the Enchanted Shield (+1 armour save, for a total of 3+).",
+      mounts: [
+        { id: "blackdragon", name: "Black Dragon", cost: 0, stat: "Black Dragon" },
+      ] },
+    { id: "morathi", name: "Morathi, The Hag Sorceress", cost: 300, stat: "Mage Lord", role: "Sorcerer Lord (level 4), using Slaanesh Magic",
+      note: "May hand-pick her spells. May take four magic items.",
+      mounts: [
+        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
+      ] },
+    { id: "hellebron", name: "Crone Hellebron, The Hag Queen", cost: 450, stat: "Elven Prince", role: "Lord",
+      note: "Frenzy. Wears light armour. Unique in carrying two magic weapons. Rides a Manticore. May take one additional magic item.",
+      items: "Makes seven attacks with the Deathsword (S10), and one with her Parrying Blade (all enemy models in base contact with her lose one attack; Cavalry/Chariots/Ridden Monsters count as one model for this)." },
+    { id: "kouran", name: "Kouran, Captain of the Black Guard", cost: 125, stat: "Elven Hero (High Elf)", role: "Hero",
+      note: "Hates all enemies.",
+      items: "Carries Blades of Ensorcelled Iron (two hand weapons, +1 to hit) and the Armour of Meteoric Iron (light armour, 2+ armour save that cannot be improved)." },
+    { id: "shadowblade", name: "Shadowblade, Master of Assassins", cost: 150, stat: "Shadowblade, Master Assassin", role: "Follows the Assassin rules, with a twist",
+      note: "Rather than hiding in a Dark Elf regiment, Shadowblade may instead deploy hidden in an enemy infantry regiment of Humans, Elves, Orcs, Beastmen Gors, Bestigors, Chaos Marauders, Chaos Warriors, Saurus Warriors, Zombies, Ghouls, or Hobgoblins. Reveal him at the start of any of your turns: roll 1D6 — on a 1 he was discovered before the battle (counts as slain); otherwise place him within 2D6\" of the nominated regiment, possibly directly into combat (counts as his move that turn).",
+      items: "Carries two poisoned hand weapons (+1 strength, wounds multiply into 1D3), light armour, a Potion of Strength (+3 strength in one melee round, must be drunk just before attacking, one use), and the Heart of Woe (if slain in melee, all models within a radius equal to his original wounds suffer an automatic hit at his Strength +1D6, wounds multiply into 1D6, normal armour save applies)." },
+    { id: "mallus", name: "Mallus Darkblade", cost: 250, stat: "Elven Prince", role: "Lord",
+      note: "Wears heavy armour. At the start of any of your turns, Mallus may drink a dark elixir to lose consciousness and let the daemon Tz'arkan possess him for the rest of the battle: he gains Frenzy (never lost even if beaten in combat), +1WS/+1S/+1T/+1I, but each natural 1 he rolls to hit strikes a friendly model in base contact instead (opponent's choice).",
+      items: "Carries the Warpsword of Khaine (ignores armour saves, re-roll failed rolls to wound).",
+      mounts: [
+        { id: "spite", name: "Spite, a Cold One that doesn't suffer from stupidity", cost: 30, stat: "Spite" },
+      ] },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
@@ -4099,7 +4392,7 @@ const FACTION_LIST = [
   { key: "woodElves", name: "Wood Elves", data: WOOD_ELVES },
   { key: "chaos", name: "Chaos", data: CHAOS },
   { key: "chaosdwarfs", name: "Chaos Dwarfs", data: CHAOS_DWARFS },
-  { key: "darkelves", name: "Dark Elves" },
+  { key: "darkelves", name: "Dark Elves", data: DARK_ELVES },
   { key: "bretonnia", name: "The Grand Army of Bretonnia", data: BRETONNIA },
   { key: "lizardmen", name: "Lizardmen" },
   { key: "dogsofwar", name: "Dogs of War", data: DOGS_OF_WAR },
@@ -4110,7 +4403,7 @@ const FACTION_LIST = [
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
