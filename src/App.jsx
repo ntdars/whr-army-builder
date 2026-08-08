@@ -430,6 +430,40 @@ const STATS = {
   "High King Thorgrim Grudgebearer": { M: 4, WS: 7, BS: 6, S: 4, T: 5, W: 3, I: 5, A: 4, Ld: 11 },
   "Josef Bugman": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 2, I: 4, A: 3, Ld: 10 },
   "Burlok Dammnison": { M: 4, WS: 6, BS: 1, S: 7, T: 5, W: 3, I: 4, A: 3, Ld: 10 },
+  "Knightly Lord": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 9 },
+  "Knightly Hero": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Knightly BSB": { M: 4, WS: 6, BS: 4, S: 4, T: 3, W: 2, I: 6, A: 3, Ld: 8 },
+  "Hippogriff": { M: 8, WS: 5, BS: 0, S: 6, T: 5, W: 5, I: 6, A: 3, Ld: 8 },
+  "Peasant": { M: 4, WS: 2, BS: 2, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 6 },
+  "Man-at-Arms": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Young Knight": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Bretonnian Knight": { M: 4, WS: 4, BS: 3, S: 4, T: 3, W: 1, I: 4, A: 1, Ld: 7 },
+  "Elite Knight": { M: 4, WS: 5, BS: 3, S: 4, T: 3, W: 1, I: 5, A: 2, Ld: 7 },
+  "Commoner Champion": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 7 },
+  "Knightly Champion": { M: 4, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 5, A: 2, Ld: 8 },
+  "The King's Champion": { M: 4, WS: 6, BS: 4, S: 4, T: 3, W: 2, I: 6, A: 3, Ld: 8 },
+  "The Hermit Knight": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Louen Leoncoeur, The Lionhearted": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 10 },
+  "The Green Knight": { M: 4, WS: 6, BS: 3, S: 5, T: 5, W: 1, I: 6, A: 1, Ld: 10 },
+  "Green Knight's Warhorse": { M: 8, WS: 4, BS: 0, S: 4, T: 4, W: 1, I: 4, A: 1, Ld: 5 },
+  "Baron Odo d'Outremer": { M: 4, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 8 },
+  "Suliman le Saracen": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 7 },
+  "Tancred, Duc de Quenelles": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 10 },
+  "The Knight of the Perilous Lance": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Reynard le Chasseur": { M: 4, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 8 },
+  "Wolf Hounds": { M: 8, WS: 4, BS: 0, S: 4, T: 3, W: 1, I: 4, A: 1, Ld: 6 },
+  "Bohemond Beastslayer, Duke of Bastonne": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 9 },
+  "Roland le Marechal": { M: 4, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 8 },
+  "Armand d'Aquitaine": { M: 4, WS: 6, BS: 4, S: 4, T: 3, W: 2, I: 6, A: 3, Ld: 8 },
+  "Bertrand the Brigand": { M: 4, WS: 4, BS: 5, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 8 },
+  "Hugo le Petit": { M: 4, WS: 3, BS: 4, S: 5, T: 3, W: 1, I: 3, A: 1, Ld: 8 },
+  "Gui le Gros": { M: 4, WS: 3, BS: 4, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 8 },
+  "Bowmen of Bergerac": { M: 4, WS: 3, BS: 4, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 8 },
+  "Tristan le Troubadour": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Jules le Jongleur": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Jasperre le'Beu Dragonslayer": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Morgiana le Fay": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 3, I: 6, A: 1, Ld: 9 },
+  "Repanse de Lyonesse": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 9 },
   "Elven Prince": { M: 5, WS: 7, BS: 7, S: 4, T: 4, W: 3, I: 9, A: 4, Ld: 10 },
   "Elven Hero (High Elf)": { M: 5, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
   "Elven BSB (High Elf)": { M: 5, WS: 5, BS: 5, S: 4, T: 3, W: 2, I: 7, A: 2, Ld: 8 },
@@ -485,7 +519,7 @@ const WOOD_ELVES_MAGIC_ITEMS = [
   { id: "sp-netlings", name: "An Annoyance of Netlings", cost: 50, cat: "sprite", desc: "In a challenge, bearer can only be hit on natural 6s." },
   { id: "sp-despairs", name: "A Lamentation of Despairs", cost: 60, cat: "sprite", desc: "Bound spell, one use. One model anywhere tests LD or suffers 1D6 wounds, no save, no LoS required." },
 ];
-const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners", engineering: "Engineering Runes" };
+const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners", engineering: "Engineering Runes", virtue: "Knightly Virtues" };
 const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 /* ============================================================================
@@ -2309,6 +2343,287 @@ const DWARFS = {
   ],
 };
 
+const BRETONNIA_MAGIC_ITEMS = [
+  { id: "br-lanceoflot", name: "Lance of Lot", cost: 20, cat: "weapon", desc: "Lance. +1 to hit and +1 strength on the turn of the charge." },
+  { id: "br-caliburnus", name: "Caliburnus", cost: 75, cat: "weapon", desc: "General only. +2 WS, +2 S, +2 attacks." },
+  { id: "br-shieldholiness", name: "Shield of Holiness and Virtue", cost: 30, cat: "armour", desc: "Knightly characters only. Disregard all hits against the bearer in the first combat round of a challenge.", restrictedTo: [{ tags: ["knightly"] }] },
+  { id: "br-antlers", name: "Antlers of the Great Hunt", cost: 10, cat: "enchanted", desc: "Knightly characters only. The bearer and his unit may re-roll failed pursuit rolls.", restrictedTo: [{ tags: ["knightly"] }] },
+  { id: "br-bonerelic", name: "Bone Relic", cost: 20, cat: "enchanted", desc: "Commoner champion only. Natural dispel 2+.", restrictedTo: [{ tags: ["commoner"] }] },
+  { id: "br-tressisoulde", name: "The Tress of Isoulde", cost: 30, cat: "enchanted", desc: "One use only. Knightly characters only. The bearer wounds automatically, no armour saves apply.", restrictedTo: [{ tags: ["knightly"] }] },
+  { id: "br-bufoshexscroll", name: "Bufo's Hex Scroll", cost: 100, cat: "arcane", desc: "One use. Any spell cast at the bearer or his regiment is dispelled, even with Total Power, and the caster is turned into a frog (counts as slain). Returns on his own table edge if Drain Magic is cast; Slann Mage Priests are unaffected." },
+  { id: "br-errantry", name: "Errantry Banner", cost: 10, cat: "banner", desc: "Chevaliers Errant only. Enemies get no armour save from hits made during the charge (not against mounts).", restrictedTo: [{ regimentIds: ["chevalierserrant"] }] },
+  { id: "br-questing", name: "Questing Banner", cost: 20, cat: "banner", desc: "Chevaliers en Quête only. Immune to psychology.", restrictedTo: [{ regimentIds: ["chevaliersenquete"] }] },
+  { id: "br-realm", name: "Banner of the Realm", cost: 30, cat: "banner", desc: "Chevaliers Féodaux only. +1 to combat resolution.", restrictedTo: [{ regimentIds: ["chevaliersfeodaux"] }] },
+  { id: "br-grail", name: "Banner of the Grail", cost: 40, cat: "banner", desc: "Chevaliers D'Honneur only. Auto-passes the first Ld test it fails, including break tests.", restrictedTo: [{ regimentIds: ["chevaliersdhonneur"] }] },
+  { id: "br-bravery", name: "Virtue of Bravery", cost: 15, cat: "virtue", desc: "Knightly Virtue. The knight and his regiment are immune to fear.", restrictedTo: [{ tags: ["knightly"] }] },
+  { id: "br-joust", name: "Virtue of the Joust", cost: 20, cat: "virtue", desc: "Knightly Virtue. When charging with a lance, the knight hits automatically.", restrictedTo: [{ tags: ["knightly"] }] },
+  { id: "br-purity", name: "Virtue of Purity", cost: 30, cat: "virtue", desc: "Knightly Virtue. Natural dispel 4+.", restrictedTo: [{ tags: ["knightly"] }] },
+  { id: "br-temper", name: "Virtue of Knightly Temper", cost: 30, cat: "virtue", desc: "Knightly Virtue. Double attacks (on profile) on the charge.", restrictedTo: [{ tags: ["knightly"] }] },
+  { id: "br-trialcombat", name: "Virtue of Trial by Combat", cost: 40, cat: "virtue", desc: "Knightly Virtue. Must always issue/accept challenges if possible; re-rolls to hit and to wound in challenges; the enemy must re-roll successful (incl. unmodified) saves in challenges.", restrictedTo: [{ tags: ["knightly"] }] },
+  { id: "br-ardour", name: "Virtue of Knightly Ardour", cost: 40, cat: "virtue", desc: "Knightly Virtue. May counter-charge to the front if the charger starts more than half its charge distance away — move 1D6\" forward, both sides count as charging, highest Initiative strikes first.", restrictedTo: [{ tags: ["knightly"] }] },
+  { id: "br-impetuous", name: "Virtue of the Impetuous Knight", cost: 60, cat: "virtue", desc: "Knightly Virtue. +1D6\" on charge moves (normal failed-charge distance if the charge fails).", restrictedTo: [{ tags: ["knightly"] }] },
+];
+
+const BRETONNIA = {
+  key: "bretonnia",
+  name: "The Grand Army of Bretonnia",
+  tagline: "Chivalrous knights and the peasant levy that bears the realm's weight",
+  magicItems: BRETONNIA_MAGIC_ITEMS,
+  armyWideRules: [
+    "Bretonnian Warhorses are bred for war over generations and don't suffer the usual -1 movement penalty for wearing barding.",
+    "A Knight's Army: the general must be a knightly character (never a wizard), and the army must include at least one regiment of knights (a Chevaliers regiment).",
+    "Knightly Disdain: knightly regiments (Chevaliers) and knightly characters ignore panic caused by anything except other knightly regiments/characters (or regiments a knightly character has joined). Knightly characters will never join a Peasant regiment.",
+    "This builder models the default, darker version of Bretonnia (war machines and peasant levies). The alternate 'Heroic Army' variant (Lance Formation, no common peasants) is described in an appendix that wasn't in the provided text, so it isn't modeled here.",
+    "Knightly Virtues: each knightly character may take one Virtue, and each Virtue may only appear once in the army. A Virtue counts as, and takes up a slot from, the character's normal magic item allowance rather than being separate — this builder enforces the one-per-army uniqueness automatically, but doesn't hard-cap a character to exactly one Virtue if they have multiple item slots free, so keep that limit in mind yourself.",
+  ],
+  characters: [
+    {
+      id: "knightlylord", name: "Knightly Lord", cost: 100, stat: "Knightly Lord", magicItemSlots: 3, tags: ["knightly"],
+      gearNote: "May take a shield and heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
+      mounts: [
+        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 20, stat: "Warhorse" },
+        { id: "pegasus", name: "Pegasus", cost: 55, stat: "Pegasus" },
+        { id: "hippogriff", name: "Hippogriff", cost: 155, stat: "Hippogriff" },
+      ],
+    },
+    {
+      id: "knightlyhero", name: "Knightly Hero", cost: 60, stat: "Knightly Hero", magicItemSlots: 2, tags: ["knightly"],
+      gearNote: "May take a shield and heavy armour for free.",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
+      mounts: [
+        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 15, stat: "Warhorse" },
+        { id: "pegasus", name: "Pegasus", cost: 50, stat: "Pegasus" },
+        { id: "hippogriff", name: "Hippogriff", cost: 150, stat: "Hippogriff" },
+      ],
+    },
+    {
+      id: "knightlybsb", name: "Knightly Battle Standard Bearer", cost: 100, stat: "Knightly BSB", magicItemSlots: 1, restriction: "0-1", tags: ["knightly"],
+      gearNote: "May take heavy armour for free. The one item may be a magic banner, or may instead be a knightly Virtue.",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 10, stat: "Warhorse" },
+      ],
+    },
+    {
+      id: "wizardlord", name: "Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4,
+      gearNote: "May take College Magic. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+        { id: "hippogriff", name: "Hippogriff", cost: 140, stat: "Hippogriff" },
+      ],
+    },
+    {
+      id: "masterwizard", name: "Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3,
+      gearNote: "May take College Magic. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+    {
+      id: "wizardchampion", name: "Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2,
+      gearNote: "May take College Magic. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+    {
+      id: "wizard", name: "Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1,
+      gearNote: "May take College Magic. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
+        { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
+      ],
+    },
+  ],
+  regiments: [
+    {
+      id: "rascals", name: "Rascals", perModel: 3, minSize: 5, stat: "Peasant", command: "standard",
+      note: "Peasants.",
+      options: [
+        { id: "spears", group: "melee", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "dhw", group: "melee", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
+    },
+    {
+      id: "rapscallions", name: "Rapscallions", perModel: 5, minSize: 5, stat: "Peasant", command: "standard",
+      note: "Peasants with longbows.",
+      options: [
+        { id: "crossbows", group: null, label: "Crossbows instead of longbows (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
+    },
+    {
+      id: "ribalds", name: "Ribalds", perModel: 5, minSize: 5, stat: "Man-at-Arms", command: "standard",
+      note: "Men-at-Arms with light armour.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "spears", group: "melee", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "halberds", group: "melee", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
+    },
+    {
+      id: "arbalestiers", name: "Arbalestiers", perModel: 9, minSize: 5, stat: "Man-at-Arms", command: "standard",
+      note: "Men-at-Arms with crossbows.",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "pavise", group: null, label: "Pavise — 5+ save vs shooting only, 4+ combined with light armour (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
+    },
+    {
+      id: "archers", name: "Archers", perModel: 7, minSize: 5, stat: "Man-at-Arms", command: "standard",
+      note: "Men-at-Arms with longbows. May skirmish.",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
+    },
+    {
+      id: "zealots", name: "Zealots", perModel: 5, minSize: 5, stat: "Peasant", command: "standard", restriction: "0-1",
+      note: "Peasants with shields. Hate all enemies. If the regiment includes at least 4 Zealots (beyond command/champion/other characters) carrying the Reliquary, it's held aloft — the regiment is immune to fear and gains Ld10.",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+1pt/model)", cost: 1, per: "model" },
+        { id: "reliquary", group: null, label: "Four Zealots carry the Reliquary (+20pts flat)", cost: 20, per: "flat" },
+      ],
+      champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
+    },
+    {
+      id: "chasseursdelamort", name: "Chasseurs de la Mort", perModel: 9, minSize: 5, statNote: "Men-at-Arms riding Normal Horses.", command: "fastCavalry",
+      options: [
+        { id: "armour", group: null, label: "Light armour (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "spears", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "bows", group: null, label: "Bows — may then skirmish (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
+    },
+    {
+      id: "chevalierserrant", name: "Chevaliers Errant", perModel: 18, minSize: 5, statNote: "Young Knights with heavy armour, shields, and lances, on Warhorses.", command: "standard", restriction: "0-1",
+      note: "Unbreakable while accompanied by a living unmarried female wizard.",
+      options: [
+        { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
+    },
+    {
+      id: "chevaliersfeodaux", name: "Chevaliers Féodaux", perModel: 22, minSize: 5, statNote: "Knights with heavy armour, shields, and lances, on Warhorses.", command: "standard",
+      options: [
+        { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
+    },
+    {
+      id: "chevaliersenquete", name: "Chevaliers en Quête", perModel: 17, minSize: 5, statNote: "Knights with heavy armour and double handed weapons, on Warhorses.", command: "standard", restriction: "0-1",
+      options: [
+        { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
+    },
+    {
+      id: "chevaliersdhonneur", name: "Chevaliers D'Honneur", perModel: 35, minSize: 5, stat: "Elite Knight", command: "standard", restriction: "0-1",
+      note: "Barding, heavy armour, shields, and lances, on Warhorses.",
+      champion: { name: "The King's Champion", baseCost: 30, magicItemSlots: 1, stat: "The King's Champion", tags: ["knightly"] },
+    },
+    {
+      id: "chevaliersapied", name: "Chevaliers á Pied", perModel: 10, minSize: 5, statNote: "Knights with heavy armour and shields (on foot).", command: "standard", restriction: "0-1",
+      options: [
+        { id: "dhw", group: null, label: "Swap shields for double handed weapons (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
+    },
+    {
+      id: "chevaliersvolants", name: "Chevaliers Volants", perModel: 55, minSize: 3, statNote: "Flying monstrous regiment. Knights with heavy armour, shields, and lances, on Pegasi.", command: "monstrous", restriction: "0-1",
+      champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
+    },
+    {
+      id: "bertrandbowmen", name: "Bertrand the Brigand and the Bowmen of Bergerac", stat: "Bowmen of Bergerac", command: "skirmisher", restriction: "0-1",
+      tieredPricing: { baseCost: 75, baseSize: 5, extraPerModel: 9 },
+      note: "Counts toward Regiments, not Characters. The first five models are always: Bertrand the Brigand (longbow, the one-use Black Arrow — always hits, always wounds, no save), Hugo le Petit (shots resolve at S5), Gui le Gros (the regiment auto-passes its first Ld test), and at least two skirmishing elite-archer Bowmen of Bergerac. Further Bowmen may be added beyond the first five at the per-model rate.",
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "balliste", name: "Balliste", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Bolt thrower. Crewed by three Men-at-Arms.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
+    },
+    {
+      id: "onagremortier", name: "Onagre / Mortier", perUnit: 80, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Small stone thrower. Crewed by three Men-at-Arms.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
+    },
+    {
+      id: "trebuchet", name: "Trébuchet", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Large stone thrower. Crewed by three Men-at-Arms.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
+    },
+    {
+      id: "lordonnance", name: "L'Ordonnance", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      note: "Normal cannon. Crewed by three Men-at-Arms.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
+    },
+    {
+      id: "pistoletdorgue", name: "Pistolet D'orgue", perUnit: 150, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
+      note: "Organ gun. Crewed by three Men-at-Arms.",
+      extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
+    },
+  ],
+  specialCharacters: [
+    { id: "hermitknight", name: "The Hermit Knight", cost: 80, stat: "The Hermit Knight", role: "Knightly Hero",
+      note: "Heavy armour, shield, double handed weapon. Has the Virtue of Bravery (fixed). May not join a regiment of knights, but may join commoners (Peasants/Men-at-Arms).", extraMagicItemSlots: 1 },
+    { id: "louen", name: "Louen Leoncoeur, The Lionhearted", cost: 350, stat: "Louen Leoncoeur, The Lionhearted", role: "Knightly Lord — must be the general",
+      note: "Virtue of the Lionheart: +1D3 Strength, rolled at the start of each melee phase. Rides a Hippogriff, carries a shield.",
+      items: "Carries: The Crown of Bretonnia (cascading pre-battle characteristic boost), The Lion Lance (any model hit but not killed also suffers a S6 hit), The Tabard of Kings (a spellcaster who wounds/kills the bearer suffers 1D3 wounds), and The Armour of Brilliance (enemies suffer -2 to hit)." },
+    { id: "greenknight", name: "The Green Knight", cost: 180, stat: "The Green Knight", role: "Unique — always acts alone, never joins regiments",
+      note: "May deploy in the open alongside Scouts, in plain sight, as long as he stays within 4\" of water, a wood, a barrow mound, a chapel, a ruin, a statue, or a bridge (not in the enemy deployment zone or within 8\" of enemy troops). Causes fear, immune to psychology, 2+ natural dispel, regenerates on 2+. Heavy armour, shield, rides the barded Green Knight's Warhorse.",
+      items: "Carries the Dolorous Blade: either one no-save attack where 1 wound becomes 1D6, or 1D6 normal attacks instead." },
+    { id: "odosuliman", name: "Baron Odo d'Outremer and Suliman le Saracen", cost: 75, stat: "Baron Odo d'Outremer", role: "Knightly champion + commoner champion pair (75pts for both)",
+      note: "Odo wears heavy armour and a shield, rides a barded Warhorse, and wields the Morning Star of Fracasse (a flail — any model wounded by it loses its magic weapon). Suliman (stat line: Suliman le Saracen) wears light armour, rides a normal Warhorse, wields a double handed weapon, and always strikes first when charging (even before Always Strikes First models, but after assassins). The two always fight together and may join regiments of knights." },
+    { id: "tancred", name: "Tancred, Duc de Quenelles", cost: 200, stat: "Tancred, Duc de Quenelles", role: "Knightly Lord",
+      note: "Heavy armour. Virtue of Purity (4+ natural dispel, fixed).",
+      items: "Carries: the Blade of Couronne (Undead within 3\" take a wound each Bretonnia movement phase, no save; bearer & regiment immune to fear/terror), Blessed Draught (drink before striking/a characteristic test for +1D6 S that phase, one use), and the Grail Shield (Undead suffer -1 to hit the bearer; single-attack Undead can't hit him at all).",
+      mounts: [
+        { id: "warhorse", name: "Barded Warhorse", cost: 75 },
+        { id: "pegasus", name: "Pegasus", cost: 150 },
+        { id: "hippogriff", name: "Hippogriff", cost: 300 },
+      ] },
+    { id: "perilouslance", name: "The Knight of the Perilous Lance", cost: 100, stat: "The Knight of the Perilous Lance", role: "Knightly Hero",
+      note: "Enemies suffer -1 to hit him on the turn he charges; he may re-roll armour saves in melee. Heavy armour, shield, barded Warhorse, lance. Virtue of the Joust (fixed — hits automatically when charging with a lance)." },
+    { id: "reynard", name: "Reynard le Chasseur", cost: 60, stat: "Reynard le Chasseur", role: "Knightly Champion — may lead a Chasseurs de la Mort regiment",
+      note: "Light armour, shield, Warhorse, a boar spear (wounded enemies lose 1D6 attacks in the first round of combat) and a war hawk (melee attacks at him are at -1 to hit). Always accompanied by two Wolf Hounds, Griffe and Groffe." },
+    { id: "bohemond", name: "Bohemond Beastslayer, Duke of Bastonne", cost: 180, stat: "Bohemond Beastslayer, Duke of Bastonne", role: "Knightly Hero",
+      note: "Heavy armour, barded Warhorse. Virtue of the Impetuous Knight (fixed — +1D6\" charge move).",
+      items: "Carries: the Beast Mace of Bastonne (+2S, 1 wound = 1D3 wounds) and Bohemond's Shield (each successful magic-weapon hit against him rolls a die; on a 6 the weapon breaks and its hits fail that round)." },
+    { id: "roland", name: "Roland le Marechal", cost: 75, stat: "Roland le Marechal", role: "Knightly Champion",
+      note: "Heavy armour, shield, barded Warhorse, lance.",
+      items: "Carries Roland's Warhorn (bound spell — all enemy flyers within 12\" are driven off)." },
+    { id: "armand", name: "Armand D'Aquitaine", cost: 225, stat: "Armand d'Aquitaine", role: "Knightly Battle Standard Bearer",
+      note: "Heavy armour, barded Warhorse. Virtue of Knightly Ardour (fixed).",
+      items: "Carries the Banner of the Lady of the Lake (enemies in melee with this regiment can't claim rank bonus)." },
+    { id: "tristanjules", name: "Tristan le Troubadour and Jules le Jongleur", cost: 125, stat: "Tristan le Troubadour", role: "Knightly Hero + companion (125pts for both)",
+      note: "Tristan wears heavy armour and a shield, rides a barded Warhorse, wields a lance, and hates enemy troops with missile weapons (incl. war machine crew). At the start of any Bretonnia turn he may sing one song until the next Bretonnia turn: +1 combat resolution, 3+ natural dispel, or Ld10 for his regiment. Jules (stat line: Jules le Jongleur) always stays at Tristan's side; all attacks at Jules are at -2 to hit, and while adjacent, enemies attacking Tristan must pass an Ld test or lose one attack." },
+    { id: "jasperre", name: "Jasperre le'Beu Dragonslayer", cost: 150, stat: "Jasperre le'Beu Dragonslayer", role: "Knightly Hero",
+      note: "Heavy armour, shield, rides a Pegasus. Immune to psychology.",
+      items: "Carries: the Dragonhelm (immune to terror, fire, and breath attacks), the Virtuous Lance (deals 1D6 wounds to large targets), and the Claw of Malgrimace (Monsters/Daemons in base contact lose half their attacks, rounding up)." },
+    { id: "morgiana", name: "Morgiana le Fay, The Fay Enchantress", cost: 430, stat: "Morgiana le Fay", role: "Wizard Lord",
+      note: "Unmarried — any Chevaliers Errant regiment she joins is unbreakable (subject to hatred instead if she dies). After deployment, knightly characters may ask her a favour (Champions 4+, Heroes 5+, Lords 6+) granting one of several combat bonuses; if a favoured knight breaks, she suffers an unsaved wound. Has her own unique spells (Spiteful Glance, The Mist of Chálons, The Doom of Dol, The Beguilement of Blondel). Rides a Unicorn.",
+      items: "Carries: the Chalice of Potions (choose one of five one-turn effects, refreshed each Bretonnia turn unless exhausted on a 1), Morgiana's Mirror (arcane, +1 to Mental Duels), the Power Familiar (an extra magic card per phase, personal use only), and the Girdle of Gold (4+ ward save)." },
+    { id: "repanse", name: "Repanse du Lyonesse", cost: 325, stat: "Repanse de Lyonesse", role: "Knightly Lord and Battle Standard Bearer — must carry the standard, may be the general",
+      note: "Causes fear. Immune to the effects of spells. Rides a barded Warhorse, wears heavy armour.",
+      items: "Wields the Sword of Lyonesse (cancels 'minus to hit' modifiers, allows no armour save and no unmodified save either) and carries the Fleur de Lys Banner (discard one random magic card from the opponent's hand each magic phase)." },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
@@ -2320,7 +2635,7 @@ const FACTION_LIST = [
   { key: "chaos", name: "Chaos", data: CHAOS },
   { key: "chaosdwarfs", name: "Chaos Dwarfs" },
   { key: "darkelves", name: "Dark Elves" },
-  { key: "bretonnia", name: "The Grand Army of Bretonnia" },
+  { key: "bretonnia", name: "The Grand Army of Bretonnia", data: BRETONNIA },
   { key: "lizardmen", name: "Lizardmen" },
   { key: "dogsofwar", name: "Dogs of War" },
   { key: "halflings", name: "Halflings of the Moot" },
@@ -2330,7 +2645,7 @@ const FACTION_LIST = [
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
