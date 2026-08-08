@@ -299,6 +299,7 @@ const STATS = {
   "Ogre Champion": { M: 6, WS: 4, BS: 3, S: 5, T: 5, W: 3, I: 4, A: 3, Ld: 7 },
   "Engineer": { M: 4, WS: 3, BS: 4, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
   "War Machine (cannon, mortar, etc.)": { M: "-", WS: "-", BS: "-", S: "-", T: 7, W: 3, I: "-", A: "-", Ld: "-" },
+  "Weapon Team": { M: "-", WS: "-", BS: "-", S: "-", T: 7, W: 2, I: "-", A: "-", Ld: "-" },
   "War Wagon": { M: "-", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
   "Steam Tank": { M: "-", WS: 2, BS: 4, S: 7, T: 10, W: 5, I: "-", A: "-", Ld: "-" },
   "The Elector Counts": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 3, I: 4, A: 3, Ld: 9 },
@@ -812,7 +813,7 @@ const WOOD_ELVES = {
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
     },
     {
-      id: "gladeriders", name: "Wood Elf Glade Riders", perModel: 22, minSize: 5, stat: "Wood Elf Lords",
+      id: "gladeriders", name: "Wood Elf Glade Riders", perModel: 22, minSize: 5, stat: "Wood Elf Warriors",
       command: "fastCavalry",
       note: "Warriors on Elven Steeds with light armour, spears & bows. Fast Cavalry, may skirmish, may Vanguard, may Fire & Flee as a charge reaction.",
       options: [
@@ -822,10 +823,9 @@ const WOOD_ELVES = {
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
-      id: "falconers", name: "Wood Elf Falconers", perModel: 15, minSize: 5,
-      statNote: "As Wood Elf Warriors, armed with Hunting Falcons (range 24\", S3 missile; -1 to hit vs Falconers in melee).",
+      id: "falconers", name: "Wood Elf Falconers", perModel: 15, minSize: 5, stat: "Wood Elf Warriors",
       restriction: "0-1", command: "skirmisher",
-      note: "Elven Warriors with Hunting Falcons. May skirmish. Falcons ignore long-range/move penalties but gain no shooting-buff bonuses.",
+      note: "Elven Warriors with Hunting Falcons (range 24\", S3 missile; -1 to hit vs Falconers in melee). May skirmish. Falcons ignore long-range/move penalties but gain no shooting-buff bonuses.",
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
@@ -926,6 +926,7 @@ const EMPIRE = {
     "Experimental weapons exist for named characters and war machine crews (Hochland Long Rifle, repeating handgun/pistol, blunderbuss, man catcher, hook halberd, ball and chain) — priced where they appear on a specific entry.",
     "Knights: normally only one regiment of each Knight type may be included, but if every other Knight type is omitted, that one type may be taken in any number. Reiksguard Foot Knights + Mounted Reiksguard Knights count as one type; Teutogen Foot Knights + Knights of the White Wolf count as one type.",
     "An Empire army may include Gotrek and Felix from the Dwarfs army book (not yet modeled in this builder).",
+    "As an auxiliary option, the Empire army may include one regiment from the Dogs of War army — this may be one of the Regiments of Renown, provided it's human. Not mechanically wired up here (this builder is one faction at a time) — add it from the Dogs of War faction on paper if you use it.",
   ],
   characters: [
     {
@@ -1069,36 +1070,42 @@ const EMPIRE = {
       champion: { name: "Empire Champion", baseCost: 20, magicItemSlots: 1, stat: "Empire Champion" },
     },
     {
-      id: "pistoliers", name: "Pistoliers", perModel: 17, minSize: 5, statNote: "State Troops in light armour with two pistols, on Normal Horses.", command: "fastCavalry",
-      note: "Fast cavalry. May skirmish.",
+      id: "pistoliers", name: "Pistoliers", perModel: 17, minSize: 5, stat: "State Trooper", command: "fastCavalry",
+      note: "State Troops in light armour with two pistols, on Normal Horses. Fast cavalry. May skirmish.",
       champion: { name: "Empire Captain", baseCost: 20, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "outriders", name: "Outriders", perModel: 17, minSize: 5, statNote: "State Troops in light armour with repeating handguns, on barded Normal Horses.", command: "standard",
+      id: "outriders", name: "Outriders", perModel: 17, minSize: 5, stat: "State Trooper", command: "standard",
+      note: "State Troops in light armour with repeating handguns, on barded Normal Horses.",
       champion: { name: "Empire Captain", baseCost: 20, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "whitewolf", name: "Knights of the White Wolf", perModel: 20, minSize: 5, statNote: "Knights with barded warhorses, full plate armour, and double handed weapons.", command: "standard",
+      id: "whitewolf", name: "Knights of the White Wolf", perModel: 20, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      note: "Knights with barded warhorses, full plate armour, and double handed weapons.",
       knightGroup: "whiteWolf",
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "teutogen", name: "Teutogen Foot Knights", perModel: 13, minSize: 5, statNote: "Knights with full plate armour and double handed weapons.", command: "standard",
+      id: "teutogen", name: "Teutogen Foot Knights", perModel: 13, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      note: "Knights with full plate armour and double handed weapons.",
       knightGroup: "whiteWolf", detachmentParent: true,
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "panther", name: "Knights Panther", perModel: 25, minSize: 5, statNote: "Knights with barded warhorses, full plate armour, shields, and lances.", command: "standard",
+      id: "panther", name: "Knights Panther", perModel: 25, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      note: "Knights with barded warhorses, full plate armour, shields, and lances.",
       knightGroup: "panther",
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "blazingsun", name: "Knights of the Blazing Sun", perModel: 25, minSize: 5, statNote: "Knights with barded warhorses, full plate armour, shields, and lances.", command: "standard",
-      knightGroup: "blazingSun", note: "Can alternatively represent a lesser Knightly Order of your own design.",
+      id: "blazingsun", name: "Knights of the Blazing Sun", perModel: 25, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      note: "Knights with barded warhorses, full plate armour, shields, and lances. Can alternatively represent a lesser Knightly Order of your own design.",
+      knightGroup: "blazingSun",
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
-      id: "reiksguardfoot", name: "Reiksguard Foot Knights", perModel: 11, minSize: 5, statNote: "Knights with full plate armour and shields.", command: "standard",
+      id: "reiksguardfoot", name: "Reiksguard Foot Knights", perModel: 11, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      note: "Knights with full plate armour and shields.",
       knightGroup: "reiksguard", detachmentParent: true,
       options: [
         { id: "dhw", group: null, label: "Swap shields for double handed weapons (+2pt/model)", cost: 2, per: "model" },
@@ -1106,7 +1113,8 @@ const EMPIRE = {
       champion: { name: "Grand Commander", baseCost: 50, magicItemSlots: 1, stat: "Grand Commander" },
     },
     {
-      id: "reiksguardmounted", name: "Mounted Reiksguard Knights", perModel: 25, minSize: 5, statNote: "Knights with barded warhorses, full plate armour, shields, and lances.", command: "standard",
+      id: "reiksguardmounted", name: "Mounted Reiksguard Knights", perModel: 25, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      note: "Knights with barded warhorses, full plate armour, shields, and lances.",
       knightGroup: "reiksguard",
       champion: { name: "Grand Commander", baseCost: 50, magicItemSlots: 1, stat: "Grand Commander" },
     },
@@ -3533,7 +3541,8 @@ const DOGS_OF_WAR = {
       champion: { name: "Human Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion", tags: ["human"] },
     },
     {
-      id: "elitehumanfoot", name: "Elite Human Foot Soldiers", perModel: 7, minSize: 5, stat: "Knight (Empire)", statNote: "Elite Human Mercenary Soldiers with light armour.", command: "standard",
+      id: "elitehumanfoot", name: "Elite Human Foot Soldiers", perModel: 7, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      note: "Elite Human Mercenary Soldiers with light armour.",
       options: [
         { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
         { id: "heavyarmour", group: null, label: "Upgrade to heavy armour (+2pt/model)", cost: 2, per: "model" },
@@ -3544,7 +3553,8 @@ const DOGS_OF_WAR = {
       champion: { name: "Elite Human Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["human"] },
     },
     {
-      id: "cavalryretainers", name: "Human Cavalry Retainers", perModel: 9, minSize: 5, stat: "State Trooper", statNote: "Human Mercenary Soldiers riding normal horses. Fast cavalry — lost if heavy armour is taken.", command: "fastCavalry",
+      id: "cavalryretainers", name: "Human Cavalry Retainers", perModel: 9, minSize: 5, stat: "State Trooper", command: "fastCavalry",
+      note: "Human Mercenary Soldiers riding normal horses. Fast cavalry — lost if heavy armour is taken.",
       options: [
         { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat, free if heavy armour taken)", cost: 10, per: "flat" },
         { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
@@ -3565,7 +3575,8 @@ const DOGS_OF_WAR = {
       champion: { name: "Elite Human Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["human"] },
     },
     {
-      id: "norsehuscarls", name: "Norse Huscarls", perModel: 8, minSize: 5, stat: "Norse Huscarls", statNote: "Huscarls with light armour. Fighting with shields, may form a Shieldwall as a charge reaction (-1 to hit the charging enemy; forfeits fighting with double handed weapons that combat).", command: "standard", tags: ["norse"],
+      id: "norsehuscarls", name: "Norse Huscarls", perModel: 8, minSize: 5, stat: "Norse Huscarls", command: "standard", tags: ["norse"],
+      note: "Huscarls with light armour. Fighting with shields, may form a Shieldwall as a charge reaction (-1 to hit the charging enemy; forfeits fighting with double handed weapons that combat).",
       options: [
         { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
         { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
@@ -3573,25 +3584,29 @@ const DOGS_OF_WAR = {
       champion: { name: "Norse Champion", baseCost: 20, magicItemSlots: 1, stat: "Norse Champion", tags: ["norse"] },
     },
     {
-      id: "seaelves", name: "Sea Elf Mercenaries", perModel: 10, minSize: 5, stat: "Elven Warriors (High Elf)", statNote: "Elven Warriors with light armour, shields, spear and bows.", command: "standard", tags: ["seaelf"],
+      id: "seaelves", name: "Sea Elf Mercenaries", perModel: 10, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard", tags: ["seaelf"],
+      note: "Elven Warriors with light armour, shields, spear and bows.",
       options: [
         { id: "longbows", group: null, label: "Upgrade bows to longbows (+2pt/model)", cost: 2, per: "model" },
       ],
       champion: { name: "Sea Elf Champion", baseCost: 20, magicItemSlots: 1, stat: "Knightly Champion", tags: ["seaelf"] },
     },
     {
-      id: "halflingmilitia", name: "Halfling Militia", perModel: 2.5, minSize: 5, stat: "Halfling", statNote: "Halflings with light armour and shields. Foresters — move through woods without penalty.", command: "standard", tags: ["halfling"],
+      id: "halflingmilitia", name: "Halfling Militia", perModel: 2.5, minSize: 5, stat: "Halfling", command: "standard", tags: ["halfling"],
+      note: "Halflings with light armour and shields. Foresters — move through woods without penalty.",
       options: [
         { id: "spears", group: null, label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
       ],
       champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion", tags: ["halfling"] },
     },
     {
-      id: "halflingbowmen", name: "Halfling Bowmen", perModel: 7, minSize: 5, stat: "Halfling", statNote: "Halflings with bows. May skirmish; foresters even if not skirmishing.", command: "skirmisher", tags: ["halfling"],
+      id: "halflingbowmen", name: "Halfling Bowmen", perModel: 7, minSize: 5, stat: "Halfling", command: "skirmisher", tags: ["halfling"],
+      note: "Halflings with bows. May skirmish; foresters even if not skirmishing.",
       champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion", tags: ["halfling"] },
     },
     {
-      id: "ogremercenaries", name: "Ogre Mercenaries", perModel: 24, minSize: 3, stat: "Ogre", statNote: "Ogres with light armour. Monstrous models that cause fear.", command: "monstrous", tags: ["ogre"],
+      id: "ogremercenaries", name: "Ogre Mercenaries", perModel: 24, minSize: 3, stat: "Ogre", command: "monstrous", tags: ["ogre"],
+      note: "Ogres with light armour. Monstrous models that cause fear.",
       options: [
         { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat)", cost: 10, per: "flat" },
         { id: "heavyarmour", group: null, label: "Swap light for heavy armour (+4pt/model)", cost: 4, per: "model" },
@@ -3601,7 +3616,8 @@ const DOGS_OF_WAR = {
       champion: { name: "Ogre Champion", baseCost: 50, magicItemSlots: 1, stat: "Ogre Champion", tags: ["ogre"] },
     },
     {
-      id: "dwarfmercenaries", name: "Dwarf Mercenary Warriors", perModel: 8, minSize: 5, stat: "Dwarf Soldier", statNote: "Dwarfs with light armour.", command: "standard", tags: ["dwarf"],
+      id: "dwarfmercenaries", name: "Dwarf Mercenary Warriors", perModel: 8, minSize: 5, stat: "Dwarf Soldier", command: "standard", tags: ["dwarf"],
+      note: "Dwarfs with light armour.",
       options: [
         { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
         { id: "heavyarmour", group: null, label: "Swap light for heavy armour (+2pt/model)", cost: 2, per: "model" },
@@ -3856,7 +3872,8 @@ const CHAOS_DWARFS = {
   ],
   regiments: [
     {
-      id: "cdwarriors", name: "Chaos Dwarf Warriors", perModel: 9, minSize: 5, stat: "Chaos Dwarf Warriors", statNote: "Chaos Dwarf Warriors with heavy armour.", command: "standard",
+      id: "cdwarriors", name: "Chaos Dwarf Warriors", perModel: 9, minSize: 5, stat: "Chaos Dwarf Warriors", command: "standard",
+      note: "Comes with heavy armour.",
       options: [
         { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
         { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
@@ -3865,15 +3882,16 @@ const CHAOS_DWARFS = {
       champion: { name: "Chaos Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Chaos Dwarf Champion", tags: ["chaosDwarf"] },
     },
     {
-      id: "cdblunderbusses", name: "Chaos Dwarf Blunderbusses", perModel: 12, minSize: 5, stat: "Chaos Dwarf Warriors", statNote: "Chaos Dwarf Warriors with heavy armour and Blunderbusses (Old School Addendum: may be reflavored as crossbows instead — same points and profile).", command: "standard",
-      note: "Fires even after moving, in a 12\" x (unit width) firing zone ahead of the regiment, hitting every model whose base is more than half within it (friend and foe alike). Hits are S3, rising to S4 with two full ranks or S5 with three-plus. No long-range/skirmisher penalty; normal cover and move-and-shoot penalties apply. Joined characters count as armed with Blunderbusses for strength purposes even if they aren't. May stand & shoot against distant chargers, hitting the charging unit only (no area effect on that reaction).",
+      id: "cdblunderbusses", name: "Chaos Dwarf Blunderbusses", perModel: 12, minSize: 5, stat: "Chaos Dwarf Warriors", command: "standard",
+      note: "Comes with heavy armour and Blunderbusses (may be reflavored as crossbows instead, under Old School Addendum — same points and profile). Fires even after moving, in a 12\" x (unit width) firing zone ahead of the regiment, hitting every model whose base is more than half within it (friend and foe alike). Hits are S3, rising to S4 with two full ranks or S5 with three-plus. No long-range/skirmisher penalty; normal cover and move-and-shoot penalties apply. Joined characters count as armed with Blunderbusses for strength purposes even if they aren't. May stand & shoot against distant chargers, hitting the charging unit only (no area effect on that reaction).",
       options: [
         { id: "shields", group: null, label: "Shields (+2pt/model)", cost: 2, per: "model" },
       ],
       champion: { name: "Chaos Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Chaos Dwarf Champion", tags: ["chaosDwarf"] },
     },
     {
-      id: "towerguard", name: "Chaos Dwarf Tower Guard", perModel: 11, minSize: 5, stat: "Chaos Dwarf Tower Guards", statNote: "Chaos Dwarf Tower Guards with heavy armour.", command: "standard", restriction: "0-1",
+      id: "towerguard", name: "Chaos Dwarf Tower Guard", perModel: 11, minSize: 5, stat: "Chaos Dwarf Tower Guards", command: "standard", restriction: "0-1",
+      note: "Comes with heavy armour.",
       options: [
         { id: "dhw", group: "melee", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
         { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
@@ -3882,7 +3900,8 @@ const CHAOS_DWARFS = {
       champion: { name: "Commander of the Tower", baseCost: 30, magicItemSlots: 1, stat: "Commander of the Tower", tags: ["chaosDwarf"] },
     },
     {
-      id: "hobgoblinwarriors", name: "Hobgoblin Warriors", perModel: 4, minSize: 5, stat: "Hobgoblin (CD)", statNote: "Hobgoblin Warriors with shields.", command: "standard", tags: ["hobgoblin"],
+      id: "hobgoblinwarriors", name: "Hobgoblin Warriors", perModel: 4, minSize: 5, stat: "Hobgoblin (CD)", command: "standard", tags: ["hobgoblin"],
+      note: "Comes with shields.",
       options: [
         { id: "spears", group: "melee", label: "Spears (+1pt/model)", cost: 1, per: "model" },
         { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
@@ -3890,7 +3909,8 @@ const CHAOS_DWARFS = {
       champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
     },
     {
-      id: "hobgoblinarchers", name: "Hobgoblin Archers", perModel: 5, minSize: 5, stat: "Hobgoblin (CD)", statNote: "Hobgoblin Warriors with bows.", command: "standard", tags: ["hobgoblin"],
+      id: "hobgoblinarchers", name: "Hobgoblin Archers", perModel: 5, minSize: 5, stat: "Hobgoblin (CD)", command: "standard", tags: ["hobgoblin"],
+      note: "Comes with bows.",
       options: [
         { id: "armour", group: null, label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
         { id: "crossbows", group: null, label: "Upgrade bows to crossbows (+2pt/model)", cost: 2, per: "model", theme: "oldschool" },
@@ -3898,7 +3918,8 @@ const CHAOS_DWARFS = {
       champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
     },
     {
-      id: "hobgoblinwolfriders", name: "Hobgoblin Wolf Riders", perModel: 11, minSize: 5, stat: "Hobgoblin (CD)", statNote: "Hobgoblin Warriors riding Giant Wolves. Fast cavalry. May skirmish if armed with bows/short bows.", command: "fastCavalry", tags: ["hobgoblin"],
+      id: "hobgoblinwolfriders", name: "Hobgoblin Wolf Riders", perModel: 11, minSize: 5, stat: "Hobgoblin (CD)", command: "fastCavalry", tags: ["hobgoblin"],
+      note: "Rides Giant Wolves. Fast cavalry. May skirmish if armed with bows/short bows.",
       options: [
         { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat)", cost: 10, per: "flat" },
         { id: "spears", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
@@ -3910,12 +3931,13 @@ const CHAOS_DWARFS = {
       champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
     },
     {
-      id: "sneakygits", name: "Hobgoblin Sneaky Gits", perModel: 8, minSize: 5, stat: "Hobgoblin (CD)", statNote: "Hobgoblin Warriors with two poisoned daggers and light armour.", command: "standard", tags: ["hobgoblin"],
-      note: "After the first round of melee, any number of models may leave the unengaged rear ranks to lap around the enemy unit's flank/rear, expanding the front rank. If five or more end up engaged to a flank/rear this way, the Sneaky Gits get the flank/rear combat resolution bonus (and the enemy loses its rank bonus) — but the Sneaky Gits also lose their own rank bonus once models leave the rear ranks.",
+      id: "sneakygits", name: "Hobgoblin Sneaky Gits", perModel: 8, minSize: 5, stat: "Hobgoblin (CD)", command: "standard", tags: ["hobgoblin"],
+      note: "Comes with two poisoned daggers and light armour. After the first round of melee, any number of models may leave the unengaged rear ranks to lap around the enemy unit's flank/rear, expanding the front rank. If five or more end up engaged to a flank/rear this way, the Sneaky Gits get the flank/rear combat resolution bonus (and the enemy loses its rank bonus) — but the Sneaky Gits also lose their own rank bonus once models leave the rear ranks.",
       champion: { name: "Hobgoblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Hobgoblin Champion (CD)", tags: ["hobgoblin"] },
     },
     {
-      id: "bullcentaurs", name: "Bull Centaurs", perModel: 24, minSize: 5, stat: "Bull Centaurs", statNote: "Bull Centaurs with light armour. Fast cavalry (unless given heavy armour).", command: "fastCavalry", tags: ["bullCentaur"],
+      id: "bullcentaurs", name: "Bull Centaurs", perModel: 24, minSize: 5, stat: "Bull Centaurs", command: "fastCavalry", tags: ["bullCentaur"],
+      note: "Comes with light armour. Fast cavalry (unless given heavy armour).",
       options: [
         { id: "standard", group: null, label: "Standard bearer, one model (free if heavy armour taken, otherwise +10pts flat)", cost: 10, per: "flat" },
         { id: "shields", group: null, label: "Shields (+2pt/model)", cost: 2, per: "model" },
@@ -3925,7 +3947,8 @@ const CHAOS_DWARFS = {
       champion: { name: "Bull Centaur Champion", baseCost: 30, magicItemSlots: 1, stat: "Bull Centaur Champion", tags: ["bullCentaur"] },
     },
     {
-      id: "orcslaves", name: "Orc Slave Warriors", perModel: 5, minSize: 5, stat: "Common Orc", statNote: "Common Orcs with light armour.", command: "standard", tags: ["commonOrc"],
+      id: "orcslaves", name: "Orc Slave Warriors", perModel: 5, minSize: 5, stat: "Common Orc", command: "standard", tags: ["commonOrc"],
+      note: "Comes with light armour.",
       options: [
         { id: "ahw", group: "melee", label: "Additional hand weapons (+1pt/model)", cost: 1, per: "model" },
         { id: "spears", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
@@ -3936,7 +3959,8 @@ const CHAOS_DWARFS = {
       champion: { name: "Common Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Common Orc Champion", tags: ["commonOrc"] },
     },
     {
-      id: "blackorcslaves", name: "Black Orc Slave Warriors", perModel: 9, minSize: 5, stat: "Black Orc", statNote: "Black Orcs with light armour.", command: "standard", tags: ["blackOrc"],
+      id: "blackorcslaves", name: "Black Orc Slave Warriors", perModel: 9, minSize: 5, stat: "Black Orc", command: "standard", tags: ["blackOrc"],
+      note: "Comes with light armour.",
       options: [
         { id: "ahw", group: "melee", label: "Additional hand weapons (+2pt/model)", cost: 2, per: "model" },
         { id: "spears", group: "melee", label: "Spears (+2pt/model)", cost: 2, per: "model" },
@@ -3960,8 +3984,8 @@ const CHAOS_DWARFS = {
     },
     // --- Modern Stuff regiments ---
     {
-      id: "bullcentaurrenders", name: "Bull Centaur Renders", perModel: 54, minSize: 3, stat: "Bull Centaur Renders", statNote: "Bull Centaur Renders wear heavy armour. Monstrous, cause fear.", command: "monstrous", theme: "modern",
-      note: "Cannot take a standard bearer or musician.",
+      id: "bullcentaurrenders", name: "Bull Centaur Renders", perModel: 54, minSize: 3, stat: "Bull Centaur Renders", command: "monstrous", theme: "modern",
+      note: "Wear heavy armour. Monstrous, cause fear. Cannot take a standard bearer or musician.",
       options: [
         { id: "shields", group: null, label: "Shields (+4pt/model)", cost: 4, per: "model" },
         { id: "dhw", group: "melee", label: "Double handed weapons (+12pt/model)", cost: 12, per: "model" },
@@ -3992,11 +4016,11 @@ const CHAOS_DWARFS = {
     },
     // --- Old School Addendum war machines ---
     {
-      id: "flamethrowerteam", name: "Flame Thrower Team", perUnit: 60, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "oldschool",
+      id: "flamethrowerteam", name: "Flame Thrower Team", perUnit: 60, stat: "Weapon Team", kind: "warmachine", theme: "oldschool",
       note: "Weapon Team: two Chaos Dwarf Warriors in heavy armour on one 25x50mm base, skirmisher-style (360° LoS, no facing when charged by flyers, can't move-and-fire, may stand & shoot). Guess up to 6\" plus the artillery die; on a misfire the team is destroyed. Otherwise place the teardrop template (small end at the hit point) — models more than half covered suffer a flaming S5 hit, 1 wound=1D3. Any casualty forces a panic test. If it blows up during a stand & shoot, the charge counts as failed.",
     },
     {
-      id: "swivelgunteam", name: "Swivel Gun Team", perUnit: 85, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "oldschool",
+      id: "swivelgunteam", name: "Swivel Gun Team", perUnit: 85, stat: "Weapon Team", kind: "warmachine", theme: "oldschool",
       note: "Weapon Team: two Chaos Dwarf Warriors in heavy armour on one 25x50mm base, skirmisher-style. Range 18\", 2D6 shots, S3 armour piercing (-1 save). On any double, fires in a random (scatter die) direction instead, hitting the first unit in its path within range — each shot then hits automatically.",
     },
     {
