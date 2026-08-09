@@ -830,6 +830,16 @@ const STATS = {
   "Ghoul Champion (Slann)": { M: 4, WS: 3, BS: 4, S: 4, T: 4, W: 1, I: 4, A: 3, Ld: 5 },
   "Amazon Champion": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 7 },
   "Toad Master Drulndribl": { M: 4, WS: 7, BS: 5, S: 4, T: 5, W: 3, I: 6, A: 4, Ld: 10 },
+
+  "Treeman Ancient": { M: 6, WS: 8, BS: 3, S: 7, T: 7, W: 6, I: 3, A: 5, Ld: 9 },
+  "Tree-Kin": { M: 5, WS: 4, BS: 0, S: 5, T: 5, W: 3, I: 3, A: 3, Ld: 8 },
+  "Eternal Guards": { M: 5, WS: 5, BS: 4, S: 3, T: 3, W: 1, I: 7, A: 1, Ld: 8 },
+  "Rangers": { M: 5, WS: 5, BS: 4, S: 3, T: 3, W: 1, I: 7, A: 1, Ld: 8 },
+  "Wild Riders": { M: 5, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 7, A: 1, Ld: 8 },
+  "Sisters of the Thorn": { M: 5, WS: 5, BS: 4, S: 3, T: 3, W: 1, I: 7, A: 1, Ld: 8 },
+  "Stag": { M: 9, WS: 3, BS: 0, S: 4, T: 3, W: 1, I: 4, A: 1, Ld: 5 },
+  "Zoat Character": { M: 7, WS: 6, BS: 4, S: 5, T: 5, W: 3, I: 7, A: 3, Ld: 10 },
+  "Zoat Warrior": { M: 7, WS: 5, BS: 3, S: 4, T: 5, W: 3, I: 6, A: 2, Ld: 8 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -874,10 +884,23 @@ const WOOD_ELVES = {
   name: "Wood Elves",
   tagline: "Guerrilla warfare from the deep groves of the Old World",
   magicItems: WOOD_ELVES_MAGIC_ITEMS,
+  themes: {
+    default: "core",
+    label: "Army Type",
+    options: [
+      { id: "core", name: "Core", desc: "The default Wood Elf army — entries from Warhammer Armies (3rd edition) and the first Wood Elf army book (4th edition). Includes Wood Elf Warriors, Beastmasters, Falconers, Wood Elf Lords, Wood Elf Chariots, and Shape Changers. May include an allied Zoat contingent." },
+      { id: "savage", name: "Savage", desc: "The more savage Wood Elf army of 6th/8th edition. Loses Shape Changers, Wood Elf Warriors, Beastmasters, Falconers, Wood Elf Lords, and Wood Elf Chariots. Gains Treeman Ancient characters, Tree-Kin, Eternal Guards, Rangers, Wild Riders, Sisters of the Thorn, and Stags as a steed option. No Zoat contingent." },
+    ],
+  },
+  contingentRules: { tag: "zoat", label: "Zoat Contingent", minRegiments: 1, minCharacters: 1, charactersCostCappedByRegiments: true, maxPercentOfArmy: 25 },
   armyWideRules: [
     "Before deployment, Wood Elves may place a small forest (6\" diameter) which must lie within or touch the Wood Elf deployment zone.",
     "Wood Elf Longbows may fire 36\" and have the armour piercing rule (-1 to armour save).",
     "All Wood Elves (including cavalry but not chariots) can move through woods without suffering movement penalties. This also applies to Treemen, Dryads and the Green Dragon.",
+    "Stags for steeds (Savage army only): a Lord may take a Stag for +33pts, a Hero for +26pts, a Battle Standard Bearer for +19pts, and Mages may take one for free.",
+    "Dryads in a Savage army are skirmishers, but cannot use the Aspects (Birch/Oak/Willow) described on their regiment entry. Not toggled mechanically — the regiment's cost and command setup stay the same in both themes, only this flavor/tactical distinction changes.",
+    "Zoat Contingent (Core army only): Wood Elves not using the Savage option may include an allied Zoat contingent. Zoat cannot use the Wood Elf General's Leadership or benefit from the Battle Standard Bearer. The contingent must include at least one Zoat Warrior regiment and at least one Zoat Character, the total cost of Zoat Characters can't exceed the total cost of Zoat Warrior regiments, one Zoat Character must be appointed general of the whole contingent, and the contingent's total cost can't exceed 25% of the army's total points. Zoat Characters act as regimental champions and won't voluntarily leave their regiment. This builder tracks these specific numbers live (see the warning banner above the roster if any aren't met) but doesn't block adding units that would violate them.",
+    "Gruarth the Beastmaster and Skaw the Falconer (special characters) reference unit types — Forest Creatures & Beastmasters, Wood Elf Falconers — that aren't available under the Savage theme. Not hard-restricted by this builder; avoid taking them in a Savage army.",
   ],
   characters: [
     {
@@ -891,6 +914,7 @@ const WOOD_ELVES = {
         { id: "eagle", name: "Great Eagle", cost: 69, stat: "Great Eagle" },
         { id: "griffon", name: "Griffon", cost: 181, stat: "Griffon" },
         { id: "dragon", name: "Green Dragon", cost: 321, stat: "Green Dragon" },
+        { id: "stag", name: "Stag", cost: 33, stat: "Stag", theme: "savage" },
       ],
     },
     {
@@ -904,6 +928,7 @@ const WOOD_ELVES = {
         { id: "eagle", name: "Great Eagle", cost: 52, stat: "Great Eagle" },
         { id: "griffon", name: "Griffon", cost: 174, stat: "Griffon" },
         { id: "dragon", name: "Green Dragon", cost: 314, stat: "Green Dragon" },
+        { id: "stag", name: "Stag", cost: 26, stat: "Stag", theme: "savage" },
       ],
     },
     {
@@ -917,6 +942,7 @@ const WOOD_ELVES = {
       gearNote: "May take light armour for free. The one magic item may be a magic banner.",
       mounts: [
         { id: "steed", name: "Elven Steed (may take barding free)", cost: 13, stat: "Elven Steed" },
+        { id: "stag", name: "Stag", cost: 19, stat: "Stag", theme: "savage" },
       ],
     },
     {
@@ -929,6 +955,7 @@ const WOOD_ELVES = {
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
         { id: "griffon", name: "Griffon", cost: 160, stat: "Griffon" },
         { id: "dragon", name: "Green Dragon", cost: 300, stat: "Green Dragon" },
+        { id: "stag", name: "Stag (free)", cost: 0, stat: "Stag", theme: "savage" },
       ],
     },
     {
@@ -939,6 +966,7 @@ const WOOD_ELVES = {
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
+        { id: "stag", name: "Stag (free)", cost: 0, stat: "Stag", theme: "savage" },
       ],
     },
     {
@@ -949,6 +977,7 @@ const WOOD_ELVES = {
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
+        { id: "stag", name: "Stag (free)", cost: 0, stat: "Stag", theme: "savage" },
       ],
     },
     {
@@ -959,12 +988,22 @@ const WOOD_ELVES = {
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
+        { id: "stag", name: "Stag (free)", cost: 0, stat: "Stag", theme: "savage" },
       ],
     },
     {
-      id: "shapechanger", name: "Shape Changer", cost: 80, stat: "Shape Changer (beast form)", magicItemSlots: 0,
+      id: "shapechanger", name: "Shape Changer", cost: 80, stat: "Shape Changer (beast form)", magicItemSlots: 0, theme: "core",
       gearNote: "Hides in a rank-and-file infantry regiment until unleashed. Causes fear in beast form. Can never be the general.",
       mounts: [],
+    },
+    {
+      id: "treemanancient", name: "Treeman Ancient", cost: 250, stat: "Treeman Ancient", theme: "savage", magicItemSlots: 2, magicItemCategoryFilter: ["sprite"],
+      gearNote: "Rules as a normal Treeman, except it's a character and may take two Sprites.",
+    },
+    {
+      id: "zoatcharacter", name: "Zoat Character", cost: 110, stat: "Zoat Character", magicItemSlots: 1, theme: "core", tags: ["zoat"], contingentTag: "zoat",
+      gearNote: "Monstrous model on a 40x40 or 40x60mm base. Causes fear, 5+ armour save (scaly skin), moves through forests without penalty. Carries a double handed weapon (forfeited if it becomes a wizard — not toggled here). Cannot use the Wood Elf General's Leadership or benefit from the Battle Standard Bearer. Acts as a regimental champion — won't voluntarily leave its regiment (not hard-enforced). The one magic item may be a Sprite, or (only if upgraded to a wizard) an arcane item — not restricted by this picker, so choose accordingly.",
+      magicLevelOption: { label: "Become a level 1 wizard (Amber or Jade Magic)", costPerLevel: 60, max: 1, min: 0 },
     },
   ],
   regiments: [
@@ -974,7 +1013,7 @@ const WOOD_ELVES = {
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
-      id: "warriors", name: "Wood Elf Warriors", perModel: 7, minSize: 5, stat: "Wood Elf Warriors",
+      id: "warriors", name: "Wood Elf Warriors", perModel: 7, minSize: 5, stat: "Wood Elf Warriors", theme: "core",
       command: "standard", note: "Warriors with shields.",
       options: [
         { id: "spear", group: "melee", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
@@ -1005,7 +1044,7 @@ const WOOD_ELVES = {
     {
       id: "dryads", name: "Dryads", perModel: 20, minSize: 5, stat: "Dryads",
       command: "none",
-      note: "Cause fear, immune to psychology, 5+ natural armour save. Cannot take a standard bearer; counts as having a musician (they sing). Each combat round choose an Aspect: Birch (+1A), Oak (+1S/+1T), or Willow (each enemy in base contact forfeits one attack). May only be joined by a Branch Wraith.",
+      note: "Cause fear, immune to psychology, 5+ natural armour save. Cannot take a standard bearer; counts as having a musician (they sing). Each combat round choose an Aspect: Birch (+1A), Oak (+1S/+1T), or Willow (each enemy in base contact forfeits one attack). May only be joined by a Branch Wraith. In a Savage army, Dryads are skirmishers instead and cannot use Aspects (not toggled here — cost and command setup are unchanged).",
       branchWraith: { name: "Branch Wraith", cost: 70, note: "Regimental champion & level 1 wizard (Jade or Amber magic). May not take a magic item, but may take one Sprite.", spriteSlots: 1 },
     },
     {
@@ -1027,7 +1066,7 @@ const WOOD_ELVES = {
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
-      id: "lords", name: "Wood Elf Lords", perModel: 20, minSize: 5, stat: "Wood Elf Lords", mountStat: "Elven Steed", mountLabel: "Elven Steed",
+      id: "lords", name: "Wood Elf Lords", perModel: 20, minSize: 5, stat: "Wood Elf Lords", mountStat: "Elven Steed", mountLabel: "Elven Steed", theme: "core",
       command: "fastCavalry", fastCavalryToggleOption: "barding",
       note: "Lords riding Elven Steeds with light armour, shields and lances. Fast cavalry.",
       options: [
@@ -1046,15 +1085,15 @@ const WOOD_ELVES = {
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
-      id: "falconers", name: "Wood Elf Falconers", perModel: 15, minSize: 5, stat: "Wood Elf Warriors",
+      id: "falconers", name: "Wood Elf Falconers", perModel: 15, minSize: 5, stat: "Wood Elf Warriors", theme: "core",
       restriction: "0-1", command: "skirmisher",
       note: "Elven Warriors with Hunting Falcons (range 24\", S3 missile; -1 to hit vs Falconers in melee). May skirmish. Falcons ignore long-range/move penalties but gain no shooting-buff bonuses.",
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
-      id: "forestcreatures", name: "Forest Creatures & Beastmasters", perModel: 0, minSize: 1, kind: "composite",
+      id: "forestcreatures", name: "Forest Creatures & Beastmasters", perModel: 0, minSize: 1, kind: "composite", theme: "core",
       restriction: "0-2", command: "none",
-      note: "Any combination of Bears, Hunting Dogs, Wild Cats or Wild Hogs, optionally led by unarmoured Wood Elf Beastmasters. Follows the Beastmaster rules in the main rulebook.",
+      note: "Any combination of Bears, Hunting Dogs, Wild Cats or Wild Hogs, optionally led by unarmoured Wood Elf Beastmasters. Follows the Beastmaster rules in the main rulebook. The whole entry is Core-only, since the book excludes Wood Elf Beastmasters from the Savage army and offers no replacement forest-creature unit there — a judgment call, flagged here.",
       composition: [
         { id: "bear", label: "Bears", cost: 15, stat: "Bears" },
         { id: "dog", label: "Hunting Dogs", cost: 10, stat: "Hunting Dogs" },
@@ -1063,6 +1102,40 @@ const WOOD_ELVES = {
         { id: "beastmaster", label: "Wood Elf Beastmasters", cost: 14, stat: "Wood Elf Beastmasters" },
       ],
     },
+    {
+      id: "treekin", name: "Tree-Kin", perModel: 45, minSize: 3, stat: "Tree-Kin", command: "none", theme: "savage",
+      note: "A monstrous regiment — flammable, causes fear, immune to psychology, 4+ natural armour save. Cannot take a musician or a standard bearer.",
+    },
+    {
+      id: "eternalguards", name: "Wood Elf Eternal Guards", perModel: 13, minSize: 5, stat: "Eternal Guards", command: "standard", theme: "savage", restriction: "0-1",
+      note: "Fight with a staff combining spear, light armour, and shield (effectively spearmen with a 5+ armour save). Immune to psychology and stubborn.",
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
+    },
+    {
+      id: "rangers", name: "Wood Elf Rangers", perModel: 15, minSize: 5, stat: "Rangers", command: "standard", theme: "savage", restriction: "0-1",
+      note: "Light armour and double handed weapons — ignore the always-strike-last rule for double handed weapons. Immune to psychology and stubborn.",
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
+    },
+    {
+      id: "wildriders", name: "Wood Elf Wild Riders", perModel: 28, minSize: 5, stat: "Wild Riders", mountStat: "Stag", mountLabel: "Stag", command: "fastCavalry", theme: "savage", restriction: "0-1",
+      note: "Spears, riding Stags. Fast cavalry. Eternal Frenzy (don't lose frenzy even if broken in melee). Cause fear. All their attacks count as magical.",
+      options: [
+        { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat)", cost: 10, per: "flat" },
+      ],
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
+    },
+    {
+      id: "sistersofthethorn", name: "Wood Elf Sisters of the Thorn", perModel: 28, minSize: 5, stat: "Sisters of the Thorn", mountStat: "Stag", mountLabel: "Stag", command: "fastCavalry", theme: "savage", restriction: "0-1",
+      note: "Spears, riding Stags. Fast cavalry. Ward save 4+, natural dispel 4+, immune to psychology. Cause fear. All their attacks count as magical.",
+      options: [
+        { id: "standard", group: null, label: "Standard bearer, one model (+10pts flat)", cost: 10, per: "flat" },
+      ],
+      champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
+    },
+    {
+      id: "zoatwarrior", name: "Zoat Warrior", perModel: 55, minSize: 3, stat: "Zoat Warrior", command: "none", theme: "core", tags: ["zoat"], contingentTag: "zoat",
+      note: "Monstrous models on 40x40 or 40x60mm bases. Cause fear, 5+ armour save (scaly skin), move through forests without penalty. Carry double handed weapons. Cannot include a standard bearer or musician. Part of the allied Zoat contingent — see army-wide rules for its composition requirements.",
+    },
   ],
   chariotsMonsters: [
     {
@@ -1070,7 +1143,7 @@ const WOOD_ELVES = {
       note: "Small monster that can fly.",
     },
     {
-      id: "chariot", name: "Wood Elf Chariot", perUnit: 60, stat: "Heavy Chariot", kind: "chariot", countsAsFirstRegiment: true,
+      id: "chariot", name: "Wood Elf Chariot", perUnit: 60, stat: "Heavy Chariot", kind: "chariot", countsAsFirstRegiment: true, theme: "core",
       note: "Heavy Chariot pulled by two Elven Steeds, crewed by two Wood Elf Warriors with light armour, spears, shields & Wood Elf Longbows (5+ armour save). The cheapest chariot in the army counts toward Regiments; further chariots count toward Chariots & Monsters.",
       extraCrewCost: 10, extraCrewLabel: "extra Wood Elf Warrior crew", extraSteedCost: 5, extraSteedLabel: "extra Elven Steeds",
       commanderCost: 43, commanderLabel: "One crewman is an Elven Commander", commanderMagicItemSlots: 1, scythedWheelsCost: 20,
@@ -1142,6 +1215,10 @@ const EMPIRE = {
   name: "The Empire",
   tagline: "The disciplined might of humanity's bulwark against the dark",
   magicItems: EMPIRE_MAGIC_ITEMS,
+  compositionRules: [
+    { kind: "requiresIfPresent", label: "Halfling Hot-Pot", trigger: [{ list: "chariots", id: "hotpot", name: "Halfling Hot-Pot" }], requires: [{ list: "regiments", id: "halflingbowmen", name: "Halfling Bowmen" }, { list: "regiments", id: "halflingmilitia", name: "Halfling Militia" }] },
+    { kind: "requiresIfPresent", label: "Tzarina Katarin", trigger: [{ list: "specials", id: "tzarinakatarin", name: "Tzarina Katarin" }], requires: [{ list: "regiments", id: "kislevlancers", name: "Kislev Winged Lancers" }, { list: "regiments", id: "kislevkossars", name: "Kislev Kossars" }, { list: "regiments", id: "kislevhorsearchers", name: "Kislev Horse Archers" }] },
+  ],
   armyWideRules: [
     "Full Plate Armour: Empire Knights wearing full plate armour get a 4+ armour save on its own.",
     "Auxiliaries: the army may include auxiliary contingents of Flagellants, Free Company, Kislev Troops, Halflings, Dwarfs, and Ogres — but only half of the army's total regiments (rounded up) may be auxiliaries.",
@@ -1450,7 +1527,7 @@ const EMPIRE = {
     },
     {
       id: "hotpot", name: "Halfling Hot-Pot", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
-      note: "Requires a Halfling regiment in the army. Shoots like a stone thrower, range 36\", S5, normal armour save allowed, no regeneration. Crewed by three halflings; cannot enter woods despite Halflings being foresters.",
+      note: "Requires a Halfling regiment in the army (now flagged live by this builder). Shoots like a stone thrower, range 36\", S5, normal armour save allowed, no regeneration. Crewed by three halflings; cannot enter woods despite Halflings being foresters.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra halfling crew",
     },
     {
@@ -1495,7 +1572,7 @@ const EMPIRE = {
       note: "Carries full plate armour and the Sword of Justice.", extraMagicItemSlots: 1,
       mountOption: { name: "Barded Warhorse", cost: 15 } },
     { id: "tzarinakatarin", name: "Tzarina Katarin, the Ice Queen of Kislev", cost: 200, stat: "Tzarina Katarin The Ice Queen", role: "Lord (Level 3 Wizard, Lore of Ice)",
-      note: "Requires a Kislev regiment in the army to include her. Rides a Warhorse. Carries the magic blade Fearfrost.", extraMagicItemSlots: 2 },
+      note: "Requires a Kislev regiment in the army to include her (now flagged live by this builder). Rides a Warhorse. Carries the magic blade Fearfrost.", extraMagicItemSlots: 2 },
   ],
 };
 
@@ -2721,9 +2798,19 @@ const BRETONNIA = {
   name: "The Grand Army of Bretonnia",
   tagline: "Chivalrous knights and the peasant levy that bears the realm's weight",
   magicItems: BRETONNIA_MAGIC_ITEMS,
+  compositionRules: [
+    { kind: "requiresAtLeastOne", label: "At least one regiment of Chevaliers", refs: [
+      { list: "regiments", id: "chevalierserrant", name: "Chevaliers Errant" },
+      { list: "regiments", id: "chevaliersfeodaux", name: "Chevaliers Féodaux" },
+      { list: "regiments", id: "chevaliersenquete", name: "Chevaliers en Quête" },
+      { list: "regiments", id: "chevaliersdhonneur", name: "Chevaliers D'Honneur" },
+      { list: "regiments", id: "chevaliersapied", name: "Chevaliers á Pied" },
+      { list: "regiments", id: "chevaliersvolants", name: "Chevaliers Volants" },
+    ] },
+  ],
   armyWideRules: [
     "Bretonnian Warhorses are bred for war over generations and don't suffer the usual -1 movement penalty for wearing barding.",
-    "A Knight's Army: the general must be a knightly character (never a wizard), and the army must include at least one regiment of knights (a Chevaliers regiment).",
+    "A Knight's Army: the general must be a knightly character (never a wizard), and the army must include at least one regiment of knights (a Chevaliers regiment). The regiment requirement is now flagged live by this builder (see the warning banner above the roster); the general-must-be-knightly part isn't, since the app doesn't track a designated general.",
     "Knightly Disdain: knightly regiments (Chevaliers) and knightly characters ignore panic caused by anything except other knightly regiments/characters (or regiments a knightly character has joined). Knightly characters will never join a Peasant regiment.",
     "This builder models the default, darker version of Bretonnia (war machines and peasant levies). The alternate 'Heroic Army' variant (Lance Formation, no common peasants) is described in an appendix that wasn't in the provided text, so it isn't modeled here.",
     "Knightly Virtues: each knightly character may take one Virtue, and each Virtue may only appear once in the army. A Virtue counts as, and takes up a slot from, the character's normal magic item allowance rather than being separate — this builder enforces the one-per-army uniqueness automatically, but doesn't hard-cap a character to exactly one Virtue if they have multiple item slots free, so keep that limit in mind yourself.",
@@ -3009,10 +3096,47 @@ const ORCS_GOBLINS = {
   name: "Orcs & Goblins",
   tagline: "An unstoppable, uncontrollable storm of green promising destruction wherever it goes",
   magicItems: ORC_MAGIC_ITEMS,
+  compositionRules: [
+    { kind: "requiresIfPresent", label: "Common Orc characters", trigger: [{ list: "characters", tag: "commonOrc", name: "a Common Orc character" }], requires: [
+      { list: "regiments", id: "orcboyz", name: "Orc Boyz" }, { list: "regiments", id: "orcarrerboyz", name: "Orc Arrer Boyz" }, { list: "regiments", id: "orcboarboyz", name: "Orc Boar Boyz" },
+      { list: "regiments", id: "orcbiguns", name: "Orc Big'uns" }, { list: "regiments", id: "orcbigunarrerboyz", name: "Orc Big'un Arrer Boyz" }, { list: "regiments", id: "orcbigunboarboyz", name: "Orc Big'un Boar Boyz" },
+    ] },
+    { kind: "requiresIfPresent", label: "Black Orc characters", trigger: [{ list: "characters", tag: "blackOrc", name: "a Black Orc character" }], requires: [{ list: "regiments", id: "blackorcs", name: "Black Orcs" }] },
+    { kind: "requiresIfPresent", label: "Savage Orc characters", trigger: [{ list: "characters", tag: "savageOrc", name: "a Savage Orc character" }], requires: [
+      { list: "regiments", id: "savageorcs", name: "Savage Orcs" }, { list: "regiments", id: "savageorcarrerboyz", name: "Savage Orc Arrer Boyz" }, { list: "regiments", id: "savageorcboarboyz", name: "Savage Orc Boar Boyz" },
+    ] },
+    { kind: "requiresIfPresent", label: "Common Goblin characters", trigger: [{ list: "characters", tag: "commonGoblin", name: "a Common Goblin character" }], requires: [
+      { list: "regiments", id: "commongoblininfantry", name: "Common Goblin Infantry" }, { list: "regiments", id: "commongoblinwolfriders", name: "Common Goblin Wolf Riders" },
+    ] },
+    { kind: "requiresIfPresent", label: "Forest Goblin characters", trigger: [{ list: "characters", tag: "forestGoblin", name: "a Forest Goblin character" }], requires: [
+      { list: "regiments", id: "forestgoblinspiderriders", name: "Forest Goblin Spider Riders" }, { list: "regiments", id: "forestgoblininfantry", name: "Forest Goblin Infantry" },
+    ] },
+    { kind: "requiresIfPresent", label: "Night Goblin characters", trigger: [{ list: "characters", tag: "nightGoblin", name: "a Night Goblin character" }], requires: [
+      { list: "regiments", id: "nightgoblininfantry", name: "Night Goblin Infantry" }, { list: "regiments", id: "nightgoblinsquighoppers", name: "Night Goblin Squig-Hoppers" },
+      { list: "regiments", id: "nightgoblinsquighunters", name: "Night Goblin Squig-Hunters" }, { list: "regiments", id: "nightgoblinnettersclubbers", name: "Night Goblin Netters and Clubbers" },
+    ] },
+    { kind: "requiresIfPresent", label: "Orc-crewed war machines/chariots", trigger: [
+      { list: "chariots", id: "spearchukkasorcs", name: "Spear Chukkas (Orc crew)" }, { list: "chariots", id: "smallrocklobbersorcs", name: "Small Rock Lobbers (Orc crew)" },
+      { list: "chariots", id: "largerocklobbersorcs", name: "Large Rock Lobbers (Orc crew)" }, { list: "chariots", id: "orcboarchariots", name: "Orc Boar Chariot" },
+    ], requires: [
+      { list: "regiments", id: "orcboyz", name: "Orc Boyz" }, { list: "regiments", id: "orcarrerboyz", name: "Orc Arrer Boyz" }, { list: "regiments", id: "orcboarboyz", name: "Orc Boar Boyz" },
+      { list: "regiments", id: "orcbiguns", name: "Orc Big'uns" }, { list: "regiments", id: "orcbigunarrerboyz", name: "Orc Big'un Arrer Boyz" }, { list: "regiments", id: "orcbigunboarboyz", name: "Orc Big'un Boar Boyz" },
+      { list: "regiments", id: "blackorcs", name: "Black Orcs" }, { list: "regiments", id: "savageorcs", name: "Savage Orcs" }, { list: "regiments", id: "savageorcarrerboyz", name: "Savage Orc Arrer Boyz" }, { list: "regiments", id: "savageorcboarboyz", name: "Savage Orc Boar Boyz" },
+    ] },
+    { kind: "requiresIfPresent", label: "Goblin-crewed war machines/chariots", trigger: [
+      { list: "chariots", id: "spearchukkasgoblins", name: "Spear Chukkas (Goblin crew)" }, { list: "chariots", id: "smallrocklobbersgoblins", name: "Small Rock Lobbers (Goblin crew)" },
+      { list: "chariots", id: "largerocklobbersgoblins", name: "Large Rock Lobbers (Goblin crew)" }, { list: "chariots", id: "goblindoomdivers", name: "Goblin Doom Divers" }, { list: "chariots", id: "goblinwolfchariots", name: "Goblin Wolf Chariot" },
+    ], requires: [
+      { list: "regiments", id: "commongoblininfantry", name: "Common Goblin Infantry" }, { list: "regiments", id: "commongoblinwolfriders", name: "Common Goblin Wolf Riders" },
+      { list: "regiments", id: "forestgoblinspiderriders", name: "Forest Goblin Spider Riders" }, { list: "regiments", id: "forestgoblininfantry", name: "Forest Goblin Infantry" },
+      { list: "regiments", id: "nightgoblininfantry", name: "Night Goblin Infantry" }, { list: "regiments", id: "nightgoblinsquighoppers", name: "Night Goblin Squig-Hoppers" },
+      { list: "regiments", id: "nightgoblinsquighunters", name: "Night Goblin Squig-Hunters" }, { list: "regiments", id: "nightgoblinnettersclubbers", name: "Night Goblin Netters and Clubbers" },
+    ] },
+  ],
   armyWideRules: [
     "Difficult to Master: this is arguably the most complex army to play, full of animosity tests, compulsory moves, exploding Shamans, and units that barely listen to orders. Most of that is battle-phase behavior rather than list-building, so this builder tracks points/composition faithfully but doesn't simulate dice-driven chaos like Fanatic scatter, Squig-Hopper bouncing, or Doom Diver misfires — those are called out as rules text on the relevant entries instead.",
     "Animosity: at the start of the turn, before movement, each Orc & Goblin regiment not engaged/fleeing (Trolls, Ogres, and similar excepted) tests animosity — 1 in 6 triggers a re-roll; a bad second roll (1-5) freezes the unit for the turn, a 6 forces it 2D6\" toward the nearest visible enemy and a mandatory charge next turn. War machines, chariots, and other non-regiment units never test.",
-    "Fielding a type requires a regiment of that type: you can't field characters, war machine crew, or chariots of a given Orc/Goblin type unless the army already includes at least one regiment of that type (infantry or cavalry). This isn't hard-enforced by the builder — keep it in mind when building your list.",
+    "Fielding a type requires a regiment of that type: you can't field characters, war machine crew, or chariots of a given Orc/Goblin type unless the army already includes at least one regiment of that type (infantry or cavalry). Now flagged live by this builder for the named characters and named-crew war machines/chariots (see the warning banner above the roster) — special characters (Azhag, Grom, Skarsnik, etc.) aren't covered by this check.",
     "Common Orcs ignore panic caused by Goblins. Big'uns are just larger, fiercer Common Orcs, not a separate race.",
     "Savage Orcs are frenzied (and still ignore Goblin-caused panic even without frenzy), never wear armour beyond a shield (relying on magic tattoos instead — treated as light armour, plus a 6+ ward save that improves to 5+ if a Savage Orc Shaman joins the regiment, benefiting the Shaman too).",
     "Black Orcs are immune to animosity and quell it in any non-Black-Orc regiment a Black Orc character joins. They ignore panic from Goblins and other Orc types, and only heed the leadership of Black Orc characters or the general.",
@@ -3680,8 +3804,18 @@ const DOGS_OF_WAR = {
   name: "Dogs of War",
   tagline: "A mercenary brotherhood — every sword, spear, and cannon sold to the highest bidder",
   magicItems: DOGS_OF_WAR_MAGIC_ITEMS,
+  compositionRules: [
+    { kind: "requiresAtLeastOne", label: "At least one Human Old World regiment", refs: [
+      { list: "regiments", id: "humanfoot", name: "Human Foot Soldiers" },
+      { list: "regiments", id: "elitehumanfoot", name: "Elite Human Foot Soldiers" },
+      { list: "regiments", id: "cavalryretainers", name: "Human Cavalry Retainers" },
+      { list: "regiments", id: "humanknights", name: "Human Knights" },
+    ] },
+    { kind: "requiresIfPresent", label: "Ogre Mercenary Hero", trigger: [{ list: "characters", id: "ogremercenaryhero", name: "Ogre Mercenary Hero" }], requires: [{ list: "regiments", id: "ogremercenaries", name: "Ogre Mercenaries" }] },
+    { kind: "requiresIfPresent", label: "Halfling Hot-Pot", trigger: [{ list: "chariots", id: "halflinghotpot", name: "Halfling Hot-Pot" }], requires: [{ list: "regiments", id: "halflingmilitia", name: "Halfling Militia" }, { list: "regiments", id: "halflingbowmen", name: "Halfling Bowmen" }] },
+  ],
   armyWideRules: [
-    "A Dogs of War army fights for a mercenary Warlord based in the Old World, typically (but not necessarily) of Tilean origin. The General and the Paymaster must both be Human Characters, and the army must include at least one Human Regiment of Old World origin (this excludes Norse — Norsca isn't considered part of the Old World).",
+    "A Dogs of War army fights for a mercenary Warlord based in the Old World, typically (but not necessarily) of Tilean origin. The General and the Paymaster must both be Human Characters, and the army must include at least one Human Regiment of Old World origin (this excludes Norse — Norsca isn't considered part of the Old World). The regiment requirement is now flagged live by this builder (see the warning banner above the roster); the General-must-be-Human part isn't, since the app doesn't track a designated general.",
     "Human Old World Regiments are the mainstay: the number of such regiments caps the maximum number of any other single regiment type or war machine (e.g. two Human Old World regiments allow up to two Halfling Bowmen, up to two Cannons, and so on, each counted separately). This builder does not hard-enforce that cap — track it yourself.",
     "Paymasters, not Battle Standard Bearers: the regiment containing the Paymaster (only one may be fielded) is unbreakable while he lives, and Dogs of War units within 12\" of him get +1 Ld. Unlike a BSB he suffers no equipment restrictions, but he can never be mounted.",
     "Regimental Banners and Champion Items: a Sea Elf regiment's champion may take High Elf magic items/banners, Dwarfs may take Dwarf runic items, Halflings may take from the Empire, and Humans may take from the Empire, Kislev, and Bretonnia (items only, not Virtues). Only unit champions may take items from other army books — independent Dogs of War characters (Lord/Hero/Paymaster/Wizards) cannot, per the rules as written. The source text doesn't include a dedicated Dogs of War-only item list, so as a practical simplification this builder lets independent Human and Wizard characters draw from the same Human item pool as Human champions — adjust to taste if you're playing strictly RAW.",
@@ -3710,7 +3844,7 @@ const DOGS_OF_WAR = {
     },
     {
       id: "ogremercenaryhero", name: "Ogre Mercenary Hero", cost: 171, stat: "Ogre Mercenary Hero", magicItemSlots: 2, tags: ["ogre"],
-      gearNote: "Your army must include an Ogre Mercenaries regiment to field this Hero (not hard-enforced by this builder — track it yourself). Ogres are monstrous models that cause fear. May take light armour or heavy armour for free.",
+      gearNote: "Your army must include an Ogre Mercenaries regiment to field this Hero (now flagged live by this builder). Ogres are monstrous models that cause fear. May take light armour or heavy armour for free.",
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Halberd", "Flail", "Double handed weapon"] },
     },
     {
@@ -3934,7 +4068,7 @@ const DOGS_OF_WAR = {
     },
     {
       id: "halflinghotpot", name: "Halfling Hot-Pot", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
-      note: "Requires a Halfling regiment in the army. Shoots like a stone thrower, range 36\", S5, allows normal armour save but no regeneration. Cannot enter a wood (it's a war machine, unlike its foresting crew). Crewed by three Halflings.",
+      note: "Requires a Halfling regiment in the army (now flagged live by this builder). Shoots like a stone thrower, range 36\", S5, allows normal armour save but no regeneration. Cannot enter a wood (it's a war machine, unlike its foresting crew). Crewed by three Halflings.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Halfling crew",
     },
   ],
@@ -4002,8 +4136,22 @@ const CHAOS_DWARFS = {
       { id: "modern", name: "Modern Stuff", desc: "Adds Fireglaives, Naphtha Bombs, Blood of Hashut, Bull Centaur Renders, K'daii Fireborn, Chaos Siege Giant, The Iron Daemon, Magma Cannons, and the Hellcannon." },
     ],
   },
+  compositionRules: [
+    { kind: "requiresAtLeastOne", label: "At least one Chaos Dwarf Warriors, Tower Guard, or Blunderbusses regiment", refs: [
+      { list: "regiments", id: "cdwarriors", name: "Chaos Dwarf Warriors" },
+      { list: "regiments", id: "towerguard", name: "Chaos Dwarf Tower Guard" },
+      { list: "regiments", id: "cdblunderbusses", name: "Chaos Dwarf Blunderbusses" },
+    ] },
+    { kind: "requiresIfPresent", label: "Black Orc Hero", trigger: [{ list: "characters", id: "blackorchero", name: "Black Orc Hero" }], requires: [{ list: "regiments", tag: "blackOrc", name: "a Black Orc regiment" }] },
+    { kind: "requiresIfPresent", label: "Common Orc Hero", trigger: [{ list: "characters", id: "commonorchero", name: "Common Orc Hero" }], requires: [{ list: "regiments", tag: "commonOrc", name: "a Common Orc regiment" }] },
+    { kind: "requiresIfPresent", label: "Common Goblin Hero", trigger: [{ list: "characters", id: "commongoblinhero", name: "Common Goblin Hero" }], requires: [{ list: "regiments", tag: "commonGoblin", name: "a Common Goblin regiment" }] },
+    { kind: "requiresIfPresent", label: "Hobgoblin Hero", trigger: [{ list: "characters", id: "hobgoblinhero", name: "Hobgoblin Hero" }], requires: [{ list: "regiments", tag: "hobgoblin", name: "a Hobgoblin regiment" }] },
+    { kind: "requiresIfPresent", label: "Hobgoblin Bolt Throwers", trigger: [{ list: "chariots", id: "hobgoblinboltthrowers", name: "Hobgoblin Bolt Throwers" }], requires: [{ list: "regiments", tag: "hobgoblin", name: "a Hobgoblin regiment" }] },
+    { kind: "requiresIfPresent", label: "K'daii Fireborn", trigger: [{ list: "regiments", id: "kdaiifireborn", name: "K'daii Fireborn" }], requires: [{ list: "characters", tag: "wizard", name: "a Sorcerer" }, { list: "specials", id: "astragoth", name: "Astragoth" }, { list: "specials", id: "drazhoath", name: "Drazhoath" }] },
+    { kind: "requiresIfPresent", label: "K'daii Destroyer", trigger: [{ list: "chariots", id: "kdaiidestroyer", name: "K'daii Destroyer" }], requires: [{ list: "characters", tag: "wizard", name: "a Sorcerer" }, { list: "specials", id: "astragoth", name: "Astragoth" }, { list: "specials", id: "drazhoath", name: "Drazhoath" }] },
+  ],
   armyWideRules: [
-    "The master race: the army general must be a Chaos Dwarf character, and the army must include at least one regiment of Chaos Dwarf Warriors, Tower Guards, or Blunderbusses. Chaos Dwarfs don't hate Orcs & Goblins, don't suffer Elf Grudge, and get no dispel bonus. They have no Gromril Armour, but Chaos Dwarf characters and elite troops may take Chaos Armour instead (4+ armour save on its own, doesn't cost a magic item slot, and may be worn by wizards while casting). Chaos Dwarfs and Bull Centaurs never take panic tests caused by greenskins of any kind.",
+    "The master race: the army general must be a Chaos Dwarf character, and the army must include at least one regiment of Chaos Dwarf Warriors, Tower Guards, or Blunderbusses (this last part is now flagged live — see the warning banner above the roster). Chaos Dwarfs don't hate Orcs & Goblins, don't suffer Elf Grudge, and get no dispel bonus. They have no Gromril Armour, but Chaos Dwarf characters and elite troops may take Chaos Armour instead (4+ armour save on its own, doesn't cost a magic item slot, and may be worn by wizards while casting). Chaos Dwarfs and Bull Centaurs never take panic tests caused by greenskins of any kind.",
     "Greenskin slaves: the army may include enslaved Common Goblins, Common Orcs, and Black Orcs. Common Goblins/Orcs are subject to animosity; Black Orcs are immune to it and ignore panic from Common Orcs/Goblins; Black Orc characters joining a non-Black-Orc regiment quell its animosity. Common Goblins fear Elves they don't outnumber 2:1. Greenskin characters can't join Chaos Dwarf ranks generally — Black Orc/Common Orc/Goblin characters act alone or join their own kind's regiments (Black Orcs will only heed Black Orc or Chaos Dwarf leadership); Chaos Dwarf characters may join Black Orc/Common Orc/Goblin regiments but never Hobgoblins.",
     "Hobgoblins: function as slave-masters over the other greenskins rather than being enslaved themselves. They suffer animosity like Common Orcs/Goblins, but nearby Orcs/Goblins (within 12\" of a Hobgoblin regiment) don't test it themselves that turn. Orc/Goblin/Black Orc units don't panic when nearby Hobgoblins break, flee, or die — it's cause for celebration. No character but a Hobgoblin may join a Hobgoblin regiment, and Hobgoblin characters can't join anyone else's regiment either.",
     "Animosity: at the start of the turn (before movement), each not-fleeing, not-engaged Orc/Goblin/Hobgoblin regiment not within 12\" of a friendly Hobgoblin regiment (Orcs/Goblins only) rolls a die — on a 1, roll again: 1-5 the unit squabbles (immune to psychology, can't move/shoot/cast that turn, though wizards may still dispel), 6 the unit moves 2D6\" toward the nearest enemy and must charge it next turn if possible. This builder doesn't simulate animosity rolls turn-to-turn — it's a battle-phase mechanic, not a list-building one, same treatment as Orcs & Goblins.",
@@ -4074,23 +4222,23 @@ const CHAOS_DWARFS = {
     },
     {
       id: "blackorchero", name: "Black Orc Hero", cost: 89, stat: "Black Orc Hero", magicItemSlots: 2, tags: ["blackOrc"],
-      gearNote: "Your army must include a Black Orc regiment to field this Hero (not hard-enforced — track it yourself). Quells animosity. May take a shield and either light armour or heavy armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
+      gearNote: "Your army must include a Black Orc regiment to field this Hero (now flagged live by this builder). Quells animosity. May take a shield and either light armour or heavy armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
       id: "commonorchero", name: "Common Orc Hero", cost: 60, stat: "Orc Hero", magicItemSlots: 2, tags: ["commonOrc"],
-      gearNote: "Your army must include a Common Orc regiment to field this Hero (not hard-enforced — track it yourself). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
+      gearNote: "Your army must include a Common Orc regiment to field this Hero (now flagged live by this builder). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
       id: "commongoblinhero", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"],
-      gearNote: "Your army must include a Common Goblin regiment to field this Hero (not hard-enforced — track it yourself). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
+      gearNote: "Your army must include a Common Goblin regiment to field this Hero (now flagged live by this builder). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Short bow"] },
     },
     {
       id: "hobgoblinhero", name: "Hobgoblin Hero", cost: 53, stat: "Hobgoblin Hero", magicItemSlots: 2, tags: ["hobgoblin"],
-      gearNote: "Your army must include a Hobgoblin regiment to field this Hero (not hard-enforced — track it yourself). May take light armour and a shield for free.",
+      gearNote: "Your army must include a Hobgoblin regiment to field this Hero (now flagged live by this builder). May take light armour and a shield for free.",
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Bow", "Crossbow"] },
       mounts: [
@@ -4226,7 +4374,7 @@ const CHAOS_DWARFS = {
     },
     {
       id: "kdaiifireborn", name: "K'daii Fireborn", perModel: 41, minSize: 3, stat: "K'daii Fireborn", command: "none", theme: "modern",
-      note: "Requires a Sorcerer elsewhere in the army (not hard-enforced — track it yourself). Monstrous; flaming attacks, immune to fire, regenerate 4+ (not cancelled by flaming, but is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit that doesn't count toward combat resolution. Count as Daemons in all regards: cause fear, magical attacks, immune to poison/living-only effects/psychology, never flee (exorcised — counts as slain — if forced to). Cannot take a standard bearer or musician; only Daemonic characters may join.",
+      note: "Requires a Sorcerer elsewhere in the army (now flagged live by this builder). Monstrous; flaming attacks, immune to fire, regenerate 4+ (not cancelled by flaming, but is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit that doesn't count toward combat resolution. Count as Daemons in all regards: cause fear, magical attacks, immune to poison/living-only effects/psychology, never flee (exorcised — counts as slain — if forced to). Cannot take a standard bearer or musician; only Daemonic characters may join.",
       champion: { name: "K'daii Manburner", baseCost: 50, magicItemSlots: 0, stat: "K'daii Manburner", note: "May take one Daemonic Reward from the Chaos army book's Daemonic Rewards (All) section (not modeled in this builder — apply on paper)." },
     },
   ],
@@ -4243,7 +4391,7 @@ const CHAOS_DWARFS = {
     },
     {
       id: "hobgoblinboltthrowers", name: "Hobgoblin Bolt Throwers", perUnit: 43, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
-      note: "Requires a Hobgoblin regiment in the army (not hard-enforced — track it yourself). Bolt thrower crewed by two Hobgoblins.",
+      note: "Requires a Hobgoblin regiment in the army (now flagged live by this builder). Bolt thrower crewed by two Hobgoblins.",
       extraCrewCost: 4, extraCrewMax: 3, extraCrewLabel: "extra Hobgoblin crew",
     },
     // --- Old School Addendum war machines ---
@@ -4280,7 +4428,7 @@ const CHAOS_DWARFS = {
     },
     {
       id: "kdaiidestroyer", name: "K'daii Destroyer", perUnit: 300, stat: "K'daii Destroyer", kind: "monster", theme: "modern",
-      note: "Requires a Sorcerer elsewhere in the army (not hard-enforced — track it yourself). Large monster, causes Terror, flaming attacks, immune to fire, regenerates 4+ (not cancelled by flaming, is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit not counting toward combat resolution. Counts as a Daemon in all regards: magical attacks, immune to poison/living-only effects/psychology, never flees (exorcised — counts as slain — if forced to).",
+      note: "Requires a Sorcerer elsewhere in the army (now flagged live by this builder). Large monster, causes Terror, flaming attacks, immune to fire, regenerates 4+ (not cancelled by flaming, is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit not counting toward combat resolution. Counts as a Daemon in all regards: magical attacks, immune to poison/living-only effects/psychology, never flees (exorcised — counts as slain — if forced to).",
     },
     {
       id: "chaossiegegiant", name: "Chaos Siege Giant", perUnit: 275, stat: "Chaos Siege Giant", kind: "monster", theme: "modern",
@@ -4878,6 +5026,12 @@ const VAMPIRE_COUNTS = {
       { id: "strigoi", name: "Strigoi", desc: "Unholy monstrosities — cannot carry equipment, magic items, mounts, or the battle standard; get an extra attack and may join Ghoul regiments. Unlocks Ghasts." },
     ],
   },
+  compositionRules: [
+    { kind: "mutualExclusion", refs: [
+      { list: "characters", id: "wightbsb", name: "Wight Battle Standard Bearer" },
+      { list: "characters", id: "vampirebsb", name: "Vampire Battle Standard Bearer" },
+    ] },
+  ],
   armyWideRules: [
     "Undead models: immune to psychology, immune to poison, cause fear. May not march unless within 12\" of the general (undead characters excepted — they may always march, for what little good it does inside a regiment that can't). Only charge reaction is hold. An undead monster whose rider is slain crumbles to dust immediately instead of rolling on the Monster Reaction Table.",
     "Three ways to die: Unstable units (Zombies, all ethereal models) simply disappear on a failed break test. Units subject to the crumble rule (Skeletons, Wights, Vampires, Mummies, Carrion) don't take break tests — instead they suffer a wound with no saves for each point the combat was lost by (reduced by one if the Battle Standard is within range). Unbreakable troops (Ushabti, Bone Giants) never crumble or break, full stop. Casualties from crumbling are removed troops-first, then musician/standard, then characters one at a time.",
@@ -5555,10 +5709,18 @@ const KISLEV = {
   name: "Kislev",
   tagline: "North of the Empire — windswept plains and dark birch glades, a realm hardened by a thousand years of Norse raids and the ever-present threat of Chaos",
   magicItems: KISLEV_MAGIC_ITEMS,
+  compositionRules: [
+    { kind: "mutualExclusion", refs: [
+      { list: "specials", id: "katarin", name: "Tzarina Katarin" },
+      { list: "specials", id: "borisursus", name: "Boris Ursus" },
+      { list: "specials", id: "igortheterrible", name: "Igor the Terrible" },
+    ] },
+    { kind: "requiresIfPresent", label: "Prince Ivan Radinov", trigger: [{ list: "specials", id: "radinov", name: "Prince Ivan Radinov" }], requires: [{ list: "regiments", id: "gryphonlegion", name: "Gryphon Legion" }] },
+  ],
   armyWideRules: [
     "A Great Bear is a small monster which causes fear. Urskin (Boris Ursus's mount) and the Chicken Legged Hut (Baba Yaga's mount) are also treated as monsters — Urskin small and causing fear, the Hut large and causing terror.",
-    "Tzarina Katarin, Boris Ursus, and Igor the Terrible may never be fielded together in the same army — each explicitly excludes the other two. Not hard-enforced by this builder; the army roster will let you add more than one.",
-    "Prince Ivan Radinov may only be fielded if the army also includes a regiment of Gryphon Legionnaires. Not hard-enforced by this builder.",
+    "Tzarina Katarin, Boris Ursus, and Igor the Terrible may never be fielded together in the same army — each explicitly excludes the other two. This builder now flags it live (see the warning banner above the roster) rather than just leaving it as text.",
+    "Prince Ivan Radinov may only be fielded if the army also includes a regiment of Gryphon Legionnaires. Now flagged live by this builder.",
   ],
   characters: [
     {
@@ -5708,7 +5870,7 @@ const KISLEV = {
       note: "Equipped with heavy armour, a shield, and a bow, riding the Great Bear Urskin (wrapped in thick fur, giving 5+ armour; rolls 3D6 on the Monster Reaction Table if Boris is slain). May take two additional magic items. May not be fielded alongside Igor the Terrible or Tzarina Katarin.",
       items: "Carries the Shard Blade." },
     { id: "radinov", name: "Prince Ivan Radinov, Captain of the Gryphon Legion", cost: 80, stat: "Prince Radinov", role: "Younger brother of the ruling Tzarina Katarin, nominal leader of the Gryphon Legion",
-      note: "Armed with a lance, full plate armour, and a shield, riding a barded warhorse (combined 1+ armour save). May take two magic items. Natural Hero: if a friendly character within 4\" of Radinov is killed, roll a D6 — on a 4+ Ivan saves them, restoring 1 wound (wounds already caused still count for combat resolution). Only one rescue attempt per battle. Your army may only field Radinov if it includes Gryphon Legionnaires (not hard-enforced)." },
+      note: "Armed with a lance, full plate armour, and a shield, riding a barded warhorse (combined 1+ armour save). May take two magic items. Natural Hero: if a friendly character within 4\" of Radinov is killed, roll a D6 — on a 4+ Ivan saves them, restoring 1 wound (wounds already caused still count for combat resolution). Only one rescue attempt per battle. Your army may only field Radinov if it includes Gryphon Legionnaires (now flagged live by this builder)." },
     { id: "saltan", name: "Tzar Saltan of Praag", cost: 80, stat: "Tzar Saltan", role: "The old and bitter ruler of Praag, a city overrun by Chaos",
       note: "Armed with heavy armour, a shield, riding a barded warhorse. May take one additional magic item. Must always challenge Chaos characters and must accept challenges from Chaos enemies. Saltan, and any regiment he leads, is immune to fear and hates Chaos.",
       items: "Carries the Black Blade." },
@@ -5765,14 +5927,20 @@ const NORSE = {
     { id: "nrs-ravenbanner", name: "Raven Banner", cost: 30, cat: "banner", desc: "The regiment is immune to psychology." },
     { id: "nrs-bannerodin", name: "The Banner of Odin", cost: 40, cat: "banner", desc: "Provides a 3+ natural dispel." },
   ],
+  compositionRules: [
+    { kind: "mutualExclusion", refs: [
+      { list: "regiments", id: "stonetrolls-norse", name: "Stone Trolls" },
+      { list: "regiments", id: "trollslayers-norse", name: "Norse Dwarf Troll Slayers" },
+    ] },
+    { kind: "ratio", label: "Mounted Norse Warriors", numerator: [{ list: "regiments", id: "mountednorsewarriors", name: "Mounted Norse Warriors" }], denominator: [{ list: "regiments", id: "norsewarriors", name: "Norse Warriors" }], maxRatio: 1 },
+  ],
   armyWideRules: [
     "The Norse are primarily an infantry army with limited cavalry. A Norse army is called a Hird; all its members are Hirdmen, and it is mandatory for all free and able Norsemen to serve — Hirdmen supply their own weapons and armour.",
     "Sea Raiders or Land Raiders: the army may use the Ambush special rule with one regiment of Norse Warriors, OR include Mammoths (carrying a howdah), but never both. Not hard-enforced by this builder.",
     "Shieldwall Formation: Huscarls, Norse Warriors on foot, and Norse Dwarfs fighting with shields may form a Shieldwall as a charge reaction. Enemies suffer -1 to hit on the charge if the Shieldwall isn't already in melee, is charged to the front, and the enemy started more than half its maximum charge distance away. Forming a Shieldwall this way prevents ordinary troopers (not characters) in the regiment from fighting with double handed weapons in the resulting combat. A battle-phase rule, not modeled here.",
     "Heroic Individuals — Shape Changers, Ulfhednar, and Shieldmaidens: the book allows a regiment to be joined by ANY NUMBER of these champions at once (Norse Champion, Shieldmaiden, and/or Ulfhednar, subject to each regiment's own restrictions). This builder's regimental champion picker only tracks one champion at a time per regiment — if you want to add more, tally their points by hand.",
     "Shape Changers transform into a Monstrous Wolf, Bear, or similar beast, and must be assigned to a specific Norse Warriors, Huscarls, or Berserker regiment at list-building time (only one per regiment). During the battle, one ordinary front-rank trooper from that regiment is swapped for the Shape Changer in beast form (which takes the space of four infantrymen — needs at least two troopers in the front rank to release). Cannot revert to human form once transformed, and can never be the general. A battle-phase mechanic, not modeled here beyond the character's own points cost.",
-    "The army cannot include both Stone Trolls and Dwarf Troll Slayers, nor both Giants and Giant Slayers (Dwarf Troll Slayers already include Giant Slayers as a champion option). Not hard-enforced by this builder.",
-    "The number of Mounted Norse Warriors regiments may not exceed the number of Norse Warriors-on-foot regiments. Not hard-enforced by this builder.",
+    "The army cannot include both Stone Trolls and Dwarf Troll Slayers, and the number of Mounted Norse Warriors regiments may not exceed the number of Norse Warriors-on-foot regiments — both now flagged live by this builder (see the warning banner above the roster). Giants vs Giant Slayers (a champion option within Troll Slayers) is still just documented text, not checked live.",
   ],
   characters: [
     {
@@ -6109,9 +6277,16 @@ const OGRES = {
   name: "Ogre Mercenaries",
   tagline: "Nomads from the eastern steppes — adaptable, pragmatic, and famously willing to fight on both sides of the same war",
   magicItems: OGRE_MAGIC_ITEMS,
+  compositionRules: [
+    { kind: "requiresAtLeastOne", label: "At least one Ogre regiment", refs: [
+      { list: "regiments", id: "ogres-main", name: "Ogres" },
+      { list: "regiments", id: "ogreleadbelchers", name: "Ogre Leadbelchers" },
+      { list: "regiments", id: "ogremaneaters", name: "Ogre Maneaters" },
+    ] },
+  ],
   armyWideRules: [
     "Ogres are monstrous models that cause fear. Sabretooth Tigers are also monstrous and cause fear.",
-    "At least one regiment of Ogres (Ogres, Leadbelchers, or Maneaters) must be included, and both the General and Battle Standard Bearer must be Ogre characters. Not hard-enforced by this builder.",
+    "At least one regiment of Ogres (Ogres, Leadbelchers, or Maneaters) must be included, and both the General and Battle Standard Bearer must be Ogre characters. The regiment requirement is now flagged live by this builder (see the warning banner above the roster) — the General/BSB-must-be-Ogre part still isn't, since the app doesn't track a designated general.",
     "Ogres and Allied Tribes: as an independent force, Ogres may ally with Common Goblins, Forest Goblins, Night Goblins, Hobgoblins, or Halflings, but the Ogres remain central to the army. Common Goblin auxiliaries (from Orcs & Goblins) don't gain the higher-Leadership rule that requires Orcs, and include characters, regiments, and one war machine/chariot per full 1,000pts of Ogre models. Night/Forest Goblin auxiliaries (also from Orcs & Goblins) include characters and regiments only — no Gargantuan Spider, no poisoned arrows option. Hobgoblins (from Chaos Dwarfs) include characters, regiments, and one bolt thrower per full 1,000pts. Halflings (from Halflings of the Moot) include characters (not Wizards) and regiments (not Empire or Wood Elf allied troops) plus one war machine/chariot per full 1,000pts — the Liberated Magic Items rule doesn't apply when Halflings are allies. Allied characters use magic items from their own army book only, never the Ogre pool. None of this is mechanically importable in this builder — track allied regiments and their points by hand using the relevant faction as reference.",
     "Giant Blunderbuss (Leadbelchers): fires even if the regiment moved, range 12\", hits every model (friend or foe) more than half within a 12\"-deep firing zone as wide as the regiment. Roll to hit with the unit's average BS (champion's BS doesn't matter) — no long-range or skirmisher/single-model penalty, but cover and move-and-shoot penalties apply as normal. All hits are Strength 4, rising to S5 with two full ranks or S6 with three or more (a last rank of fewer than 4 models doesn't count). Joined characters count as armed with a Blunderbuss for this purpose. Against a lone large target, the unit may instead concentrate fire (one roll per model in the first three ranks, no area effect). May stand-and-shoot with no to-hit penalty. A battle-phase mechanic, not simulated beyond the regiment's own points cost.",
     "Sabretooth Tigers don't act as fast cavalry, but may perform manoeuvres as if they had a musician.",
@@ -6425,8 +6600,21 @@ const SLANN_EMPIRE = {
   name: "The Slann Empire",
   tagline: "The original Slann army of 2nd/3rd edition, restored — Stone Age heirs to a starfaring civilization, ruling Lustria through the Mage Priests and their Lizardmen servitors",
   magicItems: SLANN_MAGIC_ITEMS,
+  compositionRules: [
+    { kind: "ratio", label: "Auxiliary (Lizardmen/Lobotomised/Native Tribe)", numerator: [
+      { list: "regiments", id: "lobotomisedslaves", name: "Lobotomised Human Slaves" },
+      { list: "regiments", id: "kroxigors-slann", name: "Kroxigors" },
+      { list: "regiments", id: "saurustempleguard-slann", name: "Saurus Temple Guard" },
+      { list: "regiments", id: "sauruswarriors-slann", name: "Saurus Warriors" },
+      { list: "regiments", id: "terradonriders-slann", name: "Terradon Riders" },
+      { list: "regiments", id: "nativehalflings", name: "Native Halflings" },
+      { list: "regiments", id: "ghoulishcannibaltribes", name: "Ghoulish Cannibal Tribes" },
+      { list: "regiments", id: "amazonwarriors", name: "Amazon Warriors" },
+      { list: "regiments", id: "chameleonskinks-slann", name: "Chameleon Skinks" },
+    ], denominator: [{ list: "regiments", tag: "slann", name: "Slann" }], maxRatio: 1 },
+  ],
   armyWideRules: [
-    "Army Composition: the general must be a Slann character, and there must be at least as many Slann regiments as Auxiliary regiments (Lizardmen, Lobotomised Slaves, and Native Tribes combined can't outnumber Slann regiments). Not hard-enforced by this builder.",
+    "Army Composition: the general must be a Slann character, and there must be at least as many Slann regiments as Auxiliary regiments (Lizardmen, Lobotomised Slaves, and Native Tribes combined can't outnumber Slann regiments). The ratio is now flagged live by this builder (see the warning banner above the roster); the general-must-be-Slann part isn't, since the app doesn't track a designated general.",
     "Blowpipes: no long-range penalty. Darts may be poisoned (+1 Strength). Range 12\", Strength 3, may shoot twice at -1 to hit.",
     "Aquatic: both Slann and Lizardmen Skinks move through water without penalty. A regiment that includes Cold Ones loses this rule.",
     "Lizardmen Scaly Skin: every Lizardman in the army has a natural armour save that can't be modified below 6+ (unless no save is allowed at all) — Skinks 6+, Saurus 5+, and the larger Lizardmen (Kroxigors, Carnosaurs, Salamanders, Stegadons) 4+.",
@@ -6548,7 +6736,7 @@ const SLANN_EMPIRE = {
       champion: { name: "Slann Champion", baseCost: 20, magicItemSlots: 1, stat: "Slann Champion" },
     },
     {
-      id: "slannanimalhandlers", name: "Slann Animal Handlers", perModel: 0, minSize: 1, kind: "composite", command: "none", restriction: "0-1",
+      id: "slannanimalhandlers", name: "Slann Animal Handlers", perModel: 0, minSize: 1, kind: "composite", command: "none", restriction: "0-1", tags: ["slann"],
       note: "Lizard Hounds have a 5+ armour save (floor 6+ unless no save is allowed at all) due to scaly skin. Cannot take a standard bearer or musician, and cannot be joined by characters.",
       composition: [
         { id: "beastmaster", label: "Slann Beastmasters", cost: 14, stat: "Slann Beastmaster" },
@@ -7408,7 +7596,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, selectedId, onSelect, onRemove }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -7435,6 +7623,22 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           )}
         </div>
       </div>
+      {contingentInfo?.active && contingentInfo.problems.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>{contingentInfo.label} isn't legal yet:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 12.5, color: "var(--burgundy)" }}>
+            {contingentInfo.problems.map((p, i) => <li key={i}>{p}</li>)}
+          </ul>
+        </div>
+      )}
+      {compositionInfo && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Army composition:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 12.5, color: "var(--burgundy)" }}>
+            {compositionInfo.problems.map((p, i) => <li key={i}>{p}</li>)}
+          </ul>
+        </div>
+      )}
       <div style={{ height: 1, background: "var(--line)", margin: "10px 0 16px" }} />
 
       <div className="whr-scroll" style={{ overflowY: "auto", flex: 1, paddingRight: 4 }}>
@@ -7502,7 +7706,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
   const def = applyBloodline(rawDef, roster.armyTheme);
   const usedElsewhere = allUsedMagicItemIds(roster, unit.instanceId);
   const mounted = !!unit.mountId;
-  const visibleMounts = (def.mounts || []).filter((m) => !m.requiresMark || m.requiresMark === (unit.mark || def.markGroup?.options?.[0]));
+  const visibleMounts = (def.mounts || []).filter((m) => !m.requiresMark || m.requiresMark === (unit.mark || def.markGroup?.options?.[0])).filter((m) => !m.theme || m.theme === roster.armyTheme);
   return (
     <div>
       <h3 className="whr-h1" style={{ fontSize: 19, margin: "0 0 2px" }}>{def.name}</h3>
@@ -8319,6 +8523,63 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     return { totalRegiments, auxCount, allowed: Math.ceil(totalRegiments / 2), hasAuxiliaryOption };
   }, [roster, armyData]);
 
+  const contingentInfo = useMemo(() => {
+    const rules = armyData.contingentRules;
+    if (!rules) return null;
+    const charUnits = roster.characters.filter((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      return d && d.contingentTag === rules.tag;
+    });
+    const regUnits = roster.regiments.filter((u) => {
+      const d = armyData.regiments.find((r) => r.id === u.defId);
+      return d && d.contingentTag === rules.tag;
+    });
+    if (charUnits.length === 0 && regUnits.length === 0) return { active: false };
+    const charCost = charUnits.reduce((s, u) => s + unitCost(u, armyData, roster), 0);
+    const regCost = regUnits.reduce((s, u) => s + unitCost(u, armyData, roster), 0);
+    const contingentCost = charCost + regCost;
+    const pctOfArmy = totalPoints > 0 ? (contingentCost / totalPoints) * 100 : 0;
+    const problems = [];
+    if (rules.minRegiments && regUnits.length < rules.minRegiments) problems.push(`needs at least ${rules.minRegiments} ${rules.label} regiment${rules.minRegiments > 1 ? "s" : ""} (has ${regUnits.length})`);
+    if (rules.minCharacters && charUnits.length < rules.minCharacters) problems.push(`needs at least ${rules.minCharacters} ${rules.label} character${rules.minCharacters > 1 ? "s" : ""} (has ${charUnits.length})`);
+    if (rules.charactersCostCappedByRegiments && charCost > regCost) problems.push(`character cost (${fmtPts(charCost)}pts) exceeds regiment cost (${fmtPts(regCost)}pts)`);
+    if (rules.maxPercentOfArmy && pctOfArmy > rules.maxPercentOfArmy) problems.push(`${fmtPts(contingentCost)}pts is ${pctOfArmy.toFixed(0)}% of the army, over the ${rules.maxPercentOfArmy}% cap`);
+    return { active: true, label: rules.label, regimentCount: regUnits.length, characterCount: charUnits.length, charCost, regCost, contingentCost, pctOfArmy, problems };
+  }, [roster, armyData, totalPoints]);
+
+  const compositionInfo = useMemo(() => {
+    const rules = armyData.compositionRules;
+    if (!rules || rules.length === 0) return null;
+    const DEF_LIST = { characters: "characters", regiments: "regiments", chariots: "chariotsMonsters", specials: "specialCharacters" };
+    const matchesRef = (u, ref) => {
+      if (ref.id) return u.defId === ref.id;
+      if (ref.tag) {
+        const d = (armyData[DEF_LIST[ref.list]] || []).find((x) => x.id === u.defId);
+        return !!(d && (d.tags || []).includes(ref.tag));
+      }
+      return false;
+    };
+    const countRefs = (refs) => refs.reduce((n, ref) => n + (roster[ref.list] || []).filter((u) => matchesRef(u, ref)).length, 0);
+    const rosterEmpty = roster.characters.length === 0 && roster.regiments.length === 0 && roster.chariots.length === 0 && roster.specials.length === 0;
+    const problems = [];
+    rules.forEach((rule) => {
+      if (rule.kind === "mutualExclusion") {
+        const present = rule.refs.filter((ref) => countRefs([ref]) > 0);
+        if (present.length > 1) problems.push(`${present.map((p) => p.name).join(", ")} can't be fielded together.`);
+      } else if (rule.kind === "ratio") {
+        const numCount = countRefs(rule.numerator);
+        const denCount = countRefs(rule.denominator);
+        const allowed = Math.floor(denCount * rule.maxRatio);
+        if (numCount > allowed) problems.push(`${numCount} ${rule.label} regiments, but only ${allowed} allowed (max ${rule.maxRatio}x the ${denCount} ${rule.denominator.map((d) => d.name).join("/")}).`);
+      } else if (rule.kind === "requiresAtLeastOne" && !rosterEmpty) {
+        if (countRefs(rule.refs) === 0) problems.push(`${rule.label}: needs at least one of ${rule.refs.map((r) => r.name).join(", ")}.`);
+      } else if (rule.kind === "requiresIfPresent") {
+        if (countRefs(rule.trigger) > 0 && countRefs(rule.requires) === 0) problems.push(`${rule.label} requires ${rule.requires.map((r) => r.name).join(" or ")} in the army.`);
+      }
+    });
+    return problems.length > 0 ? { problems } : null;
+  }, [roster, armyData]);
+
   function addUnit(kind, defId) {
     let inst;
     if (kind === "character") {
@@ -8364,9 +8625,14 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     });
     const clampCharacters = (list, defs) => list.map((u) => {
       const rawDef = defs.find((d) => d.id === u.defId);
-      if (!rawDef?.bloodlineOverrides) return u;
-      const def = applyBloodline(rawDef, themeId);
+      if (!rawDef) return u;
       let next = u;
+      if (next.mountId) {
+        const mountDef = (rawDef.mounts || []).find((m) => m.id === next.mountId);
+        if (mountDef?.theme && mountDef.theme !== themeId) next = { ...next, mountId: null };
+      }
+      if (!rawDef.bloodlineOverrides) return next;
+      const def = applyBloodline(rawDef, themeId);
       if (def.magicLevelOption) {
         const min = def.magicLevelOption.min || 0;
         const max = def.magicLevelOption.max;
@@ -8456,7 +8722,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
