@@ -774,6 +774,16 @@ const STATS = {
   "Cockatrice": { M: 6, WS: 4, BS: 0, S: 5, T: 5, W: 4, I: 4, A: 3, Ld: 6 },
   "Cart (Halfling)": { M: "-", WS: "-", BS: "-", S: 5, T: 5, W: 4, I: "-", A: "-", Ld: "-" },
   "Wagon (Halfling)": { M: "-", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
+  "Ogre Tyrant": { M: 7, WS: 6, BS: 5, S: 5, T: 6, W: 5, I: 6, A: 5, Ld: 9 },
+  "Ogre Big Boss": { M: 6, WS: 5, BS: 4, S: 5, T: 6, W: 4, I: 5, A: 4, Ld: 8 },
+  "Ogre BSB": { M: 6, WS: 4, BS: 3, S: 5, T: 5, W: 4, I: 4, A: 3, Ld: 7 },
+  "Ogre Shaman Champion": { M: 6, WS: 3, BS: 2, S: 5, T: 6, W: 4, I: 4, A: 2, Ld: 7 },
+  "Ogre Shaman": { M: 6, WS: 3, BS: 2, S: 4, T: 6, W: 3, I: 4, A: 2, Ld: 7 },
+  "Ogre Leadbelcher": { M: 6, WS: 3, BS: 3, S: 4, T: 5, W: 3, I: 3, A: 2, Ld: 7 },
+  "Ogre Maneater": { M: 6, WS: 4, BS: 3, S: 5, T: 5, W: 3, I: 4, A: 3, Ld: 7 },
+  "Ogre Beastmaster": { M: 7, WS: 3, BS: 2, S: 4, T: 5, W: 3, I: 3, A: 2, Ld: 7 },
+  "Sabretooth Tiger": { M: 8, WS: 4, BS: 0, S: 4, T: 4, W: 2, I: 4, A: 3, Ld: 4 },
+  "Rhino": { M: 7, WS: 3, BS: 0, S: 5, T: 5, W: 4, I: 3, A: 3, Ld: 5 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -6038,6 +6048,113 @@ const HALFLINGS = {
   specialCharacters: [],
 };
 
+const OGRE_MAGIC_ITEMS = [
+  { id: "ogr-ironboot", name: "Iron Boot", cost: 10, cat: "weapon", desc: "The bearer may forfeit all other melee attacks to make one kick against a single man-sized model (20x20mm or 25x25mm base). Roll to hit as normal; if hit but not killed, the target is kicked 2D6\" directly away — landing in water, a wood, on a cliff, in a building, on a heavy obstacle, impassable terrain, or an enemy unit kills it." },
+  { id: "ogr-ironfist", name: "Iron Fist", cost: 35, cat: "weapon", desc: "+2 Strength. 1 wound inflicted becomes 1D3 wounds." },
+  { id: "ogr-smucklebuckle", name: "Smuckle Buckle", cost: 35, cat: "armour", desc: "+1 armour save. The bearer makes 1D3 Strength 5 impact hits when charging." },
+  { id: "ogr-rockeye", name: "Rock Eye", cost: 10, cat: "enchanted", desc: "At the start of each shooting phase, the owner may focus on a single enemy unit within line of sight — that unit must reveal all hidden information within it (magic items, Chaos Gifts, Assassins, Fanatics, spells, etc.), though not which model carries what." },
+  { id: "ogr-thiefstone", name: "Thiefstone", cost: 35, cat: "enchanted", desc: "After deployment, before the first turn, name one magic item (not a Dispel Magic Scroll or Magic Banner) — if the enemy has it, it disappears and can't be used this game." },
+  { id: "ogr-grutssickle", name: "Grut's Sickle", cost: 10, cat: "arcane", desc: "The Shaman may inflict a wound on the unit he's joined (no saves) at the start of the Magic phase to immediately gain one additional winds of magic card. At the end of any round where he did this, roll 2D6 — on a 2 or 3, the unit decides it's had enough and kills and eats the Shaman.", restrictedTo: [{ tags: ["wizard"] }] },
+  { id: "ogr-jollyroger", name: "Jolly Roger", cost: 10, cat: "banner", desc: "All models in the regiment get +1 attack in the first combat round of each engagement. The regiment also suffers from stupidity (due to drunkenness)." },
+];
+
+const OGRES = {
+  key: "ogres",
+  name: "Ogre Mercenaries",
+  tagline: "Nomads from the eastern steppes — adaptable, pragmatic, and famously willing to fight on both sides of the same war",
+  magicItems: OGRE_MAGIC_ITEMS,
+  armyWideRules: [
+    "Ogres are monstrous models that cause fear. Sabretooth Tigers are also monstrous and cause fear.",
+    "At least one regiment of Ogres (Ogres, Leadbelchers, or Maneaters) must be included, and both the General and Battle Standard Bearer must be Ogre characters. Not hard-enforced by this builder.",
+    "Ogres and Allied Tribes: as an independent force, Ogres may ally with Common Goblins, Forest Goblins, Night Goblins, Hobgoblins, or Halflings, but the Ogres remain central to the army. Common Goblin auxiliaries (from Orcs & Goblins) don't gain the higher-Leadership rule that requires Orcs, and include characters, regiments, and one war machine/chariot per full 1,000pts of Ogre models. Night/Forest Goblin auxiliaries (also from Orcs & Goblins) include characters and regiments only — no Gargantuan Spider, no poisoned arrows option. Hobgoblins (from Chaos Dwarfs) include characters, regiments, and one bolt thrower per full 1,000pts. Halflings (from Halflings of the Moot) include characters (not Wizards) and regiments (not Empire or Wood Elf allied troops) plus one war machine/chariot per full 1,000pts — the Liberated Magic Items rule doesn't apply when Halflings are allies. Allied characters use magic items from their own army book only, never the Ogre pool. None of this is mechanically importable in this builder — track allied regiments and their points by hand using the relevant faction as reference.",
+    "Giant Blunderbuss (Leadbelchers): fires even if the regiment moved, range 12\", hits every model (friend or foe) more than half within a 12\"-deep firing zone as wide as the regiment. Roll to hit with the unit's average BS (champion's BS doesn't matter) — no long-range or skirmisher/single-model penalty, but cover and move-and-shoot penalties apply as normal. All hits are Strength 4, rising to S5 with two full ranks or S6 with three or more (a last rank of fewer than 4 models doesn't count). Joined characters count as armed with a Blunderbuss for this purpose. Against a lone large target, the unit may instead concentrate fire (one roll per model in the first three ranks, no area effect). May stand-and-shoot with no to-hit penalty. A battle-phase mechanic, not simulated beyond the regiment's own points cost.",
+    "Sabretooth Tigers don't act as fast cavalry, but may perform manoeuvres as if they had a musician.",
+  ],
+  characters: [
+    {
+      id: "ogretyrant", name: "Ogre Lord", cost: 244, stat: "Ogre Tyrant", magicItemSlots: 3, role: "Lord", tags: ["ogre"],
+      armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Halberd", "Flail", "Double handed weapon"] },
+    },
+    {
+      id: "ogrebigboss", name: "Ogre Hero", cost: 171, stat: "Ogre Big Boss", magicItemSlots: 2, role: "Hero", tags: ["ogre"],
+      armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Halberd", "Flail", "Double handed weapon"] },
+    },
+    {
+      id: "ogrebsb", name: "Ogre Battle Standard Bearer", cost: 128, stat: "Ogre BSB", magicItemSlots: 1, restriction: "0-1", tags: ["ogre", "bsb"],
+      gearNote: "The one magic item may be a magic banner.",
+      armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
+    },
+    {
+      id: "ogreshaman", name: "Ogre Shaman", cost: 98, stat: "Ogre Shaman", magicItemSlots: 1, tags: ["wizard", "ogre"],
+      gearNote: "Has one magic level, may take any College Magic lore. May take one magic item (Ogres cannot have a familiar).",
+    },
+    {
+      id: "ogreshamanchampion", name: "Ogre Shaman Champion", cost: 182, stat: "Ogre Shaman Champion", magicItemSlots: 2, tags: ["wizard", "ogre"],
+      gearNote: "Has two magic levels, may take any College Magic lore. May take two magic items (Ogres cannot have a familiar).",
+    },
+  ],
+  regiments: [
+    {
+      id: "ogres-main", name: "Ogres", perModel: 24, minSize: 3, stat: "Ogre", command: "monstrous",
+      note: "Ogres with light armour.",
+      options: [
+        { id: "heavyarmour", group: "armour", label: "Heavy armour instead of light (+4pt/model)", cost: 4, per: "model" },
+        { id: "ahw", group: "weapon", label: "Additional hand weapons (+6pt/model)", cost: 6, per: "model" },
+        { id: "dhw", group: "weapon", label: "Double handed weapons (+8pt/model)", cost: 8, per: "model" },
+        { id: "flails", group: "weapon", label: "Flails (+8pt/model)", cost: 8, per: "model" },
+      ],
+      champion: { name: "Ogre Champion", baseCost: 50, magicItemSlots: 1, stat: "Ogre Champion" },
+    },
+    {
+      id: "ogremaneaters", name: "Ogre Maneaters", perModel: 36, minSize: 3, stat: "Ogre Maneater", command: "monstrous", restriction: "0-1",
+      note: "Immune to psychology. Ogre Maneaters with light armour.",
+      options: [
+        { id: "heavyarmour", group: "armour", label: "Heavy armour instead of light (+4pt/model)", cost: 4, per: "model" },
+        { id: "ahw", group: "weapon", label: "Additional hand weapons (+6pt/model)", cost: 6, per: "model" },
+        { id: "dhw", group: "weapon", label: "Double handed weapons or flails (+8pt/model)", cost: 8, per: "model" },
+        { id: "allthree", group: "weapon", label: "All three weapons — hand weapon, DHW/flail, and additional hand weapon (+10pt/model)", cost: 10, per: "model" },
+      ],
+      champion: { name: "Ogre Champion", baseCost: 30, magicItemSlots: 1, stat: "Ogre Champion" },
+    },
+    {
+      id: "ogreleadbelchers", name: "Ogre Leadbelchers", perModel: 36, minSize: 3, stat: "Ogre Leadbelcher", command: "monstrous", restriction: "0-1",
+      note: "Ogres armed with giant blunderbusses (see army-wide rules for the shooting mechanic).",
+      options: [
+        { id: "lightarmour", group: "armour", label: "Light armour (+2pt/model)", cost: 2, per: "model" },
+        { id: "heavyarmour", group: "armour", label: "Heavy armour (+6pt/model)", cost: 6, per: "model" },
+      ],
+      champion: { name: "Ogre Champion", baseCost: 50, magicItemSlots: 1, stat: "Ogre Champion" },
+    },
+    {
+      id: "beastmasterspack", name: "Ogre Beastmasters and Sabretooth Tigers", perModel: 0, minSize: 1, kind: "composite", command: "none", restriction: "0-1",
+      note: "Sabretooth Tigers are fear-causing monstrous models on 40x40mm bases like Ogres — they don't act as fast cavalry but may perform manoeuvres as if they had a musician. No standard bearer, musician, or regimental champion.",
+      composition: [
+        { id: "beastmaster", label: "Ogre Beastmasters", cost: 30, stat: "Ogre Beastmaster" },
+        { id: "sabretooth", label: "Sabretooth Tigers", cost: 20, stat: "Sabretooth Tiger" },
+      ],
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "giants-ogre", name: "Giants", perUnit: 200, stat: "Giant (Orc)",
+      note: "Causes terror.",
+      variantOptions: [
+        { id: "cyclops", label: "Upgrade to a Cyclops — may hurl boulders like a small stone thrower if it didn't march that turn (guess range, roll the artillery die; on a misfire the shot scatters 1D6x10\" in a random direction from the Cyclops) (+50pts)", cost: 50 },
+      ],
+    },
+    {
+      id: "rhinoriders", name: "Rhino Riders", perUnit: 80, stat: "Ogre", mountStat: "Rhino", mountLabel: "Rhino", command: "none",
+      note: "An Ogre with light armour riding a Rhino. Works like a heavy chariot (T5, W4, 5+ armour save) except: doesn't reduce its movement rate by half when down to one wound, and the Rhino may strike to all sides in melee. Causes fear (the Rhino).",
+      variantOptions: [
+        { id: "tusks", label: "Additional tusks and horns — impact hits become 1D6+2 instead of the usual 1D6 (+20pts)", cost: 20 },
+      ],
+    },
+  ],
+  specialCharacters: [],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
@@ -6056,12 +6173,12 @@ const FACTION_LIST = [
   { key: "lizardmen", name: "Lizardmen" },
   { key: "dogsofwar", name: "Dogs of War", data: DOGS_OF_WAR },
   { key: "halflings", name: "Halflings of the Moot", data: HALFLINGS },
-  { key: "ogres", name: "Ogre Mercenaries" },
+  { key: "ogres", name: "Ogre Mercenaries", data: OGRES },
   { key: "norse", name: "Norse", data: NORSE },
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD, kislev: KISLEV, norse: NORSE, halflings: HALFLINGS };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD, kislev: KISLEV, norse: NORSE, halflings: HALFLINGS, ogres: OGRES };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
