@@ -531,6 +531,7 @@ const STATS = {
   "Elven Commander (High Elf)": { M: 5, WS: 6, BS: 5, S: 4, T: 3, W: 1, I: 7, A: 2, Ld: 9 },
   "White Lion Steed": { M: 8, WS: 5, BS: 0, S: 5, T: 4, W: 1, I: 4, A: 2, Ld: 5 },
   "Young Dragon": { M: 6, WS: 5, BS: 0, S: 5, T: 5, W: 6, I: 9, A: 6, Ld: 6 },
+  "Supreme Elven Lord": { M: 5, WS: 6, BS: 5, S: 4, T: 4, W: 3, I: 7, A: 2, Ld: 9 },
   "Korhil": { M: 5, WS: 7, BS: 6, S: 5, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
   "Belannaer": { M: 5, WS: 6, BS: 4, S: 4, T: 4, W: 4, I: 9, A: 4, Ld: 10 },
   "Imrik or Tyrion": { M: 5, WS: 8, BS: 7, S: 4, T: 4, W: 3, I: 10, A: 4, Ld: 10 },
@@ -712,6 +713,54 @@ const STATS = {
   "Settra the Imperishable": { M: 4, WS: 6, BS: 0, S: 5, T: 6, W: 4, I: 4, A: 5, Ld: 10 },
   "High Queen Khalida Neferher": { M: 4, WS: 6, BS: 0, S: 5, T: 6, W: 4, I: 4, A: 5, Ld: 10 },
   "Arkhan the Black": { M: 4, WS: 7, BS: 7, S: 5, T: 4, W: 4, I: 6, A: 5, Ld: 10 },
+
+  "Boyar": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 9 },
+  "Hetman": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Kislev BSB": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 2, I: 4, A: 2, Ld: 7 },
+  "Priest of Ursun": { M: 4, WS: 4, BS: 3, S: 4, T: 4, W: 2, I: 4, A: 2, Ld: 8 },
+  "Ice Witch Lady": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 4, I: 6, A: 3, Ld: 8 },
+  "Ice Witch Mistress": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 3, I: 5, A: 2, Ld: 7 },
+  "Ice Witch Champion": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 2, I: 4, A: 1, Ld: 7 },
+  "Ice Witch": { M: 4, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 4, A: 1, Ld: 7 },
+  "Great Bear": { M: 6, WS: 4, BS: 0, S: 6, T: 5, W: 3, I: 3, A: 2, Ld: 7 },
+  "Kislevite Warrior": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Kislevite Lancer": { M: 4, WS: 4, BS: 3, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 7 },
+  "Kislevite Knight": { M: 4, WS: 4, BS: 3, S: 4, T: 3, W: 1, I: 4, A: 1, Ld: 7 },
+  "Kislevite Beastmaster": { M: 5, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 3, A: 1, Ld: 7 },
+  "Kislevite Bear": { M: 4, WS: 3, BS: 0, S: 5, T: 5, W: 2, I: 3, A: 2, Ld: 6 },
+  "Kislevite Captain": { M: 4, WS: 5, BS: 4, S: 4, T: 3, W: 1, I: 5, A: 2, Ld: 8 },
+  "Kislevite Champion": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 7 },
+  "Boris Ursus": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 9 },
+  "Prince Radinov": { M: 4, WS: 6, BS: 4, S: 4, T: 4, W: 2, I: 6, A: 2, Ld: 9 },
+  "Tzar Saltan": { M: 4, WS: 4, BS: 3, S: 4, T: 4, W: 2, I: 4, A: 2, Ld: 8 },
+  "Stephan Rasin": { M: 4, WS: 4, BS: 4, S: 4, T: 4, W: 2, I: 4, A: 2, Ld: 8 },
+  "Ilja of Murova": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 2, I: 4, A: 3, Ld: 10 },
+  "Igor the Terrible": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 3, I: 4, A: 3, Ld: 9 },
+  "Miska the Slaughterer": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 8, A: 3, Ld: 9 },
+  "Tzarina Katarin": { M: 4, WS: 4, BS: 3, S: 3, T: 3, W: 3, I: 5, A: 3, Ld: 10 },
+  "Baba Yaga": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 4, I: 6, A: 3, Ld: 8 },
+  "Urskin": { M: 6, WS: 4, BS: 0, S: 6, T: 5, W: 4, I: 4, A: 4, Ld: 7 },
+  "Chicken Legged Hut": { M: 10, WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
+
+  "Norse King": { M: 4, WS: 7, BS: 6, S: 4, T: 4, W: 3, I: 6, A: 4, Ld: 9 },
+  "Norse Jarl": { M: 4, WS: 6, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "Norse Shape Changer (beast form)": { M: 7, WS: 6, BS: 0, S: 6, T: 5, W: 4, I: 6, A: 4, Ld: 6 },
+  "Norse BSB": { M: 4, WS: 5, BS: 4, S: 4, T: 3, W: 2, I: 4, A: 2, Ld: 7 },
+  "Vølve/Gode Lord": { M: 4, WS: 4, BS: 3, S: 4, T: 4, W: 4, I: 6, A: 3, Ld: 8 },
+  "Master Vølve/Gode": { M: 4, WS: 4, BS: 3, S: 4, T: 4, W: 3, I: 5, A: 2, Ld: 7 },
+  "Vølve/Gode Champion": { M: 4, WS: 4, BS: 3, S: 4, T: 4, W: 2, I: 4, A: 1, Ld: 7 },
+  "Vølve/Gode": { M: 4, WS: 4, BS: 3, S: 3, T: 4, W: 1, I: 4, A: 1, Ld: 7 },
+  "Norse Warrior": { M: 4, WS: 4, BS: 3, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Norse Berserker": { M: 4, WS: 6, BS: 3, S: 4, T: 4, W: 1, I: 4, A: 1, Ld: 7 },
+  "Norse Thrall": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 6 },
+  "Norse Hunter": { M: 4, WS: 4, BS: 4, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 7 },
+  "Norse Beastmaster": { M: 5, WS: 4, BS: 3, S: 3, T: 4, W: 1, I: 3, A: 1, Ld: 7 },
+  "Norse Bear": { M: 4, WS: 4, BS: 0, S: 5, T: 5, W: 2, I: 3, A: 2, Ld: 5 },
+  "Shieldmaiden": { M: 4, WS: 6, BS: 4, S: 4, T: 3, W: 1, I: 5, A: 2, Ld: 8 },
+  "Ulfhednar": { M: 4, WS: 7, BS: 0, S: 5, T: 4, W: 1, I: 5, A: 2, Ld: 7 },
+  "Mammoth": { M: 6, WS: 2, BS: 0, S: 7, T: 6, W: 6, I: 2, A: 5, Ld: 6 },
+  "Regnar Lodbrog": { M: 4, WS: 7, BS: 6, S: 5, T: 4, W: 3, I: 6, A: 4, Ld: 10 },
+  "Palnatoke": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -2262,7 +2311,7 @@ const HIGH_ELVES = {
       ],
     },
     {
-      id: "dragonprincesdragons", name: "Dragon Princes on Dragons", perUnit: 225, stat: "Elven Prince", mountStat: "Dragon (High Elf)", mountLabel: "Young Dragon", kind: "quantity",
+      id: "dragonprincesdragons", name: "Dragon Princes on Dragons", perUnit: 225, stat: "Supreme Elven Lord", mountStat: "Young Dragon", mountLabel: "Young Dragon", kind: "quantity",
       note: "Supreme Elven Lords with lances, shields, Dragon Armour (4+ save total) riding Young Dragons (Red/White/Blue — see Dragon rules above). Act as normal Monstrous Cavalry. Not a character — follows ridden-monster rules; if the rider is slain, roll on the Monster Reaction Table (3D6).",
     },
   ],
@@ -5413,6 +5462,424 @@ const CLASSIC_UNDEAD = {
   ],
 };
 
+const KISLEV_MELEE_OPTIONS = ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon", "Lance"];
+const KISLEV_PRIEST_MELEE_OPTIONS = ["Hand weapon (default)", "Additional hand weapon", "Double handed weapon"];
+const KISLEV_MISSILE_OPTIONS = { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Hand Gun", "Pistol", "Two Pistols"] };
+
+const KISLEV_MAGIC_ITEMS = [
+  { id: "kis-shardblade", name: "Shard Blade", cost: 15, cat: "weapon", desc: "Any living model wounded by this blade cannot heal and continues to bleed — must be removed as a casualty at the end of the battle." },
+  { id: "kis-pistolsboydinov", name: "Pistols of Prince Boydinov", cost: 15, cat: "weapon", desc: "Two normal pistols. Hit on a 2+. Magical shots." },
+  { id: "kis-blackblade", name: "Black Blade", cost: 30, cat: "weapon", desc: "Monsters and Daemons in base contact lose half their attacks (rounded up)." },
+  { id: "kis-bloodedge", name: "Bloodedge", cost: 40, cat: "weapon", desc: "The wielder gains +2 attacks and +2 Strength in melee. Cursed: on a to-hit roll of 1, the wielder hits a random friendly model in base-to-base contact instead (if any are present)." },
+  { id: "kis-fearfrost", name: "Fearfrost", cost: 60, cat: "weapon", desc: "No armour save allowed. 1 wound inflicted becomes 1D6 wounds." },
+  { id: "kis-armouralexandr", name: "Armour of Alexandr", cost: 50, cat: "armour", desc: "Includes a shield. 3+ armour save and 5+ ward save. If the ward save succeeds against a magic weapon, that weapon loses its magic properties." },
+  { id: "kis-crystalhelm", name: "Crystal Helm", cost: 15, cat: "enchanted", desc: "If carried by the general, all units within 18\" may use his or her Leadership." },
+  { id: "kis-birchring", name: "Birch Ring", cost: 15, cat: "enchanted", desc: "Contains the Amber spell 'Savage Beast of Horrors' as a bound spell (remains in play). The user transforms into a vicious Werebear, gaining 3 attacks at WS6/S6 and causing fear. Cannot cast spells while in beast form, but may still dispel normally." },
+  { id: "kis-icearmour", name: "Ice Armour", cost: 15, cat: "arcane", desc: "A witch may wear this and still cast spells. 4+ armour save and 4+ ward save. If the armour fails to save its bearer, it shatters and can no longer be used.", restrictedTo: [{ tags: ["wizard"] }] },
+  { id: "kis-bannerursus", name: "Banner of Ursus", cost: 10, cat: "banner", desc: "The unit is immune to fear." },
+  { id: "kis-warbanner", name: "Warbanner", cost: 40, cat: "banner", desc: "+1 to combat resolution." },
+  { id: "kis-bannermurder", name: "Banner of Murder", cost: 50, cat: "banner", desc: "+1D6\" to charge move. If the charge is failed, the unit still moves its normal failed-charge distance." },
+];
+
+const KISLEV = {
+  key: "kislev",
+  name: "Kislev",
+  tagline: "North of the Empire — windswept plains and dark birch glades, a realm hardened by a thousand years of Norse raids and the ever-present threat of Chaos",
+  magicItems: KISLEV_MAGIC_ITEMS,
+  armyWideRules: [
+    "A Great Bear is a small monster which causes fear. Urskin (Boris Ursus's mount) and the Chicken Legged Hut (Baba Yaga's mount) are also treated as monsters — Urskin small and causing fear, the Hut large and causing terror.",
+    "Tzarina Katarin, Boris Ursus, and Igor the Terrible may never be fielded together in the same army — each explicitly excludes the other two. Not hard-enforced by this builder; the army roster will let you add more than one.",
+    "Prince Ivan Radinov may only be fielded if the army also includes a regiment of Gryphon Legionnaires. Not hard-enforced by this builder.",
+  ],
+  characters: [
+    {
+      id: "boyar", name: "Boyar", cost: 100, stat: "Boyar", magicItemSlots: 3, role: "Lord",
+      armourGroup: { options: ["Shield & Light Armour (default)", "Shield & Heavy Armour"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: KISLEV_MELEE_OPTIONS },
+      missileGroup: KISLEV_MISSILE_OPTIONS,
+      mounts: [
+        { id: "warhorse", name: "Warhorse (barding free)", cost: 20, stat: "War Horse" },
+        { id: "greatbear", name: "Great Bear", cost: 45, stat: "Great Bear" },
+      ],
+    },
+    {
+      id: "bsb", name: "Battle Standard Bearer", cost: 80, stat: "Kislev BSB", magicItemSlots: 1, restriction: "0-1",
+      gearNote: "The one magic item may be a magic banner.",
+      armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
+      mounts: [
+        { id: "warhorse", name: "Warhorse (barding free)", cost: 10, stat: "War Horse" },
+        { id: "greatbear", name: "Great Bear", cost: 35, stat: "Great Bear" },
+      ],
+    },
+    {
+      id: "hetman", name: "Hetman", cost: 60, stat: "Hetman", magicItemSlots: 2, role: "Hero",
+      armourGroup: { options: ["Shield & Light Armour (default)", "Shield & Heavy Armour"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: KISLEV_MELEE_OPTIONS },
+      missileGroup: KISLEV_MISSILE_OPTIONS,
+      mounts: [
+        { id: "warhorse", name: "Warhorse (barding free)", cost: 15, stat: "War Horse" },
+        { id: "greatbear", name: "Great Bear", cost: 40, stat: "Great Bear" },
+      ],
+    },
+    {
+      id: "priestofursun", name: "Priest of Ursun", cost: 65, stat: "Priest of Ursun", magicItemSlots: 1,
+      gearNote: "Any regiment led by a Priest of Ursun is immune to fear and hates all enemies.",
+      armourGroup: { options: ["Shield & Light Armour (default)", "Shield & Heavy Armour"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: KISLEV_PRIEST_MELEE_OPTIONS },
+      mounts: [
+        { id: "warhorse", name: "Warhorse (barding free)", cost: 50, stat: "War Horse" },
+        { id: "greatbear", name: "Great Bear", cost: 75, stat: "Great Bear" },
+      ],
+    },
+    {
+      id: "icewitchlady", name: "Ice Witch Lady (level 4)", cost: 240, stat: "Ice Witch Lady", magicItemSlots: 4, tags: ["wizard"],
+      gearNote: "May only take Ice Magic. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "warhorse", name: "Warhorse (barding optional, free)", cost: 0, stat: "War Horse" },
+        { id: "greatbear", name: "Great Bear", cost: 30, stat: "Great Bear" },
+      ],
+    },
+    {
+      id: "icewitchmistress", name: "Ice Witch Mistress (level 3)", cost: 170, stat: "Ice Witch Mistress", magicItemSlots: 3, tags: ["wizard"],
+      gearNote: "May only take Ice Magic. May take as many magic items as levels (3).",
+      mounts: [{ id: "warhorse", name: "Warhorse (barding optional, free)", cost: 0, stat: "War Horse" }],
+    },
+    {
+      id: "icewitchchampion", name: "Ice Witch Champion (level 2)", cost: 110, stat: "Ice Witch Champion", magicItemSlots: 2, tags: ["wizard"],
+      gearNote: "May only take Ice Magic. May take as many magic items as levels (2).",
+      mounts: [{ id: "warhorse", name: "Warhorse (barding optional, free)", cost: 0, stat: "War Horse" }],
+    },
+    {
+      id: "icewitch", name: "Ice Witch (level 1)", cost: 50, stat: "Ice Witch", magicItemSlots: 1, tags: ["wizard"],
+      gearNote: "May only take Ice Magic. May take as many magic items as levels (1).",
+      mounts: [{ id: "warhorse", name: "Warhorse (barding optional, free)", cost: 0, stat: "War Horse" }],
+    },
+  ],
+  regiments: [
+    {
+      id: "gryphonlegion", name: "Gryphon Legion", perModel: 25, minSize: 5, stat: "Kislevite Knight", mountStat: "War Horse", mountLabel: "Barded Warhorse", command: "standard", restriction: "0-1",
+      note: "Formed as a token of eternal friendship between Kislev and the Empire, trained and garrisoned in the Empire. Knights with full plate armour (4+ heavy armour), shields, and lances, riding barded warhorses — a combined 1+ armour save.",
+      champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
+    },
+    {
+      id: "brotherhoodofthebear", name: "Brotherhood of the Bear", perModel: 18, minSize: 5, stat: "Kislevite Knight", mountStat: "War Horse", mountLabel: "Warhorse", command: "fastCavalry", restriction: "0-1",
+      note: "Ranger-Templars specializing in ambush and guerrilla warfare, formed by Tzarina Tiara Pavlovna. Knights riding warhorses, armed with light armour, shields, spears, and bows. Subject to hatred against Chaos (not hard-enforced). Fast cavalry.",
+      champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
+    },
+    {
+      id: "sonsofursa", name: "Sons of Ursa", perModel: 50, minSize: 3, stat: "Kislevite Knight", mountStat: "Great Bear", mountLabel: "Great Bear", command: "monstrous", restriction: "0-1",
+      note: "A monstrous regiment from the great temple atop the sacred Ice Mountain. Knights with heavy armour, shields, and lances, riding Great Bears. Cause fear. Regimental troops and champions riding Great Bears can't be killed separately — all hits go to the Bear (which may use the rider's 4+ armour save); when the Bear dies, remove the whole model. Not hard-enforced by this builder.",
+      champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
+    },
+    {
+      id: "kossars", name: "Kislev Kossars", perModel: 9, minSize: 5, stat: "Kislevite Warrior", command: "standard",
+      note: "A numerous people unafraid to die. Warriors with bows, double handed weapons, and light armour.",
+      champion: { name: "Champion", baseCost: 20, magicItemSlots: 1, stat: "Kislevite Champion" },
+    },
+    {
+      id: "handgunners-kis", name: "Hand Gunners", perModel: 10, minSize: 5, stat: "Kislevite Warrior", command: "standard",
+      note: "Strelti, trained by the legacy of Prince Boydinov of Erengrad. Warriors with hand guns, light armour, and a bardiche (short halberd used as a gun rest).",
+      champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
+    },
+    {
+      id: "hunters", name: "Hunters", perModel: 11, minSize: 5, stat: "Kislevite Warrior", command: "skirmisher",
+      note: "Patient trappers of the harsh Taiga. Warriors with bows. May skirmish and scout.",
+      champion: { name: "Champion", baseCost: 20, magicItemSlots: 1, stat: "Kislevite Champion" },
+    },
+    {
+      id: "guards", name: "Guards", perModel: 10, minSize: 5, stat: "Kislevite Knight", command: "standard",
+      note: "Hand-picked elite of the Kislevite infantry, forming the bodyguard of the Tzars and Tzarinas. Knights with heavy armour and halberds.",
+      champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
+    },
+    {
+      id: "roadwardens", name: "Road Wardens", perModel: 17, minSize: 5, stat: "Kislevite Warrior", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry",
+      note: "Rarely spoken of openly — they root out corruption of Chaos (and opposition to the Tzar). Warriors with light armour, armed with two pistols, riding normal horses. Fast cavalry, may skirmish.",
+      champion: { name: "Champion", baseCost: 20, magicItemSlots: 1, stat: "Kislevite Champion" },
+    },
+    {
+      id: "horsearchers-kis", name: "Kislev Horse Archers", perModel: 10, minSize: 5, stat: "Kislevite Warrior", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry",
+      note: "Fierce mounted nomads from the plains of Kislev and beyond the World Edge Mountains. Warriors with bows, riding normal horses. Fast cavalry, may skirmish.",
+      champion: { name: "Champion", baseCost: 20, magicItemSlots: 1, stat: "Kislevite Champion" },
+    },
+    {
+      id: "wingedlancers", name: "Kislev Winged Lancers", perModel: 17, minSize: 5, stat: "Kislevite Lancer", mountStat: "War Horse", mountLabel: "Warhorse", command: "fastCavalry",
+      note: "Young sons of Boyars, always prepared for war. Lancers with light armour, shields, lances, riding warhorses. Fast cavalry.",
+      options: [
+        { id: "shriekingbanners", group: null, label: "Shrieking back banners — unit causes fear on the turn it charges (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
+    },
+    {
+      id: "beastsandbeastmasters", name: "Beasts and Beastmasters", perModel: 0, minSize: 1, kind: "composite", command: "none", restriction: "0-1",
+      note: "A regiment of Bears or Giant Wolves, led by unarmoured Beastmasters. Cannot take a standard bearer, musician, or regimental champion.",
+      composition: [
+        { id: "bear", label: "Bears", cost: 15, stat: "Kislevite Bear" },
+        { id: "giantwolf", label: "Giant Wolves", cost: 10, stat: "Giant Wolf" },
+        { id: "beastmaster", label: "Beastmasters (unarmoured)", cost: 12, stat: "Kislevite Beastmaster" },
+      ],
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "mortar-kis", name: "Mortar", kind: "warmachine", perUnit: 80, stat: "War Machine (cannon, mortar, etc.)",
+      note: "The artillery of Kislev cannot compare to the Empire's vast arsenal, but the army of the Tzars still fields some fine mortars. Works exactly like a small stone thrower. Crewed by three crewmen.",
+      extraCrewCost: 5, extraCrewLabel: "extra crew",
+    },
+    {
+      id: "uruganccanon", name: "Urugan Cannon", kind: "warmachine", perUnit: 80, stat: "War Machine (cannon, mortar, etc.)",
+      note: "Prince Boydinov's black-powder experiments. Produces an Artillery Die + 4 number of shots, range 24\". Roll to hit for each shot using the crew's BS. Hits are S4 and armour piercing (-2 to armour save total). Cannot shoot the turn it moved. Misfires like a cannon. Crewed by three crewmen.",
+      extraCrewCost: 5, extraCrewLabel: "extra crew",
+    },
+  ],
+  specialCharacters: [
+    { id: "katarin", name: "Tzarina Katarin the Ice Queen of Kislev", cost: 200, stat: "Tzarina Katarin", role: "Lord — current ruler of Kislev, level 3 wizard using the lore of Ice",
+      note: "Rides a Warhorse. May take two additional magic items. May not be fielded alongside Boris Ursus or Igor the Terrible.",
+      items: "Carries the magic blade Fearfrost." },
+    { id: "borisursus", name: "Boris Ursus, The Red Tzar", cost: 160, stat: "Boris Ursus", role: "A fierce warrior and devout follower of the Bear God",
+      note: "Equipped with heavy armour, a shield, and a bow, riding the Great Bear Urskin (wrapped in thick fur, giving 5+ armour; rolls 3D6 on the Monster Reaction Table if Boris is slain). May take two additional magic items. May not be fielded alongside Igor the Terrible or Tzarina Katarin.",
+      items: "Carries the Shard Blade." },
+    { id: "radinov", name: "Prince Ivan Radinov, Captain of the Gryphon Legion", cost: 80, stat: "Prince Radinov", role: "Younger brother of the ruling Tzarina Katarin, nominal leader of the Gryphon Legion",
+      note: "Armed with a lance, full plate armour, and a shield, riding a barded warhorse (combined 1+ armour save). May take two magic items. Natural Hero: if a friendly character within 4\" of Radinov is killed, roll a D6 — on a 4+ Ivan saves them, restoring 1 wound (wounds already caused still count for combat resolution). Only one rescue attempt per battle. Your army may only field Radinov if it includes Gryphon Legionnaires (not hard-enforced)." },
+    { id: "saltan", name: "Tzar Saltan of Praag", cost: 80, stat: "Tzar Saltan", role: "The old and bitter ruler of Praag, a city overrun by Chaos",
+      note: "Armed with heavy armour, a shield, riding a barded warhorse. May take one additional magic item. Must always challenge Chaos characters and must accept challenges from Chaos enemies. Saltan, and any regiment he leads, is immune to fear and hates Chaos.",
+      items: "Carries the Black Blade." },
+    { id: "rasin", name: "Stephan Rasin, Clanchief of Cossacks", cost: 50, stat: "Stephan Rasin", role: "A young, rash, and remarkably lucky Clanchief of the Cossacks",
+      note: "Armed with light armour, a bow, riding a warhorse. Never carries magic items. Allowed three re-rolls per battle. Any regiment he leads is immune to fear and hates Chaos. If leading Kislev Horse Archers, the regiment may fire and flee as a charge reaction (resolve shooting as Stand and Shoot, then flee as normal) and rallies automatically after that flee move." },
+    { id: "iljaofmurova", name: "Ilja of Murova", cost: 90, stat: "Ilja of Murova", role: "The strongest man in the Taiga, undefeated in twenty years of contests",
+      note: "Carries a bow and may scout. Cannot be the army general. May take one additional magic item.",
+      items: "Armed with the Wyrmslayer Sword (a common magic item — always wounds on a 4+ or better; large targets get no armour save)." },
+    { id: "igortheterrible", name: "Igor the Terrible", cost: 120, stat: "Igor the Terrible", role: "A dark legend among the Kislevites — the most feared Tzar of all time",
+      note: "Hates human enemies. Armed with heavy armour and a shield. May take two additional magic items. May not be fielded alongside Boris Ursus or Tzarina Katarin.",
+      items: "Carries the magic sword Bloodedge.",
+      mounts: [
+        { id: "bardedwarhorse", name: "Barded Warhorse", cost: 0, stat: "War Horse" },
+        { id: "greatbear", name: "Great Bear", cost: 45, stat: "Great Bear" },
+        { id: "monstrousspider", name: "Monstrous Spider", cost: 55, stat: "Monstrous Spider" },
+        { id: "wyvern", name: "Wyvern", cost: 155, stat: "Wyvern (Orc)" },
+        { id: "griffon", name: "Griffon", cost: 175, stat: "Griffon" },
+        { id: "manticore", name: "Manticore", cost: 215, stat: "Manticore" },
+        { id: "chimera", name: "Chimera", cost: 265, stat: "Chimera" },
+      ] },
+    { id: "miska", name: "Miska the Slaughterer", cost: 250, stat: "Miska the Slaughterer", role: "Most famous of the Khan-Queens, daughter of Boris Ursus",
+      note: "Armed with a poisoned hand weapon, heavy armour, and a shield. Subject to frenzy. May take one additional magic item.",
+      items: "Carries the Crown of Icicles — Miska becomes a level 3 wizard using Ice Magic and may cast spells while wearing armour.",
+      mounts: [
+        { id: "bardedwarhorse", name: "Barded Warhorse", cost: 0, stat: "War Horse" },
+        { id: "greatbear", name: "Great Bear", cost: 30, stat: "Great Bear" },
+      ] },
+    { id: "babayaga", name: "Baba Yaga", cost: 350, stat: "Baba Yaga", role: "A solitary, ancient power tied to the land — most Kislevites believe her merely a legend",
+      note: "A level 4 witch — may use Ice Magic or Dark Magic. May take four magic items. Her Chicken Legged Hut works like a large chariot but also like a monster: it causes terror and rolls on the Monster Reaction Table if Baba Yaga dies.",
+      mounts: [{ id: "hut", name: "Chicken Legged Hut", cost: 0, stat: "Chicken Legged Hut" }] },
+  ],
+};
+
+const NORSE = {
+  key: "norse",
+  name: "Norse",
+  tagline: "Hardy barbarians of the Hird — sailors, traders, and raiders who plundered the Old World, Ulthuan, and Lustria alike",
+  magicItems: [
+    { id: "nrs-dainsleif", name: "Dainsleif", cost: 10, cat: "weapon", desc: "Forged by the Dwarf Runesmith Dain. Any living model wounded by this blade cannot heal and continues to bleed — must be removed as a casualty at the end of the battle." },
+    { id: "nrs-gram", name: "Gram", cost: 10, cat: "weapon", desc: "Made by the Dwarf Runesmith Regin for Dragon Slaying. Automatically wounds (no armour save) any Dragon, Wyvern, Hydra, Cold One, Horned One, Terradon, Salamander, Carnosaur, or Stegadon." },
+    { id: "nrs-tyrfing", name: "Tyrfing", cost: 40, cat: "weapon", desc: "Forged by Dwarf Runesmiths Durin and Dvalin. The wielder gains +2 attacks and +2 Strength in melee. Cursed: on a to-hit roll of 1, the wielder hits a random friendly model in base-to-base contact instead (if any are present)." },
+    { id: "nrs-skraep", name: "Skræp", cost: 40, cat: "weapon", desc: "Once wielded by King Vermund and his son Uffe. Always wounds on a 4+ or better and allows no save of any kind." },
+    { id: "nrs-mjolner", name: "Mjølner", cost: 40, cat: "weapon", desc: "Thrown weapon (use BS), range 18\", Strength 10, Multiple Wounds 1D3. Forged by Brok and Sindre; always returns to the wielder. Cannot be wielded in melee. Cannot target characters inside regiments." },
+    { id: "nrs-gridarvol", name: "Gridarvol", cost: 50, cat: "weapon", desc: "A double handed weapon once belonging to the Jotun-Giant Grid. Hits with Strength 10." },
+    { id: "nrs-gungner", name: "Gungner", cost: 50, cat: "weapon", desc: "Before the battle, the wielder may publicly dedicate this spear to an enemy — if that enemy is hit in melee by Gungner, it dies instantly. Forged by Brok and Sindre. Cannot be thrown." },
+    { id: "nrs-mimingsword", name: "Miming's Sword", cost: 80, cat: "weapon", desc: "Once belonged to the Forest Troll Miming. Always wounds, allows no armour save." },
+    { id: "nrs-svalin", name: "Svalin, The Sun Shield", cost: 15, cat: "armour", desc: "+1 bonus to armour save. The bearer is immune to all negative modifiers to hit." },
+    { id: "nrs-wolfpelt", name: "Enchanted Wolf Pelt", cost: 20, cat: "armour", desc: "Light armour, models on foot only. Takes all armour saves without modifiers. May be combined with a shield and The Standard of Shielding." },
+    { id: "nrs-beltgiantstrength", name: "Belt of Giant Strength", cost: 20, cat: "enchanted", desc: "+2 Strength. Cumulative with Gloves of Giant Strength." },
+    { id: "nrs-glovesgiantstrength", name: "Gloves of Giant Strength", cost: 20, cat: "enchanted", desc: "+2 Strength. Cumulative with Belt of Giant Strength." },
+    { id: "nrs-gjallahorn", name: "Gjallahorn", cost: 50, cat: "enchanted", desc: "Sounded once per battle at the start of the Norse player's turn — all regiments in the army may add 1D6 to their charge range that turn (rolled per regiment after charges/reactions are declared; failed charges move at normal rate)." },
+    { id: "nrs-andvaresgift", name: "Andvare's Gift", cost: 80, cat: "enchanted", desc: "Must be carried by a Norse King or Jarl on foot. After finishing his movement (alone, not part of a regiment, no charge, not in melee), the bearer may don the ring and instantly, irreversibly transform into a Wyvern — wounds carry over, all other equipment is lost, and the Wyvern can't move the turn it transforms.", restrictedTo: [{ tags: ["norseKing"] }, { tags: ["norseJarl"] }] },
+    { id: "nrs-gandstaff", name: "Gandstaff", cost: 10, cat: "arcane", desc: "The bearer counts as being one level higher for casting and dispelling.", restrictedTo: [{ tags: ["wizard"] }] },
+    { id: "nrs-ravenbanner", name: "Raven Banner", cost: 30, cat: "banner", desc: "The regiment is immune to psychology." },
+    { id: "nrs-bannerodin", name: "The Banner of Odin", cost: 40, cat: "banner", desc: "Provides a 3+ natural dispel." },
+  ],
+  armyWideRules: [
+    "The Norse are primarily an infantry army with limited cavalry. A Norse army is called a Hird; all its members are Hirdmen, and it is mandatory for all free and able Norsemen to serve — Hirdmen supply their own weapons and armour.",
+    "Sea Raiders or Land Raiders: the army may use the Ambush special rule with one regiment of Norse Warriors, OR include Mammoths (carrying a howdah), but never both. Not hard-enforced by this builder.",
+    "Shieldwall Formation: Huscarls, Norse Warriors on foot, and Norse Dwarfs fighting with shields may form a Shieldwall as a charge reaction. Enemies suffer -1 to hit on the charge if the Shieldwall isn't already in melee, is charged to the front, and the enemy started more than half its maximum charge distance away. Forming a Shieldwall this way prevents ordinary troopers (not characters) in the regiment from fighting with double handed weapons in the resulting combat. A battle-phase rule, not modeled here.",
+    "Heroic Individuals — Shape Changers, Ulfhednar, and Shieldmaidens: the book allows a regiment to be joined by ANY NUMBER of these champions at once (Norse Champion, Shieldmaiden, and/or Ulfhednar, subject to each regiment's own restrictions). This builder's regimental champion picker only tracks one champion at a time per regiment — if you want to add more, tally their points by hand.",
+    "Shape Changers transform into a Monstrous Wolf, Bear, or similar beast, and must be assigned to a specific Norse Warriors, Huscarls, or Berserker regiment at list-building time (only one per regiment). During the battle, one ordinary front-rank trooper from that regiment is swapped for the Shape Changer in beast form (which takes the space of four infantrymen — needs at least two troopers in the front rank to release). Cannot revert to human form once transformed, and can never be the general. A battle-phase mechanic, not modeled here beyond the character's own points cost.",
+    "The army cannot include both Stone Trolls and Dwarf Troll Slayers, nor both Giants and Giant Slayers (Dwarf Troll Slayers already include Giant Slayers as a champion option). Not hard-enforced by this builder.",
+    "The number of Mounted Norse Warriors regiments may not exceed the number of Norse Warriors-on-foot regiments. Not hard-enforced by this builder.",
+  ],
+  characters: [
+    {
+      id: "norseking", name: "Norse King", cost: 112, stat: "Norse King", magicItemSlots: 3, role: "Lord", tags: ["norseKing"],
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      missileGroup: { label: "Bow or thrown weapon (+10pts)", cost: 10, options: ["None (default)", "Bow", "Thrown Weapon"] },
+      mounts: [{ id: "warhorse", name: "Warhorse", cost: 23, stat: "War Horse" }],
+    },
+    {
+      id: "norsejarl", name: "Norse Jarl", cost: 67, stat: "Norse Jarl", magicItemSlots: 2, role: "Hero", tags: ["norseJarl"],
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
+      missileGroup: { label: "Bow or thrown weapon (+10pts)", cost: 10, options: ["None (default)", "Bow", "Thrown Weapon"] },
+      mounts: [{ id: "warhorse", name: "Warhorse", cost: 17, stat: "War Horse" }],
+    },
+    {
+      id: "norsebsb", name: "Norse Battle Standard Bearer", cost: 84, stat: "Norse BSB", magicItemSlots: 1, restriction: "0-1",
+      gearNote: "May take light armour for free. The one magic item may be a magic banner.",
+      mounts: [{ id: "warhorse", name: "Warhorse", cost: 11, stat: "War Horse" }],
+    },
+    {
+      id: "shapechanger", name: "Shape Changer", cost: 80, stat: "Norse Shape Changer (beast form)",
+      gearNote: "Must be assigned to a specific Norse Warriors, Huscarls, or Berserker regiment (only one per regiment) — track this by hand. Can never be the army general. No mount, no magic items.",
+    },
+    {
+      id: "volvegodelord", name: "Vølve/Gode Lord (level 4)", cost: 252, stat: "Vølve/Gode Lord", magicItemSlots: 4, tags: ["wizard"],
+      gearNote: "May take College Magic and Ice Magic. May take as many magic items as levels (4).",
+      mounts: [{ id: "warhorse", name: "Warhorse (free)", cost: 0, stat: "War Horse" }],
+    },
+    {
+      id: "mastervolvegode", name: "Master Vølve/Gode (level 3)", cost: 178, stat: "Master Vølve/Gode", magicItemSlots: 3, tags: ["wizard"],
+      gearNote: "May take College Magic and Ice Magic. May take as many magic items as levels (3).",
+      mounts: [{ id: "warhorse", name: "Warhorse (free)", cost: 0, stat: "War Horse" }],
+    },
+    {
+      id: "volvegodechampion", name: "Vølve/Gode Champion (level 2)", cost: 116, stat: "Vølve/Gode Champion", magicItemSlots: 2, tags: ["wizard"],
+      gearNote: "May take College Magic and Ice Magic. May take as many magic items as levels (2).",
+      mounts: [{ id: "warhorse", name: "Warhorse (free)", cost: 0, stat: "War Horse" }],
+    },
+    {
+      id: "volvegode", name: "Vølve/Gode (level 1)", cost: 54, stat: "Vølve/Gode", magicItemSlots: 1, tags: ["wizard"],
+      gearNote: "May take College Magic and Ice Magic. May take as many magic items as levels (1).",
+      mounts: [{ id: "warhorse", name: "Warhorse (free)", cost: 0, stat: "War Horse" }],
+    },
+  ],
+  regiments: [
+    {
+      id: "norsehuscarls-main", name: "Norse Huscarls", perModel: 8, minSize: 5, stat: "Norse Huscarls", command: "standard",
+      note: "Huscarls with light armour.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: null, label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+      ],
+      championOptions: [
+        { id: "champion", name: "Norse Champion", cost: 20, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
+        { id: "shieldmaiden", name: "Shieldmaiden", cost: 30, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Shieldmaiden", note: "Equipped like the regiment. Immune to fear and panic — so is the whole regiment while she's alive." },
+        { id: "ulfhednar", name: "Ulfhednar", cost: 40, dynamicTrooperCost: true, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
+      ],
+    },
+    {
+      id: "berserkers", name: "Berserkers", perModel: 11, minSize: 5, stat: "Norse Berserker", command: "standard", restriction: "0-1",
+      note: "Subject to frenzy (and sometimes naked). Will not be joined by Shieldmaidens.",
+      options: [
+        { id: "ahw", group: "weapon", label: "Additional hand weapon (+3pt/model)", cost: 3, per: "model" },
+        { id: "dhw", group: "weapon", label: "Double handed weapons (+4pt/model)", cost: 4, per: "model" },
+      ],
+      championOptions: [
+        { id: "champion", name: "Norse Champion", cost: 20, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
+        { id: "ulfhednar", name: "Ulfhednar", cost: 40, dynamicTrooperCost: true, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
+      ],
+    },
+    {
+      id: "norsewarriors", name: "Norse Warriors", perModel: 6, minSize: 5, stat: "Norse Warrior", command: "standard",
+      note: "Light armour by default. If the army has no Mammoth, one Norse Warriors regiment may use the Ambush special rule (not hard-enforced).",
+      options: [
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "throwingspears", group: null, label: "Throwing Spears — heavy thrown weapon (+1pt/model)", cost: 1, per: "model" },
+        { id: "thrustingspears", group: null, label: "Thrusting Spears — normal spear (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: null, label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+        { id: "bows", group: null, label: "Bows (+2pt/model)", cost: 2, per: "model" },
+      ],
+      championOptions: [
+        { id: "champion", name: "Norse Champion", cost: 20, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
+        { id: "shieldmaiden", name: "Shieldmaiden", cost: 30, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Shieldmaiden", note: "Equipped like the regiment. Immune to fear and panic — so is the whole regiment while she's alive." },
+        { id: "ulfhednar", name: "Ulfhednar", cost: 40, dynamicTrooperCost: true, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
+      ],
+    },
+    {
+      id: "norsethralls", name: "Norse Thralls", perModel: 4, minSize: 5, stat: "Norse Thrall", command: "skirmisher",
+      note: "May skirmish.",
+      options: [
+        { id: "shieldsthrowingspears", group: "gear", label: "Shields and Throwing Spears — heavy thrown weapon (+1pt/model)", cost: 1, per: "model" },
+        { id: "bows", group: "gear", label: "Bows (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Norse Champion", baseCost: 20, magicItemSlots: 1, stat: "Norse Champion" },
+    },
+    {
+      id: "norsehunters", name: "Norse Hunters", perModel: 14, minSize: 5, stat: "Norse Hunter", command: "skirmisher",
+      note: "Hunters with bows. May skirmish and scout.",
+      options: [
+        { id: "armourahw", group: null, label: "Light armour AND additional hand weapons (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Norse Champion", baseCost: 20, magicItemSlots: 1, stat: "Norse Champion" },
+    },
+    {
+      id: "mountednorsewarriors", name: "Mounted Norse Warriors", perModel: 11, minSize: 5, stat: "Norse Warrior", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "standard",
+      note: "Norse Warriors riding normal horses. Mounted Warriors with bows may skirmish. The number of Mounted Norse Warriors regiments may not exceed the number of Norse Warriors-on-foot regiments (not hard-enforced).",
+      options: [
+        { id: "warhorse", group: null, label: "Swap normal horses for warhorses (+3pt/model)", cost: 3, per: "model" },
+        { id: "lightarmour", group: null, label: "Light armour (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "spears", group: "weapon", label: "Spears (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "lances", group: "weapon", label: "Lances (+3pt/model)", cost: 3, per: "model" },
+        { id: "bows", group: null, label: "Bows, if not employing lances (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Norse Champion", baseCost: 20, magicItemSlots: 1, stat: "Norse Champion" },
+    },
+    {
+      id: "trollslayers-norse", name: "Norse Dwarf Troll Slayers", perModel: 13, minSize: 5, stat: "Troll Slayer", command: "none",
+      note: "Subject to the special rules explained in the Dwarfs army book. May carry a runic standard per the Dwarfs army book guidelines. Troll Slayers with additional hand weapons.",
+      options: [
+        { id: "dhw", group: null, label: "Swap additional hand weapon for double handed weapon (free)", cost: 0, per: "model" },
+      ],
+      championOptions: [
+        { id: "giantslayer", name: "Giant Slayer", cost: 20, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"], itemSlotLabel: "Magic Weapon (may be a rune weapon)", note: "Equipped like the regiment. The item slot must be a magic weapon — may be a weapon inscribed with dwarven runes." },
+      ],
+    },
+    {
+      id: "dwarfwarriors-norse", name: "Norse Dwarf Warriors", perModel: 8, minSize: 5, stat: "Dwarf Soldier", command: "standard",
+      note: "Subject to the special rules explained in the Dwarfs army book. May carry a runic standard per the Dwarfs army book guidelines. Dwarfs with light armour. If taking no other weapon/armour upgrades, may take bows and use skis, becoming skirmishers who can never be march-blocked (not hard-enforced).",
+      options: [
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "spears", group: "weapon", label: "Spears (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "dhw", group: "weapon", label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
+        { id: "bows", group: "weapon", label: "Bows on skis — skirmishers, never march-blocked (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Dwarf Champion" },
+    },
+    {
+      id: "beastsandbeastmasters-norse", name: "Norse Beasts and Beastmasters", perModel: 0, minSize: 1, kind: "composite", command: "none", restriction: "0-1",
+      note: "A regiment of Bears or Giant Wolves, led by unarmoured Norse Beastmasters. Cannot take a standard bearer, musician, or regimental champion.",
+      composition: [
+        { id: "bear", label: "Bears", cost: 15, stat: "Norse Bear" },
+        { id: "giantwolf", label: "Giant Wolves", cost: 10, stat: "Giant Wolf" },
+        { id: "beastmaster", label: "Norse Beastmasters (unarmoured)", cost: 13, stat: "Norse Beastmaster" },
+      ],
+    },
+    {
+      id: "stonetrolls-norse", name: "Stone Trolls", perModel: 40, minSize: 3, stat: "Trolls", command: "none",
+      note: "Subject to the special rules found in the Orcs & Goblins army book. The army cannot include Stone Trolls if it also includes Dwarf Troll Slayers (not hard-enforced). Cannot take a standard bearer, musician, or regimental champion.",
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "giants-norse", name: "Giants", perUnit: 200, stat: "Giant (Orc)",
+      note: "The army cannot include Giants if it also includes (Troll and) Giant Slayers (not hard-enforced).",
+    },
+    {
+      id: "greateagles-norse", name: "Great Eagles", perUnit: 60, stat: "Great Eagle", kind: "quantity",
+      note: "Small monsters that can fly.",
+    },
+    {
+      id: "mammoths", name: "Mammoths", perUnit: 200, stat: "Mammoth", kind: "quantity", countsAsFirstRegiment: true,
+      note: "The first Mammoth in the army counts as a regiment; additional Mammoths count as monsters. Including any Mammoth prevents the use of the Ambush special rule (not hard-enforced). Carries a howdah with four Norse Hunters armed with bows and heavy throwing spears (already included in cost). Causes terror, makes 1D6 Strength 7 impact hits, 4+ armour save from its thick hide.",
+    },
+  ],
+  specialCharacters: [
+    { id: "regnarlodbrog", name: "Regnar Lodbrog", cost: 150, stat: "Regnar Lodbrog", role: "Lord — one of the greatest Norse conquerors of all time",
+      note: "May take one additional magic item. His magic shirt (a suit of light armour) renders him immune to poison, breath attacks, and the effects of multiple wounds.",
+      items: "Wields a spear that negates armour saves and carries a shield." },
+    { id: "palnatoke", name: "Palnatoke", cost: 80, stat: "Palnatoke", role: "Hero — exiled Jarl who formed the Jomsvikings, the most feared and reviled Norse pirates of their time",
+      note: "Palnatoke and any regiment he leads hate all enemies (lost if he's killed). Wears light armour, carries a shield, and wields either an additional hand weapon or a double handed weapon. Carries a bow (range 36\", Strength 5). May take two magic items." },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
@@ -5422,6 +5889,7 @@ const FACTION_LIST = [
   { key: "vampirecounts", name: "Vampire Counts", data: VAMPIRE_COUNTS },
   { key: "tombkings", name: "Tomb Kings", data: TOMB_KINGS },
   { key: "classicundead", name: "Classic Undead", data: CLASSIC_UNDEAD },
+  { key: "kislev", name: "Kislev", data: KISLEV },
   { key: "woodElves", name: "Wood Elves", data: WOOD_ELVES },
   { key: "chaos", name: "Chaos", data: CHAOS },
   { key: "chaosdwarfs", name: "Chaos Dwarfs", data: CHAOS_DWARFS },
@@ -5431,12 +5899,11 @@ const FACTION_LIST = [
   { key: "dogsofwar", name: "Dogs of War", data: DOGS_OF_WAR },
   { key: "halflings", name: "Halflings of the Moot" },
   { key: "ogres", name: "Ogre Mercenaries" },
-  { key: "kislev", name: "Kislev" },
-  { key: "norse", name: "Norse" },
+  { key: "norse", name: "Norse", data: NORSE },
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD, kislev: KISLEV, norse: NORSE };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
@@ -5530,6 +5997,7 @@ function regimentCost(inst, def, armyData) {
     const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
     if (opt) {
       total += opt.cost;
+      if (opt.dynamicTrooperCost) total += regimentTrooperUnitCost(def, inst.gearSelections || {});
       (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
     }
   }
@@ -5879,7 +6347,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
       </div>
 
       <div style={{ textAlign: "center", marginTop: 48 }}>
-        <p className="whr-serif-italic" style={{ fontSize: 13, color: "var(--ink-faint)" }}>Maintained by ntdars</p>
+        <p className="whr-serif-italic" style={{ fontSize: 13, color: "var(--ink-faint)" }}>Maintained by Turhan Elby</p>
       </div>
     </div>
   );
@@ -6644,7 +7112,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                   onChange={() => updateUnit({ ...unit, championOptionId: opt.id, championMagicItemIds: [] })} />
                 {opt.name}
               </span>
-              <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
+              <span className="whr-opt-cost">+{fmtPts(opt.cost + (opt.dynamicTrooperCost ? regimentTrooperUnitCost(def, gearSelections) : 0))}pts</span>
             </label>
           ))}
           {def.championOptions.find((o) => o.id === unit.championOptionId)?.note && (
