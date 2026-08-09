@@ -6034,6 +6034,7 @@ const HALFLINGS = {
       note: "Only available if the general isn't already riding it as a Moot General mount (see army-wide rules — the army only ever has one Cockatrice, ridden or independent). Large, causes terror, can fly. Petrify: in the shooting phase, may target any one visible model within 8\" (no \"Look Out, Sir\" roll) — the target rolls 1D6 and must roll under its own Initiative to avoid being turned to stone and slain; a roll of 6 always affects the target regardless of Initiative.",
     },
   ],
+  specialCharacters: [],
 };
 
 const FACTION_LIST = [
