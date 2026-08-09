@@ -4751,6 +4751,7 @@ const VAMPIRE_COUNTS = {
   magicItems: [...UNDEAD_MAGIC_ITEMS, ...VC_BLOODLINE_POWERS],
   themes: {
     default: "voncarstein",
+    label: "Bloodline",
     options: [
       { id: "voncarstein", name: "Von Carstein", desc: "Archetypical vampires — no innate special rules. Unlocks Peasant Levy (Sylvania Peasant Levy and Sylvania Archers)." },
       { id: "lahmia", name: "Lahmia", desc: "Deadly seductresses — never take weapons beyond a single hand weapon nor wear armour; I11, always strike first. Unlocks Swains." },
@@ -5932,7 +5933,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
 
       <div className="whr-scroll" style={{ overflowY: "auto", flex: 1, paddingRight: 4 }}>
         {hasThemes && (
-          <Section id="armytheme" title="Army Theme">
+          <Section id="armytheme" title={armyData.themes.label || "Army Theme"}>
             {armyData.themes.options.map((t) => (
               <label key={t.id} className="whr-opt-row" style={{ alignItems: "flex-start", gap: 10, cursor: "pointer" }}>
                 <input type="radio" name="army-theme" checked={currentTheme === t.id} onChange={() => onSetTheme(t.id)} style={{ marginTop: 4 }} />
