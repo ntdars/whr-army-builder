@@ -761,6 +761,18 @@ const STATS = {
   "Mammoth": { M: 6, WS: 2, BS: 0, S: 7, T: 6, W: 6, I: 2, A: 5, Ld: 6 },
   "Regnar Lodbrog": { M: 4, WS: 7, BS: 6, S: 5, T: 4, W: 3, I: 6, A: 4, Ld: 10 },
   "Palnatoke": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+
+  "Moot General": { M: 4, WS: 5, BS: 7, S: 3, T: 3, W: 3, I: 8, A: 4, Ld: 10 },
+  "Halfling Hero": { M: 4, WS: 4, BS: 6, S: 3, T: 3, W: 2, I: 7, A: 3, Ld: 9 },
+  "Halfling Thief": { M: 5, WS: 4, BS: 4, S: 2, T: 2, W: 1, I: 10, A: 1, Ld: 8 },
+  "Halfling BSB": { M: 4, WS: 3, BS: 5, S: 3, T: 2, W: 2, I: 6, A: 2, Ld: 8 },
+  "Halfling Elite": { M: 4, WS: 3, BS: 4, S: 3, T: 2, W: 1, I: 6, A: 1, Ld: 8 },
+  "Halfling Field Wardens": { M: 4, WS: 2, BS: 5, S: 2, T: 2, W: 1, I: 6, A: 1, Ld: 8 },
+  "Livestock Beast": { M: 7, WS: 3, BS: 0, S: 2, T: 2, W: 1, I: 3, A: 1, Ld: 5 },
+  "Flying Livestock Beast": { M: 2, WS: 3, BS: 0, S: 2, T: 2, W: 1, I: 3, A: 1, Ld: 5 },
+  "Cockatrice": { M: 6, WS: 4, BS: 0, S: 5, T: 5, W: 4, I: 4, A: 3, Ld: 6 },
+  "Cart (Halfling)": { M: "-", WS: "-", BS: "-", S: 5, T: 5, W: 4, I: "-", A: "-", Ld: "-" },
+  "Wagon (Halfling)": { M: "-", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -5880,6 +5892,150 @@ const NORSE = {
   ],
 };
 
+const HALFLING_MAGIC_ITEMS = [
+  { id: "hfl-ratcatcher", name: "Liberated Ratcatcher's Blade", cost: 10, cat: "weapon", desc: "A hand weapon 'acquired' from somewhere south of the Moot. Always wounds a Skaven or rat-kin model on a 2+." },
+  { id: "hfl-poacherbow", name: "Poacher's Longbow", cost: 15, cat: "weapon", desc: "A bow that never suffers the long-range to-hit penalty." },
+  { id: "hfl-cookssword", name: "Cook's Cleaver", cost: 15, cat: "weapon", desc: "A hand weapon. +1 Strength when fighting in the first round of a combat the wielder charged into." },
+  { id: "hfl-travelmail", name: "Traveller's Light Mail", cost: 15, cat: "armour", desc: "Liberated light armour, oddly well-made. Grants a 5+ armour save." },
+  { id: "hfl-borrowedcloak", name: "Borrowed Cloak of Shadows", cost: 20, cat: "armour", desc: "Light armour. The wearer counts as having the Scout special rule if not already possessing it." },
+  { id: "hfl-luckcharm", name: "Borrowed Luck Charm", cost: 15, cat: "enchanted", desc: "The bearer may re-roll one failed armour save per game." },
+  { id: "hfl-signetring", name: "Purloined Signet Ring", cost: 20, cat: "enchanted", desc: "If carried by the general, all units within 12\" may use his or her Leadership." },
+  { id: "hfl-giftedspoon", name: "The Gifted Spoon", cost: 10, cat: "enchanted", desc: "Purely ceremonial, but no Halfling would go to war without a good spoon. No effect on the game — carried for luck." },
+  { id: "hfl-runeweapon", name: "A Single Dwarf Rune Item", cost: 35, cat: "enchanted", desc: "Halflings may commission exactly one Dwarf rune-inscribed weapon for their army, crafted per the Dwarfs army book's rune rules. This entry stands in for that one-time exception — treat as a generic magic weapon of dwarven make." },
+];
+
+const HALFLINGS = {
+  key: "halflings",
+  name: "Halflings of the Moot",
+  tagline: "Rural, earthy, and expressive to a fault — good food, strong drink, and a casual relationship with other people's property",
+  magicItems: HALFLING_MAGIC_ITEMS,
+  armyWideRules: [
+    "Foresters: all Halfling regiments and characters (and Treemen) move through woods without any penalty to movement.",
+    "Liberated Magic Items: beyond the small curated pool above, Halfling armies may in principle choose magic items from ANY army book, restricted to hand weapons, bows, light armour, and enchanted items only, at a rate of one item from another book per 800 points (or part thereof) of models in the force, ignoring that item's normal restrictions (a Halfling can carry a Chaos-Power-specific item or a Bretonnian-Commoner-only item freely, since Halflings are immune to the effects of Chaos). They may also commission exactly one Dwarf Rune Item. This builder's own item pool above is a representative curated subset, not the full any-book selection — the 800pt ratio and true any-book access are not mechanically enforced.",
+    "Halfling Thief: hides as an ordinary trooper inside a Halfling rank-and-file regiment (only one thief per regiment, noted by hand on the roster) and is revealed only when that regiment engages in melee, replacing an ordinary trooper. In the first round of combat it strikes before even strike-first models and before challenges are declared; on a hit, it randomly steals a magic item (not a banner) from an enemy in base contact, usable if the thief could otherwise use its mundane counterpart and it isn't arcane. Fights as a normal character (no longer striking first) in subsequent rounds, and moves as an independent character once the combat ends. A battle-phase mechanic, not simulated beyond the character's own points cost.",
+    "Empire or Elven allies: for every two Halfling regiments, the army may include one regiment of Imperial Troops from the Empire (Auxiliary Troops not allowed, Empire Champions permitted, may take Empire-only banners/items) — or, if no Empire Troops are taken, one regiment of Wood Elf Archers, Wood Elf Warriors, Glade Riders, or Elven Lords per two Halfling regiments instead (with access to Wood Elf-only banners/items). For each Empire regiment included, the army may also add one Empire mortar or cannon. Not mechanically importable in this builder — track allied regiments and their points by hand using the Empire or Wood Elves faction as reference.",
+    "The Cockatrice is unique — the army may only ever include a single one, whether ridden by a Moot General or taken as an independent monster (not hard-enforced as a cross-slot restriction by this builder).",
+  ],
+  characters: [
+    {
+      id: "mootgeneral", name: "Moot General", cost: 60, stat: "Moot General", magicItemSlots: 3, role: "Lord",
+      gearNote: "May take a shield for free, and light armour for free (either or both).",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear"] },
+      missileGroup: { label: "Bow or sling (+5pts)", cost: 5, options: ["None (default)", "Bow", "Sling"] },
+      mounts: [
+        { id: "livestockbeast", name: "Livestock Beast", cost: 10, stat: "Livestock Beast" },
+        { id: "greateagle", name: "Great Eagle", cost: 66, stat: "Great Eagle" },
+        { id: "cockatrice", name: "The Cockatrice (only one Moot General army-wide)", cost: 166, stat: "Cockatrice" },
+      ],
+    },
+    {
+      id: "moothero", name: "Moot Hero", cost: 36, stat: "Halfling Hero", magicItemSlots: 2, role: "Hero",
+      gearNote: "May take a shield for free, and light armour for free (either or both).",
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear"] },
+      missileGroup: { label: "Bow or sling (+5pts)", cost: 5, options: ["None (default)", "Bow", "Sling"] },
+      mounts: [
+        { id: "livestockbeast", name: "Livestock Beast", cost: 8, stat: "Livestock Beast" },
+        { id: "greateagle", name: "Great Eagle", cost: 64, stat: "Great Eagle" },
+      ],
+    },
+    {
+      id: "halflingbsb", name: "Halfling Battle Standard Bearer", cost: 60, stat: "Halfling BSB", magicItemSlots: 1, restriction: "0-1",
+      gearNote: "May take light armour for free. The one magic item may be a magic banner.",
+      mounts: [{ id: "livestockbeast", name: "Livestock Beast", cost: 4, stat: "Livestock Beast" }],
+    },
+    {
+      id: "halflingthief", name: "Halfling Thief", cost: 20, stat: "Halfling Thief",
+      gearNote: "Carries no weapon but a hand weapon, no armour, and starts with no magic items. Hides inside a Halfling rank-and-file regiment until revealed in melee (see army-wide rules). Only one thief may hide per regiment.",
+    },
+    {
+      id: "travellingwizardlord", name: "Human Travelling Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4, tags: ["wizard"],
+      gearNote: "May take College Magic. May take as many magic items as levels (4).",
+      mounts: [{ id: "normalhorse", name: "Normal Horse (free)", cost: 0, stat: "Normal Horse" }],
+    },
+    {
+      id: "travellingmasterwizard", name: "Human Travelling Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3, tags: ["wizard"],
+      gearNote: "May take College Magic. May take as many magic items as levels (3).",
+      mounts: [{ id: "normalhorse", name: "Normal Horse (free)", cost: 0, stat: "Normal Horse" }],
+    },
+    {
+      id: "travellingwizardchampion", name: "Human Travelling Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2, tags: ["wizard"],
+      gearNote: "May take College Magic. May take as many magic items as levels (2).",
+      mounts: [{ id: "normalhorse", name: "Normal Horse (free)", cost: 0, stat: "Normal Horse" }],
+    },
+    {
+      id: "travellingwizard", name: "Human Travelling Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1, tags: ["wizard"],
+      gearNote: "May take College Magic. May take as many magic items as levels (1).",
+      mounts: [{ id: "normalhorse", name: "Normal Horse (free)", cost: 0, stat: "Normal Horse" }],
+    },
+  ],
+  regiments: [
+    {
+      id: "halflingbowmen-main", name: "Halfling Bowmen", perModel: 7, minSize: 5, stat: "Halfling", command: "skirmisher",
+      note: "Halflings with bows. May skirmish.",
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
+    },
+    {
+      id: "halflingslingers", name: "Halfling Slingers", perModel: 6, minSize: 5, stat: "Halfling", command: "skirmisher",
+      note: "Halflings with slings. May skirmish.",
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
+    },
+    {
+      id: "halflingmilitia-main", name: "Halfling Militia", perModel: 2.5, minSize: 5, stat: "Halfling", command: "standard",
+      note: "Halflings with light armour and shields.",
+      options: [
+        { id: "spears", group: null, label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
+    },
+    {
+      id: "pantryguard", name: "Pantry Guard", perModel: 3, minSize: 5, stat: "Halfling Elite", command: "standard",
+      note: "Halfling Elite with light armour and shields. If equipped with bows instead of a weapon upgrade, the regiment may skirmish (not hard-enforced).",
+      options: [
+        { id: "spears", group: "weapon", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "bows", group: "weapon", label: "Bows instead, if no other weapon upgrade taken (+7pt/model)", cost: 7, per: "model" },
+      ],
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
+    },
+    {
+      id: "halflingriders", name: "Halfling Riders", perModel: 12, minSize: 5, stat: "Halfling Elite", mountStat: "Livestock Beast", mountLabel: "Livestock Beast", command: "fastCavalry",
+      note: "Halfling Elite with light armour and shields, mounted on Livestock Beasts. Fast cavalry.",
+      options: [
+        { id: "spears", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "flyinglivestock", group: null, label: "Ride Flying Livestock instead — monstrous, can fly, skirmishers (so no banner); only one Halfling Riders regiment army-wide (+12pt/model)", cost: 12, per: "model" },
+      ],
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
+    },
+    {
+      id: "fieldwardens", name: "Halfling Field Wardens", perModel: 12, minSize: 5, stat: "Halfling Field Wardens", command: "skirmisher",
+      note: "Field Wardens with bows. May skirmish and scout.",
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "treemen-halfling", name: "Treemen", perUnit: 200, stat: "Treeman", kind: "quantity", countsAsFirstRegiment: true,
+      note: "Only if the army also includes Wood Elves (allied regiments — see army-wide rules). The first Treeman counts toward Regiments, further ones toward Monsters. Large, terror-causing, immune to psychology, flammable, hate Orcs/Goblins/Hobgoblins. 3+ natural armour save. Rooted to the spot — don't take break tests unless wounded that combat round. May forfeit normal attacks to deal 1D6 automatic wounds to a structure in base contact instead. Falls over like a Giant when killed (Felled Treeman Template, Initiative test to avoid, no armour saves). Battle-phase specifics not simulated beyond points cost.",
+    },
+    {
+      id: "halflingcart", name: "Halfling Cart", perUnit: 40, stat: "Cart (Halfling)", mountStat: "Livestock Beast", mountLabel: "Livestock Beast (puller)",
+      note: "A Heavy Chariot ridden by one unequipped Halfling, pulled by one Livestock Beast.",
+    },
+    {
+      id: "halflingwagon", name: "Halfling Wagon", perUnit: 80, stat: "Wagon (Halfling)", mountStat: "Halfling", mountLabel: "Halfling Crew (6 with bows)",
+      note: "A Large Chariot ridden by seven Halflings (six equipped with bows), pulled by two Livestock Beasts.",
+    },
+    {
+      id: "halflinghotpot-main", name: "Halfling Hot-Pot", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
+      note: "The army may only include one — a truly unique phenomenon. Halflings are foresters, but the Hot-Pot itself cannot enter a wood. Shoots like a stone thrower, range 36\", Strength 5, allows a normal armour save but no regeneration save. Crewed by three Halflings.",
+      extraCrewCost: 5, extraCrewLabel: "extra Halfling crew",
+    },
+    {
+      id: "cockatrice-main", name: "The Cockatrice", perUnit: 200, stat: "Cockatrice", restriction: "0-1",
+      note: "Only available if the general isn't already riding it as a Moot General mount (see army-wide rules — the army only ever has one Cockatrice, ridden or independent). Large, causes terror, can fly. Petrify: in the shooting phase, may target any one visible model within 8\" (no \"Look Out, Sir\" roll) — the target rolls 1D6 and must roll under its own Initiative to avoid being turned to stone and slain; a roll of 6 always affects the target regardless of Initiative.",
+    },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
@@ -5897,13 +6053,13 @@ const FACTION_LIST = [
   { key: "bretonnia", name: "The Grand Army of Bretonnia", data: BRETONNIA },
   { key: "lizardmen", name: "Lizardmen" },
   { key: "dogsofwar", name: "Dogs of War", data: DOGS_OF_WAR },
-  { key: "halflings", name: "Halflings of the Moot" },
+  { key: "halflings", name: "Halflings of the Moot", data: HALFLINGS },
   { key: "ogres", name: "Ogre Mercenaries" },
   { key: "norse", name: "Norse", data: NORSE },
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD, kislev: KISLEV, norse: NORSE };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD, kislev: KISLEV, norse: NORSE, halflings: HALFLINGS };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
@@ -7662,6 +7818,10 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>{saveState}</span>
+          <div style={{ position: "relative" }}>
+            <button className="whr-btn" disabled title="Export List — coming soon">Export List</button>
+            <span style={{ position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)", marginTop: 3, whiteSpace: "nowrap", fontStyle: "italic", fontSize: 10.5, color: "var(--ink-faint)", letterSpacing: "0.03em" }}>Coming soon</span>
+          </div>
           <button className="whr-btn whr-btn-gold" onClick={onSave}>Save Roster</button>
         </div>
       </div>
