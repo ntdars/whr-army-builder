@@ -809,6 +809,27 @@ const STATS = {
   "Jungle Swarms": { M: 4, WS: 2, BS: 0, S: 3, T: 2, W: 5, I: 1, A: 5, Ld: 10 },
   "Oxayotl": { M: 6, WS: 4, BS: 5, S: 4, T: 4, W: 3, I: 7, A: 3, Ld: 7 },
   "Emperor Mazdamundi": { M: 6, WS: 6, BS: 5, S: 7, T: 6, W: 8, I: 6, A: 8, Ld: 10 },
+
+  "Slann Warlord": { M: 4, WS: 6, BS: 5, S: 4, T: 5, W: 3, I: 6, A: 4, Ld: 10 },
+  "Slann Hero": { M: 4, WS: 5, BS: 4, S: 4, T: 5, W: 2, I: 5, A: 3, Ld: 9 },
+  "Slann BSB": { M: 4, WS: 4, BS: 3, S: 4, T: 4, W: 2, I: 4, A: 2, Ld: 8 },
+  "Slann Empire Mage Priest Lord": { M: 4, WS: 3, BS: 2, S: 4, T: 5, W: 8, I: 6, A: 7, Ld: 10 },
+  "Slann Empire Master Mage Priest": { M: 4, WS: 3, BS: 2, S: 4, T: 5, W: 7, I: 5, A: 6, Ld: 9 },
+  "Slann Empire Mage Priest Champion": { M: 4, WS: 3, BS: 2, S: 4, T: 5, W: 6, I: 4, A: 5, Ld: 8 },
+  "Slann Empire Mage Priest": { M: 4, WS: 3, BS: 2, S: 3, T: 5, W: 5, I: 4, A: 5, Ld: 8 },
+  "Slann Warrior": { M: 4, WS: 3, BS: 2, S: 3, T: 4, W: 1, I: 3, A: 1, Ld: 8 },
+  "Slann Beastmaster": { M: 5, WS: 3, BS: 2, S: 3, T: 5, W: 1, I: 3, A: 1, Ld: 8 },
+  "Lizard Hound": { M: 6, WS: 3, BS: 0, S: 4, T: 3, W: 1, I: 3, A: 2, Ld: 6 },
+  "Slann Venom Tribe": { M: 4, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 3, A: 1, Ld: 8 },
+  "Slann Totem Warrior": { M: 4, WS: 4, BS: 2, S: 4, T: 4, W: 1, I: 4, A: 1, Ld: 8 },
+  "Lobotomised Human Slave": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Ghoulish Cannibal Tribe": { M: 4, WS: 2, BS: 3, S: 3, T: 4, W: 1, I: 3, A: 2, Ld: 5 },
+  "Amazon Warrior": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
+  "Slann Champion": { M: 4, WS: 4, BS: 3, S: 4, T: 4, W: 1, I: 4, A: 2, Ld: 8 },
+  "Slann Spawn Master": { M: 4, WS: 5, BS: 3, S: 4, T: 4, W: 1, I: 4, A: 2, Ld: 9 },
+  "Ghoul Champion (Slann)": { M: 4, WS: 3, BS: 4, S: 4, T: 4, W: 1, I: 4, A: 3, Ld: 5 },
+  "Amazon Champion": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 1, I: 4, A: 2, Ld: 7 },
+  "Toad Master Drulndribl": { M: 4, WS: 7, BS: 5, S: 4, T: 5, W: 3, I: 6, A: 4, Ld: 10 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -841,7 +862,7 @@ const WOOD_ELVES_MAGIC_ITEMS = [
   { id: "sp-netlings", name: "An Annoyance of Netlings", cost: 50, cat: "sprite", desc: "In a challenge, bearer can only be hit on natural 6s." },
   { id: "sp-despairs", name: "A Lamentation of Despairs", cost: 60, cat: "sprite", desc: "Bound spell, one use. One model anywhere tests LD or suffers 1D6 wounds, no save, no LoS required." },
 ];
-const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners", engineering: "Engineering Runes", virtue: "Knightly Virtues", bloodlinepower: "Bloodline Powers" };
+const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners", engineering: "Engineering Runes", virtue: "Knightly Virtues", bloodlinepower: "Bloodline Powers", heirloom: "Heirlooms of the Old Slann" };
 const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 /* ============================================================================
@@ -6382,6 +6403,263 @@ const LIZARDMEN = {
   ],
 };
 
+const SLANN_MAGIC_ITEMS = [
+  { id: "sla-amuletitza", name: "Amulet of Itza", cost: 40, cat: "arcane", desc: "Natural dispel 4+. A successful dispel deals a magical S4 hit to the unfortunate caster (or bearer of the relevant bound item)." },
+  { id: "sla-itxigrubs", name: "The Itxi Grubs", cost: 40, cat: "arcane", desc: "If eaten when magic cards are dealt, the bearer gains 1D6+1 magic cards only he can use. One use only." },
+  { id: "sla-plaquetepec", name: "The Plaque of Tepec", cost: 50, cat: "arcane", desc: "Works as a Dispel Magic Scroll. After use, both players roll 1D6 — if the owner rolls higher, the spell is also destroyed. One use only." },
+  { id: "sla-plaquexoloc", name: "The Plaque of Xoloc", cost: 50, cat: "arcane", desc: "The Mage Priest (or another friendly Slann Mage Priest) may cast one spell for free as if cast with Total Power. All wizards on the battlefield then suffer a wound on a roll of 1 on 1D6. One use only.", restrictedTo: [{ tags: ["slann"] }] },
+  { id: "sla-plaqueknowledge", name: "Plaque of Knowledge", cost: 75, cat: "arcane", desc: "The wizard may freely mix spells from any of the eight Colleges of Magic (can't pick spells another wizard already has), but loses the bonuses of following a single lore exclusively and can't use lore-exclusive items.", restrictedTo: [{ tags: ["wizard"] }] },
+  { id: "sla-jaguarstandard", name: "Jaguar Standard", cost: 20, cat: "banner", desc: "The regiment pursues and overruns an extra 1D6\"." },
+  { id: "sla-sunbursthexoatl", name: "The Sunburst Standard of Hexoatl", cost: 20, cat: "banner", desc: "The regiment can't be charged by flyers using their fly move — flyers must use their ground move to charge it." },
+  { id: "sla-totemquetzalcoatl", name: "Totem of Quetzalcoatl", cost: 30, cat: "banner", desc: "The regiment becomes immune to psychology." },
+  { id: "sla-shacklestandard", name: "Shackle Standard", cost: 60, cat: "banner", desc: "Lobotomised Slaves only. The regiment becomes unbreakable.", restrictedTo: [{ tags: ["lobotomised"] }] },
+  { id: "sla-antiteleport", name: "Anti-Teleport Field", cost: 10, cat: "heirloom", desc: "Teleporting is impossible within an 18\" radius of this techno device.", restrictedTo: [{ tags: ["slann"] }] },
+  { id: "sla-blaster", name: "Blaster", cost: 20, cat: "heirloom", desc: "Range 18\", wounds on 3+, no armour save allowed. Roll to hit with BS as normal. Any Slann character may take this even without a mundane counterpart or normal access to missile weapons — a Slann Mage Priest can't cast spells the turn he fires it.", restrictedTo: [{ tags: ["slann"] }] },
+  { id: "sla-protectivefield", name: "Protective Field", cost: 30, cat: "heirloom", desc: "A 5+ ward save.", restrictedTo: [{ tags: ["slann"] }] },
+  { id: "sla-antimagicfield", name: "Anti-Magic Field", cost: 40, cat: "heirloom", desc: "A 3+ natural dispel.", restrictedTo: [{ tags: ["slann"] }] },
+  { id: "sla-powerweapon", name: "Power Weapon", cost: 40, cat: "heirloom", desc: "+3 Strength, no armour save allowed.", restrictedTo: [{ tags: ["slann"] }] },
+];
+
+const SLANN_EMPIRE = {
+  key: "slann",
+  name: "The Slann Empire",
+  tagline: "The original Slann army of 2nd/3rd edition, restored — Stone Age heirs to a starfaring civilization, ruling Lustria through the Mage Priests and their Lizardmen servitors",
+  magicItems: SLANN_MAGIC_ITEMS,
+  armyWideRules: [
+    "Army Composition: the general must be a Slann character, and there must be at least as many Slann regiments as Auxiliary regiments (Lizardmen, Lobotomised Slaves, and Native Tribes combined can't outnumber Slann regiments). Not hard-enforced by this builder.",
+    "Blowpipes: no long-range penalty. Darts may be poisoned (+1 Strength). Range 12\", Strength 3, may shoot twice at -1 to hit.",
+    "Aquatic: both Slann and Lizardmen Skinks move through water without penalty. A regiment that includes Cold Ones loses this rule.",
+    "Lizardmen Scaly Skin: every Lizardman in the army has a natural armour save that can't be modified below 6+ (unless no save is allowed at all) — Skinks 6+, Saurus 5+, and the larger Lizardmen (Kroxigors, Carnosaurs, Salamanders, Stegadons) 4+.",
+    "Cold Blooded: every Lizardman in the army is resolute (Leadership tests use an extra 1D6, discarding the highest die) — this holds even in a regiment joined by Slann characters. Per the normal rule for resolute troops, a resolute character joining a non-resolute regiment doesn't make that regiment resolute; in fact such a character loses the benefit entirely while he remains with it. A battle-phase mechanic, not simulated by this builder.",
+    "Cold Ones (and the slightly larger Horned Ones) cause fear, are subject to stupidity, and can't be used as fast cavalry. They improve their rider's armour save by an additional +1, as if barded. A regiment including Cold Ones becomes subject to stupidity and loses the Aquatic rule. As with the Lizardmen army, this book's Character-table and Regiment-table stat rows for the Horned One disagree on its Leadership (7 vs 3) — this builder uses Ld3 consistently, matching the Cold One's own Ld3.",
+    "Carnosaurs are large, cause terror, are subject to frenzy, and have a 4+ scaly-skin save (floor 6+). Each wound they inflict multiplies into 1D3 wounds.",
+    "Native Tribes: the army may include a single regiment (no more) of ONE of Native Halflings, Ghoulish Cannibal Tribes, Amazon Warriors, or Chameleon Skinks — all four are individually capped at 0-1 by this builder, but nothing stops adding one of each; treat the four as a single shared 0-1 slot and only take one type. All Native Tribes may scout and must always deploy in skirmish formation, and all fire poisonous projectiles.",
+    "Heirlooms of the Old Slann are technological artefacts, not magic — they count toward a character's normal item-slot limit but aren't nullified by anti-magic-item effects, and (unlike ordinary magic items) the army may include more than one of the same Heirloom overall, so long as no single character carries two of the same one. This builder's magic-item picker normally prevents taking the same item twice anywhere in the roster — for a second copy of a Heirloom on a different character, track it by hand.",
+    "If more than one Slann Mage Priest is on the battlefield, they may use each other's spells via telepathy, even across different lores. Not hard-enforced by this builder.",
+  ],
+  characters: [
+    {
+      id: "slannwarlord", name: "Slann Warlord", cost: 124, stat: "Slann Warlord", magicItemSlots: 3, role: "Lord", tags: ["slann"],
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Spear", "Additional hand weapon", "Halberd", "Double handed weapon"] },
+      mounts: [
+        { id: "coldone", name: "Cold One", cost: 30, stat: "Cold One" },
+        { id: "hornedone", name: "Horned One", cost: 40, stat: "Horned One" },
+        { id: "terradon", name: "Terradon", cost: 51, stat: "Terradon" },
+      ],
+    },
+    {
+      id: "slannhero", name: "Slann Hero", cost: 74, stat: "Slann Hero", magicItemSlots: 2, role: "Hero", tags: ["slann"],
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Spear", "Additional hand weapon", "Halberd", "Double handed weapon"] },
+      mounts: [
+        { id: "coldone", name: "Cold One", cost: 23, stat: "Cold One" },
+        { id: "hornedone", name: "Horned One", cost: 33, stat: "Horned One" },
+        { id: "terradon", name: "Terradon", cost: 44, stat: "Terradon" },
+      ],
+    },
+    {
+      id: "slannwarriorpriest", name: "Slann Warrior Priest", cost: 94, stat: "Slann Hero", magicItemSlots: 2, tags: ["slann"],
+      gearNote: "Worships legendary creatures such as Quetzalcoatl. Subject to frenzy and hatred — immune to psychology and takes break tests without modifiers when alone, but must still flee along with any regiment he's joined if it flees.",
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Spear", "Additional hand weapon", "Halberd", "Double handed weapon"] },
+      mounts: [
+        { id: "coldone", name: "Cold One", cost: 23, stat: "Cold One" },
+        { id: "hornedone", name: "Horned One", cost: 33, stat: "Horned One" },
+        { id: "terradon", name: "Terradon", cost: 44, stat: "Terradon" },
+      ],
+    },
+    {
+      id: "slannbsb", name: "Slann Battle Standard Bearer", cost: 88, stat: "Slann BSB", magicItemSlots: 1, restriction: "0-1", tags: ["slann", "bsb"],
+      gearNote: "May take light armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["Light armour (default)"] },
+      mounts: [
+        { id: "coldone", name: "Cold One", cost: 16, stat: "Cold One" },
+        { id: "hornedone", name: "Horned One", cost: 26, stat: "Horned One" },
+      ],
+    },
+    {
+      id: "saurushero-slann", name: "Lizardman Saurus Hero", cost: 118, stat: "Lizardman Saurus Hero", magicItemSlots: 2, role: "Hero", tags: ["saurus"],
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Spear", "Additional hand weapon", "Halberd", "Double handed weapon"] },
+      mounts: [
+        { id: "coldone", name: "Cold One", cost: 37, stat: "Cold One" },
+        { id: "hornedone", name: "Horned One", cost: 47, stat: "Horned One" },
+        { id: "carnosaur", name: "Carnosaur", cost: 188, stat: "Carnosaur" },
+      ],
+    },
+    {
+      id: "skinkhero-slann", name: "Lizardman Skink Hero", cost: 53, stat: "Lizardman Skink Hero", magicItemSlots: 2, role: "Hero", tags: ["skink"],
+      gearNote: "One Skink Hero may join a Stegadon's howdah crew, as long as the total crew doesn't exceed 10 models.",
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Spear", "Additional hand weapon"] },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Poisoned Javelins", "Short Bow (poisoned arrows)", "Blowpipe (poisoned darts)"] },
+      mounts: [
+        { id: "coldone", name: "Cold One", cost: 15, stat: "Cold One" },
+        { id: "hornedone", name: "Horned One", cost: 25, stat: "Horned One" },
+        { id: "terradon", name: "Terradon", cost: 38, stat: "Terradon" },
+      ],
+    },
+    {
+      id: "skinkshaman-slann", name: "Lizardman Skink Shaman", cost: 46, stat: "Lizardman Skink Shaman", magicItemSlots: 2, tags: ["wizard", "skink"],
+      gearNote: "Has one magic level. May use any College Magic lore. One Skink Shaman may join a Stegadon's howdah crew, as long as the total crew doesn't exceed 10 models.",
+      mounts: [
+        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "hornedone", name: "Horned One", cost: 10, stat: "Horned One" },
+        { id: "terradon", name: "Terradon", cost: 30, stat: "Terradon" },
+      ],
+    },
+    {
+      id: "slannmagelord", name: "Slann Mage Priest Lord (level 4)", cost: 314, stat: "Slann Empire Mage Priest Lord", magicItemSlots: 5, role: "Lord", tags: ["wizard", "slann"],
+      gearNote: "Carried atop a Palanquin, which gives him +4 Wounds and +4 Attacks (already reflected) and makes him a large monster — normally moves and fights as a single model, but may instead be placed in the middle of a regiment's front rank (targetable separately by missile fire; rank bonus counts the space as regular troops). May use High Magic and College Magic. Gets one magic item more than his levels (already reflected: 5 slots for level 4).",
+    },
+    {
+      id: "slannmagemaster", name: "Master Slann Mage Priest (level 3)", cost: 236, stat: "Slann Empire Master Mage Priest", magicItemSlots: 4, tags: ["wizard", "slann"],
+      gearNote: "Carried atop a Palanquin (+4W/+4A already reflected, makes him a large monster; may be placed in a regiment's front rank instead — see Lord's note). May use High Magic and College Magic. Gets one magic item more than his levels (already reflected).",
+    },
+    {
+      id: "slannmagechampion", name: "Slann Mage Priest Champion (level 2)", cost: 172, stat: "Slann Empire Mage Priest Champion", magicItemSlots: 3, tags: ["wizard", "slann"],
+      gearNote: "Carried atop a Palanquin (+4W/+4A already reflected, large monster; may be placed in a regiment's front rank instead). May use High Magic and College Magic. Gets one magic item more than his levels (already reflected).",
+    },
+    {
+      id: "slannmagepriestbase", name: "Slann Mage Priest (level 1)", cost: 108, stat: "Slann Empire Mage Priest", magicItemSlots: 2, tags: ["wizard", "slann"],
+      gearNote: "Carried atop a Palanquin (+4W/+4A already reflected, large monster; may be placed in a regiment's front rank instead). May use High Magic and College Magic. Gets one magic item more than his levels (already reflected).",
+    },
+    {
+      id: "waraltar", name: "War Altar", cost: 134, stat: "Slann Empire Mage Priest Lord", magicItemSlots: 6, magicItemCategoryFilter: ["enchanted", "arcane", "banner", "heirloom"], tags: ["wizard", "slann"],
+      gearNote: "A long-dead, mummified Slann Mage Priest, still seated on his ancient Palanquin (+4W/+4A already reflected, large monster). Cannot cast his own spells (not even bound spells) and cannot be the army general, but knows five spells — drawn from High Magic or a College Magic deck — which he can lend telepathically to other friendly Slann Mage Priests anywhere on the battlefield, and can still attempt to dispel enemy magic. Fights in melee as if alive. Cannot wield a magic weapon or wear magic armour (already reflected — only enchanted/arcane/banner/heirloom items shown below).",
+    },
+  ],
+  regiments: [
+    {
+      id: "lobotomisedslaves", name: "Lobotomised Human Slaves", perModel: 4, minSize: 5, stat: "Lobotomised Human Slave", command: "standard", tags: ["lobotomised"],
+      note: "Equipped with shields. Immune to psychology, subject to stupidity.",
+      options: [
+        { id: "spears", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Slann Champion", baseCost: 20, magicItemSlots: 1, stat: "Slann Champion" },
+    },
+    {
+      id: "slannwarriors", name: "Slann Warriors", perModel: 8, minSize: 5, stat: "Slann Warrior", command: "standard", tags: ["slann"],
+      note: "Light armour and shields.",
+      options: [
+        { id: "spears", group: null, label: "Spears (+2pt/model)", cost: 2, per: "model" },
+      ],
+      champion: { name: "Slann Champion", baseCost: 20, magicItemSlots: 1, stat: "Slann Champion" },
+    },
+    {
+      id: "slannanimalhandlers", name: "Slann Animal Handlers", perModel: 0, minSize: 1, kind: "composite", command: "none", restriction: "0-1",
+      note: "Lizard Hounds have a 5+ armour save (floor 6+ unless no save is allowed at all) due to scaly skin. Cannot take a standard bearer or musician, and cannot be joined by characters.",
+      composition: [
+        { id: "beastmaster", label: "Slann Beastmasters", cost: 14, stat: "Slann Beastmaster" },
+        { id: "hound", label: "Lizard Hounds", cost: 8, stat: "Lizard Hound" },
+      ],
+    },
+    {
+      id: "slannvenomtribes", name: "Slann Venom Tribes", perModel: 8, minSize: 5, stat: "Slann Venom Tribe", command: "skirmisher", tags: ["slann"],
+      note: "Armed with blowpipes shooting poisoned darts. May skirmish.",
+      champion: { name: "Slann Champion", baseCost: 20, magicItemSlots: 1, stat: "Slann Champion" },
+    },
+    {
+      id: "slanntotemwarriors", name: "Slann Totem Warriors", perModel: 10, minSize: 5, stat: "Slann Totem Warrior", command: "standard", tags: ["slann"],
+      note: "Light armour and shields.",
+      champion: { name: "Slann Spawn Master", baseCost: 30, magicItemSlots: 1, stat: "Slann Spawn Master" },
+    },
+    {
+      id: "slanntotemcoldoneriders", name: "Slann Totem Warrior Cold One Riders", perModel: 25, minSize: 5, stat: "Slann Totem Warrior", mountStat: "Cold One", mountLabel: "Cold One", command: "standard", tags: ["slann"],
+      note: "Light armour, spears, and shields, riding Cold Ones.",
+      champion: { name: "Slann Spawn Master", baseCost: 30, magicItemSlots: 1, stat: "Slann Spawn Master", note: "May exchange his Cold One for a Horned One for +10pts (not toggled here — add by hand)." },
+    },
+    {
+      id: "kroxigors-slann", name: "Kroxigors", perModel: 50, minSize: 3, stat: "Lizardman Kroxigor", command: "none",
+      note: "Monstrous models that cause fear, armed with double handed weapons. 4+ armour save (floor 6+). Cannot take a standard bearer, musician, or regimental champion.",
+    },
+    {
+      id: "saurustempleguard-slann", name: "Saurus Temple Guard", perModel: 18, minSize: 5, stat: "Lizardman Saurus Temple Guard", command: "standard", tags: ["saurus"],
+      note: "Armed with halberds.",
+      options: [
+        { id: "lightarmour", group: null, label: "Light armour (+1pt/model)", cost: 1, per: "model" },
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+      ],
+      champion: { name: "Saurus Champion", baseCost: 20, magicItemSlots: 1, stat: "Lizardman Saurus Champion" },
+    },
+    {
+      id: "sauruswarriors-slann", name: "Saurus Warriors", perModel: 15, minSize: 5, stat: "Lizardman Saurus Warrior", command: "standard", tags: ["saurus"],
+      note: "Armed with hand weapons and shields.",
+      options: [
+        { id: "spears", group: null, label: "Spears (+3pt/model)", cost: 3, per: "model" },
+      ],
+      champion: { name: "Saurus Champion", baseCost: 20, magicItemSlots: 1, stat: "Lizardman Saurus Champion" },
+    },
+    {
+      id: "terradonriders-slann", name: "Terradon Riders", perModel: 42, minSize: 3, stat: "Lizardman Skink Warrior", mountStat: "Terradon", mountLabel: "Terradon", command: "skirmisher", restriction: "0-1", tags: ["skink"],
+      note: "Flying steeds, fight in skirmish formation — two Skink Warriors ride each Terradon (both must be killed before the model is removed). Each Terradon drops a rock when charging (one S6 impact hit per Terradon in the regiment; jettisoned harmlessly if charged or hit by a glancing blow first). Priced per Terradon (i.e. per pair of riders).",
+      options: [
+        { id: "spears", group: "melee", label: "Spears, for both riders (+3pt/model)", cost: 3, per: "model" },
+        { id: "shields", group: null, label: "Shields, for both riders (+3pt/model)", cost: 3, per: "model" },
+        { id: "javelins", group: "missile", label: "Javelins, for both riders (+2pt/model)", cost: 2, per: "model" },
+        { id: "shortbows", group: "missile", label: "Short bows, for both riders (+2pt/model)", cost: 2, per: "model" },
+        { id: "poison", group: null, label: "Poison missile weapons, for both riders (+4pt/model)", cost: 4, per: "model" },
+      ],
+      champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion" },
+    },
+    {
+      id: "nativehalflings", name: "Native Halflings", perModel: 11, minSize: 5, stat: "Halfling", command: "skirmisher", restriction: "0-1", tags: ["nativetribe"],
+      note: "Halflings with blowpipes. Foresters (no practical effect here, since they always skirmish). One of four mutually-exclusive Native Tribe options — see army-wide rules.",
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
+    },
+    {
+      id: "ghoulishcannibaltribes", name: "Ghoulish Cannibal Tribes", perModel: 13, minSize: 5, stat: "Ghoulish Cannibal Tribe", command: "skirmisher", restriction: "0-1", tags: ["nativetribe"],
+      note: "Ghouls with blowpipes. Cause fear, poisoned melee attacks (+1S). May skirmish; if not, unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue or overrun after a won combat that inflicted a casualty (except models with hatred/frenzy). One of four mutually-exclusive Native Tribe options — see army-wide rules.",
+      champion: { name: "Ghoul Champion", baseCost: 20, magicItemSlots: 1, stat: "Ghoul Champion (Slann)" },
+    },
+    {
+      id: "amazonwarriors", name: "Amazon Warriors", perModel: 15, minSize: 5, stat: "Amazon Warrior", command: "skirmisher", restriction: "0-1", tags: ["nativetribe"],
+      note: "A tribe of female human warriors with a bad temper, armed with additional hand weapons and bows. Re-roll panic tests, hate all enemies. One of four mutually-exclusive Native Tribe options — see army-wide rules.",
+      champion: { name: "Amazon Champion", baseCost: 20, magicItemSlots: 1, stat: "Amazon Champion" },
+    },
+    {
+      id: "chameleonskinks-slann", name: "Chameleon Skinks", perModel: 17, minSize: 5, stat: "Lizardman Chameleon Skink", command: "skirmisher", restriction: "0-1", tags: ["nativetribe", "skink"],
+      note: "Armed with blowpipes. May scout, must skirmish. Enemies shooting at them with BS suffer an extra -1 to hit (on top of the usual skirmisher penalty). One of four mutually-exclusive Native Tribe options — see army-wide rules.",
+      champion: { name: "Chameleon Skink Champion", baseCost: 20, magicItemSlots: 1, stat: "Chameleon Skink Champion" },
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "monstrousspiderscorpion-slann", name: "Monstrous Spider/Scorpion", kind: "quantity", perUnit: 40, stat: "Monstrous Spider",
+      note: "A small monster. Follows the main-rulebook rules for Monstrous Spiders/Scorpions.",
+    },
+    {
+      id: "jungleswarms-slann", name: "Jungle Swarm", kind: "quantity", perUnit: 40, stat: "Jungle Swarms", countsAsFirstRegiment: true,
+      note: "The smallest base counts toward Regiments; further bases count toward Monsters. Follows the main-rulebook rules for Swarms. Priced per base.",
+    },
+    {
+      id: "stegadons-slann", name: "Stegadon", perUnit: 200, stat: "Stegadon", mountStat: "Lizardman Skink Warrior", mountLabel: "Skink Crew (howdah)",
+      note: "A large monster ridden by four Skink Warriors with short bows or poisoned-dart blowpipes, huddled in a howdah. Causes terror, 4+ scaly-skin save (floor 6+), immune to psychology. Inflicts 1D6 Strength 7 impact hits on a charge (or fleeing through friendly regiments). All hits go against the monster; if it dies, the crew dies too. Max 5 crew in the howdah, leaving room for one joined character (not hard-enforced).",
+      variantOptions: [
+        { id: "boltthrower", label: "Small bolt thrower mounted in the howdah — range 24\", Strength 5, fires in a 360° arc even after marching; if used, the crew can't also fire their other missile weapons (+25pts)", cost: 25 },
+        { id: "secondtier", label: "Second howdah tier — 5 more crewmen who can shoot while the lower crew operate the bolt thrower, if taken (+25pts)", cost: 25 },
+      ],
+    },
+    {
+      id: "salamanders-slann", name: "Salamander", perUnit: 80, stat: "Salamander", mountStat: "Lizardman Skink Warrior", mountLabel: "Skink Handlers (4, with prodders)",
+      note: "A four-legged reptile that shoots fireballs, accompanied by four Skink handlers. 4+ scaly-skin save (floor 6+). Moves as skirmishers, but enemies get no shooting penalty for it (too large to benefit) — if shot at, roll 1D6: 1-4 hits the Salamander, 5-6 hits a handler. If it hasn't marched, may shoot an artillery-die number of S4 no-armour-save flaming fireballs (range 24\"); a misfire means it eats 1D3 handlers instead. May stand-and-shoot as a charge reaction. Rolls on the Monster Reaction Table if all handlers are slain. Not aquatic, but may cross water at half speed. Battle-phase specifics documented, not simulated beyond points cost.",
+    },
+  ],
+  specialCharacters: [
+    { id: "drulndribl", name: "Toad Master Drulndribl", cost: 250, stat: "Toad Master Drulndribl", role: "The Emperor's most favoured Slann Warlord",
+      note: "Carries light armour and a shield. May take two additional magic items.",
+      items: "Carries the Blade of Realities — every hit wounds automatically, no armour save, 1 wound becomes 1D3 wounds.",
+      mounts: [{ id: "hornedone", name: "Horned One", cost: 40, stat: "Horned One" }] },
+    { id: "lordkroak-slann", name: "Venerable Lord Kroak", cost: 375, stat: "Slann Mage Priest Lord", role: "Mummified Slann Mage Priest Lord, 5 magic levels",
+      note: "May take five additional magic items.",
+      items: "Carries The Gold Death Mask — enemies can't hit Kroak in melee unless they roll a natural 6 to hit (or 5+ with an always-hits weapon)." },
+    { id: "mazdamundi-slann", name: "Emperor Mazdamundi", cost: 600, stat: "Emperor Mazdamundi", role: "Slann Mage Priest Lord riding a Stegadon (already incorporated into his profile)",
+      note: "Causes terror and delivers 1D6 impact hits like a chariot. Always knows four fixed spells: Move the Mountains (Power 2, freezes a hill's units), The Ruination of Cities (Power 3, destroys a building/bridge and everything on it), Earth Line (Power 2, S10 hit along a line to a table corner), and Part the Waters (Power 1, removes a water feature). Carries the battle standard. May take four additional magic items, one of which may be a magic banner.",
+      items: "Carries the Cobra Mace of Mazdamundi — enemies attacking him with a magic weapon must roll 1D6 each round first; on a 6 the weapon is destroyed and no attack is made." },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
@@ -6402,10 +6680,10 @@ const FACTION_LIST = [
   { key: "halflings", name: "Halflings of the Moot", data: HALFLINGS },
   { key: "ogres", name: "Ogre Mercenaries", data: OGRES },
   { key: "norse", name: "Norse", data: NORSE },
-  { key: "slann", name: "The Slann Empire" },
+  { key: "slann", name: "The Slann Empire", data: SLANN_EMPIRE },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD, kislev: KISLEV, norse: NORSE, halflings: HALFLINGS, ogres: OGRES, lizardmen: LIZARDMEN };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD, kislev: KISLEV, norse: NORSE, halflings: HALFLINGS, ogres: OGRES, lizardmen: LIZARDMEN, slann: SLANN_EMPIRE };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
