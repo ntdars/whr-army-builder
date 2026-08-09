@@ -656,6 +656,62 @@ const STATS = {
   "Throt the Unclean": { M: 5, WS: 5, BS: 3, S: 5, T: 4, W: 2, I: 6, A: 4, Ld: 8 },
   "Warlord Queek Head-Taker": { M: 5, WS: 7, BS: 6, S: 4, T: 4, W: 3, I: 7, A: 5, Ld: 8 },
   "Boneripper": { M: 6, WS: 5, BS: 0, S: 5, T: 5, W: 3, I: 6, A: 3, Ld: 5 },
+
+  "Necromancer Lord": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 4, I: 6, A: 3, Ld: 8 },
+  "Master Necromancer": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 3, I: 5, A: 2, Ld: 7 },
+  "Necromancer Champion": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 2, I: 4, A: 1, Ld: 7 },
+  "Necromancer": { M: 4, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 4, A: 1, Ld: 7 },
+  "Vampire Lord": { M: 6, WS: 8, BS: 6, S: 7, T: 6, W: 4, I: 9, A: 4, Ld: 10 },
+  "Vampire Count": { M: 6, WS: 7, BS: 5, S: 7, T: 6, W: 3, I: 8, A: 3, Ld: 9 },
+  "Vampire BSB": { M: 6, WS: 6, BS: 4, S: 7, T: 5, W: 3, I: 7, A: 2, Ld: 8 },
+  "Wight Hero": { M: 4, WS: 5, BS: 0, S: 5, T: 5, W: 2, I: 5, A: 3, Ld: 9 },
+  "Wight BSB": { M: 4, WS: 4, BS: 0, S: 5, T: 4, W: 2, I: 4, A: 2, Ld: 8 },
+  "Undead Steed": { M: 8, WS: 2, BS: 0, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 5 },
+  "Winged Nightmare": { M: 8, WS: 3, BS: 0, S: 5, T: 5, W: 3, I: 2, A: 3, Ld: 5 },
+  "Zombie Dragon": { M: 6, WS: 4, BS: 0, S: 7, T: 7, W: 7, I: 2, A: 7, Ld: 5 },
+  "Ghoul": { M: 4, WS: 2, BS: 0, S: 3, T: 4, W: 1, I: 3, A: 2, Ld: 5 },
+  "Giant Bat": { M: 2, WS: 3, BS: 0, S: 3, T: 3, W: 2, I: 3, A: 2, Ld: 5 },
+  "Skeleton": { M: 4, WS: 2, BS: 2, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 5 },
+  "Zombie": { M: 4, WS: 1, BS: 0, S: 3, T: 4, W: 1, I: 0, A: 1, Ld: 2 },
+  "Wight": { M: 4, WS: 3, BS: 0, S: 4, T: 4, W: 1, I: 3, A: 1, Ld: 8 },
+  "Spirit Host": { M: 6, WS: 3, BS: 0, S: 3, T: 3, W: 4, I: 1, A: 4, Ld: 4 },
+  "Vampire Thrall": { M: 6, WS: 6, BS: 4, S: 7, T: 5, W: 2, I: 7, A: 2, Ld: 8 },
+  "Wight Champion": { M: 4, WS: 4, BS: 0, S: 5, T: 4, W: 1, I: 4, A: 2, Ld: 8 },
+  "Wraith": { M: 4, WS: 3, BS: 0, S: 3, T: 4, W: 3, I: 3, A: 2, Ld: 5 },
+  "Banshee": { M: 6, WS: 3, BS: 0, S: 3, T: 4, W: 2, I: 3, A: 2, Ld: 8 },
+  "Black Coach": { M: "-", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
+  "Bat Swarm": { M: 1, WS: 3, BS: 0, S: 3, T: 2, W: 5, I: 1, A: 5, Ld: 10 },
+  "Sylvania Peasant": { M: 4, WS: 2, BS: 2, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 6 },
+  "Swain": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
+  "War Horse": { M: 8, WS: 3, BS: 0, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 5 },
+  "Vampire Knight": { M: 6, WS: 5, BS: 3, S: 6, T: 5, W: 2, I: 6, A: 1, Ld: 8 },
+  "Ghast": { M: 6, WS: 3, BS: 0, S: 4, T: 5, W: 3, I: 2, A: 3, Ld: 5 },
+  "Vampire Lord (Strigoi)": { M: 6, WS: 8, BS: 6, S: 7, T: 6, W: 4, I: 9, A: 5, Ld: 10 },
+  "Vampire Count (Strigoi)": { M: 6, WS: 7, BS: 5, S: 7, T: 6, W: 3, I: 8, A: 4, Ld: 9 },
+  "Vampire Thrall (Strigoi)": { M: 6, WS: 6, BS: 4, S: 7, T: 5, W: 2, I: 7, A: 3, Ld: 8 },
+  "Lich Lord": { M: 4, WS: 7, BS: 7, S: 5, T: 4, W: 4, I: 6, A: 5, Ld: 10 },
+  "Nagash": { M: 6, WS: 7, BS: 7, S: 8, T: 7, W: 7, I: 6, A: 6, Ld: 10 },
+  "Krell": { M: 4, WS: 6, BS: 0, S: 5, T: 5, W: 3, I: 6, A: 4, Ld: 10 },
+
+  "Undead Priest Lord": { M: 4, WS: 2, BS: 2, S: 4, T: 4, W: 4, I: 4, A: 3, Ld: 6 },
+  "Master Undead Priest": { M: 4, WS: 2, BS: 2, S: 4, T: 4, W: 3, I: 3, A: 2, Ld: 5 },
+  "Undead Priest Champion": { M: 4, WS: 2, BS: 2, S: 4, T: 4, W: 2, I: 2, A: 1, Ld: 5 },
+  "Undead Priest": { M: 4, WS: 2, BS: 2, S: 3, T: 4, W: 1, I: 2, A: 1, Ld: 5 },
+  "Mummy King": { M: 4, WS: 6, BS: 0, S: 5, T: 6, W: 4, I: 4, A: 5, Ld: 10 },
+  "Mummy Prince": { M: 4, WS: 5, BS: 0, S: 5, T: 6, W: 3, I: 3, A: 4, Ld: 9 },
+  "Mummy BSB": { M: 4, WS: 4, BS: 0, S: 5, T: 5, W: 3, I: 2, A: 3, Ld: 8 },
+  "Tomb Guard": { M: 4, WS: 3, BS: 3, S: 4, T: 3, W: 1, I: 3, A: 1, Ld: 5 },
+  "Mummy": { M: 4, WS: 3, BS: 0, S: 4, T: 5, W: 2, I: 1, A: 2, Ld: 8 },
+  "Ushabti": { M: 5, WS: 4, BS: 2, S: 6, T: 4, W: 3, I: 3, A: 3, Ld: 10 },
+  "Carrion": { M: 2, WS: 3, BS: 0, S: 3, T: 3, W: 2, I: 4, A: 4, Ld: 7 },
+  "Tomb Champion": { M: 4, WS: 4, BS: 4, S: 5, T: 3, W: 1, I: 4, A: 2, Ld: 5 },
+  "Mummy Champion": { M: 4, WS: 4, BS: 0, S: 5, T: 5, W: 2, I: 2, A: 3, Ld: 8 },
+  "Bone Giant": { M: 6, WS: 3, BS: 0, S: 6, T: 5, W: 6, I: 3, A: 5, Ld: 8 },
+  "Monstrous Scorpion": { M: 7, WS: 3, BS: 0, S: 4, T: 4, W: 4, I: 1, A: 2, Ld: 5 },
+  "Scorpion Swarm": { M: 4, WS: 2, BS: 0, S: 3, T: 2, W: 5, I: 1, A: 5, Ld: 10 },
+  "Settra the Imperishable": { M: 4, WS: 6, BS: 0, S: 5, T: 6, W: 4, I: 4, A: 5, Ld: 10 },
+  "High Queen Khalida Neferher": { M: 4, WS: 6, BS: 0, S: 5, T: 6, W: 4, I: 4, A: 5, Ld: 10 },
+  "Arkhan the Black": { M: 4, WS: 7, BS: 7, S: 5, T: 4, W: 4, I: 6, A: 5, Ld: 10 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -688,7 +744,7 @@ const WOOD_ELVES_MAGIC_ITEMS = [
   { id: "sp-netlings", name: "An Annoyance of Netlings", cost: 50, cat: "sprite", desc: "In a challenge, bearer can only be hit on natural 6s." },
   { id: "sp-despairs", name: "A Lamentation of Despairs", cost: 60, cat: "sprite", desc: "Bound spell, one use. One model anywhere tests LD or suffers 1D6 wounds, no save, no LoS required." },
 ];
-const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners", engineering: "Engineering Runes", virtue: "Knightly Virtues" };
+const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners", engineering: "Engineering Runes", virtue: "Knightly Virtues", bloodlinepower: "Bloodline Powers" };
 const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 /* ============================================================================
@@ -4610,13 +4666,761 @@ const SKAVEN = {
   ],
 };
 
+function vcChampions(thrallCost, wightCost, wraithCost) {
+  return [
+    { id: "thrall", name: "Vampire Thrall", cost: thrallCost, magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped according to its bloodline. May take 1 magic item or bloodline power." },
+    { id: "wightchamp", name: "Wight Champion", cost: wightCost, magicItemSlots: 1, tags: ["wight"], itemSlotLabel: "Magic Item", note: "Equipped as you see fit within the limits of a Wight Hero. Carries a free Wight-Blade (1D3 wounds) unless another magic weapon is taken." },
+    { id: "wraithchamp", name: "Wraith Champion", cost: wraithCost, magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Ethereal, causes terror, cannot be harmed by mundane weapons. Carries a free Wraith-Weapon (double handed, no armour save) unless another magic weapon is taken." },
+  ];
+}
+
+const UNDEAD_MAGIC_ITEMS = [
+  { id: "und-tombblade", name: "The Tomb Blade of Arkhan", cost: 25, cat: "weapon", desc: "If the bearer joins a regiment of Zombies, Skeletons, Tomb Guard, or Wight infantry, a new model is added to the unit each time the bearer kills a man-sized enemy with this blade. New models don't fight in the phase they're added." },
+  { id: "und-swordofkings", name: "Sword of Kings", cost: 40, cat: "weapon", desc: "Wights only. 1 wound inflicted becomes 1D6 wounds. No armour save allowed.", restrictedTo: [{ tags: ["wight"] }] },
+  { id: "und-ringofnight", name: "Ring of Night Creatures", cost: 10, cat: "enchanted", desc: "Vampires only. All Giant Wolves and Giant Bats on the battlefield become Stubborn, using the Leadership of the Vampire carrying this ring.", restrictedTo: [{ tags: ["vampire"] }] },
+  { id: "und-mummyscurse", name: "Mummy's Curse", cost: 25, cat: "enchanted", desc: "Mummies only. A model that personally slays a Mummy wearing this amulet in melee suffers 1D3 wounds with no save of any kind.", restrictedTo: [{ tags: ["mummy"] }] },
+  { id: "und-sceptrephantoms", name: "Sceptre of Phantoms", cost: 25, cat: "enchanted", desc: "Bound Spell. May target a visible, unengaged enemy unit within 24\" with a frightful image, forcing an immediate Panic test (unless immune to Panic or Fear). Usable up to three times per game." },
+  { id: "und-amuletofdeath", name: "Amulet of Death", cost: 25, cat: "enchanted", desc: "Contains the Hand of Dust spell from the Necromancy deck. May be cast as a bound spell up to three times per game against an opponent in melee combat." },
+  { id: "und-wristbands", name: "Wristbands of Black Gold", cost: 40, cat: "enchanted", desc: "The bearer and mount get a 3+ ward save against all ranged attacks (shooting, ranged magic, banshee howls, etc)." },
+  { id: "und-blackskull", name: "Black Skull Talisman", cost: 40, cat: "enchanted", desc: "The bearer ignores the first wound suffered." },
+  { id: "und-tombkingscrown", name: "Tomb King's Crown", cost: 50, cat: "enchanted", desc: "Mummies only. All models fighting in the same regiment as this character use his WS and BS.", restrictedTo: [{ tags: ["mummy"] }] },
+  { id: "und-cursedbook", name: "Cursed Book", cost: 80, cat: "enchanted", desc: "Undead characters only. Living models suffer -1 to hit (shooting and melee) against the bearer and his regiment. The bearer can only join undead regiments with no living models.", restrictedTo: [{ tags: ["undeadCharacter"] }] },
+  { id: "und-greenpearl", name: "The Green Pearl", cost: 0, cat: "arcane", desc: "A Vampire carrying the Green Pearl gains +1 Magic Level but does not learn an additional spell.", restrictedTo: [{ tags: ["vampire"] }] },
+  { id: "und-swordunholy", name: "Sword of Unholy Power", cost: 25, cat: "arcane", desc: "Also a magic weapon. A winds of magic card is generated each time the bearer kills an enemy model with this blade — dealt to the bearer next magic phase, usable only by him." },
+  { id: "und-forbiddengrimoire", name: "Forbidden Grimoire", cost: 25, cat: "arcane", desc: "Lich Lords, Necromancers, and Undead Priests only. May attempt to cast the same spell again and again in the same magic phase, until it's successfully cast.", restrictedTo: [{ tags: ["lichLord"] }, { tags: ["necromancer"] }, { tags: ["undeadPriest"] }] },
+  { id: "und-evilscroll", name: "Evil Scroll", cost: 35, cat: "arcane", desc: "Undead Priests only. Usable as either a Power Scroll or a Dispel Magic Scroll (counts as neither for stacking limits).", restrictedTo: [{ tags: ["undeadPriest"] }] },
+  { id: "und-staffdamnation", name: "Staff of Damnation", cost: 50, cat: "arcane", desc: "Bound Spell. May cast Vanhel's Danse Macabre for free, up to three times per game, once per magic phase." },
+  { id: "und-wightkingscrown", name: "Wight King's Crown", cost: 50, cat: "arcane", desc: "Lich Lords and Necromancers only. May raise Wights instead of Skeletons when casting Raise the Dead, Summon Skeletons, or Summon Skeleton Horde. Works in combination with The Necronomicon.", restrictedTo: [{ tags: ["lichLord"] }, { tags: ["necromancer"] }] },
+  { id: "und-necronomicon", name: "The Necronomicon", cost: 50, cat: "arcane", desc: "Lich Lords, Necromancers, and Undead Priests only. May replace any spell during selection with Raise the Dead, and raises an extra 1D6 Skeletons or Zombies when casting Raise the Dead/Summon Skeletons/Summon Skeleton Horde.", restrictedTo: [{ tags: ["lichLord"] }, { tags: ["necromancer"] }, { tags: ["undeadPriest"] }] },
+  { id: "und-swiftshooting", name: "Banner of Swift Shooting", cost: 10, cat: "banner", desc: "Once per game, fire missile weapons twice at the same target in one Shooting phase, or Stand and Shoot without penalty." },
+  { id: "und-swiftcharging", name: "Banner of Swift Charging", cost: 10, cat: "banner", desc: "On its first charge, the unit adds +2\" to its charge range. One use only." },
+  { id: "und-hellishvigour", name: "Standard of Hellish Vigour", cost: 10, cat: "banner", desc: "Undead regiments only. I10.", restrictedTo: [{ tags: ["undead"] }] },
+  { id: "und-ghostrider", name: "Ghost Rider Banner", cost: 10, cat: "banner", desc: "Skeleton Horsemen only. The unit may move through terrain as if ethereal.", restrictedTo: [{ tags: ["skeletonHorsemen"] }] },
+  { id: "und-iconrakaph", name: "Icon of Rakaph", cost: 25, cat: "banner", desc: "Tomb Guard only. Once per battle, the unit may take a free complete reform before charges are declared.", restrictedTo: [{ tags: ["tombGuard"] }] },
+  { id: "und-doomrider", name: "Doom Rider Banner", cost: 25, cat: "banner", desc: "Skeleton Horsemen only. The riders (not their steeds or accompanying characters) hit automatically on the charge.", restrictedTo: [{ tags: ["skeletonHorsemen"] }] },
+  { id: "und-hiddendeath", name: "Banner of Hidden Death", cost: 25, cat: "banner", desc: "Battle Standard Bearer only. Monstrous Scorpions and Scorpion Swarms may deploy up to 12\" from the enemy, even in the open, after scouts but before vanguard.", restrictedTo: [{ tags: ["bsb"] }] },
+  { id: "und-standarddesert", name: "Standard of the Desert", cost: 25, cat: "banner", desc: "Tomb Kings regiments only. May march even if not within 12\" of the general and even with enemies within 8\".", restrictedTo: [{ tags: ["tombKings"] }] },
+  { id: "und-bloodkeep", name: "Banner of Blood Keep", cost: 100, cat: "banner", desc: "All Vampires in the regiment become subject to frenzy. Vampires leaving the regiment lose frenzy at the start of the next player turn." },
+  { id: "und-binding", name: "Banner of Binding", cost: 100, cat: "banner", desc: "Skeletons only (not Tomb Guard). The unit does not crumble if it loses a combat and is instead Unbreakable.", restrictedTo: [{ tags: ["skeletonBanner"] }] },
+];
+
+const VC_BLOODLINE_POWERS = [
+  { id: "bl-vc-wolfform", name: "Wolf Form", cost: 10, cat: "bloodlinepower", desc: "Movement Allowance 9. May join Giant Wolves (and receive a \"Look Out, Sir\" roll).", restrictedTo: [{ tags: ["voncarstein"] }] },
+  { id: "bl-vc-transfix", name: "Transfix", cost: 10, cat: "bloodlinepower", desc: "Enemies in base contact must pass a LD test (own basic LD) or strike another target instead of the Vampire. No effect on models immune to psychology.", restrictedTo: [{ tags: ["voncarstein"] }] },
+  { id: "bl-vc-darkmajesty", name: "Dark Majesty", cost: 50, cat: "bloodlinepower", desc: "Adds one point to combat resolution. If taken by the general, all undead units within 18\" may march.", restrictedTo: [{ tags: ["voncarstein"] }] },
+  { id: "bl-vc-summonwolves", name: "Summon Wolves", cost: 50, cat: "bloodlinepower", desc: "Summons 1D6+1 Giant Wolves at the start of any Vampire Player turn (roll 1D6 for table edge); they may move but not charge. One use only.", restrictedTo: [{ tags: ["voncarstein"] }] },
+  { id: "bl-vc-callstorm", name: "Call Storm", cost: 75, cat: "bloodlinepower", desc: "All shooting requiring BS is at -2 to hit, all other shooting only on a 4+, and flying is impossible for one full turn. One use only.", restrictedTo: [{ tags: ["voncarstein"] }] },
+  { id: "bl-lah-mistform", name: "Mist Form", cost: 10, cat: "bloodlinepower", desc: "May fly up to 20\", except when charging into melee.", restrictedTo: [{ tags: ["lahmia"] }] },
+  { id: "bl-lah-transfix", name: "Transfix", cost: 10, cat: "bloodlinepower", desc: "Enemies in base contact must pass a LD test (own basic LD) or strike another target instead of the Vampire. No effect on models immune to psychology.", restrictedTo: [{ tags: ["lahmia"] }] },
+  { id: "bl-lah-beguile", name: "Beguile", cost: 25, cat: "bloodlinepower", desc: "Living enemies within 8\" of the Vampire suffer -1 to LD.", restrictedTo: [{ tags: ["lahmia"] }] },
+  { id: "bl-lah-quicksilver", name: "Quicksilver Reactions", cost: 25, cat: "bloodlinepower", desc: "Ward save 5+.", restrictedTo: [{ tags: ["lahmia"] }] },
+  { id: "bl-lah-palebeauty", name: "Death's Pale Beauty", cost: 25, cat: "bloodlinepower", desc: "Living enemies suffer -1 to hit in melee against the Vampire.", restrictedTo: [{ tags: ["lahmia"] }] },
+  { id: "bl-lah-domination", name: "Domination", cost: 40, cat: "bloodlinepower", desc: "Enemies in base contact must pass a LD test (own basic LD) or cannot strike in melee and are hit automatically. No effect on models immune to psychology.", restrictedTo: [{ tags: ["lahmia"] }] },
+  { id: "bl-nec-repulsive", name: "Utterly Repulsive", cost: 10, cat: "bloodlinepower", desc: "Cause terror.", restrictedTo: [{ tags: ["necrarch"] }] },
+  { id: "bl-nec-acolyte", name: "Dark Acolyte", cost: 20, cat: "bloodlinepower", desc: "Counts as having one magic level extra without getting the extra spell. May combine with the undead-only item The Green Pearl for a combined two extra levels without extra spells.", restrictedTo: [{ tags: ["necrarch"] }] },
+  { id: "bl-nec-foresight", name: "The Gift of Foresight", cost: 20, cat: "bloodlinepower", desc: "May handpick spells.", restrictedTo: [{ tags: ["necrarch"] }] },
+  { id: "bl-nec-summoner", name: "Dark Summoner", cost: 50, cat: "bloodlinepower", desc: "May replace any spell during selection with Raise the Dead (if not already received). Raises an extra 1D6 Skeletons or Zombies when casting Raise the Dead, Summon Skeletons, or Summon Skeleton Horde.", restrictedTo: [{ tags: ["necrarch"] }] },
+  { id: "bl-nec-blackarts", name: "Master of the Black Arts", cost: 100, cat: "bloodlinepower", desc: "May take an extra personal magic card each magic phase.", restrictedTo: [{ tags: ["necrarch"] }] },
+  { id: "bl-bd-armsmaster", name: "Master of Arms", cost: 10, cat: "bloodlinepower", desc: "WS 10.", restrictedTo: [{ tags: ["blooddragon"] }] },
+  { id: "bl-bd-challenger", name: "Terrifying Challenger", cost: 10, cat: "bloodlinepower", desc: "Enemy characters challenged by the Vampire must pass a LD test (own basic LD) or refuse the challenge and hide if possible. No effect on models immune to psychology.", restrictedTo: [{ tags: ["blooddragon"] }] },
+  { id: "bl-bd-strength", name: "Strength of Steel", cost: 10, cat: "bloodlinepower", desc: "+1 Strength.", restrictedTo: [{ tags: ["blooddragon"] }] },
+  { id: "bl-bd-redfury", name: "Red Fury", cost: 25, cat: "bloodlinepower", desc: "Frenzy.", restrictedTo: [{ tags: ["blooddragon"] }] },
+  { id: "bl-bd-beastslayer", name: "Beast Slayer", cost: 25, cat: "bloodlinepower", desc: "Fighting with mundane weapons, each wound dealt multiplies into 1D3 wounds.", restrictedTo: [{ tags: ["blooddragon"] }] },
+  { id: "bl-bd-martial", name: "Martial Excellence", cost: 50, cat: "bloodlinepower", desc: "+1 to hit on all melee attacks.", restrictedTo: [{ tags: ["blooddragon"] }] },
+  { id: "bl-str-lordbeasts", name: "Lord of the Beasts", cost: 0, cat: "bloodlinepower", desc: "All Giant Wolves and Giant Bats on the battlefield become Stubborn, using this Vampire's Leadership.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-bloodgorger", name: "Blood Gorger", cost: 10, cat: "bloodlinepower", desc: "After breaking or wiping out a living enemy, may feed instead of pursuing/overrunning, recovering one lost wound. Not usable while subject to frenzy.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-longshanks", name: "Longshanks", cost: 10, cat: "bloodlinepower", desc: "Movement allowance 9.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-nightmares", name: "The Stuff of Nightmares", cost: 10, cat: "bloodlinepower", desc: "Cause terror.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-savageassault", name: "Savage Assault", cost: 25, cat: "bloodlinepower", desc: "+2 attacks on the charge.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-killerinstinct", name: "Killer Instinct", cost: 25, cat: "bloodlinepower", desc: "Each wound dealt by the Vampire multiplies into 1D3 wounds.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-ferocity", name: "Bestial Ferocity", cost: 25, cat: "bloodlinepower", desc: "Frenzy.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-revenant", name: "Curse of the Revenant", cost: 40, cat: "bloodlinepower", desc: "Regeneration 4+.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-envy", name: "Malignant Envy", cost: 50, cat: "bloodlinepower", desc: "May re-roll all failed attacks each combat round.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-summonghouls", name: "Summon Ghouls", cost: 50, cat: "bloodlinepower", desc: "Summons 1D6+2 Ghouls at the start of any turn (roll 1D6 for table edge); they may move but not charge. One use only.", restrictedTo: [{ tags: ["strigoi"] }] },
+  { id: "bl-str-hellbeast", name: "Hell Beast", cost: 60, cat: "bloodlinepower", desc: "+1 wound, can fly, 40x40 base, may join a unit of Giant Bats (and receive a \"Look Out, Sir\" roll).", restrictedTo: [{ tags: ["strigoi"] }] },
+];
+
+const VC_ARMOUR_OPTIONS = ["No armour (default)", "Shield & Light Armour", "Heavy Armour"];
+const VC_MELEE_OPTIONS = ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"];
+const vcCastingGate = (unit, def) => (unit.armour || VC_ARMOUR_OPTIONS[0]) === VC_ARMOUR_OPTIONS[0] && (unit.melee || VC_MELEE_OPTIONS[0]) !== "Double handed weapon";
+
+const VAMPIRE_COUNTS = {
+  key: "vampirecounts",
+  name: "Vampire Counts",
+  tagline: "The night's aristocracy — decrepit castles that wake at the zenith of dark magic's power",
+  magicItems: [...UNDEAD_MAGIC_ITEMS, ...VC_BLOODLINE_POWERS],
+  themes: {
+    default: "voncarstein",
+    options: [
+      { id: "voncarstein", name: "Von Carstein", desc: "Archetypical vampires — no innate special rules. Unlocks Peasant Levy (Sylvania Peasant Levy and Sylvania Archers)." },
+      { id: "lahmia", name: "Lahmia", desc: "Deadly seductresses — never take weapons beyond a single hand weapon nor wear armour; I11, always strike first. Unlocks Swains." },
+      { id: "necrarch", name: "Necrarch", desc: "Masters of magic — every Vampire (including Thralls) must take at least one magic level, up to four, and are always eligible to cast regardless of wargear. Unlocks Rat Swarms and a single unridden Zombie Dragon." },
+      { id: "blooddragon", name: "Blood Dragon", desc: "Supreme warriors — cannot become spellcasters; may swap heavy armour for Full Plate Armour (4+ save) and an Undead Steed for a living Warhorse. Unlocks Vampire Knights." },
+      { id: "strigoi", name: "Strigoi", desc: "Unholy monstrosities — cannot carry equipment, magic items, mounts, or the battle standard; get an extra attack and may join Ghoul regiments. Unlocks Ghasts." },
+    ],
+  },
+  armyWideRules: [
+    "Undead models: immune to psychology, immune to poison, cause fear. May not march unless within 12\" of the general (undead characters excepted — they may always march, for what little good it does inside a regiment that can't). Only charge reaction is hold. An undead monster whose rider is slain crumbles to dust immediately instead of rolling on the Monster Reaction Table.",
+    "Three ways to die: Unstable units (Zombies, all ethereal models) simply disappear on a failed break test. Units subject to the crumble rule (Skeletons, Wights, Vampires, Mummies, Carrion) don't take break tests — instead they suffer a wound with no saves for each point the combat was lost by (reduced by one if the Battle Standard is within range). Unbreakable troops (Ushabti, Bone Giants) never crumble or break, full stop. Casualties from crumbling are removed troops-first, then musician/standard, then characters one at a time.",
+    "The general's will: if the general is slain, all undead units crumble to dust immediately. Undead characters (and mounts) are unaffected and remain. A regiment led by a character instead makes a LD test against the character's LD when the general dies — pass and it survives, fail and it crumbles entirely (the character remains); if that character is later slain or leaves, the regiment crumbles immediately. Not hard-enforced by this builder — a battle-phase trigger, not a list-building one.",
+    "Ethereal models: unstable, always skirmish, can always march regardless of circumstance, move through solid objects (not other troops) and ignore terrain/obstacle penalties, but cannot end their move in impassable terrain. Immune to all non-magical harm (attacks from ethereal models themselves count as magical). No character may join an ethereal regiment except a Wraith champion.",
+    "Mixing living and undead: a living character in an undead regiment that crumbles/vanishes automatically flees. An undead character in a living regiment is forced to flee with it; an undead character in an unstable regiment vanishes with it on a failed break test.",
+    "Wight and Wraith weapons: every Wight carries a free Wight-Blade (1D3 wounds) and every Wraith a free Wraith-Weapon (double handed, no armour save) — regimental trooper, champion, or independent character alike. These don't use a magic item slot, but are forfeited the moment the bearer takes another magic weapon. When carrying both a magic and mundane weapon, choose which to fight with at the start of each combat.",
+    "Bloodlines: pick one of the five Vampire Bloodlines above in the sidebar. All Vampires in the army (Lords, Counts, Thralls, BSBs) must share the same bloodline, and each bloodline power may only be taken once across the whole army — this builder enforces that the same way it enforces magic item uniqueness. The Lord/Count/BSB's own wargear and casting rules wire themselves up automatically once a bloodline is picked. Regimental Vampire Thrall champion options (in Zombies/Skeleton Warriors/etc.) are NOT automatically bloodline-restricted — under Strigoi, use the dedicated Strigoi Thrall option on Ghasts instead of the generic Thrall option elsewhere, since Strigoi can't carry ordinary equipment.",
+    "Magic Items: the Weapons/Enchanted/Arcane/Banners pool at the end is common to all three Undead armies (Vampire Counts, Tomb Kings, Classic Undead) — restrictions are by character/regiment type (tags), not by which of the three armies you're playing.",
+  ],
+  characters: [
+    {
+      id: "vampirelord", name: "Vampire Lord", cost: 220, stat: "Vampire Lord", magicItemSlots: 2, bloodlinePowerSlots: 2, tags: ["vampire", "undeadCharacter"],
+      armourGroup: { options: VC_ARMOUR_OPTIONS },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
+      magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 2, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for magic levels while wearing armour or wielding a double handed weapon." },
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 51, stat: "Undead Steed" },
+        { id: "wingednightmare", name: "Winged Nightmare", cost: 105, stat: "Winged Nightmare" },
+        { id: "zombiedragon", name: "Zombie Dragon", cost: 345, stat: "Zombie Dragon" },
+      ],
+      bloodlineOverrides: {
+        lahmia: { armourGroup: null, meleeGroup: null, magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 2, min: 0 }, gearNote: "Lahmia Vampires never take weapons beyond a single hand weapon and never wear armour. I11, always strikes first." },
+        necrarch: { magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 4, min: 1 }, gearNote: "Necrarch Vampires may cast regardless of wargear, but must take at least one magic level." },
+        blooddragon: { magicLevelOption: null, armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour", "Full Plate Armour (4+ save, no shield)"] }, mounts: [
+          { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 51, stat: "Undead Steed" },
+          { id: "warhorse", name: "Warhorse (living, barding free)", cost: 51, stat: "War Horse" },
+          { id: "wingednightmare", name: "Winged Nightmare", cost: 105, stat: "Winged Nightmare" },
+          { id: "zombiedragon", name: "Zombie Dragon", cost: 345, stat: "Zombie Dragon" },
+        ], gearNote: "Blood Dragon Vampires cannot become spellcasters. May exchange heavy armour for Full Plate Armour, and an Undead Steed for a living Warhorse." },
+        strigoi: { armourGroup: null, meleeGroup: null, magicLevelOption: null, mounts: [], magicItemSlots: 0, bloodlinePowerSlots: 4, stat: "Vampire Lord (Strigoi)",
+          gearNote: "Strigoi Vampires cannot carry equipment, take magic items, ride a mount, or carry the battle standard. Get an extra attack (already reflected) and may join regiments of Ghouls. Strigoi Lords are allowed four bloodline powers instead of two." },
+      },
+    },
+    {
+      id: "vampirecount", name: "Vampire Count", cost: 154, stat: "Vampire Count", magicItemSlots: 2, tags: ["vampire", "undeadCharacter"],
+      armourGroup: { options: VC_ARMOUR_OPTIONS },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
+      magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for a magic level while wearing armour or wielding a double handed weapon." },
+      gearNote: "May take up to two magic items or bloodline powers, freely mixed (shown together below).",
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 36, stat: "Undead Steed" },
+        { id: "wingednightmare", name: "Winged Nightmare", cost: 90, stat: "Winged Nightmare" },
+        { id: "zombiedragon", name: "Zombie Dragon", cost: 330, stat: "Zombie Dragon" },
+      ],
+      bloodlineOverrides: {
+        lahmia: { armourGroup: null, meleeGroup: null, magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0 }, gearNote: "Lahmia Vampires never take weapons beyond a single hand weapon and never wear armour. I11, always strikes first." },
+        necrarch: { magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 4, min: 1 }, gearNote: "Necrarch Vampires may cast regardless of wargear, but must take at least one magic level." },
+        blooddragon: { magicLevelOption: null, armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour", "Full Plate Armour (4+ save, no shield)"] }, mounts: [
+          { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 36, stat: "Undead Steed" },
+          { id: "warhorse", name: "Warhorse (living, barding free)", cost: 36, stat: "War Horse" },
+          { id: "wingednightmare", name: "Winged Nightmare", cost: 90, stat: "Winged Nightmare" },
+          { id: "zombiedragon", name: "Zombie Dragon", cost: 330, stat: "Zombie Dragon" },
+        ], gearNote: "Blood Dragon Vampires cannot become spellcasters. May exchange heavy armour for Full Plate Armour, and an Undead Steed for a living Warhorse." },
+        strigoi: { armourGroup: null, meleeGroup: null, magicLevelOption: null, mounts: [], magicItemSlots: 2, magicItemCategoryFilter: ["bloodlinepower"], stat: "Vampire Count (Strigoi)",
+          gearNote: "Strigoi Vampires cannot carry equipment, take magic items, or ride a mount. Get an extra attack (already reflected) and may join regiments of Ghouls. May still take up to two Strigoi bloodline powers (shown below) — bloodline powers aren't equipment or magic items." },
+      },
+    },
+    {
+      id: "wighthero", name: "Wight Hero", cost: 82, stat: "Wight Hero", magicItemSlots: 2, tags: ["wight", "undeadCharacter"],
+      innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
+      armourGroup: { options: ["Shield & Light Armour (default)", "Heavy Armour"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 22, stat: "Undead Steed" },
+        { id: "wingednightmare", name: "Winged Nightmare", cost: 76, stat: "Winged Nightmare" },
+        { id: "zombiedragon", name: "Zombie Dragon", cost: 316, stat: "Zombie Dragon" },
+      ],
+    },
+    {
+      id: "necromancerlord", name: "Necromancer Lord (level 4)", cost: 240, stat: "Necromancer Lord", magicItemSlots: 4, tags: ["wizard", "necromancer"],
+      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" },
+        { id: "manticore", name: "Manticore (living)", cost: 200, stat: "Manticore" },
+      ],
+    },
+    {
+      id: "masternecromancer", name: "Master Necromancer (level 3)", cost: 170, stat: "Master Necromancer", magicItemSlots: 3, tags: ["wizard", "necromancer"],
+      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (3).",
+      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+    },
+    {
+      id: "necromancerchampion", name: "Necromancer Champion (level 2)", cost: 110, stat: "Necromancer Champion", magicItemSlots: 2, tags: ["wizard", "necromancer"],
+      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (2).",
+      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+    },
+    {
+      id: "necromancer", name: "Necromancer (level 1)", cost: 50, stat: "Necromancer", magicItemSlots: 1, tags: ["wizard", "necromancer"],
+      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (1).",
+      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+    },
+    {
+      id: "wightbsb", name: "Wight Battle Standard Bearer", cost: 52, stat: "Wight BSB", magicItemSlots: 1, restriction: "0-1", tags: ["wight", "undeadCharacter", "bsb"],
+      innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
+      gearNote: "0-1 Battle Standard Bearer total across the army — a Wight BSB and Vampire BSB can't both be taken. The one magic item may be a magic banner.",
+      armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
+      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 14, stat: "Undead Steed" }],
+    },
+    {
+      id: "vampirebsb", name: "Vampire Battle Standard Bearer", cost: 80, stat: "Vampire BSB", magicItemSlots: 1, restriction: "0-1", tags: ["vampire", "undeadCharacter", "bsb"],
+      gearNote: "0-1 Battle Standard Bearer total across the army — a Wight BSB and Vampire BSB can't both be taken. May take one bloodline power or one magic item, which may be a magic banner (shown together below). Strigoi Vampires cannot be Battle Standard Bearers.",
+      armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
+      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 21, stat: "Undead Steed" }],
+      bloodlineOverrides: {
+        blooddragon: { armourGroup: { options: ["Light armour (default)", "Heavy Armour", "Full Plate Armour (4+ save)"] } },
+      },
+    },
+    {
+      id: "swain", name: "Swain", cost: 60, stat: "Swain", magicItemSlots: 2, theme: "lahmia", tags: ["swain"],
+      gearNote: "Lahmia armies only — a human hero enthralled by his Vampire mistress. May take a shield and light or heavy armour for free. If not carrying a shield or a weapon upgrade, may carry the army's battle standard for +20pts (one of his two item slots may then be a magic banner) — not modeled as a toggle, track by hand.",
+      armourGroup: { options: ["Shield & Light Armour (default)", "Shield & Heavy Armour"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
+      missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow"] },
+      mounts: [{ id: "warhorse", name: "Warhorse (barding free)", cost: 15, stat: "War Horse" }],
+    },
+  ],
+  regiments: [
+    {
+      id: "ghouls", name: "Ghouls", perModel: 8, minSize: 5, stat: "Ghoul", command: "standard",
+      note: "Living, cause fear, poisoned attacks (+1S). May skirmish; if not skirmishing, unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue or overrun after a won combat that inflicted a casualty (gorging on the fallen instead), except models with hatred/frenzy. Cannot be joined by characters (Strigoi Vampires excepted).",
+    },
+    {
+      id: "zombies", name: "Zombies", perModel: 3, minSize: 5, stat: "Zombie", command: "standard", tags: ["undead"],
+      note: "Unstable, undead, slow — always strike last, even when charging.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "lightarmour", group: "armour", label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "heavyarmour", group: "armour", label: "Heavy armour (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "spears", group: "weapon", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "halberds", group: "weapon", label: "Halberds (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "dhw", group: "weapon", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+      ],
+      championOptions: vcChampions(60, 25, 50),
+    },
+    {
+      id: "skeletonwarriors", name: "Skeleton Warriors", perModel: 4.5, minSize: 5, stat: "Skeleton", command: "standard", tags: ["undead", "skeletonBanner"],
+      note: "Undead, subject to the crumble rule. Light armour or shield is free individually — taking both together costs +0.5pt/model per the book (not applied automatically here). Longbows/crossbows are only available if no other equipment (armour/shield/other weapon) is taken — not hard-enforced.",
+      options: [
+        { id: "lightarmour", group: null, label: "Light armour (free)", cost: 0, per: "model" },
+        { id: "shield", group: null, label: "Shield (free)", cost: 0, per: "model" },
+        { id: "heavyarmour", group: null, label: "Upgrade to heavy armour (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "spears", group: "weapon", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "halberds", group: "weapon", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "weapon", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "longbows", group: "missile", label: "Longbows (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "crossbows", group: "missile", label: "Crossbows (+2.5pt/model)", cost: 2.5, per: "model" },
+      ],
+      championOptions: vcChampions(70, 35, 60),
+    },
+    {
+      id: "skeletonhorsemen", name: "Skeleton Horsemen", perModel: 14, minSize: 5, stat: "Skeleton", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "fastCavalry", fastCavalryToggleOption: "heavyarmour", tags: ["undead", "skeletonHorsemen", "skeletonBanner"],
+      note: "Undead, subject to the crumble rule. Skeletons with light armour and shields, riding Undead Steeds. Fast cavalry.",
+      options: [
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+3pt/model) — loses fast cavalry, standard bearer becomes free", cost: 3, per: "model" },
+        { id: "spears", group: "weapon", label: "Spears (+2pt/model)", cost: 2, per: "model" },
+        { id: "lances", group: "weapon", label: "Lances (+4pt/model)", cost: 4, per: "model" },
+      ],
+      championOptions: vcChampions(80, 50, 70),
+    },
+    {
+      id: "wightguardsmen", name: "Wight Guardsmen", perModel: 10, minSize: 5, stat: "Wight", command: "standard", tags: ["undead"],
+      note: "Undead, subject to the crumble rule. Wights with Wight-Blades and heavy armour.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "halberds", group: "weapon", label: "Non-magical halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "weapon", label: "Non-magical double handed weapons (+3pt/model)", cost: 3, per: "model" },
+      ],
+      championOptions: vcChampions(70, 35, 60),
+    },
+    {
+      id: "wightknights", name: "Wight Knights", perModel: 22, minSize: 5, stat: "Wight", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "standard", tags: ["undead"],
+      note: "Undead, subject to the crumble rule. Wights with Wight-Blades, heavy armour, shields, riding Undead Steeds.",
+      options: [
+        { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
+        { id: "lances", group: null, label: "Non-magical lances (+3pt/model)", cost: 3, per: "model" },
+      ],
+      championOptions: vcChampions(80, 50, 70),
+    },
+    {
+      id: "spirithosts", name: "Spirit Hosts", perModel: 60, minSize: 1, stat: "Spirit Host", command: "none", restriction: "0-1",
+      note: "Ethereal, monstrous, always skirmish (being ethereal). No upgrades. Priced per base/model — use the size stepper to buy multiple bases.",
+    },
+    {
+      id: "giantwolves", name: "Giant Wolves", perModel: 10, minSize: 5, stat: "Giant Wolf", command: "fastCavalry",
+      note: "Living, fast cavalry. Never get standard bearer or musician upgrades. May not be joined by characters.",
+    },
+    {
+      id: "giantbats", name: "Giant Bats", perModel: 30, minSize: 1, stat: "Giant Bat", command: "none", restriction: "0-1",
+      note: "Living, flying monstrous regiment, automatically skirmishers. Priced per base/model — use the size stepper to buy multiple bases.",
+    },
+    {
+      id: "peasantlevy", name: "Sylvania Peasant Levy", perModel: 3, minSize: 5, stat: "Sylvania Peasant", command: "standard", theme: "voncarstein",
+      note: "Von Carstein armies only. Living peasant serfs.",
+      options: [
+        { id: "spears", group: "weapon", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "dhw", group: "weapon", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+      ],
+      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
+    },
+    {
+      id: "sylvaniaarchers", name: "Sylvania Archers", perModel: 5, minSize: 5, stat: "Sylvania Peasant", command: "standard", theme: "voncarstein",
+      note: "Von Carstein armies only. Peasants with longbows.",
+      options: [
+        { id: "crossbows", group: null, label: "Swap longbows for crossbows (+2pt/model)", cost: 2, per: "model" },
+      ],
+      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
+    },
+    {
+      id: "vampireknights", name: "Vampire Knights", perModel: 55, minSize: 5, stat: "Vampire Knight", mountStat: "War Horse", mountLabel: "War Horse", command: "standard", theme: "blooddragon", restriction: "0-1", tags: ["undead"],
+      note: "Blood Dragon armies only, 0-1 regiment. Undead, subject to the crumble rule. Lances, Full Plate Armour, shields, living War Horses. May march even if not within 12\" of the general.",
+      options: [
+        { id: "barding", group: null, label: "Barding (free)", cost: 0, per: "model" },
+      ],
+      championOptions: [{ id: "thrall", name: "Vampire Thrall", cost: 85, magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped like the rest of the regiment." }],
+    },
+    {
+      id: "ghasts", name: "Ghasts", perModel: 35, minSize: 3, stat: "Ghast", command: "none", theme: "strigoi", restriction: "0-1",
+      note: "Strigoi armies only, 0-1 regiment. Monstrous, living, poisoned attacks (+1S), cause fear. Unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue/overrun after a won combat that inflicted a casualty, except models with hatred/frenzy. No standard or musician upgrades. Cannot be joined by characters except a Strigoi Thrall.",
+      championOptions: [{ id: "strigoithrall", name: "Strigoi Thrall", cost: 70, magicItemSlots: 1, tags: ["strigoi"], itemSlotLabel: "Bloodline Power", magicItemCategoryFilter: ["bloodlinepower"], note: "May take one bloodline power (no magic items — Strigoi cannot carry equipment)." }],
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "blackcoach", name: "Black Coach", perUnit: 125, stat: "Black Coach", mountStat: "Wraith", mountLabel: "Wraith Driver",
+      note: "Undead, large chariot pulled by two Undead Steeds and driven by a Wraith with a Wraith-Weapon (double handed, no armour save). The Wraith is a character — if slain, the Black Coach crumbles immediately. Causes terror, cannot be harmed by mundane weapons. Recovers one lost wound for every wound it causes in melee; once fully healed, gains scythed wheels instead for the rest of the battle.",
+      commanderCost: 0, commanderLabel: "Wraith driver takes a magic item", commanderMagicItemSlots: 1,
+    },
+    {
+      id: "batswarm", name: "Bat Swarm", kind: "quantity", perUnit: 40, stat: "Bat Swarm",
+      note: "Living. Follows the main-rulebook rules for Swarms. Priced per base.",
+    },
+    {
+      id: "ratswarm-necrarch", name: "Rat Swarm", perUnit: 40, stat: "Rat Swarms", kind: "quantity", countsAsFirstRegiment: true, theme: "necrarch",
+      note: "Necrarch armies only. As described in the Skaven army book. The cheapest base counts toward Regiments; further bases count toward Chariots, Monsters, and War Machines. Priced per base.",
+    },
+    {
+      id: "zombiedragon-unridden", name: "Unridden Zombie Dragon", kind: "quantity", perUnit: 375, stat: "Zombie Dragon", theme: "necrarch", restriction: "0-1",
+      note: "Necrarch armies only, 0-1. An independent large undead monster, subject to the crumble rule.",
+    },
+  ],
+  specialCharacters: [
+    { id: "vladisabella", name: "Vlad and Isabella von Carstein", cost: 600, stat: "Vampire Lord", role: "Von Carstein — Vlad is a Vampire Lord, Isabella a Vampire Thrall", theme: "voncarstein",
+      note: "Vlad is a level 2 wizard with the Dark Majesty bloodline power, and may take one additional magic item and one bloodline power. Isabella has the Transfix bloodline power. Vlad and Isabella always stay together and try to reunite if separated; if one is killed for good, the other gains frenzy and hatred.",
+      items: "Vlad carries the Carstein Ring (one use only) — if slain, he returns to play immediately within 12\" of the killing spot, restored to one wound, having lost all equipment and magic items (spells and bloodline powers stay intact). This resurrection prevents the army from crumbling from the general's death." },
+    { id: "mannfred", name: "Mannfred von Carstein", cost: 400, stat: "Vampire Count", role: "Von Carstein — Vampire Count with 4 magic levels", theme: "voncarstein",
+      note: "May ride an Undead Steed for free (barding free). May take 4 magic items or bloodline powers, in any combination." },
+    { id: "konrad", name: "Konrad von Carstein", cost: 180, stat: "Vampire Count", role: "Von Carstein — an insane Vampire Count", theme: "voncarstein",
+      note: "Subject to frenzy, hates all enemies, cannot use magic. Carries an additional hand weapon and heavy armour. May take 2 magic items or bloodline powers." },
+  ],
+};
+
+const TK_MELEE_OPTIONS = ["Hand weapon (default)", "Flail", "Spear", "Double handed weapon"];
+
+function tkMummyChampion(cost) {
+  return [{ id: "mummychamp", name: "Mummy Champion", cost, magicItemSlots: 1, tags: ["mummy"], itemSlotLabel: "Magic Item", note: "Flammable undead Mummy Champion, equipped with light armour and a double handed weapon." }];
+}
+
+const TOMB_KINGS = {
+  key: "tombkings",
+  name: "Tomb Kings",
+  tagline: "The ancient kings of Nehekhara, called from their sleep of death to seek vengeance",
+  magicItems: UNDEAD_MAGIC_ITEMS,
+  armyWideRules: [
+    "Undead models: immune to psychology, immune to poison, cause fear. May not march unless within 12\" of the general (undead characters excepted). Only charge reaction is hold. An undead monster whose rider is slain crumbles to dust immediately instead of rolling on the Monster Reaction Table.",
+    "A dry army: save for Scorpions, every model in the Tomb Kings army is undead. There are no Zombies and no ethereal troops — only models subject to the crumble rule (Skeletons, Tomb Guard, Mummies, Carrion) or Unbreakable (Ushabti, Bone Giants).",
+    "Crumbling: units subject to the crumble rule don't take break tests — instead they suffer a wound with no saves for each point the combat was lost by (reduced by one if the Battle Standard is within range). The general's death causes all undead units to crumble immediately; undead characters are unaffected. A regiment led by a character makes a LD test against the character's LD when the general dies — pass and it survives, fail and it crumbles entirely (not hard-enforced by this builder — a battle-phase trigger, not a list-building one).",
+    "Raise the Dead: no Tomb Kings caster can raise Zombies, only Skeletons. The Raise the Dead / Summon Skeletons / Summon Skeleton Horde spells can also raise extra models for a Tomb Guard regiment and extra crew for a Screaming Skull Catapult or the Casket of Souls (but not once all crew are dead), and can restore lost wounds to Skeleton Chariots, Screaming Skull Catapults, Ushabti, and Bone Giants.",
+    "Asp Arrows: every bow fired by a Tomb Kings model is a magical Asp Arrow and never suffers negative shooting modifiers.",
+    "Magic Items: the Weapons/Enchanted/Arcane/Banners pool at the end is common to all three Undead armies (Vampire Counts, Tomb Kings, Classic Undead) — restrictions are by character/regiment type (tags), not by which of the three armies you're playing.",
+    "Mounting a character on a Skeleton Heavy Chariot: the book prices this \"for the cost of the chariot\", which varies with the chariot's own upgrades. This builder approximates it at the chariot's 60pt base cost — adjust by hand if you add chariot upgrades underneath a mounted character.",
+  ],
+  characters: [
+    {
+      id: "mummyking", name: "Mummy King", cost: 184, stat: "Mummy King", magicItemSlots: 3, tags: ["mummy", "undeadCharacter"],
+      gearNote: "Flammable. May take a shield and light armour for free.",
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: TK_MELEE_OPTIONS },
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed", cost: 42, stat: "Undead Steed" },
+        { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "mummyprince", name: "Mummy Prince", cost: 129, stat: "Mummy Prince", magicItemSlots: 2, tags: ["mummy", "undeadCharacter"],
+      gearNote: "Flammable. May take a shield and light armour for free.",
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: TK_MELEE_OPTIONS },
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed", cost: 30, stat: "Undead Steed" },
+        { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "mummybsb", name: "Mummy Battle Standard Bearer", cost: 90, stat: "Mummy BSB", magicItemSlots: 1, restriction: "0-1", tags: ["mummy", "undeadCharacter", "bsb"],
+      gearNote: "Flammable. 0-1 per army. May take light armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["Light armour (default)"] },
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed", cost: 18, stat: "Undead Steed" },
+        { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "undeadpriestlord", name: "Undead Priest Lord (level 4)", cost: 240, stat: "Undead Priest Lord", magicItemSlots: 4, tags: ["wizard", "undeadPriest", "undeadCharacter"],
+      gearNote: "Undead, subject to the crumble rule. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (free)", cost: 0, stat: "Undead Steed" },
+        { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "masterundeadpriest", name: "Master Undead Priest (level 3)", cost: 170, stat: "Master Undead Priest", magicItemSlots: 3, tags: ["wizard", "undeadPriest", "undeadCharacter"],
+      gearNote: "Undead, subject to the crumble rule. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (3).",
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (free)", cost: 0, stat: "Undead Steed" },
+        { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "undeadpriestchampion", name: "Undead Priest Champion (level 2)", cost: 110, stat: "Undead Priest Champion", magicItemSlots: 2, tags: ["wizard", "undeadPriest", "undeadCharacter"],
+      gearNote: "Undead, subject to the crumble rule. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (2).",
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (free)", cost: 0, stat: "Undead Steed" },
+        { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
+      ],
+    },
+    {
+      id: "undeadpriest", name: "Undead Priest (level 1)", cost: 50, stat: "Undead Priest", magicItemSlots: 1, tags: ["wizard", "undeadPriest", "undeadCharacter"],
+      gearNote: "Undead, subject to the crumble rule. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (1).",
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (free)", cost: 0, stat: "Undead Steed" },
+        { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
+      ],
+    },
+  ],
+  regiments: [
+    {
+      id: "tombguards", name: "Tomb Guards", perModel: 7, minSize: 5, stat: "Tomb Guard", command: "standard", tags: ["undead", "tombKings", "tombGuard"],
+      note: "Undead, subject to the crumble rule. Elite Skeletons with light armour and shields.",
+      options: [
+        { id: "dhw", group: null, label: "Swap shields for double handed weapons (+1pt/model)", cost: 1, per: "model" },
+      ],
+      championOptions: [
+        { id: "mummychamp", name: "Mummy Champion", cost: 60, magicItemSlots: 1, tags: ["mummy"], itemSlotLabel: "Magic Item", note: "Flammable, equipped with light armour and a double handed weapon." },
+        { id: "tombchamp", name: "Tomb Champion", cost: 30, magicItemSlots: 1, tags: ["tombGuard"], itemSlotLabel: "Magic Item", note: "A skeletal champion, equipped the same way as the regiment." },
+      ],
+    },
+    {
+      id: "carrion-tk", name: "Carrion", perModel: 50, minSize: 1, stat: "Carrion", command: "none", restriction: "0-1", tags: ["undead", "tombKings"],
+      note: "Undead, subject to the crumble rule. Monstrous flyers, always skirmishers. No upgrades. Priced per base/model — use the size stepper to buy multiple bases.",
+    },
+    {
+      id: "ushabti", name: "Ushabti", perModel: 50, minSize: 3, stat: "Ushabti", command: "none", tags: ["undead", "tombKings"],
+      note: "Unbreakable monstrous undead. No standard bearer or musician upgrades.",
+      options: [
+        { id: "colossi", group: "ushabtiupgrade", label: "Upgrade to Colossi (+15pt/model) — all models get T5", cost: 15, per: "model" },
+        { id: "giantbows", group: "ushabtiupgrade", label: "Giant bows instead (+15pt/model) — 36\", S5 Asp Arrows, each wound 1D3 wounds", cost: 15, per: "model" },
+      ],
+    },
+    {
+      id: "skeletonlightchariots", name: "Skeleton Light Chariots", perModel: 50, minSize: 3, stat: "Light Chariot", mountStat: "Skeleton", mountLabel: "Skeleton Crew", command: "monstrous", tags: ["undead", "tombKings"],
+      note: "Undead, subject to the crumble rule. Each chariot pulled by two Undead Steeds, crewed by two Skeleton Warriors with light armour, spears, shields, and bows (5+ save). Moves and fights as a single monstrous-style regiment — no rank bonus, no fighting in several ranks.",
+      commanderCost: 50, commanderLabel: "Replace a crewman with a Mummy Champion (light armour, double handed weapon)", commanderMagicItemSlots: 1, commanderTags: ["mummy"],
+    },
+    {
+      id: "skeletonwarriors-tk", name: "Skeleton Warriors", perModel: 4.5, minSize: 5, stat: "Skeleton", command: "standard", tags: ["undead", "tombKings", "skeletonBanner"],
+      note: "Undead, subject to the crumble rule. Light armour or shield is free individually — taking both together costs +0.5pt/model per the book (not applied automatically here). Bows are only available if no other equipment is taken — not hard-enforced.",
+      options: [
+        { id: "lightarmour", group: null, label: "Light armour (free)", cost: 0, per: "model" },
+        { id: "shield", group: null, label: "Shield (free)", cost: 0, per: "model" },
+        { id: "spears", group: "weapon", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "bows", group: "weapon", label: "Bows (+1.5pt/model)", cost: 1.5, per: "model" },
+      ],
+      championOptions: tkMummyChampion(60),
+    },
+    {
+      id: "skeletonlighthorsemen", name: "Skeleton Light Horsemen", perModel: 14, minSize: 5, stat: "Skeleton", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "fastCavalry", tags: ["undead", "tombKings", "skeletonHorsemen"],
+      note: "Undead, subject to the crumble rule. Skeletons armed with bows, riding Undead Steeds. Fast Cavalry.",
+      championOptions: tkMummyChampion(80),
+    },
+    {
+      id: "skeletonheavyhorsemen", name: "Skeleton Heavy Horsemen", perModel: 16, minSize: 5, stat: "Skeleton", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "fastCavalry", tags: ["undead", "tombKings", "skeletonHorsemen"],
+      note: "Undead, subject to the crumble rule. Skeletons armed with spears, light armour, and shields, riding Undead Steeds. Despite the name, still act as fast cavalry.",
+      championOptions: tkMummyChampion(80),
+    },
+    {
+      id: "mummies", name: "Mummies", perModel: 18, minSize: 3, stat: "Mummy", command: "standard", tags: ["undead", "tombKings", "mummy"],
+      note: "Undead, subject to the crumble rule. Flammable. Equipped with light armour.",
+      options: [
+        { id: "dhw", group: null, label: "Double handed weapons (+6pt/model)", cost: 6, per: "model" },
+      ],
+      championOptions: tkMummyChampion(60),
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "bonegiant", name: "Bone Giant", perUnit: 200, stat: "Bone Giant",
+      note: "Unbreakable large undead monster. Causes terror.",
+      variantOptions: [
+        { id: "sphinx", label: "Upgrade to a Sphinx or similar creature (50x100mm base): +1WS, +1S, +1T, +1W, +1A", cost: 100 },
+      ],
+    },
+    {
+      id: "monstrousscorpion", name: "Monstrous Scorpion", kind: "quantity", perUnit: 40, stat: "Monstrous Scorpion",
+      note: "Living small monster. Follows the main-rulebook rules for Monstrous Scorpions/Spiders.",
+    },
+    {
+      id: "scorpionswarm", name: "Scorpion Swarm", kind: "quantity", perUnit: 40, stat: "Scorpion Swarm",
+      note: "Living. Follows the main-rulebook rules for Swarms. Priced per base.",
+    },
+    {
+      id: "casketofsouls", name: "Casket of Souls", kind: "warmachine", perUnit: 150, stat: "Tomb Guard", restriction: "0-1",
+      note: "An immoveable terrain piece that blocks movement, crewed by three unbreakable Tomb Guards with double handed weapons and light armour. If all crew are slain or leave, the Casket crumbles to dust. Causes terror. Contains a bound spell: if cast while unengaged, all non-undead units within 24\" with line of sight suffer 2D6+2 minus their LD in wounds, no armour save. Hits on the Casket itself are ignored — it's indestructible.",
+      extraCrewCost: 10, extraCrewLabel: "Extra Tomb Guard crew (max 2)",
+    },
+    {
+      id: "skeletonheavychariots", name: "Skeleton Heavy Chariot", perUnit: 60, stat: "Heavy Chariot", mountStat: "Skeleton", mountLabel: "Skeleton Crew",
+      note: "Undead, subject to the crumble rule. Pulled by two Undead Steeds, crewed by two Skeleton Warriors with light armour, spears, shields, and bows (5+ save). Cannot form or join regiments — that's a special rule only for light chariots.",
+      extraCrewCost: 6, extraCrewLabel: "Extra Skeleton Warrior crew (max 2, one may become the commander below instead)",
+      extraSteedCost: 4, extraSteedLabel: "Extra Undead Steeds (max 2, widens the base)",
+      scythedWheelsCost: 20,
+      commanderCost: 60, commanderLabel: "One extra crewman is a Mummy Champion (light armour, double handed weapon) instead", commanderMagicItemSlots: 1, commanderTags: ["mummy"],
+    },
+    {
+      id: "screamingskullcatapult", name: "Screaming Skull Catapult", kind: "warmachine", perUnit: 100, stat: "Skeleton",
+      note: "Undead, subject to the crumble rule. Small Stone Thrower crewed by three Skeletons. An enemy unit that suffers at least one wound must take a Panic test. Hits count as flaming.",
+      extraCrewCost: 5, extraCrewLabel: "Extra crew (max 2)",
+    },
+  ],
+  specialCharacters: [
+    { id: "settra", name: "Settra the Imperishable", cost: 350, stat: "Settra the Imperishable", role: "Mummy King",
+      note: "Causes terror. Wears light armour. The Blessed Blade of Ptra ensures Settra always strikes first. The Crown of Nehekhara gives a 4+ ward save to Settra (and his chariot, if mounted). The Staff of Osiris is a bound spell — a fiery magic missile up to 24\" hitting the first unit in its path with a S6 hit causing 1D3 wounds, no armour save, penetrating as a bolt thrower. May ride a Skeleton Heavy Chariot for the price of the chariot." },
+    { id: "arkhan", name: "Arkhan the Black", cost: 555, stat: "Arkhan the Black", role: "Lich Lord — undead, 4 magic levels",
+      note: "Causes terror. Rides a flying, scythed Heavy Chariot with three extra crewmen, pulled by four Undead Steeds (already included in cost). May take 4 magic items." },
+    { id: "khalida", name: "High Queen Khalida Neferher", cost: 250, stat: "High Queen Khalida Neferher", role: "Mummy King with light armour",
+      note: "Causes terror. All of her attacks count as poisoned (+1 Strength) and deal 1D3 wounds each — this is cancelled if she takes a magic weapon instead. Has Regeneration (4+). May take three magic items. May ride a Skeleton Heavy Chariot for the price of the chariot." },
+  ],
+};
+
+function cuChampions(thrallCost, wightCost, wraithCost) {
+  return [
+    { id: "vcthrall", name: "Von Carstein Vampire Thrall", cost: thrallCost, magicItemSlots: 1, tags: ["vampire", "voncarstein"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls. May take 1 magic item or Von Carstein bloodline power." },
+    { id: "wightchamp", name: "Wight Champion", cost: wightCost, magicItemSlots: 1, tags: ["wight"], itemSlotLabel: "Magic Item", note: "Equipped as you see fit within the limits of a Wight Hero. Carries a free Wight-Blade (1D3 wounds) unless another magic weapon is taken." },
+    { id: "wraithchamp", name: "Wraith Champion", cost: wraithCost, magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Ethereal, causes terror, cannot be harmed by mundane weapons. Carries a free Wraith-Weapon (double handed, no armour save) unless another magic weapon is taken." },
+  ];
+}
+
+const CLASSIC_UNDEAD = {
+  key: "classicundead",
+  name: "Classic Undead",
+  tagline: "Necromancers and Liches — the original 4th-edition Undead army, mixing Vampire Counts and Tomb Kings troop choices",
+  magicItems: [...UNDEAD_MAGIC_ITEMS, ...VC_BLOODLINE_POWERS],
+  armyWideRules: [
+    "Undead models: immune to psychology, immune to poison, cause fear. May not march unless within 12\" of the general (undead characters excepted). Only charge reaction is hold. An undead monster whose rider is slain crumbles to dust immediately instead of rolling on the Monster Reaction Table.",
+    "Three ways to die: Unstable units (Zombies, all ethereal models) simply disappear on a failed break test. Units subject to the crumble rule (Skeletons, Wights, the Vampire Count, Mummies, Carrion) don't take break tests — instead they suffer a wound with no saves for each point the combat was lost by (reduced by one if the Battle Standard is within range). Unbreakable troops never crumble or break. The general's death causes all undead units to crumble immediately; undead characters are unaffected. A regiment led by a character instead makes a LD test against the character's LD — pass and it survives, fail and it crumbles entirely (not hard-enforced by this builder — a battle-phase trigger, not a list-building one).",
+    "Ethereal models (Wraiths): unstable, always skirmish, can always march regardless of circumstance, move through solid objects (not other troops) and ignore terrain/obstacle penalties, but cannot end their move in impassable terrain. Immune to all non-magical harm. No character may join an ethereal regiment except a Wraith champion.",
+    "Wight and Wraith weapons: every Wight carries a free Wight-Blade (1D3 wounds) and every Wraith a free Wraith-Weapon (double handed, no armour save) — regimental trooper, champion, or independent character alike. These don't use a magic item slot, but are forfeited the moment the bearer takes another magic weapon.",
+    "This army mixes Vampire Counts and Tomb Kings troop choices under a single Lich Lord or Necromancer-led list. The army's one Vampire option is always Von Carstein (no other Bloodline is available here) — take the Vampire Counts army instead for the other four Bloodlines.",
+    "Raise the Dead: the Summon Skeletons / Raise the Dead / Summon Skeleton Horde spells can raise extra crew for a Screaming Skull Catapult (but not once all crew are dead), and can restore lost wounds to Skeleton Chariots and Screaming Skull Catapults.",
+    "Magic Items: the Weapons/Enchanted/Arcane/Banners pool at the end is common to all three Undead armies (Vampire Counts, Tomb Kings, Classic Undead) — restrictions are by character/regiment type (tags), not by which of the three armies you're playing.",
+    "Mounting a character on a Skeleton Heavy Chariot: the book prices this \"for the cost of the chariot\", which varies with the chariot's own upgrades. This builder approximates it at the chariot's 60pt base cost — adjust by hand if you add chariot upgrades underneath a mounted character.",
+  ],
+  characters: [
+    {
+      id: "lichlord", name: "Lich Lord", cost: 360, stat: "Lich Lord", magicItemSlots: 4, tags: ["undeadCharacter", "wizard", "lichLord"],
+      gearNote: "Undead, subject to the crumble rule. A level 4 wizard. May use Dark Magic or Necromancy Spells.",
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (free, barding free)", cost: 0, stat: "Undead Steed" },
+        { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
+        { id: "wingednightmare", name: "Winged Nightmare", cost: 60, stat: "Winged Nightmare" },
+        { id: "zombiedragon", name: "Zombie Dragon", cost: 300, stat: "Zombie Dragon" },
+      ],
+    },
+    {
+      id: "necromancerlord", name: "Necromancer Lord (level 4)", cost: 240, stat: "Necromancer Lord", magicItemSlots: 4, tags: ["wizard", "necromancer"],
+      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (4).",
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" },
+        { id: "manticore", name: "Manticore (living)", cost: 200, stat: "Manticore" },
+      ],
+    },
+    {
+      id: "masternecromancer", name: "Master Necromancer (level 3)", cost: 170, stat: "Master Necromancer", magicItemSlots: 3, tags: ["wizard", "necromancer"],
+      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (3).",
+      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+    },
+    {
+      id: "necromancerchampion", name: "Necromancer Champion (level 2)", cost: 110, stat: "Necromancer Champion", magicItemSlots: 2, tags: ["wizard", "necromancer"],
+      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (2).",
+      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+    },
+    {
+      id: "necromancer", name: "Necromancer (level 1)", cost: 50, stat: "Necromancer", magicItemSlots: 1, tags: ["wizard", "necromancer"],
+      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (1).",
+      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+    },
+    {
+      id: "wightbsb", name: "Wight Battle Standard Bearer", cost: 52, stat: "Wight BSB", magicItemSlots: 1, restriction: "0-1", tags: ["wight", "undeadCharacter", "bsb"],
+      innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
+      gearNote: "0-1 per army. The one magic item may be a magic banner.",
+      armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
+      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 14, stat: "Undead Steed" }],
+    },
+    {
+      id: "wighthero", name: "Wight Hero", cost: 82, stat: "Wight Hero", magicItemSlots: 2, tags: ["wight", "undeadCharacter"],
+      innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
+      armourGroup: { options: ["Shield & Light Armour (default)", "Heavy Armour"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 22, stat: "Undead Steed" },
+        { id: "wingednightmare", name: "Winged Nightmare", cost: 76, stat: "Winged Nightmare" },
+        { id: "zombiedragon", name: "Zombie Dragon", cost: 316, stat: "Zombie Dragon" },
+      ],
+    },
+    {
+      id: "vampirecount", name: "Von Carstein Vampire Count", cost: 154, stat: "Vampire Count", magicItemSlots: 2, tags: ["vampire", "undeadCharacter", "voncarstein"],
+      armourGroup: { options: VC_ARMOUR_OPTIONS },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
+      magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for a magic level while wearing armour or wielding a double handed weapon." },
+      gearNote: "This army's Vampire option is always Von Carstein. May take up to two magic items or Von Carstein bloodline powers, freely mixed (shown together below).",
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 36, stat: "Undead Steed" },
+        { id: "wingednightmare", name: "Winged Nightmare", cost: 90, stat: "Winged Nightmare" },
+        { id: "zombiedragon", name: "Zombie Dragon", cost: 330, stat: "Zombie Dragon" },
+      ],
+    },
+    {
+      id: "mummyprince", name: "Mummy Prince", cost: 129, stat: "Mummy Prince", magicItemSlots: 2, tags: ["mummy", "undeadCharacter"],
+      gearNote: "Flammable. May take a shield and light armour for free.",
+      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      meleeGroup: { label: "Melee weapon (choose one, free)", options: TK_MELEE_OPTIONS },
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 30, stat: "Undead Steed" },
+        { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
+      ],
+    },
+  ],
+  regiments: [
+    {
+      id: "ghouls", name: "Ghouls", perModel: 8, minSize: 5, stat: "Ghoul", command: "standard",
+      note: "Living, cause fear, poisoned attacks (+1S). May skirmish; if not skirmishing, unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue or overrun after a won combat that inflicted a casualty (gorging on the fallen instead), except models with hatred/frenzy. Cannot be joined by characters.",
+    },
+    {
+      id: "wraiths", name: "Wraiths", perModel: 35, minSize: 3, stat: "Wraith", command: "none", restriction: "0-1", tags: ["undead"],
+      note: "Ethereal, terror-causing, armed with double handed Wraith-Weapons (no armour save allowed). Cannot be harmed by mundane weapons.",
+      options: [
+        { id: "undeadsteeds", group: null, label: "Ride Undead Steeds — both riders and steeds ethereal (+35pt/model)", cost: 35, per: "model" },
+      ],
+      championOptions: [{ id: "wraithchamp", name: "Wraith Champion", cost: 35, magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Same profile as a normal Wraith — the extra points buy the ability to issue challenges and a magic item slot." }],
+    },
+    {
+      id: "zombies", name: "Zombies", perModel: 3, minSize: 5, stat: "Zombie", command: "standard", tags: ["undead"],
+      note: "Unstable, undead, slow — always strike last, even when charging.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "lightarmour", group: "armour", label: "Light armour (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "heavyarmour", group: "armour", label: "Heavy armour (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "spears", group: "weapon", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "halberds", group: "weapon", label: "Halberds (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "dhw", group: "weapon", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+      ],
+      championOptions: cuChampions(60, 25, 50),
+    },
+    {
+      id: "skeletonwarriors", name: "Skeleton Warriors", perModel: 4.5, minSize: 5, stat: "Skeleton", command: "standard", tags: ["undead", "skeletonBanner"],
+      note: "Undead, subject to the crumble rule. Light armour or shield is free individually — taking both together costs +0.5pt/model per the book (not applied automatically here). Longbows/crossbows are only available if no other equipment is taken — not hard-enforced.",
+      options: [
+        { id: "lightarmour", group: null, label: "Light armour (free)", cost: 0, per: "model" },
+        { id: "shield", group: null, label: "Shield (free)", cost: 0, per: "model" },
+        { id: "heavyarmour", group: null, label: "Upgrade to heavy armour (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "spears", group: "weapon", label: "Spears (+1pt/model)", cost: 1, per: "model" },
+        { id: "halberds", group: "weapon", label: "Halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "weapon", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
+        { id: "longbows", group: "missile", label: "Longbows (+1.5pt/model)", cost: 1.5, per: "model" },
+        { id: "crossbows", group: "missile", label: "Crossbows (+2.5pt/model)", cost: 2.5, per: "model" },
+      ],
+      championOptions: cuChampions(70, 35, 60),
+    },
+    {
+      id: "mummies", name: "Mummies", perModel: 18, minSize: 3, stat: "Mummy", command: "standard", tags: ["undead", "mummy"],
+      note: "Undead, subject to the crumble rule. Flammable. Equipped with light armour.",
+      options: [
+        { id: "dhw", group: null, label: "Double handed weapons (+6pt/model)", cost: 6, per: "model" },
+      ],
+      championOptions: tkMummyChampion(60),
+    },
+    {
+      id: "carrion-cu", name: "Carrion", perModel: 50, minSize: 1, stat: "Carrion", command: "none", restriction: "0-1", tags: ["undead"],
+      note: "Undead, subject to the crumble rule. Flying undead birds of prey — cannot take any upgrades. As monstrous flyers they are always skirmishers. Priced per base/model — use the size stepper to buy multiple bases.",
+    },
+    {
+      id: "skeletonhorsemen", name: "Skeleton Horsemen", perModel: 14, minSize: 5, stat: "Skeleton", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "fastCavalry", fastCavalryToggleOption: "heavyarmour", tags: ["undead", "skeletonHorsemen", "skeletonBanner"],
+      note: "Undead, subject to the crumble rule. Skeletons with light armour and shields, riding Undead Steeds. Fast cavalry.",
+      options: [
+        { id: "heavyarmour", group: null, label: "Heavy armour instead of light (+3pt/model) — loses fast cavalry, standard bearer becomes free", cost: 3, per: "model" },
+        { id: "spears", group: "weapon", label: "Spears (+2pt/model)", cost: 2, per: "model" },
+        { id: "lances", group: "weapon", label: "Lances (+4pt/model)", cost: 4, per: "model" },
+      ],
+      championOptions: cuChampions(80, 50, 70),
+    },
+    {
+      id: "wightguardsmen", name: "Wight Guardsmen", perModel: 10, minSize: 5, stat: "Wight", command: "standard", tags: ["undead"],
+      note: "Undead, subject to the crumble rule. Wights with Wight-Blades and heavy armour.",
+      options: [
+        { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "halberds", group: "weapon", label: "Non-magical halberds (+1pt/model)", cost: 1, per: "model" },
+        { id: "dhw", group: "weapon", label: "Non-magical double handed weapons (+3pt/model)", cost: 3, per: "model" },
+      ],
+      championOptions: cuChampions(70, 35, 60),
+    },
+    {
+      id: "wightknights", name: "Wight Knights", perModel: 22, minSize: 5, stat: "Wight", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "standard", tags: ["undead"],
+      note: "Undead, subject to the crumble rule. Wights with Wight-Blades, heavy armour, shields, riding Undead Steeds.",
+      options: [
+        { id: "barding", group: null, label: "Barding (+3pt/model)", cost: 3, per: "model" },
+        { id: "lances", group: null, label: "Non-magical lances (+3pt/model)", cost: 3, per: "model" },
+      ],
+      championOptions: cuChampions(80, 50, 70),
+    },
+  ],
+  chariotsMonsters: [
+    {
+      id: "batswarm", name: "Bat Swarm", kind: "quantity", perUnit: 40, stat: "Bat Swarm",
+      note: "Living. Follows the main-rulebook rules for Swarms. Priced per base.",
+    },
+    {
+      id: "screamingskullcatapult", name: "Screaming Skull Catapult", kind: "warmachine", perUnit: 100, stat: "Skeleton",
+      note: "Small Stone Thrower crewed by three Skeletons. An enemy unit that suffers at least one wound must take a Panic test. Hits count as flaming.",
+      extraCrewCost: 5, extraCrewLabel: "Extra crew (max 2)",
+    },
+    {
+      id: "skeletonheavychariots", name: "Skeleton Heavy Chariot", perUnit: 60, stat: "Heavy Chariot", mountStat: "Skeleton", mountLabel: "Skeleton Crew",
+      note: "Undead, subject to the crumble rule. Pulled by two Undead Steeds, crewed by two Skeleton Warriors with light armour, spears, shields, and bows (5+ save).",
+      extraCrewCost: 6, extraCrewLabel: "Extra Skeleton Warrior crew (max 2, one may become the commander below instead)",
+      extraSteedCost: 4, extraSteedLabel: "Extra Undead Steeds (max 2, widens the base)",
+      scythedWheelsCost: 20,
+      commanderCost: 60, commanderLabel: "One extra crewman is a character or flammable Mummy Champion (light armour, double handed weapon) instead", commanderMagicItemSlots: 1, commanderTags: ["mummy"],
+    },
+  ],
+  specialCharacters: [
+    { id: "krell", name: "Krell, Lord of The Undead", cost: 250, stat: "Krell", role: "Wight Lord",
+      note: "Causes terror. Carries the Armour of Fortune (a common magic item — heavy armour, 5+ ward save) and the Black Axe of Krell instead of a Wight-Blade (double handed, deals 1D6 wounds; a model wounded but not slain suffers an additional no-save wound on a roll of 1 in each subsequent magic phase). May take 1 additional magic item. May ride an Undead Steed for +30pts (barding free)." },
+    { id: "dieter", name: "Dieter Helsnicht, Doom Lord of Middenheim", cost: 600, stat: "Lich Lord", role: "A particularly powerful Necromancer Lord, with characteristics similar to a Lich Lord",
+      note: "Rides a Manticore. Carries the Amulet of Doom, granting a 4+ ward save to himself and his mount. May take 3 additional magic items." },
+    { id: "heinrich", name: "Heinrich Kemmler, The Lichmaster", cost: 500, stat: "Lich Lord", role: "A particularly powerful Necromancer Lord, with characteristics similar to a Lich Lord",
+      note: "Carries the Cloak of the Night, letting him fly and be invulnerable to mundane (non-magical) attacks. May take 3 additional magic items." },
+    { id: "nagash", name: "Nagash, Supreme Lord of the Undead", cost: 700, stat: "Nagash", role: "Must always be the army general",
+      note: "Undead, subject to the crumble rule, large, causes terror. A level 5 wizard (thanks to the Book of Nagash — already reflected in his level) who may handpick spells.",
+      items: "Carries Mortis — the Great Blade of Death (+1 Strength, already reflected; each wound inflicted restores one wound Nagash lost earlier in the battle), the Black Armour of Nagash (4+ armour save, 4+ ward save, 4+ natural dispel — he may still cast spells while wearing it), the Book of Nagash (+1 magic level, already reflected), a Dispel Magic Scroll, and the Staff of Power (comes with 1D6+1 power cards taken from the winds of magic deck at the start of the battle, spendable throughout)." },
+  ],
+};
+
 const FACTION_LIST = [
   { key: "empire", name: "The Empire", data: EMPIRE },
   { key: "highelves", name: "High Elves", data: HIGH_ELVES },
   { key: "orcsgoblins", name: "Orcs & Goblins", data: ORCS_GOBLINS },
   { key: "dwarfs", name: "Dwarfs", data: DWARFS },
   { key: "skaven", name: "Skaven", data: SKAVEN },
-  { key: "undead", name: "Undead" },
+  { key: "vampirecounts", name: "Vampire Counts", data: VAMPIRE_COUNTS },
+  { key: "tombkings", name: "Tomb Kings", data: TOMB_KINGS },
+  { key: "classicundead", name: "Classic Undead", data: CLASSIC_UNDEAD },
   { key: "woodElves", name: "Wood Elves", data: WOOD_ELVES },
   { key: "chaos", name: "Chaos", data: CHAOS },
   { key: "chaosdwarfs", name: "Chaos Dwarfs", data: CHAOS_DWARFS },
@@ -4631,7 +5435,7 @@ const FACTION_LIST = [
   { key: "slann", name: "The Slann Empire" },
 ];
 
-const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN };
+const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaos: CHAOS, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD };
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
@@ -4643,6 +5447,19 @@ function getArmyData(factionKey) {
 let uidCounter = 1;
 const uid = (prefix) => `${prefix}-${uidCounter++}-${Date.now().toString(36)}`;
 
+function applyBloodline(def, bloodlineId) {
+  if (!def?.bloodlineOverrides || !bloodlineId) return def;
+  const ov = def.bloodlineOverrides[bloodlineId];
+  return ov ? { ...def, ...ov } : def;
+}
+
+function magicLevelEligible(def, inst) {
+  if (!def.magicLevelOption) return false;
+  if (def.magicLevelOption.forbiddenMark && inst.mark === def.magicLevelOption.forbiddenMark) return false;
+  if (def.magicLevelOption.eligible && !def.magicLevelOption.eligible(inst, def)) return false;
+  return true;
+}
+
 function characterCost(inst, def, armyData) {
   let total = def.cost;
   const mount = def.mounts?.find((m) => m.id === inst.mountId);
@@ -4650,13 +5467,13 @@ function characterCost(inst, def, armyData) {
   if (inst.bow && def.bowOption) total += def.bowOption.cost;
   if (def.missileGroup && inst.missile && inst.missile !== def.missileGroup.options[0]) total += def.missileGroup.cost;
   if (def.experimentalMissileGroup && inst.experimentalMissile && inst.experimentalMissile !== def.experimentalMissileGroup.options[0] && !mount) total += def.experimentalMissileGroup.cost;
-  if (def.magicLevelOption) {
-    const forbidden = def.magicLevelOption.forbiddenMark && inst.mark === def.magicLevelOption.forbiddenMark;
-    if (!forbidden) total += (inst.magicLevel || 0) * def.magicLevelOption.costPerLevel;
+  if (def.magicLevelOption && magicLevelEligible(def, inst)) {
+    total += (inst.magicLevel || def.magicLevelOption.min || 0) * def.magicLevelOption.costPerLevel;
   }
   if (def.wingsOption && inst.wings) total += def.wingsOption.cost;
   if (def.anvilOption && inst.anvil) total += def.anvilOption.cost;
   (inst.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+  if (def.bloodlinePowerSlots) (inst.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   return total;
 }
 
@@ -4707,6 +5524,13 @@ function regimentCost(inst, def, armyData) {
   if (inst.championIncluded && def.champion) {
     total += def.champion.baseCost;
     (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+  }
+  if (inst.championOptionId && def.championOptions) {
+    const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
+    if (opt) {
+      total += opt.cost;
+      (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+    }
   }
   if (def.branchWraith && inst.branchWraithIncluded) {
     total += def.branchWraith.cost;
@@ -4786,9 +5610,10 @@ function specialCost(inst, def, armyData) {
   return total;
 }
 
-function unitCost(unit, armyData) {
+function unitCost(unit, armyData, roster) {
+  const bloodline = roster?.armyTheme;
   if (unit.kind === "character") {
-    const def = armyData.characters.find((c) => c.id === unit.defId);
+    const def = applyBloodline(armyData.characters.find((c) => c.id === unit.defId), bloodline);
     return characterCost(unit, def, armyData);
   }
   if (unit.kind === "regiment") {
@@ -4882,7 +5707,7 @@ function isItemAllowed(item, context) {
   return item.restrictedTo.some((cond) => matchesRestrictionCondition(cond, context));
 }
 
-function MagicItemPicker({ items, selectedIds, onToggle, maxSlots, usedElsewhere, categoryFilter, context }) {
+function MagicItemPicker({ items, selectedIds, onToggle, maxSlots, usedElsewhere, categoryFilter, context, label = "Magic Items" }) {
   const grouped = useMemo(() => {
     const g = {};
     items.filter((m) => (!categoryFilter || categoryFilter.includes(m.cat)) && isItemAllowed(m, context)).forEach((m) => {
@@ -4895,7 +5720,7 @@ function MagicItemPicker({ items, selectedIds, onToggle, maxSlots, usedElsewhere
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4 }}>
-        <span className="whr-label" style={{ marginBottom: 0 }}>Magic Items</span>
+        <span className="whr-label" style={{ marginBottom: 0 }}>{label}</span>
         <span className="whr-opt-cost">{selectedIds.length} / {maxSlots} slots</span>
       </div>
       {Object.entries(grouped).map(([cat, arr]) => (
@@ -5226,8 +6051,9 @@ function resolveUnitTags(kind, unit, def, armyData) {
     if (unit.missile && unit.missile !== "None (default)" && def.missileGroup) tags.push(unit.missile);
     if (unit.experimentalMissile && unit.experimentalMissile !== "None (default)" && def.experimentalMissileGroup) tags.push(unit.experimentalMissile);
     if (def.wingsOption && unit.wings) tags.push("Wings");
-    if (def.magicLevelOption && unit.magicLevel > 0) tags.push(`+${unit.magicLevel} magic levels`);
+    if (def.magicLevelOption && (unit.magicLevel ?? def.magicLevelOption.min ?? 0) > 0) tags.push(`+${unit.magicLevel ?? def.magicLevelOption.min} magic levels`);
     (unit.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+    (unit.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
   } else if (kind === "regiment") {
     if (def.kind === "composite") {
       (def.composition || []).forEach((c) => { const n = unit.composition?.[c.id] || 0; if (n > 0) tags.push(`${n} ${c.label}`); });
@@ -5245,6 +6071,13 @@ function resolveUnitTags(kind, unit, def, armyData) {
     if (unit.championIncluded && def.champion) {
       tags.push(def.champion.name);
       (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+    }
+    if (unit.championOptionId && def.championOptions) {
+      const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
+      if (opt) {
+        tags.push(opt.name);
+        (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+      }
     }
     if (unit.branchWraithIncluded && def.branchWraith) {
       tags.push(def.branchWraith.name);
@@ -5367,8 +6200,8 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <>
             <div className="whr-eyebrow" style={{ marginBottom: 8 }}>Characters</div>
             {roster.characters.map((u) => {
-              const def = armyData.characters.find((c) => c.id === u.defId);
-              return <RosterUnitCard key={u.instanceId} kind="character" unit={u} def={def} cost={unitCost(u, armyData)} selected={selectedId === u.instanceId}
+              const def = applyBloodline(armyData.characters.find((c) => c.id === u.defId), roster.armyTheme);
+              return <RosterUnitCard key={u.instanceId} kind="character" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
                 onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} />;
             })}
           </>
@@ -5382,7 +6215,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
               const models = def.kind === "composite"
                 ? Object.values(u.composition || {}).reduce((a, b) => a + b, 0)
                 : u.size;
-              return <RosterUnitCard key={u.instanceId} kind="regiment" unit={u} def={def} cost={unitCost(u, armyData)} selected={selectedId === u.instanceId}
+              return <RosterUnitCard key={u.instanceId} kind="regiment" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
                 onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={models} armyData={armyData} />;
             })}
           </>
@@ -5393,7 +6226,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
             <div className="whr-eyebrow" style={{ margin: "16px 0 8px" }}>Chariots & Monsters</div>
             {roster.chariots.map((u) => {
               const def = armyData.chariotsMonsters.find((c) => c.id === u.defId);
-              return <RosterUnitCard key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData)} selected={selectedId === u.instanceId}
+              return <RosterUnitCard key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
                 onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? u.qty : null} armyData={armyData} />;
             })}
           </>
@@ -5404,7 +6237,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
             <div className="whr-eyebrow" style={{ margin: "16px 0 8px" }}>Special Characters</div>
             {roster.specials.map((u) => {
               const def = armyData.specialCharacters.find((s) => s.id === u.defId);
-              return <RosterUnitCard key={u.instanceId} kind="special" unit={u} def={def} cost={unitCost(u, armyData)} selected={selectedId === u.instanceId}
+              return <RosterUnitCard key={u.instanceId} kind="special" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
                 onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} />;
             })}
           </>
@@ -5416,7 +6249,8 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
 
 /* ---- Detail panel per unit kind ---- */
 
-function CharacterDetail({ def, unit, roster, updateUnit, armyData }) {
+function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
+  const def = applyBloodline(rawDef, roster.armyTheme);
   const usedElsewhere = allUsedMagicItemIds(roster, unit.instanceId);
   const mounted = !!unit.mountId;
   const visibleMounts = (def.mounts || []).filter((m) => !m.requiresMark || m.requiresMark === (unit.mark || def.markGroup?.options?.[0]));
@@ -5427,6 +6261,7 @@ function CharacterDetail({ def, unit, roster, updateUnit, armyData }) {
         <span className="whr-badge-gold whr-badge">{fmtPts(characterCost(unit, def, armyData))} pts</span>
       </div>
       {def.gearNote && <p style={{ fontSize: 13.5, marginTop: 10, color: "var(--ink-soft)" }}>{def.gearNote}</p>}
+      {def.innateWeapon && <p style={{ fontSize: 12.5, marginTop: 4, color: "var(--ink-faint)" }}>Carries a {def.innateWeapon.name} ({def.innateWeapon.desc}) — free, doesn't use a magic item slot. Forfeited automatically if another magic weapon is taken.</p>}
 
       {def.markGroup && (
         <div style={{ marginTop: 14 }}>
@@ -5551,6 +6386,9 @@ function CharacterDetail({ def, unit, roster, updateUnit, armyData }) {
       {def.magicLevelOption && (() => {
         const forbidden = def.magicLevelOption.forbiddenMark && (unit.mark || def.markGroup?.options?.[0]) === def.magicLevelOption.forbiddenMark;
         if (forbidden) return <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 8 }}>No magic levels — forbidden with the {def.magicLevelOption.forbiddenMark} Mark.</p>;
+        const ineligible = def.magicLevelOption.eligible && !def.magicLevelOption.eligible(unit, def);
+        if (ineligible) return <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 8 }}>{def.magicLevelOption.ineligibleNote || "Not eligible for magic levels with current wargear."}</p>;
+        const min = def.magicLevelOption.min || 0;
         return (
           <div style={{ marginTop: 14 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
@@ -5558,8 +6396,9 @@ function CharacterDetail({ def, unit, roster, updateUnit, armyData }) {
               <span className="whr-opt-cost">+{def.magicLevelOption.costPerLevel}pts/level</span>
             </div>
             <div style={{ marginTop: 6 }}>
-              <Stepper value={unit.magicLevel || 0} min={0} max={def.magicLevelOption.max} onChange={(v) => updateUnit({ ...unit, magicLevel: v })} />
+              <Stepper value={unit.magicLevel ?? min} min={min} max={def.magicLevelOption.max} onChange={(v) => updateUnit({ ...unit, magicLevel: v })} />
             </div>
+            {min > 0 && <p style={{ fontSize: 11.5, color: "var(--ink-faint)", marginTop: 4 }}>Minimum {min} level{min > 1 ? "s" : ""} required.</p>}
           </div>
         );
       })()}
@@ -5589,11 +6428,24 @@ function CharacterDetail({ def, unit, roster, updateUnit, armyData }) {
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
             categoryFilter={def.magicItemCategoryFilter}
-            context={{ characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: def.tags || [] }}
+            context={{ characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] }}
             onToggle={(id) => {
               const cur = unit.magicItemIds || [];
               const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
               updateUnit({ ...unit, magicItemIds: next });
+            }} />
+        </div>
+      )}
+
+      {def.bloodlinePowerSlots > 0 && (
+        <div style={{ marginTop: 14 }}>
+          <MagicItemPicker items={armyData.magicItems} selectedIds={unit.bloodlinePowerIds || []} maxSlots={def.bloodlinePowerSlots} usedElsewhere={usedElsewhere}
+            categoryFilter={["bloodlinepower"]}
+            context={{ characterId: def.id, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] }}
+            onToggle={(id) => {
+              const cur = unit.bloodlinePowerIds || [];
+              const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
+              updateUnit({ ...unit, bloodlinePowerIds: next });
             }} />
         </div>
       )}
@@ -5772,6 +6624,46 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                 updateUnit({ ...unit, championMagicItemIds: next });
               }} />
           )}
+        </div>
+      )}
+
+      {def.championOptions && (
+        <div style={{ marginTop: 14 }}>
+          <span className="whr-label">Regimental Champion (optional)</span>
+          <label className="whr-opt-row whr-opt-label">
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input type="radio" name={`championopt-${unit.instanceId}`} checked={!unit.championOptionId} onChange={() => updateUnit({ ...unit, championOptionId: null, championMagicItemIds: [] })} />
+              None
+            </span>
+          </label>
+          {def.championOptions.map((opt) => (
+            <label key={opt.id} className="whr-opt-row whr-opt-label">
+              <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <input type="radio" name={`championopt-${unit.instanceId}`} checked={unit.championOptionId === opt.id}
+                  onChange={() => updateUnit({ ...unit, championOptionId: opt.id, championMagicItemIds: [] })} />
+                {opt.name}
+              </span>
+              <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
+            </label>
+          ))}
+          {def.championOptions.find((o) => o.id === unit.championOptionId)?.note && (
+            <p style={{ fontSize: 11.5, color: "var(--ink-faint)", marginTop: 2 }}>{def.championOptions.find((o) => o.id === unit.championOptionId).note}</p>
+          )}
+          {def.championOptions.find((o) => o.id === unit.championOptionId) && (() => {
+            const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
+            if (!opt.magicItemSlots) return null;
+            return (
+              <MagicItemPicker items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={opt.magicItemSlots} usedElsewhere={usedElsewhere}
+                categoryFilter={opt.magicItemCategoryFilter}
+                label={opt.itemSlotLabel || "Magic Item"}
+                context={{ regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] }}
+                onToggle={(id) => {
+                  const cur = unit.championMagicItemIds || [];
+                  const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
+                  updateUnit({ ...unit, championMagicItemIds: next });
+                }} />
+            );
+          })()}
         </div>
       )}
 
@@ -6144,16 +7036,16 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
 
   const totalPoints = useMemo(() => {
     let t = 0;
-    roster.characters.forEach((u) => (t += unitCost(u, armyData)));
-    roster.regiments.forEach((u) => (t += unitCost(u, armyData)));
-    roster.chariots.forEach((u) => (t += unitCost(u, armyData)));
-    roster.specials.forEach((u) => (t += unitCost(u, armyData)));
+    roster.characters.forEach((u) => (t += unitCost(u, armyData, roster)));
+    roster.regiments.forEach((u) => (t += unitCost(u, armyData, roster)));
+    roster.chariots.forEach((u) => (t += unitCost(u, armyData, roster)));
+    roster.specials.forEach((u) => (t += unitCost(u, armyData, roster)));
     return t;
   }, [roster, armyData]);
 
   const regimentPoints = useMemo(() => {
     let t = 0;
-    roster.regiments.forEach((u) => (t += unitCost(u, armyData)));
+    roster.regiments.forEach((u) => (t += unitCost(u, armyData, roster)));
     // the cheapest unit flagged countsAsFirstRegiment counts toward Regiments
     if (roster.chariots.length > 0) {
       const flaggedUnits = roster.chariots.filter((u) => {
@@ -6161,7 +7053,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         return d && d.countsAsFirstRegiment;
       });
       if (flaggedUnits.length > 0) {
-        const costs = flaggedUnits.map((u) => unitCost(u, armyData));
+        const costs = flaggedUnits.map((u) => unitCost(u, armyData, roster));
         t += Math.min(...costs);
       }
     }
@@ -6221,6 +7113,34 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
       });
       return { ...u, gearSelections };
     });
+    const clampCharacters = (list, defs) => list.map((u) => {
+      const rawDef = defs.find((d) => d.id === u.defId);
+      if (!rawDef?.bloodlineOverrides) return u;
+      const def = applyBloodline(rawDef, themeId);
+      let next = u;
+      if (def.magicLevelOption) {
+        const min = def.magicLevelOption.min || 0;
+        const max = def.magicLevelOption.max;
+        const clamped = Math.max(min, Math.min(max, next.magicLevel ?? min));
+        if (clamped !== next.magicLevel) next = { ...next, magicLevel: clamped };
+      }
+      const context = { characterId: def.id, tags: [...(def.tags || []), themeId] };
+      const filteredItems = (next.magicItemIds || []).filter((id) => {
+        const mi = miById(armyData.magicItems, id);
+        return mi ? isItemAllowed(mi, context) : true;
+      });
+      if (filteredItems.length !== (next.magicItemIds || []).length) next = { ...next, magicItemIds: filteredItems };
+      if (!def.bloodlinePowerSlots) {
+        if (next.bloodlinePowerIds?.length) next = { ...next, bloodlinePowerIds: [] };
+      } else {
+        const filteredPowers = (next.bloodlinePowerIds || []).filter((id) => {
+          const mi = miById(armyData.magicItems, id);
+          return mi ? isItemAllowed(mi, context) : true;
+        });
+        if (filteredPowers.length !== (next.bloodlinePowerIds || []).length) next = { ...next, bloodlinePowerIds: filteredPowers };
+      }
+      return next;
+    });
     const isRemoved = (list, defs) => {
       const u = list.find((x) => x.instanceId === selectedId);
       if (!u) return false;
@@ -6238,7 +7158,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     setRoster((r) => ({
       ...r,
       armyTheme: themeId,
-      characters: keep(r.characters, armyData.characters),
+      characters: clampCharacters(keep(r.characters, armyData.characters), armyData.characters),
       regiments: stripThemedGear(keep(r.regiments, armyData.regiments), armyData.regiments),
       chariots: keep(r.chariots, armyData.chariotsMonsters),
       specials: keep(r.specials, armyData.specialCharacters),
@@ -6359,10 +7279,10 @@ export default function App() {
     try {
       const armyData = getArmyData(roster.factionKey);
       let totalPoints = 0;
-      roster.characters.forEach((u) => (totalPoints += unitCost(u, armyData)));
-      roster.regiments.forEach((u) => (totalPoints += unitCost(u, armyData)));
-      roster.chariots.forEach((u) => (totalPoints += unitCost(u, armyData)));
-      roster.specials.forEach((u) => (totalPoints += unitCost(u, armyData)));
+      roster.characters.forEach((u) => (totalPoints += unitCost(u, armyData, roster)));
+      roster.regiments.forEach((u) => (totalPoints += unitCost(u, armyData, roster)));
+      roster.chariots.forEach((u) => (totalPoints += unitCost(u, armyData, roster)));
+      roster.specials.forEach((u) => (totalPoints += unitCost(u, armyData, roster)));
 
       await storage.set(`roster:${roster.id}`, JSON.stringify(roster));
       const summary = { id: roster.id, name: roster.name, pointLimit: roster.pointLimit, factionKey: roster.factionKey, totalPoints: fmtPts(totalPoints) };
