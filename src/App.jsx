@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { Analytics } from '@vercel/analytics/react';
 import { storage } from "./storage.js";
 
 /* ============================================================================
@@ -7937,6 +7938,7 @@ export default function App() {
       {view === "builder" && roster && (
         <BuilderScreen roster={roster} setRoster={setRoster} onBack={() => setView("setup")} onSave={handleSave} saveState={saveState} />
       )}
+      <Analytics />
     </div>
   );
 }
