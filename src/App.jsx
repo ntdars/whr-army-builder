@@ -1039,6 +1039,12 @@ const WOOD_ELVES_MAGIC_ITEMS = [
   { id: "sp-despairs", name: "A Lamentation of Despairs", cost: 60, cat: "sprite", desc: "Bound spell, one use. One model anywhere tests LD or suffers 1D6 wounds, no save, no LoS required." },
 ];
 const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners", engineering: "Engineering Runes", virtue: "Knightly Virtues", bloodlinepower: "Bloodline Powers", heirloom: "Heirlooms of the Old Slann" };
+// A character/champion's own personal magic item slot never gets Magic Banners by default — only
+// the model actually carrying the regiment's standard (the dedicated "Magic Banner"
+// picker, or a Battle Standard Bearer, whose magicItemCategoryFilter already explicitly lists
+// "banner") should ever be offered one. Used as the fallback whenever an entity doesn't specify
+// its own magicItemCategoryFilter (which otherwise defaults to "every category, no restriction").
+const NON_BANNER_CATEGORIES = Object.keys(MI_CATEGORY_LABEL).filter((c) => c !== "banner");
 const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 /* ============================================================================
@@ -8860,7 +8866,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
       {def.magicItemSlots > 0 && (
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
-            categoryFilter={def.magicItemCategoryFilter}
+            categoryFilter={def.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
             context={itemContext(def, unit, { characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
             onToggle={(id) => {
               const cur = unit.magicItemIds || [];
@@ -9074,7 +9080,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
           )}
           {def.champion.magicItemSlots > 0 && (
             <MagicItemPicker items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={def.champion.magicItemSlots} usedElsewhere={usedElsewhere}
-              categoryFilter={def.champion.magicItemCategoryFilter}
+              categoryFilter={def.champion.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
               context={itemContext(def.champion, unit, { regimentId: def.id, knightGroup: def.knightGroup, mark: unit.championMark || def.champion.markGroup?.options?.[0], tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
               onToggle={(id) => {
                 const cur = unit.championMagicItemIds || [];
@@ -9087,7 +9093,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
 
       {(autoStandard || unit.standard) && (
         <div style={{ marginTop: 10 }}>
-          <span className="whr-label">Magic Banner (optional)</span>
+          <span className="whr-label">Magic Banner</span>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicBannerId ? [unit.magicBannerId] : []} maxSlots={1} usedElsewhere={usedElsewhere}
             categoryFilter={["banner"]}
             context={itemContext(def, unit, { regimentId: def.id, knightGroup: def.knightGroup, tags: def.tags || [] })}
@@ -9122,7 +9128,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
             if (!opt.magicItemSlots) return null;
             return (
               <MagicItemPicker items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={opt.magicItemSlots} usedElsewhere={usedElsewhere}
-                categoryFilter={opt.magicItemCategoryFilter}
+                categoryFilter={opt.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
                 label={opt.itemSlotLabel || "Magic Item"}
                 context={itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
                 onToggle={(id) => {
@@ -9318,7 +9324,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
         {def.magicItemSlots > 0 && (
           <div style={{ marginTop: 14 }}>
             <MagicItemPicker items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
-              categoryFilter={def.magicItemCategoryFilter}
+              categoryFilter={def.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
               context={itemContext(def, unit, { regimentId: def.id })}
               onToggle={(id) => {
                 const cur = unit.extraMagicItemIds || [];
