@@ -89,7 +89,7 @@ body {
 /* ---------- buttons ---------- */
 .whr-btn {
   font-family: var(--font-display-sc); font-weight: 400; letter-spacing: 0.05em;
-  text-transform: uppercase; font-size: 15.5px; cursor: pointer;
+  text-transform: uppercase; font-size: 15.5px; cursor: pointer; text-align: left;
   border: 1px solid var(--line); background: var(--paper-2); color: var(--ink);
   padding: 10px 18px; transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
   border-radius: 2px;
@@ -9013,6 +9013,18 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               <span className="whr-opt-cost">{standardFree ? "free" : `+${standardCost}pts`}</span>
             </label>
           )}
+          {def.champion && (
+            <label className="whr-opt-row whr-opt-label">
+              <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <input type="checkbox" checked={!!unit.championIncluded} onChange={(e) => {
+                  const checked = e.target.checked;
+                  updateUnit({ ...unit, championIncluded: checked, championMagicItemIds: checked ? unit.championMagicItemIds : [] });
+                }} />
+                {def.champion.name}
+              </span>
+              <span className="whr-opt-cost">+{fmtPts(def.champion.baseCost)}pts</span>
+            </label>
+          )}
           {def.command === "skirmisher" && <p style={{ fontSize: 14, color: "var(--ink-faint)" }}>Skirmishers cannot take a standard bearer.</p>}
         </div>
       )}
@@ -9022,20 +9034,8 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
       {def.command === "none" && def.note?.includes("No standard bearer or musician") && (
         <div className="whr-opt-row" style={{ marginTop: 10 }}><span>Standard bearer / musician</span><span className="whr-badge-burgundy whr-badge">not allowed</span></div>
       )}
-
-      {(autoStandard || unit.standard) && (
+      {def.command === "none" && def.champion && (
         <div style={{ marginTop: 10 }}>
-          <span className="whr-label">Magic Banner (optional)</span>
-          <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicBannerId ? [unit.magicBannerId] : []} maxSlots={1} usedElsewhere={usedElsewhere}
-            categoryFilter={["banner"]}
-            context={itemContext(def, unit, { regimentId: def.id, knightGroup: def.knightGroup, tags: def.tags || [] })}
-            onToggle={(id) => updateUnit({ ...unit, magicBannerId: unit.magicBannerId === id ? null : id })} />
-        </div>
-      )}
-
-      {def.champion && (
-        <div style={{ marginTop: 14 }}>
-          <span className="whr-label">Champion</span>
           <label className="whr-opt-row whr-opt-label">
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <input type="checkbox" checked={!!unit.championIncluded} onChange={(e) => {
@@ -9046,8 +9046,13 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
             </span>
             <span className="whr-opt-cost">+{fmtPts(def.champion.baseCost)}pts</span>
           </label>
-          {unit.championIncluded && def.champion.markGroup && (
-            <div style={{ marginTop: 8 }}>
+        </div>
+      )}
+
+      {def.champion && unit.championIncluded && (def.champion.markGroup || def.champion.magicItemSlots > 0) && (
+        <div style={{ marginTop: 14 }}>
+          {def.champion.markGroup && (
+            <div>
               <span className="whr-label">Champion's Mark of Chaos</span>
               {(roster.armyTheme && roster.armyTheme !== "Mixed" && def.champion.markGroup.options.includes(roster.armyTheme) ? [roster.armyTheme] : def.champion.markGroup.options).map((opt) => (
                 <label key={opt} className="whr-opt-row whr-opt-label">
@@ -9067,7 +9072,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               ))}
             </div>
           )}
-          {unit.championIncluded && def.champion.magicItemSlots > 0 && (
+          {def.champion.magicItemSlots > 0 && (
             <MagicItemPicker items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={def.champion.magicItemSlots} usedElsewhere={usedElsewhere}
               categoryFilter={def.champion.magicItemCategoryFilter}
               context={itemContext(def.champion, unit, { regimentId: def.id, knightGroup: def.knightGroup, mark: unit.championMark || def.champion.markGroup?.options?.[0], tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
@@ -9077,6 +9082,16 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                 updateUnit({ ...unit, championMagicItemIds: next });
               }} />
           )}
+        </div>
+      )}
+
+      {(autoStandard || unit.standard) && (
+        <div style={{ marginTop: 10 }}>
+          <span className="whr-label">Magic Banner (optional)</span>
+          <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicBannerId ? [unit.magicBannerId] : []} maxSlots={1} usedElsewhere={usedElsewhere}
+            categoryFilter={["banner"]}
+            context={itemContext(def, unit, { regimentId: def.id, knightGroup: def.knightGroup, tags: def.tags || [] })}
+            onToggle={(id) => updateUnit({ ...unit, magicBannerId: unit.magicBannerId === id ? null : id })} />
         </div>
       )}
 
