@@ -189,6 +189,34 @@ body {
   .whr-builder-grid { grid-template-columns: 1fr !important; }
   .whr-builder-col { max-height: none !important; }
 }
+
+.whr-print-roster { display: none; }
+@media print {
+  .whr-print-hide { display: none !important; }
+  .whr-print-roster {
+    display: block !important; position: static; width: 100%; max-width: 800px; margin: 0 auto;
+    background: #fff; color: #000; font-family: var(--font-body);
+  }
+  .whr-print-roster h1 { font-family: var(--font-display); font-size: 22px; margin: 0 0 2px; }
+  .whr-print-roster h2 {
+    font-family: var(--font-display-sc); font-weight: 400; font-size: 14px; letter-spacing: 0.1em;
+    text-transform: uppercase; border-bottom: 1px solid #000; margin: 18px 0 8px; padding-bottom: 3px;
+  }
+  .whr-print-header { border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 4px; }
+  .whr-print-header p { margin: 2px 0; font-size: 12.5px; }
+  .whr-print-unit { break-inside: avoid; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dotted #999; }
+  .whr-print-unit-header { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; }
+  .whr-print-unit-name { font-weight: 700; }
+  .whr-print-unit-cost { font-size: 12.5px; }
+  .whr-print-stat-label { font-family: var(--font-display-sc); font-weight: 400; font-size: 10.5px; letter-spacing: 0.06em; margin: 2px 0 1px; }
+  .whr-print-unit-body { display: flex; gap: 18px; margin-top: 4px; align-items: flex-start; }
+  .whr-print-stats-col { flex: 0 0 auto; }
+  .whr-print-roster table.whr-stat-table { font-size: 11.5px; margin: 0 0 4px; border: 1px solid #000; }
+  .whr-print-roster table.whr-stat-table th, .whr-print-roster table.whr-stat-table td { border: 1px solid #999; padding: 1px 5px; text-align: center; color: #000; }
+  .whr-print-tags { flex: 1 1 auto; min-width: 0; margin: 0; padding-left: 16px; font-size: 12px; }
+  .whr-print-tags li { margin-bottom: 1px; }
+  @page { margin: 0.6in; }
+}
 `;
 
 /* ============================================================================
@@ -8727,6 +8755,107 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
   );
 }
 
+// Print-only rendering, hidden on screen and revealed via the @media print CSS rule when the
+// user clicks Export List. Mirrors RosterPanel's exact category grouping/iteration so the printed
+// sheet always matches what's actually in the roster, but renders full stat blocks (via the same
+// resolveUnitStat/resolveUnitTags/StatBlock helpers RosterUnitCard uses) in a plain black-on-white
+// document layout instead of the app's interactive cards.
+function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodlineId }) {
+  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel } = resolveUnitStat(kind, unit, def, bloodlineId);
+  const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
+  const hasStats = !!(statKey || statNote);
+  return (
+    <div className="whr-print-unit">
+      <div className="whr-print-unit-header">
+        <span className="whr-print-unit-name">{unit.customName || def.name}{models != null ? ` (${models})` : ""}</span>
+        <span className="whr-print-unit-cost">{fmtPts(cost)} pts</span>
+      </div>
+      {(hasStats || tags.length > 0) && (
+        <div className="whr-print-unit-body">
+          {hasStats && (
+            <div className="whr-print-stats-col">
+              {charLabel && <div className="whr-print-stat-label">{charLabel}</div>}
+              <StatBlock statKey={statKey} statNote={statNote} />
+              {championStatKey && (
+                <>
+                  <div className="whr-print-stat-label">{championLabel}</div>
+                  <StatBlock statKey={championStatKey} statNote={null} />
+                </>
+              )}
+              {mountStatKey && (
+                <>
+                  <div className="whr-print-stat-label">{mountLabel}</div>
+                  <StatBlock statKey={mountStatKey} statNote={null} />
+                </>
+              )}
+            </div>
+          )}
+          {tags.length > 0 && (
+            <ul className="whr-print-tags">
+              {tags.map((t, i) => <li key={i}>{t}</li>)}
+            </ul>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
+  const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
+  const themeLabel = armyData.themes?.options?.find((o) => o.id === roster.armyTheme)?.name;
+  return (
+    <div className="whr-print-roster">
+      <div className="whr-print-header">
+        <h1>{roster.name}</h1>
+        <p>{armyData.name}{themeLabel ? ` — ${themeLabel}` : ""}</p>
+        <p>{fmtPts(totalPoints)} / {roster.pointLimit} points · {fmtPts(regimentPoints)} in regiments ({regimentPct.toFixed(0)}%)</p>
+      </div>
+
+      {roster.characters.length > 0 && (
+        <div>
+          <h2>Characters</h2>
+          {roster.characters.map((u) => {
+            const def = applyBloodline(armyData.characters.find((c) => c.id === u.defId), roster.armyTheme);
+            return <PrintableUnitEntry key={u.instanceId} kind="character" unit={u} def={def} cost={unitCost(u, armyData, roster)} armyData={armyData} bloodlineId={roster.armyTheme} />;
+          })}
+        </div>
+      )}
+
+      {roster.regiments.length > 0 && (
+        <div>
+          <h2>Regiments</h2>
+          {roster.regiments.map((u) => {
+            const def = armyData.regiments.find((r) => r.id === u.defId);
+            const models = def.kind === "composite" ? Object.values(u.composition || {}).reduce((a, b) => a + b, 0) : u.size;
+            return <PrintableUnitEntry key={u.instanceId} kind="regiment" unit={u} def={def} cost={unitCost(u, armyData, roster)} models={models} armyData={armyData} bloodlineId={roster.armyTheme} />;
+          })}
+        </div>
+      )}
+
+      {roster.chariots.length > 0 && (
+        <div>
+          <h2>Chariots & Monsters</h2>
+          {roster.chariots.map((u) => {
+            const def = armyData.chariotsMonsters.find((c) => c.id === u.defId);
+            return <PrintableUnitEntry key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} models={def.kind === "quantity" ? u.qty : null} armyData={armyData} bloodlineId={roster.armyTheme} />;
+          })}
+        </div>
+      )}
+
+      {roster.specials.length > 0 && (
+        <div>
+          <h2>Special Characters</h2>
+          {roster.specials.map((u) => {
+            const def = armyData.specialCharacters.find((s) => s.id === u.defId);
+            return <PrintableUnitEntry key={u.instanceId} kind="special" unit={u} def={def} cost={unitCost(u, armyData, roster)} armyData={armyData} bloodlineId={roster.armyTheme} />;
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ---- Detail panel per unit kind ---- */
 
 function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
@@ -9797,7 +9926,8 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
   }
 
   return (
-    <div className="whr-content" style={{ height: "100vh", display: "flex", flexDirection: "column", padding: "20px 24px" }}>
+    <>
+    <div className="whr-content whr-print-hide" style={{ height: "100vh", display: "flex", flexDirection: "column", padding: "20px 24px" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 10 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <button className="whr-btn whr-btn-sm" onClick={onBack}>← Barracks</button>
@@ -9808,10 +9938,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: 14, color: "var(--ink-soft)" }}>{saveState}</span>
-          <div style={{ position: "relative" }}>
-            <button className="whr-btn" disabled title="Export List — coming soon">Export List</button>
-            <span style={{ position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)", marginTop: 3, whiteSpace: "nowrap", fontStyle: "italic", fontSize: 11.5, color: "var(--ink-faint)", letterSpacing: "0.03em" }}>Coming soon</span>
-          </div>
+          <button className="whr-btn" onClick={() => window.print()}>Export List</button>
           <button className="whr-btn whr-btn-gold" onClick={onSave}>Save Roster</button>
         </div>
       </div>
@@ -9829,6 +9956,8 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
       </div>
     </div>
+    <PrintableRoster armyData={armyData} roster={roster} totalPoints={totalPoints} regimentPoints={regimentPoints} />
+    </>
   );
 }
 
