@@ -192,7 +192,7 @@ body {
 
 .whr-print-roster { display: none; }
 @media print {
-  .whr-print-hide { display: none !important; }
+  .whr-print-hide, .whr-grain, .whr-vignette { display: none !important; }
   .whr-print-roster {
     display: block !important; position: static; width: 100%; max-width: 800px; margin: 0 auto;
     background: #fff; color: #000; font-family: var(--font-body);
