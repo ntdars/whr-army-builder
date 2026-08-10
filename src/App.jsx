@@ -777,6 +777,7 @@ const STATS = {
   "Halfling Elite": { M: 4, WS: 3, BS: 4, S: 3, T: 2, W: 1, I: 6, A: 1, Ld: 8 },
   "Halfling Field Wardens": { M: 4, WS: 2, BS: 5, S: 2, T: 2, W: 1, I: 6, A: 1, Ld: 8 },
   "Livestock Beast": { M: 7, WS: 3, BS: 0, S: 2, T: 2, W: 1, I: 3, A: 1, Ld: 5 },
+  "Flying Livestock": { M: 2, WS: 3, BS: 0, S: 2, T: 2, W: 1, I: 3, A: 1, Ld: 5 },
   "Flying Livestock Beast": { M: 2, WS: 3, BS: 0, S: 2, T: 2, W: 1, I: 3, A: 1, Ld: 5 },
   "Cockatrice": { M: 6, WS: 4, BS: 0, S: 5, T: 5, W: 4, I: 4, A: 3, Ld: 6 },
   "Cart (Halfling)": { M: "-", WS: "-", BS: "-", S: 5, T: 5, W: 4, I: "-", A: "-", Ld: "-" },
@@ -1056,7 +1057,7 @@ const WOOD_ELVES = {
       branchWraith: { name: "Branch Wraith", cost: 70, note: "Regimental champion & level 1 wizard (Jade or Amber magic). May not take a magic item, but may take one Sprite.", spriteSlots: 1 },
     },
     {
-      id: "warhawkriders", name: "Wood Elf Warhawk Riders", perModel: 32, minSize: 5, stat: "Wood Elf Warriors", mountStat: "Giant Warhawk", mountLabel: "Giant Warhawk",
+      id: "warhawkriders", name: "Wood Elf Warhawk Riders", perModel: 32, minSize: 3, stat: "Wood Elf Warriors", mountStat: "Giant Warhawk", mountLabel: "Giant Warhawk",
       restriction: "0-1", command: "skirmisher",
       note: "Warriors riding Giant Warhawks — skirmishing monstrous cavalry.",
       options: [
@@ -2206,7 +2207,7 @@ const CHAOS_DAEMONS = {
       champion: { name: "Pink Horror Champion", baseCost: 39, magicItemSlots: 1, stat: "Pink Horror Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
     {
-      id: "discsoftzeentch", name: "(Unridden) Discs of Tzeentch", perModel: 30, minSize: 5, stat: "Disc of Tzeentch", command: "skirmisher", restriction: "0-1",
+      id: "discsoftzeentch", name: "(Unridden) Discs of Tzeentch", perModel: 30, minSize: 3, stat: "Disc of Tzeentch", command: "skirmisher", restriction: "0-1",
       note: "Also called Screamers. Flying monstrous regiment (skirmishers). May fly over unengaged enemy units in the remaining-moves phase for a S5 hit each (each target only once). May fly high (unlike ridden Discs).",
     },
     {
@@ -2214,7 +2215,7 @@ const CHAOS_DAEMONS = {
       note: "Move as fast cavalry; cross obstacles freely but not woods. Cannot take a standard bearer or musician. Each model makes 1D6 flaming shooting attacks (range 6\", BS to hit, S3); in melee, wounds multiply into 1D3.",
     },
     {
-      id: "nurglings", name: "Nurglings", perModel: 20, minSize: 5, stat: "Nurglings", command: "none",
+      id: "nurglings", name: "Nurglings", perModel: 20, minSize: 3, stat: "Nurglings", command: "none",
       note: "Monstrous regiment. May skirmish. Cannot take a standard bearer or musician, or be joined by characters.",
     },
     {
@@ -2722,7 +2723,7 @@ const CHAOS_WARBAND = {
       champion: { name: "Pink Horror Champion", baseCost: 39, magicItemSlots: 1, stat: "Pink Horror Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
     {
-      id: "discsoftzeentch", name: "(Unridden) Discs of Tzeentch", perModel: 30, minSize: 5, stat: "Disc of Tzeentch", command: "skirmisher", restriction: "0-1",
+      id: "discsoftzeentch", name: "(Unridden) Discs of Tzeentch", perModel: 30, minSize: 3, stat: "Disc of Tzeentch", command: "skirmisher", restriction: "0-1",
       note: "Also called Screamers. Flying monstrous regiment (skirmishers). May fly over unengaged enemy units in the remaining-moves phase for a S5 hit each (each target only once). May fly high (unlike ridden Discs).",
     },
     {
@@ -2730,7 +2731,7 @@ const CHAOS_WARBAND = {
       note: "Move as fast cavalry; cross obstacles freely but not woods. Cannot take a standard bearer or musician. Each model makes 1D6 flaming shooting attacks (range 6\", BS to hit, S3); in melee, wounds multiply into 1D3.",
     },
     {
-      id: "nurglings", name: "Nurglings", perModel: 20, minSize: 5, stat: "Nurglings", command: "none",
+      id: "nurglings", name: "Nurglings", perModel: 20, minSize: 3, stat: "Nurglings", command: "none",
       note: "Monstrous regiment. May skirmish. Cannot take a standard bearer or musician, or be joined by characters.",
     },
     {
@@ -5878,7 +5879,7 @@ const VAMPIRE_COUNTS = {
       championOptions: vcChampions(80, 50, 70),
     },
     {
-      id: "spirithosts", name: "Spirit Hosts", perModel: 60, minSize: 1, stat: "Spirit Host", command: "none", restriction: "0-1",
+      id: "spirithosts", name: "Spirit Hosts", perModel: 60, minSize: 3, stat: "Spirit Host", command: "none", restriction: "0-1",
       note: "Ethereal, monstrous, always skirmish (being ethereal). No upgrades. Priced per base/model — use the size stepper to buy multiple bases.",
     },
     {
@@ -5886,7 +5887,7 @@ const VAMPIRE_COUNTS = {
       note: "Living, fast cavalry. Never get standard bearer or musician upgrades. May not be joined by characters.",
     },
     {
-      id: "giantbats", name: "Giant Bats", perModel: 30, minSize: 1, stat: "Giant Bat", command: "none", restriction: "0-1",
+      id: "giantbats", name: "Giant Bats", perModel: 30, minSize: 3, stat: "Giant Bat", command: "none", restriction: "0-1",
       note: "Living, flying monstrous regiment, automatically skirmishers. Priced per base/model — use the size stepper to buy multiple bases.",
     },
     {
@@ -6892,7 +6893,14 @@ const HALFLINGS = {
       note: "Halfling Elite with light armour and shields, mounted on Livestock Beasts. Fast cavalry.",
       options: [
         { id: "spears", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
-        { id: "flyinglivestock", group: null, label: "Ride Flying Livestock instead — monstrous, can fly, skirmishers (so no banner); only one Halfling Riders regiment army-wide (+12pt/model)", cost: 12, per: "model" },
+      ],
+      champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
+    },
+    {
+      id: "halflingridersflying", name: "Halfling Riders (Flying Livestock)", perModel: 24, minSize: 3, stat: "Halfling Elite", mountStat: "Flying Livestock", mountLabel: "Flying Livestock", command: "skirmisher", restriction: "0-1",
+      note: "Halfling Elite with light armour and shields, riding Flying Livestock instead of ordinary Livestock Beasts — monstrous, can fly, and skirmish (so no standard bearer/banner). Only one Halfling Riders regiment army-wide may take this option (RAW models it as an upgrade to a Halfling Riders regiment; built here as its own 0-1 entry so the 3-model monstrous minimum and flying statline apply correctly).",
+      options: [
+        { id: "spears", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
       ],
       champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
     },
