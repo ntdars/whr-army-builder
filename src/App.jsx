@@ -103,7 +103,7 @@ body {
 .whr-btn-gold:hover:not(:disabled) { background: #86620F; }
 .whr-btn-danger { background: transparent; border-color: var(--burgundy); color: var(--burgundy); }
 .whr-btn-danger:hover:not(:disabled) { background: var(--burgundy-pale); }
-.whr-btn-ghost { background: transparent; border-color: transparent; padding: 6px 10px; }
+.whr-btn-ghost { background: transparent; border-color: transparent; padding: 6px 10px; text-align: left; }
 .whr-btn-ghost:hover:not(:disabled) { background: var(--paper-2); }
 .whr-btn-sm { padding: 5px 10px; font-size: 12px; }
 .whr-btn-block { width: 100%; text-align: center; }
