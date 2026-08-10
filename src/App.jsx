@@ -2193,7 +2193,7 @@ const CHAOS_DAEMONS = {
       champion: { name: "Bloodletter Champion", baseCost: 36, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
     {
-      id: "bloodlettersjuggernaut", name: "Bloodletters riding Juggernauts of Khorne", perModel: 86, minSize: 5, stat: "Bloodletters of Khorne", mountStat: "Juggernaut of Khorne", mountLabel: "Juggernaut of Khorne", command: "monstrous",
+      id: "bloodlettersjuggernaut", name: "Bloodletters riding Juggernauts of Khorne", perModel: 86, minSize: 3, stat: "Bloodletters of Khorne", mountStat: "Juggernaut of Khorne", mountLabel: "Juggernaut of Khorne", command: "monstrous",
       note: "Unique monstrous-cavalry hybrid. Daemonic Save 3+ as cavalry; the Juggernaut auto-hits/wounds with one of its two attacks. Cannot enter buildings unless dismounted (removes the Juggernaut); kill the mount to kill the whole model.",
       champion: { name: "Bloodletter Champion (mounted)", baseCost: 126, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
@@ -2219,7 +2219,7 @@ const CHAOS_DAEMONS = {
       note: "Monstrous regiment. May skirmish. Cannot take a standard bearer or musician, or be joined by characters.",
     },
     {
-      id: "plaguebearersbeasts", name: "Plaguebearers of Nurgle riding Beasts of Nurgle", perModel: 88, minSize: 5, stat: "Plaguebearers of Nurgle", mountStat: "Beast of Nurgle", mountLabel: "Beast of Nurgle", command: "monstrous",
+      id: "plaguebearersbeasts", name: "Plaguebearers of Nurgle riding Beasts of Nurgle", perModel: 88, minSize: 3, stat: "Plaguebearers of Nurgle", mountStat: "Beast of Nurgle", mountLabel: "Beast of Nurgle", command: "monstrous",
       note: "Unique monstrous-cavalry hybrid. Daemonic Save 3+ as cavalry; wounded living models are automatically slain; the Beast's hits allow no armour save and enemies in base contact suffer -1 to hit. Cannot enter buildings unless dismounted; kill the mount to kill the whole model.",
       champion: { name: "Plaguebearer Champion (mounted)", baseCost: 128, magicItemSlots: 1, stat: "Plaguebearer Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
@@ -2709,7 +2709,7 @@ const CHAOS_WARBAND = {
       champion: { name: "Bloodletter Champion", baseCost: 36, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
     {
-      id: "bloodlettersjuggernaut", name: "Bloodletters riding Juggernauts of Khorne", perModel: 86, minSize: 5, stat: "Bloodletters of Khorne", mountStat: "Juggernaut of Khorne", mountLabel: "Juggernaut of Khorne", command: "monstrous",
+      id: "bloodlettersjuggernaut", name: "Bloodletters riding Juggernauts of Khorne", perModel: 86, minSize: 3, stat: "Bloodletters of Khorne", mountStat: "Juggernaut of Khorne", mountLabel: "Juggernaut of Khorne", command: "monstrous",
       note: "Unique monstrous-cavalry hybrid. Daemonic Save 3+ as cavalry; the Juggernaut auto-hits/wounds with one of its two attacks. Cannot enter buildings unless dismounted (removes the Juggernaut); kill the mount to kill the whole model.",
       champion: { name: "Bloodletter Champion (mounted)", baseCost: 126, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
@@ -2735,7 +2735,7 @@ const CHAOS_WARBAND = {
       note: "Monstrous regiment. May skirmish. Cannot take a standard bearer or musician, or be joined by characters.",
     },
     {
-      id: "plaguebearersbeasts", name: "Plaguebearers of Nurgle riding Beasts of Nurgle", perModel: 88, minSize: 5, stat: "Plaguebearers of Nurgle", mountStat: "Beast of Nurgle", mountLabel: "Beast of Nurgle", command: "monstrous",
+      id: "plaguebearersbeasts", name: "Plaguebearers of Nurgle riding Beasts of Nurgle", perModel: 88, minSize: 3, stat: "Plaguebearers of Nurgle", mountStat: "Beast of Nurgle", mountLabel: "Beast of Nurgle", command: "monstrous",
       note: "Unique monstrous-cavalry hybrid. Daemonic Save 3+ as cavalry; wounded living models are automatically slain; the Beast's hits allow no armour save and enemies in base contact suffer -1 to hit. Cannot enter buildings unless dismounted; kill the mount to kill the whole model.",
       champion: { name: "Plaguebearer Champion (mounted)", baseCost: 128, magicItemSlots: 1, stat: "Plaguebearer Champion", magicItemCategoryFilter: ["daemonicreward"] },
     },
