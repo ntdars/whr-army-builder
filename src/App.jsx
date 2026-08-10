@@ -8127,6 +8127,29 @@ function MagicItemPicker({ items, selectedIds, onToggle, maxSlots, usedElsewhere
   );
 }
 
+// Same slot budget (selectedIds/maxSlots/onToggle) as MagicItemPicker, but when the resolved
+// category set includes "banner" it splits into two labeled pickers instead of one — banners
+// stay under their own "Magic Banner" heading (matching the regiment's own dedicated banner
+// picker) rather than getting buried as just another collapsible row inside "Magic Items".
+// Both halves draw from and write back to the same shared selection array, so the slot count
+// (e.g. "0 / 1 slots") still reflects a combined budget across both.
+function MagicItemPickerWithBanner({ items, selectedIds, onToggle, maxSlots, usedElsewhere, categoryFilter, context, label = "Magic Items" }) {
+  if (!categoryFilter || !categoryFilter.includes("banner")) {
+    return <MagicItemPicker items={items} selectedIds={selectedIds} onToggle={onToggle} maxSlots={maxSlots} usedElsewhere={usedElsewhere} categoryFilter={categoryFilter} context={context} label={label} />;
+  }
+  const nonBannerFilter = categoryFilter.filter((c) => c !== "banner");
+  return (
+    <>
+      <div style={{ marginBottom: 10 }}>
+        <MagicItemPicker items={items} selectedIds={selectedIds} onToggle={onToggle} maxSlots={maxSlots} usedElsewhere={usedElsewhere} categoryFilter={["banner"]} context={context} label="Magic Banner" />
+      </div>
+      {nonBannerFilter.length > 0 && (
+        <MagicItemPicker items={items} selectedIds={selectedIds} onToggle={onToggle} maxSlots={maxSlots} usedElsewhere={usedElsewhere} categoryFilter={nonBannerFilter} context={context} label={label} />
+      )}
+    </>
+  );
+}
+
 function Stepper({ value, min = 0, max = 99, onChange }) {
   return (
     <div className="whr-stepper">
@@ -8865,7 +8888,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
 
       {def.magicItemSlots > 0 && (
         <div style={{ marginTop: 14 }}>
-          <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
+          <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
             categoryFilter={def.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
             context={itemContext(def, unit, { characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
             onToggle={(id) => {
@@ -9079,7 +9102,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
             </div>
           )}
           {def.champion.magicItemSlots > 0 && (
-            <MagicItemPicker items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={def.champion.magicItemSlots} usedElsewhere={usedElsewhere}
+            <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={def.champion.magicItemSlots} usedElsewhere={usedElsewhere}
               categoryFilter={def.champion.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
               context={itemContext(def.champion, unit, { regimentId: def.id, knightGroup: def.knightGroup, mark: unit.championMark || def.champion.markGroup?.options?.[0], tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
               onToggle={(id) => {
@@ -9127,7 +9150,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
             const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
             if (!opt.magicItemSlots) return null;
             return (
-              <MagicItemPicker items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={opt.magicItemSlots} usedElsewhere={usedElsewhere}
+              <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={opt.magicItemSlots} usedElsewhere={usedElsewhere}
                 categoryFilter={opt.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
                 label={opt.itemSlotLabel || "Magic Item"}
                 context={itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
@@ -9323,7 +9346,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
         )}
         {def.magicItemSlots > 0 && (
           <div style={{ marginTop: 14 }}>
-            <MagicItemPicker items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
+            <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
               categoryFilter={def.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
               context={itemContext(def, unit, { regimentId: def.id })}
               onToggle={(id) => {
