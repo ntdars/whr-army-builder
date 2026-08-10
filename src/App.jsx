@@ -43,7 +43,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 17.5px;
   line-height: 1.4;
   isolation: isolate;
 }
@@ -74,7 +74,7 @@ body {
 .whr-eyebrow {
   font-family: var(--font-display-sc); font-weight: 400;
   letter-spacing: 0.14em; text-transform: uppercase;
-  font-size: 13px; color: var(--gold);
+  font-size: 14.5px; color: var(--gold);
 }
 .whr-serif-italic { font-style: italic; color: var(--ink-soft); }
 
@@ -89,7 +89,7 @@ body {
 /* ---------- buttons ---------- */
 .whr-btn {
   font-family: var(--font-display-sc); font-weight: 400; letter-spacing: 0.05em;
-  text-transform: uppercase; font-size: 14px; cursor: pointer;
+  text-transform: uppercase; font-size: 15.5px; cursor: pointer;
   border: 1px solid var(--line); background: var(--paper-2); color: var(--ink);
   padding: 10px 18px; transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
   border-radius: 2px;
@@ -105,12 +105,12 @@ body {
 .whr-btn-danger:hover:not(:disabled) { background: var(--burgundy-pale); }
 .whr-btn-ghost { background: transparent; border-color: transparent; padding: 6px 10px; }
 .whr-btn-ghost:hover:not(:disabled) { background: var(--paper-2); }
-.whr-btn-sm { padding: 5px 10px; font-size: 11px; }
+.whr-btn-sm { padding: 5px 10px; font-size: 12px; }
 .whr-btn-block { width: 100%; text-align: center; }
 
 /* ---------- inputs ---------- */
 .whr-input, .whr-select {
-  font-family: var(--font-body); font-size: 15px; color: var(--ink);
+  font-family: var(--font-body); font-size: 16.5px; color: var(--ink);
   background: var(--paper); border: 1px solid var(--line);
   padding: 9px 12px; width: 100%; border-radius: 2px;
 }
@@ -119,7 +119,7 @@ body {
   outline: 2px solid var(--gold-bright); outline-offset: 1px;
 }
 .whr-label {
-  font-family: var(--font-display-sc); font-size: 13px; font-weight: 400;
+  font-family: var(--font-display-sc); font-size: 14.5px; font-weight: 400;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft);
   display: block; margin-bottom: 6px;
 }
@@ -136,12 +136,12 @@ body {
 .whr-card-selected { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); background: #E9DCB4; }
 
 /* ---------- stat table ---------- */
-.whr-stat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.whr-stat-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
 .whr-stat-table th, .whr-stat-table td {
   border: 1px solid var(--line-soft); padding: 4px 6px; text-align: center;
 }
 .whr-stat-table th {
-  font-family: var(--font-display-sc); font-weight: 400; font-size: 12.5px;
+  font-family: var(--font-display-sc); font-weight: 400; font-size: 14px;
   letter-spacing: 0.03em; color: var(--forest-dark); background: var(--forest-pale);
 }
 .whr-stat-table td:first-child, .whr-stat-table th:first-child { text-align: left; font-weight: 600; }
@@ -151,7 +151,7 @@ body {
 
 /* ---------- pill / badge ---------- */
 .whr-badge {
-  display: inline-block; font-family: var(--font-display-sc); font-size: 12.5px;
+  display: inline-block; font-family: var(--font-display-sc); font-size: 14px;
   font-weight: 400; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 10px;
   background: var(--forest-pale); color: var(--forest-dark); border: 1px solid var(--forest);
 }
@@ -161,13 +161,13 @@ body {
 /* ---------- checkbox / radio rows ---------- */
 .whr-opt-row {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 7px 0; border-bottom: 1px dashed var(--line-soft); font-size: 15px;
+  padding: 7px 0; border-bottom: 1px dashed var(--line-soft); font-size: 16.5px;
   font-family: var(--font-display-sc); letter-spacing: 0.02em;
 }
 .whr-opt-row:last-child { border-bottom: none; }
 .whr-opt-label { display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1; }
 .whr-opt-label input { accent-color: var(--forest); width: 15px; height: 15px; cursor: pointer; }
-.whr-opt-cost { color: var(--ink-soft); font-size: 13px; white-space: nowrap; }
+.whr-opt-cost { color: var(--ink-soft); font-size: 14.5px; white-space: nowrap; }
 .whr-opt-disabled { opacity: 0.42; }
 .whr-opt-disabled input { cursor: not-allowed; }
 
@@ -175,7 +175,7 @@ body {
 .whr-stepper { display: flex; align-items: center; gap: 0; border: 1px solid var(--line); width: fit-content; }
 .whr-stepper button {
   width: 30px; height: 30px; background: var(--paper-2); border: none; cursor: pointer;
-  font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: 15px;
+  font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: 16.5px;
 }
 .whr-stepper button:hover:not(:disabled) { background: var(--paper-3); }
 .whr-stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
@@ -7991,7 +7991,7 @@ function knightGroupLimit(def, roster, armyData) {
 
 function StatBlock({ statKey, statNote }) {
   if (statNote) {
-    return <p style={{ fontSize: 13, color: "var(--ink-soft)", fontStyle: "italic", margin: "6px 0" }}>{statNote}</p>;
+    return <p style={{ fontSize: 14.5, color: "var(--ink-soft)", fontStyle: "italic", margin: "6px 0" }}>{statNote}</p>;
   }
   const s = STATS[statKey];
   if (!s) return null;
@@ -8066,30 +8066,57 @@ function MagicItemPicker({ items, selectedIds, onToggle, maxSlots, usedElsewhere
     return g;
   }, [items, categoryFilter, context]);
   const atLimit = selectedIds.length >= maxSlots;
+  // Category open/closed state is tracked explicitly once a user touches it; before that, a
+  // category defaults open if it already has a selection in it (so nothing selected gets hidden),
+  // otherwise closed (so long lists don't dump every category open on first render).
+  const [openCats, setOpenCats] = useState({});
+  const isCatOpen = (cat, arr) => {
+    if (openCats[cat] !== undefined) return openCats[cat];
+    return arr.some((mi) => selectedIds.includes(mi.id));
+  };
+  const toggleCat = (cat, arr) => setOpenCats((prev) => ({ ...prev, [cat]: !isCatOpen(cat, arr) }));
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4 }}>
         <span className="whr-label" style={{ marginBottom: 0 }}>{label}</span>
         <span className="whr-opt-cost">{selectedIds.length} / {maxSlots} slots</span>
       </div>
-      {Object.entries(grouped).map(([cat, arr]) => (
-        <div key={cat} style={{ marginBottom: 8 }}>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: 11, letterSpacing: "0.08em", color: "var(--gold)", margin: "8px 0 2px" }}>{MI_CATEGORY_LABEL[cat]}</div>
-          {arr.map((mi) => {
-            const checked = selectedIds.includes(mi.id);
-            const disabled = !checked && (atLimit || usedElsewhere.has(mi.id));
-            return (
-              <label key={mi.id} className={`whr-opt-row whr-opt-label ${disabled ? "whr-opt-disabled" : ""}`} title={mi.desc}>
-                <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <input type="checkbox" checked={checked} disabled={disabled} onChange={() => onToggle(mi.id)} />
-                  <span>{mi.name}{usedElsewhere.has(mi.id) && !checked ? " (taken)" : ""}</span>
-                </span>
-                <span className="whr-opt-cost">{mi.cost}pts</span>
-              </label>
-            );
-          })}
-        </div>
-      ))}
+      {Object.entries(grouped).map(([cat, arr]) => {
+        const open = isCatOpen(cat, arr);
+        const selCount = arr.filter((mi) => selectedIds.includes(mi.id)).length;
+        return (
+          <div key={cat} style={{ marginBottom: 6, border: "1px solid var(--line-soft)", borderRadius: 3, overflow: "hidden" }}>
+            <button type="button" onClick={() => toggleCat(cat, arr)} aria-expanded={open}
+              style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--paper-2)", border: "none", padding: "7px 9px", cursor: "pointer", textAlign: "left" }}>
+              <span style={{ display: "flex", alignItems: "center", gap: 7 }}>
+                <span aria-hidden="true" style={{ display: "inline-block", fontSize: 11, color: "var(--ink-soft)", transition: "transform 0.15s", transform: open ? "rotate(90deg)" : "rotate(0deg)" }}>▶</span>
+                <span style={{ fontFamily: "var(--font-display)", fontSize: 14.5, letterSpacing: "0.04em", color: "var(--gold)" }}>{MI_CATEGORY_LABEL[cat]}</span>
+                <span style={{ fontSize: 12, color: "var(--ink-faint)" }}>({arr.length})</span>
+              </span>
+              {selCount > 0 && (
+                <span style={{ fontSize: 11.5, color: "#F3E4BC", background: "var(--burgundy)", padding: "2px 7px", borderRadius: 8 }}>{selCount} selected</span>
+              )}
+            </button>
+            {open && (
+              <div style={{ background: "var(--paper)", padding: "2px 2px" }}>
+                {arr.map((mi) => {
+                  const checked = selectedIds.includes(mi.id);
+                  const disabled = !checked && (atLimit || usedElsewhere.has(mi.id));
+                  return (
+                    <label key={mi.id} className={`whr-opt-row whr-opt-label ${disabled ? "whr-opt-disabled" : ""}`} title={mi.desc}>
+                      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <input type="checkbox" checked={checked} disabled={disabled} onChange={() => onToggle(mi.id)} />
+                        <span>{mi.name}{usedElsewhere.has(mi.id) && !checked ? " (taken)" : ""}</span>
+                      </span>
+                      <span className="whr-opt-cost">{mi.cost}pts</span>
+                    </label>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -8121,12 +8148,12 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
   return (
     <div className="whr-content" style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px 80px" }}>
       <div style={{ textAlign: "center", marginBottom: 40 }}>
-        <h1 className="whr-h1" style={{ fontSize: 46, margin: 0 }}>WARHAMMER RENAISSANCE</h1>
+        <h1 className="whr-h1" style={{ fontSize: 50.5, margin: 0 }}>WARHAMMER RENAISSANCE</h1>
         <LeafDivider />
         <p className="whr-eyebrow" style={{ margin: 0 }}>Army List Builder</p>
         <div style={{
           marginTop: 18, padding: "10px 16px", background: "var(--burgundy)", color: "#F3E4BC",
-          fontFamily: "var(--font-display-sc)", letterSpacing: "0.03em", fontSize: 14.5,
+          fontFamily: "var(--font-display-sc)", letterSpacing: "0.03em", fontSize: 16,
           borderRadius: 2, display: "inline-block",
         }}>
           This builder is still a WIP. Contact Turhan in the WHR Facebook Group to provide feedback.
@@ -8135,7 +8162,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
 
       <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 28 }} className="whr-builder-grid">
         <section className="whr-panel" style={{ padding: 28 }}>
-          <h2 className="whr-h1" style={{ fontSize: 22, margin: 0 }}>Muster Forces</h2>
+          <h2 className="whr-h1" style={{ fontSize: 24, margin: 0 }}>Muster Forces</h2>
           <p className="whr-serif-italic" style={{ marginTop: 2 }}>Create a new roster</p>
           <div style={{ height: 1, background: "var(--line)", margin: "14px 0 20px" }} />
 
@@ -8162,7 +8189,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
                   onClick={() => available && setFaction(f.key)}
                   style={{
                     textAlign: "left", cursor: available ? "pointer" : "default",
-                    fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 13.5,
+                    fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 15,
                     opacity: available ? 1 : 0.42,
                     borderColor: active ? "var(--gold)" : "var(--line-soft)",
                     background: active ? "#E9DCB4" : "var(--paper-2)",
@@ -8170,7 +8197,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
                   }}
                 >
                   {f.name}
-                  {!available && <div style={{ fontFamily: "var(--font-body)", fontWeight: 400, fontStyle: "italic", fontSize: 11.5, color: "var(--gold)", marginTop: 2 }}>Coming soon</div>}
+                  {!available && <div style={{ fontFamily: "var(--font-body)", fontWeight: 400, fontStyle: "italic", fontSize: 12.5, color: "var(--gold)", marginTop: 2 }}>Coming soon</div>}
                 </button>
               );
             })}
@@ -8188,7 +8215,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
         <section className="whr-panel" style={{ padding: 28 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
             <div>
-              <h2 className="whr-h1" style={{ fontSize: 22, margin: 0 }}>The Barracks</h2>
+              <h2 className="whr-h1" style={{ fontSize: 24, margin: 0 }}>The Barracks</h2>
               <p className="whr-serif-italic" style={{ marginTop: 2 }}>Load an existing roster</p>
             </div>
             <span className="whr-badge">{savedList.length} Saved</span>
@@ -8213,7 +8240,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
                 <div key={r.id} className="whr-card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div>
                     <div style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>{r.name}</div>
-                    <div className="whr-serif-italic" style={{ fontSize: 13 }}>{r.pointLimit} pts · {FACTION_LIST.find((f) => f.key === r.factionKey)?.name} · {r.totalPoints} pts used</div>
+                    <div className="whr-serif-italic" style={{ fontSize: 14.5 }}>{r.pointLimit} pts · {FACTION_LIST.find((f) => f.key === r.factionKey)?.name} · {r.totalPoints} pts used</div>
                   </div>
                   <div style={{ display: "flex", gap: 6 }}>
                     <button className="whr-btn whr-btn-sm" onClick={() => onLoad(r.id)}>Load</button>
@@ -8227,7 +8254,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
       </div>
 
       <div style={{ textAlign: "center", marginTop: 48 }}>
-        <p className="whr-serif-italic" style={{ fontSize: 13, color: "var(--ink-faint)" }}>Maintained by Turhan Elby</p>
+        <p className="whr-serif-italic" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>Maintained by Turhan Elby</p>
       </div>
     </div>
   );
@@ -8267,8 +8294,8 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
   const AddRow = ({ label, sub, disabled, onClick, disabledReason }) => (
     <div className="whr-opt-row" style={{ opacity: disabled ? 0.42 : 1 }}>
       <div>
-        <div style={{ fontFamily: "var(--font-display-sc)", fontSize: 16, letterSpacing: "0.02em" }}>{label}</div>
-        {sub && <div style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>{sub}</div>}
+        <div style={{ fontFamily: "var(--font-display-sc)", fontSize: 17.5, letterSpacing: "0.02em" }}>{label}</div>
+        {sub && <div style={{ fontSize: 14, color: "var(--ink-soft)" }}>{sub}</div>}
       </div>
       <button className="whr-btn whr-btn-sm" disabled={disabled} onClick={onClick} title={disabled ? disabledReason : ""}>Add</button>
     </div>
@@ -8281,7 +8308,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
       </button>
       {rulesOpen && (
         <div className="whr-card" style={{ marginBottom: 10 }}>
-          {armyData.armyWideRules.map((r, i) => <p key={i} style={{ fontSize: 13, margin: "0 0 8px" }}>{r}</p>)}
+          {armyData.armyWideRules.map((r, i) => <p key={i} style={{ fontSize: 14.5, margin: "0 0 8px" }}>{r}</p>)}
         </div>
       )}
 
@@ -8292,8 +8319,8 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
               <label key={t.id} className="whr-opt-row" style={{ alignItems: "flex-start", gap: 10, cursor: "pointer" }}>
                 <input type="radio" name="army-theme" checked={currentTheme === t.id} onChange={() => onSetTheme(t.id)} style={{ marginTop: 4 }} />
                 <span style={{ flex: 1 }}>
-                  <div style={{ fontFamily: "var(--font-display-sc)", fontSize: 15.5, letterSpacing: "0.02em" }}>{t.name}</div>
-                  {t.desc && <div style={{ fontSize: 12, color: "var(--ink-soft)", marginTop: 2, lineHeight: 1.35 }}>{t.desc}</div>}
+                  <div style={{ fontFamily: "var(--font-display-sc)", fontSize: 17, letterSpacing: "0.02em" }}>{t.name}</div>
+                  {t.desc && <div style={{ fontSize: 13, color: "var(--ink-soft)", marginTop: 2, lineHeight: 1.35 }}>{t.desc}</div>}
                 </span>
               </label>
             ))}
@@ -8497,29 +8524,29 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   return (
     <div className={`whr-card ${selected ? "whr-card-selected" : ""}`} style={{ marginBottom: 10, cursor: "pointer" }} onClick={onSelect}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-        <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 15.5 }}>{unit.customName || def.name}</div>
+        <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 17 }}>{unit.customName || def.name}</div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span className="whr-badge-gold whr-badge">{fmtPts(cost)} pts</span>
           <button className="whr-btn-ghost" style={{ cursor: "pointer", color: "var(--burgundy)", fontFamily: "var(--font-display)" }}
             onClick={(e) => { e.stopPropagation(); onRemove(); }}>✕</button>
         </div>
       </div>
-      {models != null && <div style={{ fontSize: 12.5, color: "var(--ink-soft)", marginBottom: 6 }}>{models} Models</div>}
+      {models != null && <div style={{ fontSize: 14, color: "var(--ink-soft)", marginBottom: 6 }}>{models} Models</div>}
       {(statKey || statNote) && (
         <div style={{ marginTop: 6, marginBottom: tags.length ? 8 : 0 }}>
           {charLabel && (
-            <div className="whr-eyebrow" style={{ fontSize: 11.5, marginBottom: 2 }}>{charLabel}</div>
+            <div className="whr-eyebrow" style={{ fontSize: 12.5, marginBottom: 2 }}>{charLabel}</div>
           )}
           <StatBlock statKey={statKey} statNote={statNote} />
           {championStatKey && (
             <>
-              <div className="whr-eyebrow" style={{ fontSize: 11.5, margin: "6px 0 2px" }}>{championLabel}</div>
+              <div className="whr-eyebrow" style={{ fontSize: 12.5, margin: "6px 0 2px" }}>{championLabel}</div>
               <StatBlock statKey={championStatKey} statNote={null} />
             </>
           )}
           {mountStatKey && (
             <>
-              <div className="whr-eyebrow" style={{ fontSize: 11.5, margin: "6px 0 2px" }}>{mountLabel}</div>
+              <div className="whr-eyebrow" style={{ fontSize: 12.5, margin: "6px 0 2px" }}>{mountLabel}</div>
               <StatBlock statKey={mountStatKey} statNote={null} />
             </>
           )}
@@ -8528,7 +8555,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
       {tags.length > 0 && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginTop: 4 }}>
           {tags.map((t, i) => (
-            <span key={i} style={{ fontSize: 12, color: "var(--ink-soft)", background: "var(--paper-3)", border: "1px solid var(--line-soft)", borderRadius: 3, padding: "1px 7px" }}>{t}</span>
+            <span key={i} style={{ fontSize: 13, color: "var(--ink-soft)", background: "var(--paper-3)", border: "1px solid var(--line-soft)", borderRadius: 3, padding: "1px 7px" }}>{t}</span>
           ))}
         </div>
       )}
@@ -8546,18 +8573,18 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
     <div className="whr-col whr-builder-col" style={{ height: "100%" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
         <div>
-          <h2 className="whr-h1" style={{ fontSize: 22, margin: 0 }}>{roster.name}</h2>
-          <p className="whr-serif-italic" style={{ margin: "2px 0 0", fontSize: 13.5 }}>{roster.pointLimit} POINTS · {armyData.name.toUpperCase()}</p>
+          <h2 className="whr-h1" style={{ fontSize: 24, margin: 0 }}>{roster.name}</h2>
+          <p className="whr-serif-italic" style={{ margin: "2px 0 0", fontSize: 15 }}>{roster.pointLimit} POINTS · {armyData.name.toUpperCase()}</p>
         </div>
         <div style={{ textAlign: "right" }}>
-          <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 22, color: overLimit ? "var(--burgundy)" : "var(--forest-dark)" }}>
+          <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 24, color: overLimit ? "var(--burgundy)" : "var(--forest-dark)" }}>
             {fmtPts(totalPoints)} / {roster.pointLimit}
           </div>
-          <div style={{ fontSize: 12, color: underHalf ? "var(--burgundy)" : "var(--ink-soft)" }}>
+          <div style={{ fontSize: 13, color: underHalf ? "var(--burgundy)" : "var(--ink-soft)" }}>
             {fmtPts(regimentPoints)} in regiments ({regimentPct.toFixed(0)}%, min 50%)
           </div>
           {auxiliaryInfo?.hasAuxiliaryOption && auxiliaryInfo.totalRegiments > 0 && (
-            <div style={{ fontSize: 12, color: overAuxLimit ? "var(--burgundy)" : "var(--ink-soft)" }}>
+            <div style={{ fontSize: 13, color: overAuxLimit ? "var(--burgundy)" : "var(--ink-soft)" }}>
               {auxiliaryInfo.auxCount} / {auxiliaryInfo.allowed} regiments as auxiliaries
             </div>
           )}
@@ -8565,29 +8592,29 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
       </div>
       {contingentInfo?.active && contingentInfo.problems.length > 0 && (
         <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>{contingentInfo.label} isn't legal yet:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 12.5, color: "var(--burgundy)" }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>{contingentInfo.label} isn't legal yet:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {contingentInfo.problems.map((p, i) => <li key={i}>{p}</li>)}
           </ul>
         </div>
       )}
       {themeGateWarning && (
         <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--burgundy)" }}>{themeGateWarning}</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)" }}>{themeGateWarning}</div>
         </div>
       )}
       {endlessBannerWarnings && endlessBannerWarnings.length > 0 && (
         <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic Banner:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 12.5, color: "var(--burgundy)" }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic Banner:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {endlessBannerWarnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
       {compositionInfo && (
         <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Army composition:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 12.5, color: "var(--burgundy)" }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Army composition:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {compositionInfo.problems.map((p, i) => <li key={i}>{p}</li>)}
           </ul>
         </div>
@@ -8662,12 +8689,12 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
   const visibleMounts = (def.mounts || []).filter((m) => !m.requiresMark || m.requiresMark === (unit.mark || def.markGroup?.options?.[0])).filter((m) => !m.theme || m.theme === roster.armyTheme);
   return (
     <div>
-      <h3 className="whr-h1" style={{ fontSize: 19, margin: "0 0 2px" }}>{def.name}</h3>
+      <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
       <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10 }}>
         <span className="whr-badge-gold whr-badge">{fmtPts(characterCost(unit, def, armyData))} pts</span>
       </div>
-      {def.gearNote && <p style={{ fontSize: 13.5, marginTop: 10, color: "var(--ink-soft)" }}>{def.gearNote}</p>}
-      {def.innateWeapon && <p style={{ fontSize: 12.5, marginTop: 4, color: "var(--ink-faint)" }}>Carries a {def.innateWeapon.name} ({def.innateWeapon.desc}) — free, doesn't use a magic item slot. Forfeited automatically if another magic weapon is taken.</p>}
+      {def.gearNote && <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.gearNote}</p>}
+      {def.innateWeapon && <p style={{ fontSize: 14, marginTop: 4, color: "var(--ink-faint)" }}>Carries a {def.innateWeapon.name} ({def.innateWeapon.desc}) — free, doesn't use a magic item slot. Forfeited automatically if another magic weapon is taken.</p>}
 
       {def.markGroup && (
         <div style={{ marginTop: 14 }}>
@@ -8791,9 +8818,9 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
 
       {def.magicLevelOption && (() => {
         const forbidden = def.magicLevelOption.forbiddenMark && (unit.mark || def.markGroup?.options?.[0]) === def.magicLevelOption.forbiddenMark;
-        if (forbidden) return <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 8 }}>No magic levels — forbidden with the {def.magicLevelOption.forbiddenMark} Mark.</p>;
+        if (forbidden) return <p style={{ fontSize: 14, color: "var(--ink-faint)", marginTop: 8 }}>No magic levels — forbidden with the {def.magicLevelOption.forbiddenMark} Mark.</p>;
         const ineligible = def.magicLevelOption.eligible && !def.magicLevelOption.eligible(unit, def);
-        if (ineligible) return <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 8 }}>{def.magicLevelOption.ineligibleNote || "Not eligible for magic levels with current wargear."}</p>;
+        if (ineligible) return <p style={{ fontSize: 14, color: "var(--ink-faint)", marginTop: 8 }}>{def.magicLevelOption.ineligibleNote || "Not eligible for magic levels with current wargear."}</p>;
         const min = def.magicLevelOption.min || 0;
         return (
           <div style={{ marginTop: 14 }}>
@@ -8804,7 +8831,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
             <div style={{ marginTop: 6 }}>
               <Stepper value={unit.magicLevel ?? min} min={min} max={def.magicLevelOption.max} onChange={(v) => updateUnit({ ...unit, magicLevel: v })} />
             </div>
-            {min > 0 && <p style={{ fontSize: 11.5, color: "var(--ink-faint)", marginTop: 4 }}>Minimum {min} level{min > 1 ? "s" : ""} required.</p>}
+            {min > 0 && <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 4 }}>Minimum {min} level{min > 1 ? "s" : ""} required.</p>}
           </div>
         );
       })()}
@@ -8869,14 +8896,14 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
     const total = def.composition.reduce((sum, c) => sum + (comp[c.id] || 0) * c.cost, 0);
     return (
       <div>
-        <h3 className="whr-h1" style={{ fontSize: 19, margin: "0 0 2px" }}>{def.name}</h3>
+        <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
         <span className="whr-badge-gold whr-badge">{fmtPts(total)} pts</span>
-        <p style={{ fontSize: 13.5, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
+        <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         {def.composition.map((c) => (
           <div key={c.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: "1px dashed var(--line-soft)" }}>
             <div>
-              <div style={{ fontFamily: "var(--font-display-sc)", fontSize: 16, letterSpacing: "0.02em" }}>{c.label}</div>
-              <div style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>{c.cost}pts each</div>
+              <div style={{ fontFamily: "var(--font-display-sc)", fontSize: 17.5, letterSpacing: "0.02em" }}>{c.label}</div>
+              <div style={{ fontSize: 14, color: "var(--ink-soft)" }}>{c.cost}pts each</div>
             </div>
             <Stepper value={comp[c.id] || 0} onChange={(v) => updateUnit({ ...unit, composition: { ...comp, [c.id]: v } })} />
           </div>
@@ -8905,12 +8932,12 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
 
   return (
     <div>
-      <h3 className="whr-h1" style={{ fontSize: 19, margin: "0 0 2px" }}>{def.name}</h3>
+      <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
         <span className="whr-badge-gold whr-badge">{fmtPts(regimentCost(unit, def, armyData))} pts</span>
-        <span style={{ fontSize: 13, color: "var(--ink-soft)" }}>{size} Models{unit.championIncluded ? " (incl. champion)" : ""}</span>
+        <span style={{ fontSize: 14.5, color: "var(--ink-soft)" }}>{size} Models{unit.championIncluded ? " (incl. champion)" : ""}</span>
       </div>
-      {def.note && <p style={{ fontSize: 13.5, color: "var(--ink-soft)" }}>{def.note}</p>}
+      {def.note && <p style={{ fontSize: 15, color: "var(--ink-soft)" }}>{def.note}</p>}
 
       <div style={{ marginTop: 14 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
@@ -8946,7 +8973,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                           <span className="whr-opt-cost">{o.cost ? `+${o.cost}/model` : "free"}</span>
                         </label>
                       ))}
-                      <label className="whr-opt-row whr-opt-label" style={{ fontSize: 13, color: "var(--ink-faint)" }}>
+                      <label className="whr-opt-row whr-opt-label" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>
                         <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                           <input type="radio" name={`${g}-${unit.instanceId}`} checked={!gearSelections[g]} onChange={() => { const n = { ...gearSelections }; delete n[g]; updateUnit({ ...unit, gearSelections: n }); }} />
                           None of the above (default)
@@ -8986,7 +9013,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               <span className="whr-opt-cost">{standardFree ? "free" : `+${standardCost}pts`}</span>
             </label>
           )}
-          {def.command === "skirmisher" && <p style={{ fontSize: 12.5, color: "var(--ink-faint)" }}>Skirmishers cannot take a standard bearer.</p>}
+          {def.command === "skirmisher" && <p style={{ fontSize: 14, color: "var(--ink-faint)" }}>Skirmishers cannot take a standard bearer.</p>}
         </div>
       )}
       {def.command === "none" && def.note?.includes("counts as having a musician") && (
@@ -9073,7 +9100,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
             </label>
           ))}
           {def.championOptions.find((o) => o.id === unit.championOptionId)?.note && (
-            <p style={{ fontSize: 11.5, color: "var(--ink-faint)", marginTop: 2 }}>{def.championOptions.find((o) => o.id === unit.championOptionId).note}</p>
+            <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 2 }}>{def.championOptions.find((o) => o.id === unit.championOptionId).note}</p>
           )}
           {def.championOptions.find((o) => o.id === unit.championOptionId) && (() => {
             const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
@@ -9103,7 +9130,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
             </span>
             <span className="whr-opt-cost">+{def.branchWraith.cost}pts</span>
           </label>
-          <p style={{ fontSize: 12.5, color: "var(--ink-faint)" }}>{def.branchWraith.note}</p>
+          <p style={{ fontSize: 14, color: "var(--ink-faint)" }}>{def.branchWraith.note}</p>
           {unit.branchWraithIncluded && (
             <MagicItemPicker items={armyData.magicItems} selectedIds={unit.branchWraithSpriteIds || []} maxSlots={def.branchWraith.spriteSlots} usedElsewhere={usedElsewhere}
               categoryFilter={["sprite"]}
@@ -9125,7 +9152,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
           <div style={{ marginTop: 6 }}>
             <Stepper value={unit.extraOptionCount || 0} min={0} max={def.extraOption.max} onChange={(v) => updateUnit({ ...unit, extraOptionCount: v })} />
           </div>
-          {def.extraOption.note && <p style={{ fontSize: 12.5, color: "var(--burgundy)", marginTop: 4 }}>{def.extraOption.note}</p>}
+          {def.extraOption.note && <p style={{ fontSize: 14, color: "var(--burgundy)", marginTop: 4 }}>{def.extraOption.note}</p>}
         </div>
       )}
 
@@ -9140,7 +9167,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
             return (
               <div key={i} className="whr-card" style={{ marginBottom: 8 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                  <span style={{ fontFamily: "var(--font-display-sc)", fontSize: 15 }}>{dtype ? dtype.name : "Unknown"}</span>
+                  <span style={{ fontFamily: "var(--font-display-sc)", fontSize: 16.5 }}>{dtype ? dtype.name : "Unknown"}</span>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <span className="whr-badge-gold whr-badge">{fmtPts(cost)} pts</span>
                     <button className="whr-btn-ghost" style={{ cursor: "pointer", color: "var(--burgundy)", fontFamily: "var(--font-display)" }}
@@ -9153,7 +9180,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                     updateUnit({ ...unit, detachments: next });
                   }} />
                 </div>
-                {under50 && <div style={{ fontSize: 12, color: "var(--burgundy)", marginTop: 6 }}>Below the 50pt regiment minimum</div>}
+                {under50 && <div style={{ fontSize: 13, color: "var(--burgundy)", marginTop: 6 }}>Below the 50pt regiment minimum</div>}
               </div>
             );
           })}
@@ -9185,14 +9212,14 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
     const srCount = ABOM_SPECIAL_RULES.filter((r) => sr[r.id]).length;
     return (
       <div>
-        <h3 className="whr-h1" style={{ fontSize: 19, margin: "0 0 2px" }}>{def.name}</h3>
+        <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
         <span className="whr-badge-gold whr-badge">{fmtPts(chariotCost(unit, def, armyData))} pts</span>
-        <p style={{ fontSize: 13.5, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
+        <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">Characteristic upgrades (max 2 of each)</span>
           {ABOM_CHAR_UPGRADES.map((u) => (
             <div key={u.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 0", borderBottom: "1px dashed var(--line-soft)" }}>
-              <span style={{ fontSize: 14.5 }}>{u.label} <span className="whr-opt-cost">({u.cost}pts each)</span></span>
+              <span style={{ fontSize: 16 }}>{u.label} <span className="whr-opt-cost">({u.cost}pts each)</span></span>
               <Stepper value={cu[u.id] || 0} min={0} max={2} onChange={(v) => updateUnit({ ...unit, charUpgrades: { ...cu, [u.id]: v } })} />
             </div>
           ))}
@@ -9235,9 +9262,9 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
   if (def.kind === "quantity") {
     return (
       <div>
-        <h3 className="whr-h1" style={{ fontSize: 19, margin: "0 0 2px" }}>{def.name}</h3>
+        <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
         <span className="whr-badge-gold whr-badge">{fmtPts(chariotCost(unit, def, armyData))} pts</span>
-        <p style={{ fontSize: 13.5, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
+        <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">Quantity ({def.perUnit}pts each)</span>
           <Stepper value={unit.qty || 1} min={1} onChange={(v) => updateUnit({ ...unit, qty: v })} />
@@ -9264,9 +9291,9 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
   if (def.kind === "warmachine") {
     return (
       <div>
-        <h3 className="whr-h1" style={{ fontSize: 19, margin: "0 0 2px" }}>{def.name}</h3>
+        <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
         <span className="whr-badge-gold whr-badge">{fmtPts(chariotCost(unit, def, armyData))} pts</span>
-        <p style={{ fontSize: 13.5, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
+        <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         {def.extraCrewCost != null && (
           <div style={{ marginTop: 14 }}>
             <span className="whr-label">{def.extraCrewLabel || "Extra crew"} (max {def.extraCrewMax || 2}, +{def.extraCrewCost}pts/model)</span>
@@ -9291,9 +9318,9 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
 
   return (
     <div>
-      <h3 className="whr-h1" style={{ fontSize: 19, margin: "0 0 2px" }}>{def.name}</h3>
+      <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
       <span className="whr-badge-gold whr-badge">{fmtPts(chariotCost(unit, def, armyData))} pts</span>
-      <p style={{ fontSize: 13.5, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
+      <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
       {def.extraCrewCost != null && (
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">{def.extraCrewLabel || "Extra crew"} (max 2, +{def.extraCrewCost}pts/model)</span>
@@ -9356,11 +9383,11 @@ function SpecialDetail({ def, unit, roster, updateUnit, armyData }) {
   const usedElsewhere = allUsedMagicItemIds(roster, unit.instanceId);
   return (
     <div>
-      <h3 className="whr-h1" style={{ fontSize: 19, margin: "0 0 2px" }}>{def.name}</h3>
+      <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
       <div className="whr-badge" style={{ marginBottom: 6 }}>{def.role}</div>
       <div><span className="whr-badge-gold whr-badge">{fmtPts(specialCost(unit, def, armyData))} pts</span></div>
-      {def.note && <p style={{ fontSize: 13.5, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>}
-      {def.items && <p style={{ fontSize: 13, marginTop: 8, fontStyle: "italic", color: "var(--ink-soft)" }}>{def.items}</p>}
+      {def.note && <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>}
+      {def.items && <p style={{ fontSize: 14.5, marginTop: 8, fontStyle: "italic", color: "var(--ink-soft)" }}>{def.items}</p>}
 
       {def.mounts && def.mounts.length > 0 && (
         <div style={{ marginTop: 14 }}>
@@ -9750,15 +9777,15 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <button className="whr-btn whr-btn-sm" onClick={onBack}>← Barracks</button>
           <div>
-            <h1 className="whr-h1" style={{ fontSize: 22, margin: 0 }}>{roster.name}</h1>
-            <p className="whr-serif-italic" style={{ margin: 0, fontSize: 12.5 }}>{roster.pointLimit} points · {armyData.name}</p>
+            <h1 className="whr-h1" style={{ fontSize: 24, margin: 0 }}>{roster.name}</h1>
+            <p className="whr-serif-italic" style={{ margin: 0, fontSize: 14 }}>{roster.pointLimit} points · {armyData.name}</p>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>{saveState}</span>
+          <span style={{ fontSize: 14, color: "var(--ink-soft)" }}>{saveState}</span>
           <div style={{ position: "relative" }}>
             <button className="whr-btn" disabled title="Export List — coming soon">Export List</button>
-            <span style={{ position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)", marginTop: 3, whiteSpace: "nowrap", fontStyle: "italic", fontSize: 10.5, color: "var(--ink-faint)", letterSpacing: "0.03em" }}>Coming soon</span>
+            <span style={{ position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)", marginTop: 3, whiteSpace: "nowrap", fontStyle: "italic", fontSize: 11.5, color: "var(--ink-faint)", letterSpacing: "0.03em" }}>Coming soon</span>
           </div>
           <button className="whr-btn whr-btn-gold" onClick={onSave}>Save Roster</button>
         </div>
