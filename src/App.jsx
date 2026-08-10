@@ -686,6 +686,7 @@ const STATS = {
   "Spirit Host": { M: 6, WS: 3, BS: 0, S: 3, T: 3, W: 4, I: 1, A: 4, Ld: 4 },
   "Vampire Thrall": { M: 6, WS: 6, BS: 4, S: 7, T: 5, W: 2, I: 7, A: 2, Ld: 8 },
   "Wight Champion": { M: 4, WS: 4, BS: 0, S: 5, T: 4, W: 1, I: 4, A: 2, Ld: 8 },
+  "Wraith Champion": { M: 4, WS: 3, BS: 0, S: 4, T: 4, W: 1, I: 3, A: 2, Ld: 8 },
   "Wraith": { M: 4, WS: 3, BS: 0, S: 3, T: 4, W: 3, I: 3, A: 2, Ld: 5 },
   "Banshee": { M: 6, WS: 3, BS: 0, S: 3, T: 4, W: 2, I: 3, A: 2, Ld: 8 },
   "Black Coach": { M: "-", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
@@ -5601,9 +5602,9 @@ const SKAVEN = {
 
 function vcChampions(thrallCost, wightCost, wraithCost) {
   return [
-    { id: "thrall", name: "Vampire Thrall", cost: thrallCost, magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped according to its bloodline. May take 1 magic item or bloodline power." },
-    { id: "wightchamp", name: "Wight Champion", cost: wightCost, magicItemSlots: 1, tags: ["wight"], itemSlotLabel: "Magic Item", note: "Equipped as you see fit within the limits of a Wight Hero. Carries a free Wight-Blade (1D3 wounds) unless another magic weapon is taken." },
-    { id: "wraithchamp", name: "Wraith Champion", cost: wraithCost, magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Ethereal, causes terror, cannot be harmed by mundane weapons. Carries a free Wraith-Weapon (double handed, no armour save) unless another magic weapon is taken." },
+    { id: "thrall", name: "Vampire Thrall", cost: thrallCost, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped according to its bloodline. May take 1 magic item or bloodline power." },
+    { id: "wightchamp", name: "Wight Champion", cost: wightCost, stat: "Wight Champion", magicItemSlots: 1, tags: ["wight"], itemSlotLabel: "Magic Item", note: "Equipped as you see fit within the limits of a Wight Hero. Carries a free Wight-Blade (1D3 wounds) unless another magic weapon is taken." },
+    { id: "wraithchamp", name: "Wraith Champion", cost: wraithCost, stat: "Wraith Champion", magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Ethereal, causes terror, cannot be harmed by mundane weapons. Carries a free Wraith-Weapon (double handed, no armour save) unless another magic weapon is taken." },
   ];
 }
 
@@ -5898,7 +5899,7 @@ const VAMPIRE_COUNTS = {
         { id: "dhw", group: "weapon", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
         { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
       ],
-      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
+      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
     },
     {
       id: "sylvaniaarchers", name: "Sylvania Archers", perModel: 5, minSize: 5, stat: "Sylvania Peasant", command: "standard", theme: "voncarstein",
@@ -5906,7 +5907,7 @@ const VAMPIRE_COUNTS = {
       options: [
         { id: "crossbows", group: null, label: "Swap longbows for crossbows (+2pt/model)", cost: 2, per: "model" },
       ],
-      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
+      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
     },
     {
       id: "vampireknights", name: "Vampire Knights", perModel: 55, minSize: 5, stat: "Vampire Knight", mountStat: "War Horse", mountLabel: "War Horse", command: "standard", theme: "blooddragon", restriction: "0-1", tags: ["undead"],
@@ -5914,12 +5915,12 @@ const VAMPIRE_COUNTS = {
       options: [
         { id: "barding", group: null, label: "Barding (free)", cost: 0, per: "model" },
       ],
-      championOptions: [{ id: "thrall", name: "Vampire Thrall", cost: 85, magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped like the rest of the regiment." }],
+      championOptions: [{ id: "thrall", name: "Vampire Thrall", cost: 85, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped like the rest of the regiment." }],
     },
     {
       id: "ghasts", name: "Ghasts", perModel: 35, minSize: 3, stat: "Ghast", command: "none", theme: "strigoi", restriction: "0-1",
       note: "Strigoi armies only, 0-1 regiment. Monstrous, living, poisoned attacks (+1S), cause fear. Unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue/overrun after a won combat that inflicted a casualty, except models with hatred/frenzy. No standard or musician upgrades. Cannot be joined by characters except a Strigoi Thrall.",
-      championOptions: [{ id: "strigoithrall", name: "Strigoi Thrall", cost: 70, magicItemSlots: 1, tags: ["strigoi"], itemSlotLabel: "Bloodline Power", magicItemCategoryFilter: ["bloodlinepower"], note: "May take one bloodline power (no magic items — Strigoi cannot carry equipment)." }],
+      championOptions: [{ id: "strigoithrall", name: "Strigoi Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["strigoi"], itemSlotLabel: "Bloodline Power", magicItemCategoryFilter: ["bloodlinepower"], note: "May take one bloodline power (no magic items — Strigoi cannot carry equipment)." }],
     },
   ],
   chariotsMonsters: [
@@ -5955,7 +5956,7 @@ const VAMPIRE_COUNTS = {
 const TK_MELEE_OPTIONS = ["Hand weapon (default)", "Flail", "Spear", "Double handed weapon"];
 
 function tkMummyChampion(cost) {
-  return [{ id: "mummychamp", name: "Mummy Champion", cost, magicItemSlots: 1, tags: ["mummy"], itemSlotLabel: "Magic Item", note: "Flammable undead Mummy Champion, equipped with light armour and a double handed weapon." }];
+  return [{ id: "mummychamp", name: "Mummy Champion", cost, stat: "Mummy Champion", magicItemSlots: 1, tags: ["mummy"], itemSlotLabel: "Magic Item", note: "Flammable undead Mummy Champion, equipped with light armour and a double handed weapon." }];
 }
 
 const TOMB_KINGS = {
@@ -6043,8 +6044,8 @@ const TOMB_KINGS = {
         { id: "dhw", group: null, label: "Swap shields for double handed weapons (+1pt/model)", cost: 1, per: "model" },
       ],
       championOptions: [
-        { id: "mummychamp", name: "Mummy Champion", cost: 60, magicItemSlots: 1, tags: ["mummy"], itemSlotLabel: "Magic Item", note: "Flammable, equipped with light armour and a double handed weapon." },
-        { id: "tombchamp", name: "Tomb Champion", cost: 30, magicItemSlots: 1, tags: ["tombGuard"], itemSlotLabel: "Magic Item", note: "A skeletal champion, equipped the same way as the regiment." },
+        { id: "mummychamp", name: "Mummy Champion", cost: 60, stat: "Mummy Champion", magicItemSlots: 1, tags: ["mummy"], itemSlotLabel: "Magic Item", note: "Flammable, equipped with light armour and a double handed weapon." },
+        { id: "tombchamp", name: "Tomb Champion", cost: 30, stat: "Tomb Champion", magicItemSlots: 1, tags: ["tombGuard"], itemSlotLabel: "Magic Item", note: "A skeletal champion, equipped the same way as the regiment." },
       ],
     },
     {
@@ -6142,8 +6143,8 @@ const TOMB_KINGS = {
 function cuChampions(thrallCost, wightCost, wraithCost) {
   return [
     { id: "vcthrall", name: "Von Carstein Vampire Thrall", cost: thrallCost, magicItemSlots: 1, tags: ["vampire", "voncarstein"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls. May take 1 magic item or Von Carstein bloodline power." },
-    { id: "wightchamp", name: "Wight Champion", cost: wightCost, magicItemSlots: 1, tags: ["wight"], itemSlotLabel: "Magic Item", note: "Equipped as you see fit within the limits of a Wight Hero. Carries a free Wight-Blade (1D3 wounds) unless another magic weapon is taken." },
-    { id: "wraithchamp", name: "Wraith Champion", cost: wraithCost, magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Ethereal, causes terror, cannot be harmed by mundane weapons. Carries a free Wraith-Weapon (double handed, no armour save) unless another magic weapon is taken." },
+    { id: "wightchamp", name: "Wight Champion", cost: wightCost, stat: "Wight Champion", magicItemSlots: 1, tags: ["wight"], itemSlotLabel: "Magic Item", note: "Equipped as you see fit within the limits of a Wight Hero. Carries a free Wight-Blade (1D3 wounds) unless another magic weapon is taken." },
+    { id: "wraithchamp", name: "Wraith Champion", cost: wraithCost, stat: "Wraith Champion", magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Ethereal, causes terror, cannot be harmed by mundane weapons. Carries a free Wraith-Weapon (double handed, no armour save) unless another magic weapon is taken." },
   ];
 }
 
@@ -6248,7 +6249,7 @@ const CLASSIC_UNDEAD = {
       options: [
         { id: "undeadsteeds", group: null, label: "Ride Undead Steeds — both riders and steeds ethereal (+35pt/model)", cost: 35, per: "model" },
       ],
-      championOptions: [{ id: "wraithchamp", name: "Wraith Champion", cost: 35, magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Same profile as a normal Wraith — the extra points buy the ability to issue challenges and a magic item slot." }],
+      championOptions: [{ id: "wraithchamp", name: "Wraith Champion", cost: 35, stat: "Wraith Champion", magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Same profile as a normal Wraith — the extra points buy the ability to issue challenges and a magic item slot." }],
     },
     {
       id: "zombies", name: "Zombies", perModel: 3, minSize: 5, stat: "Zombie", command: "standard", tags: ["undead"],
@@ -6663,9 +6664,9 @@ const NORSE = {
         { id: "dhw", group: null, label: "Double handed weapons (+3pt/model)", cost: 3, per: "model" },
       ],
       championOptions: [
-        { id: "champion", name: "Norse Champion", cost: 20, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
-        { id: "shieldmaiden", name: "Shieldmaiden", cost: 30, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Shieldmaiden", note: "Equipped like the regiment. Immune to fear and panic — so is the whole regiment while she's alive." },
-        { id: "ulfhednar", name: "Ulfhednar", cost: 40, dynamicTrooperCost: true, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
+        { id: "champion", name: "Norse Champion", cost: 20, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
+        { id: "shieldmaiden", name: "Shieldmaiden", cost: 30, magicItemSlots: 1, stat: "Shieldmaiden", note: "Equipped like the regiment. Immune to fear and panic — so is the whole regiment while she's alive." },
+        { id: "ulfhednar", name: "Ulfhednar", cost: 40, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
       ],
     },
     {
@@ -6676,8 +6677,8 @@ const NORSE = {
         { id: "dhw", group: "weapon", label: "Double handed weapons (+4pt/model)", cost: 4, per: "model" },
       ],
       championOptions: [
-        { id: "champion", name: "Norse Champion", cost: 20, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
-        { id: "ulfhednar", name: "Ulfhednar", cost: 40, dynamicTrooperCost: true, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
+        { id: "champion", name: "Norse Champion", cost: 20, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
+        { id: "ulfhednar", name: "Ulfhednar", cost: 40, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
       ],
     },
     {
@@ -6691,9 +6692,9 @@ const NORSE = {
         { id: "bows", group: null, label: "Bows (+2pt/model)", cost: 2, per: "model" },
       ],
       championOptions: [
-        { id: "champion", name: "Norse Champion", cost: 20, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
-        { id: "shieldmaiden", name: "Shieldmaiden", cost: 30, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Shieldmaiden", note: "Equipped like the regiment. Immune to fear and panic — so is the whole regiment while she's alive." },
-        { id: "ulfhednar", name: "Ulfhednar", cost: 40, dynamicTrooperCost: true, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
+        { id: "champion", name: "Norse Champion", cost: 20, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
+        { id: "shieldmaiden", name: "Shieldmaiden", cost: 30, magicItemSlots: 1, stat: "Shieldmaiden", note: "Equipped like the regiment. Immune to fear and panic — so is the whole regiment while she's alive." },
+        { id: "ulfhednar", name: "Ulfhednar", cost: 40, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
       ],
     },
     {
@@ -6733,7 +6734,7 @@ const NORSE = {
         { id: "dhw", group: null, label: "Swap additional hand weapon for double handed weapon (free)", cost: 0, per: "model" },
       ],
       championOptions: [
-        { id: "giantslayer", name: "Giant Slayer", cost: 20, dynamicTrooperCost: true, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"], itemSlotLabel: "Magic Weapon (may be a rune weapon)", note: "Equipped like the regiment. The item slot must be a magic weapon — may be a weapon inscribed with dwarven runes." },
+        { id: "giantslayer", name: "Giant Slayer", cost: 20, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"], itemSlotLabel: "Magic Weapon (may be a rune weapon)", note: "Equipped like the regiment. The item slot must be a magic weapon — may be a weapon inscribed with dwarven runes." },
       ],
     },
     {
@@ -7642,7 +7643,6 @@ function regimentCost(inst, def, armyData) {
     const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
     if (opt) {
       total += opt.cost;
-      if (opt.dynamicTrooperCost) total += regimentTrooperUnitCost(def, inst.gearSelections || {});
       (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
     }
   }
@@ -8138,8 +8138,18 @@ function resolveUnitStat(kind, unit, def) {
   if (kind === "regiment") {
     if (def.kind === "composite") return { statKey: null, statNote: null };
     const base = { statKey: def.statNote ? null : def.stat, statNote: def.statNote || null };
-    if (def.mountStat) return { ...base, mountStatKey: def.mountStat, charLabel: def.riderLabel || def.name, mountLabel: def.mountLabel || def.mountStat };
-    return base;
+    let championStatKey = null, championLabel = null;
+    if (unit.championIncluded && def.champion?.stat) {
+      championStatKey = def.champion.stat;
+      championLabel = def.champion.name;
+    } else if (unit.championOptionId && def.championOptions) {
+      const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
+      if (opt?.stat) { championStatKey = opt.stat; championLabel = opt.name; }
+    }
+    const hasExtra = !!(championStatKey || def.mountStat);
+    const withChampion = { ...base, championStatKey, championLabel, charLabel: hasExtra ? (def.riderLabel || def.name) : null };
+    if (def.mountStat) return { ...withChampion, mountStatKey: def.mountStat, mountLabel: def.mountLabel || def.mountStat };
+    return withChampion;
   }
   if (kind === "chariot") {
     const base = { statKey: def.statNote ? null : def.stat, statNote: def.statNote || null };
@@ -8242,7 +8252,7 @@ function resolveUnitTags(kind, unit, def, armyData) {
 }
 
 function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData }) {
-  const { statKey, statNote, mountStatKey, charLabel, mountLabel } = resolveUnitStat(kind, unit, def);
+  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel } = resolveUnitStat(kind, unit, def);
   const tags = resolveUnitTags(kind, unit, def, armyData);
   return (
     <div className={`whr-card ${selected ? "whr-card-selected" : ""}`} style={{ marginBottom: 10, cursor: "pointer" }} onClick={onSelect}>
@@ -8257,10 +8267,16 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
       {models != null && <div style={{ fontSize: 12.5, color: "var(--ink-soft)", marginBottom: 6 }}>{models} Models</div>}
       {(statKey || statNote) && (
         <div style={{ marginTop: 6, marginBottom: tags.length ? 8 : 0 }}>
-          {mountStatKey && (
+          {charLabel && (
             <div className="whr-eyebrow" style={{ fontSize: 11.5, marginBottom: 2 }}>{charLabel}</div>
           )}
           <StatBlock statKey={statKey} statNote={statNote} />
+          {championStatKey && (
+            <>
+              <div className="whr-eyebrow" style={{ fontSize: 11.5, margin: "6px 0 2px" }}>{championLabel}</div>
+              <StatBlock statKey={championStatKey} statNote={null} />
+            </>
+          )}
           {mountStatKey && (
             <>
               <div className="whr-eyebrow" style={{ fontSize: 11.5, margin: "6px 0 2px" }}>{mountLabel}</div>
@@ -8749,12 +8765,11 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <input type="checkbox" checked={!!unit.championIncluded} onChange={(e) => {
                 const checked = e.target.checked;
-                const newSize = checked ? size + 1 : Math.max(def.minSize, size - 1);
-                updateUnit({ ...unit, championIncluded: checked, championMagicItemIds: checked ? unit.championMagicItemIds : [], size: newSize });
+                updateUnit({ ...unit, championIncluded: checked, championMagicItemIds: checked ? unit.championMagicItemIds : [] });
               }} />
               {def.champion.name}
             </span>
-            <span className="whr-opt-cost">+{fmtPts(def.champion.baseCost + regimentTrooperUnitCost(def, gearSelections))}pts</span>
+            <span className="whr-opt-cost">+{fmtPts(def.champion.baseCost)}pts</span>
           </label>
           {unit.championIncluded && def.champion.markGroup && (
             <div style={{ marginTop: 8 }}>
@@ -8806,7 +8821,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                   onChange={() => updateUnit({ ...unit, championOptionId: opt.id, championMagicItemIds: [] })} />
                 {opt.name}
               </span>
-              <span className="whr-opt-cost">+{fmtPts(opt.cost + (opt.dynamicTrooperCost ? regimentTrooperUnitCost(def, gearSelections) : 0))}pts</span>
+              <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
             </label>
           ))}
           {def.championOptions.find((o) => o.id === unit.championOptionId)?.note && (
