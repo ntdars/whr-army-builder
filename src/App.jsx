@@ -5707,7 +5707,7 @@ const VAMPIRE_COUNTS = {
     "Ethereal models: unstable, always skirmish, can always march regardless of circumstance, move through solid objects (not other troops) and ignore terrain/obstacle penalties, but cannot end their move in impassable terrain. Immune to all non-magical harm (attacks from ethereal models themselves count as magical). No character may join an ethereal regiment except a Wraith champion.",
     "Mixing living and undead: a living character in an undead regiment that crumbles/vanishes automatically flees. An undead character in a living regiment is forced to flee with it; an undead character in an unstable regiment vanishes with it on a failed break test.",
     "Wight and Wraith weapons: every Wight carries a free Wight-Blade (1D3 wounds) and every Wraith a free Wraith-Weapon (double handed, no armour save) — regimental trooper, champion, or independent character alike. These don't use a magic item slot, but are forfeited the moment the bearer takes another magic weapon. When carrying both a magic and mundane weapon, choose which to fight with at the start of each combat.",
-    "Bloodlines: pick one of the five Vampire Bloodlines above in the sidebar. All Vampires in the army (Lords, Counts, Thralls, BSBs) must share the same bloodline, and each bloodline power may only be taken once across the whole army — this builder enforces that the same way it enforces magic item uniqueness. The Lord/Count/BSB's own wargear and casting rules wire themselves up automatically once a bloodline is picked. Regimental Vampire Thrall champion options (in Zombies/Skeleton Warriors/etc.) are NOT automatically bloodline-restricted — under Strigoi, use the dedicated Strigoi Thrall option on Ghasts instead of the generic Thrall option elsewhere, since Strigoi can't carry ordinary equipment.",
+    "Bloodlines: pick one of the five Vampire Bloodlines above in the sidebar. All Vampires in the army (Lords, Counts, Thralls, BSBs) must share the same bloodline, and each bloodline power may only be taken once across the whole army — this builder enforces that the same way it enforces magic item uniqueness. The Lord/Count/BSB's own wargear and casting rules wire themselves up automatically once a bloodline is picked. Regimental Vampire Thrall champion options (in Zombies/Skeleton Warriors/etc.) automatically relabel to Strigoi Thrall and pick up the Strigoi profile's extra attack when the Strigoi bloodline is selected — note this only swaps name and statline, it does not restrict or unlock which regiments can take the option (Strigoi still can't carry ordinary equipment, so the item slot on those swapped Thralls should really only be spent on a bloodline power, same as the dedicated Ghast-only Strigoi Thrall option).",
     "Magic Items: the Weapons/Enchanted/Arcane/Banners pool at the end is common to all three Undead armies (Vampire Counts, Tomb Kings, Classic Undead) — restrictions are by character/regiment type (tags), not by which of the three armies you're playing.",
   ],
   characters: [
@@ -5899,7 +5899,7 @@ const VAMPIRE_COUNTS = {
         { id: "dhw", group: "weapon", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
         { id: "shields", group: null, label: "Shields (+0.5pt/model)", cost: 0.5, per: "model" },
       ],
-      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
+      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls.", bloodlineSwap: { strigoi: { name: "Strigoi Thrall", stat: "Vampire Thrall (Strigoi)" } } }],
     },
     {
       id: "sylvaniaarchers", name: "Sylvania Archers", perModel: 5, minSize: 5, stat: "Sylvania Peasant", command: "standard", theme: "voncarstein",
@@ -5907,7 +5907,7 @@ const VAMPIRE_COUNTS = {
       options: [
         { id: "crossbows", group: null, label: "Swap longbows for crossbows (+2pt/model)", cost: 2, per: "model" },
       ],
-      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
+      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls.", bloodlineSwap: { strigoi: { name: "Strigoi Thrall", stat: "Vampire Thrall (Strigoi)" } } }],
     },
     {
       id: "vampireknights", name: "Vampire Knights", perModel: 55, minSize: 5, stat: "Vampire Knight", mountStat: "War Horse", mountLabel: "War Horse", command: "standard", theme: "blooddragon", restriction: "0-1", tags: ["undead"],
@@ -5915,7 +5915,7 @@ const VAMPIRE_COUNTS = {
       options: [
         { id: "barding", group: null, label: "Barding (free)", cost: 0, per: "model" },
       ],
-      championOptions: [{ id: "thrall", name: "Vampire Thrall", cost: 85, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped like the rest of the regiment." }],
+      championOptions: [{ id: "thrall", name: "Vampire Thrall", cost: 85, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped like the rest of the regiment.", bloodlineSwap: { strigoi: { name: "Strigoi Thrall", stat: "Vampire Thrall (Strigoi)" } } }],
     },
     {
       id: "ghasts", name: "Ghasts", perModel: 35, minSize: 3, stat: "Ghast", command: "none", theme: "strigoi", restriction: "0-1",
@@ -8129,7 +8129,12 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
   );
 }
 
-function resolveUnitStat(kind, unit, def) {
+function championOptionEffective(opt, bloodlineId) {
+  if (!opt) return opt;
+  const swap = opt.bloodlineSwap?.[bloodlineId];
+  return swap ? { ...opt, ...swap } : opt;
+}
+function resolveUnitStat(kind, unit, def, bloodlineId) {
   if (kind === "character") {
     const mount = def.mounts?.find((m) => m.id === unit.mountId);
     if (mount) return { statKey: def.stat, statNote: null, mountStatKey: mount.stat, charLabel: def.name, mountLabel: mount.name.replace(/\s*\([^)]*\)\s*$/, "") };
@@ -8143,7 +8148,7 @@ function resolveUnitStat(kind, unit, def) {
       championStatKey = def.champion.stat;
       championLabel = def.champion.name;
     } else if (unit.championOptionId && def.championOptions) {
-      const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
+      const opt = championOptionEffective(def.championOptions.find((o) => o.id === unit.championOptionId), bloodlineId);
       if (opt?.stat) { championStatKey = opt.stat; championLabel = opt.name; }
     }
     const hasExtra = !!(championStatKey || def.mountStat);
@@ -8169,7 +8174,7 @@ function optionLabelById(options, id) {
   return o ? o.label.replace(/\s*\([^)]*\)\s*$/, "").replace(/\s*[+][\d.]+.*$/, "").trim() : null;
 }
 
-function resolveUnitTags(kind, unit, def, armyData) {
+function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
   const tags = [];
   if (kind === "character") {
     if (def.markGroup && unit.mark) tags.push(`Mark of ${unit.mark}`);
@@ -8204,7 +8209,7 @@ function resolveUnitTags(kind, unit, def, armyData) {
       (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
     }
     if (unit.championOptionId && def.championOptions) {
-      const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
+      const opt = championOptionEffective(def.championOptions.find((o) => o.id === unit.championOptionId), bloodlineId);
       if (opt) {
         tags.push(opt.name);
         (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
@@ -8251,9 +8256,9 @@ function resolveUnitTags(kind, unit, def, armyData) {
   return tags;
 }
 
-function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData }) {
-  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel } = resolveUnitStat(kind, unit, def);
-  const tags = resolveUnitTags(kind, unit, def, armyData);
+function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData, bloodlineId }) {
+  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel } = resolveUnitStat(kind, unit, def, bloodlineId);
+  const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   return (
     <div className={`whr-card ${selected ? "whr-card-selected" : ""}`} style={{ marginBottom: 10, cursor: "pointer" }} onClick={onSelect}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
@@ -8360,7 +8365,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
             {roster.characters.map((u) => {
               const def = applyBloodline(armyData.characters.find((c) => c.id === u.defId), roster.armyTheme);
               return <RosterUnitCard key={u.instanceId} kind="character" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} bloodlineId={roster.armyTheme} />;
             })}
           </>
         )}
@@ -8374,7 +8379,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
                 ? Object.values(u.composition || {}).reduce((a, b) => a + b, 0)
                 : u.size;
               return <RosterUnitCard key={u.instanceId} kind="regiment" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={models} armyData={armyData} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={models} armyData={armyData} bloodlineId={roster.armyTheme} />;
             })}
           </>
         )}
@@ -8385,7 +8390,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
             {roster.chariots.map((u) => {
               const def = armyData.chariotsMonsters.find((c) => c.id === u.defId);
               return <RosterUnitCard key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? u.qty : null} armyData={armyData} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? u.qty : null} armyData={armyData} bloodlineId={roster.armyTheme} />;
             })}
           </>
         )}
@@ -8396,7 +8401,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
             {roster.specials.map((u) => {
               const def = armyData.specialCharacters.find((s) => s.id === u.defId);
               return <RosterUnitCard key={u.instanceId} kind="special" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} bloodlineId={roster.armyTheme} />;
             })}
           </>
         )}
@@ -8819,7 +8824,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <input type="radio" name={`championopt-${unit.instanceId}`} checked={unit.championOptionId === opt.id}
                   onChange={() => updateUnit({ ...unit, championOptionId: opt.id, championMagicItemIds: [] })} />
-                {opt.name}
+                {championOptionEffective(opt, roster.armyTheme).name}
               </span>
               <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
             </label>
