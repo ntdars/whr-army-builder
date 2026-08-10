@@ -857,6 +857,162 @@ const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
    MAGIC ITEMS
    ========================================================================== */
 
+// Common Magic Items — available to any army (subject to the restrictions below), per the Common
+// Magic Items rules. Merged into every faction's magicItems pool (minus arcane/familiar for
+// Dwarfs, who cannot use bound spells or arcane items at all).
+// subtype on weapon/armour items gates against a bearer's allowedWeaponSubtypes/allowedArmourSubtypes
+// (undefined on a bearer = unrestricted, i.e. no behavior change until that bearer is audited).
+// Arcane items and Familiars are wizard-only (restrictedTo tags:["wizard"], resolved dynamically
+// via isWizard — see itemContext). Familiars are additionally on-foot only.
+// The 8 items marked "(lore-locked)" require a specific College Magic lore the bearer doesn't yet
+// track in this app (spells/lores aren't modeled) — left open to any wizard for now, pending the
+// per-faction lore-access data.
+const COMMON_MAGIC_ITEMS = [
+  // Magic Weapons
+  { id: "cm-bitingblade", name: "Biting Blade", cost: 10, cat: "weapon", subtype: "handWeapon", desc: "-2 to armour save." },
+  { id: "cm-bladeleapingcopper", name: "Blade of Leaping Copper", cost: 10, cat: "weapon", subtype: "handWeapon", desc: "+1A." },
+  { id: "cm-bladeslorenzo", name: "Blades of Lorenzo", cost: 10, cat: "weapon", subtype: "handWeapon", desc: "Two hand weapons, +3 WS." },
+  { id: "cm-swordswiftslaying", name: "Sword of Swift Slaying", cost: 10, cat: "weapon", subtype: "handWeapon", desc: "Always strike first." },
+  { id: "cm-swordofmight", name: "Sword of Might", cost: 15, cat: "weapon", subtype: "handWeapon", desc: "+1S." },
+  { id: "cm-wyrmslayersword", name: "Wyrmslayer Sword", cost: 15, cat: "weapon", subtype: "handWeapon", desc: "Always wound on 4+ or better. Large targets have no armour save." },
+  { id: "cm-heartseeker", name: "Heart Seeker", cost: 15, cat: "weapon", subtype: "handWeapon", desc: "May re-roll missed attacks." },
+  { id: "cm-skyarrownaloer", name: "Sky Arrow of Naloer", cost: 15, cat: "weapon", subtype: "bow", desc: "The bearer must have a short bow, bow, or longbow. One use only. Must be shot at models flying high. No modifiers to hit apply. S10. 1 wound = 1D6 wounds." },
+  { id: "cm-bladeseagold", name: "Blade of Sea Gold", cost: 20, cat: "weapon", subtype: "handWeapon", desc: "-3 to armour save." },
+  { id: "cm-flailofskulls", name: "Flail of Skulls", cost: 20, cat: "weapon", subtype: "handWeapon", desc: "Flail. 1 wound = 2 wounds." },
+  { id: "cm-blessedsword", name: "Blessed Sword", cost: 20, cat: "weapon", subtype: "handWeapon", desc: "WS 10." },
+  { id: "cm-starlance", name: "Star Lance", cost: 20, cat: "weapon", subtype: "lance", desc: "Lance. S10 (only on the charge)." },
+  { id: "cm-parryingblade", name: "Parrying Blade", cost: 25, cat: "weapon", subtype: "handWeapon", desc: "All enemy models in base contact have one less A. Treat Cavalry, Chariots and Ridden Monsters as just one model. It is the owner of the model losing the attack who decides which attack is forfeit. This effect stacks when combined with items and abilities of similar kind." },
+  { id: "cm-venomsword", name: "Venom Sword", cost: 25, cat: "weapon", subtype: "handWeapon", desc: "1 wound = 1D6 wounds." },
+  { id: "cm-bladeleapingbronze", name: "Blade of Leaping Bronze", cost: 30, cat: "weapon", subtype: "handWeapon", desc: "+2A." },
+  { id: "cm-ogreblade", name: "Ogre Blade", cost: 30, cat: "weapon", subtype: "handWeapon", desc: "+2S." },
+  { id: "cm-broadswordensorcelled", name: "Broadsword of Ensorcelled Iron", cost: 30, cat: "weapon", subtype: "twoHanded", desc: "Double handed weapon, +1 to hit." },
+  { id: "cm-berserkersword", name: "Berserker Sword", cost: 30, cat: "weapon", subtype: "handWeapon", desc: "The bearer gains frenzy and +1S." },
+  { id: "cm-swordfortitude", name: "Sword of Fortitude", cost: 35, cat: "weapon", subtype: "handWeapon", desc: "The bearer and the bearer's regiment are immune to psychology." },
+  { id: "cm-gromrilblade", name: "Gromril Blade", cost: 35, cat: "weapon", subtype: "handWeapon", desc: "No armour save allowed." },
+  { id: "cm-macehelsturm", name: "Mace of Helsturm", cost: 35, cat: "weapon", subtype: "handWeapon", desc: "The bearer forfeits normal attacks and makes one attack with S10 where 1 wound = 1D6 wounds." },
+  { id: "cm-swordofteclis", name: "Sword of Teclis", cost: 40, cat: "weapon", subtype: "handWeapon", desc: "Wounds automatically." },
+  { id: "cm-bladedartingsteel", name: "Blade of Darting Steel", cost: 40, cat: "weapon", subtype: "handWeapon", desc: "Hits automatically." },
+  { id: "cm-giantblade", name: "Giant Blade", cost: 45, cat: "weapon", subtype: "handWeapon", desc: "+3S." },
+  { id: "cm-dragonblade", name: "Dragon Blade", cost: 45, cat: "weapon", subtype: "handWeapon", desc: "Each hit becomes two hits. Roll to wound separately for each hit. If the attacks are directed against a single model, the model is hit twice as many times. If the attacks are directed against (identical) troops, twice as many models are hit." },
+  { id: "cm-swordofheroes", name: "Sword of Heroes", cost: 50, cat: "weapon", subtype: "handWeapon", desc: "Against opponents with T5 or more: +3S, 1 wound = 1D3 wounds." },
+  { id: "cm-bladeleapinggold", name: "Blade of Leaping Gold", cost: 60, cat: "weapon", subtype: "handWeapon", desc: "+3A." },
+  { id: "cm-daemonslayer", name: "Daemon Slayer", cost: 85, cat: "weapon", subtype: "handWeapon", desc: "All hits inflict 1D3 wounds on Daemons with no armour save possible. Against other targets: +3S. 1 wound = 1D3 wounds." },
+  { id: "cm-dragonslayer", name: "Dragon Slayer", cost: 85, cat: "weapon", subtype: "handWeapon", desc: "All hits inflict 1D3 wounds on Dragons with no armour save possible. Against other targets: +3S. 1 wound = 1D3 wounds." },
+  { id: "cm-abolisherblade", name: "Abolisher Blade", cost: 100, cat: "weapon", subtype: "handWeapon", desc: "Wielder may not carry other magic items. No magic items in base contact with the wielder work." },
+  { id: "cm-frostblade", name: "Frost Blade", cost: 100, cat: "weapon", subtype: "handWeapon", desc: "A wounded opponent is killed instantly." },
+  { id: "cm-hydrasword", name: "Hydra Sword", cost: 125, cat: "weapon", subtype: "handWeapon", desc: "Each hit becomes 1D6 hits. Roll to wound separately for each hit. If the attacks are directed against a single model, the model is hit more times. If the attacks are directed against (identical) troops, more models are hit." },
+  { id: "cm-hellfiresword", name: "Hellfire Sword", cost: 125, cat: "weapon", subtype: "handWeapon", desc: "S10. Flaming. Killed enemies burst into flames and immediately cause a panic test in the regiment the victim was a part of." },
+
+  // Magic Armour
+  { id: "cm-dragonhelm", name: "Dragonhelm", cost: 10, cat: "armour", subtype: "helmet", desc: "The bearer (but not the bearer's mount) is immune to fire-based attacks and breath weapons. The bearer is immune to terror." },
+  { id: "cm-enchantedshield", name: "Enchanted Shield", cost: 10, cat: "armour", subtype: "shield", desc: "+1 armour save." },
+  { id: "cm-armourendurance", name: "Armour of Endurance", cost: 10, cat: "armour", subtype: "heavyArmour", desc: "Heavy armour. 6+ ward save." },
+  { id: "cm-shieldptolos", name: "Shield of Ptolos", cost: 15, cat: "armour", subtype: "shield", desc: "1+ armour save (that cannot be improved) vs. shooting only (including ranged spells)." },
+  { id: "cm-armourresilience", name: "Armour of Resilience", cost: 15, cat: "armour", subtype: "heavyArmour", desc: "Heavy armour. +1 armour save." },
+  { id: "cm-oakenarmour", name: "Oaken Armour", cost: 15, cat: "armour", subtype: "lightArmour", desc: "Light armour. +1W." },
+  { id: "cm-charmedshield", name: "Charmed Shield", cost: 20, cat: "armour", subtype: "shield", desc: "Discount the first hit against the bearer. This means the first successful hit during the battle by a melee opponent or ranged attack or spell provided it is of the kind that would potentially wound the bearer. The hit is discounted before determining if it wounds." },
+  { id: "cm-adamantarmour", name: "Adamant Armour", cost: 25, cat: "armour", subtype: "heavyArmour", desc: "Heavy armour. +1T." },
+  { id: "cm-dawnarmour", name: "Dawn Armour", cost: 25, cat: "armour", subtype: "heavyArmour", desc: "Heavy armour. Bearer may re-roll failed armour saves." },
+  { id: "cm-trollhidearmour", name: "Trollhide Armour", cost: 25, cat: "armour", subtype: "lightArmour", desc: "Light armour. Regeneration save 4+." },
+  { id: "cm-shiningshield", name: "Shining Shield", cost: 25, cat: "armour", subtype: "shield", desc: "Enemies suffer -1 to hit against the bearer and his mount." },
+  { id: "cm-emeraldarmour", name: "Emerald Armour", cost: 25, cat: "armour", subtype: "lightArmour", desc: "Light armour. Ignore first wound suffered. This means the first wound suffered during the battle is discounted before taking any saving throw (even if not permitted) and therefore before resolving any additional effect such as multiple wounds." },
+  { id: "cm-armourfortune", name: "Armour of Fortune", cost: 30, cat: "armour", subtype: "heavyArmour", desc: "Heavy armour. Ward save 5+." },
+  { id: "cm-armourmeteoriciron", name: "Armour of Meteoric Iron", cost: 30, cat: "armour", subtype: "lightArmour", desc: "Light armour. 2+ armour save (that cannot be improved)." },
+  { id: "cm-parryingshield", name: "Parrying Shield", cost: 40, cat: "armour", subtype: "shield", desc: "All enemy models in base contact have one less A. Treat Cavalry, Chariots and Ridden Monsters as just one model. It is the owner of the model losing the attack who decides which attack is forfeit. This effect stacks when combined with items and abilities of similar kind." },
+  { id: "cm-shieldmagicimmunity", name: "Shield of Magic Immunity", cost: 50, cat: "armour", subtype: "shield", desc: "The bearer (but not the bearer's mount) is immune to the effect of spells. (The bearer's regiment may still be affected by spells, i.e., if the regiment is teleported, the character remains where he is and so on.)" },
+  { id: "cm-spelleatershield", name: "Spelleater Shield", cost: 50, cat: "armour", subtype: "shield", desc: "Natural dispel 4+, dispelled spells are destroyed on a further roll of 4+." },
+  { id: "cm-armourunyielding", name: "Armour of Unyielding", cost: 50, cat: "armour", subtype: "heavyArmour", desc: "Heavy armour. +2T." },
+  { id: "cm-armourprotection", name: "Armour of Protection", cost: 60, cat: "armour", subtype: "heavyArmour", desc: "Heavy armour. Ward save 4+." },
+  { id: "cm-armourbrilliance", name: "Armour of Brilliance", cost: 70, cat: "armour", subtype: "heavyArmour", desc: "Heavy armour. Enemies suffer a -2 to hit against the bearer and the bearer's mount." },
+
+  // Enchanted Items
+  { id: "cm-potionhealing", name: "Potion of Healing", cost: 10, cat: "enchanted", desc: "The bearer recovers 1D6 lost wounds. May not be imbibed when the bearer is slain. Living models only. One use only." },
+  { id: "cm-nullstonering", name: "Nullstone Ring", cost: 10, cat: "enchanted", desc: "No model in base contact with the bearer can cast spells." },
+  { id: "cm-ghostring", name: "Ghost Ring", cost: 10, cat: "enchanted", desc: "The bearer and his mount can move through solid objects and any kind of terrain. The bearer may not move through enemy troops. Note that the move must take the bearer clear of impassable terrain." },
+  { id: "cm-talismanravensdark", name: "Talisman of Ravensdark", cost: 10, cat: "enchanted", desc: "Flying creatures (and their riders) cannot strike against the bearer (and his mount) in melee combat. This item cannot be carried by a character that can fly or that rides a mount with the fly ability." },
+  { id: "cm-orbthunder", name: "Orb of Thunder", cost: 10, cat: "enchanted", desc: "Bound spell. One use only. All creatures flying high are driven off. No flying movement is possible, use ground move instead. Remains in play." },
+  { id: "cm-crimsonamulet", name: "Crimson Amulet", cost: 15, cat: "enchanted", desc: "The bearer automatically passes any characteristic test except LD tests." },
+  { id: "cm-vanhorstmannspeculum", name: "Van Horstmann's Speculum", cost: 15, cat: "enchanted", desc: "In a challenge the bearer fights with his opponent's number of A, WS and S as they appear on the opponent's profile. The bearer attacks at exactly the same time as his opponent even if carrying a double handed weapon (in effect, the two models could kill each other simultaneously)." },
+  { id: "cm-amuletfire", name: "Amulet of Fire", cost: 20, cat: "enchanted", desc: "Natural dispel 4+. Can only be used once each magic phase." },
+  { id: "cm-potionstrength", name: "Potion of Strength", cost: 20, cat: "enchanted", desc: "+3S in one melee combat round. Must be imbibed just before attacking. One use only." },
+  { id: "cm-pipesofdoom", name: "Pipes of Doom", cost: 20, cat: "enchanted", footOnly: true, desc: "When the bearer and the bearer's regiment are charged by cavalry, the charging unit must take a LD test (even if immune to psychology). If the test is failed, the cavalry regiment does not move (and the charge is failed). Models on foot only." },
+  { id: "cm-drumsswiftreform", name: "Drums of Swift Reform", cost: 20, cat: "enchanted", footOnly: true, desc: "The bearer and his regiment may make a complete reform before and after taking a normal move or even a march move. Models on foot only." },
+  { id: "cm-blackgemgnar", name: "Black Gem of Gnar", cost: 20, cat: "enchanted", desc: "In a challenge, the bearer and his opponent (and any mounts) do not strike blows in the first round of melee combat, as they are frozen in time." },
+  { id: "cm-drumsmarching", name: "Drums of Marching", cost: 20, cat: "enchanted", footOnly: true, desc: "The bearer's regiment can march even if there is an enemy unit within 8\" at the start of the turn. Infantry only." },
+  { id: "cm-talismanluck", name: "Talisman of Luck", cost: 25, cat: "enchanted", desc: "The bearer may re-roll one personal die roll. One use only." },
+  { id: "cm-jadeamulet", name: "Jade Amulet", cost: 30, cat: "enchanted", desc: "+1T." },
+  { id: "cm-ringvolans", name: "Ring of Volans", cost: 30, cat: "enchanted", desc: "Bound spell. Before the battle, select one spell from one of the eight College Magic lores requiring only one or two power cards to cast. This spell can be cast as a bound spell once in the game. One use only." },
+  { id: "cm-clawnagash", name: "Claw of Nagash", cost: 35, cat: "enchanted", desc: "Bound spell. Can be used against a single living model within 8\". The model suffers 1D6 wounds, no armour save allowed. One use only." },
+  { id: "cm-ringcorin", name: "Ring of Corin", cost: 45, cat: "enchanted", desc: "Bound spell. Destroys the magic properties of a magic item within 12\" of the bearer of the Ring of Corin if the bearer can identify the name of the opposing player's magic item (only one guess permitted). Cannot be used against magic scrolls." },
+  { id: "cm-hornurgok", name: "Horn of Urgok", cost: 50, cat: "enchanted", desc: "Bound spell. Casts the Grey spell Horn of Andar. Can be used three times only." },
+  { id: "cm-rubychalice", name: "Ruby Chalice", cost: 50, cat: "enchanted", desc: "Enemies suffer a -2 to hit with missiles against the bearer, the bearer's mount, and the bearer's regiment." },
+  { id: "cm-crowncommand", name: "Crown of Command", cost: 50, cat: "enchanted", desc: "LD 10." },
+  { id: "cm-talismanobsidian", name: "Talisman of Obsidian", cost: 75, cat: "enchanted", desc: "Neither the bearer, nor anyone within his regiment, can cast spells, and spells cast against the bearer and the bearer's regiment are dispelled automatically (except if cast with Total Power). This applies to spells cast by friends and enemies alike." },
+
+  // Arcane Items (wizards only)
+  { id: "cm-skullstaff", name: "Skull Staff", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "In each magic phase, at your request, your opponent must reveal the magic items and spells of all their models that are within 12\" of the wizard bearing the skull staff." },
+  { id: "cm-enchantedmirror", name: "Enchanted Mirror", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Dispel attempts made by the bearer always succeed on 4+ (or better)." },
+  { id: "cm-staffstealing", name: "Staff of Stealing", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Used when winds of magic are rolled. Your side steals one (1) magic card from your enemy. One use only." },
+  { id: "cm-powerscroll", name: "Power Scroll", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Automatically powers one of the wizard's spells. One use only." },
+  { id: "cm-infusionwhite", name: "Infusion of White", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Used when winds of magic are rolled. The bearer gains 1D6 extra magic cards that only he/she can use. On a roll of six the wizard ODs after the magic phase ends (passes out for the rest of the battle, is hit automatically if attacked in melee combat). One use only." },
+  { id: "cm-seerstone", name: "Seerstone", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "For each extra power card spent when attempting to cast a spell, the wizard may increase the range of the spell by 12\". No effect on spells with no range, spells with a radius effect centred on the wizard, or bound spells." },
+  { id: "cm-cloakhorrors", name: "Cloak of Horrors", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item exclusive to wizards using the Amber lore (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Savage Beast of Horrors and amplifies its effects (6 automatic hits at S6; bearer's own T becomes 6 while active)." },
+  { id: "cm-stormcrowstaff", name: "Stormcrow Staff", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item and bound spell, Celestial lore only (lore-locked — not yet enforced pending lore-access data). Usable only against flying units, 18\" range, LoS required (flying-high units always count as in LoS). Target suffers 1D6 lightning S6 hits, no armour save." },
+  { id: "cm-teclistextbook", name: "Teclis' Textbook", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "The owner may use any one of the eight lores of College Magic instead of their normal lore. Takes up a magic item slot but is not strictly a magic item, and cannot be destroyed." },
+  { id: "cm-flameforgedcape", name: "Flameforged Cape", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item exclusive to wizards using the Bright lore (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Scarlet Scimitar and amplifies it — while active, all attempts to hit the bearer (melee or ranged, even normally-automatic ones) require a natural 6." },
+  { id: "cm-purplereaper", name: "Purple Reaper", cost: 20, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item limited to wizards using the Amethyst lore (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Purple Scythe and amplifies it to 1D6 S10 hits (instead of 1D3 S5) on each enemy model in base contact. May be used even while mounted." },
+  { id: "cm-dispelmagicscroll", name: "Dispel Magic Scroll", cost: 25, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Automatically dispels an enemy spell, even if cast with Total Power and including spells cast in a previous turn that remain in play. One use only. You may include two unless playing with the \"Veto One Spell\" house rule, in which case only one." },
+  { id: "cm-ringdarkness", name: "Ring of Darkness", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Bound spell. The wizard becomes ethereal, as described in the Undead army book. Remains in play." },
+  { id: "cm-amuletsteel", name: "Amulet of Steel", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item and bound spell, Gold lore only (lore-locked — not yet enforced pending lore-access data). Cast on any unit within 18\" and LoS: enemies suffer -2 armour save, friendly units gain +2 (or 5+ if they had none). Lasts until the next magic phase." },
+  { id: "cm-crownshadows", name: "Crown of Shadows", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item, Grey lore only (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Crown of Taidron and extends its range to 18\" (from 3\"); costs one power, 1D6 lightning S6 hits distributed like normal shooting." },
+  { id: "cm-booksecrets", name: "Book of Secrets", cost: 40, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Used just after rolling for winds of magic. Discard any number of magic cards not belonging to a particular wizard and immediately draw replacements." },
+  { id: "cm-whitecloak", name: "White Cloak", cost: 40, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item, Light lore only (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Shimmering Cloak and extends its protection to any regiment the bearer joins." },
+  { id: "cm-wandresurrection", name: "Wand of Resurrection", cost: 50, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item, Jade lore only (lore-locked — not yet enforced pending lore-access data). Whenever a Jade spell is successfully cast, revive one fallen rank-and-file cavalry model or two infantry models (own or friendly regiment within 18\" and LoS, capped at starting model count). Living creatures only — no effect on undead, Daemons, or constructs." },
+  { id: "cm-bookashur", name: "Book of Ashur", cost: 50, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "+1 magic level. Does not increase the number of magic items the wizard may carry." },
+  { id: "cm-orbforbiddenknowledge", name: "Orb of Forbidden Knowledge", cost: 50, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "For purposes of casting and dispelling, the bearer always counts as having two magic levels more than he actually has." },
+  { id: "cm-destroymagicscroll", name: "Destroy Magic Scroll", cost: 50, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Automatically dispels an enemy spell, even if cast with Total Power and including spells cast in a previous turn that remain in play. Furthermore, roll 1D6, on a 4+ the spell is destroyed (bound spells re-roll a successful destroy). One use only." },
+  { id: "cm-chalicesorcery", name: "Chalice of Sorcery", cost: 75, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Once per magic phase the wizard may drink from the chalice when casting a spell — the spell is cast for free. Afterwards roll 1D6: on a 1-2 the wizard suffers one wound (no save) and the chalice is empty." },
+  { id: "cm-staffthreesisters", name: "Staff of the Three Sisters", cost: 75, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Dispel attempts made by the bearer always succeed on 3+ or better." },
+  { id: "cm-doomfiring", name: "Doomfire Ring", cost: 75, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Bound spell. A firebolt of doom strikes a visible enemy unit within 24\": 2D6 flaming S4 hits, distributed like normal shooting, normal armour saves apply. Usable three times only." },
+  { id: "cm-wandjet", name: "Wand of Jet", cost: 75, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Reduces the cost of casting a spell by one power card (power-one spells cast free). Usable once per magic phase; each use costs the caster 1D6 characteristic points (BS/I/LD/etc., distributed as chosen), permanently. If any characteristic is reduced to 0, the wizard dies." },
+  { id: "cm-staffflamingdeath", name: "Staff of Flaming Death", cost: 75, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Bound spell. A large fireball strikes a visible enemy unit within 12\": 1D6 flaming S5 hits, distributed like normal shooting, normal armour saves apply." },
+  { id: "cm-staffmanycolouredtraitor", name: "Staff of the Many Coloured Traitor", cost: 125, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "All successful rolls to dispel spells cast by the bearer of this item must be re-rolled. Does not include bound spells." },
+
+  // Familiars (wizards on foot only)
+  { id: "cm-scrollfamiliar", name: "Scroll Familiar", cost: 10, cat: "familiar", restrictedTo: [{ tags: ["wizard"] }], footOnly: true, desc: "May carry two scrolls just as a character; usable by its master only while in base contact with it." },
+  { id: "cm-warriorfamiliar", name: "Warrior Familiar", cost: 30, cat: "familiar", restrictedTo: [{ tags: ["wizard"] }], footOnly: true, desc: "If its master is attacked in melee (even in a challenge), the Familiar interposes itself and must be killed before hits can be allocated against the wizard. Always strikes first. M5 WS5 BS0 S5 T5 W1 I6 A2 Ld10." },
+  { id: "cm-spellfamiliar", name: "Spell Familiar", cost: 30, cat: "familiar", restrictedTo: [{ tags: ["wizard"] }], footOnly: true, desc: "After spells are dealt, may pick a spell from its master's lore not already in its master's possession; the master may cast it while in base contact with the familiar. M5 WS3 BS3 S2 T3 W1 I4 A1 Ld8." },
+
+  // Magic Banners
+  { id: "cm-endlessbanner", name: "Endless Banner", cost: 0, cat: "banner", excludeTags: ["bsb"], regimentDiscount: { pct: 0.20, capNormal: 50, capLarge: 100, largeThreshold: 3000 }, minRegimentSize: 40,
+    desc: "Free. Cannot be given to a regiment carrying missile weapons, and can't be carried by a Battle Standard Bearer. Can only be given to a regiment of at least 40 models. Makes the regiment 20% cheaper (capped at a 50pt discount, or 100pts in battles of 3000+pts a side) — but the unit can't take any other magic banner. Not magical itself; its effects can't be removed or cancelled." },
+  { id: "cm-bannerofchampions", name: "Banner of Champions", cost: 0, cat: "banner", isBannerOfChampions: true,
+    desc: "Free. No magical effects (cannot be negated). The regimental champion's cost counts towards Regiments instead of Characters/Monsters/War Machines/Chariots, as long as the champion carries no magic items, doesn't ride a chariot or monstrous model, has no special rule occupying a magic item slot, and can't cast spells. If given to the Battle Standard Bearer instead, this applies to every regimental champion in the army (meeting the same conditions)." },
+  { id: "cm-flamingstandard", name: "Flaming Standard", cost: 10, cat: "banner", desc: "All attacks (both melee and missile) count as flaming and magical." },
+  { id: "cm-impetuousstandard", name: "Impetuous Standard", cost: 10, cat: "banner", desc: "Enemy units that declare they will stand and shoot in reaction to a charge by a unit with this standard will not be able to shoot and will hold instead." },
+  { id: "cm-bifrostbanner", name: "Bifrost Banner", cost: 20, cat: "banner", desc: "For movement purposes, treat difficult terrain, steep slopes, and water (including swamps and quicksand) as open terrain — no movement penalties apply. Line of sight is unaffected." },
+  { id: "cm-assaultbanner", name: "Assault Banner", cost: 20, cat: "banner", desc: "+1S on the first charge made by the bearer's unit (does not apply to mounts). One use only." },
+  { id: "cm-bannerlegion", name: "Banner of Legion", cost: 25, cat: "banner", desc: "May claim up to +4 in rank bonus." },
+  { id: "cm-phalanxstandard", name: "Phalanx Standard", cost: 25, cat: "banner", desc: "One extra rank fights to the front in melee combat with one attack. Infantry only." },
+  { id: "cm-bannerspellprotection", name: "Banner of Spell Protection", cost: 30, cat: "banner", desc: "Natural dispel 4+." },
+  { id: "cm-bannerglory", name: "Banner of Glory", cost: 30, cat: "banner", desc: "+1 WS (does not apply to mounts)." },
+  { id: "cm-bannermight", name: "Banner of Might", cost: 30, cat: "banner", desc: "+1 to hit on the first charge made by the bearer's unit (does not apply to mounts). One use only." },
+  { id: "cm-scarecrowbanner", name: "Scarecrow Banner", cost: 30, cat: "banner", desc: "Cannot be charged by units able to fly (the unit may choose another regiment to charge instead). Immune to hunting falcons (Falconers must choose another target) and cannot be targeted by the Flock of Doom spell (caster must choose another target)." },
+  { id: "cm-rendingbanner", name: "Rending Banner", cost: 40, cat: "banner", desc: "All attacks (including shooting) inflict a -1 penalty to armour save (does not apply to mounts)." },
+  { id: "cm-bannerspeed", name: "Banner of Speed", cost: 40, cat: "banner", desc: "+1 movement allowance (applies to steeds if given to cavalry regiments)." },
+  { id: "cm-bannerarcanewarding", name: "Banner of Arcane Warding", cost: 40, cat: "banner", desc: "4+ natural dispel that works even against Total Power. A successful dispel rebounds the spell 4D6\" from the standard bearer in a random direction, potentially hitting the first enemy unit in its path (or centring/redirecting a templated/line spell the same way). Only enemy units can be affected; several may be hit by a line spell." },
+  { id: "cm-bannermissileprotection", name: "Banner of Missile Protection", cost: 50, cat: "banner", desc: "4+ ward save vs. all shooting (including ranged spells, banshee howls, and such)." },
+  { id: "cm-valorousstandard", name: "Valorous Standard", cost: 50, cat: "banner", desc: "Resolute. Does not affect regiments immune to psychology." },
+  { id: "cm-bannerunyielding", name: "Banner of Unyielding", cost: 50, cat: "banner", desc: "Stubborn. Does not affect regiments immune to psychology." },
+  { id: "cm-standardshielding", name: "Standard of Shielding", cost: 50, cat: "banner", desc: "+1 armour save (or 6+ armour save if the unit had no armour save beforehand)." },
+  { id: "cm-inspiringstandard", name: "Inspiring Standard", cost: 50, cat: "banner", desc: "May re-roll any LD test. When used as a battle standard, all units within 18\" may re-roll LD tests." },
+  { id: "cm-bannergreatdeeds", name: "Banner of Great Deeds", cost: 50, cat: "banner", desc: "+1A on the first charge (does not apply to mounts). One use only. The second rank still only delivers one attack per model regardless of the models' number of attacks." },
+  { id: "cm-dreadbanner", name: "Dread Banner", cost: 60, cat: "banner", desc: "The regiment causes fear." },
+  { id: "cm-bannerwrath", name: "Banner of Wrath", cost: 80, cat: "banner", desc: "Bound spell. A magical missile flies from the banner and strikes a visible enemy unit within 18\": 1D6 flaming S3 hits, distributed like normal shooting, no armour save allowed. After use, roll 1D6 — on a 1 the banner is exhausted and cannot be used again." },
+];
+
+const COMMON_MAGIC_ITEMS_NO_ARCANE = COMMON_MAGIC_ITEMS.filter((i) => i.cat !== "arcane" && i.cat !== "familiar");
+
 const WOOD_ELVES_MAGIC_ITEMS = [
   { id: "mi-hagbane", name: "Hagbane Arrows", cost: 10, cat: "weapon", desc: "Requires a bow/longbow. Magic arrows wound on 4+, 1 wound = 1D3 wounds." },
   { id: "mi-flail", name: "Flail of Claws", cost: 10, cat: "weapon", desc: "Light flail, +1S first round only. Always strikes first. Hit models lose 1 attack that round." },
@@ -893,7 +1049,7 @@ const WOOD_ELVES = {
   key: "woodElves",
   name: "Wood Elves",
   tagline: "Guerrilla warfare from the deep groves of the Old World",
-  magicItems: WOOD_ELVES_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...WOOD_ELVES_MAGIC_ITEMS],
   themes: {
     default: "core",
     label: "Army Type",
@@ -1224,7 +1380,7 @@ const EMPIRE = {
   key: "empire",
   name: "The Empire",
   tagline: "The disciplined might of humanity's bulwark against the dark",
-  magicItems: EMPIRE_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...EMPIRE_MAGIC_ITEMS],
   compositionRules: [
     { kind: "requiresIfPresent", label: "Halfling Hot-Pot", trigger: [{ list: "chariots", id: "hotpot", name: "Halfling Hot-Pot" }], requires: [{ list: "regiments", id: "halflingbowmen", name: "Halfling Bowmen" }, { list: "regiments", id: "halflingmilitia", name: "Halfling Militia" }] },
     { kind: "requiresIfPresent", label: "Tzarina Katarin", trigger: [{ list: "specials", id: "tzarinakatarin", name: "Tzarina Katarin" }], requires: [{ list: "regiments", id: "kislevlancers", name: "Kislev Winged Lancers" }, { list: "regiments", id: "kislevkossars", name: "Kislev Kossars" }, { list: "regiments", id: "kislevhorsearchers", name: "Kislev Horse Archers" }] },
@@ -1564,10 +1720,10 @@ const EMPIRE = {
       note: "Rides a barded Warhorse. Carries full plate armour, a shield, a Runefang, and the Talisman of Ulric." },
     { id: "valmirvonraukov", name: "Valmir von Raukov, Elector Count of Ostland", cost: 120, stat: "The Elector Counts", role: "Lord",
       note: "Rides a barded Warhorse. Carries full plate armour, a shield, a Runefang, and the Dragon Bow." },
-    { id: "supremepatriarch", name: "The Supreme Patriarch of the Colleges of Magic", cost: 300, stat: "The Supreme Patriarch", role: "Wizard Lord",
+    { id: "supremepatriarch", name: "The Supreme Patriarch of the Colleges of Magic", cost: 300, stat: "The Supreme Patriarch", role: "Wizard Lord", tags: ["wizard"],
       note: "Uses Bright Magic. Carries the Staff of Volans — once per game may cast a spell for free as if cast with Total Power.", extraMagicItemSlots: 3,
       mountOption: { name: "Warhorse (may be barded, free)", cost: 0 } },
-    { id: "grandtheogonist", name: "Grand Theogonist Volkmar", cost: 300, stat: "Grand Theogonist Volkmar", role: "Lord",
+    { id: "grandtheogonist", name: "Grand Theogonist Volkmar", cost: 300, stat: "Grand Theogonist Volkmar", role: "Lord", tags: ["wizard"],
       note: "Rides the War Altar (a large chariot). Unbreakable. Carries the Horn of Sigismund (causes terror), The Jade Griffon (recovers all lost wounds after each phase), and the Staff of Command (becomes a level 2 wizard, any College Magic and High Magic) — all unique to him." },
     { id: "karlfranz", name: "The Emperor Karl Franz", cost: 260, stat: "The Emperor Karl Franz", role: "Lord (must be general)",
       note: "Cannot be fielded alongside Magnus the Pious. Carries full plate armour, a shield, the Imperial Crown, the Hammer of Sigmar, and the Silver Seal.", extraMagicItemSlots: 1,
@@ -1581,7 +1737,7 @@ const EMPIRE = {
     { id: "ludwigschwarzhelm", name: "Ludwig Schwarzhelm", cost: 140, stat: "Ludwig Schwarzhelm", role: "Battle Standard Bearer",
       note: "Carries full plate armour and the Sword of Justice.", extraMagicItemSlots: 1,
       mountOption: { name: "Barded Warhorse", cost: 15 } },
-    { id: "tzarinakatarin", name: "Tzarina Katarin, the Ice Queen of Kislev", cost: 200, stat: "Tzarina Katarin The Ice Queen", role: "Lord (Level 3 Wizard, Lore of Ice)",
+    { id: "tzarinakatarin", name: "Tzarina Katarin, the Ice Queen of Kislev", cost: 200, stat: "Tzarina Katarin The Ice Queen", role: "Lord (Level 3 Wizard, Lore of Ice)", tags: ["wizard"],
       note: "Requires a Kislev regiment in the army to include her (now flagged live by this builder). Rides a Warhorse. Carries the magic blade Fearfrost.", extraMagicItemSlots: 2 },
   ],
 };
@@ -1680,7 +1836,7 @@ const CHAOS_WARRIORS = {
     "Chaos Spawn: any model (friend or foe) can be transformed into a Chaos Spawn during the battle via the Eye of the God test after playing a Chaos Gift on a Marked character — not simulated here, see the rulebook.",
     "For armies under 2000pts, the general may be a regimental champion if no other character could fill the role, and — while ill-advised — may even be a Chaos Spawn General (who cannot impart Leadership to others).",
   ],
-  magicItems: CHAOS_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...CHAOS_MAGIC_ITEMS],
   characters: [
     {
       id: "chaoslord", name: "Chaos Lord", cost: 208, stat: "Chaos Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"],
@@ -1898,11 +2054,11 @@ const CHAOS_WARRIORS = {
     { id: "sigvald", name: "Prince Sigvald", cost: 308, stat: "Prince Sigvald", role: "Chaos Lord — not official WHR, needs opponent's agreement", impliedMark: "Slaanesh",
       note: "Mark of Slaanesh. Treats difficult terrain, steep slopes, and water as open ground for movement (can't see through it though) — extends to any unit he joins.",
       items: "Carries: The Auric Armour (1+ save combined with his Mirrored Shield, plus Regeneration 4+), Sliverslash (+2 attacks, always strikes first), the Mirrored Shield (mundane — grants Sigvald Stupidity while carried)." },
-    { id: "vilitch", name: "Vilitch the Curseling", cost: 503, stat: "Vilitch the Curseling", role: "Chaos Sorcerer Lord — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch",
+    { id: "vilitch", name: "Vilitch the Curseling", cost: 503, stat: "Vilitch the Curseling", role: "Chaos Sorcerer Lord — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch", tags: ["wizard"],
       note: "Mark of Tzeentch. Chaos Armour. His Fused Twin acts as a Spell Familiar without needing an extra model. If he dispels an enemy spell (targeting him or his unit) with a Dispel card, he keeps the power used to cast it. If an enemy wizard's Dispel card fails against his spell, he takes that card into his own hand.", extraMagicItemSlots: 2 },
-    { id: "festus", name: "Festus the Leechlord", cost: 359, stat: "Festus the Leechlord", role: "Chaos Sorcerer Champion — not official WHR, needs opponent's agreement", impliedMark: "Nurgle",
+    { id: "festus", name: "Festus the Leechlord", cost: 359, stat: "Festus the Leechlord", role: "Chaos Sorcerer Champion — not official WHR, needs opponent's agreement", impliedMark: "Nurgle", tags: ["wizard"],
       note: "Mark of Nurgle (in profile). Chaos Armour, Regeneration 4+. He and any unit he joins only pursue 1D6\" (binding captives), but captured units are worth double victory points. Pestilent Potions: a unit he joins gains a 5+ regeneration save and poisoned attacks (including his own) while he's with them." },
-    { id: "galrauch", name: "Galrauch, The Great Drake", cost: 640, stat: "Galrauch", role: "Two-Headed Chaos Dragon — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch",
+    { id: "galrauch", name: "Galrauch, The Great Drake", cost: 640, stat: "Galrauch", role: "Two-Headed Chaos Dragon — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch", tags: ["wizard"],
       note: "Large monster, flies, causes terror, 4+ scaly skin save. Mark of Tzeentch. A level 4 wizard (Tzeentch Magic). One head breathes fire (S4) or poison (S3, no save) each shooting phase; once per battle one head may instead breathe the Breath of Change (teardrop template, failed Toughness test on 1D6 removes the model from play) while the other head can't breathe that phase. Each turn, a failed Ld test makes the ancient Dragon spirit surface: no move/spells/breath, half his attacks turn on himself that phase (added to the enemy's combat res if already in combat)." },
   ],
 };
@@ -1918,7 +2074,7 @@ const BEASTMEN = {
     "Marks of Chaos are available to Beastmen characters exactly as for Chaos Warriors (see the Chaos Warriors army's rules text for what each Mark does); Dragon Ogre characters pay an additional +25pts for the Mark of Slaanesh.",
     "The Chaos Abomination is available if the army general is a Beastman/Minotaur/Dragon Ogre/Centaur Lord or Hero bearing the Mark of Chaos Undivided.",
   ],
-  magicItems: CHAOS_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...CHAOS_MAGIC_ITEMS],
   characters: [
     {
       id: "beastmanlord", name: "Beastman Lord", cost: 148, stat: "Beastman Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
@@ -2155,7 +2311,7 @@ const CHAOS_DAEMONS = {
     "Daemons normally cannot take magic items at all — the Daemonic Reward list (a separate, non-magic-item category that isn't affected by rules that negate magic items) is their equivalent.",
     "Nurgle's stench, Slaanesh's musk, and similar to-hit penalties don't stack, and are ineffective against models with a matching special rule (e.g. Plaguebearers fighting other Plaguebearers).",
   ],
-  magicItems: CHAOS_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...CHAOS_MAGIC_ITEMS],
   characters: [
     {
       id: "daemonprince", name: "Daemon Prince", cost: 200, stat: "Daemon Prince", magicItemSlots: 2, magicItemCategoryFilter: ["daemonicreward", "chaosbanner"],
@@ -2169,7 +2325,7 @@ const CHAOS_DAEMONS = {
       gearNote: "Large, causes terror, can fly. Bears the Mark of Khorne. Wears Chaos Armour (replaces the 4+ Daemonic Save with a 4+ armour save) and The Whip and Axe of Khorne (fixed — already reflected in his profile's 11 attacks and 1D3-wound multiplier).",
     },
     {
-      id: "lordofchange", name: "Lord of Change, Greater Daemon of Tzeentch", cost: 725, stat: "Lord of Change", magicItemSlots: 1, magicItemCategoryFilter: ["daemonicreward"], impliedMark: "Tzeentch",
+      id: "lordofchange", name: "Lord of Change, Greater Daemon of Tzeentch", cost: 725, stat: "Lord of Change", magicItemSlots: 1, magicItemCategoryFilter: ["daemonicreward"], impliedMark: "Tzeentch", tags: ["wizard"],
       gearNote: "Large, causes terror, can fly. Bears the Mark of Tzeentch. A level 5 wizard using Tzeentch Magic (fixed). May take 1 Daemonic Reward.",
     },
     {
@@ -2340,7 +2496,7 @@ const CHAOS_WARBAND = {
       { list: "regiments", id: "chaosknights", name: "Chaos Knights" },
     ] },
   ],
-  magicItems: CHAOS_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...CHAOS_MAGIC_ITEMS],
   characters: [
     {
       id: "chaoslord", name: "Chaos Lord", cost: 208, stat: "Chaos Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"],
@@ -2552,7 +2708,7 @@ const CHAOS_WARBAND = {
       gearNote: "Large, causes terror, can fly. Bears the Mark of Khorne. Wears Chaos Armour (replaces the 4+ Daemonic Save with a 4+ armour save) and The Whip and Axe of Khorne (fixed — already reflected in his profile's 11 attacks and 1D3-wound multiplier).",
     },
     {
-      id: "lordofchange", name: "Lord of Change, Greater Daemon of Tzeentch", cost: 725, stat: "Lord of Change", magicItemSlots: 1, magicItemCategoryFilter: ["daemonicreward"], impliedMark: "Tzeentch",
+      id: "lordofchange", name: "Lord of Change, Greater Daemon of Tzeentch", cost: 725, stat: "Lord of Change", magicItemSlots: 1, magicItemCategoryFilter: ["daemonicreward"], impliedMark: "Tzeentch", tags: ["wizard"],
       gearNote: "Large, causes terror, can fly. Bears the Mark of Tzeentch. A level 5 wizard using Tzeentch Magic (fixed). May take 1 Daemonic Reward.",
     },
     {
@@ -2855,11 +3011,11 @@ const CHAOS_WARBAND = {
     { id: "sigvald", name: "Prince Sigvald", cost: 308, stat: "Prince Sigvald", role: "Chaos Lord — not official WHR, needs opponent's agreement", impliedMark: "Slaanesh",
       note: "Mark of Slaanesh. Treats difficult terrain, steep slopes, and water as open ground for movement (can't see through it though) — extends to any unit he joins.",
       items: "Carries: The Auric Armour (1+ save combined with his Mirrored Shield, plus Regeneration 4+), Sliverslash (+2 attacks, always strikes first), the Mirrored Shield (mundane — grants Sigvald Stupidity while carried)." },
-    { id: "vilitch", name: "Vilitch the Curseling", cost: 503, stat: "Vilitch the Curseling", role: "Chaos Sorcerer Lord — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch",
+    { id: "vilitch", name: "Vilitch the Curseling", cost: 503, stat: "Vilitch the Curseling", role: "Chaos Sorcerer Lord — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch", tags: ["wizard"],
       note: "Mark of Tzeentch. Chaos Armour. His Fused Twin acts as a Spell Familiar without needing an extra model. If he dispels an enemy spell (targeting him or his unit) with a Dispel card, he keeps the power used to cast it. If an enemy wizard's Dispel card fails against his spell, he takes that card into his own hand.", extraMagicItemSlots: 2 },
-    { id: "festus", name: "Festus the Leechlord", cost: 359, stat: "Festus the Leechlord", role: "Chaos Sorcerer Champion — not official WHR, needs opponent's agreement", impliedMark: "Nurgle",
+    { id: "festus", name: "Festus the Leechlord", cost: 359, stat: "Festus the Leechlord", role: "Chaos Sorcerer Champion — not official WHR, needs opponent's agreement", impliedMark: "Nurgle", tags: ["wizard"],
       note: "Mark of Nurgle (in profile). Chaos Armour, Regeneration 4+. He and any unit he joins only pursue 1D6\" (binding captives), but captured units are worth double victory points. Pestilent Potions: a unit he joins gains a 5+ regeneration save and poisoned attacks (including his own) while he's with them." },
-    { id: "galrauch", name: "Galrauch, The Great Drake", cost: 640, stat: "Galrauch", role: "Two-Headed Chaos Dragon — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch",
+    { id: "galrauch", name: "Galrauch, The Great Drake", cost: 640, stat: "Galrauch", role: "Two-Headed Chaos Dragon — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch", tags: ["wizard"],
       note: "Large monster, flies, causes terror, 4+ scaly skin save. Mark of Tzeentch. A level 4 wizard (Tzeentch Magic). One head breathes fire (S4) or poison (S3, no save) each shooting phase; once per battle one head may instead breathe the Breath of Change (teardrop template, failed Toughness test on 1D6 removes the model from play) while the other head can't breathe that phase. Each turn, a failed Ld test makes the ancient Dragon spirit surface: no move/spells/breath, half his attacks turn on himself that phase (added to the enemy's combat res if already in combat)." },
     { id: "kholek", name: "Kholek Suneater", cost: 485, stat: "Kholek Suneater", role: "Dragon Ogre Lord — not official WHR, needs opponent's agreement", impliedMark: "Chaos Undivided",
       note: "Large monster, causes terror, immune to psychology, 5+ scaly-skin save, frenzied if hit by enemy lightning. Mark of Chaos Undivided (in profile). In the shooting phase, targets an unengaged visible enemy unit: on 2-6 it takes 1D6 S6 lightning hits, on a 1 Kholek is hit instead. Lightning-based spells targeting a unit within 12\" of him are redirected to him instead.",
@@ -2926,7 +3082,7 @@ const HIGH_ELVES = {
   key: "highelves",
   name: "High Elves",
   tagline: "The fading, feuding nobility of Ulthuan, holding the line against the dark",
-  magicItems: HIGH_ELF_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...HIGH_ELF_MAGIC_ITEMS],
   armyWideRules: [
     "Elven stoicism: High Elves (excluding non-elf entities in the army) remain resolute against Dark Elves — when a resolute unit takes an Ld-based test, roll an extra 1D6 and discard the highest result.",
     "Lightweight barding: High Elf cavalry suffer no movement reduction for wearing barding.",
@@ -3229,7 +3385,7 @@ const DWARFS = {
   key: "dwarfs",
   name: "Dwarfs",
   tagline: "Stoic, ironclad holds standing against the dark and the endless grudge",
-  magicItems: DWARF_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS_NO_ARCANE, ...DWARF_MAGIC_ITEMS],
   armyWideRules: [
     "Dwarfs hate all Orcs & Goblins — Orcs, Goblins, Snotlings, and Hobgoblins (but not Ogres, Trolls, or Giants).",
     "Dwarfs suffer -1 Ld if they fight within 8\" of elven allies (High Elves or Wood Elves).",
@@ -3465,7 +3621,7 @@ const BRETONNIA = {
   key: "bretonnia",
   name: "The Grand Army of Bretonnia",
   tagline: "Chivalrous knights and the peasant levy that bears the realm's weight",
-  magicItems: BRETONNIA_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...BRETONNIA_MAGIC_ITEMS],
   compositionRules: [
     { kind: "requiresAtLeastOne", label: "At least one regiment of Chevaliers", refs: [
       { list: "regiments", id: "chevalierserrant", name: "Chevaliers Errant" },
@@ -3763,7 +3919,7 @@ const ORCS_GOBLINS = {
   key: "orcsgoblins",
   name: "Orcs & Goblins",
   tagline: "An unstoppable, uncontrollable storm of green promising destruction wherever it goes",
-  magicItems: ORC_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...ORC_MAGIC_ITEMS],
   compositionRules: [
     { kind: "requiresIfPresent", label: "Common Orc characters", trigger: [{ list: "characters", tag: "commonOrc", name: "a Common Orc character" }], requires: [
       { list: "regiments", id: "orcboyz", name: "Orc Boyz" }, { list: "regiments", id: "orcarrerboyz", name: "Orc Arrer Boyz" }, { list: "regiments", id: "orcboarboyz", name: "Orc Boar Boyz" },
@@ -4392,7 +4548,7 @@ const ORCS_GOBLINS = {
     },
   ],
   specialCharacters: [
-    { id: "azhag", name: "Azhag the Slaughterer", cost: 450, stat: "Azhag the Slaughterer", role: "Common Orc Warlord",
+    { id: "azhag", name: "Azhag the Slaughterer", cost: 450, stat: "Azhag the Slaughterer", role: "Common Orc Warlord", tags: ["wizard"],
       note: "Wears light armour, carries a shield, rides a Wyvern. Wears the Crown of Sorcery, making him a level 3 wizard (Dark Magic) who may wear armour and still cast; he never needs to take Waaagh tests. No Orcs & Goblins regiment within 12\" of him needs to test animosity.", extraMagicItemSlots: 2 },
     { id: "gorfang", name: "Gorfang Rotgut", cost: 90, stat: "Gorfang Rotgut", role: "Common Orc Hero",
       note: "Hates Dwarfs — and so does any Common Orc regiment he joins (Big'uns included). Has the same mount/weapon/armour options as a normal Common Orc Hero.", extraMagicItemSlots: 2,
@@ -4471,7 +4627,7 @@ const DOGS_OF_WAR = {
   key: "dogsofwar",
   name: "Dogs of War",
   tagline: "A mercenary brotherhood — every sword, spear, and cannon sold to the highest bidder",
-  magicItems: DOGS_OF_WAR_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...DOGS_OF_WAR_MAGIC_ITEMS],
   compositionRules: [
     { kind: "requiresAtLeastOne", label: "At least one Human Old World regiment", refs: [
       { list: "regiments", id: "humanfoot", name: "Human Foot Soldiers" },
@@ -4795,7 +4951,7 @@ const CHAOS_DWARFS = {
   key: "chaosdwarfs",
   name: "Chaos Dwarfs",
   tagline: "High Hats from the Dark Lands — bound to Hashut, forging chains for the weak",
-  magicItems: [...CHAOS_DWARF_MAGIC_ITEMS, ...ORC_MAGIC_ITEMS],
+  magicItems: [...COMMON_MAGIC_ITEMS, ...CHAOS_DWARF_MAGIC_ITEMS, ...ORC_MAGIC_ITEMS],
   themes: {
     default: "core",
     options: [
@@ -5157,7 +5313,7 @@ const DARK_ELVES = {
   key: "darkelves",
   name: "Dark Elves",
   tagline: "The Druchii — cruel raiders and slavers of Naggaroth, sworn to Malekith and the Cult of Khaine",
-  magicItems: DARK_ELF_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...DARK_ELF_MAGIC_ITEMS],
   armyWideRules: [
     "All Dark Elves (i.e. not their mounts, nor Harpies or Hydras) hate all High Elves (but not Wood Elves).",
   ],
@@ -5424,7 +5580,7 @@ const SKAVEN = {
   key: "skaven",
   name: "Skaven",
   tagline: "The Under-Empire's rat-men — treacherous clans united only by the will of the Horned Rat",
-  magicItems: SKAVEN_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...SKAVEN_MAGIC_ITEMS],
   armyWideRules: [
     "Strength in numbers: Skaven regiments add their rank bonus to their Ld for all tests (panic, break, fear, etc.) — use the highest Ld present (the general's, if within 12\") plus the rank bonus. Doesn't apply if the regiment can't claim a rank bonus (fleeing, skirmishing, lost to a flank attack, etc.).",
     "Lead from the back: Skaven characters may stand in the rear rank of a regiment. Even if a Skaven character refuses a challenge, the regiment may still use his Ld and other special rules, including spellcasting.",
@@ -5585,10 +5741,10 @@ const SKAVEN = {
     { id: "snikch", name: "Deathmaster Snikch, Chief Assassin of Clan Eshin", cost: 225, stat: "Chief Assassin Deathmaster Snikch", role: "Follows the Assassin rules, with a twist — cannot be the army general",
       note: "Wields three poisoned blades as Assassins' weapons, +2 attacks for 6 total per round. Instead of infiltrating, may Scout (alone or with a Gutter Runners regiment). 4+ ward save. May take one additional magic item.",
       items: "Carries poisoned throwing stars and the Cloak of Shadows (if at least 4\" from the enemy at the start of the turn, cannot be charged, shot at, or targeted by a spell unless the opponent rolls a 6 to spot him — they may pick another target on a fail; if he's blocking a unit from being charged, simply move him aside to let the charge through) and the Bands of Power (enchanted, bound spell — if cast successfully, doubles the wielder's Strength until the next magic phase)." },
-    { id: "ikitclaw", name: "Ikit Claw, Chief Warlock of Clan Skryre", cost: 450, stat: "Chief Warlock Ikit Claw", role: "Warlord and Grey Seer",
+    { id: "ikitclaw", name: "Ikit Claw, Chief Warlock of Clan Skryre", cost: 450, stat: "Chief Warlock Ikit Claw", role: "Warlord and Grey Seer", tags: ["wizard"],
       note: "May use any spell deck except Waaagh Magic (as a Grey Seer, may use Grey-Seer-only spells; comes with four Warpstone Tokens). Unbreakable, but must flee along if his regiment flees. In the shooting phase, choose one: fire his pistol (magical warpstone bullets), cast Poison Wind Globes at double range (his high Strength), or fire his small Warpfire Thrower as a S4 breath weapon from his base (runs out on a preceding roll of 1-2 on a D6). May use all his gear and still cast spells. His mechanical claw's +1S is already reflected in his profile. May take three additional magic items.",
       items: "Carries the Storm Daemon, a magic halberd with a bound spell — may cast Warp Lightning (24\", 1D6 S5 hits, no armour save); after use, roll a die, on a 1 it's exhausted for the rest of the game (still counts as a magic halberd)." },
-    { id: "skrolk", name: "Lord Skrolk, Plaguelord of Clan Pestilens", cost: 325, stat: "Plaguelord Lord Skrolk", role: "Lord",
+    { id: "skrolk", name: "Lord Skrolk, Plaguelord of Clan Pestilens", cost: 325, stat: "Plaguelord Lord Skrolk", role: "Lord", tags: ["wizard"],
       note: "Frenzy. Terror. Can only join regiments of Plague Monks. Enemies in base contact suffer -1 to hit him in melee. If he's the general, Plague Monks count as the mainstay regiment type instead of Clanrat Warriors. May take one more magic item, which may be an arcane item.",
       items: "Carries the Liber Bubonicus (makes him a level 2 wizard who may pick spells from Skaven's Putrefy/Plague/Pestilent Breath/Wither or Nurgle's Stream of Corruption/Miasma of Pestilence/Stench of Nurgle — when he casts Nurgle spells, Clan Pestilens models get the same immunities Nurgle followers would) and the Rod of Corruption (magic weapon — living models hit must pass a Toughness test or die instantly with no save of any kind; only tests once per melee phase; if passed, wound normally)." },
     { id: "queek", name: "Warlord Queek Head-Taker", cost: 225, stat: "Warlord Queek Head-Taker", role: "Lord",
@@ -5682,7 +5838,7 @@ const VAMPIRE_COUNTS = {
   key: "vampirecounts",
   name: "Vampire Counts",
   tagline: "The night's aristocracy — decrepit castles that wake at the zenith of dark magic's power",
-  magicItems: [...UNDEAD_MAGIC_ITEMS, ...VC_BLOODLINE_POWERS],
+  magicItems: [...COMMON_MAGIC_ITEMS, ...UNDEAD_MAGIC_ITEMS, ...VC_BLOODLINE_POWERS],
   themes: {
     default: "voncarstein",
     label: "Bloodline",
@@ -5943,7 +6099,7 @@ const VAMPIRE_COUNTS = {
     },
   ],
   specialCharacters: [
-    { id: "vladisabella", name: "Vlad and Isabella von Carstein", cost: 600, stat: "Vampire Lord", role: "Von Carstein — Vlad is a Vampire Lord, Isabella a Vampire Thrall", theme: "voncarstein",
+    { id: "vladisabella", name: "Vlad and Isabella von Carstein", cost: 600, stat: "Vampire Lord", role: "Von Carstein — Vlad is a Vampire Lord, Isabella a Vampire Thrall", theme: "voncarstein", tags: ["wizard"],
       note: "Vlad is a level 2 wizard with the Dark Majesty bloodline power, and may take one additional magic item and one bloodline power. Isabella has the Transfix bloodline power. Vlad and Isabella always stay together and try to reunite if separated; if one is killed for good, the other gains frenzy and hatred.",
       items: "Vlad carries the Carstein Ring (one use only) — if slain, he returns to play immediately within 12\" of the killing spot, restored to one wound, having lost all equipment and magic items (spells and bloodline powers stay intact). This resurrection prevents the army from crumbling from the general's death." },
     { id: "mannfred", name: "Mannfred von Carstein", cost: 400, stat: "Vampire Count", role: "Von Carstein — Vampire Count with 4 magic levels", theme: "voncarstein",
@@ -5963,7 +6119,7 @@ const TOMB_KINGS = {
   key: "tombkings",
   name: "Tomb Kings",
   tagline: "The ancient kings of Nehekhara, called from their sleep of death to seek vengeance",
-  magicItems: UNDEAD_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...UNDEAD_MAGIC_ITEMS],
   armyWideRules: [
     "Undead models: immune to psychology, immune to poison, cause fear. May not march unless within 12\" of the general (undead characters excepted). Only charge reaction is hold. An undead monster whose rider is slain crumbles to dust immediately instead of rolling on the Monster Reaction Table.",
     "A dry army: save for Scorpions, every model in the Tomb Kings army is undead. There are no Zombies and no ethereal troops — only models subject to the crumble rule (Skeletons, Tomb Guard, Mummies, Carrion) or Unbreakable (Ushabti, Bone Giants).",
@@ -6152,7 +6308,7 @@ const CLASSIC_UNDEAD = {
   key: "classicundead",
   name: "Classic Undead",
   tagline: "Necromancers and Liches — the original 4th-edition Undead army, mixing Vampire Counts and Tomb Kings troop choices",
-  magicItems: [...UNDEAD_MAGIC_ITEMS, ...VC_BLOODLINE_POWERS],
+  magicItems: [...COMMON_MAGIC_ITEMS, ...UNDEAD_MAGIC_ITEMS, ...VC_BLOODLINE_POWERS],
   armyWideRules: [
     "Undead models: immune to psychology, immune to poison, cause fear. May not march unless within 12\" of the general (undead characters excepted). Only charge reaction is hold. An undead monster whose rider is slain crumbles to dust immediately instead of rolling on the Monster Reaction Table.",
     "Three ways to die: Unstable units (Zombies, all ethereal models) simply disappear on a failed break test. Units subject to the crumble rule (Skeletons, Wights, the Vampire Count, Mummies, Carrion) don't take break tests — instead they suffer a wound with no saves for each point the combat was lost by (reduced by one if the Battle Standard is within range). Unbreakable troops never crumble or break. The general's death causes all undead units to crumble immediately; undead characters are unaffected. A regiment led by a character instead makes a LD test against the character's LD — pass and it survives, fail and it crumbles entirely (not hard-enforced by this builder — a battle-phase trigger, not a list-building one).",
@@ -6343,11 +6499,11 @@ const CLASSIC_UNDEAD = {
   specialCharacters: [
     { id: "krell", name: "Krell, Lord of The Undead", cost: 250, stat: "Krell", role: "Wight Lord",
       note: "Causes terror. Carries the Armour of Fortune (a common magic item — heavy armour, 5+ ward save) and the Black Axe of Krell instead of a Wight-Blade (double handed, deals 1D6 wounds; a model wounded but not slain suffers an additional no-save wound on a roll of 1 in each subsequent magic phase). May take 1 additional magic item. May ride an Undead Steed for +30pts (barding free)." },
-    { id: "dieter", name: "Dieter Helsnicht, Doom Lord of Middenheim", cost: 600, stat: "Lich Lord", role: "A particularly powerful Necromancer Lord, with characteristics similar to a Lich Lord",
+    { id: "dieter", name: "Dieter Helsnicht, Doom Lord of Middenheim", cost: 600, stat: "Lich Lord", role: "A particularly powerful Necromancer Lord, with characteristics similar to a Lich Lord", tags: ["wizard"],
       note: "Rides a Manticore. Carries the Amulet of Doom, granting a 4+ ward save to himself and his mount. May take 3 additional magic items." },
-    { id: "heinrich", name: "Heinrich Kemmler, The Lichmaster", cost: 500, stat: "Lich Lord", role: "A particularly powerful Necromancer Lord, with characteristics similar to a Lich Lord",
+    { id: "heinrich", name: "Heinrich Kemmler, The Lichmaster", cost: 500, stat: "Lich Lord", role: "A particularly powerful Necromancer Lord, with characteristics similar to a Lich Lord", tags: ["wizard"],
       note: "Carries the Cloak of the Night, letting him fly and be invulnerable to mundane (non-magical) attacks. May take 3 additional magic items." },
-    { id: "nagash", name: "Nagash, Supreme Lord of the Undead", cost: 700, stat: "Nagash", role: "Must always be the army general",
+    { id: "nagash", name: "Nagash, Supreme Lord of the Undead", cost: 700, stat: "Nagash", role: "Must always be the army general", tags: ["wizard"],
       note: "Undead, subject to the crumble rule, large, causes terror. A level 5 wizard (thanks to the Book of Nagash — already reflected in his level) who may handpick spells.",
       items: "Carries Mortis — the Great Blade of Death (+1 Strength, already reflected; each wound inflicted restores one wound Nagash lost earlier in the battle), the Black Armour of Nagash (4+ armour save, 4+ ward save, 4+ natural dispel — he may still cast spells while wearing it), the Book of Nagash (+1 magic level, already reflected), a Dispel Magic Scroll, and the Staff of Power (comes with 1D6+1 power cards taken from the winds of magic deck at the start of the battle, spendable throughout)." },
   ],
@@ -6376,7 +6532,7 @@ const KISLEV = {
   key: "kislev",
   name: "Kislev",
   tagline: "North of the Empire — windswept plains and dark birch glades, a realm hardened by a thousand years of Norse raids and the ever-present threat of Chaos",
-  magicItems: KISLEV_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...KISLEV_MAGIC_ITEMS],
   compositionRules: [
     { kind: "mutualExclusion", refs: [
       { list: "specials", id: "katarin", name: "Tzarina Katarin" },
@@ -6531,7 +6687,7 @@ const KISLEV = {
     },
   ],
   specialCharacters: [
-    { id: "katarin", name: "Tzarina Katarin the Ice Queen of Kislev", cost: 200, stat: "Tzarina Katarin", role: "Lord — current ruler of Kislev, level 3 wizard using the lore of Ice",
+    { id: "katarin", name: "Tzarina Katarin the Ice Queen of Kislev", cost: 200, stat: "Tzarina Katarin", role: "Lord — current ruler of Kislev, level 3 wizard using the lore of Ice", tags: ["wizard"],
       note: "Rides a Warhorse. May take two additional magic items. May not be fielded alongside Boris Ursus or Igor the Terrible.",
       items: "Carries the magic blade Fearfrost." },
     { id: "borisursus", name: "Boris Ursus, The Red Tzar", cost: 160, stat: "Boris Ursus", role: "A fierce warrior and devout follower of the Bear God",
@@ -6559,7 +6715,7 @@ const KISLEV = {
         { id: "manticore", name: "Manticore", cost: 215, stat: "Manticore" },
         { id: "chimera", name: "Chimera", cost: 265, stat: "Chimera" },
       ] },
-    { id: "miska", name: "Miska the Slaughterer", cost: 250, stat: "Miska the Slaughterer", role: "Most famous of the Khan-Queens, daughter of Boris Ursus",
+    { id: "miska", name: "Miska the Slaughterer", cost: 250, stat: "Miska the Slaughterer", role: "Most famous of the Khan-Queens, daughter of Boris Ursus", tags: ["wizard"],
       note: "Armed with a poisoned hand weapon, heavy armour, and a shield. Subject to frenzy. May take one additional magic item.",
       items: "Carries the Crown of Icicles — Miska becomes a level 3 wizard using Ice Magic and may cast spells while wearing armour.",
       mounts: [
@@ -6577,6 +6733,7 @@ const NORSE = {
   name: "Norse",
   tagline: "Hardy barbarians of the Hird — sailors, traders, and raiders who plundered the Old World, Ulthuan, and Lustria alike",
   magicItems: [
+    ...COMMON_MAGIC_ITEMS,
     { id: "nrs-dainsleif", name: "Dainsleif", cost: 10, cat: "weapon", desc: "Forged by the Dwarf Runesmith Dain. Any living model wounded by this blade cannot heal and continues to bleed — must be removed as a casualty at the end of the battle." },
     { id: "nrs-gram", name: "Gram", cost: 10, cat: "weapon", desc: "Made by the Dwarf Runesmith Regin for Dragon Slaying. Automatically wounds (no armour save) any Dragon, Wyvern, Hydra, Cold One, Horned One, Terradon, Salamander, Carnosaur, or Stegadon." },
     { id: "nrs-tyrfing", name: "Tyrfing", cost: 40, cat: "weapon", desc: "Forged by Dwarf Runesmiths Durin and Dvalin. The wielder gains +2 attacks and +2 Strength in melee. Cursed: on a to-hit roll of 1, the wielder hits a random friendly model in base-to-base contact instead (if any are present)." },
@@ -6801,7 +6958,7 @@ const HALFLINGS = {
   key: "halflings",
   name: "Halflings of the Moot",
   tagline: "Rural, earthy, and expressive to a fault — good food, strong drink, and a casual relationship with other people's property",
-  magicItems: HALFLING_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...HALFLING_MAGIC_ITEMS],
   armyWideRules: [
     "Foresters: all Halfling regiments and characters (and Treemen) move through woods without any penalty to movement.",
     "Liberated Magic Items: beyond the small curated pool above, Halfling armies may in principle choose magic items from ANY army book, restricted to hand weapons, bows, light armour, and enchanted items only, at a rate of one item from another book per 800 points (or part thereof) of models in the force, ignoring that item's normal restrictions (a Halfling can carry a Chaos-Power-specific item or a Bretonnian-Commoner-only item freely, since Halflings are immune to the effects of Chaos). They may also commission exactly one Dwarf Rune Item. This builder's own item pool above is a representative curated subset, not the full any-book selection — the 800pt ratio and true any-book access are not mechanically enforced.",
@@ -6951,7 +7108,7 @@ const OGRES = {
   key: "ogres",
   name: "Ogre Mercenaries",
   tagline: "Nomads from the eastern steppes — adaptable, pragmatic, and famously willing to fight on both sides of the same war",
-  magicItems: OGRE_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...OGRE_MAGIC_ITEMS],
   compositionRules: [
     { kind: "requiresAtLeastOne", label: "At least one Ogre regiment", refs: [
       { list: "regiments", id: "ogres-main", name: "Ogres" },
@@ -7075,7 +7232,7 @@ const LIZARDMEN = {
   key: "lizardmen",
   name: "Lizardmen",
   tagline: "From the steaming jungles of Lustria — an ancient, reptilian civilization guided by the Slann Mage Priests toward the unfathomable plans of the Old Ones",
-  magicItems: LIZARDMEN_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...LIZARDMEN_MAGIC_ITEMS],
   armyWideRules: [
     "Blowpipes: no long-range penalty. Darts may be poisoned (+1 Strength). Range 12\", Strength 3, may shoot twice at -1 to hit.",
     "Aquatic: Skinks move through water without penalty. Regiments that include Cold Ones lose this rule (see Cold One special rules below).",
@@ -7274,7 +7431,7 @@ const SLANN_EMPIRE = {
   key: "slann",
   name: "The Slann Empire",
   tagline: "The original Slann army of 2nd/3rd edition, restored — Stone Age heirs to a starfaring civilization, ruling Lustria through the Mage Priests and their Lizardmen servitors",
-  magicItems: SLANN_MAGIC_ITEMS,
+  magicItems: [...COMMON_MAGIC_ITEMS, ...SLANN_MAGIC_ITEMS],
   compositionRules: [
     { kind: "ratio", label: "Auxiliary (Lizardmen/Lobotomised/Native Tribe)", numerator: [
       { list: "regiments", id: "lobotomisedslaves", name: "Lobotomised Human Slaves" },
@@ -7607,7 +7764,50 @@ function detachmentCost(d, armyData) {
   return dtype.perModel * d.size;
 }
 
-function regimentCost(inst, def, armyData) {
+// Extracts just the champion's own point contribution to a regiment (baseCost/option cost plus
+// any magic items on the champion). Used both by regimentCost (champion is always added to the
+// regiment's total) and by the Banner of Champions bucket-accounting logic, which needs to know
+// how much of a regiment's cost came from its champion.
+function regimentChampionCost(inst, def, armyData) {
+  let total = 0;
+  if (inst.championIncluded && def.champion) {
+    total += def.champion.baseCost;
+    (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+  }
+  if (inst.championOptionId && def.championOptions) {
+    const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
+    if (opt) {
+      total += opt.cost;
+      (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+    }
+  }
+  return total;
+}
+
+// A regiment's champion is eligible for the Banner of Champions' bucket swap only if he carries no
+// magic items, isn't mounted on a chariot/monstrous model, and doesn't cast spells (i.e. isn't a
+// wizard) — mirrors the item's own wording. Chariot/monstrous-mount champions and championOptions
+// that grant a genuinely different creature (Vampire Thrall, Wight Champion, etc., which already
+// aren't modeled as "baseCost adds a rider" but as a flat creature swap) are treated as eligible
+// unless they explicitly have a mount or are wizards, since the app has no notion of "champion rides
+// a chariot" beyond the regiment's own mount/kind.
+function championEligibleForBannerOfChampions(inst, def, armyData) {
+  if (inst.championIncluded && def.champion) {
+    if ((inst.championMagicItemIds || []).length > 0) return false;
+    if (isWizard(def.champion, inst)) return false;
+    return true;
+  }
+  if (inst.championOptionId && def.championOptions) {
+    const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
+    if (!opt) return false;
+    if ((inst.championMagicItemIds || []).length > 0) return false;
+    if (isWizard(opt, inst)) return false;
+    return true;
+  }
+  return false;
+}
+
+function regimentCost(inst, def, armyData, roster) {
   if (def.kind === "composite") {
     let total = 0;
     (def.composition || []).forEach((c) => { total += (inst.composition?.[c.id] || 0) * c.cost; });
@@ -7633,19 +7833,16 @@ function regimentCost(inst, def, armyData) {
   }
   if (inst.standard && inst.magicBannerId) {
     const mi = miById(armyData.magicItems, inst.magicBannerId);
-    if (mi) total += mi.cost;
-  }
-  if (inst.championIncluded && def.champion) {
-    total += def.champion.baseCost;
-    (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
-  }
-  if (inst.championOptionId && def.championOptions) {
-    const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
-    if (opt) {
-      total += opt.cost;
-      (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+    if (mi) {
+      if (mi.regimentDiscount) {
+        const largeBattle = (roster?.pointLimit || 0) >= (mi.regimentDiscount.largeThreshold || Infinity);
+        const cap = largeBattle ? mi.regimentDiscount.capLarge : mi.regimentDiscount.capNormal;
+        total -= Math.min(total * mi.regimentDiscount.pct, cap);
+      }
+      total += mi.cost;
     }
   }
+  total += regimentChampionCost(inst, def, armyData);
   if (def.branchWraith && inst.branchWraithIncluded) {
     total += def.branchWraith.cost;
     (inst.branchWraithSpriteIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
@@ -7732,7 +7929,7 @@ function unitCost(unit, armyData, roster) {
   }
   if (unit.kind === "regiment") {
     const def = armyData.regiments.find((r) => r.id === unit.defId);
-    return regimentCost(unit, def, armyData);
+    return regimentCost(unit, def, armyData, roster);
   }
   if (unit.kind === "chariot") {
     const def = armyData.chariotsMonsters.find((c) => c.id === unit.defId);
@@ -7814,8 +8011,46 @@ function matchesRestrictionCondition(cond, context) {
   if (cond.tags && (!context.tags || !cond.tags.some((t) => context.tags.includes(t)))) return false;
   return true;
 }
+// A character/champion/special counts as a Wizard if: its name carries a "(Level N)" tag (the
+// overwhelming majority of casters), it buys levels dynamically via magicLevelOption (checked
+// against the live unit state), or it's been manually tagged "wizard" (used for the handful of
+// special characters whose caster status is prose-only, e.g. "a level 4 wizard (Dark Magic)" in
+// their note text, with no (Level N) in their name and no magicLevelOption to check against).
+function isWizard(entityDef, unit) {
+  if (!entityDef) return false;
+  if ((entityDef.tags || []).includes("wizard")) return true;
+  if (/\(level\s*\d/i.test(entityDef.name || "")) return true;
+  if (entityDef.magicLevelOption && unit && (unit.magicLevel ?? entityDef.magicLevelOption.min ?? 0) > 0) return true;
+  return false;
+}
+
+// Builds the context object passed to MagicItemPicker / isItemAllowed for a given bearer.
+// entityDef: the character/champion/championOption/special def granting the item slots.
+// unit: the roster instance (for magicLevel / mountId / mounted lookups) — may be null for
+// contexts where mounted-state doesn't apply (e.g. war machine crew).
+// extra: any additional context fields specific to the call site (characterId, mark, knightGroup...).
+function itemContext(entityDef, unit, extra = {}) {
+  const wizard = isWizard(entityDef, unit);
+  const baseTags = extra.tags || entityDef?.tags || [];
+  const tags = wizard && !baseTags.includes("wizard") ? [...baseTags, "wizard"] : baseTags;
+  return {
+    ...extra,
+    tags,
+    mounted: !!(unit?.mountId || unit?.mounted),
+    allowedWeaponSubtypes: entityDef?.allowedWeaponSubtypes,
+    allowedArmourSubtypes: entityDef?.allowedArmourSubtypes,
+  };
+}
+
 function isItemAllowed(item, context) {
   if (item.excludeTags && context?.tags && item.excludeTags.some((t) => context.tags.includes(t))) return false;
+  if (item.footOnly && context?.mounted) return false;
+  if (item.subtype === "shield" || item.subtype === "helmet" || item.subtype === "lightArmour" || item.subtype === "heavyArmour") {
+    if (context?.allowedArmourSubtypes && !context.allowedArmourSubtypes.includes(item.subtype)) return false;
+  }
+  if (item.subtype === "handWeapon" || item.subtype === "twoHanded" || item.subtype === "lance" || item.subtype === "bow") {
+    if (context?.allowedWeaponSubtypes && !context.allowedWeaponSubtypes.includes(item.subtype)) return false;
+  }
   if (!item.restrictedTo) return true;
   if (!context) return false;
   return item.restrictedTo.some((cond) => matchesRestrictionCondition(cond, context));
@@ -8301,7 +8536,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, selectedId, onSelect, onRemove }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -8339,6 +8574,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
       {themeGateWarning && (
         <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
           <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--burgundy)" }}>{themeGateWarning}</div>
+        </div>
+      )}
+      {endlessBannerWarnings && endlessBannerWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic Banner:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 12.5, color: "var(--burgundy)" }}>
+            {endlessBannerWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
         </div>
       )}
       {compositionInfo && (
@@ -8434,7 +8677,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <input type="radio" name={`mark-${unit.instanceId}`} checked={(unit.mark || def.markGroup.options[0]) === opt}
                   onChange={() => {
-                    const context = { characterId: def.id, mark: opt, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] };
+                    const context = itemContext(def, unit, { characterId: def.id, mark: opt, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
                     const filteredItems = (unit.magicItemIds || []).filter((id) => {
                       const mi = miById(armyData.magicItems, id);
                       return mi ? isItemAllowed(mi, context) : true;
@@ -8591,7 +8834,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
             categoryFilter={def.magicItemCategoryFilter}
-            context={{ characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] }}
+            context={itemContext(def, unit, { characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
             onToggle={(id) => {
               const cur = unit.magicItemIds || [];
               const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
@@ -8604,7 +8847,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.bloodlinePowerIds || []} maxSlots={def.bloodlinePowerSlots} usedElsewhere={usedElsewhere}
             categoryFilter={["bloodlinepower"]}
-            context={{ characterId: def.id, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] }}
+            context={itemContext(def, unit, { characterId: def.id, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
             onToggle={(id) => {
               const cur = unit.bloodlinePowerIds || [];
               const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
@@ -8758,7 +9001,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
           <span className="whr-label">Magic Banner (optional)</span>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicBannerId ? [unit.magicBannerId] : []} maxSlots={1} usedElsewhere={usedElsewhere}
             categoryFilter={["banner"]}
-            context={{ regimentId: def.id, knightGroup: def.knightGroup, tags: def.tags || [] }}
+            context={itemContext(def, unit, { regimentId: def.id, knightGroup: def.knightGroup, tags: def.tags || [] })}
             onToggle={(id) => updateUnit({ ...unit, magicBannerId: unit.magicBannerId === id ? null : id })} />
         </div>
       )}
@@ -8784,7 +9027,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                   <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <input type="radio" name={`championmark-${unit.instanceId}`} checked={(unit.championMark || def.champion.markGroup.options[0]) === opt}
                       onChange={() => {
-                        const context = { regimentId: def.id, mark: opt, tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] };
+                        const context = itemContext(def.champion, unit, { regimentId: def.id, mark: opt, tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
                         const filteredItems = (unit.championMagicItemIds || []).filter((id) => {
                           const mi = miById(armyData.magicItems, id);
                           return mi ? isItemAllowed(mi, context) : true;
@@ -8800,7 +9043,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
           {unit.championIncluded && def.champion.magicItemSlots > 0 && (
             <MagicItemPicker items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={def.champion.magicItemSlots} usedElsewhere={usedElsewhere}
               categoryFilter={def.champion.magicItemCategoryFilter}
-              context={{ regimentId: def.id, knightGroup: def.knightGroup, mark: unit.championMark || def.champion.markGroup?.options?.[0], tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] }}
+              context={itemContext(def.champion, unit, { regimentId: def.id, knightGroup: def.knightGroup, mark: unit.championMark || def.champion.markGroup?.options?.[0], tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
               onToggle={(id) => {
                 const cur = unit.championMagicItemIds || [];
                 const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
@@ -8839,7 +9082,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               <MagicItemPicker items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={opt.magicItemSlots} usedElsewhere={usedElsewhere}
                 categoryFilter={opt.magicItemCategoryFilter}
                 label={opt.itemSlotLabel || "Magic Item"}
-                context={{ regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] }}
+                context={itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
                 onToggle={(id) => {
                   const cur = unit.championMagicItemIds || [];
                   const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
@@ -9034,7 +9277,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
           <div style={{ marginTop: 14 }}>
             <MagicItemPicker items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
               categoryFilter={def.magicItemCategoryFilter}
-              context={{ regimentId: def.id }}
+              context={itemContext(def, unit, { regimentId: def.id })}
               onToggle={(id) => {
                 const cur = unit.extraMagicItemIds || [];
                 const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
@@ -9098,7 +9341,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
       )}
       {unit.commander && def.commanderCost != null && (
         <MagicItemPicker items={armyData.magicItems} selectedIds={unit.commanderMagicItemIds || []} maxSlots={def.commanderMagicItemSlots} usedElsewhere={usedElsewhere}
-          context={{ regimentId: def.id, tags: def.commanderTags || [] }}
+          context={itemContext(def, unit, { regimentId: def.id, tags: def.commanderTags || [] })}
           onToggle={(id) => {
             const cur = unit.commanderMagicItemIds || [];
             const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
@@ -9153,7 +9396,7 @@ function SpecialDetail({ def, unit, roster, updateUnit, armyData }) {
       {def.extraMagicItemSlots > 0 && (
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.extraMagicItemSlots} usedElsewhere={usedElsewhere}
-            context={{ characterId: def.id, tags: def.tags || [] }}
+            context={itemContext(def, unit, { characterId: def.id, tags: def.tags || [] })}
             onToggle={(id) => {
               const cur = unit.extraMagicItemIds || [];
               const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
@@ -9166,7 +9409,7 @@ function SpecialDetail({ def, unit, roster, updateUnit, armyData }) {
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.extraSpriteSlots} usedElsewhere={usedElsewhere}
             categoryFilter={["sprite"]}
-            context={{ characterId: def.id, tags: def.tags || [] }}
+            context={itemContext(def, unit, { characterId: def.id, tags: def.tags || [] })}
             onToggle={(id) => {
               const cur = unit.extraMagicItemIds || [];
               const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
@@ -9227,8 +9470,28 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
   }, [roster, armyData]);
 
   const regimentPoints = useMemo(() => {
+    const bsbUnit = roster.characters.find((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      return d && (d.tags || []).includes("bsb");
+    });
+    const armyWideBannerOfChampions = !!bsbUnit && (bsbUnit.magicItemIds || []).includes("cm-bannerofchampions");
     let t = 0;
-    roster.regiments.forEach((u) => (t += unitCost(u, armyData, roster)));
+    roster.regiments.forEach((u) => {
+      const d = armyData.regiments.find((r) => r.id === u.defId);
+      let cost = unitCost(u, armyData, roster);
+      if (d) {
+        const champCost = regimentChampionCost(u, d, armyData);
+        if (champCost > 0) {
+          const eligible = championEligibleForBannerOfChampions(u, d, armyData);
+          const bannerApplies = eligible && (u.magicBannerId === "cm-bannerofchampions" || armyWideBannerOfChampions);
+          // Per the Banner of Champions rule, a champion's cost counts towards Characters/Monsters/
+          // War Machines/Chariots by default — it only counts towards Regiments (as this app's own
+          // regimentCost() always bakes it in) when that specific banner is in play for him.
+          if (!bannerApplies) cost -= champCost;
+        }
+      }
+      t += cost;
+    });
     // the cheapest unit flagged countsAsFirstRegiment counts toward Regiments
     if (roster.chariots.length > 0) {
       const flaggedUnits = roster.chariots.filter((u) => {
@@ -9241,6 +9504,22 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
       }
     }
     return t;
+  }, [roster, armyData]);
+
+  const endlessBannerWarnings = useMemo(() => {
+    const warnings = [];
+    roster.regiments.forEach((u) => {
+      const mi = miById(armyData.magicItems, u.magicBannerId);
+      if (!mi || !mi.regimentDiscount) return;
+      const d = armyData.regiments.find((r) => r.id === u.defId);
+      if (!d) return;
+      const size = u.size || d.minSize;
+      const minSize = mi.minRegimentSize || 0;
+      if (minSize && size < minSize) {
+        warnings.push(`${d.name}: ${mi.name} requires a regiment of at least ${minSize} models (currently ${size}) and can't be given to a regiment carrying missile weapons — please verify.`);
+      }
+    });
+    return warnings;
   }, [roster, armyData]);
 
   const auxiliaryInfo = useMemo(() => {
@@ -9374,7 +9653,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
       const champ = def?.champion;
       if (!champ?.markGroup || !themeId || themeId === "Mixed" || !champ.markGroup.options.includes(themeId)) return u;
       if (u.championMark === themeId) return u;
-      const context = { regimentId: def.id, mark: themeId, tags: [...(champ.tags || []), themeId] };
+      const context = itemContext(champ, u, { regimentId: def.id, mark: themeId, tags: [...(champ.tags || []), themeId] });
       const filteredItems = (u.championMagicItemIds || []).filter((id) => {
         const mi = miById(armyData.magicItems, id);
         return mi ? isItemAllowed(mi, context) : true;
@@ -9393,7 +9672,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         next = { ...next, mark: themeId };
         const lockedMountDef = (rawDef.mounts || []).find((m) => m.id === next.mountId);
         if (lockedMountDef?.requiresMark && lockedMountDef.requiresMark !== themeId) next = { ...next, mountId: null };
-        const lockContext = { characterId: rawDef.id, mark: themeId, tags: [...(rawDef.tags || []), themeId] };
+        const lockContext = itemContext(rawDef, next, { characterId: rawDef.id, mark: themeId, tags: [...(rawDef.tags || []), themeId] });
         const lockFiltered = (next.magicItemIds || []).filter((id) => {
           const mi = miById(armyData.magicItems, id);
           return mi ? isItemAllowed(mi, lockContext) : true;
@@ -9408,7 +9687,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         const clamped = Math.max(min, Math.min(max, next.magicLevel ?? min));
         if (clamped !== next.magicLevel) next = { ...next, magicLevel: clamped };
       }
-      const context = { characterId: def.id, tags: [...(def.tags || []), themeId] };
+      const context = itemContext(def, next, { characterId: def.id, tags: [...(def.tags || []), themeId] });
       const filteredItems = (next.magicItemIds || []).filter((id) => {
         const mi = miById(armyData.magicItems, id);
         return mi ? isItemAllowed(mi, context) : true;
@@ -9491,7 +9770,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
