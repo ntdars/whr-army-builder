@@ -9078,6 +9078,15 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
+      {(autoStandard || unit.standard) && (
+        <div style={{ marginTop: 10 }}>
+          <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicBannerId ? [unit.magicBannerId] : []} maxSlots={1} usedElsewhere={usedElsewhere}
+            categoryFilter={["banner"]} label="Magic Banner"
+            context={itemContext(def, unit, { regimentId: def.id, knightGroup: def.knightGroup, tags: def.tags || [] })}
+            onToggle={(id) => updateUnit({ ...unit, magicBannerId: unit.magicBannerId === id ? null : id })} />
+        </div>
+      )}
+
       {def.champion && unit.championIncluded && (def.champion.markGroup || def.champion.magicItemSlots > 0) && (
         <div style={{ marginTop: 14 }}>
           {def.champion.markGroup && (
@@ -9111,16 +9120,6 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                 updateUnit({ ...unit, championMagicItemIds: next });
               }} />
           )}
-        </div>
-      )}
-
-      {(autoStandard || unit.standard) && (
-        <div style={{ marginTop: 10 }}>
-          <span className="whr-label">Magic Banner</span>
-          <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicBannerId ? [unit.magicBannerId] : []} maxSlots={1} usedElsewhere={usedElsewhere}
-            categoryFilter={["banner"]}
-            context={itemContext(def, unit, { regimentId: def.id, knightGroup: def.knightGroup, tags: def.tags || [] })}
-            onToggle={(id) => updateUnit({ ...unit, magicBannerId: unit.magicBannerId === id ? null : id })} />
         </div>
       )}
 
