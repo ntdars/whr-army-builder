@@ -1074,6 +1074,7 @@ const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enc
 // "banner") should ever be offered one. Used as the fallback whenever an entity doesn't specify
 // its own magicItemCategoryFilter (which otherwise defaults to "every category, no restriction").
 const NON_BANNER_CATEGORIES = Object.keys(MI_CATEGORY_LABEL).filter((c) => c !== "banner");
+const NON_ARCANE_CATEGORIES = Object.keys(MI_CATEGORY_LABEL).filter((c) => c !== "arcane");
 // Battle Standard Bearers (tags include "bsb") are the one kind of plain character whose personal
 // item slot conventionally doubles as the unit's magic banner — give them NON_BANNER_CATEGORIES
 // plus "banner" back unless they already specify their own magicItemCategoryFilter.
@@ -4049,6 +4050,7 @@ const ORCS_GOBLINS = {
     "All Goblins (Common, Night, Forest) fear Elves unless they outnumber them two-to-one. Without any Orcs in the army, Common Goblin character Ld all increase by 1 (this includes Grom) — not enforced by the builder. Night Goblins hate Dwarfs but not Chaos Dwarfs. Forest Goblins (including Spider Riders) cross woods without movement penalty, and in an army with no Orcs at all, Forest Goblin short bows may be upgraded to poisoned arrows — offered here as a normal purchasable option without enforcing the no-Orcs condition.",
     "Night Goblin Shamans carry a magic mushroom (eat it for 1D6 extra magic cards, risking an explosive death on a failed Waaagh test) — a battle-phase mechanic, not modeled here.",
     "A Forest Goblin Shaman doesn't explode on a failed Waaagh test followed by a roll of 1-5 like other Shamans — instead he goes into a momentary trance (can't do anything that phase, including casting or dispelling) and he and his mount move 1D6\" in a random direction, leaving his regiment if he was in one. A battle-phase mechanic, not modeled here.",
+    "Magic Banner Q&A: a joined character (of any type) follows the regiment's psychology and movement, so a regiment carrying the Evil Sun Banner or Stalker Banner still benefits even with, say, an Orc character attached — animosity and movement are regiment-wide effects the character shares. Other Goblin-only banners' combat/magic benefits do not extend to a joined character of a different type. Note Forest Goblins also lose their woods-movement bonus if joined by a model that doesn't have it.",
   ],
   characters: [
     {
@@ -4648,7 +4650,7 @@ const ORCS_GOBLINS = {
   ],
   specialCharacters: [
     { id: "azhag", theme: "core", name: "Azhag the Slaughterer", cost: 450, stat: "Azhag the Slaughterer", role: "Common Orc Warlord", tags: ["wizard"],
-      note: "Wears light armour, carries a shield, rides a Wyvern. Wears the Crown of Sorcery, making him a level 3 wizard (Dark Magic) who may wear armour and still cast; he never needs to take Waaagh tests. No Orcs & Goblins regiment within 12\" of him needs to test animosity.", extraMagicItemSlots: 2 },
+      note: "Wears light armour, carries a shield, rides a Wyvern. Wears the Crown of Sorcery, making him a level 3 wizard (Dark Magic) who may wear armour and still cast; he never needs to take Waaagh tests. No Orcs & Goblins regiment within 12\" of him needs to test animosity.", extraMagicItemSlots: 2, magicItemCategoryFilter: NON_ARCANE_CATEGORIES },
     { id: "gorfang", theme: "core", name: "Gorfang Rotgut", cost: 90, stat: "Gorfang Rotgut", role: "Common Orc Hero",
       note: "Hates Dwarfs — and so does any Common Orc regiment he joins (Big'uns included). Has the same mount/weapon/armour options as a normal Common Orc Hero.", extraMagicItemSlots: 2,
       mounts: [
@@ -9683,6 +9685,7 @@ function SpecialDetail({ def, unit, roster, updateUnit, armyData }) {
       {def.extraMagicItemSlots > 0 && (
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.extraMagicItemSlots} usedElsewhere={usedElsewhere}
+            categoryFilter={def.magicItemCategoryFilter}
             context={itemContext(def, unit, { characterId: def.id, tags: def.tags || [] })}
             onToggle={(id) => toggleArrayField(unit, "extraMagicItemIds", id, updateUnit)} />
         </div>
