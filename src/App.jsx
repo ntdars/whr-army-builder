@@ -1158,46 +1158,46 @@ const WOOD_ELVES = {
       id: "magelord", name: "Mage Lord (level 4)", cost: 264, stat: "Mage Lord", magicItemSlots: 4,
       gearNote: "May take College Magic or High Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
         { id: "griffon", name: "Griffon", cost: 160, stat: "Griffon" },
         { id: "dragon", name: "Green Dragon", cost: 300, stat: "Green Dragon" },
-        { id: "stag", name: "Stag (free)", cost: 0, stat: "Stag", theme: "savage" },
+        { id: "stag", name: "Stag", cost: 0, stat: "Stag", theme: "savage" },
       ],
     },
     {
       id: "mastermage", name: "Master Mage (level 3)", cost: 186, stat: "Master Mage", magicItemSlots: 3,
       gearNote: "May take College Magic or High Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
-        { id: "stag", name: "Stag (free)", cost: 0, stat: "Stag", theme: "savage" },
+        { id: "stag", name: "Stag", cost: 0, stat: "Stag", theme: "savage" },
       ],
     },
     {
       id: "magechampion", name: "Mage Champion (level 2)", cost: 122, stat: "Mage Champion", magicItemSlots: 2,
       gearNote: "May take College Magic or High Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
-        { id: "stag", name: "Stag (free)", cost: 0, stat: "Stag", theme: "savage" },
+        { id: "stag", name: "Stag", cost: 0, stat: "Stag", theme: "savage" },
       ],
     },
     {
       id: "mage", name: "Mage (level 1)", cost: 58, stat: "Mage", magicItemSlots: 1,
       gearNote: "May take College Magic or High Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
-        { id: "stag", name: "Stag (free)", cost: 0, stat: "Stag", theme: "savage" },
+        { id: "stag", name: "Stag", cost: 0, stat: "Stag", theme: "savage" },
       ],
     },
     {
@@ -1226,7 +1226,7 @@ const WOOD_ELVES = {
       command: "standard", note: "Warriors with shields.",
       options: [
         { id: "spear", group: "melee", label: "Spears", cost: 0.5, per: "model" },
-        { id: "ahw", group: "melee", label: "Additional hand weapons instead of shield (free)", cost: 0, per: "model" },
+        { id: "ahw", group: "melee", label: "Additional hand weapons instead of shield", cost: 0, per: "model" },
         { id: "dhw", group: "melee", label: "Double handed weapons instead of shield", cost: 2, per: "model" },
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -1473,7 +1473,7 @@ const EMPIRE = {
       id: "wizardlord", name: "Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4,
       gearNote: "May take College Magic (and Ice Magic if the army includes Kislev regiments). May take as many magic items as levels (4).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "griffon", name: "Griffon", cost: 160, stat: "Griffon" },
       ],
@@ -1482,7 +1482,7 @@ const EMPIRE = {
       id: "masterwizard", name: "Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3,
       gearNote: "May take College Magic (and Ice Magic if the army includes Kislev regiments). May take as many magic items as levels (3).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -1490,7 +1490,7 @@ const EMPIRE = {
       id: "wizardchampion", name: "Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2,
       gearNote: "May take College Magic (and Ice Magic if the army includes Kislev regiments). May take as many magic items as levels (2).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -1498,7 +1498,7 @@ const EMPIRE = {
       id: "wizard", name: "Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1,
       gearNote: "May take College Magic (and Ice Magic if the army includes Kislev regiments). May take as many magic items as levels (1).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -1767,7 +1767,7 @@ const EMPIRE = {
       note: "Rides a barded Warhorse. Carries full plate armour, a shield, a Runefang, and the Dragon Bow." },
     { id: "supremepatriarch", name: "The Supreme Patriarch of the Colleges of Magic", cost: 300, stat: "The Supreme Patriarch", role: "Wizard Lord", tags: ["wizard"],
       note: "Uses Bright Magic. Carries the Staff of Volans — once per game may cast a spell for free as if cast with Total Power.", extraMagicItemSlots: 3,
-      mountOption: { name: "Warhorse (may be barded, free)", cost: 0 } },
+      mountOption: { name: "Warhorse (may take Barding free)", cost: 0 } },
     { id: "grandtheogonist", name: "Grand Theogonist Volkmar", cost: 300, stat: "Grand Theogonist Volkmar", role: "Lord", tags: ["wizard"],
       note: "Rides the War Altar (a large chariot). Unbreakable. Carries the Horn of Sigismund (causes terror), The Jade Griffon (recovers all lost wounds after each phase), and the Staff of Command (becomes a level 2 wizard, any College Magic and High Magic) — all unique to him." },
     { id: "karlfranz", name: "The Emperor Karl Franz", cost: 260, stat: "The Emperor Karl Franz", role: "Lord (must be general)",
@@ -1941,7 +1941,7 @@ const CHAOS_WARRIORS = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (free, may take barding)", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
         { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -1959,7 +1959,7 @@ const CHAOS_WARRIORS = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (free, may take barding)", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
         { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -1973,7 +1973,7 @@ const CHAOS_WARRIORS = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (free, may take barding)", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
         { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -1987,7 +1987,7 @@ const CHAOS_WARRIORS = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (free, may take barding)", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
         { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -2012,7 +2012,7 @@ const CHAOS_WARRIORS = {
       options: [
         { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon", cost: 1.5, per: "model" },
         { id: "heavy", group: "melee", label: "Swap shield for double handed weapon or flail", cost: 3, per: "model" },
-        { id: "bows", group: "melee", label: "Give up armour & shield, take bows instead (free)", cost: 0, per: "model" },
+        { id: "bows", group: "melee", label: "Give up armour & shield, take bows instead", cost: 0, per: "model" },
       ],
       champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
     },
@@ -2610,7 +2610,7 @@ const CHAOS_WARBAND = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (free, may take barding)", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
         { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -2628,7 +2628,7 @@ const CHAOS_WARBAND = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (free, may take barding)", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
         { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -2642,7 +2642,7 @@ const CHAOS_WARBAND = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (free, may take barding)", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
         { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -2656,7 +2656,7 @@ const CHAOS_WARBAND = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (free, may take barding)", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
         { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -2800,7 +2800,7 @@ const CHAOS_WARBAND = {
       options: [
         { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon", cost: 1.5, per: "model" },
         { id: "heavy", group: "melee", label: "Swap shield for double handed weapon or flail", cost: 3, per: "model" },
-        { id: "bows", group: "melee", label: "Give up armour & shield, take bows instead (free)", cost: 0, per: "model" },
+        { id: "bows", group: "melee", label: "Give up armour & shield, take bows instead", cost: 0, per: "model" },
       ],
       champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES },
     },
@@ -3194,7 +3194,7 @@ const HIGH_ELVES = {
       id: "magelord", name: "Mage Lord (level 4)", cost: 264, stat: "Mage Lord", magicItemSlots: 4, tags: ["mage"],
       gearNote: "May take College Magic and High Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -3207,7 +3207,7 @@ const HIGH_ELVES = {
       id: "mastermage", name: "Master Mage (level 3)", cost: 186, stat: "Master Mage", magicItemSlots: 3, tags: ["mage"],
       gearNote: "May take College Magic and High Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -3217,7 +3217,7 @@ const HIGH_ELVES = {
       id: "magechampion", name: "Mage Champion (level 2)", cost: 122, stat: "Mage Champion", magicItemSlots: 2, tags: ["mage"],
       gearNote: "May take College Magic and High Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -3227,7 +3227,7 @@ const HIGH_ELVES = {
       id: "mage", name: "Mage (level 1)", cost: 58, stat: "Mage", magicItemSlots: 1, tags: ["mage"],
       gearNote: "May take College Magic and High Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -3247,7 +3247,7 @@ const HIGH_ELVES = {
       id: "warriors", name: "Elven Warriors", perModel: 7, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
       note: "Warriors with shields.",
       options: [
-        { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon (free)", cost: 0, per: "model" },
+        { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon", cost: 0, per: "model" },
         { id: "dhw", group: "melee", label: "Swap shield for double handed weapon", cost: 2, per: "model" },
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -3542,7 +3542,7 @@ const DWARFS = {
       id: "trollslayers", name: "Troll Slayers", perModel: 13, minSize: 5, stat: "Troll Slayer", command: "standard",
       note: "Additional hand weapons by default. Unbreakable, never armoured or shielded, always wound on 4+ regardless of toughness.",
       options: [
-        { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons (free)", cost: 0, per: "model" },
+        { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons", cost: 0, per: "model" },
       ],
       extraOption: { label: "Slayer-Berserkers (work like Night Goblin Fanatics)", cost: 30, max: 3, note: "Unofficial — needs your opponent's consent to field." },
       champion: { name: "Giant Slayer", baseCost: 20, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"] },
@@ -3745,7 +3745,7 @@ const BRETONNIA = {
       id: "wizardlord", name: "Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4,
       gearNote: "May take College Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "hippogriff", name: "Hippogriff", cost: 140, stat: "Hippogriff" },
@@ -3755,7 +3755,7 @@ const BRETONNIA = {
       id: "masterwizard", name: "Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3,
       gearNote: "May take College Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
@@ -3764,7 +3764,7 @@ const BRETONNIA = {
       id: "wizardchampion", name: "Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2,
       gearNote: "May take College Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
@@ -3773,7 +3773,7 @@ const BRETONNIA = {
       id: "wizard", name: "Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1,
       gearNote: "May take College Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
@@ -4118,7 +4118,7 @@ const ORCS_GOBLINS = {
       id: "commonorcshamanlord", theme: "core", name: "Common Orc Shaman Lord (level 4)", cost: 220, stat: "Orc Shaman Lord", magicItemSlots: 4, tags: ["commonOrc", "commonOrcShaman"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (4).",
       mounts: [
-        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "boar", name: "War Boar", cost: 0, stat: "War Boar" },
         { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
         { id: "wyvern", name: "Wyvern", cost: 140, stat: "Wyvern (Orc)" },
       ],
@@ -4127,7 +4127,7 @@ const ORCS_GOBLINS = {
       id: "commonorcmastershaman", theme: "core", name: "Common Orc Master Shaman (level 3)", cost: 155, stat: "Orc Master Shaman", magicItemSlots: 3, tags: ["commonOrc", "commonOrcShaman"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (3).",
       mounts: [
-        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "boar", name: "War Boar", cost: 0, stat: "War Boar" },
         { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
       ],
     },
@@ -4135,7 +4135,7 @@ const ORCS_GOBLINS = {
       id: "commonorcshamanchampion", theme: "core", name: "Common Orc Shaman Champion (level 2)", cost: 100, stat: "Orc Shaman Champion", magicItemSlots: 2, tags: ["commonOrc", "commonOrcShaman"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (2).",
       mounts: [
-        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "boar", name: "War Boar", cost: 0, stat: "War Boar" },
         { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
       ],
     },
@@ -4143,7 +4143,7 @@ const ORCS_GOBLINS = {
       id: "commonorcshaman", theme: "core", name: "Common Orc Shaman (level 1)", cost: 45, stat: "Orc Shaman", magicItemSlots: 1, tags: ["commonOrc", "commonOrcShaman"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (1).",
       mounts: [
-        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "boar", name: "War Boar", cost: 0, stat: "War Boar" },
         { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
       ],
     },
@@ -4180,7 +4180,7 @@ const ORCS_GOBLINS = {
       id: "savageorcshamanlord", theme: "core", name: "Savage Orc Shaman Lord (level 4)", cost: 250, stat: "Orc Shaman Lord", magicItemSlots: 4, tags: ["savageOrc", "savageOrcShaman"],
       gearNote: "Adorned with magic tattoos. Takes Waaagh! Spells. May take as many magic items as levels (4).",
       mounts: [
-        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "boar", name: "War Boar", cost: 0, stat: "War Boar" },
         { id: "wyvern", name: "Wyvern", cost: 140, stat: "Wyvern (Orc)" },
       ],
     },
@@ -4188,21 +4188,21 @@ const ORCS_GOBLINS = {
       id: "savageorcmastershaman", theme: "core", name: "Savage Orc Master Shaman (level 3)", cost: 185, stat: "Orc Master Shaman", magicItemSlots: 3, tags: ["savageOrc", "savageOrcShaman"],
       gearNote: "Adorned with magic tattoos. Takes Waaagh! Spells. May take as many magic items as levels (3).",
       mounts: [
-        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "boar", name: "War Boar", cost: 0, stat: "War Boar" },
       ],
     },
     {
       id: "savageorcshamanchampion", theme: "core", name: "Savage Orc Shaman Champion (level 2)", cost: 130, stat: "Orc Shaman Champion", magicItemSlots: 2, tags: ["savageOrc", "savageOrcShaman"],
       gearNote: "Adorned with magic tattoos. Takes Waaagh! Spells. May take as many magic items as levels (2).",
       mounts: [
-        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "boar", name: "War Boar", cost: 0, stat: "War Boar" },
       ],
     },
     {
       id: "savageorcshaman", theme: "core", name: "Savage Orc Shaman (level 1)", cost: 75, stat: "Orc Shaman", magicItemSlots: 1, tags: ["savageOrc", "savageOrcShaman"],
       gearNote: "Adorned with magic tattoos. Takes Waaagh! Spells. May take as many magic items as levels (1).",
       mounts: [
-        { id: "boar", name: "War Boar (free)", cost: 0, stat: "War Boar" },
+        { id: "boar", name: "War Boar", cost: 0, stat: "War Boar" },
       ],
     },
     {
@@ -4242,7 +4242,7 @@ const ORCS_GOBLINS = {
       id: "commongoblinshamanlord", name: "Common Goblin Shaman Lord (level 4)", cost: 170, stat: "Goblin Shaman Lord", magicItemSlots: 4, tags: ["commonGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (4).",
       mounts: [
-        { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
+        { id: "wolf", name: "Giant Wolf", cost: 0, stat: "Giant Wolf" },
         { id: "chariot", name: "Wolf Chariot (for the price of the chariot)", cost: 0, stat: "Light Chariot" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
@@ -4251,7 +4251,7 @@ const ORCS_GOBLINS = {
       id: "commongoblinmastershaman", name: "Common Goblin Master Shaman (level 3)", cost: 120, stat: "Goblin Master Shaman", magicItemSlots: 3, tags: ["commonGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (3).",
       mounts: [
-        { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
+        { id: "wolf", name: "Giant Wolf", cost: 0, stat: "Giant Wolf" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
@@ -4259,7 +4259,7 @@ const ORCS_GOBLINS = {
       id: "commongoblinshamanchampion", name: "Common Goblin Shaman Champion (level 2)", cost: 75, stat: "Goblin Shaman Champion", magicItemSlots: 2, tags: ["commonGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (2).",
       mounts: [
-        { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
+        { id: "wolf", name: "Giant Wolf", cost: 0, stat: "Giant Wolf" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
@@ -4267,7 +4267,7 @@ const ORCS_GOBLINS = {
       id: "commongoblinshaman", name: "Common Goblin Shaman (level 1)", cost: 30, stat: "Goblin Shaman", magicItemSlots: 1, tags: ["commonGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (1).",
       mounts: [
-        { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
+        { id: "wolf", name: "Giant Wolf", cost: 0, stat: "Giant Wolf" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
@@ -4304,7 +4304,7 @@ const ORCS_GOBLINS = {
       id: "forestgoblinshamanlord", name: "Forest Goblin Shaman Lord (level 4)", cost: 170, stat: "Goblin Shaman Lord", magicItemSlots: 4, tags: ["forestGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (4).",
       mounts: [
-        { id: "spidersteed", name: "Giant Spider (free)", cost: 0, stat: "Giant Spider" },
+        { id: "spidersteed", name: "Giant Spider", cost: 0, stat: "Giant Spider" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
@@ -4312,7 +4312,7 @@ const ORCS_GOBLINS = {
       id: "forestgoblinmastershaman", name: "Forest Goblin Master Shaman (level 3)", cost: 120, stat: "Goblin Master Shaman", magicItemSlots: 3, tags: ["forestGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (3).",
       mounts: [
-        { id: "spidersteed", name: "Giant Spider (free)", cost: 0, stat: "Giant Spider" },
+        { id: "spidersteed", name: "Giant Spider", cost: 0, stat: "Giant Spider" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
@@ -4320,7 +4320,7 @@ const ORCS_GOBLINS = {
       id: "forestgoblinshamanchampion", name: "Forest Goblin Shaman Champion (level 2)", cost: 75, stat: "Goblin Shaman Champion", magicItemSlots: 2, tags: ["forestGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (2).",
       mounts: [
-        { id: "spidersteed", name: "Giant Spider (free)", cost: 0, stat: "Giant Spider" },
+        { id: "spidersteed", name: "Giant Spider", cost: 0, stat: "Giant Spider" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
@@ -4328,7 +4328,7 @@ const ORCS_GOBLINS = {
       id: "forestgoblinshaman", name: "Forest Goblin Shaman (level 1)", cost: 30, stat: "Goblin Shaman", magicItemSlots: 1, tags: ["forestGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (1).",
       mounts: [
-        { id: "spidersteed", name: "Giant Spider (free)", cost: 0, stat: "Giant Spider" },
+        { id: "spidersteed", name: "Giant Spider", cost: 0, stat: "Giant Spider" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
@@ -4786,7 +4786,7 @@ const DOGS_OF_WAR = {
       id: "wizardlord", name: "Human Hireling Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4, tags: ["human", "wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -4794,7 +4794,7 @@ const DOGS_OF_WAR = {
       id: "masterwizard", name: "Human Hireling Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3, tags: ["human", "wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -4802,7 +4802,7 @@ const DOGS_OF_WAR = {
       id: "wizardchampion", name: "Human Hireling Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2, tags: ["human", "wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -4810,7 +4810,7 @@ const DOGS_OF_WAR = {
       id: "wizard", name: "Human Hireling Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1, tags: ["human", "wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (free, may take barding)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -5490,8 +5490,8 @@ const DARK_ELVES = {
       id: "sorcererlord", name: "Sorcerer Lord (level 4)", cost: 264, stat: "Mage Lord", magicItemSlots: 4, tags: ["wizard"],
       gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
-        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
         { id: "hydra", name: "War Hydra", cost: 160, stat: "War Hydra" },
@@ -5503,8 +5503,8 @@ const DARK_ELVES = {
       id: "mastersorcerer", name: "Master Sorcerer (level 3)", cost: 186, stat: "Master Mage", magicItemSlots: 3, tags: ["wizard"],
       gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
-        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
       ],
@@ -5513,8 +5513,8 @@ const DARK_ELVES = {
       id: "sorcererchampion", name: "Sorcerer Champion (level 2)", cost: 122, stat: "Mage Champion", magicItemSlots: 2, tags: ["wizard"],
       gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
-        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
       ],
@@ -5523,8 +5523,8 @@ const DARK_ELVES = {
       id: "sorcerer", name: "Sorcerer (level 1)", cost: 58, stat: "Mage", magicItemSlots: 1, tags: ["wizard"],
       gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
-        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
       ],
@@ -5549,7 +5549,7 @@ const DARK_ELVES = {
       note: "Elven Warriors with shields.",
       options: [
         { id: "spears", group: null, label: "Spears", cost: 0.5, per: "model" },
-        { id: "ahw", group: "melee2", label: "Swap shield for additional hand weapon (free)", cost: 0, per: "model" },
+        { id: "ahw", group: "melee2", label: "Swap shield for additional hand weapon", cost: 0, per: "model" },
         { id: "dhw", group: "melee2", label: "Swap shield for double handed weapon", cost: 2, per: "model" },
         { id: "armour", group: "armour", label: "Light armour", cost: 0.5, per: "model" },
         { id: "heavyarmour", group: "armour", label: "Heavy armour", cost: 2.5, per: "model" },
@@ -5642,7 +5642,7 @@ const DARK_ELVES = {
       note: "Immune to psychology. Causes fear. Casts spells as a Sorcerer Lord (magic level 4).",
       items: "Carries Circlet of Iron (arcane — grants an extra power or dispel card each magic phase), the Witch King's Armour (3+ armour save; enemies suffer -1 to hit him and his mount in both melee and shooting; may be worn along with the Spellshield and still cast spells), the Spellshield (a shield with 4+ natural dispel — a successful dispel with it inflicts a S6 hit, no save, on Malekith per power card spent), and Destroyer (a magic weapon — on a hit against a model with items or spells, roll a D6 per hit, on 4+ steal a random item or spell, usable until a new one is stolen, only one power stolen per melee phase).",
       mounts: [
-        { id: "coldonechariot", name: "Cold One Chariot with Scythed Wheels (free)", cost: 0, stat: "Heavy Chariot" },
+        { id: "coldonechariot", name: "Cold One Chariot with Scythed Wheels", cost: 0, stat: "Heavy Chariot" },
         { id: "blackdragon", name: "Black Dragon", cost: 321, stat: "Black Dragon" },
       ] },
     { id: "tullaris", name: "Tullaris of Har Ganeth", cost: 200, stat: "Tullaris of Har Ganeth", role: "Hero",
@@ -5657,7 +5657,7 @@ const DARK_ELVES = {
     { id: "morathi", name: "Morathi, The Hag Sorceress", cost: 300, stat: "Mage Lord", role: "Sorcerer Lord (level 4), using Slaanesh Magic",
       note: "May hand-pick her spells. May take four magic items.",
       mounts: [
-        { id: "steed", name: "Elven Steed (free, may take barding)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
       ] },
     { id: "hellebron", name: "Crone Hellebron, The Hag Queen", cost: 450, stat: "Elven Prince", role: "Lord",
@@ -6111,8 +6111,8 @@ const VAMPIRE_COUNTS = {
       id: "skeletonwarriors", name: "Skeleton Warriors", perModel: 4.5, minSize: 5, stat: "Skeleton", command: "standard", tags: ["undead", "skeletonBanner"],
       note: "Undead, subject to the crumble rule. Light armour or shield is free individually — taking both together costs +0.5pt/model per the book (not applied automatically here). Longbows/crossbows are only available if no other equipment (armour/shield/other weapon) is taken — not hard-enforced.",
       options: [
-        { id: "lightarmour", group: null, label: "Light armour (free)", cost: 0, per: "model" },
-        { id: "shield", group: null, label: "Shield (free)", cost: 0, per: "model" },
+        { id: "lightarmour", group: null, label: "Light armour", cost: 0, per: "model" },
+        { id: "shield", group: null, label: "Shield", cost: 0, per: "model" },
         { id: "heavyarmour", group: null, label: "Upgrade to heavy armour", cost: 1.5, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 1, per: "model" },
         { id: "halberds", group: "weapon", label: "Halberds", cost: 1, per: "model" },
@@ -6185,7 +6185,7 @@ const VAMPIRE_COUNTS = {
       id: "vampireknights", name: "Vampire Knights", perModel: 55, minSize: 5, stat: "Vampire Knight", mountStat: "War Horse", mountLabel: "War Horse", command: "standard", theme: "blooddragon", restriction: "0-1", tags: ["undead"],
       note: "Blood Dragon armies only, 0-1 regiment. Undead, subject to the crumble rule. Lances, Full Plate Armour, shields, living War Horses. May march even if not within 12\" of the general.",
       options: [
-        { id: "barding", group: null, label: "Barding (free)", cost: 0, per: "model" },
+        { id: "barding", group: null, label: "Barding", cost: 0, per: "model" },
       ],
       championOptions: [{ id: "thrall", name: "Vampire Thrall", cost: 85, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped like the rest of the regiment.", bloodlineSwap: { strigoi: { name: "Strigoi Thrall", stat: "Vampire Thrall (Strigoi)" } } }],
     },
@@ -6279,7 +6279,7 @@ const TOMB_KINGS = {
       id: "undeadpriestlord", name: "Undead Priest Lord (level 4)", cost: 240, stat: "Undead Priest Lord", magicItemSlots: 4, tags: ["wizard", "undeadPriest", "undeadCharacter"],
       gearNote: "Undead, subject to the crumble rule. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (4).",
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (free)", cost: 0, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed", cost: 0, stat: "Undead Steed" },
         { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
       ],
     },
@@ -6287,7 +6287,7 @@ const TOMB_KINGS = {
       id: "masterundeadpriest", name: "Master Undead Priest (level 3)", cost: 170, stat: "Master Undead Priest", magicItemSlots: 3, tags: ["wizard", "undeadPriest", "undeadCharacter"],
       gearNote: "Undead, subject to the crumble rule. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (3).",
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (free)", cost: 0, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed", cost: 0, stat: "Undead Steed" },
         { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
       ],
     },
@@ -6295,7 +6295,7 @@ const TOMB_KINGS = {
       id: "undeadpriestchampion", name: "Undead Priest Champion (level 2)", cost: 110, stat: "Undead Priest Champion", magicItemSlots: 2, tags: ["wizard", "undeadPriest", "undeadCharacter"],
       gearNote: "Undead, subject to the crumble rule. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (2).",
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (free)", cost: 0, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed", cost: 0, stat: "Undead Steed" },
         { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
       ],
     },
@@ -6303,7 +6303,7 @@ const TOMB_KINGS = {
       id: "undeadpriest", name: "Undead Priest (level 1)", cost: 50, stat: "Undead Priest", magicItemSlots: 1, tags: ["wizard", "undeadPriest", "undeadCharacter"],
       gearNote: "Undead, subject to the crumble rule. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (1).",
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (free)", cost: 0, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed", cost: 0, stat: "Undead Steed" },
         { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
       ],
     },
@@ -6341,8 +6341,8 @@ const TOMB_KINGS = {
       id: "skeletonwarriors-tk", name: "Skeleton Warriors", perModel: 4.5, minSize: 5, stat: "Skeleton", command: "standard", tags: ["undead", "tombKings", "skeletonBanner"],
       note: "Undead, subject to the crumble rule. Light armour or shield is free individually — taking both together costs +0.5pt/model per the book (not applied automatically here). Bows are only available if no other equipment is taken — not hard-enforced.",
       options: [
-        { id: "lightarmour", group: null, label: "Light armour (free)", cost: 0, per: "model" },
-        { id: "shield", group: null, label: "Shield (free)", cost: 0, per: "model" },
+        { id: "lightarmour", group: null, label: "Light armour", cost: 0, per: "model" },
+        { id: "shield", group: null, label: "Shield", cost: 0, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 1, per: "model" },
         { id: "bows", group: "weapon", label: "Bows", cost: 1.5, per: "model" },
       ],
@@ -6440,7 +6440,7 @@ const CLASSIC_UNDEAD = {
       id: "lichlord", name: "Lich Lord", cost: 360, stat: "Lich Lord", magicItemSlots: 4, tags: ["undeadCharacter", "wizard", "lichLord"],
       gearNote: "Undead, subject to the crumble rule. A level 4 wizard. May use Dark Magic or Necromancy Spells.",
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (free, barding free)", cost: 0, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed (may take Barding free)", cost: 0, stat: "Undead Steed" },
         { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
         { id: "wingednightmare", name: "Winged Nightmare", cost: 60, stat: "Winged Nightmare" },
         { id: "zombiedragon", name: "Zombie Dragon", cost: 300, stat: "Zombie Dragon" },
@@ -6540,8 +6540,8 @@ const CLASSIC_UNDEAD = {
       id: "skeletonwarriors", name: "Skeleton Warriors", perModel: 4.5, minSize: 5, stat: "Skeleton", command: "standard", tags: ["undead", "skeletonBanner"],
       note: "Undead, subject to the crumble rule. Light armour or shield is free individually — taking both together costs +0.5pt/model per the book (not applied automatically here). Longbows/crossbows are only available if no other equipment is taken — not hard-enforced.",
       options: [
-        { id: "lightarmour", group: null, label: "Light armour (free)", cost: 0, per: "model" },
-        { id: "shield", group: null, label: "Shield (free)", cost: 0, per: "model" },
+        { id: "lightarmour", group: null, label: "Light armour", cost: 0, per: "model" },
+        { id: "shield", group: null, label: "Shield", cost: 0, per: "model" },
         { id: "heavyarmour", group: null, label: "Upgrade to heavy armour", cost: 1.5, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 1, per: "model" },
         { id: "halberds", group: "weapon", label: "Halberds", cost: 1, per: "model" },
@@ -6911,22 +6911,22 @@ const NORSE = {
     {
       id: "volvegodelord", name: "Vølve/Gode Lord (level 4)", cost: 252, stat: "Vølve/Gode Lord", magicItemSlots: 4, tags: ["wizard"],
       gearNote: "May take College Magic and Ice Magic. May take as many magic items as levels (4).",
-      mounts: [{ id: "warhorse", name: "Warhorse (free)", cost: 0, stat: "War Horse" }],
+      mounts: [{ id: "warhorse", name: "Warhorse", cost: 0, stat: "War Horse" }],
     },
     {
       id: "mastervolvegode", name: "Master Vølve/Gode (level 3)", cost: 178, stat: "Master Vølve/Gode", magicItemSlots: 3, tags: ["wizard"],
       gearNote: "May take College Magic and Ice Magic. May take as many magic items as levels (3).",
-      mounts: [{ id: "warhorse", name: "Warhorse (free)", cost: 0, stat: "War Horse" }],
+      mounts: [{ id: "warhorse", name: "Warhorse", cost: 0, stat: "War Horse" }],
     },
     {
       id: "volvegodechampion", name: "Vølve/Gode Champion (level 2)", cost: 116, stat: "Vølve/Gode Champion", magicItemSlots: 2, tags: ["wizard"],
       gearNote: "May take College Magic and Ice Magic. May take as many magic items as levels (2).",
-      mounts: [{ id: "warhorse", name: "Warhorse (free)", cost: 0, stat: "War Horse" }],
+      mounts: [{ id: "warhorse", name: "Warhorse", cost: 0, stat: "War Horse" }],
     },
     {
       id: "volvegode", name: "Vølve/Gode (level 1)", cost: 54, stat: "Vølve/Gode", magicItemSlots: 1, tags: ["wizard"],
       gearNote: "May take College Magic and Ice Magic. May take as many magic items as levels (1).",
-      mounts: [{ id: "warhorse", name: "Warhorse (free)", cost: 0, stat: "War Horse" }],
+      mounts: [{ id: "warhorse", name: "Warhorse", cost: 0, stat: "War Horse" }],
     },
   ],
   regiments: [
@@ -7005,7 +7005,7 @@ const NORSE = {
       id: "trollslayers-norse", name: "Norse Dwarf Troll Slayers", perModel: 13, minSize: 5, stat: "Troll Slayer", command: "none",
       note: "Subject to the special rules explained in the Dwarfs army book. May carry a runic standard per the Dwarfs army book guidelines. Troll Slayers with additional hand weapons.",
       options: [
-        { id: "dhw", group: null, label: "Swap additional hand weapon for double handed weapon (free)", cost: 0, per: "model" },
+        { id: "dhw", group: null, label: "Swap additional hand weapon for double handed weapon", cost: 0, per: "model" },
       ],
       championOptions: [
         { id: "giantslayer", name: "Giant Slayer", cost: 20, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"], itemSlotLabel: "Magic Weapon (may be a rune weapon)", note: "Equipped like the regiment. The item slot must be a magic weapon — may be a weapon inscribed with dwarven runes." },
@@ -7120,22 +7120,22 @@ const HALFLINGS = {
     {
       id: "travellingwizardlord", name: "Human Travelling Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4, tags: ["wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (4).",
-      mounts: [{ id: "normalhorse", name: "Normal Horse (free)", cost: 0, stat: "Normal Horse" }],
+      mounts: [{ id: "normalhorse", name: "Normal Horse", cost: 0, stat: "Normal Horse" }],
     },
     {
       id: "travellingmasterwizard", name: "Human Travelling Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3, tags: ["wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (3).",
-      mounts: [{ id: "normalhorse", name: "Normal Horse (free)", cost: 0, stat: "Normal Horse" }],
+      mounts: [{ id: "normalhorse", name: "Normal Horse", cost: 0, stat: "Normal Horse" }],
     },
     {
       id: "travellingwizardchampion", name: "Human Travelling Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2, tags: ["wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (2).",
-      mounts: [{ id: "normalhorse", name: "Normal Horse (free)", cost: 0, stat: "Normal Horse" }],
+      mounts: [{ id: "normalhorse", name: "Normal Horse", cost: 0, stat: "Normal Horse" }],
     },
     {
       id: "travellingwizard", name: "Human Travelling Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1, tags: ["wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (1).",
-      mounts: [{ id: "normalhorse", name: "Normal Horse (free)", cost: 0, stat: "Normal Horse" }],
+      mounts: [{ id: "normalhorse", name: "Normal Horse", cost: 0, stat: "Normal Horse" }],
     },
   ],
   regiments: [
@@ -7398,7 +7398,7 @@ const LIZARDMEN = {
       id: "skinkshaman", name: "Lizardman Skink Shaman", cost: 46, stat: "Lizardman Skink Shaman", magicItemSlots: 2, tags: ["wizard", "skink"],
       gearNote: "Has one magic level. May use any College Magic lore. One Skink Shaman may join a Stegadon's howdah crew, as long as the total crew doesn't exceed the maximum (not hard-enforced).",
       mounts: [
-        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "hornedone", name: "Horned One", cost: 10, stat: "Horned One" },
         { id: "terradon", name: "Terradon", cost: 30, stat: "Terradon" },
       ],
@@ -7429,7 +7429,7 @@ const LIZARDMEN = {
       id: "skinkwarriors", name: "Skink Warriors", perModel: 4, minSize: 5, stat: "Lizardman Skink Warrior", command: "standard", tags: ["skink"],
       note: "Armed with short bows. May skirmish (mandatory if missiles are poisoned — not hard-enforced).",
       options: [
-        { id: "javelins", group: "weapon", label: "Swap short bows for javelins and shields (free)", cost: 0, per: "model" },
+        { id: "javelins", group: "weapon", label: "Swap short bows for javelins and shields", cost: 0, per: "model" },
         { id: "blowpipes", group: "weapon", label: "Swap short bows for blowpipes", cost: 1, per: "model" },
         { id: "poison", group: null, label: "Poison missile weapons — forces skirmish formation (not enforced)", cost: 2, per: "model" },
       ],
@@ -7645,7 +7645,7 @@ const SLANN_EMPIRE = {
       id: "skinkshaman-slann", name: "Lizardman Skink Shaman", cost: 46, stat: "Lizardman Skink Shaman", magicItemSlots: 2, tags: ["wizard", "skink"],
       gearNote: "Has one magic level. May use any College Magic lore. One Skink Shaman may join a Stegadon's howdah crew, as long as the total crew doesn't exceed 10 models.",
       mounts: [
-        { id: "coldone", name: "Cold One (free)", cost: 0, stat: "Cold One" },
+        { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "hornedone", name: "Horned One", cost: 10, stat: "Horned One" },
         { id: "terradon", name: "Terradon", cost: 30, stat: "Terradon" },
       ],
@@ -9678,7 +9678,7 @@ function SpecialDetail({ def, unit, roster, updateUnit, armyData }) {
             <input type="checkbox" checked={!!unit.mounted} onChange={(e) => updateUnit({ ...unit, mounted: e.target.checked })} />
             {def.mountOption.name}
           </span>
-          <span className="whr-opt-cost">+{def.mountOption.cost}pts</span>
+          <span className="whr-opt-cost">{def.mountOption.cost > 0 ? `+${def.mountOption.cost}pts` : "free"}</span>
         </label>
       )}
 
