@@ -97,6 +97,7 @@ body {
 .whr-btn:hover:not(:disabled) { background: var(--paper-3); border-color: var(--gold); }
 .whr-btn:active:not(:disabled) { transform: translateY(1px); }
 .whr-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.whr-btn-stack { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 11.5px; line-height: 1.3; padding: 6px 16px; }
 .whr-btn-primary { background: var(--forest); border-color: var(--forest-dark); color: var(--paper); }
 .whr-btn-primary:hover:not(:disabled) { background: var(--forest-dark); }
 .whr-btn-gold { background: var(--gold); border-color: var(--gold-bright); color: var(--paper); }
@@ -10055,6 +10056,10 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: 14, color: "var(--ink-soft)" }}>{saveState}</span>
+          <button className="whr-btn whr-btn-stack" onClick={() => window.open("https://forms.gle/zrKUfgxMCgqeiMiA8", "_blank", "noopener,noreferrer")}>
+            <span>Bug report</span>
+            <span>/ feedback</span>
+          </button>
           {renaming ? (
             <input className="whr-input" autoFocus value={renameValue} style={{ width: 180 }}
               onChange={(e) => setRenameValue(e.target.value)}
