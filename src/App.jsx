@@ -1059,12 +1059,12 @@ const WOOD_ELVES_MAGIC_ITEMS = [
   { id: "mi-midwinter", name: "Midwinter Standard", cost: 20, cat: "banner", desc: "One use. Unit auto-passes the first break test it fails." },
   { id: "mi-hawkeye", name: "Hawkeye Banner", cost: 40, cat: "banner", desc: "+1 BS." },
   { id: "mi-swiftness", name: "Banner of Surprising Swiftness", cost: 60, cat: "banner", desc: "Once/game: move 1D6\" forward in the magic phase; counts as charging." },
-  { id: "sp-luminescents", name: "A Resplendence of Luminescents", cost: 10, cat: "sprite", desc: "All attacks by bearer & regiment count as magical." },
-  { id: "sp-spites", name: "A Murder of Spites", cost: 20, cat: "sprite", desc: "1D6 S3 hits vs an enemy unit within 12\" in the shooting phase." },
-  { id: "sp-malevolents", name: "A Muster of Malevolents", cost: 30, cat: "sprite", desc: "1D6 S4 hits vs a melee opponent, in addition to normal attacks." },
-  { id: "sp-radiants", name: "A Cluster of Radiants", cost: 40, cat: "sprite", desc: "Natural dispel 3+." },
-  { id: "sp-netlings", name: "An Annoyance of Netlings", cost: 50, cat: "sprite", desc: "In a challenge, bearer can only be hit on natural 6s." },
-  { id: "sp-despairs", name: "A Lamentation of Despairs", cost: 60, cat: "sprite", desc: "Bound spell, one use. One model anywhere tests LD or suffers 1D6 wounds, no save, no LoS required." },
+  { id: "sp-luminescents", name: "A Resplendence of Luminescents", cost: 10, cat: "sprite", restrictedTo: [{ tags: ["spriteEligible"] }, { characterIds: ["zoatcharacter"], tags: ["wizard"] }], desc: "All attacks by bearer & regiment count as magical." },
+  { id: "sp-spites", name: "A Murder of Spites", cost: 20, cat: "sprite", restrictedTo: [{ tags: ["spriteEligible"] }, { characterIds: ["zoatcharacter"], tags: ["wizard"] }], desc: "1D6 S3 hits vs an enemy unit within 12\" in the shooting phase." },
+  { id: "sp-malevolents", name: "A Muster of Malevolents", cost: 30, cat: "sprite", restrictedTo: [{ tags: ["spriteEligible"] }, { characterIds: ["zoatcharacter"], tags: ["wizard"] }], desc: "1D6 S4 hits vs a melee opponent, in addition to normal attacks." },
+  { id: "sp-radiants", name: "A Cluster of Radiants", cost: 40, cat: "sprite", restrictedTo: [{ tags: ["spriteEligible"] }, { characterIds: ["zoatcharacter"], tags: ["wizard"] }], desc: "Natural dispel 3+." },
+  { id: "sp-netlings", name: "An Annoyance of Netlings", cost: 50, cat: "sprite", restrictedTo: [{ tags: ["spriteEligible"] }, { characterIds: ["zoatcharacter"], tags: ["wizard"] }], desc: "In a challenge, bearer can only be hit on natural 6s." },
+  { id: "sp-despairs", name: "A Lamentation of Despairs", cost: 60, cat: "sprite", restrictedTo: [{ tags: ["spriteEligible"] }, { characterIds: ["zoatcharacter"], tags: ["wizard"] }], desc: "Bound spell, one use. One model anywhere tests LD or suffers 1D6 wounds, no save, no LoS required." },
 ];
 const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enchanted: "Enchanted Items", arcane: "Arcane Items", banner: "Magic Banners", sprite: "Sprites", familiar: "Familiars", reward: "Chaos Rewards", daemonicreward: "Daemonic Rewards", chaosbanner: "Chaos Banners", engineering: "Engineering Runes", virtue: "Knightly Virtues", bloodlinepower: "Bloodline Powers", heirloom: "Heirlooms of the Old Slann" };
 // A character/champion's own personal magic item slot never gets Magic Banners by default — only
@@ -1197,12 +1197,12 @@ const WOOD_ELVES = {
       mounts: [],
     },
     {
-      id: "treemanancient", name: "Treeman Ancient", cost: 250, stat: "Treeman Ancient", theme: "savage", magicItemSlots: 2, magicItemCategoryFilter: ["sprite"],
+      id: "treemanancient", name: "Treeman Ancient", cost: 250, stat: "Treeman Ancient", theme: "savage", magicItemSlots: 2, magicItemCategoryFilter: ["sprite"], tags: ["spriteEligible"],
       gearNote: "Rules as a normal Treeman, except it's a character and may take two Sprites.",
     },
     {
       id: "zoatcharacter", name: "Zoat Character", cost: 110, stat: "Zoat Character", magicItemSlots: 1, theme: "core", tags: ["zoat"], contingentTag: "zoat",
-      gearNote: "Monstrous model on a 40x40 or 40x60mm base. Causes fear, 5+ armour save (scaly skin), moves through forests without penalty. Carries a double handed weapon (forfeited if it becomes a wizard — not toggled here). Cannot use the Wood Elf General's Leadership or benefit from the Battle Standard Bearer. Acts as a regimental champion — won't voluntarily leave its regiment (not hard-enforced). The one magic item may be a Sprite, or (only if upgraded to a wizard) an arcane item — not restricted by this picker, so choose accordingly.",
+      gearNote: "Monstrous model on a 40x40 or 40x60mm base. Causes fear, 5+ armour save (scaly skin), moves through forests without penalty. Carries a double handed weapon (forfeited if it becomes a wizard — not toggled here). Cannot use the Wood Elf General's Leadership or benefit from the Battle Standard Bearer. Acts as a regimental champion — won't voluntarily leave its regiment (not hard-enforced). Only if upgraded to a wizard may its one magic item be an arcane item.",
       magicLevelOption: { label: "Become a level 1 wizard (Amber or Jade Magic)", costPerLevel: 60, max: 1, min: 0 },
     },
   ],
@@ -1382,7 +1382,7 @@ const WOOD_ELVES = {
       note: "Wood Elf Longbow. May scout.", extraMagicItemSlots: 2 },
     { id: "gruarth", name: "Gruarth the Beastmaster", cost: 30, stat: "Gruarth the Beastmaster", role: "Beastmaster (alternative)",
       note: "Must accompany a pack of Forest Creatures (bought separately).", extraMagicItemSlots: 1 },
-    { id: "durthu", name: "Durthu the Treeman", cost: 260, stat: "Durthu the Treeman", role: "Treeman (alternative, is a character)",
+    { id: "durthu", name: "Durthu the Treeman", cost: 260, stat: "Durthu the Treeman", role: "Treeman (alternative, is a character)", tags: ["spriteEligible"],
       note: "Hates Dwarfs & Chaos Dwarfs in addition to Orcs/Goblins/Hobgoblins. 2+ armour save.", extraSpriteSlots: 2 },
   ],
 };
@@ -9308,6 +9308,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
           {unit.branchWraithIncluded && (
             <MagicItemPicker items={armyData.magicItems} selectedIds={unit.branchWraithSpriteIds || []} maxSlots={def.branchWraith.spriteSlots} usedElsewhere={usedElsewhere}
               categoryFilter={["sprite"]}
+              context={{ regimentId: def.id, tags: ["spriteEligible"] }}
               onToggle={(id) => toggleArrayField(unit, "branchWraithSpriteIds", id, updateUnit)} />
           )}
         </div>
