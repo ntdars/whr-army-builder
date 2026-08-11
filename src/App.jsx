@@ -4483,7 +4483,7 @@ const ORCS_GOBLINS = {
       champion: { name: "Black Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Black Orc Champion", tags: ["blackOrc"] },
     },
     {
-      id: "commongoblininfantry", name: "Common Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Common Goblin", command: "standard",
+      id: "commongoblininfantry", name: "Common Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Common Goblin", command: "standard", tags: ["commonGoblin"],
       note: "Fear Elves unless outnumbering them two-to-one.",
       options: [
         { id: "spear", group: "melee", label: "Spears", cost: 0.5, per: "model" },
@@ -4495,7 +4495,7 @@ const ORCS_GOBLINS = {
       champion: { name: "Common Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Common Goblin Champion", tags: ["commonGoblin"] },
     },
     {
-      id: "commongoblinwolfriders", name: "Common Goblin Wolf Riders", perModel: 9, minSize: 5, stat: "Common Goblin", mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "fastCavalry",
+      id: "commongoblinwolfriders", name: "Common Goblin Wolf Riders", perModel: 9, minSize: 5, stat: "Common Goblin", mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "fastCavalry", tags: ["commonGoblin"],
       note: "Fear Elves unless outnumbering them two-to-one. Fast cavalry.",
       options: [
         { id: "spear", group: null, label: "Spears", cost: 1, per: "model" },
@@ -4506,7 +4506,7 @@ const ORCS_GOBLINS = {
       champion: { name: "Common Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Common Goblin Champion", tags: ["commonGoblin"] },
     },
     {
-      id: "forestgoblinspiderriders", name: "Forest Goblin Spider Riders", perModel: 8, minSize: 5, stat: "Forest Goblin", mountStat: "Giant Spider", mountLabel: "Giant Spider", command: "fastCavalry",
+      id: "forestgoblinspiderriders", name: "Forest Goblin Spider Riders", perModel: 8, minSize: 5, stat: "Forest Goblin", mountStat: "Giant Spider", mountLabel: "Giant Spider", command: "fastCavalry", tags: ["forestGoblin"],
       note: "Forest Goblins on Giant Spiders (poisonous +1S attacks, cross terrain freely). Fear Elves unless outnumbering them two-to-one. Fast cavalry.",
       options: [
         { id: "spear", group: null, label: "Spears", cost: 1, per: "model" },
@@ -4517,7 +4517,7 @@ const ORCS_GOBLINS = {
       champion: { name: "Forest Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Forest Goblin Champion", tags: ["forestGoblin"] },
     },
     {
-      id: "forestgoblininfantry", name: "Forest Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Forest Goblin", command: "standard",
+      id: "forestgoblininfantry", name: "Forest Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Forest Goblin", command: "standard", tags: ["forestGoblin"],
       note: "Fear Elves unless outnumbering them two-to-one. Cross woods without movement penalty.",
       options: [
         { id: "spear", group: "melee", label: "Spears", cost: 0.5, per: "model" },
@@ -4529,7 +4529,7 @@ const ORCS_GOBLINS = {
       champion: { name: "Forest Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Forest Goblin Champion", tags: ["forestGoblin"] },
     },
     {
-      id: "nightgoblininfantry", name: "Night Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Night Goblin", command: "standard",
+      id: "nightgoblininfantry", name: "Night Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Night Goblin", command: "standard", tags: ["nightGoblin"],
       note: "Fear Elves unless outnumbering them two-to-one. Hate Dwarfs (not Chaos Dwarfs). May conceal up to 3 hidden Fanatics — released and scattering wildly the moment an enemy comes within 8\" (see the full rules in the book); Fanatics don't count toward the regiment's 50pt minimum.",
       options: [
         { id: "spear", group: "melee", label: "Spears", cost: 0.5, per: "model" },
@@ -4554,7 +4554,7 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "nightgoblinnettersclubbers", name: "Night Goblin Netters and Clubbers", perModel: 6, minSize: 5, stat: "Night Goblin", command: "standard",
+      id: "nightgoblinnettersclubbers", name: "Night Goblin Netters and Clubbers", perModel: 6, minSize: 5, stat: "Night Goblin", command: "standard", tags: ["nightGoblin"],
       note: "Nets and clubs — treated as double handed weapons that strike first (the net effect stacks with itself, so they strike first twice over, not just cancelling the double-handed-weapon strike-last penalty).",
       champion: { name: "Night Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Night Goblin Champion", tags: ["nightGoblin"] },
     },
@@ -4817,7 +4817,7 @@ const DOGS_OF_WAR = {
   ],
   regiments: [
     {
-      id: "humanfoot", name: "Human Foot Soldiers", perModel: 5, minSize: 5, stat: "State Trooper", command: "standard",
+      id: "humanfoot", name: "Human Foot Soldiers", perModel: 5, minSize: 5, stat: "State Trooper", command: "standard", tags: ["human"],
       note: "Human Mercenary Soldiers.",
       options: [
         { id: "shields", group: null, label: "Shields", cost: 0.5, per: "model" },
@@ -4835,7 +4835,7 @@ const DOGS_OF_WAR = {
       champion: { name: "Human Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion", tags: ["human"] },
     },
     {
-      id: "elitehumanfoot", name: "Elite Human Foot Soldiers", perModel: 7, minSize: 5, stat: "Knight (Empire)", command: "standard",
+      id: "elitehumanfoot", name: "Elite Human Foot Soldiers", perModel: 7, minSize: 5, stat: "Knight (Empire)", command: "standard", tags: ["human"],
       note: "Elite Human Mercenary Soldiers with light armour.",
       options: [
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
@@ -4847,7 +4847,7 @@ const DOGS_OF_WAR = {
       champion: { name: "Elite Human Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["human"] },
     },
     {
-      id: "cavalryretainers", name: "Human Cavalry Retainers", perModel: 9, minSize: 5, stat: "State Trooper", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry", fastCavalryToggleOption: { group: "armour", value: "heavyarmour" },
+      id: "cavalryretainers", name: "Human Cavalry Retainers", perModel: 9, minSize: 5, stat: "State Trooper", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry", fastCavalryToggleOption: { group: "armour", value: "heavyarmour" }, tags: ["human"],
       note: "Human Mercenary Soldiers riding normal horses. Fast cavalry — lost if heavy armour is taken.",
       options: [
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
@@ -4861,7 +4861,7 @@ const DOGS_OF_WAR = {
       champion: { name: "Human Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion", tags: ["human"] },
     },
     {
-      id: "humanknights", name: "Human Knights", perModel: 20, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse", command: "standard",
+      id: "humanknights", name: "Human Knights", perModel: 20, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse", command: "standard", tags: ["human"],
       note: "Elite Human Soldiers with heavy armour, shields, and lances riding Warhorses.",
       options: [
         { id: "barding", group: null, label: "Barding", cost: 3, per: "model" },
