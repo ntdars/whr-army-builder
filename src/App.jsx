@@ -8202,6 +8202,7 @@ function MagicItemPicker({ items, selectedIds, onToggle, maxSlots, usedElsewhere
       g[m.cat] = g[m.cat] || [];
       g[m.cat].push(m);
     });
+    Object.values(g).forEach((arr) => arr.sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name)));
     return g;
   }, [items, categoryFilter, context]);
   const atLimit = selectedIds.length >= maxSlots;
