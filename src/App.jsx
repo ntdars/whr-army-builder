@@ -989,7 +989,8 @@ const COMMON_MAGIC_ITEMS = [
   { id: "cm-teclistextbook", name: "Teclis' Textbook", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "The owner may use any one of the eight lores of College Magic instead of their normal lore. Takes up a magic item slot but is not strictly a magic item, and cannot be destroyed." },
   { id: "cm-flameforgedcape", name: "Flameforged Cape", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item exclusive to wizards using the Bright lore (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Scarlet Scimitar and amplifies it — while active, all attempts to hit the bearer (melee or ranged, even normally-automatic ones) require a natural 6." },
   { id: "cm-purplereaper", name: "Purple Reaper", cost: 20, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item limited to wizards using the Amethyst lore (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Purple Scythe and amplifies it to 1D6 S10 hits (instead of 1D3 S5) on each enemy model in base contact. May be used even while mounted." },
-  { id: "cm-dispelmagicscroll", name: "Dispel Magic Scroll", cost: 25, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Automatically dispels an enemy spell, even if cast with Total Power and including spells cast in a previous turn that remain in play. One use only. You may include two unless playing with the \"Veto One Spell\" house rule, in which case only one." },
+  { id: "cm-dispelmagicscroll", name: "Dispel Magic Scroll", cost: 25, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Automatically dispels an enemy spell, even if cast with Total Power and including spells cast in a previous turn that remain in play. One use only. You may include two unless playing with the \"Veto One Spell\" house rule, in which case only one — offered as two separate entries below so both can be selected." },
+  { id: "cm-dispelmagicscroll2", name: "Dispel Magic Scroll", cost: 25, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Second copy — see above. Only include this one if not playing with the \"Veto One Spell\" house rule." },
   { id: "cm-ringdarkness", name: "Ring of Darkness", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Bound spell. The wizard becomes ethereal, as described in the Undead army book. Remains in play." },
   { id: "cm-amuletsteel", name: "Amulet of Steel", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item and bound spell, Gold lore only (lore-locked — not yet enforced pending lore-access data). Cast on any unit within 18\" and LoS: enemies suffer -2 armour save, friendly units gain +2 (or 5+ if they had none). Lasts until the next magic phase." },
   { id: "cm-crownshadows", name: "Crown of Shadows", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item, Grey lore only (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Crown of Taidron and extends its range to 18\" (from 3\"); costs one power, 1D6 lightning S6 hits distributed like normal shooting." },
@@ -1073,6 +1074,10 @@ const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enc
 // "banner") should ever be offered one. Used as the fallback whenever an entity doesn't specify
 // its own magicItemCategoryFilter (which otherwise defaults to "every category, no restriction").
 const NON_BANNER_CATEGORIES = Object.keys(MI_CATEGORY_LABEL).filter((c) => c !== "banner");
+// Battle Standard Bearers (tags include "bsb") are the one kind of plain character whose personal
+// item slot conventionally doubles as the unit's magic banner — give them NON_BANNER_CATEGORIES
+// plus "banner" back unless they already specify their own magicItemCategoryFilter.
+const defaultCategoryFilter = (def) => def?.magicItemCategoryFilter || ((def?.tags || []).includes("bsb") ? [...NON_BANNER_CATEGORIES, "banner"] : NON_BANNER_CATEGORIES);
 const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 /* ============================================================================
@@ -1106,6 +1111,7 @@ const WOOD_ELVES = {
     {
       id: "warlord", name: "Wood Elf Warlord", cost: 124, stat: "Wood Elf Warlord", magicItemSlots: 3,
       gearNote: "May take a shield and light armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Wood Elf Longbow", cost: 10 },
       mounts: [
@@ -1120,6 +1126,7 @@ const WOOD_ELVES = {
     {
       id: "hero", name: "Wood Elf Hero", cost: 74, stat: "Wood Elf Hero", magicItemSlots: 2,
       gearNote: "May take a shield and light armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Wood Elf Longbow", cost: 10 },
       mounts: [
@@ -1138,8 +1145,9 @@ const WOOD_ELVES = {
       mounts: [],
     },
     {
-      id: "bsb", name: "Wood Elf Battle Standard Bearer", cost: 88, stat: "Wood Elf BSB", magicItemSlots: 1,
+      id: "bsb", name: "Wood Elf Battle Standard Bearer", cost: 88, stat: "Wood Elf BSB", magicItemSlots: 1, tags: ["bsb"],
       gearNote: "May take light armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour"] },
       mounts: [
         { id: "steed", name: "Elven Steed (may take barding free)", cost: 13, stat: "Elven Steed" },
         { id: "stag", name: "Stag", cost: 19, stat: "Stag", theme: "savage" },
@@ -1432,6 +1440,7 @@ const EMPIRE = {
     {
       id: "empirelord", name: "Empire Lord", cost: 100, stat: "Empire Lord", magicItemSlots: 3,
       gearNote: "May take a shield and either light armour, heavy armour, or full plate armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Full Plate Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Handgun", "Pistol", "Two pistols"] },
       mounts: [
@@ -1443,6 +1452,7 @@ const EMPIRE = {
     {
       id: "empirehero", name: "Empire Hero", cost: 60, stat: "Empire Hero", magicItemSlots: 2,
       gearNote: "May take a shield and either light armour, heavy armour, or full plate armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Full Plate Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Handgun", "Pistol", "Two pistols"] },
       experimentalMissileGroup: { label: "Experimental missile weapon — foot only (any one, +10pts)", cost: 10, options: ["None (default)", "Hochland Long Rifle", "Repeating handgun", "Repeating pistol"] },
@@ -1453,8 +1463,9 @@ const EMPIRE = {
       ],
     },
     {
-      id: "empirebsb", name: "Empire Battle Standard Bearer", cost: 80, stat: "Empire BSB", magicItemSlots: 1, restriction: "0-1",
+      id: "empirebsb", name: "Empire Battle Standard Bearer", cost: 80, stat: "Empire BSB", magicItemSlots: 1, restriction: "0-1", tags: ["bsb"],
       gearNote: "May take either light armour, heavy armour, or full plate armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour", "Full Plate Armour"] },
       mounts: [
         { id: "warhorse", name: "Warhorse (may take barding free)", cost: 10, stat: "Warhorse" },
       ],
@@ -1495,6 +1506,7 @@ const EMPIRE = {
     {
       id: "warriorpriest", name: "Warrior Priest", cost: 65, stat: "Warrior Priest", magicItemSlots: 1,
       gearNote: "May take a shield and either light or heavy armour for free (not full plate). Any regiment of Swordsmen or State Troops he joins (including detachments within 8\") becomes immune to fear and hates all enemies — as does the Priest himself.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Double handed weapon"] },
       mounts: [
         { id: "warhorse", name: "Warhorse (may take barding free)", cost: 10, stat: "Warhorse" },
@@ -1911,7 +1923,7 @@ const CHAOS_WARRIORS = {
       ],
     },
     {
-      id: "chaosbsb", name: "Chaos Battle Standard Bearer", cost: 116, stat: "Chaos BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"],
+      id: "chaosbsb", name: "Chaos Battle Standard Bearer", cost: 116, stat: "Chaos BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion", "bsb"],
       gearNote: "Wears Chaos Armour. The one Chaos Reward or magic item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -2113,6 +2125,7 @@ const BEASTMEN = {
     {
       id: "beastmanlord", name: "Beastman Lord", cost: 148, stat: "Beastman Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Beastmen are infantry. May take light armour and a shield for free, or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       mounts: [
@@ -2122,6 +2135,7 @@ const BEASTMEN = {
     {
       id: "beastmanhero", name: "Beastman Hero", cost: 89, stat: "Beastman Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Beastmen are infantry. May take light armour and a shield for free, or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       mounts: [
@@ -2131,36 +2145,42 @@ const BEASTMEN = {
     {
       id: "minotaurlord", name: "Minotaur Lord", cost: 256, stat: "Minotaur Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Monstrous model, causes fear. After a won combat with an enemy casualty, must gorge on the dead (no pursuit/overrun unless hatred/frenzy). Charged before its next move while feasting, it becomes frenzied. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "minotaurhero", name: "Minotaur Hero", cost: 168, stat: "Minotaur Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Monstrous model, causes fear. Same gorging/frenzy rule as the Minotaur Lord. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "dragonogrelord", name: "Dragon Ogre Lord", cost: 400, stat: "Dragon Ogre Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Large model, causes terror, immune to psychology, becomes frenzied if hit by enemy lightning, 5+ armour save from scaly skin. Mark of Slaanesh costs +25pts for Dragon Ogres. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "dragonogrehero", name: "Dragon Ogre Hero", cost: 300, stat: "Dragon Ogre Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Large model, causes terror, immune to psychology, becomes frenzied if hit by enemy lightning, 5+ armour save from scaly skin. Mark of Slaanesh costs +25pts for Dragon Ogres. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "centaurlord", name: "Centaur Lord", cost: 184, stat: "Centaur Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Centaurs are cavalry. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "centaurhero", name: "Centaur Hero", cost: 110, stat: "Centaur Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Centaurs are cavalry. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
@@ -2197,20 +2217,21 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "beastmanbsb", name: "Beastman Battle Standard Bearer", cost: 96, stat: "Beastman BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES], tags: ["beastman"],
+      id: "beastmanbsb", name: "Beastman Battle Standard Bearer", cost: 96, stat: "Beastman BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES], tags: ["beastman", "bsb"],
       gearNote: "0-1 slot shared with the Minotaur/Centaur BSB below — pick only one. May take light armour for free, or heavy armour for free. May take a Beastman Chariot for the price of the chariot. The one item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       mounts: [
         { id: "chariot", name: "Beastman Chariot (for the price of the chariot)", cost: 0, stat: "Extra Heavy Chariot" },
       ],
     },
     {
-      id: "minotaurbsb", name: "Minotaur Battle Standard Bearer", cost: 132, stat: "Minotaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES], tags: ["beastman"],
+      id: "minotaurbsb", name: "Minotaur Battle Standard Bearer", cost: 132, stat: "Minotaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES], tags: ["beastman", "bsb"],
       gearNote: "0-1 slot shared with the Beastman/Centaur BSB — pick only one. Monstrous model, causes fear. The one item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
     },
     {
-      id: "centaurbsb", name: "Centaur Battle Standard Bearer", cost: 108, stat: "Centaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES], tags: ["beastman"],
+      id: "centaurbsb", name: "Centaur Battle Standard Bearer", cost: 108, stat: "Centaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES], tags: ["beastman", "bsb"],
       gearNote: "0-1 slot shared with the Beastman/Minotaur BSB — pick only one. Centaurs are cavalry. The one item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
     },
@@ -2571,7 +2592,7 @@ const CHAOS_WARBAND = {
       ],
     },
     {
-      id: "chaosbsb", name: "Chaos Battle Standard Bearer", cost: 116, stat: "Chaos BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: CHAOS_WARBAND_BSB_ITEM_CATEGORIES, tags: ["chaosChampion"],
+      id: "chaosbsb", name: "Chaos Battle Standard Bearer", cost: 116, stat: "Chaos BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: CHAOS_WARBAND_BSB_ITEM_CATEGORIES, tags: ["chaosChampion", "bsb"],
       gearNote: "Wears Chaos Armour. The one Chaos Reward or magic item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -2647,6 +2668,7 @@ const CHAOS_WARBAND = {
     {
       id: "beastmanlord", name: "Beastman Lord", cost: 148, stat: "Beastman Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Beastmen are infantry. May take light armour and a shield for free, or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       mounts: [
@@ -2656,6 +2678,7 @@ const CHAOS_WARBAND = {
     {
       id: "beastmanhero", name: "Beastman Hero", cost: 89, stat: "Beastman Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Beastmen are infantry. May take light armour and a shield for free, or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       mounts: [
@@ -2665,36 +2688,42 @@ const CHAOS_WARBAND = {
     {
       id: "minotaurlord", name: "Minotaur Lord", cost: 256, stat: "Minotaur Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Monstrous model, causes fear. After a won combat with an enemy casualty, must gorge on the dead (no pursuit/overrun unless hatred/frenzy). Charged before its next move while feasting, it becomes frenzied. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "minotaurhero", name: "Minotaur Hero", cost: 168, stat: "Minotaur Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Monstrous model, causes fear. Same gorging/frenzy rule as the Minotaur Lord. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "dragonogrelord", name: "Dragon Ogre Lord", cost: 400, stat: "Dragon Ogre Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Large model, causes terror, immune to psychology, becomes frenzied if hit by enemy lightning, 5+ armour save from scaly skin. Mark of Slaanesh costs +25pts for Dragon Ogres. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "dragonogrehero", name: "Dragon Ogre Hero", cost: 300, stat: "Dragon Ogre Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Large model, causes terror, immune to psychology, becomes frenzied if hit by enemy lightning, 5+ armour save from scaly skin. Mark of Slaanesh costs +25pts for Dragon Ogres. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "centaurlord", name: "Centaur Lord", cost: 184, stat: "Centaur Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Centaurs are cavalry. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
       id: "centaurhero", name: "Centaur Hero", cost: 110, stat: "Centaur Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Centaurs are cavalry. May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
@@ -3127,6 +3156,7 @@ const HIGH_ELVES = {
     {
       id: "elvenprince", name: "Elven Prince", cost: 124, stat: "Elven Prince", magicItemSlots: 3,
       gearNote: "May take a shield and either light armour or Dragon Armour for free (Dragon Armour grants immunity to fire/flaming attacks).",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Dragon Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Longbow", cost: 10 },
       mounts: [
@@ -3142,6 +3172,7 @@ const HIGH_ELVES = {
     {
       id: "elvenhero", name: "Elven Hero", cost: 74, stat: "Elven Hero (High Elf)", magicItemSlots: 2,
       gearNote: "May take a shield and either light armour or Dragon Armour for free (Dragon Armour grants immunity to fire/flaming attacks).",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Dragon Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Longbow", cost: 10 },
       mounts: [
@@ -3153,8 +3184,9 @@ const HIGH_ELVES = {
       ],
     },
     {
-      id: "elvenbsb", name: "Elven Battle Standard Bearer", cost: 88, stat: "Elven BSB (High Elf)", magicItemSlots: 1, restriction: "0-1",
+      id: "elvenbsb", name: "Elven Battle Standard Bearer", cost: 88, stat: "Elven BSB (High Elf)", magicItemSlots: 1, restriction: "0-1", tags: ["bsb"],
       gearNote: "May take either light armour or Dragon Armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Dragon Armour"] },
       mounts: [
         { id: "steed", name: "Elven Steed (may take barding free)", cost: 13, stat: "Elven Steed" },
       ],
@@ -3433,6 +3465,7 @@ const DWARFS = {
     {
       id: "dwarflord", name: "Dwarf Lord", cost: 136, stat: "Dwarf Lord", magicItemSlots: 3, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfLord"],
       gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Handgun", "Crossbow", "Two pistols"] },
       mounts: [
@@ -3443,12 +3476,14 @@ const DWARFS = {
     {
       id: "dwarfhero", name: "Dwarf Hero", cost: 82, stat: "Dwarf Hero", magicItemSlots: 2, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"],
       gearNote: "May join a war machine (except Organ Guns) and act as an Engineer — the machine may use his BS and re-roll misfires (except bouncing cannon balls); he can't shoot his own weapons while operating it. May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Handgun", "Crossbow", "Two pistols"] },
     },
     {
-      id: "dwarfbsb", name: "Dwarf Battle Standard Bearer", cost: 92, stat: "Dwarf BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"],
+      id: "dwarfbsb", name: "Dwarf Battle Standard Bearer", cost: 92, stat: "Dwarf BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["bsb"],
       gearNote: "May take light armour, heavy armour, or Gromril Armour for free. The one item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour", "Gromril Armour"] },
     },
     {
       id: "daemonslayer", name: "Daemon Slayer", cost: 100, stat: "Daemon Slayer", magicItemSlots: 1, magicItemCategoryFilter: ["weapon"],
@@ -3463,18 +3498,21 @@ const DWARFS = {
     {
       id: "runelord", name: "Runelord", cost: 160, stat: "Runelord", magicItemSlots: 3, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfRunesmith"],
       gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free. One Runesmith in the army may bring an Anvil of Doom (attended by two Anvil Guard Hammerers) — while operating it, he casts as a level 4 wizard using Bright Magic's Blast/Fireball/Piercing Bolts of Burning/The Burning Head, expending power cards as normal.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       anvilOption: { label: "Anvil of Doom (+2 Anvil Guard Hammerers)", cost: 100 },
     },
     {
       id: "masterrunesmith", name: "Master Runesmith", cost: 120, stat: "Master Runesmith", magicItemSlots: 2, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfRunesmith"],
       gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       anvilOption: { label: "Anvil of Doom (+2 Anvil Guard Hammerers)", cost: 110 },
     },
     {
       id: "runesmith", name: "Runesmith", cost: 80, stat: "Runesmith", magicItemSlots: 1, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfRunesmith"],
       gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       anvilOption: { label: "Anvil of Doom (+2 Anvil Guard Hammerers)", cost: 120 },
     },
@@ -3677,6 +3715,7 @@ const BRETONNIA = {
     {
       id: "knightlylord", name: "Knightly Lord", cost: 100, stat: "Knightly Lord", magicItemSlots: 3, tags: ["knightly"],
       gearNote: "May take a shield and heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
         { id: "warhorse", name: "Warhorse (may take barding free)", cost: 20, stat: "Warhorse" },
@@ -3687,6 +3726,7 @@ const BRETONNIA = {
     {
       id: "knightlyhero", name: "Knightly Hero", cost: 60, stat: "Knightly Hero", magicItemSlots: 2, tags: ["knightly"],
       gearNote: "May take a shield and heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
         { id: "warhorse", name: "Warhorse (may take barding free)", cost: 15, stat: "Warhorse" },
@@ -3695,8 +3735,9 @@ const BRETONNIA = {
       ],
     },
     {
-      id: "knightlybsb", name: "Knightly Battle Standard Bearer", cost: 100, stat: "Knightly BSB", magicItemSlots: 1, restriction: "0-1", tags: ["knightly"],
+      id: "knightlybsb", name: "Knightly Battle Standard Bearer", cost: 100, stat: "Knightly BSB", magicItemSlots: 1, restriction: "0-1", tags: ["knightly", "bsb"],
       gearNote: "May take heavy armour for free. The one item may be a magic banner, or may instead be a knightly Virtue.",
+      armourGroup: { options: ["No armour (default)", "Heavy Armour"] },
       mounts: [
         { id: "warhorse", name: "Warhorse (may take barding free)", cost: 10, stat: "Warhorse" },
       ],
@@ -3959,7 +4000,7 @@ const ORCS_GOBLINS = {
     label: "Army Type",
     options: [
       { id: "core", name: "Core", desc: "The default Orcs & Goblins army — Common Orcs, Black Orcs, Savage Orcs, Common Goblins, Night Goblins, and Forest Goblins all mixed together, plus hired muscle like Trolls, Giants, and Ogre Mercenaries." },
-      { id: "forestgoblins", name: "Forest Goblins", desc: "A pure Forest Goblin warband from the deep woods — no Orcs, Black Orcs, Savage Orcs, Common Goblins, or Night Goblins. Keeps Forest Goblin Infantry, Spider Riders, all spider-mounted characters, and generic greenskin auxiliaries (Trolls, Giants, Snotlings, Ogre Mercenaries) and Goblin-crewed war machines/chariots." },
+      { id: "forestgoblins", name: "Forest Goblins", desc: "A Forest Goblin-led warband from the deep woods — no Common Orcs, Black Orcs, or Savage Orcs. Common Goblins and Night Goblins are still welcome alongside the Forest Goblins, plus generic greenskin auxiliaries (Trolls, Giants, Snotlings, Ogre Mercenaries) and Goblin-crewed war machines/chariots. In an army with no Orcs at all, Forest Goblin regiments may take poisoned arrows." },
     ],
   },
   compositionRules: [
@@ -4015,6 +4056,7 @@ const ORCS_GOBLINS = {
     {
       id: "blackorcwarlord", theme: "core", name: "Black Orc Warlord", cost: 148, stat: "Black Orc Warlord", magicItemSlots: 3, tags: ["blackOrc"],
       gearNote: "May take a shield and either light or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       mounts: [
         { id: "boar", name: "War Boar", cost: 33, stat: "War Boar" },
@@ -4024,6 +4066,7 @@ const ORCS_GOBLINS = {
     {
       id: "blackorchero", theme: "core", name: "Black Orc Hero", cost: 89, stat: "Black Orc Hero", magicItemSlots: 2, tags: ["blackOrc"],
       gearNote: "May take a shield and either light or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       mounts: [
         { id: "boar", name: "War Boar", cost: 24, stat: "War Boar" },
@@ -4031,8 +4074,9 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "blackorcbsb", theme: "core", name: "Black Orc Battle Standard Bearer", cost: 96, stat: "Black Orc BSB", magicItemSlots: 1, restriction: "0-1", tags: ["blackOrc"],
+      id: "blackorcbsb", theme: "core", name: "Black Orc Battle Standard Bearer", cost: 96, stat: "Black Orc BSB", magicItemSlots: 1, restriction: "0-1", tags: ["blackOrc", "bsb"],
       gearNote: "May take light or heavy armour for free. The one item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour"] },
       mounts: [
         { id: "boar", name: "War Boar", cost: 15, stat: "War Boar" },
       ],
@@ -4040,6 +4084,7 @@ const ORCS_GOBLINS = {
     {
       id: "commonorcwarlord", theme: "core", name: "Common Orc Warlord", cost: 100, stat: "Orc Warlord", magicItemSlots: 3, tags: ["commonOrc"],
       gearNote: "May take a shield and light armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Crossbow"] },
       mounts: [
@@ -4051,6 +4096,7 @@ const ORCS_GOBLINS = {
     {
       id: "commonorchero", theme: "core", name: "Common Orc Hero", cost: 60, stat: "Orc Hero", magicItemSlots: 2, tags: ["commonOrc"],
       gearNote: "May take a shield and light armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Crossbow"] },
       mounts: [
@@ -4060,8 +4106,9 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "commonorcbsb", theme: "core", name: "Common Orc Battle Standard Bearer", cost: 80, stat: "Orc BSB", magicItemSlots: 1, restriction: "0-1", tags: ["commonOrc"],
+      id: "commonorcbsb", theme: "core", name: "Common Orc Battle Standard Bearer", cost: 80, stat: "Orc BSB", magicItemSlots: 1, restriction: "0-1", tags: ["commonOrc", "bsb"],
       gearNote: "May take light armour for free. The one item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour"] },
       mounts: [
         { id: "boar", name: "War Boar", cost: 11, stat: "War Boar" },
         { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0, stat: "Heavy Chariot" },
@@ -4103,6 +4150,7 @@ const ORCS_GOBLINS = {
     {
       id: "savageorcwarlord", theme: "core", name: "Savage Orc Warlord", cost: 130, stat: "Orc Warlord", magicItemSlots: 3, tags: ["savageOrc"],
       gearNote: "Adorned with magic tattoos (as light armour, plus a 6+/5+ ward — see army-wide rules). May take a shield for free.",
+      armourGroup: { options: ["No shield (default)", "Shield"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Bow", cost: 10 },
       mounts: [
@@ -4113,6 +4161,7 @@ const ORCS_GOBLINS = {
     {
       id: "savageorchero", theme: "core", name: "Savage Orc Hero", cost: 90, stat: "Orc Hero", magicItemSlots: 2, tags: ["savageOrc"],
       gearNote: "Adorned with magic tattoos (as light armour, plus a 6+/5+ ward — see army-wide rules). May take a shield for free.",
+      armourGroup: { options: ["No shield (default)", "Shield"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Bow", cost: 10 },
       mounts: [
@@ -4121,7 +4170,7 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "savageorcbsb", theme: "core", name: "Savage Orc Battle Standard Bearer", cost: 90, stat: "Orc BSB", magicItemSlots: 1, restriction: "0-1", tags: ["savageOrc"],
+      id: "savageorcbsb", theme: "core", name: "Savage Orc Battle Standard Bearer", cost: 90, stat: "Orc BSB", magicItemSlots: 1, restriction: "0-1", tags: ["savageOrc", "bsb"],
       gearNote: "Adorned with magic tattoos. The one item may be a magic banner.",
       mounts: [
         { id: "boar", name: "War Boar", cost: 13, stat: "War Boar" },
@@ -4157,8 +4206,9 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "commongoblinwarlord", theme: "core", name: "Common Goblin Warlord", cost: 60, stat: "Goblin Warlord", magicItemSlots: 3, tags: ["commonGoblin"],
+      id: "commongoblinwarlord", name: "Common Goblin Warlord", cost: 60, stat: "Goblin Warlord", magicItemSlots: 3, tags: ["commonGoblin"],
       gearNote: "May take a shield and light armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Short bow", cost: 10 },
       mounts: [
@@ -4168,8 +4218,9 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "commongoblinhero", theme: "core", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"],
+      id: "commongoblinhero", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"],
       gearNote: "May take a shield and light armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Short bow", cost: 10 },
       mounts: [
@@ -4179,15 +4230,16 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "commongoblinbsb", theme: "core", name: "Common Goblin Battle Standard Bearer", cost: 60, stat: "Goblin BSB", magicItemSlots: 1, restriction: "0-1", tags: ["commonGoblin"],
+      id: "commongoblinbsb", name: "Common Goblin Battle Standard Bearer", cost: 60, stat: "Goblin BSB", magicItemSlots: 1, restriction: "0-1", tags: ["commonGoblin", "bsb"],
       gearNote: "May take light armour for free. The one item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour"] },
       mounts: [
         { id: "wolf", name: "Giant Wolf", cost: 9, stat: "Giant Wolf" },
         { id: "chariot", name: "Wolf Chariot (for the price of the chariot)", cost: 0, stat: "Light Chariot" },
       ],
     },
     {
-      id: "commongoblinshamanlord", theme: "core", name: "Common Goblin Shaman Lord (level 4)", cost: 170, stat: "Goblin Shaman Lord", magicItemSlots: 4, tags: ["commonGoblin"],
+      id: "commongoblinshamanlord", name: "Common Goblin Shaman Lord (level 4)", cost: 170, stat: "Goblin Shaman Lord", magicItemSlots: 4, tags: ["commonGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (4).",
       mounts: [
         { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
@@ -4196,7 +4248,7 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "commongoblinmastershaman", theme: "core", name: "Common Goblin Master Shaman (level 3)", cost: 120, stat: "Goblin Master Shaman", magicItemSlots: 3, tags: ["commonGoblin"],
+      id: "commongoblinmastershaman", name: "Common Goblin Master Shaman (level 3)", cost: 120, stat: "Goblin Master Shaman", magicItemSlots: 3, tags: ["commonGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (3).",
       mounts: [
         { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
@@ -4204,7 +4256,7 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "commongoblinshamanchampion", theme: "core", name: "Common Goblin Shaman Champion (level 2)", cost: 75, stat: "Goblin Shaman Champion", magicItemSlots: 2, tags: ["commonGoblin"],
+      id: "commongoblinshamanchampion", name: "Common Goblin Shaman Champion (level 2)", cost: 75, stat: "Goblin Shaman Champion", magicItemSlots: 2, tags: ["commonGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (2).",
       mounts: [
         { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
@@ -4212,7 +4264,7 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "commongoblinshaman", theme: "core", name: "Common Goblin Shaman (level 1)", cost: 30, stat: "Goblin Shaman", magicItemSlots: 1, tags: ["commonGoblin"],
+      id: "commongoblinshaman", name: "Common Goblin Shaman (level 1)", cost: 30, stat: "Goblin Shaman", magicItemSlots: 1, tags: ["commonGoblin"],
       gearNote: "Takes Waaagh! Spells. May take as many magic items as levels (1).",
       mounts: [
         { id: "wolf", name: "Giant Wolf (free)", cost: 0, stat: "Giant Wolf" },
@@ -4222,6 +4274,7 @@ const ORCS_GOBLINS = {
     {
       id: "forestgoblinwarlord", name: "Forest Goblin Warlord", cost: 60, stat: "Goblin Warlord", magicItemSlots: 3, tags: ["forestGoblin"],
       gearNote: "May take a shield for free.",
+      armourGroup: { options: ["No shield (default)", "Shield"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Short bow", cost: 10 },
       mounts: [
@@ -4232,6 +4285,7 @@ const ORCS_GOBLINS = {
     {
       id: "forestgoblinhero", name: "Forest Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["forestGoblin"],
       gearNote: "May take a shield for free.",
+      armourGroup: { options: ["No shield (default)", "Shield"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Short bow", cost: 10 },
       mounts: [
@@ -4240,7 +4294,7 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "forestgoblinbsb", name: "Forest Goblin Battle Standard Bearer", cost: 60, stat: "Goblin BSB", magicItemSlots: 1, restriction: "0-1", tags: ["forestGoblin"],
+      id: "forestgoblinbsb", name: "Forest Goblin Battle Standard Bearer", cost: 60, stat: "Goblin BSB", magicItemSlots: 1, restriction: "0-1", tags: ["forestGoblin", "bsb"],
       gearNote: "The one item may be a magic banner.",
       mounts: [
         { id: "spidersteed", name: "Giant Spider", cost: 8, stat: "Giant Spider" },
@@ -4279,8 +4333,9 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "nightgoblinwarlord", theme: "core", name: "Night Goblin Warlord", cost: 60, stat: "Goblin Warlord", magicItemSlots: 3, tags: ["nightGoblin"],
+      id: "nightgoblinwarlord", name: "Night Goblin Warlord", cost: 60, stat: "Goblin Warlord", magicItemSlots: 3, tags: ["nightGoblin"],
       gearNote: "May take a shield for free.",
+      armourGroup: { options: ["No shield (default)", "Shield"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Short bow", cost: 10 },
       mounts: [
@@ -4288,8 +4343,9 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "nightgoblinhero", theme: "core", name: "Night Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["nightGoblin"],
+      id: "nightgoblinhero", name: "Night Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["nightGoblin"],
       gearNote: "May take a shield for free.",
+      armourGroup: { options: ["No shield (default)", "Shield"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Short bow", cost: 10 },
       mounts: [
@@ -4297,32 +4353,32 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "nightgoblinbsb", theme: "core", name: "Night Goblin Battle Standard Bearer", cost: 60, stat: "Goblin BSB", magicItemSlots: 1, restriction: "0-1", tags: ["nightGoblin"],
+      id: "nightgoblinbsb", name: "Night Goblin Battle Standard Bearer", cost: 60, stat: "Goblin BSB", magicItemSlots: 1, restriction: "0-1", tags: ["nightGoblin", "bsb"],
       gearNote: "The one item may be a magic banner.",
     },
     {
-      id: "nightgoblinshamanlord", theme: "core", name: "Night Goblin Shaman Lord (level 4)", cost: 180, stat: "Goblin Shaman Lord", magicItemSlots: 4, tags: ["nightGoblin", "nightGoblinShaman"],
+      id: "nightgoblinshamanlord", name: "Night Goblin Shaman Lord (level 4)", cost: 180, stat: "Goblin Shaman Lord", magicItemSlots: 4, tags: ["nightGoblin", "nightGoblinShaman"],
       gearNote: "Comes with a magic mushroom (see army-wide rules). Takes Waaagh! Spells. May take as many magic items as levels (4).",
       mounts: [
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
     {
-      id: "nightgoblinmastershaman", theme: "core", name: "Night Goblin Master Shaman (level 3)", cost: 130, stat: "Goblin Master Shaman", magicItemSlots: 3, tags: ["nightGoblin", "nightGoblinShaman"],
+      id: "nightgoblinmastershaman", name: "Night Goblin Master Shaman (level 3)", cost: 130, stat: "Goblin Master Shaman", magicItemSlots: 3, tags: ["nightGoblin", "nightGoblinShaman"],
       gearNote: "Comes with a magic mushroom (see army-wide rules). Takes Waaagh! Spells. May take as many magic items as levels (3).",
       mounts: [
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
     {
-      id: "nightgoblinshamanchampion", theme: "core", name: "Night Goblin Shaman Champion (level 2)", cost: 85, stat: "Goblin Shaman Champion", magicItemSlots: 2, tags: ["nightGoblin", "nightGoblinShaman"],
+      id: "nightgoblinshamanchampion", name: "Night Goblin Shaman Champion (level 2)", cost: 85, stat: "Goblin Shaman Champion", magicItemSlots: 2, tags: ["nightGoblin", "nightGoblinShaman"],
       gearNote: "Comes with a magic mushroom (see army-wide rules). Takes Waaagh! Spells. May take as many magic items as levels (2).",
       mounts: [
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
       ],
     },
     {
-      id: "nightgoblinshaman", theme: "core", name: "Night Goblin Shaman (level 1)", cost: 40, stat: "Goblin Shaman", magicItemSlots: 1, tags: ["nightGoblin", "nightGoblinShaman"],
+      id: "nightgoblinshaman", name: "Night Goblin Shaman (level 1)", cost: 40, stat: "Goblin Shaman", magicItemSlots: 1, tags: ["nightGoblin", "nightGoblinShaman"],
       gearNote: "Comes with a magic mushroom (see army-wide rules). Takes Waaagh! Spells. May take as many magic items as levels (1).",
       mounts: [
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
@@ -4427,7 +4483,7 @@ const ORCS_GOBLINS = {
       champion: { name: "Black Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Black Orc Champion", tags: ["blackOrc"] },
     },
     {
-      id: "commongoblininfantry", theme: "core", name: "Common Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Common Goblin", command: "standard",
+      id: "commongoblininfantry", name: "Common Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Common Goblin", command: "standard",
       note: "Fear Elves unless outnumbering them two-to-one.",
       options: [
         { id: "spear", group: "melee", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
@@ -4439,7 +4495,7 @@ const ORCS_GOBLINS = {
       champion: { name: "Common Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Common Goblin Champion", tags: ["commonGoblin"] },
     },
     {
-      id: "commongoblinwolfriders", theme: "core", name: "Common Goblin Wolf Riders", perModel: 9, minSize: 5, stat: "Common Goblin", mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "fastCavalry",
+      id: "commongoblinwolfriders", name: "Common Goblin Wolf Riders", perModel: 9, minSize: 5, stat: "Common Goblin", mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "fastCavalry",
       note: "Fear Elves unless outnumbering them two-to-one. Fast cavalry.",
       options: [
         { id: "spear", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
@@ -4456,6 +4512,7 @@ const ORCS_GOBLINS = {
         { id: "spear", group: null, label: "Spears (+1pt/model)", cost: 1, per: "model" },
         { id: "shortbows", group: null, label: "Short bows (+1pt/model)", cost: 1, per: "model" },
         { id: "shields", group: null, label: "Shields (+1pt/model)", cost: 1, per: "model" },
+        { id: "poisonedarrows", group: null, label: "Poisoned arrows — only for models armed with short bows, +1 strength (+1pt/model)", cost: 1, per: "model", theme: "forestgoblins" },
       ],
       champion: { name: "Forest Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Forest Goblin Champion", tags: ["forestGoblin"] },
     },
@@ -4467,11 +4524,12 @@ const ORCS_GOBLINS = {
         { id: "dhw", group: "melee", label: "Double handed weapons (+2pt/model)", cost: 2, per: "model" },
         { id: "shortbows", group: "melee", label: "Short bows (+1pt/model)", cost: 1, per: "model" },
         { id: "shields", group: null, label: "Shields, only if not armed with short bows (+0.5pt/model)", cost: 0.5, per: "model" },
+        { id: "poisonedarrows", group: null, label: "Poisoned arrows — only for models armed with short bows, +1 strength (+1pt/model)", cost: 1, per: "model", theme: "forestgoblins" },
       ],
       champion: { name: "Forest Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Forest Goblin Champion", tags: ["forestGoblin"] },
     },
     {
-      id: "nightgoblininfantry", theme: "core", name: "Night Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Night Goblin", command: "standard",
+      id: "nightgoblininfantry", name: "Night Goblin Infantry", perModel: 2.5, minSize: 5, stat: "Night Goblin", command: "standard",
       note: "Fear Elves unless outnumbering them two-to-one. Hate Dwarfs (not Chaos Dwarfs). May conceal up to 3 hidden Fanatics — released and scattering wildly the moment an enemy comes within 8\" (see the full rules in the book); Fanatics don't count toward the regiment's 50pt minimum.",
       options: [
         { id: "spear", group: "melee", label: "Spears (+0.5pt/model)", cost: 0.5, per: "model" },
@@ -4484,11 +4542,11 @@ const ORCS_GOBLINS = {
       champion: { name: "Night Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Night Goblin Champion", tags: ["nightGoblin"] },
     },
     {
-      id: "nightgoblinsquighoppers", theme: "core", name: "Night Goblin Squig-Hoppers", perModel: 25, minSize: 1, stat: "Cave Squig", command: "none",
+      id: "nightgoblinsquighoppers", name: "Night Goblin Squig-Hoppers", perModel: 25, minSize: 1, stat: "Cave Squig", command: "none",
       note: "Cannot take a standard bearer, musician, or champion, and no characters may join. All deploy within 2\" of each other, then each acts as an independent unit — immune to psychology, no animosity tests, bounces 2D6\" each turn, auto-hits anything it bounces onto (the rider never fights). See the full bounce/scatter rules in the book.",
     },
     {
-      id: "nightgoblinsquighunters", theme: "core", name: "Night Goblin Squig-Hunters", perModel: 0, minSize: 4, kind: "composite", command: "none",
+      id: "nightgoblinsquighunters", name: "Night Goblin Squig-Hunters", perModel: 0, minSize: 4, kind: "composite", command: "none",
       note: "Cannot take a standard bearer, musician, or champion, and no characters may join. Needs at least 1 Night Goblin (with a prodder) per 3 Cave Squigs to start; if Squigs ever outnumber that ratio, the excess go wild (bounce like a Squig-Hopper, in a random direction). Moves at the Night Goblins' M4 and uses their Ld5. While in ranks, the Squigs are unbreakable; if the regiment panics/breaks, only the Night Goblins flee — the Squigs go wild instead.",
       composition: [
         { id: "goblin", label: "Night Goblins (with prodders)", cost: 6, stat: "Night Goblin" },
@@ -4496,7 +4554,7 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "nightgoblinnettersclubbers", theme: "core", name: "Night Goblin Netters and Clubbers", perModel: 6, minSize: 5, stat: "Night Goblin", command: "standard",
+      id: "nightgoblinnettersclubbers", name: "Night Goblin Netters and Clubbers", perModel: 6, minSize: 5, stat: "Night Goblin", command: "standard",
       note: "Nets and clubs — treated as double handed weapons that strike first (the net effect stacks with itself, so they strike first twice over, not just cancelling the double-handed-weapon strike-last penalty).",
       champion: { name: "Night Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Night Goblin Champion", tags: ["nightGoblin"] },
     },
@@ -4528,7 +4586,7 @@ const ORCS_GOBLINS = {
       note: "Follows the main-rulebook Giant rules. The first Giant counts toward Regiments; further ones count toward Monsters.",
     },
     {
-      id: "goblinwolfchariots", theme: "core", name: "Goblin Wolf Chariot", perUnit: 44, stat: "Light Chariot", kind: "chariot",
+      id: "goblinwolfchariots", name: "Goblin Wolf Chariot", perUnit: 44, stat: "Light Chariot", kind: "chariot",
       note: "Light Chariot pulled by two Giant Wolves, crewed by two Common Goblins with light armour, spears, shields and short bows (5+ combined save).",
       extraCrewCost: 6, extraCrewLabel: "extra Common Goblin crew", extraSteedCost: 8, extraSteedLabel: "extra Giant Wolves",
       scythedWheelsCost: 10, commanderCost: 15, commanderLabel: "One crewman is a Common Goblin Champion", commanderMagicItemSlots: 1,
@@ -4600,7 +4658,7 @@ const ORCS_GOBLINS = {
         { id: "chariot", name: "Boar Chariot (for the price of the chariot)", cost: 0 },
         { id: "wyvern", name: "Wyvern", cost: 150 },
       ] },
-    { id: "skarsnik", theme: "core", name: "Skarsnik, Warlord of the Eight Peaks", cost: 200, stat: "Skarsnik of the Eight Peaks", role: "Night Goblin Warlord",
+    { id: "skarsnik", name: "Skarsnik, Warlord of the Eight Peaks", cost: 200, stat: "Skarsnik of the Eight Peaks", role: "Night Goblin Warlord",
       note: "Always accompanied by Gobbla, a giant Cave Squig, who moves and fights alongside him (if Skarsnik dies, roll on the Monster Reaction Table for Gobbla; if acting alone Gobbla moves 2D6\"/turn). Carries Skarsnik's Prodder for free.", extraMagicItemSlots: 2 },
     { id: "oglok", theme: "core", name: "Oglok the 'Orrible", cost: 85, stat: "Oglok the 'Orrible", role: "Common Orc Hero",
       note: "Has the same mount/weapon/armour options as a normal Common Orc Hero.", extraMagicItemSlots: 2,
@@ -4611,7 +4669,7 @@ const ORCS_GOBLINS = {
       ] },
     { id: "gorbad", theme: "core", name: "Gorbad Ironclaw", cost: 250, stat: "Gorbad Ironclaw", role: "Common Orc Warlord",
       note: "Wears light armour, carries a shield and Morgor the Mangler. Rides a War Boar.", extraMagicItemSlots: 2 },
-    { id: "grom", theme: "core", name: "Grom the Paunch of Misty Mountain", cost: 225, stat: "Grom the Paunch", role: "Common Goblin Warlord",
+    { id: "grom", name: "Grom the Paunch of Misty Mountain", cost: 225, stat: "Grom the Paunch", role: "Common Goblin Warlord",
       note: "Regenerates on 4+. Wears light armour, carries a shield and the Axe of Grom. Rides a heavy scythed Wolf Chariot (100x75mm base) with three wolves and two Common Goblin crew besides Grom. A Common Goblin Battle Standard Bearer (Niblit) may join as a fourth crew member, purchased separately as normal.", extraMagicItemSlots: 2 },
     { id: "morglum", theme: "core", name: "Morglum Necksnapper", cost: 175, stat: "Morglum Necksnapper", role: "Black Orc Warlord",
       note: "Immune to psychology, as is any regiment he joins. Has the same mount/weapon/armour options as a normal Black Orc Warlord.", extraMagicItemSlots: 3,
@@ -4692,6 +4750,7 @@ const DOGS_OF_WAR = {
     {
       id: "mercenarylord", name: "Human Mercenary Lord", cost: 110, stat: "Human Mercenary Lord", magicItemSlots: 3, tags: ["human"],
       gearNote: "May take a shield and either light armour or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
       mounts: [
@@ -4702,6 +4761,7 @@ const DOGS_OF_WAR = {
     {
       id: "mercenaryhero", name: "Human Mercenary Hero", cost: 60, stat: "Empire Hero", magicItemSlots: 2, tags: ["human"],
       gearNote: "May take a shield and either light armour or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
       mounts: [
@@ -4712,11 +4772,13 @@ const DOGS_OF_WAR = {
     {
       id: "ogremercenaryhero", name: "Ogre Mercenary Hero", cost: 171, stat: "Ogre Mercenary Hero", magicItemSlots: 2, tags: ["ogre"],
       gearNote: "Your army must include an Ogre Mercenaries regiment to field this Hero (now flagged live by this builder). Ogres are monstrous models that cause fear. May take light armour or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Halberd", "Flail", "Double handed weapon"] },
     },
     {
       id: "paymaster", name: "Human Mercenary Paymaster", cost: 80, stat: "Empire BSB", magicItemSlots: 1, restriction: "0-1", tags: ["human"],
       gearNote: "The Dogs of War equivalent of a Battle Standard Bearer: carries the Pay Chest. His regiment is unbreakable while he lives, and Dogs of War units within 12\" get +1 Ld. Suffers no restriction on equipment, but can never be mounted. May take a shield and either light armour or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (any one, +10pts)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
     },
@@ -5059,6 +5121,7 @@ const CHAOS_DWARFS = {
     {
       id: "sorcererlord", name: "Chaos Dwarf Sorcerer Lord (level 4)", cost: 276, stat: "Chaos Dwarf Sorcerer Lord", magicItemSlots: 4, tags: ["chaosDwarf", "wizard"],
       gearNote: "Uses Chaos Dwarf Magic. May wear Chaos Armour for +10pts. May take as many magic items as levels (4). May ride a Lammasu for +180pts.",
+      chaosArmourOption: { label: "Chaos Armour", cost: 10 },
       mounts: [
         { id: "lammasu", name: "Lammasu", cost: 180, stat: "Lammasu" },
       ],
@@ -5066,14 +5129,17 @@ const CHAOS_DWARFS = {
     {
       id: "mastersorcerer", name: "Master Chaos Dwarf Sorcerer (level 3)", cost: 194, stat: "Chaos Dwarf Master Sorcerer", magicItemSlots: 3, tags: ["chaosDwarf", "wizard"],
       gearNote: "Uses Chaos Dwarf Magic. May wear Chaos Armour for +10pts. May take as many magic items as levels (3).",
+      chaosArmourOption: { label: "Chaos Armour", cost: 10 },
     },
     {
       id: "sorcererchampion", name: "Chaos Dwarf Sorcerer Champion (level 2)", cost: 128, stat: "Chaos Dwarf Sorcerer Champion", magicItemSlots: 2, tags: ["chaosDwarf", "wizard"],
       gearNote: "Uses Chaos Dwarf Magic. May wear Chaos Armour for +10pts. May take as many magic items as levels (2).",
+      chaosArmourOption: { label: "Chaos Armour", cost: 10 },
     },
     {
       id: "sorcerer", name: "Chaos Dwarf Sorcerer (level 1)", cost: 62, stat: "Chaos Dwarf Sorcerer", magicItemSlots: 1, tags: ["chaosDwarf", "wizard"],
       gearNote: "Uses Chaos Dwarf Magic. May wear Chaos Armour for +10pts. May take as many magic items as levels (1).",
+      chaosArmourOption: { label: "Chaos Armour", cost: 10 },
     },
     {
       id: "bullcentaurlord", name: "Bull Centaur Lord", cost: 208, stat: "Bull Centaur Lord", magicItemSlots: 3, tags: ["bullCentaur"],
@@ -5090,22 +5156,26 @@ const CHAOS_DWARFS = {
     {
       id: "blackorchero", name: "Black Orc Hero", cost: 89, stat: "Black Orc Hero", magicItemSlots: 2, tags: ["blackOrc"],
       gearNote: "Your army must include a Black Orc regiment to field this Hero (now flagged live by this builder). Quells animosity. May take a shield and either light armour or heavy armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
       id: "commonorchero", name: "Common Orc Hero", cost: 60, stat: "Orc Hero", magicItemSlots: 2, tags: ["commonOrc"],
       gearNote: "Your army must include a Common Orc regiment to field this Hero (now flagged live by this builder). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
       id: "commongoblinhero", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"],
       gearNote: "Your army must include a Common Goblin regiment to field this Hero (now flagged live by this builder). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Short bow"] },
     },
     {
       id: "hobgoblinhero", name: "Hobgoblin Hero", cost: 53, stat: "Hobgoblin Hero", magicItemSlots: 2, tags: ["hobgoblin"],
       gearNote: "Your army must include a Hobgoblin regiment to field this Hero (now flagged live by this builder). May take light armour and a shield for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Bow", "Crossbow"] },
       mounts: [
@@ -5364,6 +5434,7 @@ const DARK_ELVES = {
     {
       id: "firstamongequals", name: "First Among Equals", cost: 124, stat: "Elven Prince", magicItemSlots: 3,
       gearNote: "May take a shield and either light armour or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Repeating crossbow"] },
       mounts: [
@@ -5379,6 +5450,7 @@ const DARK_ELVES = {
     {
       id: "elvenhero", name: "Elven Hero", cost: 74, stat: "Elven Hero (High Elf)", magicItemSlots: 2,
       gearNote: "May take a shield and either light armour or heavy armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (+10pts)", cost: 10, options: ["None (default)", "Repeating crossbow"] },
       mounts: [
@@ -5394,6 +5466,7 @@ const DARK_ELVES = {
     {
       id: "witchelfhero", name: "Witch Elf Hero", cost: 104, stat: "Elven Hero (High Elf)", magicItemSlots: 2,
       gearNote: "Subject to frenzy. Comes with light armour and two poisoned hand weapons by default — may forfeit all weapons and armour for free.",
+      armourGroup: { options: ["Light Armour (default)", "No armour or weapons (forfeited)"] },
       mounts: [
         { id: "steed", name: "Elven Steed (may take barding free)", cost: 20, stat: "Elven Steed" },
         { id: "coldone", name: "Cold One", cost: 23, stat: "Cold One" },
@@ -5405,8 +5478,9 @@ const DARK_ELVES = {
       ],
     },
     {
-      id: "elvenbsb", name: "Elven Battle Standard Bearer", cost: 88, stat: "Elven BSB (High Elf)", magicItemSlots: 1, restriction: "0-1",
+      id: "elvenbsb", name: "Elven Battle Standard Bearer", cost: 88, stat: "Elven BSB (High Elf)", magicItemSlots: 1, restriction: "0-1", tags: ["bsb"],
       gearNote: "May take light armour or heavy armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour"] },
       mounts: [
         { id: "steed", name: "Elven Steed (may take barding free)", cost: 13, stat: "Elven Steed" },
         { id: "coldone", name: "Cold One", cost: 16, stat: "Cold One" },
@@ -5642,18 +5716,21 @@ const SKAVEN = {
     {
       id: "skavenwarlord", name: "Skaven Warlord", cost: 88, stat: "Skaven Warlord", magicItemSlots: 3,
       gearNote: "May take a shield and light armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon, magical bullets (+10pts)", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
     },
     {
       id: "skavenhero", name: "Skaven Hero", cost: 53, stat: "Skaven Hero", magicItemSlots: 2,
       gearNote: "May take a shield and light armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon, magical bullets (+10pts)", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
     },
     {
-      id: "skavenbsb", name: "Skaven Battle Standard Bearer", cost: 76, stat: "Skaven BSB", magicItemSlots: 1, restriction: "0-1",
+      id: "skavenbsb", name: "Skaven Battle Standard Bearer", cost: 76, stat: "Skaven BSB", magicItemSlots: 1, restriction: "0-1", tags: ["bsb"],
       gearNote: "May take light armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour"] },
     },
     {
       id: "greyseer", name: "Grey Seer (level 4)", cost: 325, stat: "Grey Seer", magicItemSlots: 4, tags: ["wizard"],
@@ -5681,6 +5758,7 @@ const SKAVEN = {
     {
       id: "plaguepriest", name: "Plague Priest", cost: 73, stat: "Clan Pestilens Plague Priest", magicItemSlots: 2,
       gearNote: "Subject to frenzy. May only join regiments of Plague Monks. May take a shield and light armour for free.",
+      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
@@ -6601,7 +6679,7 @@ const KISLEV = {
       ],
     },
     {
-      id: "bsb", name: "Battle Standard Bearer", cost: 80, stat: "Kislev BSB", magicItemSlots: 1, restriction: "0-1",
+      id: "bsb", name: "Battle Standard Bearer", cost: 80, stat: "Kislev BSB", magicItemSlots: 1, restriction: "0-1", tags: ["bsb"],
       gearNote: "The one magic item may be a magic banner.",
       armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
       mounts: [
@@ -6826,8 +6904,9 @@ const NORSE = {
       mounts: [{ id: "warhorse", name: "Warhorse", cost: 17, stat: "War Horse" }],
     },
     {
-      id: "norsebsb", name: "Norse Battle Standard Bearer", cost: 84, stat: "Norse BSB", magicItemSlots: 1, restriction: "0-1",
+      id: "norsebsb", name: "Norse Battle Standard Bearer", cost: 84, stat: "Norse BSB", magicItemSlots: 1, restriction: "0-1", tags: ["bsb"],
       gearNote: "May take light armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour"] },
       mounts: [{ id: "warhorse", name: "Warhorse", cost: 11, stat: "War Horse" }],
     },
     {
@@ -7013,6 +7092,7 @@ const HALFLINGS = {
     {
       id: "mootgeneral", name: "Moot General", cost: 60, stat: "Moot General", magicItemSlots: 3, role: "Lord",
       gearNote: "May take a shield for free, and light armour for free (either or both).",
+      armourGroup: { options: ["Neither (default)", "Shield only", "Light Armour only", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear"] },
       missileGroup: { label: "Bow or sling (+5pts)", cost: 5, options: ["None (default)", "Bow", "Sling"] },
       mounts: [
@@ -7024,6 +7104,7 @@ const HALFLINGS = {
     {
       id: "moothero", name: "Moot Hero", cost: 36, stat: "Halfling Hero", magicItemSlots: 2, role: "Hero",
       gearNote: "May take a shield for free, and light armour for free (either or both).",
+      armourGroup: { options: ["Neither (default)", "Shield only", "Light Armour only", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear"] },
       missileGroup: { label: "Bow or sling (+5pts)", cost: 5, options: ["None (default)", "Bow", "Sling"] },
       mounts: [
@@ -7032,8 +7113,9 @@ const HALFLINGS = {
       ],
     },
     {
-      id: "halflingbsb", name: "Halfling Battle Standard Bearer", cost: 60, stat: "Halfling BSB", magicItemSlots: 1, restriction: "0-1",
+      id: "halflingbsb", name: "Halfling Battle Standard Bearer", cost: 60, stat: "Halfling BSB", magicItemSlots: 1, restriction: "0-1", tags: ["bsb"],
       gearNote: "May take light armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour"] },
       mounts: [{ id: "livestockbeast", name: "Livestock Beast", cost: 4, stat: "Livestock Beast" }],
     },
     {
@@ -7289,6 +7371,7 @@ const LIZARDMEN = {
     {
       id: "saurusbsb", name: "Lizardman Saurus Battle Standard Bearer", cost: 112, stat: "Lizardman Saurus BSB", magicItemSlots: 1, restriction: "0-1", tags: ["saurus", "bsb"],
       gearNote: "You can't take this option if a Slann Mage Priest is instead carrying the battle standard. May take light armour for free. The one magic item may be a magic banner.",
+      armourGroup: { options: ["No armour (default)", "Light Armour"] },
       mounts: [
         { id: "coldone", name: "Cold One", cost: 23, stat: "Cold One" },
         { id: "hornedone", name: "Horned One", cost: 33, stat: "Horned One" },
@@ -7786,6 +7869,7 @@ function characterCost(inst, def, armyData) {
   }
   if (def.wingsOption && inst.wings) total += def.wingsOption.cost;
   if (def.anvilOption && inst.anvil) total += def.anvilOption.cost;
+  if (def.chaosArmourOption && inst.chaosArmour) total += def.chaosArmourOption.cost;
   (inst.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   if (def.bloodlinePowerSlots) (inst.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   return total;
@@ -8523,6 +8607,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
     if (unit.missile && unit.missile !== "None (default)" && def.missileGroup) tags.push(unit.missile);
     if (unit.experimentalMissile && unit.experimentalMissile !== "None (default)" && def.experimentalMissileGroup) tags.push(unit.experimentalMissile);
     if (def.wingsOption && unit.wings) tags.push("Wings");
+    if (def.chaosArmourOption && unit.chaosArmour) tags.push(def.chaosArmourOption.label);
     if (def.magicLevelOption && (unit.magicLevel ?? def.magicLevelOption.min ?? 0) > 0) tags.push(`+${unit.magicLevel ?? def.magicLevelOption.min} magic levels`);
     (unit.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
     (unit.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
@@ -8992,6 +9077,18 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
+      {def.chaosArmourOption && (
+        <div style={{ marginTop: 8 }}>
+          <label className="whr-opt-row whr-opt-label">
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input type="checkbox" checked={!!unit.chaosArmour} onChange={(e) => updateUnit({ ...unit, chaosArmour: e.target.checked })} />
+              {def.chaosArmourOption.label}
+            </span>
+            <span className="whr-opt-cost">+{def.chaosArmourOption.cost}pts</span>
+          </label>
+        </div>
+      )}
+
       {def.magicLevelOption && (() => {
         const forbidden = def.magicLevelOption.forbiddenMark && (unit.mark || def.markGroup?.options?.[0]) === def.magicLevelOption.forbiddenMark;
         if (forbidden) return <p style={{ fontSize: 14, color: "var(--ink-faint)", marginTop: 8 }}>No magic levels — forbidden with the {def.magicLevelOption.forbiddenMark} Mark.</p>;
@@ -9036,7 +9133,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
       {def.magicItemSlots > 0 && (
         <div style={{ marginTop: 14 }}>
           <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
-            categoryFilter={def.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
+            categoryFilter={defaultCategoryFilter(def)}
             context={itemContext(def, unit, { characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
             onToggle={(id) => toggleArrayField(unit, "magicItemIds", id, updateUnit)} />
         </div>
