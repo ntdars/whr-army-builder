@@ -893,9 +893,9 @@ const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 // (undefined on a bearer = unrestricted, i.e. no behavior change until that bearer is audited).
 // Arcane items and Familiars are wizard-only (restrictedTo tags:["wizard"], resolved dynamically
 // via isWizard — see itemContext). Familiars are additionally on-foot only.
-// The 8 items marked "(lore-locked)" require a specific College Magic lore the bearer doesn't yet
-// track in this app (spells/lores aren't modeled) — left open to any wizard for now, pending the
-// per-faction lore-access data.
+// 8 items carry a `requiresLore` field (a specific College Magic lore) — still selectable by any
+// wizard (restrictedTo stays tags:["wizard"] only, so this isn't a hard block), but flagged via
+// a roster warning if the bearer's chosen Lore of Magic (see resolveWizardLore) doesn't match.
 const COMMON_MAGIC_ITEMS = [
   // Magic Weapons
   { id: "cm-bitingblade", name: "Biting Blade", cost: 10, cat: "weapon", subtype: "handWeapon", desc: "-2 to armour save." },
@@ -985,19 +985,19 @@ const COMMON_MAGIC_ITEMS = [
   { id: "cm-powerscroll", name: "Power Scroll", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Automatically powers one of the wizard's spells. One use only." },
   { id: "cm-infusionwhite", name: "Infusion of White", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Used when winds of magic are rolled. The bearer gains 1D6 extra magic cards that only he/she can use. On a roll of six the wizard ODs after the magic phase ends (passes out for the rest of the battle, is hit automatically if attacked in melee combat). One use only." },
   { id: "cm-seerstone", name: "Seerstone", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "For each extra power card spent when attempting to cast a spell, the wizard may increase the range of the spell by 12\". No effect on spells with no range, spells with a radius effect centred on the wizard, or bound spells." },
-  { id: "cm-cloakhorrors", name: "Cloak of Horrors", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item exclusive to wizards using the Amber lore (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Savage Beast of Horrors and amplifies its effects (6 automatic hits at S6; bearer's own T becomes 6 while active)." },
-  { id: "cm-stormcrowstaff", name: "Stormcrow Staff", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item and bound spell, Celestial lore only (lore-locked — not yet enforced pending lore-access data). Usable only against flying units, 18\" range, LoS required (flying-high units always count as in LoS). Target suffers 1D6 lightning S6 hits, no armour save." },
+  { id: "cm-cloakhorrors", name: "Cloak of Horrors", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], requiresLore: "Amber", desc: "An arcane item exclusive to wizards using the Amber lore. Lets the wizard swap a dealt spell for Savage Beast of Horrors and amplifies its effects (6 automatic hits at S6; bearer's own T becomes 6 while active)." },
+  { id: "cm-stormcrowstaff", name: "Stormcrow Staff", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], requiresLore: "Celestial", desc: "An arcane item and bound spell, Celestial lore only. Usable only against flying units, 18\" range, LoS required (flying-high units always count as in LoS). Target suffers 1D6 lightning S6 hits, no armour save." },
   { id: "cm-teclistextbook", name: "Teclis' Textbook", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "The owner may use any one of the eight lores of College Magic instead of their normal lore. Takes up a magic item slot but is not strictly a magic item, and cannot be destroyed." },
-  { id: "cm-flameforgedcape", name: "Flameforged Cape", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item exclusive to wizards using the Bright lore (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Scarlet Scimitar and amplifies it — while active, all attempts to hit the bearer (melee or ranged, even normally-automatic ones) require a natural 6." },
-  { id: "cm-purplereaper", name: "Purple Reaper", cost: 20, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item limited to wizards using the Amethyst lore (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Purple Scythe and amplifies it to 1D6 S10 hits (instead of 1D3 S5) on each enemy model in base contact. May be used even while mounted." },
+  { id: "cm-flameforgedcape", name: "Flameforged Cape", cost: 10, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], requiresLore: "Bright", desc: "An arcane item exclusive to wizards using the Bright lore. Lets the wizard swap a dealt spell for Scarlet Scimitar and amplifies it — while active, all attempts to hit the bearer (melee or ranged, even normally-automatic ones) require a natural 6." },
+  { id: "cm-purplereaper", name: "Purple Reaper", cost: 20, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], requiresLore: "Amethyst", desc: "An arcane item limited to wizards using the Amethyst lore. Lets the wizard swap a dealt spell for Purple Scythe and amplifies it to 1D6 S10 hits (instead of 1D3 S5) on each enemy model in base contact. May be used even while mounted." },
   { id: "cm-dispelmagicscroll", name: "Dispel Magic Scroll", cost: 25, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Automatically dispels an enemy spell, even if cast with Total Power and including spells cast in a previous turn that remain in play. One use only. You may include two unless playing with the \"Veto One Spell\" house rule, in which case only one — offered as two separate entries below so both can be selected." },
   { id: "cm-dispelmagicscroll2", name: "Dispel Magic Scroll", cost: 25, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Second copy — see above. Only include this one if not playing with the \"Veto One Spell\" house rule." },
   { id: "cm-ringdarkness", name: "Ring of Darkness", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Bound spell. The wizard becomes ethereal, as described in the Undead army book. Remains in play." },
-  { id: "cm-amuletsteel", name: "Amulet of Steel", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item and bound spell, Gold lore only (lore-locked — not yet enforced pending lore-access data). Cast on any unit within 18\" and LoS: enemies suffer -2 armour save, friendly units gain +2 (or 5+ if they had none). Lasts until the next magic phase." },
-  { id: "cm-crownshadows", name: "Crown of Shadows", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item, Grey lore only (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Crown of Taidron and extends its range to 18\" (from 3\"); costs one power, 1D6 lightning S6 hits distributed like normal shooting." },
+  { id: "cm-amuletsteel", name: "Amulet of Steel", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], requiresLore: "Gold", desc: "An arcane item and bound spell, Gold lore only. Cast on any unit within 18\" and LoS: enemies suffer -2 armour save, friendly units gain +2 (or 5+ if they had none). Lasts until the next magic phase." },
+  { id: "cm-crownshadows", name: "Crown of Shadows", cost: 30, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], requiresLore: "Grey", desc: "An arcane item, Grey lore only. Lets the wizard swap a dealt spell for Crown of Taidron and extends its range to 18\" (from 3\"); costs one power, 1D6 lightning S6 hits distributed like normal shooting." },
   { id: "cm-booksecrets", name: "Book of Secrets", cost: 40, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Used just after rolling for winds of magic. Discard any number of magic cards not belonging to a particular wizard and immediately draw replacements." },
-  { id: "cm-whitecloak", name: "White Cloak", cost: 40, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item, Light lore only (lore-locked — not yet enforced pending lore-access data). Lets the wizard swap a dealt spell for Shimmering Cloak and extends its protection to any regiment the bearer joins." },
-  { id: "cm-wandresurrection", name: "Wand of Resurrection", cost: 50, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "An arcane item, Jade lore only (lore-locked — not yet enforced pending lore-access data). Whenever a Jade spell is successfully cast, revive one fallen rank-and-file cavalry model or two infantry models (own or friendly regiment within 18\" and LoS, capped at starting model count). Living creatures only — no effect on undead, Daemons, or constructs." },
+  { id: "cm-whitecloak", name: "White Cloak", cost: 40, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], requiresLore: "Light", desc: "An arcane item, Light lore only. Lets the wizard swap a dealt spell for Shimmering Cloak and extends its protection to any regiment the bearer joins." },
+  { id: "cm-wandresurrection", name: "Wand of Resurrection", cost: 50, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], requiresLore: "Jade", desc: "An arcane item, Jade lore only. Whenever a Jade spell is successfully cast, revive one fallen rank-and-file cavalry model or two infantry models (own or friendly regiment within 18\" and LoS, capped at starting model count). Living creatures only — no effect on undead, Daemons, or constructs." },
   { id: "cm-bookashur", name: "Book of Ashur", cost: 50, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "+1 magic level. Does not increase the number of magic items the wizard may carry." },
   { id: "cm-orbforbiddenknowledge", name: "Orb of Forbidden Knowledge", cost: 50, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "For purposes of casting and dispelling, the bearer always counts as having two magic levels more than he actually has." },
   { id: "cm-destroymagicscroll", name: "Destroy Magic Scroll", cost: 50, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "Automatically dispels an enemy spell, even if cast with Total Power and including spells cast in a previous turn that remain in play. Furthermore, roll 1D6, on a 4+ the spell is destroyed (bound spells re-roll a successful destroy). One use only." },
@@ -1076,6 +1076,11 @@ const MI_CATEGORY_LABEL = { weapon: "Magic Weapons", armour: "Magic Armour", enc
 // its own magicItemCategoryFilter (which otherwise defaults to "every category, no restriction").
 const NON_BANNER_CATEGORIES = Object.keys(MI_CATEGORY_LABEL).filter((c) => c !== "banner");
 const NON_ARCANE_CATEGORIES = Object.keys(MI_CATEGORY_LABEL).filter((c) => c !== "arcane");
+// The 8 lores taught at the Colleges of Magic in Altdorf. Factions with College Magic access
+// list these plus, where applicable, one faction-specific alternate lore (e.g. Empire also gets
+// Ice Magic). Factions without College access get either one fixed lore (no choice) or a small
+// named choice between two non-College lores (Undead: Dark/Necromancy, Chaos: Dark/Own God's).
+const COLLEGE_LORES = ["Celestial", "Grey", "Bright", "Gold", "Jade", "Light", "Amber", "Amethyst"];
 // Battle Standard Bearers (tags include "bsb") are the one kind of plain character whose personal
 // item slot conventionally doubles as the unit's magic banner — give them NON_BANNER_CATEGORIES
 // plus "banner" back unless they already specify their own magicItemCategoryFilter.
@@ -1088,6 +1093,7 @@ const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 const WOOD_ELVES = {
   key: "woodElves",
+  loreOptions: [...COLLEGE_LORES, "High Magic"],
   name: "Wood Elves",
   tagline: "Guerrilla warfare from the deep groves of the Old World",
   magicItems: [...COMMON_MAGIC_ITEMS, ...WOOD_ELVES_MAGIC_ITEMS],
@@ -1420,6 +1426,7 @@ const EMPIRE_MAGIC_ITEMS = [
 
 const EMPIRE = {
   key: "empire",
+  loreOptions: [...COLLEGE_LORES, "Ice Magic"],
   name: "The Empire",
   tagline: "The disciplined might of humanity's bulwark against the dark",
   magicItems: [...COMMON_MAGIC_ITEMS, ...EMPIRE_MAGIC_ITEMS],
@@ -1873,6 +1880,7 @@ const CHAOS_MAGIC_ITEMS = [
 
 const CHAOS_WARRIORS = {
   key: "chaoswarriors",
+  loreOptions: ["Dark Magic", "Own God's Magic"],
   name: "Chaos Warriors",
   armyWideRules: [
     "A pure Chaos Warriors army may mix followers of different Chaos Powers freely — Marks are chosen per character/champion with no restriction.",
@@ -2111,6 +2119,7 @@ const CHAOS_WARRIORS = {
 
 const BEASTMEN = {
   key: "beastmen",
+  loreOptions: ["Dark Magic", "Own God's Magic"],
   name: "Beastmen",
   armyWideRules: [
     "A pure Beastmen army may mix followers of different Chaos Powers freely — Marks are chosen per character/champion with no restriction.",
@@ -2358,6 +2367,7 @@ const BEASTMEN = {
 
 const CHAOS_DAEMONS = {
   key: "daemons",
+  loreOptions: ["Dark Magic", "Own God's Magic"],
   name: "Daemons",
   armyWideRules: [
     "A pure Daemons army may mix followers of different Chaos Powers freely — this is what a Daemon army normally does, and pure Daemon armies never suffer Daemon Animosity for it.",
@@ -2519,6 +2529,7 @@ const CHAOS_DAEMONS = {
 
 const CHAOS_WARBAND = {
   key: "chaoswarband",
+  loreOptions: ["Dark Magic", "Own God's Magic"],
   name: "Chaos Warband",
   armyWideRules: [
     "A Chaos Warband draws from all three Chaos army lists (Chaos Warriors, Beastmen, and Daemons) at once, but is always dedicated to a single Chaos Power — pick your Power below. At 2000pts or more you may instead choose \"Chaos Warhost,\" which keeps everything else about a Warband but allows mixing Powers freely.",
@@ -3143,6 +3154,7 @@ const HIGH_ELF_MAGIC_ITEMS = [
 
 const HIGH_ELVES = {
   key: "highelves",
+  loreOptions: [...COLLEGE_LORES, "High Magic"],
   name: "High Elves",
   tagline: "The fading, feuding nobility of Ulthuan, holding the line against the dark",
   magicItems: [...COMMON_MAGIC_ITEMS, ...HIGH_ELF_MAGIC_ITEMS],
@@ -3691,6 +3703,7 @@ const BRETONNIA_MAGIC_ITEMS = [
 
 const BRETONNIA = {
   key: "bretonnia",
+  loreOptions: [...COLLEGE_LORES],
   name: "The Grand Army of Bretonnia",
   tagline: "Chivalrous knights and the peasant levy that bears the realm's weight",
   magicItems: [...COMMON_MAGIC_ITEMS, ...BRETONNIA_MAGIC_ITEMS],
@@ -3992,6 +4005,7 @@ const ORC_MAGIC_ITEMS = [
 
 const ORCS_GOBLINS = {
   key: "orcsgoblins",
+  loreOptions: ["Waaagh! Magic"],
   name: "Orcs & Goblins",
   tagline: "An unstoppable, uncontrollable storm of green promising destruction wherever it goes",
   magicItems: [...COMMON_MAGIC_ITEMS, ...ORC_MAGIC_ITEMS],
@@ -4727,6 +4741,7 @@ const DOGS_OF_WAR_MAGIC_ITEMS = [
 
 const DOGS_OF_WAR = {
   key: "dogsofwar",
+  loreOptions: [...COLLEGE_LORES],
   name: "Dogs of War",
   tagline: "A mercenary brotherhood — every sword, spear, and cannon sold to the highest bidder",
   magicItems: [...COMMON_MAGIC_ITEMS, ...DOGS_OF_WAR_MAGIC_ITEMS],
@@ -5053,6 +5068,7 @@ const CHAOS_DWARF_MAGIC_ITEMS = [
 
 const CHAOS_DWARFS = {
   key: "chaosdwarfs",
+  loreOptions: ["Chaos Dwarf Magic"],
   name: "Chaos Dwarfs",
   tagline: "High Hats from the Dark Lands — bound to Hashut, forging chains for the weak",
   magicItems: [...COMMON_MAGIC_ITEMS, ...CHAOS_DWARF_MAGIC_ITEMS, ...ORC_MAGIC_ITEMS],
@@ -5421,6 +5437,7 @@ const DARK_ELF_MAGIC_ITEMS = [
 
 const DARK_ELVES = {
   key: "darkelves",
+  loreOptions: [...COLLEGE_LORES, "Dark Magic"],
   name: "Dark Elves",
   tagline: "The Druchii — cruel raiders and slavers of Naggaroth, sworn to Malekith and the Cult of Khaine",
   magicItems: [...COMMON_MAGIC_ITEMS, ...DARK_ELF_MAGIC_ITEMS],
@@ -5691,6 +5708,7 @@ const SKAVEN_MAGIC_ITEMS = [
 
 const SKAVEN = {
   key: "skaven",
+  loreOptions: ["Skaven Magic"],
   name: "Skaven",
   tagline: "The Under-Empire's rat-men — treacherous clans united only by the will of the Horned Rat",
   magicItems: [...COMMON_MAGIC_ITEMS, ...SKAVEN_MAGIC_ITEMS],
@@ -5953,6 +5971,7 @@ const vcCastingGate = (unit, def) => (unit.armour || VC_ARMOUR_OPTIONS[0]) === V
 
 const VAMPIRE_COUNTS = {
   key: "vampirecounts",
+  loreOptions: ["Dark Magic", "Necromancy Magic"],
   name: "Vampire Counts",
   tagline: "The night's aristocracy — decrepit castles that wake at the zenith of dark magic's power",
   magicItems: [...COMMON_MAGIC_ITEMS, ...UNDEAD_MAGIC_ITEMS, ...VC_BLOODLINE_POWERS],
@@ -6234,6 +6253,7 @@ function tkMummyChampion(cost) {
 
 const TOMB_KINGS = {
   key: "tombkings",
+  loreOptions: ["Dark Magic", "Necromancy Magic"],
   name: "Tomb Kings",
   tagline: "The ancient kings of Nehekhara, called from their sleep of death to seek vengeance",
   magicItems: [...COMMON_MAGIC_ITEMS, ...UNDEAD_MAGIC_ITEMS],
@@ -6423,6 +6443,7 @@ function cuChampions(thrallCost, wightCost, wraithCost) {
 
 const CLASSIC_UNDEAD = {
   key: "classicundead",
+  loreOptions: ["Dark Magic", "Necromancy Magic"],
   name: "Classic Undead",
   tagline: "Necromancers and Liches — the original 4th-edition Undead army, mixing Vampire Counts and Tomb Kings troop choices",
   magicItems: [...COMMON_MAGIC_ITEMS, ...UNDEAD_MAGIC_ITEMS, ...VC_BLOODLINE_POWERS],
@@ -6647,6 +6668,7 @@ const KISLEV_MAGIC_ITEMS = [
 
 const KISLEV = {
   key: "kislev",
+  loreOptions: ["Ice Magic"],
   name: "Kislev",
   tagline: "North of the Empire — windswept plains and dark birch glades, a realm hardened by a thousand years of Norse raids and the ever-present threat of Chaos",
   magicItems: [...COMMON_MAGIC_ITEMS, ...KISLEV_MAGIC_ITEMS],
@@ -6847,6 +6869,7 @@ const KISLEV = {
 
 const NORSE = {
   key: "norse",
+  loreOptions: [...COLLEGE_LORES, "Ice Magic"],
   name: "Norse",
   tagline: "Hardy barbarians of the Hird — sailors, traders, and raiders who plundered the Old World, Ulthuan, and Lustria alike",
   magicItems: [
@@ -7074,6 +7097,7 @@ const HALFLING_MAGIC_ITEMS = [
 
 const HALFLINGS = {
   key: "halflings",
+  loreOptions: [...COLLEGE_LORES],
   name: "Halflings of the Moot",
   tagline: "Rural, earthy, and expressive to a fault — good food, strong drink, and a casual relationship with other people's property",
   magicItems: [...COMMON_MAGIC_ITEMS, ...HALFLING_MAGIC_ITEMS],
@@ -7227,6 +7251,7 @@ const OGRE_MAGIC_ITEMS = [
 
 const OGRES = {
   key: "ogres",
+  loreOptions: [...COLLEGE_LORES],
   name: "Ogre Mercenaries",
   tagline: "Nomads from the eastern steppes — adaptable, pragmatic, and famously willing to fight on both sides of the same war",
   magicItems: [...COMMON_MAGIC_ITEMS, ...OGRE_MAGIC_ITEMS],
@@ -7351,6 +7376,7 @@ const LIZARDMEN_MAGIC_ITEMS = [
 
 const LIZARDMEN = {
   key: "lizardmen",
+  loreOptions: [...COLLEGE_LORES, "High Magic"],
   name: "Lizardmen",
   tagline: "From the steaming jungles of Lustria — an ancient, reptilian civilization guided by the Slann Mage Priests toward the unfathomable plans of the Old Ones",
   magicItems: [...COMMON_MAGIC_ITEMS, ...LIZARDMEN_MAGIC_ITEMS],
@@ -7551,6 +7577,7 @@ const SLANN_MAGIC_ITEMS = [
 
 const SLANN_EMPIRE = {
   key: "slann",
+  loreOptions: [...COLLEGE_LORES, "High Magic"],
   name: "The Slann Empire",
   tagline: "The original Slann army of 2nd/3rd edition, restored — Stone Age heirs to a starfaring civilization, ruling Lustria through the Mage Priests and their Lizardmen servitors",
   magicItems: [...COMMON_MAGIC_ITEMS, ...SLANN_MAGIC_ITEMS],
@@ -8163,6 +8190,16 @@ function isWizard(entityDef, unit) {
   return false;
 }
 
+// A faction's loreOptions has either one entry (no real choice — that lore is simply always in
+// effect, nothing to store on the unit) or several (Undead's 2-way Dark/Necromancy choice, or a
+// full College Magic dropdown) — in which case the player's pick lives on unit.lore.
+function resolveWizardLore(armyData, unit) {
+  const opts = armyData?.loreOptions;
+  if (!opts || opts.length === 0) return null;
+  if (opts.length === 1) return opts[0];
+  return unit?.lore || null;
+}
+
 // Builds the context object passed to MagicItemPicker / isItemAllowed for a given bearer.
 // entityDef: the character/champion/championOption/special def granting the item slots.
 // unit: the roster instance (for magicLevel / mountId / mounted lookups) — may be null for
@@ -8613,6 +8650,10 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
     if (def.wingsOption && unit.wings) tags.push("Wings");
     if (def.chaosArmourOption && unit.chaosArmour) tags.push(def.chaosArmourOption.label);
     if (def.magicLevelOption && (unit.magicLevel ?? def.magicLevelOption.min ?? 0) > 0) tags.push(`+${unit.magicLevel ?? def.magicLevelOption.min} magic levels`);
+    if (isWizard(def, unit) && armyData.loreOptions) {
+      const lore = resolveWizardLore(armyData, unit);
+      if (lore) tags.push(`Lore: ${lore}`);
+    }
     (unit.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
     (unit.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
   } else if (kind === "regiment") {
@@ -8727,7 +8768,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, selectedId, onSelect, onRemove }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -8772,6 +8813,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic Banner:</div>
           <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {endlessBannerWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
+      {loreWarnings && loreWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Lore of Magic:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            {loreWarnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
@@ -9112,6 +9161,24 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
           </div>
         );
       })()}
+
+      {isWizard(def, unit) && armyData.loreOptions && armyData.loreOptions.length > 0 && (
+        <div style={{ marginTop: 14 }}>
+          <span className="whr-label">Lore of Magic</span>
+          {armyData.loreOptions.length === 1 ? (
+            <div className="whr-opt-row" style={{ opacity: 0.7 }}>
+              <span>{armyData.loreOptions[0]}</span>
+            </div>
+          ) : (
+            <select className="whr-select" value={unit.lore || ""} onChange={(e) => updateUnit({ ...unit, lore: e.target.value || null })}>
+              <option value="">Choose one</option>
+              {armyData.loreOptions.map((lore) => (
+                <option key={lore} value={lore}>{lore}</option>
+              ))}
+            </select>
+          )}
+        </div>
+      )}
 
       {def.mounts && def.mounts.length > 0 && (
         <div style={{ marginTop: 14 }}>
@@ -9806,6 +9873,27 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     return t;
   }, [roster, armyData]);
 
+  const loreWarnings = useMemo(() => {
+    const warnings = [];
+    if (!armyData.loreOptions || armyData.loreOptions.length === 0) return warnings;
+    roster.characters.forEach((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      if (!d || !isWizard(d, u)) return;
+      const lore = resolveWizardLore(armyData, u);
+      if (armyData.loreOptions.length > 1 && !lore) {
+        warnings.push(`${d.name}: Lore must be chosen for your Wizard.`);
+        return;
+      }
+      (u.magicItemIds || []).forEach((id) => {
+        const mi = miById(armyData.magicItems, id);
+        if (mi && mi.requiresLore && mi.requiresLore !== lore) {
+          warnings.push(`${d.name}: ${mi.name} requires ${mi.requiresLore} lore — bearer's lore is ${lore || "unset"}.`);
+        }
+      });
+    });
+    return warnings;
+  }, [roster, armyData]);
+
   const endlessBannerWarnings = useMemo(() => {
     const warnings = [];
     roster.regiments.forEach((u) => {
@@ -10080,7 +10168,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
