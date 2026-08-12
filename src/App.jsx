@@ -8356,7 +8356,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
           fontFamily: "var(--font-display-sc)", letterSpacing: "0.03em", fontSize: 16,
           borderRadius: 2, display: "inline-block",
         }}>
-          This builder is still a WIP. Contact Turhan in the WHR Facebook Group to provide feedback.
+          This builder is still a WIP. While mostly functional, maintain some level of skepticism and spot check against the WHR Armies book.
         </div>
       </div>
 
