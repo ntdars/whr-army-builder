@@ -8340,7 +8340,7 @@ function fmtPts(n) {
    SETUP / BARRACKS SCREEN
    ========================================================================== */
 
-function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError, onChangelog }) {
+function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
   const [listName, setListName] = useState("");
   const [pointLimit, setPointLimit] = useState(2000);
   const [faction, setFaction] = useState("woodElves");
@@ -8454,68 +8454,8 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError, onCh
       </div>
 
       <div style={{ textAlign: "center", marginTop: 48 }}>
-        <p className="whr-serif-italic" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>
-          <span style={{ cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3 }} onClick={onChangelog}>Changelog</span>
-          {" // Maintained by Turhan"}
-        </p>
+        <p className="whr-serif-italic" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>Maintained by Turhan</p>
       </div>
-    </div>
-  );
-}
-
-/* ============================================================================
-   CHANGELOG SCREEN
-   ========================================================================== */
-
-const CHANGELOG_TAG_STYLE = {
-  added: { background: "var(--forest)", color: "#E1F5EE" },
-  fixed: { background: "var(--burgundy)", color: "#FAECE7" },
-  changed: { background: "#534AB7", color: "#EEEDFE" },
-};
-
-const CHANGELOG_ENTRIES = [
-  {
-    date: "August 12, 2026",
-    items: [
-      { tag: "added", text: "Every wizard now has a Lore of Magic field — locked for armies with only one lore, a picker for the rest, with a warning if it's left unchosen." },
-      { tag: "fixed", text: "Bad Moon Banner, Stalker Banner, and several other unit-restricted magic banners weren't showing up for their eligible regiments." },
-      { tag: "changed", text: "Magic item pickers now sort by point cost instead of listing all Common items before Unique ones, so cheap options aren't buried at the bottom." },
-      { tag: "changed", text: "Cleaned up a bunch of option labels that redundantly repeated their own point cost in the text." },
-      { tag: "added", text: "New Bug Report / Feedback button for sending in issues directly." },
-      { tag: "fixed", text: "Battle Standard Bearers across every army can now actually take a magic banner — most were silently blocked." },
-      { tag: "added", text: "Armour selection is now live for Lords, Heroes, and BSBs in every army that was missing it." },
-      { tag: "added", text: "Chaos Dwarf Sorcerers can now take Chaos Armour." },
-      { tag: "fixed", text: "Orcs & Goblins' Forest Goblin army type now correctly allows Common and Night Goblins alongside Forest Goblins." },
-      { tag: "added", text: "Forest Goblin regiments can take poisoned arrows when running a Forest Goblin army." },
-      { tag: "changed", text: "Dispel Magic Scroll can now be taken twice, per its own rule." },
-      { tag: "fixed", text: "A handful of regiments (Wild Riders, Sisters of the Thorn, Human Cavalry Retainers, and others) had a duplicate, incorrect Standard Bearer option sitting alongside the real one." },
-      { tag: "fixed", text: "Print / Export to PDF was rendering a blank page in Chrome." },
-    ],
-  },
-];
-
-function ChangelogScreen({ onBack }) {
-  return (
-    <div className="whr-content" style={{ maxWidth: 800, margin: "0 auto", padding: "48px 24px 80px" }}>
-      <p className="whr-eyebrow" style={{ cursor: "pointer", marginBottom: 24 }} onClick={onBack}>← Back to Army Selection</p>
-      <div style={{ textAlign: "center", marginBottom: 36 }}>
-        <h1 className="whr-h1" style={{ fontSize: 38, margin: 0 }}>CHANGELOG</h1>
-        <LeafDivider />
-      </div>
-      {CHANGELOG_ENTRIES.map((group) => (
-        <div key={group.date} style={{ marginBottom: 32 }}>
-          <p className="whr-eyebrow" style={{ marginBottom: 12 }}>{group.date}</p>
-          {group.items.map((item, i) => (
-            <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 9 }}>
-              <span style={{
-                ...CHANGELOG_TAG_STYLE[item.tag], fontFamily: "var(--font-display-sc)", fontSize: 10.5,
-                letterSpacing: "0.04em", padding: "2px 8px", borderRadius: 2, whiteSpace: "nowrap", marginTop: 2,
-              }}>{item.tag}</span>
-              <span style={{ fontSize: 14.5, lineHeight: 1.55, color: "var(--ink)" }}>{item.text}</span>
-            </div>
-          ))}
-        </div>
-      ))}
     </div>
   );
 }
@@ -10251,7 +10191,7 @@ function emptyRosterUnits() {
 }
 
 export default function App() {
-  const [view, setView] = useState("setup"); // setup | builder | changelog
+  const [view, setView] = useState("setup"); // setup | builder
   const [roster, setRoster] = useState(null);
   const [savedList, setSavedList] = useState([]);
   const [storageError, setStorageError] = useState(false);
@@ -10329,9 +10269,8 @@ export default function App() {
       <ParchmentGrain />
       <div className="whr-vignette" />
       {view === "setup" && (
-        <SetupScreen onMuster={handleMuster} savedList={savedList} onLoad={handleLoad} onDelete={handleDelete} storageError={storageError} onChangelog={() => setView("changelog")} />
+        <SetupScreen onMuster={handleMuster} savedList={savedList} onLoad={handleLoad} onDelete={handleDelete} storageError={storageError} />
       )}
-      {view === "changelog" && <ChangelogScreen onBack={() => setView("setup")} />}
       {view === "builder" && roster && (
         <BuilderScreen roster={roster} setRoster={setRoster} onBack={() => setView("setup")} onSave={handleSave} saveState={saveState} />
       )}
