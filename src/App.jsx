@@ -2497,6 +2497,7 @@ const CHAOS_DAEMONS = {
       id: "hellcannon", name: "Hellcannon", perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine",
       note: "House rule / optional — ask your opponent's permission before including it, primarily meant for Siege Battles. A Daemon that works as a war machine, crewed by three Chaos Dwarfs in heavy armour. Shoots like a large stone thrower; any regiment losing even one model to it must take a panic test; shots count as magical. A misfire eats 1D3 crew instead of firing; if all crew die, it becomes an independent monster with random movement that charges the nearest model each turn (friend or foe), following normal Daemon rules — and still defends itself if charged.",
       extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
+      crewArmourFixed: "Heavy armour",
     },
   ],
   specialCharacters: [
@@ -3062,6 +3063,7 @@ const CHAOS_WARBAND = {
       id: "hellcannon", name: "Hellcannon", perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine",
       note: "House rule / optional — ask your opponent's permission before including it, primarily meant for Siege Battles. A Daemon that works as a war machine, crewed by three Chaos Dwarfs in heavy armour. Shoots like a large stone thrower; any regiment losing even one model to it must take a panic test; shots count as magical. A misfire eats 1D3 crew instead of firing; if all crew die, it becomes an independent monster with random movement that charges the nearest model each turn (friend or foe), following normal Daemon rules — and still defends itself if charged.",
       extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
+      crewArmourFixed: "Heavy armour",
     },
   ],
   specialCharacters: [
@@ -3626,30 +3628,35 @@ const DWARFS = {
       note: "Manned by three Dwarf Soldiers.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
       magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+      baseCrew: 3, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }, { id: "heavy", label: "Heavy armour", cost: 2 }],
     },
     {
       id: "largestonethrowers", name: "Large Stone Throwers", perUnit: 100, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
       note: "Manned by three Dwarf Soldiers.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
       magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+      baseCrew: 3, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }, { id: "heavy", label: "Heavy armour", cost: 2 }],
     },
     {
       id: "cannons", name: "Cannons", perUnit: 100, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
       note: "Normal cannon. Manned by three Dwarf Soldiers.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
       magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+      baseCrew: 3, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }, { id: "heavy", label: "Heavy armour", cost: 2 }],
     },
     {
       id: "organgun", name: "Organ Gun", perUnit: 155, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
       note: "Manned by three Dwarf Soldiers.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
       magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+      baseCrew: 3, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }, { id: "heavy", label: "Heavy armour", cost: 2 }],
     },
     {
       id: "flamecannons", name: "Flame Cannons", perUnit: 90, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
       note: "Guess range like a cannon (max 12\") plus the artillery die; teardrop template, S5 hit (1 wound = 1D3). Any casualty forces a panic test. Uniquely, Flame Cannons may stand & shoot (resolved before the enemy unit moves). Manned by three Dwarf Soldiers.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
       magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+      baseCrew: 3, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }, { id: "heavy", label: "Heavy armour", cost: 2 }],
     },
     {
       id: "gyrocopters", name: "Gyrocopter", perUnit: 100, stat: "Gyrocopter", kind: "quantity",
@@ -4991,6 +4998,7 @@ const DOGS_OF_WAR = {
       id: "boltthrowers", name: "Bolt Throwers", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
       note: "Crewed by three Human Mercenary Soldiers.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Human Mercenary Soldier crew",
+      baseCrew: 3, crewArmourOptions: [{ id: "light", label: "Light armour (default)", cost: 0 }, { id: "heavy", label: "Heavy armour", cost: 4 }],
     },
     {
       id: "smallstonethrowers", name: "Small Stone Throwers", perUnit: 80, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
@@ -5336,6 +5344,7 @@ const CHAOS_DWARFS = {
       id: "earthshaker", name: "Chaos Dwarf Earth Shaker Cannon", perUnit: 165, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
       note: "Works like a Large Stone Thrower. Units hit by the template (even without a wound) can't move, shoot, or cast spells through the next magic phase and their next movement/shooting phases (compulsory/flee moves and spell-forced moves still happen). Crewed by three Chaos Dwarfs in heavy armour.",
       extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
+      crewArmourFixed: "Heavy armour",
     },
     {
       id: "deathrockets", name: "Chaos Dwarf Death Rockets", perUnit: 85, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
@@ -5376,11 +5385,13 @@ const CHAOS_DWARFS = {
       id: "magmacannon", name: "Magma Cannon", perUnit: 90, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "modern",
       note: "Follows Dwarf Flame Cannon rules: guesses range like a cannon (max 12\") plus the artillery die; teardrop template, S5 hit (1 wound = 1D3). Any casualty forces a panic test. May stand & shoot (resolved before the enemy unit moves). Crewed by three Chaos Dwarfs.",
       extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
+      baseCrew: 3, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }, { id: "heavy", label: "Heavy armour", cost: 2 }],
     },
     {
       id: "cdhellcannon", name: "Hellcannon", perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine", theme: "modern",
       note: "From the Chaos army book. House rule / optional — ask your opponent's permission before including it, primarily meant for Siege Battles. A Daemon that works as a war machine, crewed by three Chaos Dwarfs in heavy armour. Shoots like a large stone thrower; any regiment losing even one model to it must take a panic test; shots count as magical. A misfire eats 1D3 crew instead of firing; if all crew die, it becomes an independent monster with random movement that charges the nearest model each turn (friend or foe), following normal Daemon rules — and still defends itself if charged.",
       extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
+      crewArmourFixed: "Heavy armour",
     },
     {
       id: "kdaiidestroyer", name: "K'daii Destroyer", perUnit: 300, stat: "K'daii Destroyer", kind: "monster", theme: "modern",
@@ -5649,6 +5660,7 @@ const DARK_ELVES = {
       id: "cauldronofblood", name: "Witch Elf Cauldron of Blood", perUnit: 64, stat: "Wood Elf Warriors", kind: "warmachine", restriction: "0-1",
       note: "The cauldron itself is indestructible and causes terror (not represented by the crew's stat line above, which is shown only because the crew fights). Crewed by three Witch Elves with light armour and two poisoned hand weapons. While accompanying the cauldron, the crew doesn't have to charge or pursue despite being frenzied. If the cauldron hasn't moved and doesn't fight, the crew may perform unholy rituals — as long as maintained, all Witch Elf units within 24\" get an extra attack on top of frenzy.",
       extraCrewCost: 12, extraCrewMax: 2, extraCrewLabel: "extra Witch Elf crew",
+      crewArmourFixed: "Light armour",
     },
     {
       id: "warhydra", name: "War Hydra", perUnit: 200, stat: "War Hydra", kind: "monster",
@@ -6415,6 +6427,7 @@ const TOMB_KINGS = {
       id: "casketofsouls", name: "Casket of Souls", kind: "warmachine", perUnit: 150, stat: "Tomb Guard", restriction: "0-1",
       note: "An immoveable terrain piece that blocks movement, crewed by three unbreakable Tomb Guards with double handed weapons and light armour. If all crew are slain or leave, the Casket crumbles to dust. Causes terror. Contains a bound spell: if cast while unengaged, all non-undead units within 24\" with line of sight suffer 2D6+2 minus their LD in wounds, no armour save. Hits on the Casket itself are ignored — it's indestructible.",
       extraCrewCost: 10, extraCrewLabel: "Extra Tomb Guard crew (max 2)",
+      crewArmourFixed: "Light armour",
     },
     {
       id: "skeletonheavychariots", name: "Skeleton Heavy Chariot", perUnit: 60, stat: "Heavy Chariot", mountStat: "Skeleton", mountLabel: "Skeleton Crew",
