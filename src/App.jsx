@@ -9091,12 +9091,12 @@ function RuneForge({ items, cat, label, context, comboIds, onChange }) {
         if (m.repeatable) {
           const count = countOf(m.id);
           const atCap = selected.length >= 3 && count === 0;
-          const capLabel = m.maxCount && m.maxCount < 3 ? `max ${m.maxCount}` : "repeatable";
+          const capLabel = m.maxCount && m.maxCount < 3 ? `max ${m.maxCount}` : null;
           return (
             <div key={m.id} className={`whr-opt-row ${atCap ? "whr-opt-disabled" : ""}`}>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 {m.name}
-                <span style={{ fontSize: 11, color: "var(--ink-faint)" }}>({capLabel})</span>
+                {capLabel && <span style={{ fontSize: 11, color: "var(--ink-faint)" }}>({capLabel})</span>}
               </span>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <div className="whr-stepper">
