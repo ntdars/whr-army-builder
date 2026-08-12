@@ -3413,7 +3413,7 @@ const DWARF_MAGIC_ITEMS = [
   { id: "dw-runefire", isRune: true, name: "Rune of Fire", cost: 10, cat: "weapon", desc: "Weapon Rune. Flaming attacks." },
   { id: "dw-runestriking", isRune: true, repeatable: true, name: "Rune of Striking", cost: 10, cat: "weapon", desc: "Weapon Rune. +2 WS (can be taken several times)." },
   { id: "dw-runeswiftness", isRune: true, name: "Rune of Swiftness", cost: 10, cat: "weapon", desc: "Weapon Rune. Always strikes first." },
-  { id: "dw-runeparrying", isRune: true, repeatable: true, name: "Rune of Parrying", cost: 10, cat: "weapon", desc: "Weapon Rune. One enemy in base contact has -1 attack (all of them if taken twice)." },
+  { id: "dw-runeparrying", isRune: true, repeatable: true, maxCount: 2, name: "Rune of Parrying", cost: 10, cat: "weapon", desc: "Weapon Rune. One enemy in base contact has -1 attack (all of them if taken twice)." },
   { id: "dw-runefury", isRune: true, repeatable: true, name: "Rune of Fury", cost: 10, cat: "weapon", desc: "Weapon Rune. +1 attack (can be taken several times)." },
   { id: "dw-runecutting", isRune: true, repeatable: true, name: "Rune of Cutting", cost: 10, cat: "weapon", desc: "Weapon Rune. -1 armour save (can be taken several times)." },
   { id: "dw-runemight", isRune: true, name: "Rune of Might", cost: 15, cat: "weapon", desc: "Weapon Rune. Double strength vs enemies with equal or higher toughness than the bearer's." },
@@ -8374,7 +8374,7 @@ function fmtPts(n) {
 function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
   const [listName, setListName] = useState("");
   const [pointLimit, setPointLimit] = useState(2000);
-  const [faction, setFaction] = useState("woodElves");
+  const [faction, setFaction] = useState(null);
 
   return (
     <div className="whr-content" style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px 80px" }}>
