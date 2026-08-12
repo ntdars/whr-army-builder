@@ -3398,70 +3398,71 @@ const DWARF_MAGIC_ITEMS = [
   { id: "dw-redaxe", name: "Red Axe of Karak Eight Peaks", cost: 10, cat: "weapon", desc: "Double handed weapon. Not truly magical — can't be destroyed/nullified. Bearer hates Orcs & Goblins and Skaven; re-rolls to-hit against them every round, not just the first." },
   { id: "dw-axequeenhelga", name: "Axe of Queen Helga", cost: 10, cat: "weapon", desc: "Double wounds against the first character hit (lasts the whole game)." },
   { id: "dw-axeofgrimnir", name: "The Axe of Grimnir", cost: 100, cat: "weapon", desc: "Always wounds on 2+. No armour save. 1 wound = 1D3 wounds (1D6 vs monstrous regiments/characters)." },
-  { id: "dw-mrflight", name: "Master Rune of Flight", cost: 20, cat: "weapon", desc: "Master Weapon Rune. Thrown up to 12\", auto-hits, returns to hand. May stand & shoot as a charge reaction and target characters in regiments." },
-  { id: "dw-mrsnorri", name: "Snorri Spangelhelm's Master Rune", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Hits automatically." },
-  { id: "dw-mrskalf", name: "Skalf Blackhammer's Master Rune", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Wounds automatically." },
-  { id: "dw-mralaric", name: "Alaric the Mad's Master Rune", cost: 30, cat: "weapon", desc: "Master Weapon Rune. No armour save." },
-  { id: "dw-mrtrygg", name: "Master Rune of Trygg Trollslayer", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Bearer hates Trolls; against Trolls, one wound kills (no regeneration)." },
-  { id: "dw-mrangrim", name: "Master Rune of Angrim Redbeard", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Daemons, one wound kills." },
-  { id: "dw-mrhaki", name: "Master Rune of Haki Skullsplitter", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Skaven and Beastmen (Ungors/Gors/Bestigors/Centigors/Minotaurs), one wound kills." },
-  { id: "dw-mrbaldrik", name: "Master Rune of Baldrik the Bad", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Elves and Dragons of all kinds, one wound kills." },
-  { id: "dw-mreric", name: "Master Rune of Eric Cleric", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Undead, one wound kills." },
-  { id: "dw-mrdeath", name: "Master Rune of Death", cost: 60, cat: "weapon", desc: "Master Weapon Rune. All wounds kill." },
-  { id: "dw-runefire", name: "Rune of Fire", cost: 10, cat: "weapon", desc: "Weapon Rune. Flaming attacks." },
-  { id: "dw-runestriking", name: "Rune of Striking", cost: 10, cat: "weapon", desc: "Weapon Rune. +2 WS (can be taken several times)." },
-  { id: "dw-runeswiftness", name: "Rune of Swiftness", cost: 10, cat: "weapon", desc: "Weapon Rune. Always strikes first." },
-  { id: "dw-runeparrying", name: "Rune of Parrying", cost: 10, cat: "weapon", desc: "Weapon Rune. One enemy in base contact has -1 attack (all of them if taken twice)." },
-  { id: "dw-runefury", name: "Rune of Fury", cost: 10, cat: "weapon", desc: "Weapon Rune. +1 attack (can be taken several times)." },
-  { id: "dw-runecutting", name: "Rune of Cutting", cost: 10, cat: "weapon", desc: "Weapon Rune. -1 armour save (can be taken several times)." },
-  { id: "dw-runemight", name: "Rune of Might", cost: 15, cat: "weapon", desc: "Weapon Rune. Double strength vs enemies with equal or higher toughness than the bearer's." },
-  { id: "dw-runecleaving", name: "Rune of Cleaving", cost: 15, cat: "weapon", desc: "Weapon Rune. +1 strength (can be taken several times)." },
-  { id: "dw-runesmiting", name: "Rune of Smiting", cost: 25, cat: "weapon", desc: "Weapon Rune. 1 wound = 1D6 wounds (multiple instances: roll more dice, take the highest)." },
+  { id: "dw-mrflight", isRune: true, isMasterRune: true, name: "Master Rune of Flight", cost: 20, cat: "weapon", desc: "Master Weapon Rune. Thrown up to 12\", auto-hits, returns to hand. May stand & shoot as a charge reaction and target characters in regiments." },
+  { id: "dw-mrsnorri", isRune: true, isMasterRune: true, name: "Snorri Spangelhelm's Master Rune", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Hits automatically." },
+  { id: "dw-mrskalf", isRune: true, isMasterRune: true, name: "Skalf Blackhammer's Master Rune", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Wounds automatically." },
+  { id: "dw-mralaric", isRune: true, isMasterRune: true, name: "Alaric the Mad's Master Rune", cost: 30, cat: "weapon", desc: "Master Weapon Rune. No armour save." },
+  { id: "dw-mrtrygg", isRune: true, isMasterRune: true, name: "Master Rune of Trygg Trollslayer", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Bearer hates Trolls; against Trolls, one wound kills (no regeneration)." },
+  { id: "dw-mrangrim", isRune: true, isMasterRune: true, name: "Master Rune of Angrim Redbeard", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Daemons, one wound kills." },
+  { id: "dw-mrhaki", isRune: true, isMasterRune: true, name: "Master Rune of Haki Skullsplitter", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Skaven and Beastmen (Ungors/Gors/Bestigors/Centigors/Minotaurs), one wound kills." },
+  { id: "dw-mrbaldrik", isRune: true, isMasterRune: true, name: "Master Rune of Baldrik the Bad", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Elves and Dragons of all kinds, one wound kills." },
+  { id: "dw-mreric", isRune: true, isMasterRune: true, name: "Master Rune of Eric Cleric", cost: 30, cat: "weapon", desc: "Master Weapon Rune. Against Undead, one wound kills." },
+  { id: "dw-mrdeath", isRune: true, isMasterRune: true, name: "Master Rune of Death", cost: 60, cat: "weapon", desc: "Master Weapon Rune. All wounds kill." },
+  { id: "dw-runefire", isRune: true, name: "Rune of Fire", cost: 10, cat: "weapon", desc: "Weapon Rune. Flaming attacks." },
+  { id: "dw-runestriking", isRune: true, name: "Rune of Striking", cost: 10, cat: "weapon", desc: "Weapon Rune. +2 WS (can be taken several times)." },
+  { id: "dw-runeswiftness", isRune: true, name: "Rune of Swiftness", cost: 10, cat: "weapon", desc: "Weapon Rune. Always strikes first." },
+  { id: "dw-runeparrying", isRune: true, name: "Rune of Parrying", cost: 10, cat: "weapon", desc: "Weapon Rune. One enemy in base contact has -1 attack (all of them if taken twice)." },
+  { id: "dw-runefury", isRune: true, name: "Rune of Fury", cost: 10, cat: "weapon", desc: "Weapon Rune. +1 attack (can be taken several times)." },
+  { id: "dw-runecutting", isRune: true, name: "Rune of Cutting", cost: 10, cat: "weapon", desc: "Weapon Rune. -1 armour save (can be taken several times)." },
+  { id: "dw-runemight", isRune: true, name: "Rune of Might", cost: 15, cat: "weapon", desc: "Weapon Rune. Double strength vs enemies with equal or higher toughness than the bearer's." },
+  { id: "dw-runecleaving", isRune: true, name: "Rune of Cleaving", cost: 15, cat: "weapon", desc: "Weapon Rune. +1 strength (can be taken several times)." },
+  { id: "dw-runesmiting", isRune: true, name: "Rune of Smiting", cost: 25, cat: "weapon", desc: "Weapon Rune. 1 wound = 1D6 wounds (multiple instances: roll more dice, take the highest)." },
   { id: "dw-armourofskaldour", name: "Armour of Skaldour", cost: 80, cat: "armour", desc: "Gromril armour. 2+ save (unmodifiable). 4+ ward save. Immune to fire-based attacks." },
-  { id: "dw-mradamant", name: "Master Rune of Adamant", cost: 30, cat: "armour", desc: "Master Armour Rune. +2 armour save." },
-  { id: "dw-mrgromril", name: "Master Rune of Gromril", cost: 100, cat: "armour", desc: "Master Armour Rune. Toughness 10." },
-  { id: "dw-runestone", name: "Rune of Stone", cost: 10, cat: "armour", desc: "Armour Rune. +1 armour save (can be taken several times)." },
-  { id: "dw-runefortitude", name: "Rune of Fortitude", cost: 20, cat: "armour", desc: "Armour Rune. +1 wound (can be taken several times)." },
-  { id: "dw-runeiron", name: "Rune of Iron", cost: 30, cat: "armour", desc: "Armour Rune. +1 toughness (can be taken several times)." },
-  { id: "dw-runeresistance", name: "Rune of Resistance", cost: 30, cat: "armour", desc: "Armour Rune. 5+ ward save (4+ if taken twice; can't be taken thrice)." },
-  { id: "dw-runespelleating", name: "Rune of Spell Eating", cost: 60, cat: "armour", desc: "Armour Rune. Natural dispel 3+; dispelled spells are destroyed on 3+ (multiple instances: roll more dice, take highest)." },
+  { id: "dw-mradamant", isRune: true, isMasterRune: true, name: "Master Rune of Adamant", cost: 30, cat: "armour", desc: "Master Armour Rune. +2 armour save." },
+  { id: "dw-mrgromril", isRune: true, isMasterRune: true, name: "Master Rune of Gromril", cost: 100, cat: "armour", desc: "Master Armour Rune. Toughness 10." },
+  { id: "dw-runestone", isRune: true, name: "Rune of Stone", cost: 10, cat: "armour", desc: "Armour Rune. +1 armour save (can be taken several times)." },
+  { id: "dw-runefortitude", isRune: true, name: "Rune of Fortitude", cost: 20, cat: "armour", desc: "Armour Rune. +1 wound (can be taken several times)." },
+  { id: "dw-runeiron", isRune: true, name: "Rune of Iron", cost: 30, cat: "armour", desc: "Armour Rune. +1 toughness (can be taken several times)." },
+  { id: "dw-runeresistance", isRune: true, name: "Rune of Resistance", cost: 30, cat: "armour", desc: "Armour Rune. 5+ ward save (4+ if taken twice; can't be taken thrice)." },
+  { id: "dw-runespelleating", isRune: true, name: "Rune of Spell Eating", cost: 60, cat: "armour", desc: "Armour Rune. Natural dispel 3+; dispelled spells are destroyed on 3+ (multiple instances: roll more dice, take highest)." },
   { id: "dw-bugmanstankard", name: "Bugman's Tankard", cost: 10, cat: "enchanted", desc: "The bearer or one model in his unit recovers one lost wound after a phase ends. Doesn't work on dead models. Three uses." },
   { id: "dw-dragoncrown", name: "Dragon Crown of Karaz", cost: 25, cat: "enchanted", desc: "Dwarf Lord only. Bearer and his unit are immune to psychology.", restrictedTo: [{ tags: ["dwarfLord"] }] },
   { id: "dw-fieryring", name: "Firery Ring of Thori", cost: 25, cat: "enchanted", desc: "After a normal move, creates a wall of flame around the bearer's unit (can't shoot but can be shot at; nothing can charge it). Lasts until the Dwarf player's next turn. Models entering it by accident are destroyed. One use." },
   { id: "dw-greatbookgrudges", name: "Great Book of Grudges", cost: 50, cat: "enchanted", desc: "Dwarf Lord only. Bearer and his unit hate all enemies.", restrictedTo: [{ tags: ["dwarfLord"] }] },
   { id: "dw-goldensceptre", name: "Golden Sceptre of Nogrim", cost: 50, cat: "enchanted", desc: "+1 armour save to the bearer and his unit." },
-  { id: "dw-mrdismay", name: "Master Rune of Dismay", cost: 25, cat: "enchanted", desc: "Talismanic Master Rune, must be on a war horn. One use. Sound it at the start of an enemy turn — all enemy units test Ld (unless immune to psychology) or can't charge that turn." },
-  { id: "dw-mrdisdain", name: "Master Runes of Disdain", cost: 50, cat: "enchanted", desc: "Talismanic Master Rune. Dispels and destroys a spell cast at the bearer or his unit. One use." },
-  { id: "dw-mrspite", name: "Master Rune of Spite", cost: 50, cat: "enchanted", desc: "Talismanic Master Rune. Ward save with a twist — rebounds wounds on 5+ (only unmodified saves apply to rebounded wounds)." },
-  { id: "dw-runeluck", name: "Rune of Luck", cost: 20, cat: "enchanted", desc: "Talismanic Rune. Re-roll one personal die roll, one use (may be taken several times)." },
-  { id: "dw-runespellbreaking", name: "Rune of Spellbreaking", cost: 25, cat: "enchanted", desc: "Talismanic Rune, Runesmiths only. Works exactly as a Dispel Magic Scroll. Max two per army (one if using the 'Veto One Spell' house rule).", restrictedTo: [{ tags: ["dwarfRunesmith"] }] },
-  { id: "dw-mrstubbornness", name: "Master Rune of Sheer Damn Stubbornness", cost: 10, cat: "banner", desc: "Master Rune of Protection, BSB only. Unbreakable." },
-  { id: "dw-mrchallenge", name: "Master Rune of Challenge", cost: 10, cat: "banner", desc: "Master Rune of Protection, BSB only. An enemy that could charge this regiment must pass an Ld test on 3D6 (2D6 if immune to psychology) or is forced to charge it." },
-  { id: "dw-mrbattle", name: "Master Rune of Battle", cost: 75, cat: "banner", desc: "Master Rune of Protection, BSB only. The regiment adds 1D6 to combat resolution." },
-  { id: "dw-mrstromni", name: "Master Rune of Stromni Redbeard", cost: 75, cat: "banner", desc: "Master Rune of Protection, BSB only. All friendly Dwarf units within 12\" add +1 to combat resolution." },
-  { id: "dw-mrgroth", name: "Master Rune of Groth One-Eye", cost: 125, cat: "banner", desc: "Master Rune of Protection, BSB only. All friendly Dwarf units within 12\" take Ld/break tests without modifiers." },
-  { id: "dw-mrvalaya", name: "Master Rune of Valaya", cost: 150, cat: "banner", desc: "Master Rune of Protection, BSB only. Natural dispel 4+ against all spells on the battlefield (incl. allied wizards/Anvil of Doom); remains-in-play spells auto-dispel at end of magic phase." },
-  { id: "dw-runecourage", name: "Rune of Courage", cost: 10, cat: "banner", desc: "Rune of Protection, Longbeards only. Immune to panic.", restrictedTo: [{ regimentIds: ["longbeards"] }] },
-  { id: "dw-runeurgency", name: "Rune of Urgency", cost: 25, cat: "banner", desc: "Rune of Protection. The regiment may take a Vanguard move before the battle begins." },
-  { id: "dw-runeslowness", name: "Rune of Slowness", cost: 25, cat: "banner", desc: "Rune of Protection. Charging enemies have their charge move reduced by 1D6\" (multiple instances: roll more dice, take highest)." },
-  { id: "dw-runewarding", name: "Rune of Warding", cost: 25, cat: "banner", desc: "Rune of Protection. Natural dispel 4+ (multiple instances: roll more dice, take highest)." },
-  { id: "dw-runepassage", name: "Rune of Passage", cost: 25, cat: "banner", desc: "Rune of Protection. The bearer and his unit may march even with enemies within 8\"; treats difficult terrain as open." },
-  { id: "dw-runeoathkeeping", name: "Rune of Oath-Keeping", cost: 25, cat: "banner", desc: "Rune of Protection. The regiment never loses its rank bonus when hit to the flank/rear (step-up is still cancelled, enemy still gets their combat res bonus)." },
-  { id: "dw-runeguarding", name: "Rune of Guarding", cost: 40, cat: "banner", desc: "Rune of Protection, Hammerers only. If the general joins, they auto-pass Ld/break tests (may still break from fear-causing outnumbering etc.).", restrictedTo: [{ regimentIds: ["hammerers"] }] },
-  { id: "dw-runefear", name: "Rune of Fear", cost: 40, cat: "banner", desc: "Rune of Protection. Causes fear." },
-  { id: "dw-runeburning", name: "Rune of Burning", cost: 10, cat: "engineering", desc: "Engineering Rune. Ammunition counts as flaming." },
-  { id: "dw-runeseeking", name: "Rune of Seeking", cost: 10, cat: "engineering", desc: "Engineering Rune, Bolt Throwers only. May shoot at fliers flying high with no long-range/large-target penalty.", restrictedTo: [{ regimentIds: ["boltthrowers"] }] },
-  { id: "dw-runeforging", name: "Rune of Forging", cost: 10, cat: "engineering", desc: "Engineering Rune, Flame Cannons & Cannons only (not Organ Guns). Doesn't miss a turn on its first misfire (still blows up on a second).", restrictedTo: [{ regimentIds: ["cannons", "flamecannons"] }] },
-  { id: "dw-runepenetrating", name: "Rune of Penetrating", cost: 10, cat: "engineering", desc: "Engineering Rune. +1 strength. Cost doubles if inscribed on a Gyrocopter (not modeled — apply manually)." },
-  { id: "dw-runedisguise", name: "Rune of Disguise", cost: 15, cat: "engineering", desc: "Engineering Rune. The machine is invisible until an enemy comes within 1\" or it shoots. Cost doubles if inscribed on a Gyrocopter (not modeled — apply manually)." },
-  { id: "dw-runetargeting", name: "Rune of Targeting", cost: 15, cat: "engineering", desc: "Engineering Rune, Bolt Throwers/Goblin Hewer/Cannons only. Bolt Throwers & Goblin Hewer get +1 to hit; Cannons may re-roll the first artillery die.", restrictedTo: [{ regimentIds: ["boltthrowers", "goblinhewer", "cannons"] }] },
-  { id: "dw-runedemolishing", name: "Rune of Demolishing", cost: 15, cat: "engineering", desc: "Engineering Rune, Cannons only (not Flame Cannons/Organ Guns). Deals +1 wound (D3+1 total).", restrictedTo: [{ regimentIds: ["cannons"] }] },
-  { id: "dw-runeimmolation", name: "Rune of Immolation", cost: 15, cat: "engineering", desc: "Engineering Rune. Self-destruct at will (including when the crew dies or fails a break test) — the crew and any enemy engaged with the machine suffer 1D6 S6 hits, no save." },
-  { id: "dw-runeaccuracy", name: "Rune of Accuracy", cost: 30, cat: "engineering", desc: "Engineering Rune, Stone Throwers only. Re-roll the artillery die and/or scatter die after measuring the guessed distance.", restrictedTo: [{ regimentIds: ["smallstonethrowers", "largestonethrowers"] }] },
+  { id: "dw-mrdismay", isRune: true, isMasterRune: true, name: "Master Rune of Dismay", cost: 25, cat: "enchanted", desc: "Talismanic Master Rune, must be on a war horn. One use. Sound it at the start of an enemy turn — all enemy units test Ld (unless immune to psychology) or can't charge that turn." },
+  { id: "dw-mrdisdain", isRune: true, isMasterRune: true, name: "Master Runes of Disdain", cost: 50, cat: "enchanted", desc: "Talismanic Master Rune. Dispels and destroys a spell cast at the bearer or his unit. One use." },
+  { id: "dw-mrspite", isRune: true, isMasterRune: true, name: "Master Rune of Spite", cost: 50, cat: "enchanted", desc: "Talismanic Master Rune. Ward save with a twist — rebounds wounds on 5+ (only unmodified saves apply to rebounded wounds)." },
+  { id: "dw-runeluck", isRune: true, name: "Rune of Luck", cost: 20, cat: "enchanted", desc: "Talismanic Rune. Re-roll one personal die roll, one use (may be taken several times)." },
+  { id: "dw-runespellbreaking", isRune: true, name: "Rune of Spellbreaking", cost: 25, cat: "enchanted", desc: "Talismanic Rune, Runesmiths only. Works exactly as a Dispel Magic Scroll. Max two per army (one if using the 'Veto One Spell' house rule).", restrictedTo: [{ tags: ["dwarfRunesmith"] }] },
+  { id: "dw-mrstubbornness", isRune: true, isMasterRune: true, name: "Master Rune of Sheer Damn Stubbornness", cost: 10, cat: "banner", desc: "Master Rune of Protection, BSB only. Unbreakable." },
+  { id: "dw-mrchallenge", isRune: true, isMasterRune: true, name: "Master Rune of Challenge", cost: 10, cat: "banner", desc: "Master Rune of Protection, BSB only. An enemy that could charge this regiment must pass an Ld test on 3D6 (2D6 if immune to psychology) or is forced to charge it." },
+  { id: "dw-mrbattle", isRune: true, isMasterRune: true, name: "Master Rune of Battle", cost: 75, cat: "banner", desc: "Master Rune of Protection, BSB only. The regiment adds 1D6 to combat resolution." },
+  { id: "dw-mrstromni", isRune: true, isMasterRune: true, name: "Master Rune of Stromni Redbeard", cost: 75, cat: "banner", desc: "Master Rune of Protection, BSB only. All friendly Dwarf units within 12\" add +1 to combat resolution." },
+  { id: "dw-mrgroth", isRune: true, isMasterRune: true, name: "Master Rune of Groth One-Eye", cost: 125, cat: "banner", desc: "Master Rune of Protection, BSB only. All friendly Dwarf units within 12\" take Ld/break tests without modifiers." },
+  { id: "dw-mrvalaya", isRune: true, isMasterRune: true, name: "Master Rune of Valaya", cost: 150, cat: "banner", desc: "Master Rune of Protection, BSB only. Natural dispel 4+ against all spells on the battlefield (incl. allied wizards/Anvil of Doom); remains-in-play spells auto-dispel at end of magic phase." },
+  { id: "dw-runecourage", isRune: true, name: "Rune of Courage", cost: 10, cat: "banner", desc: "Rune of Protection, Longbeards only. Immune to panic.", restrictedTo: [{ regimentIds: ["longbeards"] }] },
+  { id: "dw-runeurgency", isRune: true, name: "Rune of Urgency", cost: 25, cat: "banner", desc: "Rune of Protection. The regiment may take a Vanguard move before the battle begins." },
+  { id: "dw-runeslowness", isRune: true, name: "Rune of Slowness", cost: 25, cat: "banner", desc: "Rune of Protection. Charging enemies have their charge move reduced by 1D6\" (multiple instances: roll more dice, take highest)." },
+  { id: "dw-runewarding", isRune: true, name: "Rune of Warding", cost: 25, cat: "banner", desc: "Rune of Protection. Natural dispel 4+ (multiple instances: roll more dice, take highest)." },
+  { id: "dw-runepassage", isRune: true, name: "Rune of Passage", cost: 25, cat: "banner", desc: "Rune of Protection. The bearer and his unit may march even with enemies within 8\"; treats difficult terrain as open." },
+  { id: "dw-runeoathkeeping", isRune: true, name: "Rune of Oath-Keeping", cost: 25, cat: "banner", desc: "Rune of Protection. The regiment never loses its rank bonus when hit to the flank/rear (step-up is still cancelled, enemy still gets their combat res bonus)." },
+  { id: "dw-runeguarding", isRune: true, name: "Rune of Guarding", cost: 40, cat: "banner", desc: "Rune of Protection, Hammerers only. If the general joins, they auto-pass Ld/break tests (may still break from fear-causing outnumbering etc.).", restrictedTo: [{ regimentIds: ["hammerers"] }] },
+  { id: "dw-runefear", isRune: true, name: "Rune of Fear", cost: 40, cat: "banner", desc: "Rune of Protection. Causes fear." },
+  { id: "dw-runeburning", isRune: true, name: "Rune of Burning", cost: 10, cat: "engineering", desc: "Engineering Rune. Ammunition counts as flaming." },
+  { id: "dw-runeseeking", isRune: true, name: "Rune of Seeking", cost: 10, cat: "engineering", desc: "Engineering Rune, Bolt Throwers only. May shoot at fliers flying high with no long-range/large-target penalty.", restrictedTo: [{ regimentIds: ["boltthrowers"] }] },
+  { id: "dw-runeforging", isRune: true, name: "Rune of Forging", cost: 10, cat: "engineering", desc: "Engineering Rune, Flame Cannons & Cannons only (not Organ Guns). Doesn't miss a turn on its first misfire (still blows up on a second).", restrictedTo: [{ regimentIds: ["cannons", "flamecannons"] }] },
+  { id: "dw-runepenetrating", isRune: true, name: "Rune of Penetrating", cost: 10, cat: "engineering", desc: "Engineering Rune. +1 strength. Cost doubles if inscribed on a Gyrocopter (not modeled — apply manually)." },
+  { id: "dw-runedisguise", isRune: true, name: "Rune of Disguise", cost: 15, cat: "engineering", desc: "Engineering Rune. The machine is invisible until an enemy comes within 1\" or it shoots. Cost doubles if inscribed on a Gyrocopter (not modeled — apply manually)." },
+  { id: "dw-runetargeting", isRune: true, name: "Rune of Targeting", cost: 15, cat: "engineering", desc: "Engineering Rune, Bolt Throwers/Goblin Hewer/Cannons only. Bolt Throwers & Goblin Hewer get +1 to hit; Cannons may re-roll the first artillery die.", restrictedTo: [{ regimentIds: ["boltthrowers", "goblinhewer", "cannons"] }] },
+  { id: "dw-runedemolishing", isRune: true, name: "Rune of Demolishing", cost: 15, cat: "engineering", desc: "Engineering Rune, Cannons only (not Flame Cannons/Organ Guns). Deals +1 wound (D3+1 total).", restrictedTo: [{ regimentIds: ["cannons"] }] },
+  { id: "dw-runeimmolation", isRune: true, name: "Rune of Immolation", cost: 15, cat: "engineering", desc: "Engineering Rune. Self-destruct at will (including when the crew dies or fails a break test) — the crew and any enemy engaged with the machine suffer 1D6 S6 hits, no save." },
+  { id: "dw-runeaccuracy", isRune: true, name: "Rune of Accuracy", cost: 30, cat: "engineering", desc: "Engineering Rune, Stone Throwers only. Re-roll the artillery die and/or scatter die after measuring the guessed distance.", restrictedTo: [{ regimentIds: ["smallstonethrowers", "largestonethrowers"] }] },
 ];
 
 const DWARFS = {
   key: "dwarfs",
+  runeForge: true,
   name: "Dwarfs",
   tagline: "Stoic, ironclad holds standing against the dark and the endless grudge",
   magicItems: [...COMMON_MAGIC_ITEMS_NO_ARCANE, ...DWARF_MAGIC_ITEMS],
@@ -7900,6 +7901,7 @@ function characterCost(inst, def, armyData) {
   if (def.anvilOption && inst.anvil) total += def.anvilOption.cost;
   if (def.chaosArmourOption && inst.chaosArmour) total += def.chaosArmourOption.cost;
   (inst.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+  Object.values(inst.runeItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
   if (def.bloodlinePowerSlots) (inst.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   return total;
 }
@@ -8035,6 +8037,7 @@ function chariotCost(inst, def, armyData) {
     total += (inst.extraCrew || 0) * (def.extraCrewCost || 0);
     total += crewArmourCost(inst, def);
     (inst.extraMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+    Object.values(inst.runeItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
     return total;
   }
   // full chariot
@@ -8250,7 +8253,7 @@ function isItemAllowed(item, context) {
 function MagicItemPicker({ items, selectedIds, onToggle, maxSlots, usedElsewhere, categoryFilter, context, label = "Magic Items" }) {
   const grouped = useMemo(() => {
     const g = {};
-    items.filter((m) => (!categoryFilter || categoryFilter.includes(m.cat)) && isItemAllowed(m, context)).forEach((m) => {
+    items.filter((m) => !m.isRune && (!categoryFilter || categoryFilter.includes(m.cat)) && isItemAllowed(m, context)).forEach((m) => {
       g[m.cat] = g[m.cat] || [];
       g[m.cat].push(m);
     });
@@ -8670,6 +8673,10 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       if (lore) tags.push(`Lore: ${lore}`);
     }
     (unit.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+    Object.values(unit.runeItems || {}).forEach((ids) => {
+      const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
+      if (names.length > 0) tags.push(names.join(" + "));
+    });
     (unit.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
   } else if (kind === "regiment") {
     if (def.kind === "composite") {
@@ -8729,6 +8736,10 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
     } else if (def.kind === "warmachine") {
       if (unit.extraCrew) tags.push(`+${unit.extraCrew} ${def.extraCrewLabel || "crew"}`);
       (unit.extraMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+      Object.values(unit.runeItems || {}).forEach((ids) => {
+        const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
+        if (names.length > 0) tags.push(names.join(" + "));
+      });
       if (def.crewArmourFixed) tags.push(`Crew: ${def.crewArmourFixed}`);
       else if (def.crewArmourOptions) {
         const selectedId = unit.crewArmourId || def.crewArmourOptions[0].id;
@@ -8799,7 +8810,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, selectedId, onSelect, onRemove }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -8852,6 +8863,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Lore of Magic:</div>
           <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {loreWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
+      {runeWarnings && runeWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Dwarf runes:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            {runeWarnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
@@ -9026,6 +9045,49 @@ function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
 }
 
 /* ---- Detail panel per unit kind ---- */
+
+// Lets a Dwarf character build one item (weapon/armour/enchanted/banner) out of up to 3
+// individual runes instead of picking a single fixed named item. Combined item = one slot,
+// cost = sum of the chosen runes. At most one Master Rune per item, enforced here in the UI.
+function RuneForge({ items, cat, label, context, comboIds, onChange }) {
+  const pool = items.filter((m) => m.isRune && m.cat === cat && isItemAllowed(m, context));
+  if (pool.length === 0) return null;
+  const selected = comboIds || [];
+  const hasMaster = selected.some((id) => pool.find((m) => m.id === id)?.isMasterRune);
+  const total = selected.reduce((sum, id) => sum + (pool.find((m) => m.id === id)?.cost || 0), 0);
+  const toggle = (m) => {
+    if (selected.includes(m.id)) { onChange(selected.filter((x) => x !== m.id)); return; }
+    if (selected.length >= 3) return;
+    if (m.isMasterRune && hasMaster) return;
+    onChange([...selected, m.id]);
+  };
+  const comboNames = selected.map((id) => pool.find((m) => m.id === id)?.name).filter(Boolean).join(" + ");
+  return (
+    <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--line-soft)" }}>
+      <span className="whr-label">Forge a rune {label} (up to 3 runes)</span>
+      {pool.map((m) => {
+        const checked = selected.includes(m.id);
+        const disabled = !checked && (selected.length >= 3 || (m.isMasterRune && hasMaster));
+        return (
+          <label key={m.id} className={`whr-opt-row whr-opt-label ${disabled ? "whr-opt-disabled" : ""}`}>
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input type="checkbox" checked={checked} disabled={disabled} onChange={() => toggle(m)} />
+              {m.name}
+              {m.isMasterRune && <span style={{ fontFamily: "var(--font-display-sc)", fontSize: 10, letterSpacing: "0.04em", background: "var(--gold)", color: "var(--paper)", padding: "1px 6px", borderRadius: 2, marginLeft: 6 }}>Master</span>}
+            </span>
+            <span className="whr-opt-cost">+{m.cost}pts</span>
+          </label>
+        );
+      })}
+      {selected.length > 0 && (
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, paddingTop: 8, borderTop: "1px solid var(--line-soft)", fontSize: 14.5 }}>
+          <span>{comboNames}</span>
+          <strong>{fmtPts(total)}pts</strong>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
   const def = applyBloodline(rawDef, roster.armyTheme);
@@ -9232,14 +9294,25 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
-      {def.magicItemSlots > 0 && (
-        <div style={{ marginTop: 14 }}>
-          <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
-            categoryFilter={defaultCategoryFilter(def)}
-            context={itemContext(def, unit, { characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
-            onToggle={(id) => toggleArrayField(unit, "magicItemIds", id, updateUnit)} />
-        </div>
-      )}
+      {def.magicItemSlots > 0 && (() => {
+        const runeItems = unit.runeItems || {};
+        const runeSlotsUsed = Object.values(runeItems).filter((arr) => arr && arr.length > 0).length;
+        const effFilter = defaultCategoryFilter(def);
+        const itemCtx = itemContext(def, unit, { characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+        return (
+          <div style={{ marginTop: 14 }}>
+            <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={Math.max(0, def.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
+              categoryFilter={effFilter}
+              context={itemCtx}
+              onToggle={(id) => toggleArrayField(unit, "magicItemIds", id, updateUnit)} />
+            {armyData.runeForge && ["weapon", "armour", "enchanted", "banner"].filter((c) => effFilter.includes(c)).map((cat) => (
+              <RuneForge key={cat} items={armyData.magicItems} cat={cat} label={{ weapon: "weapon", armour: "armour", enchanted: "talisman", banner: "banner" }[cat]}
+                context={itemCtx} comboIds={runeItems[cat]}
+                onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, [cat]: ids } })} />
+            ))}
+          </div>
+        );
+      })()}
 
       {def.bloodlinePowerSlots > 0 && (
         <div style={{ marginTop: 14 }}>
@@ -9703,14 +9776,25 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
           </div>
         )}
         <CrewArmourGroup def={def} unit={unit} updateUnit={updateUnit} />
-        {def.magicItemSlots > 0 && (
-          <div style={{ marginTop: 14 }}>
-            <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
-              categoryFilter={def.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
-              context={itemContext(def, unit, { regimentId: def.id })}
-              onToggle={(id) => toggleArrayField(unit, "extraMagicItemIds", id, updateUnit)} />
-          </div>
-        )}
+        {def.magicItemSlots > 0 && (() => {
+          const runeItems = unit.runeItems || {};
+          const runeSlotsUsed = Object.values(runeItems).filter((arr) => arr && arr.length > 0).length;
+          const effFilter = def.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
+          const itemCtx = itemContext(def, unit, { regimentId: def.id });
+          return (
+            <div style={{ marginTop: 14 }}>
+              <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={Math.max(0, def.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
+                categoryFilter={effFilter}
+                context={itemCtx}
+                onToggle={(id) => toggleArrayField(unit, "extraMagicItemIds", id, updateUnit)} />
+              {armyData.runeForge && effFilter.includes("engineering") && (
+                <RuneForge items={armyData.magicItems} cat="engineering" label="engineering item"
+                  context={itemCtx} comboIds={runeItems.engineering}
+                  onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, engineering: ids } })} />
+              )}
+            </div>
+          );
+        })()}
       </div>
     );
   }
@@ -9955,6 +10039,38 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
           warnings.push(`${d.name}: ${mi.name} requires ${mi.requiresLore} lore — bearer's lore is ${lore || "unset"}.`);
         }
       });
+    });
+    return warnings;
+  }, [roster, armyData]);
+
+  const runeWarnings = useMemo(() => {
+    const warnings = [];
+    if (!armyData.runeForge) return warnings;
+    const combos = [];
+    const collect = (u, label) => {
+      Object.values(u.runeItems || {}).forEach((ids) => {
+        if (ids && ids.length > 0) combos.push({ label, ids: [...ids].sort() });
+      });
+    };
+    roster.characters.forEach((u) => { const d = armyData.characters.find((c) => c.id === u.defId); if (d) collect(u, d.name); });
+    roster.chariots.forEach((u) => { const d = armyData.chariotsMonsters.find((c) => c.id === u.defId); if (d) collect(u, d.name); });
+    for (let i = 0; i < combos.length; i++) {
+      for (let j = i + 1; j < combos.length; j++) {
+        if (combos[i].ids.join(",") === combos[j].ids.join(",")) {
+          warnings.push(`${combos[i].label} and ${combos[j].label} carry the exact same rune combination.`);
+        }
+      }
+    }
+    const masterUseCount = {};
+    combos.forEach((c) => c.ids.forEach((id) => {
+      const mi = miById(armyData.magicItems, id);
+      if (mi && mi.isMasterRune) { masterUseCount[id] = masterUseCount[id] || []; masterUseCount[id].push(c.label); }
+    }));
+    Object.entries(masterUseCount).forEach(([id, labels]) => {
+      if (labels.length > 1) {
+        const mi = miById(armyData.magicItems, id);
+        warnings.push(`${mi.name} is carried by more than one item (${labels.join(", ")}) — a Master Rune may only be used once in the whole army.`);
+      }
     });
     return warnings;
   }, [roster, armyData]);
@@ -10233,7 +10349,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
