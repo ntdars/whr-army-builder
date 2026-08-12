@@ -3443,13 +3443,13 @@ const DWARF_MAGIC_ITEMS = [
   { id: "dw-mrstromni", isRune: true, isMasterRune: true, name: "Master Rune of Stromni Redbeard", cost: 75, cat: "banner", desc: "Master Rune of Protection, BSB only. All friendly Dwarf units within 12\" add +1 to combat resolution." },
   { id: "dw-mrgroth", isRune: true, isMasterRune: true, name: "Master Rune of Groth One-Eye", cost: 125, cat: "banner", desc: "Master Rune of Protection, BSB only. All friendly Dwarf units within 12\" take Ld/break tests without modifiers." },
   { id: "dw-mrvalaya", isRune: true, isMasterRune: true, name: "Master Rune of Valaya", cost: 150, cat: "banner", desc: "Master Rune of Protection, BSB only. Natural dispel 4+ against all spells on the battlefield (incl. allied wizards/Anvil of Doom); remains-in-play spells auto-dispel at end of magic phase." },
-  { id: "dw-runecourage", isRune: true, name: "Rune of Courage", cost: 10, cat: "banner", desc: "Rune of Protection, Longbeards only. Immune to panic.", restrictedTo: [{ regimentIds: ["longbeards"] }] },
+  { id: "dw-runecourage", isRune: true, name: "Rune of Courage", cost: 10, cat: "banner", desc: "Rune of Protection, Longbeards only. Immune to panic.", requiresRegimentIds: ["longbeards"], requiresRegimentLabel: "Longbeards" },
   { id: "dw-runeurgency", isRune: true, name: "Rune of Urgency", cost: 25, cat: "banner", desc: "Rune of Protection. The regiment may take a Vanguard move before the battle begins." },
   { id: "dw-runeslowness", isRune: true, name: "Rune of Slowness", cost: 25, cat: "banner", desc: "Rune of Protection. Charging enemies have their charge move reduced by 1D6\" (multiple instances: roll more dice, take highest)." },
   { id: "dw-runewarding", isRune: true, name: "Rune of Warding", cost: 25, cat: "banner", desc: "Rune of Protection. Natural dispel 4+ (multiple instances: roll more dice, take highest)." },
   { id: "dw-runepassage", isRune: true, name: "Rune of Passage", cost: 25, cat: "banner", desc: "Rune of Protection. The bearer and his unit may march even with enemies within 8\"; treats difficult terrain as open." },
   { id: "dw-runeoathkeeping", isRune: true, name: "Rune of Oath-Keeping", cost: 25, cat: "banner", desc: "Rune of Protection. The regiment never loses its rank bonus when hit to the flank/rear (step-up is still cancelled, enemy still gets their combat res bonus)." },
-  { id: "dw-runeguarding", isRune: true, name: "Rune of Guarding", cost: 40, cat: "banner", desc: "Rune of Protection, Hammerers only. If the general joins, they auto-pass Ld/break tests (may still break from fear-causing outnumbering etc.).", restrictedTo: [{ regimentIds: ["hammerers"] }] },
+  { id: "dw-runeguarding", isRune: true, name: "Rune of Guarding", cost: 40, cat: "banner", desc: "Rune of Protection, Hammerers only. If the general joins, they auto-pass Ld/break tests (may still break from fear-causing outnumbering etc.).", requiresRegimentIds: ["hammerers"], requiresRegimentLabel: "Hammerers" },
   { id: "dw-runefear", isRune: true, name: "Rune of Fear", cost: 40, cat: "banner", desc: "Rune of Protection. Causes fear." },
   { id: "dw-runeburning", isRune: true, name: "Rune of Burning", cost: 10, cat: "engineering", desc: "Engineering Rune. Ammunition counts as flaming." },
   { id: "dw-runeseeking", isRune: true, name: "Rune of Seeking", cost: 10, cat: "engineering", desc: "Engineering Rune, Bolt Throwers only. May shoot at fliers flying high with no long-range/large-target penalty.", restrictedTo: [{ regimentIds: ["boltthrowers"] }] },
@@ -3479,7 +3479,7 @@ const DWARFS = {
   ],
   characters: [
     {
-      id: "dwarflord", name: "Dwarf Lord", cost: 136, stat: "Dwarf Lord", magicItemSlots: 3, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfLord"],
+      id: "dwarflord", name: "Dwarf Lord", cost: 136, stat: "Dwarf Lord", magicItemSlots: 3, magicItemCategoryFilter: ["weapon", "armour", "enchanted"], tags: ["dwarfLord"],
       gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
@@ -3490,7 +3490,7 @@ const DWARFS = {
       ],
     },
     {
-      id: "dwarfhero", name: "Dwarf Hero", cost: 82, stat: "Dwarf Hero", magicItemSlots: 2, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"],
+      id: "dwarfhero", name: "Dwarf Hero", cost: 82, stat: "Dwarf Hero", magicItemSlots: 2, magicItemCategoryFilter: ["weapon", "armour", "enchanted"],
       gearNote: "May join a war machine (except Organ Guns) and act as an Engineer — the machine may use his BS and re-roll misfires (except bouncing cannon balls); he can't shoot his own weapons while operating it. May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
@@ -3512,21 +3512,21 @@ const DWARFS = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
-      id: "runelord", name: "Runelord", cost: 160, stat: "Runelord", magicItemSlots: 3, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfRunesmith"],
+      id: "runelord", name: "Runelord", cost: 160, stat: "Runelord", magicItemSlots: 3, magicItemCategoryFilter: ["weapon", "armour", "enchanted"], tags: ["dwarfRunesmith"],
       gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free. One Runesmith in the army may bring an Anvil of Doom (attended by two Anvil Guard Hammerers) — while operating it, he casts as a level 4 wizard using Bright Magic's Blast/Fireball/Piercing Bolts of Burning/The Burning Head, expending power cards as normal.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       anvilOption: { label: "Anvil of Doom (+2 Anvil Guard Hammerers)", cost: 100 },
     },
     {
-      id: "masterrunesmith", name: "Master Runesmith", cost: 120, stat: "Master Runesmith", magicItemSlots: 2, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfRunesmith"],
+      id: "masterrunesmith", name: "Master Runesmith", cost: 120, stat: "Master Runesmith", magicItemSlots: 2, magicItemCategoryFilter: ["weapon", "armour", "enchanted"], tags: ["dwarfRunesmith"],
       gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       anvilOption: { label: "Anvil of Doom (+2 Anvil Guard Hammerers)", cost: 110 },
     },
     {
-      id: "runesmith", name: "Runesmith", cost: 80, stat: "Runesmith", magicItemSlots: 1, magicItemCategoryFilter: ["weapon", "armour", "enchanted", "banner"], tags: ["dwarfRunesmith"],
+      id: "runesmith", name: "Runesmith", cost: 80, stat: "Runesmith", magicItemSlots: 1, magicItemCategoryFilter: ["weapon", "armour", "enchanted"], tags: ["dwarfRunesmith"],
       gearNote: "May take light armour, heavy armour, or Gromril Armour, and a shield, all for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Gromril Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
@@ -10085,6 +10085,13 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         warnings.push(`${mi.name} is carried by more than one item (${labels.join(", ")}) — a Master Rune may only be used once in the whole army.`);
       }
     });
+    const regimentDefIds = new Set(roster.regiments.map((u) => u.defId));
+    combos.forEach((c) => c.ids.forEach((id) => {
+      const mi = miById(armyData.magicItems, id);
+      if (mi && mi.requiresRegimentIds && !mi.requiresRegimentIds.some((rid) => regimentDefIds.has(rid))) {
+        warnings.push(`${c.label} carries ${mi.name}, but your army has no regiment of ${mi.requiresRegimentLabel || "the required type"}.`);
+      }
+    }));
     return warnings;
   }, [roster, armyData]);
 
