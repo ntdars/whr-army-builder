@@ -1357,7 +1357,7 @@ const WOOD_ELVES = {
       note: "Small monster that can fly.",
     },
     {
-      id: "chariot", name: "Wood Elf Chariot", perUnit: 60, stat: "Heavy Chariot", kind: "chariot", countsAsFirstRegiment: true, theme: "core",
+      id: "chariot", name: "Wood Elf Chariot", perUnit: 60, stat: "Heavy Chariot", kind: "chariot", countsAsFirstRegiment: true, theme: "core", crewArmourFixed: "Light armour",
       note: "Heavy Chariot pulled by two Elven Steeds, crewed by two Wood Elf Warriors with light armour, spears, shields & Wood Elf Longbows (5+ armour save). The cheapest chariot in the army counts toward Regiments; further chariots count toward Chariots & Monsters.",
       extraCrewCost: 10, extraCrewLabel: "extra Wood Elf Warrior crew", extraSteedCost: 5, extraSteedLabel: "extra Elven Steeds",
       commanderCost: 43, commanderLabel: "One crewman is an Elven Commander", commanderMagicItemSlots: 1, scythedWheelsCost: 20,
@@ -2060,7 +2060,7 @@ const CHAOS_WARRIORS = {
   ],
   chariotsMonsters: [
     {
-      id: "chaoswarriorchariot", name: "Chaos Warrior Chariot", perUnit: 79, stat: "Heavy Chariot", kind: "chariot",
+      id: "chaoswarriorchariot", name: "Chaos Warrior Chariot", perUnit: 79, stat: "Heavy Chariot", kind: "chariot", crewArmourFixed: "Chaos Armour",
       note: "Heavy Chariot pulled by two barded Chaos Steeds, crewed by two Chaos Warriors with Halberds and Chaos Armour (3+ armour save). Daemonic teams reduce armour save to 4+, and the Daemon type must match the Mark of a rider (or the general's, in a single-Power army).",
       extraCrewCost: 20, extraCrewLabel: "extra Chaos Warrior crew", extraSteedCost: 7, extraSteedLabel: "extra Chaos Steeds",
       scythedWheelsCost: 20, commanderCost: 60, commanderLabel: "One crewman is a Chaos Champion (with Mark of Chaos)", commanderMagicItemSlots: 1,
@@ -2073,7 +2073,7 @@ const CHAOS_WARRIORS = {
       ],
     },
     {
-      id: "chaosmarauderchariot", name: "Chaos Marauder Chariot", perUnit: 62, stat: "Heavy Chariot", kind: "chariot",
+      id: "chaosmarauderchariot", name: "Chaos Marauder Chariot", perUnit: 62, stat: "Heavy Chariot", kind: "chariot", crewArmourFixed: "Light armour",
       note: "Heavy Chariot pulled by two Warhorses, crewed by two Chaos Marauders with spears, light armour and shields (5+ armour save).",
       extraCrewCost: 16, extraCrewLabel: "extra Chaos Marauder crew", extraSteedCost: 2, extraSteedLabel: "extra Warhorses",
       scythedWheelsCost: 20,
@@ -2338,7 +2338,7 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "beastmanchariots", name: "Beastman Chariot", perUnit: 70, stat: "Extra Heavy Chariot", kind: "chariot",
+      id: "beastmanchariots", name: "Beastman Chariot", perUnit: 70, stat: "Extra Heavy Chariot", kind: "chariot", crewArmourFixed: "Light armour",
       note: "Extra Heavy Chariot (T6) pulled by two Tuskgors (+2S on the charge), crewed by two Gor Beastmen with spears, light armour, shields (4+ combined save from the Tuskgors' hide).",
       extraCrewCost: 7, extraCrewLabel: "extra Gor Beastmen crew", extraSteedCost: 8, extraSteedLabel: "extra Tuskgors",
       scythedWheelsCost: 20, commanderCost: 42, commanderLabel: "One crewman is a Gor Beastman Champion (with Mark of Chaos)", commanderMagicItemSlots: 1,
@@ -2995,7 +2995,7 @@ const CHAOS_WARBAND = {
   ],
   chariotsMonsters: [
     {
-      id: "chaoswarriorchariot", name: "Chaos Warrior Chariot", perUnit: 79, stat: "Heavy Chariot", kind: "chariot",
+      id: "chaoswarriorchariot", name: "Chaos Warrior Chariot", perUnit: 79, stat: "Heavy Chariot", kind: "chariot", crewArmourFixed: "Chaos Armour",
       note: "Heavy Chariot pulled by two barded Chaos Steeds, crewed by two Chaos Warriors with Halberds and Chaos Armour (3+ armour save). Daemonic teams reduce armour save to 4+, and the Daemon type must match the Mark of a rider (or the general's, in a single-Power army).",
       extraCrewCost: 20, extraCrewLabel: "extra Chaos Warrior crew", extraSteedCost: 7, extraSteedLabel: "extra Chaos Steeds",
       scythedWheelsCost: 20, commanderCost: 60, commanderLabel: "One crewman is a Chaos Champion (with Mark of Chaos)", commanderMagicItemSlots: 1,
@@ -3008,7 +3008,7 @@ const CHAOS_WARBAND = {
       ],
     },
     {
-      id: "chaosmarauderchariot", name: "Chaos Marauder Chariot", perUnit: 62, stat: "Heavy Chariot", kind: "chariot",
+      id: "chaosmarauderchariot", name: "Chaos Marauder Chariot", perUnit: 62, stat: "Heavy Chariot", kind: "chariot", crewArmourFixed: "Light armour",
       note: "Heavy Chariot pulled by two Warhorses, crewed by two Chaos Marauders with spears, light armour and shields (5+ armour save).",
       extraCrewCost: 16, extraCrewLabel: "extra Chaos Marauder crew", extraSteedCost: 2, extraSteedLabel: "extra Warhorses",
       scythedWheelsCost: 20,
@@ -3029,7 +3029,7 @@ const CHAOS_WARBAND = {
       ],
     },
     {
-      id: "beastmanchariots", name: "Beastman Chariot", perUnit: 70, stat: "Extra Heavy Chariot", kind: "chariot",
+      id: "beastmanchariots", name: "Beastman Chariot", perUnit: 70, stat: "Extra Heavy Chariot", kind: "chariot", crewArmourFixed: "Light armour",
       note: "Extra Heavy Chariot (T6) pulled by two Tuskgors (+2S on the charge), crewed by two Gor Beastmen with spears, light armour, shields (4+ combined save from the Tuskgors' hide).",
       extraCrewCost: 7, extraCrewLabel: "extra Gor Beastmen crew", extraSteedCost: 8, extraSteedLabel: "extra Tuskgors",
       scythedWheelsCost: 20, commanderCost: 42, commanderLabel: "One crewman is a Gor Beastman Champion (with Mark of Chaos)", commanderMagicItemSlots: 1,
@@ -3343,11 +3343,12 @@ const HIGH_ELVES = {
     },
     {
       id: "boltthrowers", name: "Repeating Bolt Throwers", perUnit: 74, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
-      note: "Crewed by two Elven Warriors. Crew may take light armour for +1pt each (not modeled individually here — folded into the flat crew cost).",
+      note: "Crewed by two Elven Warriors.",
       extraCrewCost: 7, extraCrewMax: 3, extraCrewLabel: "extra Elven Warrior crew",
+      baseCrew: 2, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }],
     },
     {
-      id: "tiranocchariots", name: "Tiranoc Chariot", perUnit: 60, stat: "Heavy Chariot", kind: "chariot", countsAsFirstRegiment: true,
+      id: "tiranocchariots", name: "Tiranoc Chariot", perUnit: 60, stat: "Heavy Chariot", kind: "chariot", countsAsFirstRegiment: true, crewArmourFixed: "Light armour",
       note: "Heavy Chariot pulled by two Elven Steeds, crewed by two Elven Warriors with light armour, spears, shields and longbows (5+ armour save; crew may swap spears/shields for halberds instead, 6+ save). The first Tiranoc Chariot counts toward Regiments; further ones count toward Chariots & Monsters.",
       extraCrewCost: 10, extraCrewLabel: "extra Elven Warrior crew", extraSteedCost: 5, extraSteedLabel: "extra Elven Steeds",
       scythedWheelsCost: 20, commanderCost: 43, commanderLabel: "One crewman is an Elven Commander", commanderMagicItemSlots: 1,
@@ -3614,9 +3615,10 @@ const DWARFS = {
   chariotsMonsters: [
     {
       id: "boltthrowers", name: "Bolt Throwers", perUnit: 55, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
-      note: "Manned by three Dwarf Soldiers. Crew may take light or heavy armour (not modeled individually — folded into the flat cost).",
+      note: "Manned by three Dwarf Soldiers.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Dwarf Soldier crew",
       magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
+      baseCrew: 3, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }, { id: "heavy", label: "Heavy armour", cost: 2 }],
     },
     {
       id: "smallstonethrowers", name: "Small Stone Throwers", perUnit: 85, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
@@ -4601,7 +4603,7 @@ const ORCS_GOBLINS = {
       note: "Follows the main-rulebook Giant rules. The first Giant counts toward Regiments; further ones count toward Monsters.",
     },
     {
-      id: "goblinwolfchariots", name: "Goblin Wolf Chariot", perUnit: 44, stat: "Light Chariot", kind: "chariot",
+      id: "goblinwolfchariots", name: "Goblin Wolf Chariot", perUnit: 44, stat: "Light Chariot", kind: "chariot", crewArmourFixed: "Light armour",
       note: "Light Chariot pulled by two Giant Wolves, crewed by two Common Goblins with light armour, spears, shields and short bows (5+ combined save).",
       extraCrewCost: 6, extraCrewLabel: "extra Common Goblin crew", extraSteedCost: 8, extraSteedLabel: "extra Giant Wolves",
       scythedWheelsCost: 10, commanderCost: 15, commanderLabel: "One crewman is a Common Goblin Champion", commanderMagicItemSlots: 1,
@@ -5338,6 +5340,7 @@ const CHAOS_DWARFS = {
       id: "deathrockets", name: "Chaos Dwarf Death Rockets", perUnit: 85, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
       note: "Works like a Small Stone Thrower. Crewed by two Chaos Dwarf Warriors in heavy armour.",
       extraCrewCost: 10, extraCrewMax: 3, extraCrewLabel: "extra Chaos Dwarf crew",
+      crewArmourFixed: "Heavy armour",
     },
     {
       id: "hobgoblinboltthrowers", name: "Hobgoblin Bolt Throwers", perUnit: 43, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
@@ -5348,13 +5351,15 @@ const CHAOS_DWARFS = {
     {
       id: "flamethrowerteam", name: "Flame Thrower Team", perUnit: 60, stat: "Weapon Team", kind: "warmachine", theme: "oldschool",
       note: "Weapon Team: two Chaos Dwarf Warriors in heavy armour on one 25x50mm base, skirmisher-style (360° LoS, no facing when charged by flyers, can't move-and-fire, may stand & shoot). Guess up to 6\" plus the artillery die; on a misfire the team is destroyed. Otherwise place the teardrop template (small end at the hit point) — models more than half covered suffer a flaming S5 hit, 1 wound=1D3. Any casualty forces a panic test. If it blows up during a stand & shoot, the charge counts as failed.",
+      crewArmourFixed: "Heavy armour",
     },
     {
       id: "swivelgunteam", name: "Swivel Gun Team", perUnit: 85, stat: "Weapon Team", kind: "warmachine", theme: "oldschool",
       note: "Weapon Team: two Chaos Dwarf Warriors in heavy armour on one 25x50mm base, skirmisher-style. Range 18\", 2D6 shots, S3 armour piercing (-1 save). On any double, fires in a random (scatter die) direction instead, hitting the first unit in its path within range — each shot then hits automatically.",
+      crewArmourFixed: "Heavy armour",
     },
     {
-      id: "cdjuggernaut", name: "Chaos Dwarf Juggernaut", perUnit: 200, stat: "Chaos Dwarf Juggernaut", kind: "chariot", restriction: "0-1", theme: "oldschool",
+      id: "cdjuggernaut", name: "Chaos Dwarf Juggernaut", perUnit: 200, stat: "Chaos Dwarf Juggernaut", kind: "chariot", restriction: "0-1", theme: "oldschool", crewArmourFixed: "Heavy armour",
       note: "Unbreakable large chariot pushed by a Bull Centaur (M8; only the crew fights in melee, not the Centaur). Can't pursue/overrun, doesn't double movement on the charge, and doesn't halve movement at one wound. Crewed by six Chaos Dwarf Warriors in heavy armour with crossbows. Front-mounted organ-gun variant: S7, 1D3 wounds, no armour save, guess range up to 36\", may fire even after moving, can't pivot to shoot, only two barrels fire per round (never needs reloading). First misfire (non-bounce): can't shoot this turn or next, can still move. Second misfire (non-bounce): gun and Juggernaut both explode.",
     },
     {
@@ -5616,7 +5621,7 @@ const DARK_ELVES = {
     },
     {
       id: "darkriders", name: "Dark Riders", perModel: 24, minSize: 5, stat: "Wood Elf Warriors", mountStat: "Elven Steed", mountLabel: "Elven Steed", command: "fastCavalry",
-      note: "Warriors riding Elven Steeds, equipped with light armour, spears, and bows. Fast Cavalry. May skirmish, act as Vanguard troops, and Fire & Flee as a charge reaction (resolve a Stand & Shoot, then flee as normal — rallies automatically if not caught, unless below 25% of original size). Fire & Flee is lost if joined by characters other than the unit champion.",
+      note: "Warriors riding Elven Steeds, equipped with light armour, spears, and repeating crossbows. Fast Cavalry. May skirmish, act as Vanguard troops, and Fire & Flee as a charge reaction (resolve a Stand & Shoot, then flee as normal — rallies automatically if not caught, unless below 25% of original size). Fire & Flee is lost if joined by characters other than the unit champion.",
       options: [
         { id: "shields", group: null, label: "Shields", cost: 2, per: "model" },
       ],
@@ -5631,8 +5636,9 @@ const DARK_ELVES = {
   chariotsMonsters: [
     {
       id: "boltthrowers", name: "Repeating Bolt Throwers", perUnit: 74, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
-      note: "Crewed by two Elven Warriors. Crewmen may take light armour for +1pt each (not wired up as a toggle here — add by hand if taken).",
+      note: "Crewed by two Elven Warriors.",
       extraCrewCost: 7, extraCrewMax: 3, extraCrewLabel: "extra Elven Warrior crew",
+      baseCrew: 2, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }],
     },
     {
       id: "monstrousspiders", name: "Monstrous Spiders / Scorpions", perUnit: 40, stat: "Monstrous Spider", kind: "quantity",
@@ -5648,7 +5654,7 @@ const DARK_ELVES = {
       note: "Causes terror, immune to psychology when on its own, and has a flaming breath attack with strength equal to its current wounds. Scaly skin confers a 5+ armour save that cannot be modified.",
     },
     {
-      id: "coldonechariots", name: "Cold One Chariots", perUnit: 66, stat: "Heavy Chariot", kind: "chariot",
+      id: "coldonechariots", name: "Cold One Chariots", perUnit: 66, stat: "Heavy Chariot", kind: "chariot", crewArmourFixed: "Light armour",
       note: "Heavy Chariot pulled by two Cold Ones, crewed by two Elven Warriors with light armour, spears, shields and repeating crossbows (4+ armour save). Since Cold Ones are stupid, the chariot suffers from stupidity.",
       extraCrewCost: 9, extraCrewLabel: "extra Elven Warrior crew", extraSteedCost: 12, extraSteedLabel: "extra Cold One steeds",
       commanderCost: 43, commanderLabel: "One crewman is an Elven Commander", commanderMagicItemSlots: 1,
@@ -8010,6 +8016,13 @@ function regimentCost(inst, def, armyData, roster) {
   return total;
 }
 
+function crewArmourCost(inst, def) {
+  if (!def.crewArmourOptions || !def.baseCrew) return 0;
+  const selected = def.crewArmourOptions.find((o) => o.id === inst.crewArmourId) || def.crewArmourOptions[0];
+  const crewCount = def.baseCrew + (inst.extraCrew || 0);
+  return (selected.cost || 0) * crewCount;
+}
+
 function chariotCost(inst, def, armyData) {
   if (def.kind === "abomination") return abominationCost(inst, def);
   if (def.kind === "quantity") {
@@ -8020,12 +8033,14 @@ function chariotCost(inst, def, armyData) {
   if (def.kind === "warmachine") {
     let total = def.perUnit;
     total += (inst.extraCrew || 0) * (def.extraCrewCost || 0);
+    total += crewArmourCost(inst, def);
     (inst.extraMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
     return total;
   }
   // full chariot
   let total = def.perUnit;
   total += (inst.extraCrew || 0) * (def.extraCrewCost || 0);
+  total += crewArmourCost(inst, def);
   total += (inst.extraSteeds || 0) * (def.extraSteedCost || 0);
   if (inst.commander && def.commanderCost != null) {
     total += def.commanderCost;
@@ -8703,9 +8718,25 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
         (unit.commanderMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
       }
       (def.variantOptions || []).forEach((o) => { if (unit.variantSelections?.[o.id]) tags.push(o.label); });
+      if (def.crewArmourFixed) tags.push(`Crew: ${def.crewArmourFixed}`);
+      else if (def.crewArmourOptions) {
+        const selectedId = unit.crewArmourId || def.crewArmourOptions[0].id;
+        if (selectedId !== def.crewArmourOptions[0].id) {
+          const o = def.crewArmourOptions.find((x) => x.id === selectedId);
+          if (o) tags.push(`Crew: ${o.label}`);
+        }
+      }
     } else if (def.kind === "warmachine") {
       if (unit.extraCrew) tags.push(`+${unit.extraCrew} ${def.extraCrewLabel || "crew"}`);
       (unit.extraMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+      if (def.crewArmourFixed) tags.push(`Crew: ${def.crewArmourFixed}`);
+      else if (def.crewArmourOptions) {
+        const selectedId = unit.crewArmourId || def.crewArmourOptions[0].id;
+        if (selectedId !== def.crewArmourOptions[0].id) {
+          const o = def.crewArmourOptions.find((x) => x.id === selectedId);
+          if (o) tags.push(`Crew: ${o.label}`);
+        }
+      }
     } else if (def.kind === "quantity" && def.variantOptions) {
       (def.variantOptions || []).forEach((o) => { if (unit.variantSelections?.[o.id]) tags.push(o.label); });
     } else if (def.kind === "abomination") {
@@ -9542,6 +9573,38 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
   );
 }
 
+function CrewArmourGroup({ def, unit, updateUnit }) {
+  if (def.crewArmourFixed) {
+    return (
+      <div style={{ marginTop: 14 }}>
+        <span className="whr-label">Crew Armour</span>
+        <div className="whr-opt-row" style={{ opacity: 0.7 }}>
+          <span>{def.crewArmourFixed}</span>
+        </div>
+      </div>
+    );
+  }
+  if (def.crewArmourOptions && def.crewArmourOptions.length > 0) {
+    const selectedId = unit.crewArmourId || def.crewArmourOptions[0].id;
+    return (
+      <div style={{ marginTop: 14 }}>
+        <span className="whr-label">Crew Armour</span>
+        {def.crewArmourOptions.map((o) => (
+          <label key={o.id} className="whr-opt-row whr-opt-label">
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input type="radio" name={`crewarmour-${unit.instanceId}`} checked={selectedId === o.id}
+                onChange={() => updateUnit({ ...unit, crewArmourId: o.id })} />
+              {o.label}
+            </span>
+            <span className="whr-opt-cost">{o.cost ? `+${o.cost}pts/model` : "free"}</span>
+          </label>
+        ))}
+      </div>
+    );
+  }
+  return null;
+}
+
 function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
   const usedElsewhere = allUsedMagicItemIds(roster, unit.instanceId);
 
@@ -9639,6 +9702,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
             <Stepper value={unit.extraCrew || 0} min={0} max={def.extraCrewMax || 2} onChange={(v) => updateUnit({ ...unit, extraCrew: v })} />
           </div>
         )}
+        <CrewArmourGroup def={def} unit={unit} updateUnit={updateUnit} />
         {def.magicItemSlots > 0 && (
           <div style={{ marginTop: 14 }}>
             <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.magicItemSlots} usedElsewhere={usedElsewhere}
@@ -9662,6 +9726,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
           <Stepper value={unit.extraCrew || 0} min={0} max={2} onChange={(v) => updateUnit({ ...unit, extraCrew: v })} />
         </div>
       )}
+      <CrewArmourGroup def={def} unit={unit} updateUnit={updateUnit} />
       {def.extraSteedCost != null && (
         <div style={{ marginTop: 10 }}>
           <span className="whr-label">{def.extraSteedLabel || "Extra steeds"} (max 2, +{def.extraSteedCost}pts/model, widens base)</span>
