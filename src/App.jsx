@@ -8180,19 +8180,6 @@ function countOfDef(roster, kind, defId) {
   return arr.filter((u) => u.defId === defId).length;
 }
 
-function knightGroupLimit(def, roster, armyData) {
-  if (!def.knightGroup) return restrictionLimit(def.restriction);
-  const knightUnits = roster.regiments.filter((u) => {
-    const d = armyData.regiments.find((x) => x.id === u.defId);
-    return d && d.knightGroup;
-  });
-  const groupsPresent = new Set(knightUnits.map((u) => armyData.regiments.find((x) => x.id === u.defId).knightGroup));
-  if (groupsPresent.size === 0) return Infinity;
-  if (groupsPresent.size === 1) return groupsPresent.has(def.knightGroup) ? Infinity : 1;
-  const currentCount = knightUnits.filter((u) => armyData.regiments.find((x) => x.id === u.defId).knightGroup === def.knightGroup).length;
-  return Math.max(currentCount, 1);
-}
-
 /* ============================================================================
    REUSABLE SUBCOMPONENTS
    ========================================================================== */
@@ -8588,7 +8575,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
         </Section>
         <Section id="regiments" title="Regiments">
           {armyData.regiments.filter(themeVisible).map((r) => {
-            const limit = r.knightGroup ? knightGroupLimit(r, roster, armyData) : restrictionLimit(r.restriction);
+            const limit = restrictionLimit(r.restriction);
             const count = countOfDef(roster, "regiment", r.id);
             const atLimit = count >= limit;
             return (
@@ -8597,7 +8584,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
                 label={r.name + (r.restriction ? ` (${r.restriction})` : "")}
                 sub={r.kind === "composite" ? "mixed unit, priced per model" : r.tieredPricing ? `${fmtPts(r.tieredPricing.baseCost)}pts, minimum ${r.minSize}` : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
                 disabled={atLimit}
-                disabledReason={r.knightGroup ? "Only one Knight type unless it's your only type" : `Limit reached (${r.restriction})`}
+                disabledReason={`Limit reached (${r.restriction})`}
                 onClick={() => onAdd("regiment", r.id)}
               />
             );
@@ -8843,7 +8830,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, selectedId, onSelect, onRemove }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -8912,6 +8899,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>House rules:</div>
           <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {houseRuleWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
+      {knightWarnings && knightWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Knightly Orders:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            {knightWarnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
@@ -10193,6 +10188,25 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     return warnings;
   }, [roster, armyData]);
 
+  const knightWarnings = useMemo(() => {
+    const warnings = [];
+    const groups = {};
+    roster.regiments.forEach((u) => {
+      const d = armyData.regiments.find((x) => x.id === u.defId);
+      if (d?.knightGroup) { groups[d.knightGroup] = groups[d.knightGroup] || []; groups[d.knightGroup].push(d); }
+    });
+    if (Object.keys(groups).length > 1) {
+      Object.values(groups).forEach((defs) => {
+        if (defs.length > 1) {
+          const uniqueNames = [...new Set(defs.map((d) => d.name))];
+          const desc = uniqueNames.length > 1 ? uniqueNames.join(" and ") : `two ${uniqueNames[0]}`;
+          warnings.push(`Cannot take ${desc} unless they are the only Knightly Order taken.`);
+        }
+      });
+    }
+    return warnings;
+  }, [roster, armyData]);
+
   const houseRuleWarnings = useMemo(() => {
     const warnings = [];
     roster.regiments.forEach((u) => {
@@ -10525,7 +10539,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
