@@ -6148,17 +6148,19 @@ const VAMPIRE_COUNTS = {
     },
     {
       id: "skeletonwarriors", name: "Skeleton Warriors", perModel: 4.5, minSize: 5, stat: "Skeleton", command: "standard", tags: ["undead", "skeletonBanner"],
-      note: "Undead, subject to the crumble rule. Light armour or shield is free individually — taking both together costs +0.5pt/model per the book (not applied automatically here). Longbows/crossbows are only available if no other equipment (armour/shield/other weapon) is taken — not hard-enforced.",
+      note: "Undead, subject to the crumble rule.",
       options: [
-        { id: "lightarmour", group: null, label: "Light armour", cost: 0, per: "model" },
-        { id: "shield", group: null, label: "Shield", cost: 0, per: "model" },
-        { id: "heavyarmour", group: null, label: "Upgrade to heavy armour", cost: 1.5, per: "model" },
+        { id: "lightarmour", group: "armour", label: "Light armour", cost: 0, per: "model" },
+        { id: "shield", group: "armour", label: "Shield", cost: 0, per: "model" },
+        { id: "both", group: "armour", label: "Light armour and shield", cost: 0.5, per: "model" },
+        { id: "heavyarmour", group: "armour", label: "Heavy armour", cost: 1.5, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 1, per: "model" },
         { id: "halberds", group: "weapon", label: "Halberds", cost: 1, per: "model" },
         { id: "dhw", group: "weapon", label: "Double handed weapons", cost: 2, per: "model" },
         { id: "longbows", group: "missile", label: "Longbows", cost: 1.5, per: "model" },
         { id: "crossbows", group: "missile", label: "Crossbows", cost: 2.5, per: "model" },
       ],
+      missileExclusiveGroups: ["armour", "weapon"],
       championOptions: vcChampions(70, 35, 60),
     },
     {
@@ -6379,13 +6381,15 @@ const TOMB_KINGS = {
     },
     {
       id: "skeletonwarriors-tk", name: "Skeleton Warriors", perModel: 4.5, minSize: 5, stat: "Skeleton", command: "standard", tags: ["undead", "tombKings", "skeletonBanner"],
-      note: "Undead, subject to the crumble rule. Light armour or shield is free individually — taking both together costs +0.5pt/model per the book (not applied automatically here). Bows are only available if no other equipment is taken — not hard-enforced.",
+      note: "Undead, subject to the crumble rule.",
       options: [
-        { id: "lightarmour", group: null, label: "Light armour", cost: 0, per: "model" },
-        { id: "shield", group: null, label: "Shield", cost: 0, per: "model" },
+        { id: "lightarmour", group: "armour", label: "Light armour", cost: 0, per: "model" },
+        { id: "shield", group: "armour", label: "Shield", cost: 0, per: "model" },
+        { id: "both", group: "armour", label: "Light armour and shield", cost: 0.5, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 1, per: "model" },
-        { id: "bows", group: "weapon", label: "Bows", cost: 1.5, per: "model" },
+        { id: "bows", group: "missile", label: "Bows", cost: 1.5, per: "model" },
       ],
+      missileExclusiveGroups: ["armour", "weapon"],
       championOptions: tkMummyChampion(60),
     },
     {
@@ -6580,17 +6584,19 @@ const CLASSIC_UNDEAD = {
     },
     {
       id: "skeletonwarriors", name: "Skeleton Warriors", perModel: 4.5, minSize: 5, stat: "Skeleton", command: "standard", tags: ["undead", "skeletonBanner"],
-      note: "Undead, subject to the crumble rule. Light armour or shield is free individually — taking both together costs +0.5pt/model per the book (not applied automatically here). Longbows/crossbows are only available if no other equipment is taken — not hard-enforced.",
+      note: "Undead, subject to the crumble rule.",
       options: [
-        { id: "lightarmour", group: null, label: "Light armour", cost: 0, per: "model" },
-        { id: "shield", group: null, label: "Shield", cost: 0, per: "model" },
-        { id: "heavyarmour", group: null, label: "Upgrade to heavy armour", cost: 1.5, per: "model" },
+        { id: "lightarmour", group: "armour", label: "Light armour", cost: 0, per: "model" },
+        { id: "shield", group: "armour", label: "Shield", cost: 0, per: "model" },
+        { id: "both", group: "armour", label: "Light armour and shield", cost: 0.5, per: "model" },
+        { id: "heavyarmour", group: "armour", label: "Heavy armour", cost: 1.5, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 1, per: "model" },
         { id: "halberds", group: "weapon", label: "Halberds", cost: 1, per: "model" },
         { id: "dhw", group: "weapon", label: "Double handed weapons", cost: 2, per: "model" },
         { id: "longbows", group: "missile", label: "Longbows", cost: 1.5, per: "model" },
         { id: "crossbows", group: "missile", label: "Crossbows", cost: 2.5, per: "model" },
       ],
+      missileExclusiveGroups: ["armour", "weapon"],
       championOptions: cuChampions(70, 35, 60),
     },
     {
@@ -9491,26 +9497,36 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               visibleOptions.forEach((o) => { if (o.group) { groups[o.group] = groups[o.group] || []; groups[o.group].push(o); } else singles.push(o); });
               return (
                 <>
-                  {Object.entries(groups).map(([g, opts]) => (
-                    <div key={g} style={{ marginBottom: 6 }}>
-                      {opts.map((o) => (
-                        <label key={o.id} className="whr-opt-row whr-opt-label">
+                  {Object.entries(groups).map(([g, opts]) => {
+                    const mx = def.missileExclusiveGroups;
+                    let blocked = false;
+                    if (mx && g === "missile") blocked = mx.some((og) => !!gearSelections[og]);
+                    else if (mx && mx.includes(g)) blocked = !!gearSelections.missile;
+                    return (
+                      <div key={g} style={{ marginBottom: 6 }}>
+                        {opts.map((o) => {
+                          const checked = (gearSelections[g] || "") === o.id;
+                          const disabled = blocked && !checked;
+                          return (
+                            <label key={o.id} className={`whr-opt-row whr-opt-label ${disabled ? "whr-opt-disabled" : ""}`}>
+                              <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                <input type="radio" name={`${g}-${unit.instanceId}`} checked={checked} disabled={disabled}
+                                  onChange={() => updateUnit({ ...unit, gearSelections: { ...gearSelections, [g]: o.id } })} />
+                                {o.label}
+                              </span>
+                              <span className="whr-opt-cost">{o.cost ? `+${o.cost}/model` : "free"}</span>
+                            </label>
+                          );
+                        })}
+                        <label className="whr-opt-row whr-opt-label" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>
                           <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                            <input type="radio" name={`${g}-${unit.instanceId}`} checked={(gearSelections[g] || "") === o.id}
-                              onChange={() => updateUnit({ ...unit, gearSelections: { ...gearSelections, [g]: o.id } })} />
-                            {o.label}
+                            <input type="radio" name={`${g}-${unit.instanceId}`} checked={!gearSelections[g]} onChange={() => { const n = { ...gearSelections }; delete n[g]; updateUnit({ ...unit, gearSelections: n }); }} />
+                            None of the above (default)
                           </span>
-                          <span className="whr-opt-cost">{o.cost ? `+${o.cost}/model` : "free"}</span>
                         </label>
-                      ))}
-                      <label className="whr-opt-row whr-opt-label" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>
-                        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                          <input type="radio" name={`${g}-${unit.instanceId}`} checked={!gearSelections[g]} onChange={() => { const n = { ...gearSelections }; delete n[g]; updateUnit({ ...unit, gearSelections: n }); }} />
-                          None of the above (default)
-                        </span>
-                      </label>
-                    </div>
-                  ))}
+                      </div>
+                    );
+                  })}
                   {singles.map((o) => (
                     <label key={o.id} className="whr-opt-row whr-opt-label">
                       <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
