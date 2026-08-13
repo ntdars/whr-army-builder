@@ -3557,12 +3557,12 @@ const DWARFS = {
     },
     {
       id: "trollslayers", name: "Troll Slayers", perModel: 13, minSize: 5, stat: "Troll Slayer", command: "standard",
-      note: "Additional hand weapons by default. Unbreakable, never armoured or shielded, always wound on 4+ regardless of toughness.",
+      note: "Additional hand weapons by default. Unbreakable, never armoured or shielded, always wound on 4+ regardless of toughness. May be joined by any number of Giant Slayers, each equipped like the rest of the regiment.",
       options: [
         { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons", cost: 0, per: "model" },
       ],
       extraOption: { label: "Slayer-Berserkers (work like Night Goblin Fanatics)", cost: 30, max: 3, note: "Unofficial — needs your opponent's consent to field." },
-      champion: { name: "Giant Slayer", baseCost: 20, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"] },
+      multiChampion: { name: "Giant Slayer", baseCost: 20, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"], itemSlotLabel: "Magic Weapon (may be a rune weapon)" },
     },
     {
       id: "dwarfcrossbowmen", name: "Dwarf Crossbowmen", perModel: 11, minSize: 5, stat: "Dwarf Soldier", command: "standard",
@@ -4631,7 +4631,7 @@ const ORCS_GOBLINS = {
       note: "A Monstrous Spider is a small monster — follows the main-rulebook rules for Monstrous Spiders.",
     },
     {
-      id: "gargantuanspider", name: "Gargantuan Spider", perUnit: 225, stat: "Gargantuan Spider", kind: "quantity", restriction: "0-1",
+      id: "gargantuanspider", name: "Gargantuan Spider", perUnit: 225, stat: "Gargantuan Spider", kind: "quantity", restriction: "0-1", maxQty: 1,
       note: "Only summonable if the general is a Forest Goblin and the army includes a Forest Goblin Shaman. Large monster, causes terror, 4+ armour save, immune to psychology, poisonous (+1S vs living). Too large to be a forester or scale buildings like regular spiders. Carries a howdah of 8 Forest Goblins with poisoned short bows shooting in a 360° arc with no movement penalty; damage always goes to the spider, and its death slays the whole model.",
     },
     {
@@ -7051,9 +7051,7 @@ const NORSE = {
       options: [
         { id: "dhw", group: null, label: "Swap additional hand weapon for double handed weapon", cost: 0, per: "model" },
       ],
-      championOptions: [
-        { id: "giantslayer", name: "Giant Slayer", cost: 20, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"], itemSlotLabel: "Magic Weapon (may be a rune weapon)", note: "Equipped like the regiment. The item slot must be a magic weapon — may be a weapon inscribed with dwarven runes." },
-      ],
+      multiChampion: { name: "Giant Slayer", baseCost: 20, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"], itemSlotLabel: "Magic Weapon (may be a rune weapon)" },
     },
     {
       id: "dwarfwarriors-norse", name: "Norse Dwarf Warriors", perModel: 8, minSize: 5, stat: "Dwarf Soldier", command: "standard",
@@ -7952,6 +7950,15 @@ function regimentChampionCost(inst, def, armyData) {
       (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
     }
   }
+  if (def.multiChampion) {
+    const count = inst.multiChampionCount || 0;
+    const trooperCost = regimentTrooperUnitCost(def, inst.gearSelections || {});
+    for (let i = 0; i < count; i++) {
+      total += def.multiChampion.baseCost + trooperCost;
+      ((inst.multiChampionItems || [])[i] || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+      Object.values((inst.multiChampionRuneItems || [])[i] || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
+    }
+  }
   return total;
 }
 
@@ -8019,6 +8026,9 @@ function regimentCost(inst, def, armyData, roster) {
       }
       total += mi.cost;
     }
+  }
+  if (inst.standard) {
+    (inst.runeItems?.banner || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   }
   total += regimentChampionCost(inst, def, armyData);
   if (def.branchWraith && inst.branchWraithIncluded) {
@@ -8140,6 +8150,7 @@ function allUsedMagicItemIds(roster, excludeUnitId) {
     (u.branchWraithSpriteIds || []).forEach((id) => used.add(id));
     (u.commanderMagicItemIds || []).forEach((id) => used.add(id));
     (u.extraMagicItemIds || []).forEach((id) => used.add(id));
+    (u.multiChampionItems || []).forEach((arr) => (arr || []).forEach((id) => used.add(id)));
     if (u.magicBannerId) used.add(u.magicBannerId);
   });
   collect(roster.characters);
@@ -8705,6 +8716,10 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
     if (autoStandard) { tags.push("Musician"); tags.push("Standard Bearer"); }
     else if (unit.standard) tags.push("Standard Bearer");
     if (unit.magicBannerId) { const mi = miById(armyData.magicItems, unit.magicBannerId); if (mi) tags.push(mi.name); }
+    if ((unit.runeItems?.banner || []).length > 0) {
+      const names = unit.runeItems.banner.map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
+      if (names.length > 0) tags.push(names.join(" + "));
+    }
     if (unit.championIncluded && def.champion) {
       tags.push(def.champion.name);
       if (def.champion.markGroup) tags.push(`Mark of ${unit.championMark || def.champion.markGroup.options[0]}`);
@@ -9490,7 +9505,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
           {!autoStandard && standardAllowed && (
             <label className="whr-opt-row whr-opt-label">
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <input type="checkbox" checked={!!unit.standard} onChange={(e) => updateUnit({ ...unit, standard: e.target.checked, magicBannerId: e.target.checked ? unit.magicBannerId : null })} />
+                <input type="checkbox" checked={!!unit.standard} onChange={(e) => updateUnit({ ...unit, standard: e.target.checked, magicBannerId: e.target.checked ? unit.magicBannerId : null, runeItems: e.target.checked ? unit.runeItems : { ...(unit.runeItems || {}), banner: [] } })} />
                 Standard Bearer
               </span>
               <span className="whr-opt-cost">{standardFree ? "free" : `+${standardCost}pts`}</span>
@@ -9532,14 +9547,23 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
-      {(autoStandard || unit.standard) && (
-        <div style={{ marginTop: 10 }}>
-          <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicBannerId ? [unit.magicBannerId] : []} maxSlots={1} usedElsewhere={usedElsewhere}
-            categoryFilter={["banner"]} label="Magic Banner"
-            context={itemContext(def, unit, { regimentId: def.id, knightGroup: def.knightGroup, tags: def.tags || [] })}
-            onToggle={(id) => updateUnit({ ...unit, magicBannerId: unit.magicBannerId === id ? null : id })} />
-        </div>
-      )}
+      {(autoStandard || unit.standard) && (() => {
+        const runeBanner = unit.runeItems?.banner || [];
+        const itemCtx = itemContext(def, unit, { regimentId: def.id, knightGroup: def.knightGroup, tags: def.tags || [] });
+        return (
+          <div style={{ marginTop: 10 }}>
+            <MagicItemPicker items={armyData.magicItems} selectedIds={unit.magicBannerId ? [unit.magicBannerId] : []} maxSlots={runeBanner.length > 0 ? 0 : 1} usedElsewhere={usedElsewhere}
+              categoryFilter={["banner"]} label="Magic Banner"
+              context={itemCtx}
+              onToggle={(id) => updateUnit({ ...unit, magicBannerId: unit.magicBannerId === id ? null : id, runeItems: unit.magicBannerId === id ? unit.runeItems : { ...(unit.runeItems || {}), banner: [] } })} />
+            {armyData.runeForge && (
+              <RuneForge items={armyData.magicItems} cat="banner" label="banner" context={itemCtx}
+                comboIds={runeBanner}
+                onChange={(ids) => updateUnit({ ...unit, magicBannerId: ids.length > 0 ? null : unit.magicBannerId, runeItems: { ...(unit.runeItems || {}), banner: ids } })} />
+            )}
+          </div>
+        );
+      })()}
 
       {def.champion && unit.championIncluded && (def.champion.markGroup || def.champion.magicItemSlots > 0) && (
         <div style={{ marginTop: 14 }}>
@@ -9606,6 +9630,54 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                 onToggle={(id) => toggleArrayField(unit, "championMagicItemIds", id, updateUnit)} />
             );
           })()}
+        </div>
+      )}
+
+      {def.multiChampion && (
+        <div style={{ marginTop: 14 }}>
+          <span className="whr-label">{def.multiChampion.name}s (any number, +{fmtPts(def.multiChampion.baseCost)}pts + one trooper's cost each)</span>
+          <Stepper value={unit.multiChampionCount || 0} min={0} max={20}
+            onChange={(v) => {
+              const items = [...(unit.multiChampionItems || [])];
+              const runes = [...(unit.multiChampionRuneItems || [])];
+              while (items.length < v) items.push([]);
+              while (runes.length < v) runes.push({});
+              items.length = v; runes.length = v;
+              updateUnit({ ...unit, multiChampionCount: v, multiChampionItems: items, multiChampionRuneItems: runes });
+            }} />
+          {Array.from({ length: unit.multiChampionCount || 0 }).map((_, i) => {
+            const mc = def.multiChampion;
+            const instItems = (unit.multiChampionItems || [])[i] || [];
+            const instRunes = (unit.multiChampionRuneItems || [])[i] || {};
+            const runeUsed = (instRunes.weapon || []).length > 0 ? 1 : 0;
+            const itemCtx = itemContext(mc, unit, { regimentId: def.id, tags: mc.tags || [] });
+            const setInstItems = (ids) => {
+              const items = [...(unit.multiChampionItems || [])];
+              items[i] = ids;
+              updateUnit({ ...unit, multiChampionItems: items });
+            };
+            const setInstRunes = (ids) => {
+              const runes = [...(unit.multiChampionRuneItems || [])];
+              runes[i] = { ...(runes[i] || {}), weapon: ids };
+              updateUnit({ ...unit, multiChampionRuneItems: runes });
+            };
+            return (
+              <div key={i} style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--line-soft)" }}>
+                <span style={{ fontSize: 13, fontWeight: 700 }}>{mc.name} #{i + 1}</span>
+                {mc.magicItemSlots > 0 && (
+                  <MagicItemPicker items={armyData.magicItems} selectedIds={instItems} maxSlots={Math.max(0, mc.magicItemSlots - runeUsed)}
+                    usedElsewhere={usedElsewhere} categoryFilter={mc.magicItemCategoryFilter}
+                    label={mc.itemSlotLabel || "Magic Item"}
+                    context={itemCtx}
+                    onToggle={(id) => setInstItems(instItems.includes(id) ? instItems.filter((x) => x !== id) : [...instItems, id])} />
+                )}
+                {armyData.runeForge && (mc.magicItemCategoryFilter || []).includes("weapon") && (
+                  <RuneForge items={armyData.magicItems} cat="weapon" label="weapon" context={itemCtx}
+                    comboIds={instRunes.weapon} onChange={setInstRunes} />
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -9783,10 +9855,12 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
         <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
         <span className="whr-badge-gold whr-badge">{fmtPts(chariotCost(unit, def, armyData))} pts</span>
         <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
-        <div style={{ marginTop: 14 }}>
-          <span className="whr-label">Quantity ({def.perUnit}pts each)</span>
-          <Stepper value={unit.qty || 1} min={1} onChange={(v) => updateUnit({ ...unit, qty: v })} />
-        </div>
+        {def.maxQty !== 1 && (
+          <div style={{ marginTop: 14 }}>
+            <span className="whr-label">Quantity ({def.perUnit}pts each)</span>
+            <Stepper value={unit.qty || 1} min={1} onChange={(v) => updateUnit({ ...unit, qty: v })} />
+          </div>
+        )}
         {(def.variantOptions || []).length > 0 && (
           <div style={{ marginTop: 14 }}>
             <span className="whr-label">Variants</span>
@@ -10090,12 +10164,13 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     const warnings = [];
     if (!armyData.runeForge) return warnings;
     const combos = [];
-    const collect = (u, label) => {
+    const collect = (u, label, regimentDefId) => {
       Object.values(u.runeItems || {}).forEach((ids) => {
-        if (ids && ids.length > 0) combos.push({ label, ids: [...ids].sort() });
+        if (ids && ids.length > 0) combos.push({ label, ids: [...ids].sort(), regimentDefId });
       });
     };
     roster.characters.forEach((u) => { const d = armyData.characters.find((c) => c.id === u.defId); if (d) collect(u, d.name); });
+    roster.regiments.forEach((u) => { const d = armyData.regiments.find((r) => r.id === u.defId); if (d) collect(u, d.name, u.defId); });
     roster.chariots.forEach((u) => { const d = armyData.chariotsMonsters.find((c) => c.id === u.defId); if (d) collect(u, d.name); });
     for (let i = 0; i < combos.length; i++) {
       for (let j = i + 1; j < combos.length; j++) {
@@ -10118,7 +10193,14 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     const regimentDefIds = new Set(roster.regiments.map((u) => u.defId));
     combos.forEach((c) => c.ids.forEach((id) => {
       const mi = miById(armyData.magicItems, id);
-      if (mi && mi.requiresRegimentIds && !mi.requiresRegimentIds.some((rid) => regimentDefIds.has(rid))) {
+      if (!mi || !mi.requiresRegimentIds) return;
+      // If we know exactly which regiment carries this (a regiment's own standard bearer), check
+      // that regiment's own type directly. Otherwise (a character/BSB — we don't track which
+      // regiment they've joined) fall back to an approximate "does the army have one anywhere" check.
+      const eligible = c.regimentDefId
+        ? mi.requiresRegimentIds.includes(c.regimentDefId)
+        : mi.requiresRegimentIds.some((rid) => regimentDefIds.has(rid));
+      if (!eligible) {
         warnings.push(`${c.label} carries ${mi.name}, but your army has no regiment of ${mi.requiresRegimentLabel || "the required type"}.`);
       }
     }));
