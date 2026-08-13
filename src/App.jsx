@@ -8790,8 +8790,11 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   return (
     <div className={`whr-card ${selected ? "whr-card-selected" : ""}`} style={{ marginBottom: 10, cursor: "pointer" }} onClick={onSelect}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-        <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 17 }}>{unit.customName || def.name}</div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <div>
+          <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 17 }}>{unit.customName || def.name}</div>
+          {unit.customName && <div className="whr-serif-italic" style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: -2 }}>{def.name}</div>}
+        </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span className="whr-badge-gold whr-badge">{fmtPts(cost)} pts</span>
           <button className="whr-btn-ghost" style={{ cursor: "pointer", color: "var(--burgundy)", fontFamily: "var(--font-display)" }}
@@ -8991,7 +8994,7 @@ function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodline
   return (
     <div className="whr-print-unit">
       <div className="whr-print-unit-header">
-        <span className="whr-print-unit-name">{unit.customName || def.name}{models != null ? ` (${models})` : ""}</span>
+        <span className="whr-print-unit-name">{unit.customName ? `${unit.customName} (${def.name})` : def.name}{models != null ? ` (${models})` : ""}</span>
         <span className="whr-print-unit-cost">{fmtPts(cost)} pts</span>
       </div>
       {(hasStats || tags.length > 0) && (
@@ -9155,6 +9158,16 @@ function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: f
   );
 }
 
+function NicknameField({ unit, updateUnit }) {
+  return (
+    <div style={{ marginBottom: 12 }}>
+      <label className="whr-label" style={{ display: "block" }}>Nickname (optional)</label>
+      <input className="whr-input" maxLength={50} placeholder="e.g. Manaan's Blades" value={unit.customName || ""}
+        onChange={(e) => updateUnit({ ...unit, customName: e.target.value })} style={{ width: "100%", maxWidth: 320 }} />
+    </div>
+  );
+}
+
 function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
   const def = applyBloodline(rawDef, roster.armyTheme);
   const usedElsewhere = allUsedMagicItemIds(roster, unit.instanceId);
@@ -9166,6 +9179,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
       <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10 }}>
         <span className="whr-badge-gold whr-badge">{fmtPts(characterCost(unit, def, armyData))} pts</span>
       </div>
+      <NicknameField unit={unit} updateUnit={updateUnit} />
       {def.gearNote && <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.gearNote}</p>}
       {def.innateWeapon && <p style={{ fontSize: 14, marginTop: 4, color: "var(--ink-faint)" }}>Carries a {def.innateWeapon.name} ({def.innateWeapon.desc}) — free, doesn't use a magic item slot. Forfeited automatically if another magic weapon is taken.</p>}
 
@@ -9412,6 +9426,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
       <div>
         <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
         <span className="whr-badge-gold whr-badge">{fmtPts(total)} pts</span>
+        <NicknameField unit={unit} updateUnit={updateUnit} />
         <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         {def.composition.map((c) => (
           <div key={c.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: "1px dashed var(--line-soft)" }}>
@@ -9451,6 +9466,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         <span className="whr-badge-gold whr-badge">{fmtPts(regimentCost(unit, def, armyData))} pts</span>
         <span style={{ fontSize: 14.5, color: "var(--ink-soft)" }}>{size} Models{unit.championIncluded ? " (incl. champion)" : ""}</span>
       </div>
+      <NicknameField unit={unit} updateUnit={updateUnit} />
       {def.note && <p style={{ fontSize: 15, color: "var(--ink-soft)" }}>{def.note}</p>}
 
       <div style={{ marginTop: 14 }}>
@@ -9824,6 +9840,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
       <div>
         <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
         <span className="whr-badge-gold whr-badge">{fmtPts(chariotCost(unit, def, armyData))} pts</span>
+        <NicknameField unit={unit} updateUnit={updateUnit} />
         <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">Characteristic upgrades (max 2 of each)</span>
@@ -9874,6 +9891,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
       <div>
         <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
         <span className="whr-badge-gold whr-badge">{fmtPts(chariotCost(unit, def, armyData))} pts</span>
+        <NicknameField unit={unit} updateUnit={updateUnit} />
         <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         {def.maxQty !== 1 && (
           <div style={{ marginTop: 14 }}>
@@ -9905,6 +9923,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
       <div>
         <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
         <span className="whr-badge-gold whr-badge">{fmtPts(chariotCost(unit, def, armyData))} pts</span>
+        <NicknameField unit={unit} updateUnit={updateUnit} />
         <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         {def.extraCrewCost != null && (
           <div style={{ marginTop: 14 }}>
@@ -9948,6 +9967,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
     <div>
       <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
       <span className="whr-badge-gold whr-badge">{fmtPts(chariotCost(unit, def, armyData))} pts</span>
+      <NicknameField unit={unit} updateUnit={updateUnit} />
       <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
       {def.extraCrewCost != null && (
         <div style={{ marginTop: 14 }}>
