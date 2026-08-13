@@ -8269,6 +8269,7 @@ function isItemAllowed(item, context) {
   if (item.subtype === "handWeapon" || item.subtype === "twoHanded" || item.subtype === "lance" || item.subtype === "bow") {
     if (context?.allowedWeaponSubtypes && !context.allowedWeaponSubtypes.includes(item.subtype)) return false;
   }
+  if (item.requiresRegimentIds && context?.regimentId && !item.requiresRegimentIds.includes(context.regimentId)) return false;
   if (!item.restrictedTo) return true;
   if (!context) return false;
   return item.restrictedTo.some((cond) => matchesRestrictionCondition(cond, context));
@@ -9077,7 +9078,7 @@ function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
 // Lets a Dwarf character build one item (weapon/armour/enchanted/banner) out of up to 3
 // individual runes instead of picking a single fixed named item. Combined item = one slot,
 // cost = sum of the chosen runes. At most one Master Rune per item, enforced here in the UI.
-function RuneForge({ items, cat, label, context, comboIds, onChange }) {
+function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: forgeDisabled }) {
   const pool = items.filter((m) => m.isRune && m.cat === cat && isItemAllowed(m, context));
   if (pool.length === 0) return null;
   const selected = comboIds || [];
@@ -9105,19 +9106,19 @@ function RuneForge({ items, cat, label, context, comboIds, onChange }) {
       {pool.map((m) => {
         if (m.repeatable) {
           const count = countOf(m.id);
-          const atCap = selected.length >= 3 && count === 0;
+          const atCap = forgeDisabled || (selected.length >= 3 && count === 0);
           const capLabel = m.maxCount && m.maxCount < 3 ? `max ${m.maxCount}` : null;
           return (
-            <div key={m.id} className={`whr-opt-row ${atCap ? "whr-opt-disabled" : ""}`}>
+            <div key={m.id} className={`whr-opt-row ${atCap ? "whr-opt-disabled" : ""}`} title={m.desc}>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 {m.name}
                 {capLabel && <span style={{ fontSize: 11, color: "var(--ink-faint)" }}>({capLabel})</span>}
               </span>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <div className="whr-stepper">
-                  <button onClick={() => setCount(m, count - 1)} disabled={count === 0}>−</button>
+                  <button onClick={() => setCount(m, count - 1)} disabled={forgeDisabled || count === 0}>−</button>
                   <div className="whr-stepper-val">{count}</div>
-                  <button onClick={() => setCount(m, count + 1)} disabled={count >= (m.maxCount || 3) || selected.length >= 3}>+</button>
+                  <button onClick={() => setCount(m, count + 1)} disabled={forgeDisabled || count >= (m.maxCount || 3) || selected.length >= 3}>+</button>
                 </div>
                 <span className="whr-opt-cost" style={{ minWidth: 56, textAlign: "right" }}>{count > 0 ? `+${m.cost}pts` : `${m.cost}pts ea`}</span>
               </span>
@@ -9125,9 +9126,9 @@ function RuneForge({ items, cat, label, context, comboIds, onChange }) {
           );
         }
         const checked = selected.includes(m.id);
-        const disabled = !checked && (selected.length >= 3 || (m.isMasterRune && hasMaster));
+        const disabled = forgeDisabled || (!checked && (selected.length >= 3 || (m.isMasterRune && hasMaster)));
         return (
-          <label key={m.id} className={`whr-opt-row whr-opt-label ${disabled ? "whr-opt-disabled" : ""}`}>
+          <label key={m.id} className={`whr-opt-row whr-opt-label ${disabled ? "whr-opt-disabled" : ""}`} title={m.desc}>
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <input type="checkbox" checked={checked} disabled={disabled} onChange={() => toggle(m)} />
               {m.name}
@@ -9357,16 +9358,24 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         const runeSlotsUsed = Object.values(runeItems).filter((arr) => arr && arr.length > 0).length;
         const effFilter = defaultCategoryFilter(def);
         const itemCtx = itemContext(def, unit, { characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+        const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
+        const hasNamedOfCat = (cat) => (unit.magicItemIds || []).some((id) => namedCatOf(id) === cat);
         return (
           <div style={{ marginTop: 14 }}>
             <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.magicItemIds || []} maxSlots={Math.max(0, def.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
               categoryFilter={effFilter}
               context={itemCtx}
-              onToggle={(id) => toggleArrayField(unit, "magicItemIds", id, updateUnit)} />
+              onToggle={(id) => {
+                const mi = miById(armyData.magicItems, id);
+                const already = (unit.magicItemIds || []).includes(id);
+                const newIds = already ? (unit.magicItemIds || []).filter((x) => x !== id) : [...(unit.magicItemIds || []), id];
+                const newRuneItems = (!already && mi) ? { ...runeItems, [mi.cat]: [] } : runeItems;
+                updateUnit({ ...unit, magicItemIds: newIds, runeItems: newRuneItems });
+              }} />
             {armyData.runeForge && ["weapon", "armour", "enchanted", "banner"].filter((c) => effFilter.includes(c)).map((cat) => (
               <RuneForge key={cat} items={armyData.magicItems} cat={cat} label={{ weapon: "weapon", armour: "armour", enchanted: "talisman", banner: "banner" }[cat]}
-                context={itemCtx} comboIds={runeItems[cat]}
-                onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, [cat]: ids } })} />
+                context={itemCtx} comboIds={runeItems[cat]} disabled={hasNamedOfCat(cat)}
+                onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, [cat]: ids }, magicItemIds: ids.length > 0 ? (unit.magicItemIds || []).filter((id) => namedCatOf(id) !== cat) : unit.magicItemIds })} />
             ))}
           </div>
         );
@@ -9558,7 +9567,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               onToggle={(id) => updateUnit({ ...unit, magicBannerId: unit.magicBannerId === id ? null : id, runeItems: unit.magicBannerId === id ? unit.runeItems : { ...(unit.runeItems || {}), banner: [] } })} />
             {armyData.runeForge && (
               <RuneForge items={armyData.magicItems} cat="banner" label="banner" context={itemCtx}
-                comboIds={runeBanner}
+                comboIds={runeBanner} disabled={!!unit.magicBannerId}
                 onChange={(ids) => updateUnit({ ...unit, magicBannerId: ids.length > 0 ? null : unit.magicBannerId, runeItems: { ...(unit.runeItems || {}), banner: ids } })} />
             )}
           </div>
@@ -9898,16 +9907,24 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
           const runeSlotsUsed = Object.values(runeItems).filter((arr) => arr && arr.length > 0).length;
           const effFilter = def.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
           const itemCtx = itemContext(def, unit, { regimentId: def.id });
+          const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
+          const hasNamedOfCat = (cat) => (unit.extraMagicItemIds || []).some((id) => namedCatOf(id) === cat);
           return (
             <div style={{ marginTop: 14 }}>
               <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={Math.max(0, def.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
                 categoryFilter={effFilter}
                 context={itemCtx}
-                onToggle={(id) => toggleArrayField(unit, "extraMagicItemIds", id, updateUnit)} />
+                onToggle={(id) => {
+                  const mi = miById(armyData.magicItems, id);
+                  const already = (unit.extraMagicItemIds || []).includes(id);
+                  const newIds = already ? (unit.extraMagicItemIds || []).filter((x) => x !== id) : [...(unit.extraMagicItemIds || []), id];
+                  const newRuneItems = (!already && mi) ? { ...runeItems, [mi.cat]: [] } : runeItems;
+                  updateUnit({ ...unit, extraMagicItemIds: newIds, runeItems: newRuneItems });
+                }} />
               {armyData.runeForge && effFilter.includes("engineering") && (
                 <RuneForge items={armyData.magicItems} cat="engineering" label="engineering item"
-                  context={itemCtx} comboIds={runeItems.engineering}
-                  onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, engineering: ids } })} />
+                  context={itemCtx} comboIds={runeItems.engineering} disabled={hasNamedOfCat("engineering")}
+                  onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, engineering: ids }, extraMagicItemIds: ids.length > 0 ? (unit.extraMagicItemIds || []).filter((id) => namedCatOf(id) !== "engineering") : unit.extraMagicItemIds })} />
               )}
             </div>
           );
