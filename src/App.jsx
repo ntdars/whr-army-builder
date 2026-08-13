@@ -3561,7 +3561,7 @@ const DWARFS = {
       options: [
         { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons", cost: 0, per: "model" },
       ],
-      extraOption: { label: "Slayer-Berserkers (work like Night Goblin Fanatics)", cost: 30, max: 3, note: "Unofficial — needs your opponent's consent to field." },
+      extraOption: { label: "Slayer-Berserkers", cost: 30, max: 3, unofficial: true },
       multiChampion: { name: "Giant Slayer", baseCost: 20, magicItemSlots: 1, stat: "Giant Slayer", magicItemCategoryFilter: ["weapon"], itemSlotLabel: "Magic Weapon (may be a rune weapon)" },
     },
     {
@@ -8839,7 +8839,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, selectedId, onSelect, onRemove }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -8900,6 +8900,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Dwarf runes:</div>
           <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {runeWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
+      {houseRuleWarnings && houseRuleWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>House rules:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            {houseRuleWarnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
@@ -9535,6 +9543,71 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
           {def.command === "skirmisher" && <p style={{ fontSize: 14, color: "var(--ink-faint)" }}>Skirmishers cannot take a standard bearer.</p>}
         </div>
       )}
+
+      {def.multiChampion && (
+        <div style={{ marginTop: 14 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <span className="whr-label" style={{ marginBottom: 0 }}>{def.multiChampion.name}s</span>
+            <span className="whr-opt-cost">+{fmtPts(def.multiChampion.baseCost + regimentTrooperUnitCost(def, unit.gearSelections || {}))}pts each</span>
+          </div>
+          <Stepper value={unit.multiChampionCount || 0} min={0} max={20}
+            onChange={(v) => {
+              const items = [...(unit.multiChampionItems || [])];
+              const runes = [...(unit.multiChampionRuneItems || [])];
+              while (items.length < v) items.push([]);
+              while (runes.length < v) runes.push({});
+              items.length = v; runes.length = v;
+              updateUnit({ ...unit, multiChampionCount: v, multiChampionItems: items, multiChampionRuneItems: runes });
+            }} />
+          {Array.from({ length: unit.multiChampionCount || 0 }).map((_, i) => {
+            const mc = def.multiChampion;
+            const instItems = (unit.multiChampionItems || [])[i] || [];
+            const instRunes = (unit.multiChampionRuneItems || [])[i] || {};
+            const runeUsed = (instRunes.weapon || []).length > 0 ? 1 : 0;
+            const itemCtx = itemContext(mc, unit, { regimentId: def.id, tags: mc.tags || [] });
+            const setInstItems = (ids) => {
+              const items = [...(unit.multiChampionItems || [])];
+              items[i] = ids;
+              updateUnit({ ...unit, multiChampionItems: items });
+            };
+            const setInstRunes = (ids) => {
+              const runes = [...(unit.multiChampionRuneItems || [])];
+              runes[i] = { ...(runes[i] || {}), weapon: ids };
+              updateUnit({ ...unit, multiChampionRuneItems: runes });
+            };
+            return (
+              <div key={i} style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--line-soft)" }}>
+                <span style={{ fontSize: 13, fontWeight: 700 }}>{mc.name} #{i + 1}</span>
+                {mc.magicItemSlots > 0 && (
+                  <MagicItemPicker items={armyData.magicItems} selectedIds={instItems} maxSlots={Math.max(0, mc.magicItemSlots - runeUsed)}
+                    usedElsewhere={usedElsewhere} categoryFilter={mc.magicItemCategoryFilter}
+                    label={mc.itemSlotLabel || "Magic Item"}
+                    context={itemCtx}
+                    onToggle={(id) => setInstItems(instItems.includes(id) ? instItems.filter((x) => x !== id) : [...instItems, id])} />
+                )}
+                {armyData.runeForge && (mc.magicItemCategoryFilter || []).includes("weapon") && (
+                  <RuneForge items={armyData.magicItems} cat="weapon" label="weapon" context={itemCtx}
+                    comboIds={instRunes.weapon} onChange={setInstRunes} />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {def.extraOption && (
+        <div style={{ marginTop: 14 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <span className="whr-label" style={{ marginBottom: 0 }}>{def.extraOption.label}</span>
+            <span className="whr-opt-cost">+{def.extraOption.cost}pts each</span>
+          </div>
+          <div style={{ marginTop: 6 }}>
+            <Stepper value={unit.extraOptionCount || 0} min={0} max={def.extraOption.max} onChange={(v) => updateUnit({ ...unit, extraOptionCount: v })} />
+          </div>
+          {def.extraOption.note && <p style={{ fontSize: 14, color: "var(--burgundy)", marginTop: 4 }}>{def.extraOption.note}</p>}
+        </div>
+      )}
+
       {def.command === "none" && def.note?.includes("counts as having a musician") && (
         <div className="whr-opt-row" style={{ marginTop: 10 }}><span>Musician (sung, not carried)</span><span className="whr-badge">included</span></div>
       )}
@@ -9642,54 +9715,6 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
-      {def.multiChampion && (
-        <div style={{ marginTop: 14 }}>
-          <span className="whr-label">{def.multiChampion.name}s (any number, +{fmtPts(def.multiChampion.baseCost)}pts + one trooper's cost each)</span>
-          <Stepper value={unit.multiChampionCount || 0} min={0} max={20}
-            onChange={(v) => {
-              const items = [...(unit.multiChampionItems || [])];
-              const runes = [...(unit.multiChampionRuneItems || [])];
-              while (items.length < v) items.push([]);
-              while (runes.length < v) runes.push({});
-              items.length = v; runes.length = v;
-              updateUnit({ ...unit, multiChampionCount: v, multiChampionItems: items, multiChampionRuneItems: runes });
-            }} />
-          {Array.from({ length: unit.multiChampionCount || 0 }).map((_, i) => {
-            const mc = def.multiChampion;
-            const instItems = (unit.multiChampionItems || [])[i] || [];
-            const instRunes = (unit.multiChampionRuneItems || [])[i] || {};
-            const runeUsed = (instRunes.weapon || []).length > 0 ? 1 : 0;
-            const itemCtx = itemContext(mc, unit, { regimentId: def.id, tags: mc.tags || [] });
-            const setInstItems = (ids) => {
-              const items = [...(unit.multiChampionItems || [])];
-              items[i] = ids;
-              updateUnit({ ...unit, multiChampionItems: items });
-            };
-            const setInstRunes = (ids) => {
-              const runes = [...(unit.multiChampionRuneItems || [])];
-              runes[i] = { ...(runes[i] || {}), weapon: ids };
-              updateUnit({ ...unit, multiChampionRuneItems: runes });
-            };
-            return (
-              <div key={i} style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--line-soft)" }}>
-                <span style={{ fontSize: 13, fontWeight: 700 }}>{mc.name} #{i + 1}</span>
-                {mc.magicItemSlots > 0 && (
-                  <MagicItemPicker items={armyData.magicItems} selectedIds={instItems} maxSlots={Math.max(0, mc.magicItemSlots - runeUsed)}
-                    usedElsewhere={usedElsewhere} categoryFilter={mc.magicItemCategoryFilter}
-                    label={mc.itemSlotLabel || "Magic Item"}
-                    context={itemCtx}
-                    onToggle={(id) => setInstItems(instItems.includes(id) ? instItems.filter((x) => x !== id) : [...instItems, id])} />
-                )}
-                {armyData.runeForge && (mc.magicItemCategoryFilter || []).includes("weapon") && (
-                  <RuneForge items={armyData.magicItems} cat="weapon" label="weapon" context={itemCtx}
-                    comboIds={instRunes.weapon} onChange={setInstRunes} />
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
-
       {def.branchWraith && (
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">Join a Branch Wraith</span>
@@ -9707,19 +9732,6 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               context={{ regimentId: def.id, tags: ["spriteEligible"] }}
               onToggle={(id) => toggleArrayField(unit, "branchWraithSpriteIds", id, updateUnit)} />
           )}
-        </div>
-      )}
-
-      {def.extraOption && (
-        <div style={{ marginTop: 14 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-            <span className="whr-label" style={{ marginBottom: 0 }}>{def.extraOption.label}</span>
-            <span className="whr-opt-cost">+{def.extraOption.cost}pts each</span>
-          </div>
-          <div style={{ marginTop: 6 }}>
-            <Stepper value={unit.extraOptionCount || 0} min={0} max={def.extraOption.max} onChange={(v) => updateUnit({ ...unit, extraOptionCount: v })} />
-          </div>
-          {def.extraOption.note && <p style={{ fontSize: 14, color: "var(--burgundy)", marginTop: 4 }}>{def.extraOption.note}</p>}
         </div>
       )}
 
@@ -10177,6 +10189,17 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     return warnings;
   }, [roster, armyData]);
 
+  const houseRuleWarnings = useMemo(() => {
+    const warnings = [];
+    roster.regiments.forEach((u) => {
+      const d = armyData.regiments.find((r) => r.id === u.defId);
+      if (d?.extraOption?.unofficial && u.extraOptionCount) {
+        warnings.push(`${d.name}: ${d.extraOption.label} is unofficial — needs your opponent's consent to field.`);
+      }
+    });
+    return warnings;
+  }, [roster, armyData]);
+
   const runeWarnings = useMemo(() => {
     const warnings = [];
     if (!armyData.runeForge) return warnings;
@@ -10498,7 +10521,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
