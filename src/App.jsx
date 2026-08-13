@@ -9162,7 +9162,7 @@ function NicknameField({ unit, updateUnit }) {
   return (
     <div style={{ marginBottom: 12 }}>
       <label className="whr-label" style={{ display: "block" }}>Nickname (optional)</label>
-      <input className="whr-input" maxLength={50} placeholder="e.g. Manaan's Blades" value={unit.customName || ""}
+      <input className="whr-input" maxLength={50} placeholder="e.g. Manann's Blades" value={unit.customName || ""}
         onChange={(e) => updateUnit({ ...unit, customName: e.target.value })} style={{ width: "100%", maxWidth: 320 }} />
     </div>
   );
