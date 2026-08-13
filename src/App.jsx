@@ -7918,7 +7918,7 @@ function characterCost(inst, def, armyData) {
 }
 
 function regimentTrooperUnitCost(def, gearSelections) {
-  let perModel = def.perModel;
+  let perModel = def.perModel ?? def.tieredPricing?.extraPerModel ?? 0;
   (def.options || []).forEach((opt) => {
     if (opt.per !== "model") return;
     const selected = opt.group ? gearSelections[opt.group] === opt.id : !!gearSelections[opt.id];
@@ -8595,7 +8595,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
               <AddRow
                 key={r.id}
                 label={r.name + (r.restriction ? ` (${r.restriction})` : "")}
-                sub={r.kind === "composite" ? "mixed unit, priced per model" : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
+                sub={r.kind === "composite" ? "mixed unit, priced per model" : r.tieredPricing ? `${fmtPts(r.tieredPricing.baseCost)}pts, minimum ${r.minSize}` : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
                 disabled={atLimit}
                 disabledReason={r.knightGroup ? "Only one Knight type unless it's your only type" : `Limit reached (${r.restriction})`}
                 onClick={() => onAdd("regiment", r.id)}
