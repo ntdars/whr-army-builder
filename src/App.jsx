@@ -8655,6 +8655,9 @@ function resolveUnitStat(kind, unit, def, bloodlineId) {
     } else if (unit.championOptionId && def.championOptions) {
       const opt = championOptionEffective(def.championOptions.find((o) => o.id === unit.championOptionId), bloodlineId);
       if (opt?.stat) { championStatKey = opt.stat; championLabel = opt.name; }
+    } else if (def.multiChampion?.stat && (unit.multiChampionCount || 0) > 0) {
+      championStatKey = def.multiChampion.stat;
+      championLabel = unit.multiChampionCount > 1 ? `${def.multiChampion.name} ×${unit.multiChampionCount}` : def.multiChampion.name;
     }
     const hasExtra = !!(championStatKey || def.mountStat);
     const withChampion = { ...base, championStatKey, championLabel, charLabel: hasExtra ? (def.riderLabel || def.name) : null };
@@ -8737,6 +8740,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       tags.push(def.branchWraith.name);
       (unit.branchWraithSpriteIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
     }
+    if (def.multiChampion && unit.multiChampionCount) tags.push(`${unit.multiChampionCount} ${def.multiChampion.name}${unit.multiChampionCount > 1 ? "s" : ""}`);
     if (def.extraOption && unit.extraOptionCount) tags.push(`${unit.extraOptionCount} ${def.extraOption.label}`);
     if (def.detachmentParent) {
       (unit.detachments || []).forEach((d) => {
@@ -10194,7 +10198,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     roster.regiments.forEach((u) => {
       const d = armyData.regiments.find((r) => r.id === u.defId);
       if (d?.extraOption?.unofficial && u.extraOptionCount) {
-        warnings.push(`${d.name}: ${d.extraOption.label} is unofficial — needs your opponent's consent to field.`);
+        warnings.push(`${d.name}: ${d.extraOption.label} are unofficial — needs your opponent's consent to field.`);
       }
     });
     return warnings;
