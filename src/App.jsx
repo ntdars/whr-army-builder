@@ -7121,6 +7121,10 @@ const HALFLING_MAGIC_ITEMS = [
 
 const HALFLINGS = {
   key: "halflings",
+  auxiliaryFactions: [
+    { key: "empire", label: "Empire Auxiliaries", sourceKey: "empire", filter: (r) => !r.auxiliary },
+    { key: "woodElves", label: "Wood Elf Auxiliaries", sourceKey: "woodElves", filter: (r) => ["archers", "warriors", "gladeriders", "lords"].includes(r.id) },
+  ],
   loreOptions: [...COLLEGE_LORES],
   name: "Halflings of the Moot",
   tagline: "Rural, earthy, and expressive to a fault — good food, strong drink, and a casual relationship with other people's property",
@@ -7880,6 +7884,17 @@ const FACTION_LIST = [
 ];
 
 const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaoswarriors: CHAOS_WARRIORS, beastmen: BEASTMEN, daemons: CHAOS_DAEMONS, chaoswarband: CHAOS_WARBAND, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD, kislev: KISLEV, norse: NORSE, halflings: HALFLINGS, ogres: OGRES, lizardmen: LIZARDMEN, slann: SLANN_EMPIRE };
+
+// A handful of factions (currently just Halflings) can field a small number of allied "auxiliary"
+// regiments pulled wholesale from another faction's own army list (Empire Troops / Elven Troops).
+// These two helpers resolve the *correct* source faction's armyData/def for a given roster unit —
+// unit.sourceFaction is only ever set on these cross-faction units, so both are a no-op otherwise.
+function armyDataFor(u, armyData) {
+  return u.sourceFaction ? FACTIONS[u.sourceFaction] : armyData;
+}
+function regDefFor(u, armyData) {
+  return armyDataFor(u, armyData).regiments.find((r) => r.id === u.defId);
+}
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
@@ -8126,6 +8141,7 @@ function specialCost(inst, def, armyData) {
 }
 
 function unitCost(unit, armyData, roster) {
+  if (unit.sourceFaction) armyData = FACTIONS[unit.sourceFaction];
   const bloodline = roster?.armyTheme;
   if (unit.kind === "character") {
     const def = applyBloodline(armyData.characters.find((c) => c.id === unit.defId), bloodline);
@@ -8622,6 +8638,21 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
             );
           })}
         </Section>
+        {(armyData.auxiliaryFactions || []).map((af) => {
+          const src = FACTIONS[af.sourceKey];
+          const eligible = src.regiments.filter(af.filter);
+          const halflingCount = roster.regiments.filter((u) => !u.sourceFaction).length;
+          const maxAux = Math.floor(halflingCount / 2);
+          return (
+            <Section key={af.key} id={`aux-${af.key}`} title={af.label}>
+              <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginBottom: 6 }}>1 per 2 Halfling regiments (currently {maxAux} allowed)</p>
+              {eligible.map((r) => (
+                <AddRow key={r.id} label={r.name} sub={r.kind === "composite" ? "mixed unit, priced per model" : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
+                  onClick={() => onAdd("regiment", r.id, af.sourceKey)} />
+              ))}
+            </Section>
+          );
+        })}
       </div>
     </div>
   );
@@ -8839,7 +8870,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, selectedId, onSelect, onRemove }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -8927,6 +8958,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           </ul>
         </div>
       )}
+      {auxiliaryWarnings && auxiliaryWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Auxiliaries:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            {auxiliaryWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
       {compositionInfo && (
         <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Army composition:</div>
@@ -8960,12 +8999,13 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <>
             <div className="whr-eyebrow" style={{ margin: "16px 0 8px" }}>Regiments</div>
             {roster.regiments.map((u) => {
-              const def = armyData.regiments.find((r) => r.id === u.defId);
+              const def = regDefFor(u, armyData);
+              const srcArmyData = armyDataFor(u, armyData);
               const models = def.kind === "composite"
                 ? Object.values(u.composition || {}).reduce((a, b) => a + b, 0)
                 : u.size;
               return <RosterUnitCard key={u.instanceId} kind="regiment" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={models} armyData={armyData} bloodlineId={roster.armyTheme} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={models} armyData={srcArmyData} bloodlineId={roster.armyTheme} />;
             })}
           </>
         )}
@@ -9067,9 +9107,9 @@ function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
         <div>
           <h2>Regiments</h2>
           {roster.regiments.map((u) => {
-            const def = armyData.regiments.find((r) => r.id === u.defId);
+            const def = regDefFor(u, armyData);
             const models = def.kind === "composite" ? Object.values(u.composition || {}).reduce((a, b) => a + b, 0) : u.size;
-            return <PrintableUnitEntry key={u.instanceId} kind="regiment" unit={u} def={def} cost={unitCost(u, armyData, roster)} models={models} armyData={armyData} bloodlineId={roster.armyTheme} />;
+            return <PrintableUnitEntry key={u.instanceId} kind="regiment" unit={u} def={def} cost={unitCost(u, armyData, roster)} models={models} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme} />;
           })}
         </div>
       )}
@@ -10124,7 +10164,7 @@ function DetailPanel({ armyData, roster, selectedId, updateUnit }) {
   return (
     <div className="whr-scroll" style={{ height: "100%", overflowY: "auto", paddingRight: 4 }}>
       {kind === "character" && <CharacterDetail def={armyData.characters.find((c) => c.id === u.defId)} unit={u} roster={roster} updateUnit={update} armyData={armyData} />}
-      {kind === "regiment" && <RegimentDetail def={armyData.regiments.find((r) => r.id === u.defId)} unit={u} roster={roster} updateUnit={update} armyData={armyData} />}
+      {kind === "regiment" && <RegimentDetail def={regDefFor(u, armyData)} unit={u} roster={roster} updateUnit={update} armyData={armyDataFor(u, armyData)} />}
       {kind === "chariot" && <ChariotDetail def={armyData.chariotsMonsters.find((c) => c.id === u.defId)} unit={u} roster={roster} updateUnit={update} armyData={armyData} />}
       {kind === "special" && <SpecialDetail def={armyData.specialCharacters.find((s) => s.id === u.defId)} unit={u} roster={roster} updateUnit={update} armyData={armyData} />}
     </div>
@@ -10219,6 +10259,22 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         }
       });
     });
+    return warnings;
+  }, [roster, armyData]);
+
+  const auxiliaryWarnings = useMemo(() => {
+    const warnings = [];
+    if (!armyData.auxiliaryFactions) return warnings;
+    const bySource = {};
+    roster.regiments.forEach((u) => { if (u.sourceFaction) bySource[u.sourceFaction] = (bySource[u.sourceFaction] || 0) + 1; });
+    const halflingCount = roster.regiments.filter((u) => !u.sourceFaction).length;
+    const totalAux = Object.values(bySource).reduce((a, b) => a + b, 0);
+    if ((bySource.empire || 0) > 0 && (bySource.woodElves || 0) > 0) {
+      warnings.push("Wood Elf Auxiliaries cannot be taken with Empire troops.");
+    }
+    if (totalAux > Math.floor(halflingCount / 2)) {
+      warnings.push("Only one Auxiliary unit can be taken per two regiments of Halflings.");
+    }
     return warnings;
   }, [roster, armyData]);
 
@@ -10405,17 +10461,18 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     return problems.length > 0 ? { problems } : null;
   }, [roster, armyData]);
 
-  function addUnit(kind, defId) {
+  function addUnit(kind, defId, sourceFaction) {
     let inst;
     if (kind === "character") {
       inst = { instanceId: uid("char"), kind: "character", defId, mountId: null, bow: false, missile: null, experimentalMissile: null, magicItemIds: [] };
       setRoster((r) => ({ ...r, characters: [...r.characters, inst] }));
     } else if (kind === "regiment") {
-      const def = armyData.regiments.find((x) => x.id === defId);
+      const srcArmyData = sourceFaction ? FACTIONS[sourceFaction] : armyData;
+      const def = srcArmyData.regiments.find((x) => x.id === defId);
       if (def.kind === "composite") {
-        inst = { instanceId: uid("reg"), kind: "regiment", defId, composition: {} };
+        inst = { instanceId: uid("reg"), kind: "regiment", defId, composition: {}, sourceFaction: sourceFaction || undefined };
       } else {
-        inst = { instanceId: uid("reg"), kind: "regiment", defId, size: def.minSize, gearSelections: {}, standard: def.command === "standard" || def.command === "special", magicBannerId: null, championIncluded: false, championMagicItemIds: [], branchWraithIncluded: false, branchWraithSpriteIds: [], detachments: [] };
+        inst = { instanceId: uid("reg"), kind: "regiment", defId, size: def.minSize, gearSelections: {}, standard: def.command === "standard" || def.command === "special", magicBannerId: null, championIncluded: false, championMagicItemIds: [], branchWraithIncluded: false, branchWraithSpriteIds: [], detachments: [], sourceFaction: sourceFaction || undefined };
       }
       setRoster((r) => ({ ...r, regiments: [...r.regiments, inst] }));
     } else if (kind === "chariot") {
@@ -10589,7 +10646,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
