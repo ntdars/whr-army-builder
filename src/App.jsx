@@ -7964,12 +7964,14 @@ function regimentChampionCost(inst, def, armyData) {
   if (inst.championIncluded && def.champion) {
     total += def.champion.baseCost;
     (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+    Object.values(inst.championRuneItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
   }
   if (inst.championOptionId && def.championOptions) {
     const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
     if (opt) {
       total += opt.cost;
       (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+      Object.values(inst.championRuneItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
     }
   }
   if (def.multiChampion) {
@@ -8753,12 +8755,20 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       tags.push(def.champion.name);
       if (def.champion.markGroup) tags.push(`Mark of ${unit.championMark || def.champion.markGroup.options[0]}`);
       (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+      Object.values(unit.championRuneItems || {}).forEach((ids) => {
+        const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
+        if (names.length > 0) tags.push(names.join(" + "));
+      });
     }
     if (unit.championOptionId && def.championOptions) {
       const opt = championOptionEffective(def.championOptions.find((o) => o.id === unit.championOptionId), bloodlineId);
       if (opt) {
         tags.push(opt.name);
         (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+        Object.values(unit.championRuneItems || {}).forEach((ids) => {
+          const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
+          if (names.length > 0) tags.push(names.join(" + "));
+        });
       }
     }
     if (unit.branchWraithIncluded && def.branchWraith) {
@@ -9155,6 +9165,7 @@ function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: f
   const pool = items.filter((m) => m.isRune && m.cat === cat && isItemAllowed(m, context));
   if (pool.length === 0) return null;
   const selected = comboIds || [];
+  const [open, setOpen] = useState(selected.length > 0);
   const hasMaster = selected.some((id) => pool.find((m) => m.id === id)?.isMasterRune);
   const total = selected.reduce((sum, id) => sum + runeCostFor(pool.find((m) => m.id === id), defId), 0);
   const countOf = (id) => selected.filter((x) => x === id).length;
@@ -9175,8 +9186,21 @@ function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: f
   const comboNames = Object.entries(nameCounts).map(([nm, n]) => (n > 1 ? `${nm} ×${n}` : nm)).join(" + ");
   return (
     <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--line-soft)" }}>
-      <span className="whr-label">Forge a rune {label} (up to 3 runes)</span>
-      {pool.map((m) => {
+      <div style={{ border: "1px solid var(--line-soft)", borderRadius: 3, overflow: "hidden" }}>
+        <button type="button" onClick={() => setOpen(!open)} aria-expanded={open}
+          style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--paper-2)", border: "none", padding: "7px 9px", cursor: "pointer", textAlign: "left" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 7 }}>
+            <span aria-hidden="true" style={{ display: "inline-block", fontSize: 11, color: "var(--ink-soft)", transition: "transform 0.15s", transform: open ? "rotate(90deg)" : "rotate(0deg)" }}>▶</span>
+            <span style={{ fontFamily: "var(--font-display)", fontSize: 14.5, letterSpacing: "0.04em", color: "var(--gold)" }}>Forge a rune {label}</span>
+            <span style={{ fontSize: 12, color: "var(--ink-faint)" }}>({pool.length})</span>
+          </span>
+          {selected.length > 0 && (
+            <span style={{ fontSize: 11.5, color: "#F3E4BC", background: "var(--burgundy)", padding: "2px 7px", borderRadius: 8 }}>{selected.length} selected</span>
+          )}
+        </button>
+        {open && (
+          <div style={{ background: "var(--paper)", padding: "2px 8px" }}>
+            {pool.map((m) => {
         if (m.repeatable) {
           const count = countOf(m.id);
           const atCap = forgeDisabled || (selected.length >= 3 && count === 0);
@@ -9210,13 +9234,16 @@ function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: f
             <span className="whr-opt-cost">+{runeCostFor(m, defId)}pts</span>
           </label>
         );
-      })}
-      {selected.length > 0 && (
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, paddingTop: 8, borderTop: "1px solid var(--line-soft)", fontSize: 14.5 }}>
-          <span>{comboNames} <span style={{ fontSize: 12, color: "var(--ink-faint)" }}>({selected.length}/3 runes)</span></span>
-          <strong>{fmtPts(total)}pts</strong>
-        </div>
-      )}
+            })}
+            {selected.length > 0 && (
+              <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, paddingTop: 8, borderTop: "1px solid var(--line-soft)", fontSize: 14.5, padding: "8px 2px" }}>
+                <span>{comboNames} <span style={{ fontSize: 12, color: "var(--ink-faint)" }}>({selected.length}/3 runes)</span></span>
+                <strong>{fmtPts(total)}pts</strong>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -9748,12 +9775,33 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               ))}
             </div>
           )}
-          {def.champion.magicItemSlots > 0 && (
-            <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={def.champion.magicItemSlots} usedElsewhere={usedElsewhere}
-              categoryFilter={def.champion.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
-              context={itemContext(def.champion, unit, { regimentId: def.id, knightGroup: def.knightGroup, mark: unit.championMark || def.champion.markGroup?.options?.[0], tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
-              onToggle={(id) => toggleArrayField(unit, "championMagicItemIds", id, updateUnit)} />
-          )}
+          {def.champion.magicItemSlots > 0 && (() => {
+            const championRuneItems = unit.championRuneItems || {};
+            const runeSlotsUsed = Object.values(championRuneItems).filter((arr) => arr && arr.length > 0).length;
+            const effFilter = def.champion.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
+            const itemCtx = itemContext(def.champion, unit, { regimentId: def.id, knightGroup: def.knightGroup, mark: unit.championMark || def.champion.markGroup?.options?.[0], tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+            const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
+            const hasNamedOfCat = (c) => (unit.championMagicItemIds || []).some((id) => namedCatOf(id) === c);
+            return (
+              <>
+                <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={Math.max(0, def.champion.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
+                  categoryFilter={effFilter}
+                  context={itemCtx}
+                  onToggle={(id) => {
+                    const mi = miById(armyData.magicItems, id);
+                    const already = (unit.championMagicItemIds || []).includes(id);
+                    const newIds = already ? (unit.championMagicItemIds || []).filter((x) => x !== id) : [...(unit.championMagicItemIds || []), id];
+                    const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
+                    updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
+                  }} />
+                {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
+                  <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "weapon", armour: "armour", enchanted: "talisman" }[c]}
+                    context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
+                    onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
+                ))}
+              </>
+            );
+          })()}
         </div>
       )}
 
@@ -9782,12 +9830,31 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
           {def.championOptions.find((o) => o.id === unit.championOptionId) && (() => {
             const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
             if (!opt.magicItemSlots) return null;
+            const championRuneItems = unit.championRuneItems || {};
+            const runeSlotsUsed = Object.values(championRuneItems).filter((arr) => arr && arr.length > 0).length;
+            const effFilter = opt.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
+            const itemCtx = itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+            const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
+            const hasNamedOfCat = (c) => (unit.championMagicItemIds || []).some((id) => namedCatOf(id) === c);
             return (
-              <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={opt.magicItemSlots} usedElsewhere={usedElsewhere}
-                categoryFilter={opt.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
-                label={opt.itemSlotLabel || "Magic Item"}
-                context={itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
-                onToggle={(id) => toggleArrayField(unit, "championMagicItemIds", id, updateUnit)} />
+              <>
+                <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={Math.max(0, opt.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
+                  categoryFilter={effFilter}
+                  label={opt.itemSlotLabel || "Magic Item"}
+                  context={itemCtx}
+                  onToggle={(id) => {
+                    const mi = miById(armyData.magicItems, id);
+                    const already = (unit.championMagicItemIds || []).includes(id);
+                    const newIds = already ? (unit.championMagicItemIds || []).filter((x) => x !== id) : [...(unit.championMagicItemIds || []), id];
+                    const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
+                    updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
+                  }} />
+                {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
+                  <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "weapon", armour: "armour", enchanted: "talisman" }[c]}
+                    context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
+                    onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
+                ))}
+              </>
             );
           })()}
         </div>
@@ -10342,8 +10409,22 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         if (ids && ids.length > 0) combos.push({ label, ids: [...ids].sort(), regimentDefId });
       });
     };
+    const collectChampion = (u, label) => {
+      Object.values(u.championRuneItems || {}).forEach((ids) => {
+        if (ids && ids.length > 0) combos.push({ label, ids: [...ids].sort() });
+      });
+    };
     roster.characters.forEach((u) => { const d = armyData.characters.find((c) => c.id === u.defId); if (d) collect(u, d.name); });
-    roster.regiments.forEach((u) => { const d = armyData.regiments.find((r) => r.id === u.defId); if (d) collect(u, d.name, u.defId); });
+    roster.regiments.forEach((u) => {
+      const d = armyData.regiments.find((r) => r.id === u.defId);
+      if (!d) return;
+      collect(u, d.name, u.defId);
+      if (u.championIncluded && d.champion) collectChampion(u, `${d.name} (${d.champion.name})`);
+      if (u.championOptionId && d.championOptions) {
+        const opt = d.championOptions.find((o) => o.id === u.championOptionId);
+        if (opt) collectChampion(u, `${d.name} (${opt.name})`);
+      }
+    });
     roster.chariots.forEach((u) => { const d = armyData.chariotsMonsters.find((c) => c.id === u.defId); if (d) collect(u, d.name); });
     for (let i = 0; i < combos.length; i++) {
       for (let j = i + 1; j < combos.length; j++) {
