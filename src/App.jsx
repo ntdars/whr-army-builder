@@ -1363,7 +1363,7 @@ const WOOD_ELVES = {
       commanderCost: 43, commanderLabel: "One crewman is an Elven Commander", commanderMagicItemSlots: 1, scythedWheelsCost: 20,
     },
     {
-      id: "treeman", name: "Treeman", perUnit: 200, stat: "Treeman", kind: "quantity",
+      id: "treeman", name: "Treeman", perUnit: 200, stat: "Treeman", kind: "quantity", maxQty: 1,
       note: "Large terror-causing monster, immune to psychology, flammable, hates Orcs/Goblins/Hobgoblins. 3+ natural armour save. Rooted to the spot (no break test unless wounded that round).",
     },
   ],
@@ -7244,8 +7244,8 @@ const HALFLINGS = {
   ],
   chariotsMonsters: [
     {
-      id: "treemen-halfling", name: "Treemen", perUnit: 200, stat: "Treeman", kind: "quantity", countsAsFirstRegiment: true,
-      note: "Only if the army also includes Wood Elves (allied regiments — see army-wide rules). The first Treeman counts toward Regiments, further ones toward Monsters. Large, terror-causing, immune to psychology, flammable, hate Orcs/Goblins/Hobgoblins. 3+ natural armour save. Rooted to the spot — don't take break tests unless wounded that combat round. May forfeit normal attacks to deal 1D6 automatic wounds to a structure in base contact instead. Falls over like a Giant when killed (Felled Treeman Template, Initiative test to avoid, no armour saves). Battle-phase specifics not simulated beyond points cost.",
+      id: "treemen-halfling", name: "Treemen", perUnit: 200, stat: "Treeman", kind: "quantity", countsAsFirstRegiment: true, maxQty: 1,
+      note: "Only if the army also includes Wood Elf Auxiliaries. The first Treeman counts toward Regiments, further ones toward Monsters. Large, terror-causing, immune to psychology, flammable, hate Orcs/Goblins/Hobgoblins. 3+ natural armour save. Rooted to the spot — don't take break tests unless wounded that combat round. May forfeit normal attacks to deal 1D6 automatic wounds to a structure in base contact instead. Falls over like a Giant when killed (Felled Treeman Template, Initiative test to avoid, no armour saves). Battle-phase specifics not simulated beyond points cost.",
     },
     {
       id: "halflingcart", name: "Halfling Cart", perUnit: 40, stat: "Cart (Halfling)", mountStat: "Livestock Beast", mountLabel: "Livestock Beast (puller)",
@@ -9161,6 +9161,15 @@ function runeCostFor(mi, defId) {
   return mi?.cost || 0;
 }
 
+function RunesSection({ children }) {
+  return (
+    <div style={{ marginTop: 14 }}>
+      <span className="whr-label">Runes</span>
+      {children}
+    </div>
+  );
+}
+
 function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: forgeDisabled, defId }) {
   const pool = items.filter((m) => m.isRune && m.cat === cat && isItemAllowed(m, context));
   if (pool.length === 0) return null;
@@ -9185,13 +9194,13 @@ function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: f
   selected.forEach((id) => { const nm = pool.find((m) => m.id === id)?.name; if (nm) nameCounts[nm] = (nameCounts[nm] || 0) + 1; });
   const comboNames = Object.entries(nameCounts).map(([nm, n]) => (n > 1 ? `${nm} ×${n}` : nm)).join(" + ");
   return (
-    <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--line-soft)" }}>
+    <div style={{ marginBottom: 6 }}>
       <div style={{ border: "1px solid var(--line-soft)", borderRadius: 3, overflow: "hidden" }}>
         <button type="button" onClick={() => setOpen(!open)} aria-expanded={open}
           style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--paper-2)", border: "none", padding: "7px 9px", cursor: "pointer", textAlign: "left" }}>
           <span style={{ display: "flex", alignItems: "center", gap: 7 }}>
             <span aria-hidden="true" style={{ display: "inline-block", fontSize: 11, color: "var(--ink-soft)", transition: "transform 0.15s", transform: open ? "rotate(90deg)" : "rotate(0deg)" }}>▶</span>
-            <span style={{ fontFamily: "var(--font-display)", fontSize: 14.5, letterSpacing: "0.04em", color: "var(--gold)" }}>Forge a rune {label}</span>
+            <span style={{ fontFamily: "var(--font-display)", fontSize: 14.5, letterSpacing: "0.04em", color: "var(--gold)" }}>{label}</span>
             <span style={{ fontSize: 12, color: "var(--ink-faint)" }}>({pool.length})</span>
           </span>
           {selected.length > 0 && (
@@ -9483,11 +9492,15 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
                 const newRuneItems = (!already && mi) ? { ...runeItems, [mi.cat]: [] } : runeItems;
                 updateUnit({ ...unit, magicItemIds: newIds, runeItems: newRuneItems });
               }} />
-            {armyData.runeForge && ["weapon", "armour", "enchanted", "banner"].filter((c) => effFilter.includes(c)).map((cat) => (
-              <RuneForge key={cat} items={armyData.magicItems} cat={cat} label={{ weapon: "weapon", armour: "armour", enchanted: "talisman", banner: "banner" }[cat]}
-                context={itemCtx} comboIds={runeItems[cat]} disabled={hasNamedOfCat(cat)}
-                onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, [cat]: ids }, magicItemIds: ids.length > 0 ? (unit.magicItemIds || []).filter((id) => namedCatOf(id) !== cat) : unit.magicItemIds })} />
-            ))}
+            {armyData.runeForge && ["weapon", "armour", "enchanted", "banner"].filter((c) => effFilter.includes(c)).length > 0 && (
+              <RunesSection>
+                {["weapon", "armour", "enchanted", "banner"].filter((c) => effFilter.includes(c)).map((cat) => (
+                  <RuneForge key={cat} items={armyData.magicItems} cat={cat} label={{ weapon: "Forge a Weapon Rune", armour: "Forge an Armour Rune", enchanted: "Forge a Talisman Rune", banner: "Forge a Banner Rune" }[cat]}
+                    context={itemCtx} comboIds={runeItems[cat]} disabled={hasNamedOfCat(cat)}
+                    onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, [cat]: ids }, magicItemIds: ids.length > 0 ? (unit.magicItemIds || []).filter((id) => namedCatOf(id) !== cat) : unit.magicItemIds })} />
+                ))}
+              </RunesSection>
+            )}
           </div>
         );
       })()}
@@ -9691,8 +9704,10 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                     onToggle={(id) => setInstItems(instItems.includes(id) ? instItems.filter((x) => x !== id) : [...instItems, id])} />
                 )}
                 {armyData.runeForge && (mc.magicItemCategoryFilter || []).includes("weapon") && (
-                  <RuneForge items={armyData.magicItems} cat="weapon" label="weapon" context={itemCtx}
-                    comboIds={instRunes.weapon} onChange={setInstRunes} />
+                  <RunesSection>
+                    <RuneForge items={armyData.magicItems} cat="weapon" label="Forge a Weapon Rune" context={itemCtx}
+                      comboIds={instRunes.weapon} onChange={setInstRunes} />
+                  </RunesSection>
                 )}
               </div>
             );
@@ -9744,9 +9759,11 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               context={itemCtx}
               onToggle={(id) => updateUnit({ ...unit, magicBannerId: unit.magicBannerId === id ? null : id, runeItems: unit.magicBannerId === id ? unit.runeItems : { ...(unit.runeItems || {}), banner: [] } })} />
             {armyData.runeForge && (
-              <RuneForge items={armyData.magicItems} cat="banner" label="banner" context={itemCtx}
-                comboIds={runeBanner} disabled={!!unit.magicBannerId}
-                onChange={(ids) => updateUnit({ ...unit, magicBannerId: ids.length > 0 ? null : unit.magicBannerId, runeItems: { ...(unit.runeItems || {}), banner: ids } })} />
+              <RunesSection>
+                <RuneForge items={armyData.magicItems} cat="banner" label="Forge a Banner Rune" context={itemCtx}
+                  comboIds={runeBanner} disabled={!!unit.magicBannerId}
+                  onChange={(ids) => updateUnit({ ...unit, magicBannerId: ids.length > 0 ? null : unit.magicBannerId, runeItems: { ...(unit.runeItems || {}), banner: ids } })} />
+              </RunesSection>
             )}
           </div>
         );
@@ -9794,11 +9811,15 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                     const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
                     updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
                   }} />
-                {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
-                  <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "weapon", armour: "armour", enchanted: "talisman" }[c]}
-                    context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
-                    onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
-                ))}
+                {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
+                  <RunesSection>
+                    {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
+                      <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "Forge a Weapon Rune", armour: "Forge an Armour Rune", enchanted: "Forge a Talisman Rune" }[c]}
+                        context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
+                        onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
+                    ))}
+                  </RunesSection>
+                )}
               </>
             );
           })()}
@@ -9849,11 +9870,15 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                     const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
                     updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
                   }} />
-                {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
-                  <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "weapon", armour: "armour", enchanted: "talisman" }[c]}
-                    context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
-                    onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
-                ))}
+                {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
+                  <RunesSection>
+                    {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
+                      <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "Forge a Weapon Rune", armour: "Forge an Armour Rune", enchanted: "Forge a Talisman Rune" }[c]}
+                        context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
+                        onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
+                    ))}
+                  </RunesSection>
+                )}
               </>
             );
           })()}
@@ -10082,9 +10107,11 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
                   updateUnit({ ...unit, extraMagicItemIds: newIds, runeItems: newRuneItems });
                 }} />
               {armyData.runeForge && effFilter.includes("engineering") && (
-                <RuneForge items={armyData.magicItems} cat="engineering" label="engineering item" defId={def.id}
-                  context={itemCtx} comboIds={runeItems.engineering} disabled={hasNamedOfCat("engineering")}
-                  onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, engineering: ids }, extraMagicItemIds: ids.length > 0 ? (unit.extraMagicItemIds || []).filter((id) => namedCatOf(id) !== "engineering") : unit.extraMagicItemIds })} />
+                <RunesSection>
+                  <RuneForge items={armyData.magicItems} cat="engineering" label="Forge an Engineering Rune" defId={def.id}
+                    context={itemCtx} comboIds={runeItems.engineering} disabled={hasNamedOfCat("engineering")}
+                    onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, engineering: ids }, extraMagicItemIds: ids.length > 0 ? (unit.extraMagicItemIds || []).filter((id) => namedCatOf(id) !== "engineering") : unit.extraMagicItemIds })} />
+                </RunesSection>
               )}
             </div>
           );
@@ -10350,6 +10377,9 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     }
     if (totalAux > Math.floor(halflingCount / 2)) {
       warnings.push("Only one Auxiliary unit can be taken per two regiments of Halflings.");
+    }
+    if (roster.regiments.some((u) => u.defId === "treemen-halfling") && !(bySource.woodElves > 0)) {
+      warnings.push("Halfling Treemen require Wood Elf Auxiliaries in the army.");
     }
     return warnings;
   }, [roster, armyData]);
