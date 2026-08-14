@@ -8839,7 +8839,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, selectedId, onSelect, onRemove }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -8916,6 +8916,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Knightly Orders:</div>
           <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {knightWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
+      {wargearWarnings && wargearWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Wargear:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            {wargearWarnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
@@ -9497,36 +9505,26 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
               visibleOptions.forEach((o) => { if (o.group) { groups[o.group] = groups[o.group] || []; groups[o.group].push(o); } else singles.push(o); });
               return (
                 <>
-                  {Object.entries(groups).map(([g, opts]) => {
-                    const mx = def.missileExclusiveGroups;
-                    let blocked = false;
-                    if (mx && g === "missile") blocked = mx.some((og) => !!gearSelections[og]);
-                    else if (mx && mx.includes(g)) blocked = !!gearSelections.missile;
-                    return (
-                      <div key={g} style={{ marginBottom: 6 }}>
-                        {opts.map((o) => {
-                          const checked = (gearSelections[g] || "") === o.id;
-                          const disabled = blocked && !checked;
-                          return (
-                            <label key={o.id} className={`whr-opt-row whr-opt-label ${disabled ? "whr-opt-disabled" : ""}`}>
-                              <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                                <input type="radio" name={`${g}-${unit.instanceId}`} checked={checked} disabled={disabled}
-                                  onChange={() => updateUnit({ ...unit, gearSelections: { ...gearSelections, [g]: o.id } })} />
-                                {o.label}
-                              </span>
-                              <span className="whr-opt-cost">{o.cost ? `+${o.cost}/model` : "free"}</span>
-                            </label>
-                          );
-                        })}
-                        <label className="whr-opt-row whr-opt-label" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>
+                  {Object.entries(groups).map(([g, opts]) => (
+                    <div key={g} style={{ marginBottom: 6 }}>
+                      {opts.map((o) => (
+                        <label key={o.id} className="whr-opt-row whr-opt-label">
                           <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                            <input type="radio" name={`${g}-${unit.instanceId}`} checked={!gearSelections[g]} onChange={() => { const n = { ...gearSelections }; delete n[g]; updateUnit({ ...unit, gearSelections: n }); }} />
-                            None of the above (default)
+                            <input type="radio" name={`${g}-${unit.instanceId}`} checked={(gearSelections[g] || "") === o.id}
+                              onChange={() => updateUnit({ ...unit, gearSelections: { ...gearSelections, [g]: o.id } })} />
+                            {o.label}
                           </span>
+                          <span className="whr-opt-cost">{o.cost ? `+${o.cost}/model` : "free"}</span>
                         </label>
-                      </div>
-                    );
-                  })}
+                      ))}
+                      <label className="whr-opt-row whr-opt-label" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>
+                        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                          <input type="radio" name={`${g}-${unit.instanceId}`} checked={!gearSelections[g]} onChange={() => { const n = { ...gearSelections }; delete n[g]; updateUnit({ ...unit, gearSelections: n }); }} />
+                          None of the above (default)
+                        </span>
+                      </label>
+                    </div>
+                  ))}
                   {singles.map((o) => (
                     <label key={o.id} className="whr-opt-row whr-opt-label">
                       <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -10224,6 +10222,22 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     return warnings;
   }, [roster, armyData]);
 
+  const wargearWarnings = useMemo(() => {
+    const warnings = [];
+    roster.regiments.forEach((u) => {
+      const d = armyData.regiments.find((r) => r.id === u.defId);
+      const mx = d?.missileExclusiveGroups;
+      if (!mx) return;
+      const gearSelections = u.gearSelections || {};
+      const hasMissile = !!gearSelections.missile;
+      const hasOther = mx.some((g) => !!gearSelections[g]);
+      if (hasMissile && hasOther) {
+        warnings.push(`${u.customName ? `${u.customName} (${d.name})` : d.name} cannot take ranged weapons with other equipment.`);
+      }
+    });
+    return warnings;
+  }, [roster, armyData]);
+
   const knightWarnings = useMemo(() => {
     const warnings = [];
     const groups = {};
@@ -10575,7 +10589,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
