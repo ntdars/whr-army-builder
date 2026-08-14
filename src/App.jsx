@@ -10404,9 +10404,21 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
 
   const wargearWarnings = useMemo(() => {
     const warnings = [];
+    const hasArmourItem = (ids) => (ids || []).some((id) => miById(armyData.magicItems, id)?.cat === "armour");
+    roster.characters.forEach((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      if (!d) return;
+      if (u.armour && u.armour.includes("Dragon Armour") && hasArmourItem(u.magicItemIds)) {
+        warnings.push(`${u.customName ? `${u.customName} (${d.name})` : d.name}: Dragon Armour cannot be combined with Magic Armour.`);
+      }
+    });
     roster.regiments.forEach((u) => {
       const d = armyData.regiments.find((r) => r.id === u.defId);
-      const mx = d?.missileExclusiveGroups;
+      if (!d) return;
+      if (u.defId === "dragonprinces" && u.championIncluded && hasArmourItem(u.championMagicItemIds)) {
+        warnings.push(`${u.customName ? `${u.customName} (${d.name})` : d.name}: Dragon Armour cannot be combined with Magic Armour.`);
+      }
+      const mx = d.missileExclusiveGroups;
       if (!mx) return;
       const gearSelections = u.gearSelections || {};
       const hasMissile = !!gearSelections.missile;
