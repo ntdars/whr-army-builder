@@ -3454,8 +3454,8 @@ const DWARF_MAGIC_ITEMS = [
   { id: "dw-runeburning", isRune: true, name: "Rune of Burning", cost: 10, cat: "engineering", desc: "Engineering Rune. Ammunition counts as flaming." },
   { id: "dw-runeseeking", isRune: true, name: "Rune of Seeking", cost: 10, cat: "engineering", desc: "Engineering Rune, Bolt Throwers only. May shoot at fliers flying high with no long-range/large-target penalty.", restrictedTo: [{ regimentIds: ["boltthrowers"] }] },
   { id: "dw-runeforging", isRune: true, name: "Rune of Forging", cost: 10, cat: "engineering", desc: "Engineering Rune, Flame Cannons & Cannons only (not Organ Guns). Doesn't miss a turn on its first misfire (still blows up on a second).", restrictedTo: [{ regimentIds: ["cannons", "flamecannons"] }] },
-  { id: "dw-runepenetrating", isRune: true, name: "Rune of Penetrating", cost: 10, cat: "engineering", desc: "Engineering Rune. +1 strength. Cost doubles if inscribed on a Gyrocopter (not modeled — apply manually)." },
-  { id: "dw-runedisguise", isRune: true, name: "Rune of Disguise", cost: 15, cat: "engineering", desc: "Engineering Rune. The machine is invisible until an enemy comes within 1\" or it shoots. Cost doubles if inscribed on a Gyrocopter (not modeled — apply manually)." },
+  { id: "dw-runepenetrating", isRune: true, name: "Rune of Penetrating", cost: 10, cat: "engineering", desc: "Engineering Rune. +1 strength. Cost doubles if inscribed on a Gyrocopter.", doubleCostOn: ["gyrocopters"] },
+  { id: "dw-runedisguise", isRune: true, name: "Rune of Disguise", cost: 15, cat: "engineering", desc: "Engineering Rune. The machine is invisible until an enemy comes within 1\" or it shoots. Cost doubles if inscribed on a Gyrocopter.", doubleCostOn: ["gyrocopters"] },
   { id: "dw-runetargeting", isRune: true, name: "Rune of Targeting", cost: 15, cat: "engineering", desc: "Engineering Rune, Bolt Throwers/Goblin Hewer/Cannons only. Bolt Throwers & Goblin Hewer get +1 to hit; Cannons may re-roll the first artillery die.", restrictedTo: [{ regimentIds: ["boltthrowers", "goblinhewer", "cannons"] }] },
   { id: "dw-runedemolishing", isRune: true, name: "Rune of Demolishing", cost: 15, cat: "engineering", desc: "Engineering Rune, Cannons only (not Flame Cannons/Organ Guns). Deals +1 wound (D3+1 total).", restrictedTo: [{ regimentIds: ["cannons"] }] },
   { id: "dw-runeimmolation", isRune: true, name: "Rune of Immolation", cost: 15, cat: "engineering", desc: "Engineering Rune. Self-destruct at will (including when the crew dies or fails a break test) — the crew and any enemy engaged with the machine suffer 1D6 S6 hits, no save." },
@@ -3659,8 +3659,9 @@ const DWARFS = {
       baseCrew: 3, crewArmourOptions: [{ id: "none", label: "No armour (default)", cost: 0 }, { id: "light", label: "Light armour", cost: 1 }, { id: "heavy", label: "Heavy armour", cost: 2 }],
     },
     {
-      id: "gyrocopters", name: "Gyrocopter", perUnit: 100, stat: "Gyrocopter", kind: "quantity",
+      id: "gyrocopters", name: "Gyrocopter", perUnit: 100, stat: "Gyrocopter", kind: "warmachine",
       note: "Works like a flying light chariot with no steeds and one Dwarf Soldier crewman. Won't charge but can be charged; if beaten or broken it scatters 2D6\" and crashes for 2D6 S4 hits on whatever it lands on (counts as slain). Fires once per turn — either a bomb (3\" template, scatters on a miss, S5, panic test on any casualty) or its steam cannon (teardrop template, S3, no save; unusable after flying high or 10\"+ that turn).",
+      magicItemSlots: 3, magicItemCategoryFilter: ["engineering"],
     },
     {
       id: "goblinhewer", name: "Goblin Hewer", perUnit: 90, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
@@ -8081,7 +8082,7 @@ function chariotCost(inst, def, armyData) {
     total += (inst.extraCrew || 0) * (def.extraCrewCost || 0);
     total += crewArmourCost(inst, def);
     (inst.extraMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
-    Object.values(inst.runeItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
+    Object.values(inst.runeItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += runeCostFor(mi, def.id); }));
     return total;
   }
   // full chariot
@@ -9142,12 +9143,20 @@ function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
 // Lets a Dwarf character build one item (weapon/armour/enchanted/banner) out of up to 3
 // individual runes instead of picking a single fixed named item. Combined item = one slot,
 // cost = sum of the chosen runes. At most one Master Rune per item, enforced here in the UI.
-function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: forgeDisabled }) {
+// A couple of Engineering Runes (Penetrating, Disguise) cost double specifically on a Gyrocopter —
+// everywhere else a rune's cost is a flat constant, so this is a targeted exception rather than a
+// general mechanism. defId is the bearing unit's own def id (e.g. "gyrocopters").
+function runeCostFor(mi, defId) {
+  if (mi?.doubleCostOn && defId && mi.doubleCostOn.includes(defId)) return mi.cost * 2;
+  return mi?.cost || 0;
+}
+
+function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: forgeDisabled, defId }) {
   const pool = items.filter((m) => m.isRune && m.cat === cat && isItemAllowed(m, context));
   if (pool.length === 0) return null;
   const selected = comboIds || [];
   const hasMaster = selected.some((id) => pool.find((m) => m.id === id)?.isMasterRune);
-  const total = selected.reduce((sum, id) => sum + (pool.find((m) => m.id === id)?.cost || 0), 0);
+  const total = selected.reduce((sum, id) => sum + runeCostFor(pool.find((m) => m.id === id), defId), 0);
   const countOf = (id) => selected.filter((x) => x === id).length;
   const toggle = (m) => {
     if (selected.includes(m.id)) { onChange(selected.filter((x) => x !== m.id)); return; }
@@ -9184,7 +9193,7 @@ function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: f
                   <div className="whr-stepper-val">{count}</div>
                   <button onClick={() => setCount(m, count + 1)} disabled={forgeDisabled || count >= (m.maxCount || 3) || selected.length >= 3}>+</button>
                 </div>
-                <span className="whr-opt-cost" style={{ minWidth: 56, textAlign: "right" }}>{count > 0 ? `+${m.cost}pts` : `${m.cost}pts ea`}</span>
+                <span className="whr-opt-cost" style={{ minWidth: 56, textAlign: "right" }}>{count > 0 ? `+${runeCostFor(m, defId)}pts` : `${runeCostFor(m, defId)}pts ea`}</span>
               </span>
             </div>
           );
@@ -9198,7 +9207,7 @@ function RuneForge({ items, cat, label, context, comboIds, onChange, disabled: f
               {m.name}
               {m.isMasterRune && <span style={{ fontFamily: "var(--font-display-sc)", fontSize: 10, letterSpacing: "0.04em", background: "var(--gold)", color: "var(--paper)", padding: "1px 6px", borderRadius: 2, marginLeft: 6 }}>Master</span>}
             </span>
-            <span className="whr-opt-cost">+{m.cost}pts</span>
+            <span className="whr-opt-cost">+{runeCostFor(m, defId)}pts</span>
           </label>
         );
       })}
@@ -10006,7 +10015,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
                   updateUnit({ ...unit, extraMagicItemIds: newIds, runeItems: newRuneItems });
                 }} />
               {armyData.runeForge && effFilter.includes("engineering") && (
-                <RuneForge items={armyData.magicItems} cat="engineering" label="engineering item"
+                <RuneForge items={armyData.magicItems} cat="engineering" label="engineering item" defId={def.id}
                   context={itemCtx} comboIds={runeItems.engineering} disabled={hasNamedOfCat("engineering")}
                   onChange={(ids) => updateUnit({ ...unit, runeItems: { ...runeItems, engineering: ids }, extraMagicItemIds: ids.length > 0 ? (unit.extraMagicItemIds || []).filter((id) => namedCatOf(id) !== "engineering") : unit.extraMagicItemIds })} />
               )}
