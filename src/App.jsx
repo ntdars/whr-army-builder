@@ -7123,7 +7123,7 @@ const HALFLING_MAGIC_ITEMS = [
 const HALFLINGS = {
   key: "halflings",
   auxiliaryFactions: [
-    { key: "empire", label: "Empire Auxiliaries", sourceKey: "empire", filter: (r) => !r.auxiliary },
+    { key: "empire", label: "Empire Auxiliaries", sourceKey: "empire", filter: (r) => !r.auxiliary, warMachineIds: ["mortars", "cannons"] },
     { key: "woodElves", label: "Wood Elf Auxiliaries", sourceKey: "woodElves", filter: (r) => ["archers", "warriors", "gladeriders", "lords"].includes(r.id) },
   ],
   loreOptions: [...COLLEGE_LORES],
@@ -7896,6 +7896,9 @@ function armyDataFor(u, armyData) {
 function regDefFor(u, armyData) {
   return armyDataFor(u, armyData).regiments.find((r) => r.id === u.defId);
 }
+function chariotDefFor(u, armyData) {
+  return armyDataFor(u, armyData).chariotsMonsters.find((c) => c.id === u.defId);
+}
 function getArmyData(factionKey) {
   return FACTIONS[factionKey] || WOOD_ELVES;
 }
@@ -8644,6 +8647,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
         {(armyData.auxiliaryFactions || []).map((af) => {
           const src = FACTIONS[af.sourceKey];
           const eligible = src.regiments.filter(af.filter);
+          const eligibleWarMachines = (af.warMachineIds || []).map((id) => src.chariotsMonsters.find((c) => c.id === id)).filter(Boolean);
           const halflingCount = roster.regiments.filter((u) => !u.sourceFaction).length;
           const maxAux = Math.floor(halflingCount / 2);
           return (
@@ -8653,6 +8657,15 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
                 <AddRow key={r.id} label={r.name} sub={r.kind === "composite" ? "mixed unit, priced per model" : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
                   onClick={() => onAdd("regiment", r.id, af.sourceKey)} />
               ))}
+              {eligibleWarMachines.length > 0 && (
+                <>
+                  <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 10, marginBottom: 6 }}>1 per Empire regiment taken above</p>
+                  {eligibleWarMachines.map((r) => (
+                    <AddRow key={r.id} label={r.name} sub={`${fmtPts(r.perUnit)}pts`}
+                      onClick={() => onAdd("chariot", r.id, af.sourceKey)} />
+                  ))}
+                </>
+              )}
             </Section>
           );
         })}
@@ -9025,9 +9038,9 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <>
             <div className="whr-eyebrow" style={{ margin: "16px 0 8px" }}>Chariots & Monsters</div>
             {roster.chariots.map((u) => {
-              const def = armyData.chariotsMonsters.find((c) => c.id === u.defId);
+              const def = chariotDefFor(u, armyData);
               return <RosterUnitCard key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? u.qty : null} armyData={armyData} bloodlineId={roster.armyTheme} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? u.qty : null} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme} />;
             })}
           </>
         )}
@@ -9129,8 +9142,8 @@ function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
         <div>
           <h2>Chariots & Monsters</h2>
           {roster.chariots.map((u) => {
-            const def = armyData.chariotsMonsters.find((c) => c.id === u.defId);
-            return <PrintableUnitEntry key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} models={def.kind === "quantity" ? u.qty : null} armyData={armyData} bloodlineId={roster.armyTheme} />;
+            const def = chariotDefFor(u, armyData);
+            return <PrintableUnitEntry key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} models={def.kind === "quantity" ? u.qty : null} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme} />;
           })}
         </div>
       )}
@@ -10268,7 +10281,7 @@ function DetailPanel({ armyData, roster, selectedId, updateUnit }) {
     <div className="whr-scroll" style={{ height: "100%", overflowY: "auto", paddingRight: 4 }}>
       {kind === "character" && <CharacterDetail def={armyData.characters.find((c) => c.id === u.defId)} unit={u} roster={roster} updateUnit={update} armyData={armyData} />}
       {kind === "regiment" && <RegimentDetail def={regDefFor(u, armyData)} unit={u} roster={roster} updateUnit={update} armyData={armyDataFor(u, armyData)} />}
-      {kind === "chariot" && <ChariotDetail def={armyData.chariotsMonsters.find((c) => c.id === u.defId)} unit={u} roster={roster} updateUnit={update} armyData={armyData} />}
+      {kind === "chariot" && <ChariotDetail def={chariotDefFor(u, armyData)} unit={u} roster={roster} updateUnit={update} armyData={armyDataFor(u, armyData)} />}
       {kind === "special" && <SpecialDetail def={armyData.specialCharacters.find((s) => s.id === u.defId)} unit={u} roster={roster} updateUnit={update} armyData={armyData} />}
     </div>
   );
@@ -10380,6 +10393,11 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     }
     if (roster.chariots.some((u) => u.defId === "treemen-halfling") && !(bySource.woodElves > 0)) {
       warnings.push("Halfling Treemen require Wood Elf Auxiliaries in the army.");
+    }
+    const empireWarMachineIds = new Set((armyData.auxiliaryFactions.find((af) => af.sourceKey === "empire")?.warMachineIds) || []);
+    const empireWarMachineCount = roster.chariots.filter((u) => u.sourceFaction === "empire" && empireWarMachineIds.has(u.defId)).length;
+    if (empireWarMachineCount > (bySource.empire || 0)) {
+      warnings.push("Cannot take more Empire mortars/cannons than Empire troop regiments.");
     }
     return warnings;
   }, [roster, armyData]);
@@ -10596,11 +10614,12 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
       }
       setRoster((r) => ({ ...r, regiments: [...r.regiments, inst] }));
     } else if (kind === "chariot") {
-      const def = armyData.chariotsMonsters.find((x) => x.id === defId);
-      if (def.kind === "quantity") inst = { instanceId: uid("cm"), kind: "chariot", defId, qty: 1, variantSelections: {} };
-      else if (def.kind === "warmachine") inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraMagicItemIds: [] };
-      else if (def.kind === "abomination") inst = { instanceId: uid("cm"), kind: "chariot", defId, charUpgrades: {}, specialRules: {}, rider: "sorcererLord" };
-      else inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraSteeds: 0, commander: false, commanderMagicItemIds: [], scythedWheels: false, variantSelections: {} };
+      const srcArmyData = sourceFaction ? FACTIONS[sourceFaction] : armyData;
+      const def = srcArmyData.chariotsMonsters.find((x) => x.id === defId);
+      if (def.kind === "quantity") inst = { instanceId: uid("cm"), kind: "chariot", defId, qty: 1, variantSelections: {}, sourceFaction: sourceFaction || undefined };
+      else if (def.kind === "warmachine") inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraMagicItemIds: [], sourceFaction: sourceFaction || undefined };
+      else if (def.kind === "abomination") inst = { instanceId: uid("cm"), kind: "chariot", defId, charUpgrades: {}, specialRules: {}, rider: "sorcererLord", sourceFaction: sourceFaction || undefined };
+      else inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraSteeds: 0, commander: false, commanderMagicItemIds: [], scythedWheels: false, variantSelections: {}, sourceFaction: sourceFaction || undefined };
       setRoster((r) => ({ ...r, chariots: [...r.chariots, inst] }));
     } else if (kind === "special") {
       inst = { instanceId: uid("sp"), kind: "special", defId, mounted: false, mountId: null, extraMagicItemIds: [] };
