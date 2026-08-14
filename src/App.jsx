@@ -10378,7 +10378,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
     if (totalAux > Math.floor(halflingCount / 2)) {
       warnings.push("Only one Auxiliary unit can be taken per two regiments of Halflings.");
     }
-    if (roster.regiments.some((u) => u.defId === "treemen-halfling") && !(bySource.woodElves > 0)) {
+    if (roster.chariots.some((u) => u.defId === "treemen-halfling") && !(bySource.woodElves > 0)) {
       warnings.push("Halfling Treemen require Wood Elf Auxiliaries in the army.");
     }
     return warnings;
