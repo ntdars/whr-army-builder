@@ -5412,19 +5412,19 @@ const CHAOS_DWARFS = {
   ],
   specialCharacters: [
     { id: "zhatan", name: "Zhatan the Black, Commander of the Tower of Zharr", cost: 200, stat: "Zhatan The Black", role: "Chaos Dwarf Lord",
-      note: "Chaos Armour, a shield, and a double handed weapon. Hates all enemies — and so does any Chaos Dwarf regiment he joins. May take four magic items.",
+      note: "Chaos Armour, a shield, and a double handed weapon. Hates all enemies — and so does any Chaos Dwarf regiment he joins. May take four magic items.", extraMagicItemSlots: 4,
       mounts: [
         { id: "greattaurus", name: "Great Taurus", cost: 200, stat: "Great Taurus" },
       ] },
     { id: "gorduz", name: "Gorduz Backstabber", cost: 100, stat: "Gorduz Backstabber", role: "Hobgoblin Lord",
-      note: "Light armour; carries a shield (may swap for an additional hand weapon for free). Ward save against losing his last wound: 2+ the first time he needs it, then 3+, then 4+, and so on — if he actually makes five successful saves this way, the ability is gone for good. May wield a spear for free if mounted. May take three magic items.",
+      note: "Light armour; carries a shield (may swap for an additional hand weapon for free). Ward save against losing his last wound: 2+ the first time he needs it, then 3+, then 4+, and so on — if he actually makes five successful saves this way, the ability is gone for good. May wield a spear for free if mounted. May take three magic items.", extraMagicItemSlots: 3,
       mounts: [
         { id: "giantwolf", name: "Giant Wolf", cost: 20, stat: "Giant Wolf" },
       ] },
     { id: "astragoth", name: "Astragoth, High Priest of Hashut", cost: 300, stat: "Astragoth", role: "Chaos Dwarf Sorcerer Lord",
-      note: "Partly petrified — 3+ armour save. If all three of his attacks hit, he gets three additional attacks (no further generation after that). Movement can never exceed 8\", even marching or charging. May take four magic items." },
+      note: "Partly petrified — 3+ armour save. If all three of his attacks hit, he gets three additional attacks (no further generation after that). Movement can never exceed 8\", even marching or charging. May take four magic items.", extraMagicItemSlots: 4 },
     { id: "drazhoath", name: "Drazhoath The Ashen, Prophet of Hashut", cost: 450, stat: "Drazhoath The Ashen", role: "Chaos Dwarf Sorcerer Lord — must be the army general",
-      note: "All Chaos Dwarf units (including Drazhoath) get +1 combat resolution within 12\" of him. May ride a Great Taurus for +224pts.",
+      note: "All Chaos Dwarf units (including Drazhoath) get +1 combat resolution within 12\" of him. May ride a Great Taurus for +224pts.", extraMagicItemSlots: 1,
       items: "Carries Chaos Armour, the Hellshard Amulet, the Graven Sceptre, and the Daemonspite Crucible (casts one spell per turn for one less power card than normal; if Drazhoath or his mount kills an enemy wizard in melee, that drops to two less power cards for the rest of the game — further slain wizards don't stack further). May take one additional magic item.",
       mounts: [
         { id: "greattaurus", name: "Great Taurus", cost: 224, stat: "Great Taurus" },
@@ -5696,13 +5696,13 @@ const DARK_ELVES = {
         { id: "blackdragon", name: "Black Dragon", cost: 0, stat: "Black Dragon" },
       ] },
     { id: "morathi", name: "Morathi, The Hag Sorceress", cost: 300, stat: "Mage Lord", role: "Sorcerer Lord (level 4), using Slaanesh Magic",
-      note: "May hand-pick her spells. May take four magic items.",
+      note: "May hand-pick her spells. May take four magic items.", extraMagicItemSlots: 4,
       mounts: [
         { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
       ] },
     { id: "hellebron", name: "Crone Hellebron, The Hag Queen", cost: 450, stat: "Elven Prince", role: "Lord",
-      note: "Frenzy. Wears light armour. Unique in carrying two magic weapons. Rides a Manticore. May take one additional magic item.",
+      note: "Frenzy. Wears light armour. Unique in carrying two magic weapons. Rides a Manticore. May take one additional magic item.", extraMagicItemSlots: 1,
       items: "Makes seven attacks with the Deathsword (S10), and one with her Parrying Blade (all enemy models in base contact with her lose one attack; Cavalry/Chariots/Ridden Monsters count as one model for this)." },
     { id: "kouran", name: "Kouran, Captain of the Black Guard", cost: 125, stat: "Elven Hero (High Elf)", role: "Hero",
       note: "Hates all enemies.",
@@ -5892,24 +5892,24 @@ const SKAVEN = {
   ],
   specialCharacters: [
     { id: "thanquol", name: "Grey Seer Thanquol and Boneripper", cost: 500, stat: "Grey Seer", role: "Grey Seer (level 4)",
-      note: "Thanquol must stand next to Boneripper, his bodyguard — if they're separated or Thanquol dies, Boneripper becomes subject to stupidity. Thanquol may use one Warpstone Token each magic phase and never has to test for turning into a Chaos Spawn. 4+ ward save. May take four magic items.",
+      note: "Thanquol must stand next to Boneripper, his bodyguard — if they're separated or Thanquol dies, Boneripper becomes subject to stupidity. Thanquol may use one Warpstone Token each magic phase and never has to test for turning into a Chaos Spawn. 4+ ward save. May take four magic items.", extraMagicItemSlots: 4,
       mounts: [
         { id: "boneripper", name: "Boneripper (bodyguard, always present)", cost: 0, stat: "Boneripper" },
       ] },
     { id: "snikch", name: "Deathmaster Snikch, Chief Assassin of Clan Eshin", cost: 225, stat: "Chief Assassin Deathmaster Snikch", role: "Follows the Assassin rules, with a twist — cannot be the army general",
-      note: "Wields three poisoned blades as Assassins' weapons, +2 attacks for 6 total per round. Instead of infiltrating, may Scout (alone or with a Gutter Runners regiment). 4+ ward save. May take one additional magic item.",
+      note: "Wields three poisoned blades as Assassins' weapons, +2 attacks for 6 total per round. Instead of infiltrating, may Scout (alone or with a Gutter Runners regiment). 4+ ward save. May take one additional magic item.", extraMagicItemSlots: 1,
       items: "Carries poisoned throwing stars and the Cloak of Shadows (if at least 4\" from the enemy at the start of the turn, cannot be charged, shot at, or targeted by a spell unless the opponent rolls a 6 to spot him — they may pick another target on a fail; if he's blocking a unit from being charged, simply move him aside to let the charge through) and the Bands of Power (enchanted, bound spell — if cast successfully, doubles the wielder's Strength until the next magic phase)." },
     { id: "ikitclaw", name: "Ikit Claw, Chief Warlock of Clan Skryre", cost: 450, stat: "Chief Warlock Ikit Claw", role: "Warlord and Grey Seer", tags: ["wizard"],
-      note: "May use any spell deck except Waaagh Magic (as a Grey Seer, may use Grey-Seer-only spells; comes with four Warpstone Tokens). Unbreakable, but must flee along if his regiment flees. In the shooting phase, choose one: fire his pistol (magical warpstone bullets), cast Poison Wind Globes at double range (his high Strength), or fire his small Warpfire Thrower as a S4 breath weapon from his base (runs out on a preceding roll of 1-2 on a D6). May use all his gear and still cast spells. His mechanical claw's +1S is already reflected in his profile. May take three additional magic items.",
+      note: "May use any spell deck except Waaagh Magic (as a Grey Seer, may use Grey-Seer-only spells; comes with four Warpstone Tokens). Unbreakable, but must flee along if his regiment flees. In the shooting phase, choose one: fire his pistol (magical warpstone bullets), cast Poison Wind Globes at double range (his high Strength), or fire his small Warpfire Thrower as a S4 breath weapon from his base (runs out on a preceding roll of 1-2 on a D6). May use all his gear and still cast spells. His mechanical claw's +1S is already reflected in his profile. May take three additional magic items.", extraMagicItemSlots: 3,
       items: "Carries the Storm Daemon, a magic halberd with a bound spell — may cast Warp Lightning (24\", 1D6 S5 hits, no armour save); after use, roll a die, on a 1 it's exhausted for the rest of the game (still counts as a magic halberd)." },
     { id: "skrolk", name: "Lord Skrolk, Plaguelord of Clan Pestilens", cost: 325, stat: "Plaguelord Lord Skrolk", role: "Lord", tags: ["wizard"],
-      note: "Frenzy. Terror. Can only join regiments of Plague Monks. Enemies in base contact suffer -1 to hit him in melee. If he's the general, Plague Monks count as the mainstay regiment type instead of Clanrat Warriors. May take one more magic item, which may be an arcane item.",
+      note: "Frenzy. Terror. Can only join regiments of Plague Monks. Enemies in base contact suffer -1 to hit him in melee. If he's the general, Plague Monks count as the mainstay regiment type instead of Clanrat Warriors. May take one more magic item, which may be an arcane item.", extraMagicItemSlots: 1,
       items: "Carries the Liber Bubonicus (makes him a level 2 wizard who may pick spells from Skaven's Putrefy/Plague/Pestilent Breath/Wither or Nurgle's Stream of Corruption/Miasma of Pestilence/Stench of Nurgle — when he casts Nurgle spells, Clan Pestilens models get the same immunities Nurgle followers would) and the Rod of Corruption (magic weapon — living models hit must pass a Toughness test or die instantly with no save of any kind; only tests once per melee phase; if passed, wound normally)." },
     { id: "queek", name: "Warlord Queek Head-Taker", cost: 225, stat: "Warlord Queek Head-Taker", role: "Lord",
-      note: "Hates Orcs & Goblins and Dwarfs. +1 to hit and to wound in challenges. May take two additional magic items.",
+      note: "Hates Orcs & Goblins and Dwarfs. +1 to hit and to wound in challenges. May take two additional magic items.", extraMagicItemSlots: 2,
       items: "Wields Dwarf-Gouger (magic weapon, no armour save, 1 wound = D3 wounds, always wounds Dwarfs on 2+) and wears the Warpstone Armour (light armour, 4+ ward save — each wound saved this way inflicts a S3 hit back on the attacker)." },
     { id: "throt", name: "Throt the Unclean", cost: 100, stat: "Throt the Unclean", role: "Cannot be the army general — may be used as a Packmaster",
-      note: "May take one additional magic item.",
+      note: "May take one additional magic item.", extraMagicItemSlots: 1,
       items: "Wields a man catcher (against man-sized models, skip the wound roll — each model hit tests Toughness, once per melee round; on a fail, it's slain instantly with no saves of any kind) and carries a Warpstone Charm." },
   ],
 };
@@ -6261,12 +6261,12 @@ const VAMPIRE_COUNTS = {
   ],
   specialCharacters: [
     { id: "vladisabella", name: "Vlad and Isabella von Carstein", cost: 600, stat: "Vampire Lord", role: "Von Carstein — Vlad is a Vampire Lord, Isabella a Vampire Thrall", theme: "voncarstein", tags: ["wizard"],
-      note: "Vlad is a level 2 wizard with the Dark Majesty bloodline power, and may take one additional magic item and one bloodline power. Isabella has the Transfix bloodline power. Vlad and Isabella always stay together and try to reunite if separated; if one is killed for good, the other gains frenzy and hatred.",
+      note: "Vlad is a level 2 wizard with the Dark Majesty bloodline power, and may take one additional magic item and one bloodline power. Isabella has the Transfix bloodline power. Vlad and Isabella always stay together and try to reunite if separated; if one is killed for good, the other gains frenzy and hatred.", extraMagicItemSlots: 1, bloodlinePowerSlots: 1,
       items: "Vlad carries the Carstein Ring (one use only) — if slain, he returns to play immediately within 12\" of the killing spot, restored to one wound, having lost all equipment and magic items (spells and bloodline powers stay intact). This resurrection prevents the army from crumbling from the general's death." },
     { id: "mannfred", name: "Mannfred von Carstein", cost: 400, stat: "Vampire Count", role: "Von Carstein — Vampire Count with 4 magic levels", theme: "voncarstein",
-      note: "May ride an Undead Steed for free (barding free). May take 4 magic items or bloodline powers, in any combination." },
+      note: "May ride an Undead Steed for free (barding free). May take 4 magic items or bloodline powers, in any combination.", extraMagicItemSlots: 4, bloodlinePowerSlots: 4, sharedItemBloodlineCap: 4 },
     { id: "konrad", name: "Konrad von Carstein", cost: 180, stat: "Vampire Count", role: "Von Carstein — an insane Vampire Count", theme: "voncarstein",
-      note: "Subject to frenzy, hates all enemies, cannot use magic. Carries an additional hand weapon and heavy armour. May take 2 magic items or bloodline powers." },
+      note: "Subject to frenzy, hates all enemies, cannot use magic. Carries an additional hand weapon and heavy armour. May take 2 magic items or bloodline powers.", extraMagicItemSlots: 2, bloodlinePowerSlots: 2, sharedItemBloodlineCap: 2 },
   ],
 };
 
@@ -6455,9 +6455,9 @@ const TOMB_KINGS = {
     { id: "settra", name: "Settra the Imperishable", cost: 350, stat: "Settra the Imperishable", role: "Mummy King",
       note: "Causes terror. Wears light armour. The Blessed Blade of Ptra ensures Settra always strikes first. The Crown of Nehekhara gives a 4+ ward save to Settra (and his chariot, if mounted). The Staff of Osiris is a bound spell — a fiery magic missile up to 24\" hitting the first unit in its path with a S6 hit causing 1D3 wounds, no armour save, penetrating as a bolt thrower. May ride a Skeleton Heavy Chariot for the price of the chariot." },
     { id: "arkhan", name: "Arkhan the Black", cost: 555, stat: "Arkhan the Black", role: "Lich Lord — undead, 4 magic levels",
-      note: "Causes terror. Rides a flying, scythed Heavy Chariot with three extra crewmen, pulled by four Undead Steeds (already included in cost). May take 4 magic items." },
+      note: "Causes terror. Rides a flying, scythed Heavy Chariot with three extra crewmen, pulled by four Undead Steeds (already included in cost). May take 4 magic items.", extraMagicItemSlots: 4 },
     { id: "khalida", name: "High Queen Khalida Neferher", cost: 250, stat: "High Queen Khalida Neferher", role: "Mummy King with light armour",
-      note: "Causes terror. All of her attacks count as poisoned (+1 Strength) and deal 1D3 wounds each — this is cancelled if she takes a magic weapon instead. Has Regeneration (4+). May take three magic items. May ride a Skeleton Heavy Chariot for the price of the chariot." },
+      note: "Causes terror. All of her attacks count as poisoned (+1 Strength) and deal 1D3 wounds each — this is cancelled if she takes a magic weapon instead. Has Regeneration (4+). May take three magic items. May ride a Skeleton Heavy Chariot for the price of the chariot.", extraMagicItemSlots: 3 },
   ],
 };
 
@@ -6666,11 +6666,11 @@ const CLASSIC_UNDEAD = {
   ],
   specialCharacters: [
     { id: "krell", name: "Krell, Lord of The Undead", cost: 250, stat: "Krell", role: "Wight Lord",
-      note: "Causes terror. Carries the Armour of Fortune (a common magic item — heavy armour, 5+ ward save) and the Black Axe of Krell instead of a Wight-Blade (double handed, deals 1D6 wounds; a model wounded but not slain suffers an additional no-save wound on a roll of 1 in each subsequent magic phase). May take 1 additional magic item. May ride an Undead Steed for +30pts (barding free)." },
+      note: "Causes terror. Carries the Armour of Fortune (a common magic item — heavy armour, 5+ ward save) and the Black Axe of Krell instead of a Wight-Blade (double handed, deals 1D6 wounds; a model wounded but not slain suffers an additional no-save wound on a roll of 1 in each subsequent magic phase). May take 1 additional magic item. May ride an Undead Steed for +30pts (barding free).", extraMagicItemSlots: 1 },
     { id: "dieter", name: "Dieter Helsnicht, Doom Lord of Middenheim", cost: 600, stat: "Lich Lord", role: "A particularly powerful Necromancer Lord, with characteristics similar to a Lich Lord", tags: ["wizard"],
-      note: "Rides a Manticore. Carries the Amulet of Doom, granting a 4+ ward save to himself and his mount. May take 3 additional magic items." },
+      note: "Rides a Manticore. Carries the Amulet of Doom, granting a 4+ ward save to himself and his mount. May take 3 additional magic items.", extraMagicItemSlots: 3 },
     { id: "heinrich", name: "Heinrich Kemmler, The Lichmaster", cost: 500, stat: "Lich Lord", role: "A particularly powerful Necromancer Lord, with characteristics similar to a Lich Lord", tags: ["wizard"],
-      note: "Carries the Cloak of the Night, letting him fly and be invulnerable to mundane (non-magical) attacks. May take 3 additional magic items." },
+      note: "Carries the Cloak of the Night, letting him fly and be invulnerable to mundane (non-magical) attacks. May take 3 additional magic items.", extraMagicItemSlots: 3 },
     { id: "nagash", name: "Nagash, Supreme Lord of the Undead", cost: 700, stat: "Nagash", role: "Must always be the army general", tags: ["wizard"],
       note: "Undead, subject to the crumble rule, large, causes terror. A level 5 wizard (thanks to the Book of Nagash — already reflected in his level) who may handpick spells.",
       items: "Carries Mortis — the Great Blade of Death (+1 Strength, already reflected; each wound inflicted restores one wound Nagash lost earlier in the battle), the Black Armour of Nagash (4+ armour save, 4+ ward save, 4+ natural dispel — he may still cast spells while wearing it), the Book of Nagash (+1 magic level, already reflected), a Dispel Magic Scroll, and the Staff of Power (comes with 1D6+1 power cards taken from the winds of magic deck at the start of the battle, spendable throughout)." },
@@ -6857,23 +6857,23 @@ const KISLEV = {
   ],
   specialCharacters: [
     { id: "katarin", name: "Tzarina Katarin the Ice Queen of Kislev", cost: 200, stat: "Tzarina Katarin", role: "Lord — current ruler of Kislev, level 3 wizard using the lore of Ice", tags: ["wizard"],
-      note: "Rides a Warhorse. May take two additional magic items. May not be fielded alongside Boris Ursus or Igor the Terrible.",
+      note: "Rides a Warhorse. May take two additional magic items. May not be fielded alongside Boris Ursus or Igor the Terrible.", extraMagicItemSlots: 2,
       items: "Carries the magic blade Fearfrost." },
     { id: "borisursus", name: "Boris Ursus, The Red Tzar", cost: 160, stat: "Boris Ursus", role: "A fierce warrior and devout follower of the Bear God",
-      note: "Equipped with heavy armour, a shield, and a bow, riding the Great Bear Urskin (wrapped in thick fur, giving 5+ armour; rolls 3D6 on the Monster Reaction Table if Boris is slain). May take two additional magic items. May not be fielded alongside Igor the Terrible or Tzarina Katarin.",
+      note: "Equipped with heavy armour, a shield, and a bow, riding the Great Bear Urskin (wrapped in thick fur, giving 5+ armour; rolls 3D6 on the Monster Reaction Table if Boris is slain). May take two additional magic items. May not be fielded alongside Igor the Terrible or Tzarina Katarin.", extraMagicItemSlots: 2,
       items: "Carries the Shard Blade." },
     { id: "radinov", name: "Prince Ivan Radinov, Captain of the Gryphon Legion", cost: 80, stat: "Prince Radinov", role: "Younger brother of the ruling Tzarina Katarin, nominal leader of the Gryphon Legion",
-      note: "Armed with a lance, full plate armour, and a shield, riding a barded warhorse (combined 1+ armour save). May take two magic items. Natural Hero: if a friendly character within 4\" of Radinov is killed, roll a D6 — on a 4+ Ivan saves them, restoring 1 wound (wounds already caused still count for combat resolution). Only one rescue attempt per battle. Your army may only field Radinov if it includes Gryphon Legionnaires (now flagged live by this builder)." },
+      note: "Armed with a lance, full plate armour, and a shield, riding a barded warhorse (combined 1+ armour save). May take two magic items. Natural Hero: if a friendly character within 4\" of Radinov is killed, roll a D6 — on a 4+ Ivan saves them, restoring 1 wound (wounds already caused still count for combat resolution). Only one rescue attempt per battle. Your army may only field Radinov if it includes Gryphon Legionnaires (now flagged live by this builder).", extraMagicItemSlots: 2 },
     { id: "saltan", name: "Tzar Saltan of Praag", cost: 80, stat: "Tzar Saltan", role: "The old and bitter ruler of Praag, a city overrun by Chaos",
-      note: "Armed with heavy armour, a shield, riding a barded warhorse. May take one additional magic item. Must always challenge Chaos characters and must accept challenges from Chaos enemies. Saltan, and any regiment he leads, is immune to fear and hates Chaos.",
+      note: "Armed with heavy armour, a shield, riding a barded warhorse. May take one additional magic item. Must always challenge Chaos characters and must accept challenges from Chaos enemies. Saltan, and any regiment he leads, is immune to fear and hates Chaos.", extraMagicItemSlots: 1,
       items: "Carries the Black Blade." },
     { id: "rasin", name: "Stephan Rasin, Clanchief of Cossacks", cost: 50, stat: "Stephan Rasin", role: "A young, rash, and remarkably lucky Clanchief of the Cossacks",
       note: "Armed with light armour, a bow, riding a warhorse. Never carries magic items. Allowed three re-rolls per battle. Any regiment he leads is immune to fear and hates Chaos. If leading Kislev Horse Archers, the regiment may fire and flee as a charge reaction (resolve shooting as Stand and Shoot, then flee as normal) and rallies automatically after that flee move." },
     { id: "iljaofmurova", name: "Ilja of Murova", cost: 90, stat: "Ilja of Murova", role: "The strongest man in the Taiga, undefeated in twenty years of contests",
-      note: "Carries a bow and may scout. Cannot be the army general. May take one additional magic item.",
+      note: "Carries a bow and may scout. Cannot be the army general. May take one additional magic item.", extraMagicItemSlots: 1,
       items: "Armed with the Wyrmslayer Sword (a common magic item — always wounds on a 4+ or better; large targets get no armour save)." },
     { id: "igortheterrible", name: "Igor the Terrible", cost: 120, stat: "Igor the Terrible", role: "A dark legend among the Kislevites — the most feared Tzar of all time",
-      note: "Hates human enemies. Armed with heavy armour and a shield. May take two additional magic items. May not be fielded alongside Boris Ursus or Tzarina Katarin.",
+      note: "Hates human enemies. Armed with heavy armour and a shield. May take two additional magic items. May not be fielded alongside Boris Ursus or Tzarina Katarin.", extraMagicItemSlots: 2,
       items: "Carries the magic sword Bloodedge.",
       mounts: [
         { id: "bardedwarhorse", name: "Barded Warhorse", cost: 0, stat: "War Horse" },
@@ -6885,14 +6885,14 @@ const KISLEV = {
         { id: "chimera", name: "Chimera", cost: 265, stat: "Chimera" },
       ] },
     { id: "miska", name: "Miska the Slaughterer", cost: 250, stat: "Miska the Slaughterer", role: "Most famous of the Khan-Queens, daughter of Boris Ursus", tags: ["wizard"],
-      note: "Armed with a poisoned hand weapon, heavy armour, and a shield. Subject to frenzy. May take one additional magic item.",
+      note: "Armed with a poisoned hand weapon, heavy armour, and a shield. Subject to frenzy. May take one additional magic item.", extraMagicItemSlots: 1,
       items: "Carries the Crown of Icicles — Miska becomes a level 3 wizard using Ice Magic and may cast spells while wearing armour.",
       mounts: [
         { id: "bardedwarhorse", name: "Barded Warhorse", cost: 0, stat: "War Horse" },
         { id: "greatbear", name: "Great Bear", cost: 30, stat: "Great Bear" },
       ] },
     { id: "babayaga", name: "Baba Yaga", cost: 350, stat: "Baba Yaga", role: "A solitary, ancient power tied to the land — most Kislevites believe her merely a legend",
-      note: "A level 4 witch — may use Ice Magic or Dark Magic. May take four magic items. Her Chicken Legged Hut works like a large chariot but also like a monster: it causes terror and rolls on the Monster Reaction Table if Baba Yaga dies.",
+      note: "A level 4 witch — may use Ice Magic or Dark Magic. May take four magic items. Her Chicken Legged Hut works like a large chariot but also like a monster: it causes terror and rolls on the Monster Reaction Table if Baba Yaga dies.", extraMagicItemSlots: 4,
       mounts: [{ id: "hut", name: "Chicken Legged Hut", cost: 0, stat: "Chicken Legged Hut" }] },
   ],
 };
@@ -7104,10 +7104,10 @@ const NORSE = {
   ],
   specialCharacters: [
     { id: "regnarlodbrog", name: "Regnar Lodbrog", cost: 150, stat: "Regnar Lodbrog", role: "Lord — one of the greatest Norse conquerors of all time",
-      note: "May take one additional magic item. His magic shirt (a suit of light armour) renders him immune to poison, breath attacks, and the effects of multiple wounds.",
+      note: "May take one additional magic item. His magic shirt (a suit of light armour) renders him immune to poison, breath attacks, and the effects of multiple wounds.", extraMagicItemSlots: 1,
       items: "Wields a spear that negates armour saves and carries a shield." },
     { id: "palnatoke", name: "Palnatoke", cost: 80, stat: "Palnatoke", role: "Hero — exiled Jarl who formed the Jomsvikings, the most feared and reviled Norse pirates of their time",
-      note: "Palnatoke and any regiment he leads hate all enemies (lost if he's killed). Wears light armour, carries a shield, and wields either an additional hand weapon or a double handed weapon. Carries a bow (range 36\", Strength 5). May take two magic items." },
+      note: "Palnatoke and any regiment he leads hate all enemies (lost if he's killed). Wears light armour, carries a shield, and wields either an additional hand weapon or a double handed weapon. Carries a bow (range 36\", Strength 5). May take two magic items.", extraMagicItemSlots: 2 },
   ],
 };
 
@@ -7572,7 +7572,7 @@ const LIZARDMEN = {
     { id: "oxayotl", name: "Oxayotl", cost: 100, stat: "Oxayotl", role: "Skink Hero",
       note: "5+ scaly-skin save. Shooting attacks against him suffer -2 to hit. May be deployed as a scout, or in the open no closer than 8\" from the enemy (chameleon heritage). Carries a blowpipe that may fire three poisonous Strength 5 hits." },
     { id: "lordkroak", name: "Venerable Lord Kroak", cost: 375, stat: "Slann Mage Priest Lord", role: "Mummified Slann Mage Priest Lord, 5 magic levels",
-      note: "May take five additional magic items.",
+      note: "May take five additional magic items.", extraMagicItemSlots: 5,
       items: "Carries The Gold Death Mask — enemies can't hit Kroak in melee unless they roll a natural 6 to hit (or 5+ with an always-hits weapon)." },
     { id: "lotlbotl", name: "Lotl Botl", cost: 150, stat: "Lizardman Saurus Hero", role: "Saurus Hero",
       note: "Causes fear. His presence in a regiment adds +1 to combat resolution. Light armour and a shield." },
@@ -7585,7 +7585,7 @@ const LIZARDMEN = {
     { id: "itzibitzi", name: "Itzi-Bitzi", cost: 80, stat: "Lizardman Skink Hero", role: "Skink Hero",
       note: "Once per battle, in the Lizardmen movement phase, may force all non-deaf enemies within 8\" (Dwarf Longbeards excepted) to take a panic test on three dice choosing the two highest (resolute troops take a normal panic test) — applies even to units in melee. Carries light armour, a shield, and the Piranha Blade." },
     { id: "mazdamundi", name: "Emperor Mazdamundi", cost: 600, stat: "Emperor Mazdamundi", role: "Slann Mage Priest Lord riding a Stegadon (already incorporated into his profile)",
-      note: "Causes terror and delivers 1D6 impact hits like a chariot. Always knows four fixed spells: Move the Mountains (Power 2, freezes a hill's units), The Ruination of Cities (Power 3, destroys a building/bridge and everything on it), Earth Line (Power 2, S10 hit along a line to a table corner), and Part the Waters (Power 1, removes a water feature). Carries the battle standard. May take four additional magic items, one of which may be a magic banner.",
+      note: "Causes terror and delivers 1D6 impact hits like a chariot. Always knows four fixed spells: Move the Mountains (Power 2, freezes a hill's units), The Ruination of Cities (Power 3, destroys a building/bridge and everything on it), Earth Line (Power 2, S10 hit along a line to a table corner), and Part the Waters (Power 1, removes a water feature). Carries the battle standard. May take four additional magic items, one of which may be a magic banner.", extraMagicItemSlots: 4,
       items: "Carries the Cobra Mace of Mazdamundi — enemies attacking him with a magic weapon must roll 1D6 each round first; on a 6 the weapon is destroyed and no attack is made." },
   ],
 };
@@ -7849,14 +7849,14 @@ const SLANN_EMPIRE = {
   ],
   specialCharacters: [
     { id: "drulndribl", name: "Toad Master Drulndribl", cost: 250, stat: "Toad Master Drulndribl", role: "The Emperor's most favoured Slann Warlord",
-      note: "Carries light armour and a shield. May take two additional magic items.",
+      note: "Carries light armour and a shield. May take two additional magic items.", extraMagicItemSlots: 2,
       items: "Carries the Blade of Realities — every hit wounds automatically, no armour save, 1 wound becomes 1D3 wounds.",
       mounts: [{ id: "hornedone", name: "Horned One", cost: 40, stat: "Horned One" }] },
     { id: "lordkroak-slann", name: "Venerable Lord Kroak", cost: 375, stat: "Slann Mage Priest Lord", role: "Mummified Slann Mage Priest Lord, 5 magic levels",
-      note: "May take five additional magic items.",
+      note: "May take five additional magic items.", extraMagicItemSlots: 5,
       items: "Carries The Gold Death Mask — enemies can't hit Kroak in melee unless they roll a natural 6 to hit (or 5+ with an always-hits weapon)." },
     { id: "mazdamundi-slann", name: "Emperor Mazdamundi", cost: 600, stat: "Emperor Mazdamundi", role: "Slann Mage Priest Lord riding a Stegadon (already incorporated into his profile)",
-      note: "Causes terror and delivers 1D6 impact hits like a chariot. Always knows four fixed spells: Move the Mountains (Power 2, freezes a hill's units), The Ruination of Cities (Power 3, destroys a building/bridge and everything on it), Earth Line (Power 2, S10 hit along a line to a table corner), and Part the Waters (Power 1, removes a water feature). Carries the battle standard. May take four additional magic items, one of which may be a magic banner.",
+      note: "Causes terror and delivers 1D6 impact hits like a chariot. Always knows four fixed spells: Move the Mountains (Power 2, freezes a hill's units), The Ruination of Cities (Power 3, destroys a building/bridge and everything on it), Earth Line (Power 2, S10 hit along a line to a table corner), and Part the Waters (Power 1, removes a water feature). Carries the battle standard. May take four additional magic items, one of which may be a magic banner.", extraMagicItemSlots: 4,
       items: "Carries the Cobra Mace of Mazdamundi — enemies attacking him with a magic weapon must roll 1D6 each round first; on a 6 the weapon is destroyed and no attack is made." },
   ],
 };
@@ -8897,7 +8897,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, selectedId, onSelect, onRemove }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -8966,6 +8966,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>House rules:</div>
           <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {houseRuleWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
+      {sharedPoolWarnings && sharedPoolWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic items / bloodline powers:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            {sharedPoolWarnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
@@ -10247,6 +10255,23 @@ function SpecialDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
+      {def.bloodlinePowerSlots > 0 && (
+        <div style={{ marginTop: 14 }}>
+          <MagicItemPicker items={armyData.magicItems} selectedIds={unit.bloodlinePowerIds || []} maxSlots={def.bloodlinePowerSlots} usedElsewhere={usedElsewhere}
+            categoryFilter={["bloodlinepower"]}
+            context={itemContext(def, unit, { characterId: def.id, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] })}
+            onToggle={(id) => toggleArrayField(unit, "bloodlinePowerIds", id, updateUnit)} />
+        </div>
+      )}
+      {def.sharedItemBloodlineCap > 0 && (() => {
+        const combined = (unit.extraMagicItemIds || []).length + (unit.bloodlinePowerIds || []).length;
+        return combined > def.sharedItemBloodlineCap ? (
+          <p style={{ fontSize: 13.5, marginTop: 6, color: "var(--burgundy)", fontWeight: 700 }}>
+            {def.name} may only take {def.sharedItemBloodlineCap} magic items and bloodline powers combined (currently {combined}).
+          </p>
+        ) : null;
+      })()}
+
       {def.extraSpriteSlots > 0 && (
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.extraSpriteSlots} usedElsewhere={usedElsewhere}
@@ -10458,6 +10483,19 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
       const d = armyData.regiments.find((r) => r.id === u.defId);
       if (d?.extraOption?.unofficial && u.extraOptionCount) {
         warnings.push(`${d.name}: ${d.extraOption.label} are unofficial — needs your opponent's consent to field.`);
+      }
+    });
+    return warnings;
+  }, [roster, armyData]);
+
+  const sharedPoolWarnings = useMemo(() => {
+    const warnings = [];
+    roster.specials.forEach((u) => {
+      const d = armyData.specialCharacters?.find((s) => s.id === u.defId);
+      if (!d?.sharedItemBloodlineCap) return;
+      const combined = (u.extraMagicItemIds || []).length + (u.bloodlinePowerIds || []).length;
+      if (combined > d.sharedItemBloodlineCap) {
+        warnings.push(`${d.name} may only take ${d.sharedItemBloodlineCap} magic items and bloodline powers combined (currently ${combined}).`);
       }
     });
     return warnings;
@@ -10800,7 +10838,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
