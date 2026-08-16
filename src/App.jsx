@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { storage } from "./storage.js";
 
 /* ============================================================================
@@ -191,9 +191,20 @@ body {
 }
 
 @media (max-width: 900px) {
-  .whr-builder-grid { grid-template-columns: 1fr !important; }
-  .whr-builder-col { max-height: none !important; }
+  .whr-builder-grid {
+    display: flex !important; overflow-x: auto !important; overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important; gap: 0 !important; padding: 0 6% !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .whr-builder-grid::-webkit-scrollbar { display: none; }
+  .whr-builder-col { flex: 0 0 88% !important; max-height: none !important; scroll-snap-align: center; box-sizing: border-box; overflow-y: auto; }
+  .whr-carousel-dots { display: flex !important; }
 }
+
+.whr-carousel-dots { display: none; justify-content: center; gap: 20px; padding: 10px 0 2px; }
+.whr-carousel-dot-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; padding: 4px; }
+.whr-carousel-dot { width: 7px; height: 7px; border-radius: 50%; display: block; transition: background 0.15s; }
+.whr-carousel-dot-label { font-family: var(--font-display-sc); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
 
 .whr-print-roster { display: none; }
 @media print {
@@ -10325,6 +10336,42 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
   const [selectedId, setSelectedId] = useState(null);
   const [renaming, setRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState(roster.name);
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const carouselRef = useRef(null);
+
+  // Mobile-only: the three builder columns (Regiments / Army / Upgrades) live in a single
+  // horizontally-scrolling flex row with scroll-snap (see .whr-builder-grid media query below).
+  // On desktop this same ref/scroll code is inert — the grid isn't wider than its container so
+  // scrollTo has nothing to do, and the dot indicators are hidden via CSS.
+  function scrollToPanel(i) {
+    const el = carouselRef.current;
+    const panel = el?.children?.[i];
+    if (!el || !panel) return;
+    el.scrollTo({ left: panel.offsetLeft - el.offsetLeft - (el.clientWidth - panel.clientWidth) / 2, behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    function onScroll() {
+      const center = el.scrollLeft + el.clientWidth / 2;
+      let closest = 0, best = Infinity;
+      for (let i = 0; i < el.children.length; i++) {
+        const c = el.children[i];
+        const cc = c.offsetLeft - el.offsetLeft + c.clientWidth / 2;
+        const d = Math.abs(cc - center);
+        if (d < best) { best = d; closest = i; }
+      }
+      setMobileIndex(closest);
+    }
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  function selectAndAdvance(id) {
+    setSelectedId(id);
+    scrollToPanel(2);
+  }
 
   function startRename() {
     setRenameValue(roster.name);
@@ -10680,6 +10727,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
       setRoster((r) => ({ ...r, specials: [...r.specials, inst] }));
     }
     setSelectedId(inst.instanceId);
+    scrollToPanel(2);
   }
 
   function setArmyTheme(themeId) {
@@ -10833,17 +10881,25 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
       </div>
 
-      <div className="whr-builder-grid" style={{ display: "grid", gridTemplateColumns: "280px 1fr 340px", gap: 18, flex: 1, minHeight: 0 }}>
+      <div className="whr-builder-grid" ref={carouselRef} style={{ display: "grid", gridTemplateColumns: "280px 1fr 340px", gap: 18, flex: 1, minHeight: 0 }}>
         <div className="whr-panel whr-builder-col" style={{ padding: 14, minHeight: 0 }}>
           <Sidebar armyData={armyData} roster={roster} onAdd={addUnit} onSetTheme={setArmyTheme} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} selectedId={selectedId} onSelect={setSelectedId} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} selectedId={selectedId} onSelect={selectAndAdvance} onRemove={removeUnit} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
         </div>
+      </div>
+      <div className="whr-carousel-dots">
+        {["Regiments", "Army", "Upgrades"].map((label, i) => (
+          <button key={label} type="button" className="whr-carousel-dot-btn" aria-label={`Show ${label}`} onClick={() => scrollToPanel(i)}>
+            <span className="whr-carousel-dot" style={{ background: mobileIndex === i ? "var(--gold)" : "var(--line-soft)" }} />
+            <span className="whr-carousel-dot-label" style={{ color: mobileIndex === i ? "var(--ink)" : "var(--ink-faint)" }}>{label}</span>
+          </button>
+        ))}
       </div>
     </div>
     <PrintableRoster armyData={armyData} roster={roster} totalPoints={totalPoints} regimentPoints={regimentPoints} />
