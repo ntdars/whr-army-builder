@@ -155,8 +155,9 @@ body {
 
 /* ---------- pill / badge ---------- */
 .whr-badge {
-  display: inline-block; font-family: var(--font-display-sc); font-size: 14px;
-  font-weight: 400; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 10px;
+  display: inline-flex; align-items: center; justify-content: center; line-height: 1;
+  font-family: var(--font-display-sc); font-size: 14px;
+  font-weight: 400; letter-spacing: 0.04em; padding: 3px 8px 2px; border-radius: 10px;
   background: var(--forest-pale); color: var(--forest-dark); border: 1px solid var(--forest);
 }
 .whr-badge-gold { background: #F3E4BC; color: var(--gold); border-color: var(--gold); }
