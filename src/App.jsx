@@ -116,6 +116,9 @@ body {
   padding: 9px 12px; width: 100%; border-radius: 2px;
 }
 .whr-input::placeholder { color: var(--ink-faint); font-style: italic; }
+.whr-input[type="number"]::-webkit-outer-spin-button,
+.whr-input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.whr-input[type="number"] { -moz-appearance: textfield; }
 .whr-input:focus, .whr-select:focus, .whr-btn:focus-visible {
   outline: 2px solid var(--gold-bright); outline-offset: 1px;
 }
