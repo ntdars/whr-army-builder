@@ -4592,7 +4592,7 @@ const ORCS_GOBLINS = {
       ],
     },
     {
-      id: "snotlings", name: "Snotlings", perModel: 15, minSize: 5, stat: "Snotling Base", command: "none", restriction: "0-1",
+      id: "snotlings", name: "Snotlings", perModel: 15, minSize: 1, stat: "Snotling Base", command: "none", restriction: "0-1",
       note: "Priced per 40x40mm base. Cannot take a standard bearer, musician, or be joined by characters, but still counts as a full rank-and-file regiment (front/flank/rear, can claim/cancel rank bonus). Never causes panic if destroyed/fleeing. Mimics the nearest friendly unit within 12\" (idles if none, charges/rushes if that unit fights, flees or turns frenzied alongside it). Unbreakable in combat as long as the nearest friendly unit isn't fleeing.",
     },
     {
