@@ -191,12 +191,23 @@ body {
 }
 
 @media (max-width: 900px) {
-  .whr-builder-grid {
+  /* SetupScreen's "Muster Forces" / "The Barracks" two-up grid — just stack full-width,
+     matching desktop's per-section width instead of squeezing both into a shared row. */
+  .whr-builder-grid { grid-template-columns: 1fr !important; }
+
+  /* BuilderScreen's toolbar (bug report / rename / export / save) wraps under the
+     title on narrow screens — center it instead of leaving it hugging the left edge. */
+  .whr-toolbar-actions { justify-content: center; flex-wrap: wrap; width: 100%; }
+
+  /* BuilderScreen's three-column carousel — a horizontally swipeable row instead, each
+     column at 88% width so neighbors peek in on both edges. Deliberately a different
+     class from .whr-builder-grid above; the two screens have unrelated layouts. */
+  .whr-builder-carousel {
     display: flex !important; overflow-x: auto !important; overflow-y: hidden !important;
     scroll-snap-type: x mandatory !important; gap: 0 !important; padding: 0 6% !important;
     -webkit-overflow-scrolling: touch;
   }
-  .whr-builder-grid::-webkit-scrollbar { display: none; }
+  .whr-builder-carousel::-webkit-scrollbar { display: none; }
   .whr-builder-col { flex: 0 0 88% !important; max-height: none !important; scroll-snap-align: center; box-sizing: border-box; overflow-y: auto; }
   .whr-carousel-dots { display: flex !important; }
 }
@@ -10340,7 +10351,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
   const carouselRef = useRef(null);
 
   // Mobile-only: the three builder columns (Regiments / Army / Upgrades) live in a single
-  // horizontally-scrolling flex row with scroll-snap (see .whr-builder-grid media query below).
+  // horizontally-scrolling flex row with scroll-snap (see .whr-builder-carousel media query below).
   // On desktop this same ref/scroll code is inert — the grid isn't wider than its container so
   // scrollTo has nothing to do, and the dot indicators are hidden via CSS.
   function scrollToPanel(i) {
@@ -10862,7 +10873,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
             <p className="whr-serif-italic" style={{ margin: 0, fontSize: 14 }}>{roster.pointLimit} points · {armyData.name}</p>
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div className="whr-toolbar-actions" style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: 14, color: "var(--ink-soft)" }}>{saveState}</span>
           <button className="whr-btn whr-btn-stack" onClick={() => window.open("https://forms.gle/zrKUfgxMCgqeiMiA8", "_blank", "noopener,noreferrer")}>
             <span>Bug report</span>
@@ -10881,7 +10892,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
         </div>
       </div>
 
-      <div className="whr-builder-grid" ref={carouselRef} style={{ display: "grid", gridTemplateColumns: "280px 1fr 340px", gap: 18, flex: 1, minHeight: 0 }}>
+      <div className="whr-builder-carousel" ref={carouselRef} style={{ display: "grid", gridTemplateColumns: "280px 1fr 340px", gap: 18, flex: 1, minHeight: 0 }}>
         <div className="whr-panel whr-builder-col" style={{ padding: 14, minHeight: 0 }}>
           <Sidebar armyData={armyData} roster={roster} onAdd={addUnit} onSetTheme={setArmyTheme} />
         </div>
