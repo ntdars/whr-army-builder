@@ -8942,7 +8942,10 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
       )}
       {themeGateWarning && (
         <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)" }}>{themeGateWarning}</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Army theme:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            <li>{themeGateWarning}</li>
+          </ul>
         </div>
       )}
       {endlessBannerWarnings && endlessBannerWarnings.length > 0 && (
