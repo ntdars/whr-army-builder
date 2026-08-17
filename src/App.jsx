@@ -8427,13 +8427,6 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
         <h1 className="whr-h1" style={{ fontSize: 50.5, margin: 0 }}>WARHAMMER RENAISSANCE</h1>
         <LeafDivider />
         <p className="whr-eyebrow" style={{ margin: 0 }}>Army List Builder</p>
-        <div style={{
-          marginTop: 18, padding: "10px 16px", background: "var(--burgundy)", color: "#F3E4BC",
-          fontFamily: "var(--font-display-sc)", letterSpacing: "0.03em", fontSize: 16,
-          borderRadius: 2, display: "inline-block",
-        }}>
-          This builder is still a WIP. While mostly functional, maintain some level of skepticism and spot check against the WHR Armies book.
-        </div>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 28 }} className="whr-builder-grid">
@@ -9087,7 +9080,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
 }
 
 // Print-only rendering, hidden on screen and revealed via the @media print CSS rule when the
-// user clicks Export List. Mirrors RosterPanel's exact category grouping/iteration so the printed
+// user clicks Print / PDF. Mirrors RosterPanel's exact category grouping/iteration so the printed
 // sheet always matches what's actually in the roster, but renders full stat blocks (via the same
 // resolveUnitStat/resolveUnitTags/StatBlock helpers RosterUnitCard uses) in a plain black-on-white
 // document layout instead of the app's interactive cards.
@@ -10334,12 +10327,103 @@ function DetailPanel({ armyData, roster, selectedId, updateUnit }) {
    BUILDER SCREEN ROOT
    ========================================================================== */
 
-function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
+function RosterCodeModal({ roster, onClose, onImport }) {
+  const [code, setCode] = useState("");
+  const [codeError, setCodeError] = useState("");
+  const [copyState, setCopyState] = useState("");
+  const [importValue, setImportValue] = useState("");
+  const [importState, setImportState] = useState(""); // "" | "importing" | "done" | "error"
+  const [importMessage, setImportMessage] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    setCode("");
+    setCodeError("");
+    encodeRosterCode(roster)
+      .then((c) => { if (!cancelled) setCode(c); })
+      .catch((e) => { if (!cancelled) setCodeError(e.message || "Couldn't generate a code."); });
+    return () => { cancelled = true; };
+  }, [roster]);
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopyState("Copied!");
+    } catch (e) {
+      setCopyState("Couldn't copy automatically — select the text above and copy it manually.");
+    }
+    setTimeout(() => setCopyState(""), 3000);
+  }
+
+  async function handleImportClick() {
+    setImportState("importing");
+    setImportMessage("");
+    try {
+      const decoded = await decodeRosterCode(importValue);
+      const saved = await onImport(decoded);
+      setImportState("done");
+      setImportMessage(`Imported "${saved.name}" — find it in the Barracks.`);
+      setImportValue("");
+    } catch (e) {
+      setImportState("error");
+      setImportMessage(e.message || "That code couldn't be imported.");
+    }
+  }
+
+  return (
+    <div style={{ position: "fixed", inset: 0, background: "rgba(55,42,27,0.45)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100, padding: 20 }} onClick={onClose}>
+      <div className="whr-panel" style={{ maxWidth: 480, width: "100%", padding: 24, maxHeight: "85vh", overflowY: "auto", borderRadius: 4 }} onClick={(e) => e.stopPropagation()}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 4 }}>
+          <h2 className="whr-h1" style={{ fontSize: 22, margin: 0 }}>Import / Export</h2>
+          <button className="whr-btn whr-btn-sm" onClick={onClose}>Close</button>
+        </div>
+        <p className="whr-serif-italic" style={{ marginTop: 2, marginBottom: 16, fontSize: 14 }}>
+          Share a roster with a code — it's decoded straight from the text, nothing touches a server.
+        </p>
+
+        <div style={{ height: 1, background: "var(--line)", margin: "0 0 18px" }} />
+
+        <label className="whr-label">Generate a code for "{roster.name}"</label>
+        {codeError ? (
+          <p style={{ color: "var(--burgundy)", fontSize: 13.5 }}>{codeError}</p>
+        ) : (
+          <>
+            <textarea className="whr-input" readOnly value={code || "Generating…"} rows={4}
+              style={{ width: "100%", fontFamily: "monospace", fontSize: 12, resize: "none", boxSizing: "border-box" }}
+              onFocus={(e) => e.target.select()} />
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 8, flexWrap: "wrap" }}>
+              <button className="whr-btn whr-btn-gold" disabled={!code} onClick={handleCopy}>Copy to Clipboard</button>
+              {copyState && <span style={{ fontSize: 13, color: "var(--ink-soft)" }}>{copyState}</span>}
+            </div>
+          </>
+        )}
+
+        <div style={{ height: 1, background: "var(--line)", margin: "22px 0 18px" }} />
+
+        <label className="whr-label">Import a code</label>
+        <textarea className="whr-input" value={importValue} onChange={(e) => setImportValue(e.target.value)} rows={4}
+          placeholder="Paste a roster code here…"
+          style={{ width: "100%", fontFamily: "monospace", fontSize: 12, resize: "none", boxSizing: "border-box" }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 8, flexWrap: "wrap" }}>
+          <button className="whr-btn whr-btn-primary" disabled={!importValue.trim() || importState === "importing"} onClick={handleImportClick}>
+            {importState === "importing" ? "Importing…" : "Import"}
+          </button>
+          {importMessage && (
+            <span style={{ fontSize: 13, color: importState === "error" ? "var(--burgundy)" : "var(--forest-dark)" }}>{importMessage}</span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport }) {
   const armyData = getArmyData(roster.factionKey);
   const [selectedId, setSelectedId] = useState(null);
   const [renaming, setRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState(roster.name);
   const [mobileIndex, setMobileIndex] = useState(0);
+  const [showCodeModal, setShowCodeModal] = useState(false);
   const carouselRef = useRef(null);
 
   // Mobile-only: the three builder columns (Regiments / Army / Upgrades) live in a single
@@ -10871,6 +10955,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
             <span>Bug report</span>
             <span>/ feedback</span>
           </button>
+          <button className="whr-btn" onClick={() => setShowCodeModal(true)}>Import / Export</button>
           {renaming ? (
             <input className="whr-input" autoFocus value={renameValue} style={{ width: 180 }}
               onChange={(e) => setRenameValue(e.target.value)}
@@ -10879,7 +10964,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
           ) : (
             <button className="whr-btn" onClick={startRename}>Rename</button>
           )}
-          <button className="whr-btn" onClick={() => window.print()}>Export List</button>
+          <button className="whr-btn" onClick={() => window.print()}>Print / PDF</button>
           <button className="whr-btn whr-btn-gold" onClick={onSave}>Save Roster</button>
         </div>
       </div>
@@ -10906,6 +10991,9 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
       </div>
     </div>
     <PrintableRoster armyData={armyData} roster={roster} totalPoints={totalPoints} regimentPoints={regimentPoints} />
+    {showCodeModal && (
+      <RosterCodeModal roster={roster} onClose={() => setShowCodeModal(false)} onImport={onImport} />
+    )}
     </>
   );
 }
@@ -10913,6 +11001,80 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState }) {
 /* ============================================================================
    APP ROOT
    ========================================================================== */
+
+/* ---------- roster share codes ----------
+   A share code is the roster JSON, gzip-compressed (via the browser's native
+   CompressionStream where available) and base64-encoded. Fully client-side —
+   decoding a code never touches the storage backend, so it works even if the
+   original roster was later changed, deleted, or belongs to someone else's
+   storage entirely. Falls back to plain base64 (no compression) on older
+   browsers without CompressionStream/DecompressionStream support. */
+const SHARE_CODE_PREFIX = "WHR1:";
+const SHARE_CODE_PREFIX_PLAIN = "WHR0:";
+
+function bytesToBase64(bytes) {
+  let binary = "";
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+function base64ToBytes(b64) {
+  const binary = atob(b64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+async function streamAllBytes(readable) {
+  const chunks = [];
+  const reader = readable.getReader();
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+  }
+  const total = chunks.reduce((n, c) => n + c.length, 0);
+  const out = new Uint8Array(total);
+  let offset = 0;
+  for (const c of chunks) { out.set(c, offset); offset += c.length; }
+  return out;
+}
+
+async function encodeRosterCode(roster) {
+  const json = JSON.stringify(roster);
+  if (typeof CompressionStream === "function") {
+    const cs = new CompressionStream("gzip");
+    const writer = cs.writable.getWriter();
+    writer.write(new TextEncoder().encode(json));
+    writer.close();
+    const compressed = await streamAllBytes(cs.readable);
+    return SHARE_CODE_PREFIX + bytesToBase64(compressed);
+  }
+  return SHARE_CODE_PREFIX_PLAIN + bytesToBase64(new TextEncoder().encode(json));
+}
+
+async function decodeRosterCode(code) {
+  const trimmed = (code || "").trim();
+  let json;
+  if (trimmed.startsWith(SHARE_CODE_PREFIX)) {
+    if (typeof DecompressionStream !== "function") {
+      throw new Error("This browser can't decompress this code — try importing from a more modern browser.");
+    }
+    const bytes = base64ToBytes(trimmed.slice(SHARE_CODE_PREFIX.length));
+    const ds = new DecompressionStream("gzip");
+    const writer = ds.writable.getWriter();
+    writer.write(bytes);
+    writer.close();
+    const out = await streamAllBytes(ds.readable);
+    json = new TextDecoder().decode(out);
+  } else if (trimmed.startsWith(SHARE_CODE_PREFIX_PLAIN)) {
+    const bytes = base64ToBytes(trimmed.slice(SHARE_CODE_PREFIX_PLAIN.length));
+    json = new TextDecoder().decode(bytes);
+  } else {
+    throw new Error("That doesn't look like a roster code.");
+  }
+  const roster = JSON.parse(json);
+  if (!roster || !roster.factionKey || !roster.characters) throw new Error("That code didn't decode into a valid roster.");
+  return roster;
+}
 
 const INDEX_KEY = "roster-index";
 
@@ -10993,6 +11155,27 @@ export default function App() {
     }
   }
 
+  // Imports a decoded roster (from a share code) as a brand-new saved roster —
+  // always gets a fresh id, so it never collides with or overwrites anything
+  // already in this browser's Barracks, including the roster it was exported from.
+  async function handleImportRoster(decodedRoster) {
+    const armyData = getArmyData(decodedRoster.factionKey);
+    if (!armyData) throw new Error("That code is for a faction this builder doesn't have loaded.");
+    const imported = { ...decodedRoster, id: uid("roster") };
+    let totalPoints = 0;
+    imported.characters.forEach((u) => (totalPoints += unitCost(u, armyData, imported)));
+    imported.regiments.forEach((u) => (totalPoints += unitCost(u, armyData, imported)));
+    imported.chariots.forEach((u) => (totalPoints += unitCost(u, armyData, imported)));
+    imported.specials.forEach((u) => (totalPoints += unitCost(u, armyData, imported)));
+
+    await storage.set(`roster:${imported.id}`, JSON.stringify(imported));
+    const summary = { id: imported.id, name: imported.name, pointLimit: imported.pointLimit, factionKey: imported.factionKey, totalPoints: fmtPts(totalPoints) };
+    const nextIndex = [summary, ...savedList];
+    await storage.set(INDEX_KEY, JSON.stringify(nextIndex));
+    setSavedList(nextIndex);
+    return imported;
+  }
+
   return (
     <div className="whr-root">
       <style>{CSS}</style>
@@ -11002,7 +11185,7 @@ export default function App() {
         <SetupScreen onMuster={handleMuster} savedList={savedList} onLoad={handleLoad} onDelete={handleDelete} storageError={storageError} />
       )}
       {view === "builder" && roster && (
-        <BuilderScreen roster={roster} setRoster={setRoster} onBack={() => setView("setup")} onSave={handleSave} saveState={saveState} />
+        <BuilderScreen roster={roster} setRoster={setRoster} onBack={() => setView("setup")} onSave={handleSave} saveState={saveState} onImport={handleImportRoster} />
       )}
     </div>
   );
