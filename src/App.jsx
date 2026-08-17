@@ -151,6 +151,11 @@ body {
 .whr-stat-table td:first-child, .whr-stat-table th:first-child { text-align: left; font-weight: 600; }
 
 /* ---------- scrollbar-safe columns ---------- */
+/* .whr-builder-col does double duty: it's on the three outer column wrappers in
+   BuilderScreen (Sidebar/RosterPanel/DetailPanel containers) for the mobile carousel
+   sizing rules, AND on each of those components' own inner root div (paired with
+   .whr-col) for height/scroll behavior. Both usages are intentional, not a collision —
+   worth knowing before assuming one of them is dead weight. */
 .whr-col { min-height: 0; display: flex; flex-direction: column; }
 
 /* ---------- pill / badge ---------- */
@@ -6015,6 +6020,44 @@ const VC_ARMOUR_OPTIONS = ["No armour (default)", "Shield & Light Armour", "Heav
 const VC_MELEE_OPTIONS = ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"];
 const vcCastingGate = (unit, def) => (unit.armour || VC_ARMOUR_OPTIONS[0]) === VC_ARMOUR_OPTIONS[0] && (unit.melee || VC_MELEE_OPTIONS[0]) !== "Double handed weapon";
 
+// Shared between VAMPIRE_COUNTS and CLASSIC_UNDEAD — Classic Undead is the pre-split
+// 4th-edition army, built from the same Wight/Necromancer characters VC still uses today.
+// Kept as a single source so a rules fix only has to happen once instead of twice.
+const WIGHT_HERO_BASE = {
+  id: "wighthero", name: "Wight Hero", cost: 82, stat: "Wight Hero", magicItemSlots: 2, tags: ["wight", "undeadCharacter"],
+  innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
+  armourGroup: { options: ["Shield & Light Armour (default)", "Heavy Armour"] },
+  meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
+  mounts: [
+    { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 22, stat: "Undead Steed" },
+    { id: "wingednightmare", name: "Winged Nightmare", cost: 76, stat: "Winged Nightmare" },
+    { id: "zombiedragon", name: "Zombie Dragon", cost: 316, stat: "Zombie Dragon" },
+  ],
+};
+const NECROMANCER_LORD_BASE = {
+  id: "necromancerlord", name: "Necromancer Lord (level 4)", cost: 240, stat: "Necromancer Lord", magicItemSlots: 4, tags: ["wizard", "necromancer"],
+  gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (4).",
+  mounts: [
+    { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" },
+    { id: "manticore", name: "Manticore (living)", cost: 200, stat: "Manticore" },
+  ],
+};
+const MASTER_NECROMANCER_BASE = {
+  id: "masternecromancer", name: "Master Necromancer (level 3)", cost: 170, stat: "Master Necromancer", magicItemSlots: 3, tags: ["wizard", "necromancer"],
+  gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (3).",
+  mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+};
+const NECROMANCER_CHAMPION_BASE = {
+  id: "necromancerchampion", name: "Necromancer Champion (level 2)", cost: 110, stat: "Necromancer Champion", magicItemSlots: 2, tags: ["wizard", "necromancer"],
+  gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (2).",
+  mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+};
+const NECROMANCER_BASE = {
+  id: "necromancer", name: "Necromancer (level 1)", cost: 50, stat: "Necromancer", magicItemSlots: 1, tags: ["wizard", "necromancer"],
+  gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (1).",
+  mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+};
+
 const VAMPIRE_COUNTS = {
   key: "vampirecounts",
   loreOptions: ["Dark Magic", "Necromancy Magic"],
@@ -6096,40 +6139,11 @@ const VAMPIRE_COUNTS = {
           gearNote: "Strigoi Vampires cannot carry equipment, take magic items, or ride a mount. Get an extra attack (already reflected) and may join regiments of Ghouls. May still take up to two Strigoi bloodline powers (shown below) — bloodline powers aren't equipment or magic items." },
       },
     },
-    {
-      id: "wighthero", name: "Wight Hero", cost: 82, stat: "Wight Hero", magicItemSlots: 2, tags: ["wight", "undeadCharacter"],
-      innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
-      armourGroup: { options: ["Shield & Light Armour (default)", "Heavy Armour"] },
-      meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
-      mounts: [
-        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 22, stat: "Undead Steed" },
-        { id: "wingednightmare", name: "Winged Nightmare", cost: 76, stat: "Winged Nightmare" },
-        { id: "zombiedragon", name: "Zombie Dragon", cost: 316, stat: "Zombie Dragon" },
-      ],
-    },
-    {
-      id: "necromancerlord", name: "Necromancer Lord (level 4)", cost: 240, stat: "Necromancer Lord", magicItemSlots: 4, tags: ["wizard", "necromancer"],
-      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (4).",
-      mounts: [
-        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" },
-        { id: "manticore", name: "Manticore (living)", cost: 200, stat: "Manticore" },
-      ],
-    },
-    {
-      id: "masternecromancer", name: "Master Necromancer (level 3)", cost: 170, stat: "Master Necromancer", magicItemSlots: 3, tags: ["wizard", "necromancer"],
-      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (3).",
-      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
-    },
-    {
-      id: "necromancerchampion", name: "Necromancer Champion (level 2)", cost: 110, stat: "Necromancer Champion", magicItemSlots: 2, tags: ["wizard", "necromancer"],
-      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (2).",
-      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
-    },
-    {
-      id: "necromancer", name: "Necromancer (level 1)", cost: 50, stat: "Necromancer", magicItemSlots: 1, tags: ["wizard", "necromancer"],
-      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (1).",
-      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
-    },
+    { ...WIGHT_HERO_BASE },
+    { ...NECROMANCER_LORD_BASE },
+    { ...MASTER_NECROMANCER_BASE },
+    { ...NECROMANCER_CHAMPION_BASE },
+    { ...NECROMANCER_BASE },
     {
       id: "wightbsb", name: "Wight Battle Standard Bearer", cost: 52, stat: "Wight BSB", magicItemSlots: 1, restriction: "0-1", tags: ["wight", "undeadCharacter", "bsb"],
       innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
@@ -6519,29 +6533,10 @@ const CLASSIC_UNDEAD = {
         { id: "zombiedragon", name: "Zombie Dragon", cost: 300, stat: "Zombie Dragon" },
       ],
     },
-    {
-      id: "necromancerlord", name: "Necromancer Lord (level 4)", cost: 240, stat: "Necromancer Lord", magicItemSlots: 4, tags: ["wizard", "necromancer"],
-      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (4).",
-      mounts: [
-        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" },
-        { id: "manticore", name: "Manticore (living)", cost: 200, stat: "Manticore" },
-      ],
-    },
-    {
-      id: "masternecromancer", name: "Master Necromancer (level 3)", cost: 170, stat: "Master Necromancer", magicItemSlots: 3, tags: ["wizard", "necromancer"],
-      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (3).",
-      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
-    },
-    {
-      id: "necromancerchampion", name: "Necromancer Champion (level 2)", cost: 110, stat: "Necromancer Champion", magicItemSlots: 2, tags: ["wizard", "necromancer"],
-      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (2).",
-      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
-    },
-    {
-      id: "necromancer", name: "Necromancer (level 1)", cost: 50, stat: "Necromancer", magicItemSlots: 1, tags: ["wizard", "necromancer"],
-      gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (1).",
-      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
-    },
+    { ...NECROMANCER_LORD_BASE },
+    { ...MASTER_NECROMANCER_BASE },
+    { ...NECROMANCER_CHAMPION_BASE },
+    { ...NECROMANCER_BASE },
     {
       id: "wightbsb", name: "Wight Battle Standard Bearer", cost: 52, stat: "Wight BSB", magicItemSlots: 1, restriction: "0-1", tags: ["wight", "undeadCharacter", "bsb"],
       innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
@@ -6549,17 +6544,7 @@ const CLASSIC_UNDEAD = {
       armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
       mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 14, stat: "Undead Steed" }],
     },
-    {
-      id: "wighthero", name: "Wight Hero", cost: 82, stat: "Wight Hero", magicItemSlots: 2, tags: ["wight", "undeadCharacter"],
-      innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
-      armourGroup: { options: ["Shield & Light Armour (default)", "Heavy Armour"] },
-      meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
-      mounts: [
-        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 22, stat: "Undead Steed" },
-        { id: "wingednightmare", name: "Winged Nightmare", cost: 76, stat: "Winged Nightmare" },
-        { id: "zombiedragon", name: "Zombie Dragon", cost: 316, stat: "Zombie Dragon" },
-      ],
-    },
+    { ...WIGHT_HERO_BASE },
     {
       id: "vampirecount", name: "Von Carstein Vampire Count", cost: 154, stat: "Vampire Count", magicItemSlots: 2, tags: ["vampire", "undeadCharacter", "voncarstein"],
       armourGroup: { options: VC_ARMOUR_OPTIONS },
@@ -7429,6 +7414,21 @@ const LIZARDMEN_MAGIC_ITEMS = [
   { id: "liz-sacredserpent", name: "Standard of the Sacred Serpent", cost: 40, cat: "banner", desc: "If unengaged, spits 1D6 venomous missiles in the shooting phase that hit automatically — range 12\", Strength 4, poisonous (no effect on poison-immune creatures)." },
 ];
 
+// Shared between LIZARDMEN and SLANN_EMPIRE — Lord Kroak and Mazdamundi are the same
+// character in both books, just under a different id per faction (SLANN_EMPIRE uses a
+// "-slann" suffix so its own copy can't collide with the Lizardmen one if a roster ever
+// cross-references both). Kept as a single source so a rules fix only has to happen once.
+const LORD_KROAK_BASE = {
+  name: "Venerable Lord Kroak", cost: 375, stat: "Slann Mage Priest Lord", role: "Mummified Slann Mage Priest Lord, 5 magic levels",
+  note: "May take five additional magic items.", extraMagicItemSlots: 5,
+  items: "Carries The Gold Death Mask — enemies can't hit Kroak in melee unless they roll a natural 6 to hit (or 5+ with an always-hits weapon).",
+};
+const EMPEROR_MAZDAMUNDI_BASE = {
+  name: "Emperor Mazdamundi", cost: 600, stat: "Emperor Mazdamundi", role: "Slann Mage Priest Lord riding a Stegadon (already incorporated into his profile)",
+  note: "Causes terror and delivers 1D6 impact hits like a chariot. Always knows four fixed spells: Move the Mountains (Power 2, freezes a hill's units), The Ruination of Cities (Power 3, destroys a building/bridge and everything on it), Earth Line (Power 2, S10 hit along a line to a table corner), and Part the Waters (Power 1, removes a water feature). Carries the battle standard. May take four additional magic items, one of which may be a magic banner.", extraMagicItemSlots: 4,
+  items: "Carries the Cobra Mace of Mazdamundi — enemies attacking him with a magic weapon must roll 1D6 each round first; on a 6 the weapon is destroyed and no attack is made.",
+};
+
 const LIZARDMEN = {
   key: "lizardmen",
   loreOptions: [...COLLEGE_LORES, "High Magic"],
@@ -7594,9 +7594,7 @@ const LIZARDMEN = {
       note: "His attacks allow no armour save and inflicted wounds multiply into 1D3 wounds. May re-roll his armour saves. Carries a shield." },
     { id: "oxayotl", name: "Oxayotl", cost: 100, stat: "Oxayotl", role: "Skink Hero",
       note: "5+ scaly-skin save. Shooting attacks against him suffer -2 to hit. May be deployed as a scout, or in the open no closer than 8\" from the enemy (chameleon heritage). Carries a blowpipe that may fire three poisonous Strength 5 hits." },
-    { id: "lordkroak", name: "Venerable Lord Kroak", cost: 375, stat: "Slann Mage Priest Lord", role: "Mummified Slann Mage Priest Lord, 5 magic levels",
-      note: "May take five additional magic items.", extraMagicItemSlots: 5,
-      items: "Carries The Gold Death Mask — enemies can't hit Kroak in melee unless they roll a natural 6 to hit (or 5+ with an always-hits weapon)." },
+    { id: "lordkroak", ...LORD_KROAK_BASE },
     { id: "lotlbotl", name: "Lotl Botl", cost: 150, stat: "Lizardman Saurus Hero", role: "Saurus Hero",
       note: "Causes fear. His presence in a regiment adds +1 to combat resolution. Light armour and a shield." },
     { id: "tenehuini", name: "Tenehuini, Prophet of Sotek", cost: 100, stat: "Lizardman Skink Shaman", role: "Skink Shaman and Battle Standard Bearer",
@@ -7607,9 +7605,7 @@ const LIZARDMEN = {
       mounts: [{ id: "hornedone", name: "Horned One", cost: 0, stat: "Horned One" }] },
     { id: "itzibitzi", name: "Itzi-Bitzi", cost: 80, stat: "Lizardman Skink Hero", role: "Skink Hero",
       note: "Once per battle, in the Lizardmen movement phase, may force all non-deaf enemies within 8\" (Dwarf Longbeards excepted) to take a panic test on three dice choosing the two highest (resolute troops take a normal panic test) — applies even to units in melee. Carries light armour, a shield, and the Piranha Blade." },
-    { id: "mazdamundi", name: "Emperor Mazdamundi", cost: 600, stat: "Emperor Mazdamundi", role: "Slann Mage Priest Lord riding a Stegadon (already incorporated into his profile)",
-      note: "Causes terror and delivers 1D6 impact hits like a chariot. Always knows four fixed spells: Move the Mountains (Power 2, freezes a hill's units), The Ruination of Cities (Power 3, destroys a building/bridge and everything on it), Earth Line (Power 2, S10 hit along a line to a table corner), and Part the Waters (Power 1, removes a water feature). Carries the battle standard. May take four additional magic items, one of which may be a magic banner.", extraMagicItemSlots: 4,
-      items: "Carries the Cobra Mace of Mazdamundi — enemies attacking him with a magic weapon must roll 1D6 each round first; on a 6 the weapon is destroyed and no attack is made." },
+    { id: "mazdamundi", ...EMPEROR_MAZDAMUNDI_BASE },
   ],
 };
 
@@ -7875,12 +7871,8 @@ const SLANN_EMPIRE = {
       note: "Carries light armour and a shield. May take two additional magic items.", extraMagicItemSlots: 2,
       items: "Carries the Blade of Realities — every hit wounds automatically, no armour save, 1 wound becomes 1D3 wounds.",
       mounts: [{ id: "hornedone", name: "Horned One", cost: 40, stat: "Horned One" }] },
-    { id: "lordkroak-slann", name: "Venerable Lord Kroak", cost: 375, stat: "Slann Mage Priest Lord", role: "Mummified Slann Mage Priest Lord, 5 magic levels",
-      note: "May take five additional magic items.", extraMagicItemSlots: 5,
-      items: "Carries The Gold Death Mask — enemies can't hit Kroak in melee unless they roll a natural 6 to hit (or 5+ with an always-hits weapon)." },
-    { id: "mazdamundi-slann", name: "Emperor Mazdamundi", cost: 600, stat: "Emperor Mazdamundi", role: "Slann Mage Priest Lord riding a Stegadon (already incorporated into his profile)",
-      note: "Causes terror and delivers 1D6 impact hits like a chariot. Always knows four fixed spells: Move the Mountains (Power 2, freezes a hill's units), The Ruination of Cities (Power 3, destroys a building/bridge and everything on it), Earth Line (Power 2, S10 hit along a line to a table corner), and Part the Waters (Power 1, removes a water feature). Carries the battle standard. May take four additional magic items, one of which may be a magic banner.", extraMagicItemSlots: 4,
-      items: "Carries the Cobra Mace of Mazdamundi — enemies attacking him with a magic weapon must roll 1D6 each round first; on a 6 the weapon is destroyed and no attack is made." },
+    { id: "lordkroak-slann", ...LORD_KROAK_BASE },
+    { id: "mazdamundi-slann", ...EMPEROR_MAZDAMUNDI_BASE },
   ],
 };
 
