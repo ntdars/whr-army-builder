@@ -10516,15 +10516,28 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
       }
       t += cost;
     });
-    // the cheapest unit flagged countsAsFirstRegiment counts toward Regiments
+    // The cheapest unit flagged countsAsFirstRegiment counts toward Regiments — but for a
+    // "quantity" unit (War Wagon, Giants, Rat Swarms, etc.) bought as a group of several in one
+    // roster entry, only ONE unit's worth counts toward Regiments even if several were bought
+    // together; the rest count toward Chariots/Monsters/War Machines instead, per each unit's
+    // own note text. Using unitCost() directly here would wrongly scale the whole group's cost
+    // (e.g. 3 War Wagons at 100pts each) into the Regiments total instead of just one.
     if (roster.chariots.length > 0) {
       const flaggedUnits = roster.chariots.filter((u) => {
         const d = armyData.chariotsMonsters.find((c) => c.id === u.defId);
         return d && d.countsAsFirstRegiment;
       });
       if (flaggedUnits.length > 0) {
-        const costs = flaggedUnits.map((u) => unitCost(u, armyData, roster));
-        t += Math.min(...costs);
+        const candidateCosts = flaggedUnits.map((u) => {
+          const d = armyData.chariotsMonsters.find((c) => c.id === u.defId);
+          if (d.kind === "quantity") {
+            let variantPerUnit = 0;
+            (d.variantOptions || []).forEach((o) => { if (u.variantSelections?.[o.id]) variantPerUnit += o.cost; });
+            return d.perUnit + variantPerUnit;
+          }
+          return unitCost(u, armyData, roster);
+        });
+        t += Math.min(...candidateCosts);
       }
     }
     return t;
