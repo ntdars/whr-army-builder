@@ -10749,10 +10749,11 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
 
   const themeGateWarning = useMemo(() => {
     const gate = armyData.themeGates?.find((g) => g.themeId === (roster.armyTheme || armyData.themes?.default));
-    if (!gate) return null;
-    if (gate.minPoints && roster.pointLimit < gate.minPoints) return `${gate.label} requires an army of at least ${gate.minPoints}pts (this roster is set to ${roster.pointLimit}pts).`;
+    if (!gate || !gate.minPoints) return null;
+    if (roster.pointLimit < gate.minPoints) return `${gate.label} requires an army of at least ${gate.minPoints}pts (this roster is set to ${roster.pointLimit}pts).`;
+    if (totalPoints < gate.minPoints) return `${gate.label} requires an army of at least ${gate.minPoints}pts (this roster currently has ${totalPoints}pts of units — keep building to clear this).`;
     return null;
-  }, [armyData, roster.armyTheme, roster.pointLimit]);
+  }, [armyData, roster.armyTheme, roster.pointLimit, totalPoints]);
 
   const compositionInfo = useMemo(() => {
     const rules = armyData.compositionRules;
