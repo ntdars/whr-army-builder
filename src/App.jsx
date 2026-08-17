@@ -8697,7 +8697,7 @@ function championOptionEffective(opt, bloodlineId) {
   const swap = opt.bloodlineSwap?.[bloodlineId];
   return swap ? { ...opt, ...swap } : opt;
 }
-function resolveUnitStat(kind, unit, def, bloodlineId) {
+function resolveUnitStat(kind, unit, def, bloodlineId, armyData) {
   if (kind === "character") {
     const mount = def.mounts?.find((m) => m.id === unit.mountId);
     if (mount) return { statKey: def.stat, statNote: null, mountStatKey: mount.stat, charLabel: def.name, mountLabel: mount.name.replace(/\s*\([^)]*\)\s*$/, "") };
@@ -8717,8 +8717,20 @@ function resolveUnitStat(kind, unit, def, bloodlineId) {
       championStatKey = def.multiChampion.stat;
       championLabel = unit.multiChampionCount > 1 ? `${def.multiChampion.name} ×${unit.multiChampionCount}` : def.multiChampion.name;
     }
+    // Detachments stack underneath the champion/mount, in the order they were added — each
+    // shown as its own small statline labeled "<Name> (Detachment)" so it's clearly distinct
+    // from the parent regiment's own profile above it.
+    let detachments = [];
+    if (def.detachmentParent && (unit.detachments || []).length > 0 && armyData) {
+      detachments = unit.detachments.map((d) => {
+        const dtype = (armyData.detachmentTypes || []).find((t) => t.id === d.defId);
+        if (!dtype?.stat) return null;
+        const baseName = dtype.name.replace(/\s*\(detachment\)\s*$/i, "");
+        return { statKey: dtype.stat, label: `${baseName} (Detachment)` };
+      }).filter(Boolean);
+    }
     const hasExtra = !!(championStatKey || def.mountStat);
-    const withChampion = { ...base, championStatKey, championLabel, charLabel: hasExtra ? (def.riderLabel || def.name) : null };
+    const withChampion = { ...base, championStatKey, championLabel, charLabel: hasExtra ? (def.riderLabel || def.name) : null, detachments };
     if (def.mountStat) return { ...withChampion, mountStatKey: def.mountStat, mountLabel: def.mountLabel || def.mountStat };
     return withChampion;
   }
@@ -8865,7 +8877,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
 }
 
 function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData, bloodlineId }) {
-  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel } = resolveUnitStat(kind, unit, def, bloodlineId);
+  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   return (
     <div className={`whr-card ${selected ? "whr-card-selected" : ""}`} style={{ marginBottom: 10, cursor: "pointer" }} onClick={onSelect}>
@@ -8899,6 +8911,12 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
               <StatBlock statKey={mountStatKey} statNote={null} />
             </>
           )}
+          {(detachments || []).map((d, i) => (
+            <React.Fragment key={i}>
+              <div className="whr-eyebrow" style={{ fontSize: 12.5, margin: "6px 0 2px", color: "var(--gold)" }}>{d.label}</div>
+              <StatBlock statKey={d.statKey} statNote={null} />
+            </React.Fragment>
+          ))}
         </div>
       )}
       {tags.length > 0 && (
@@ -9095,7 +9113,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
 // resolveUnitStat/resolveUnitTags/StatBlock helpers RosterUnitCard uses) in a plain black-on-white
 // document layout instead of the app's interactive cards.
 function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodlineId }) {
-  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel } = resolveUnitStat(kind, unit, def, bloodlineId);
+  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   const hasStats = !!(statKey || statNote);
   return (
@@ -9122,6 +9140,12 @@ function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodline
                   <StatBlock statKey={mountStatKey} statNote={null} />
                 </>
               )}
+              {(detachments || []).map((d, i) => (
+                <React.Fragment key={i}>
+                  <div className="whr-print-stat-label">{d.label}</div>
+                  <StatBlock statKey={d.statKey} statNote={null} />
+                </React.Fragment>
+              ))}
             </div>
           )}
           {tags.length > 0 && (
