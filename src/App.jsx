@@ -7139,7 +7139,6 @@ const HALFLING_MAGIC_ITEMS = [
   { id: "hfl-luckcharm", name: "Borrowed Luck Charm", cost: 15, cat: "enchanted", desc: "The bearer may re-roll one failed armour save per game." },
   { id: "hfl-signetring", name: "Purloined Signet Ring", cost: 20, cat: "enchanted", desc: "If carried by the general, all units within 12\" may use his or her Leadership." },
   { id: "hfl-giftedspoon", name: "The Gifted Spoon", cost: 10, cat: "enchanted", desc: "Purely ceremonial, but no Halfling would go to war without a good spoon. No effect on the game — carried for luck." },
-  { id: "hfl-runeweapon", name: "A Single Dwarf Rune Item", cost: 35, cat: "enchanted", desc: "Halflings may commission exactly one Dwarf rune-inscribed weapon for their army, crafted per the Dwarfs army book's rune rules. This entry stands in for that one-time exception — treat as a generic magic weapon of dwarven make." },
 ];
 
 const HALFLINGS = {
@@ -7154,7 +7153,7 @@ const HALFLINGS = {
   magicItems: [...COMMON_MAGIC_ITEMS, ...HALFLING_MAGIC_ITEMS],
   armyWideRules: [
     "Foresters: all Halfling regiments and characters (and Treemen) move through woods without any penalty to movement.",
-    "Liberated Magic Items: beyond the small curated pool above, Halfling armies may in principle choose magic items from ANY army book, restricted to hand weapons, bows, light armour, and enchanted items only, at a rate of one item from another book per 800 points (or part thereof) of models in the force, ignoring that item's normal restrictions (a Halfling can carry a Chaos-Power-specific item or a Bretonnian-Commoner-only item freely, since Halflings are immune to the effects of Chaos). They may also commission exactly one Dwarf Rune Item. This builder's own item pool above is a representative curated subset, not the full any-book selection — the 800pt ratio and true any-book access are not mechanically enforced.",
+    "Liberated Magic Items: beyond the small curated pool above, Halfling characters and regiment champions have a dedicated \"Liberated Magic Items\" section offering hand weapons, bows, light armour, and enchanted items from any other army book, ignoring that item's normal restrictions (a Halfling can carry a Chaos-Power-specific item or a Bretonnian-Commoner-only item freely, since Halflings are immune to the effects of Chaos), plus exactly one Dwarf Rune Item for the whole army. The one-per-800-points cap and the one-Rune-Item cap are both tracked army-wide and flagged as a Rule Flag if exceeded, rather than hard-blocked per unit.",
     "Halfling Thief: hides as an ordinary trooper inside a Halfling rank-and-file regiment (only one thief per regiment, noted by hand on the roster) and is revealed only when that regiment engages in melee, replacing an ordinary trooper. In the first round of combat it strikes before even strike-first models and before challenges are declared; on a hit, it randomly steals a magic item (not a banner) from an enemy in base contact, usable if the thief could otherwise use its mundane counterpart and it isn't arcane. Fights as a normal character (no longer striking first) in subsequent rounds, and moves as an independent character once the combat ends. A battle-phase mechanic, not simulated beyond the character's own points cost.",
     "Empire or Elven allies: for every two Halfling regiments, the army may include one regiment of Imperial Troops from the Empire (Auxiliary Troops not allowed, Empire Champions permitted, may take Empire-only banners/items) — or, if no Empire Troops are taken, one regiment of Wood Elf Archers, Wood Elf Warriors, Glade Riders, or Elven Lords per two Halfling regiments instead (with access to Wood Elf-only banners/items). For each Empire regiment included, the army may also add one Empire mortar or cannon. Not mechanically importable in this builder — track allied regiments and their points by hand using the Empire or Wood Elves faction as reference.",
     "The Cockatrice is unique — the army may only ever include a single one, whether ridden by a Moot General or taken as an independent monster (not hard-enforced as a cross-slot restriction by this builder).",
@@ -7915,6 +7914,32 @@ const FACTION_LIST = [
 
 const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaoswarriors: CHAOS_WARRIORS, beastmen: BEASTMEN, daemons: CHAOS_DAEMONS, chaoswarband: CHAOS_WARBAND, highelves: HIGH_ELVES, dwarfs: DWARFS, bretonnia: BRETONNIA, orcsgoblins: ORCS_GOBLINS, dogsofwar: DOGS_OF_WAR, chaosdwarfs: CHAOS_DWARFS, darkelves: DARK_ELVES, skaven: SKAVEN, vampirecounts: VAMPIRE_COUNTS, tombkings: TOMB_KINGS, classicundead: CLASSIC_UNDEAD, kislev: KISLEV, norse: NORSE, halflings: HALFLINGS, ogres: OGRES, lizardmen: LIZARDMEN, slann: SLANN_EMPIRE };
 
+// Halflings' "Liberated Magic Items" rule: hand weapons, bows, light armour, and enchanted
+// items from any OTHER army book, plus exactly one Dwarf Rune Item. Best-guess category
+// mapping — the engine doesn't yet distinguish "hand weapon" from other weapon subtypes
+// (lances, great weapons) or "light" from "heavy" armour within the weapon/armour categories
+// (see the Project Anvil subtype-audit note), so this may be a little more permissive than
+// strict RAW in either direction. Runes are pulled separately (weapon/armour/enchanted runes
+// only — engineering runes are machine-only and irrelevant to a carried item).
+const LIBERATED_ITEM_CATEGORIES = ["weapon", "armour", "enchanted"];
+const LIBERATED_MAGIC_ITEMS_BY_FACTION = (() => {
+  const halflingIds = new Set((HALFLINGS.magicItems || []).map((m) => m.id));
+  const seen = new Set();
+  const groups = [];
+  Object.entries(FACTIONS).forEach(([key, fd]) => {
+    if (key === "halflings") return;
+    const items = [], runes = [];
+    (fd.magicItems || []).forEach((m) => {
+      if (!LIBERATED_ITEM_CATEGORIES.includes(m.cat)) return;
+      if (halflingIds.has(m.id) || seen.has(m.id)) return;
+      seen.add(m.id);
+      (m.isRune ? runes : items).push(m);
+    });
+    if (items.length > 0 || runes.length > 0) groups.push({ key, label: fd.name, items, runes });
+  });
+  return groups;
+})();
+
 // A handful of factions (currently just Halflings) can field a small number of allied "auxiliary"
 // regiments pulled wholesale from another faction's own army list (Empire Troops / Elven Troops).
 // These two helpers resolve the *correct* source faction's armyData/def for a given roster unit —
@@ -8405,6 +8430,81 @@ function MagicItemPickerWithBanner({ items, selectedIds, onToggle, maxSlots, use
         <MagicItemPicker items={items} selectedIds={selectedIds} onToggle={onToggle} maxSlots={maxSlots} usedElsewhere={usedElsewhere} categoryFilter={nonBannerFilter} context={context} label={label} />
       )}
     </>
+  );
+}
+
+// Halflings-only: picks from LIBERATED_MAGIC_ITEMS_BY_FACTION, grouped by source army book
+// instead of by category (reusing the same collapsible-row look as MagicItemPicker). No hard
+// slot cap here — per-unit enforcement isn't practical for an army-wide "1 per 800pts" budget
+// shared across every character/champion in the roster, so this picker lets the user select
+// freely and a roster-wide Rule Flag (liberatedItemWarnings, in BuilderScreen) catches going
+// over budget instead. The one Dwarf Rune Item exception renders as its own small section
+// beneath the main groups, capped at 1 by this component directly since that part IS a clean
+// per-army (not per-unit) global cap regardless of point total.
+// Halflings-only: picks from LIBERATED_MAGIC_ITEMS_BY_FACTION, grouped by source army book
+// instead of by category (reusing the same collapsible-row look as MagicItemPicker), plus one
+// more group for the single Dwarf Rune Item exception at the bottom. Everything writes to the
+// same selectedIds array — no hard slot cap here, since per-unit enforcement isn't practical
+// for a budget that's shared army-wide across every character/champion in the roster (1 per
+// 800pts of the army, plus exactly 1 rune item total). A roster-wide Rule Flag
+// (liberatedItemWarnings, in BuilderScreen) catches going over either budget instead.
+function LiberatedMagicItemsPicker({ selectedIds, onToggle, usedElsewhere }) {
+  const [openFactions, setOpenFactions] = useState({});
+  const isOpen = (key, arr) => {
+    if (openFactions[key] !== undefined) return openFactions[key];
+    return arr.some((mi) => selectedIds.includes(mi.id));
+  };
+  const toggleOpen = (key, arr) => setOpenFactions((prev) => ({ ...prev, [key]: !isOpen(key, arr) }));
+  const renderGroup = (key, label, arr) => {
+    if (arr.length === 0) return null;
+    const open = isOpen(key, arr);
+    const selCount = arr.filter((mi) => selectedIds.includes(mi.id)).length;
+    return (
+      <div key={key} style={{ marginBottom: 6, border: "1px solid var(--line-soft)", borderRadius: 3, overflow: "hidden" }}>
+        <button type="button" onClick={() => toggleOpen(key, arr)} aria-expanded={open}
+          style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--paper-2)", border: "none", padding: "7px 9px", cursor: "pointer", textAlign: "left" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 7 }}>
+            <span aria-hidden="true" style={{ display: "inline-block", fontSize: 11, color: "var(--ink-soft)", transition: "transform 0.15s", transform: open ? "rotate(90deg)" : "rotate(0deg)" }}>▶</span>
+            <span style={{ fontFamily: "var(--font-display)", fontSize: 14.5, letterSpacing: "0.04em", color: "var(--gold)" }}>{label}</span>
+            <span style={{ fontSize: 12, color: "var(--ink-faint)" }}>({arr.length})</span>
+          </span>
+          {selCount > 0 && (
+            <span style={{ fontSize: 11.5, color: "#F3E4BC", background: "var(--burgundy)", padding: "2px 7px", borderRadius: 8 }}>{selCount} selected</span>
+          )}
+        </button>
+        {open && (
+          <div style={{ background: "var(--paper)", padding: "2px 2px" }}>
+            {arr.map((mi) => {
+              const checked = selectedIds.includes(mi.id);
+              const disabled = !checked && usedElsewhere.has(mi.id);
+              return (
+                <label key={mi.id} className={`whr-opt-row whr-opt-label ${disabled ? "whr-opt-disabled" : ""}`} title={mi.desc}>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <input type="checkbox" checked={checked} disabled={disabled} onChange={() => onToggle(mi.id)} />
+                    <span>{mi.name}{usedElsewhere.has(mi.id) && !checked ? " (taken)" : ""}</span>
+                  </span>
+                  <span className="whr-opt-cost">{mi.cost}pts</span>
+                </label>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  };
+  const allRunes = LIBERATED_MAGIC_ITEMS_BY_FACTION.flatMap((f) => f.runes);
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 2 }}>
+        <span className="whr-label" style={{ marginBottom: 0, color: "var(--gold)" }}>Liberated Magic Items</span>
+        <span className="whr-opt-cost">{selectedIds.length} taken</span>
+      </div>
+      <p className="whr-serif-italic" style={{ fontSize: 12.5, color: "var(--ink-faint)", margin: "0 0 8px" }}>
+        Any army book's hand weapons, bows, light armour, or enchanted items — one per 800pts of the army (rounded up), plus one Dwarf Rune Item. Tracked army-wide, not per unit.
+      </p>
+      {LIBERATED_MAGIC_ITEMS_BY_FACTION.map((f) => renderGroup(f.key, f.label, f.items))}
+      {renderGroup("runes", "Dwarf Rune Item (1 total)", allRunes)}
+    </div>
   );
 }
 
@@ -8947,7 +9047,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, selectedId, onSelect, onRemove, onReorderSection }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, liberatedItemWarnings, selectedId, onSelect, onRemove, onReorderSection }) {
   // Pointer-based reordering (not native HTML5 drag-and-drop — that requires
   // dataTransfer.setData() to reliably fire onDrop in several browsers, and its default
   // "ghost image follows cursor" look is flat and inconsistent across browsers). This
@@ -9170,6 +9270,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic items / bloodline powers:</div>
           <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {sharedPoolWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
+      {liberatedItemWarnings && liberatedItemWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Liberated Magic Items:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            {liberatedItemWarnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
@@ -9735,6 +9843,13 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         );
       })()}
 
+      {armyData.key === "halflings" && (
+        <div style={{ marginTop: 14 }}>
+          <LiberatedMagicItemsPicker selectedIds={unit.liberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
+            onToggle={(id) => toggleArrayField(unit, "liberatedMagicItemIds", id, updateUnit)} />
+        </div>
+      )}
+
       {def.bloodlinePowerSlots > 0 && (
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.bloodlinePowerIds || []} maxSlots={def.bloodlinePowerSlots} usedElsewhere={usedElsewhere}
@@ -10041,6 +10156,12 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                     const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
                     updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
                   }} />
+                {armyData.key === "halflings" && (
+                  <div style={{ marginTop: 10 }}>
+                    <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
+                      onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
+                  </div>
+                )}
                 {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
                   <RunesSection>
                     {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
@@ -10100,6 +10221,12 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
                     const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
                     updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
                   }} />
+                {armyData.key === "halflings" && (
+                  <div style={{ marginTop: 10 }}>
+                    <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
+                      onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
+                  </div>
+                )}
                 {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
                   <RunesSection>
                     {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
@@ -10856,6 +10983,29 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     return warnings;
   }, [roster, armyData]);
 
+  // Halflings' "Liberated Magic Items" — tracked army-wide rather than per unit (the rule caps
+  // the whole army at one liberated item per 800pts of units actually in the army, not the
+  // roster's target point limit, plus exactly one Dwarf Rune Item total), so this is a soft
+  // Rule Flag rather than a hard per-unit slot block. See LiberatedMagicItemsPicker.
+  const liberatedItemWarnings = useMemo(() => {
+    if (armyData.key !== "halflings") return [];
+    const allIds = [];
+    roster.characters.forEach((u) => allIds.push(...(u.liberatedMagicItemIds || [])));
+    roster.regiments.forEach((u) => allIds.push(...(u.championLiberatedMagicItemIds || [])));
+    const runeIds = new Set(LIBERATED_MAGIC_ITEMS_BY_FACTION.flatMap((f) => f.runes).map((m) => m.id));
+    const nonRuneCount = allIds.filter((id) => !runeIds.has(id)).length;
+    const runeCount = allIds.filter((id) => runeIds.has(id)).length;
+    const warnings = [];
+    const maxNonRune = Math.ceil(totalPoints / 800);
+    if (nonRuneCount > maxNonRune) {
+      warnings.push(`Only ${maxNonRune} Liberated Magic Item${maxNonRune === 1 ? "" : "s"} allowed at ${totalPoints}pts of units (one per 800pts, rounded up) — currently ${nonRuneCount}.`);
+    }
+    if (runeCount > 1) {
+      warnings.push(`Only one Dwarf Rune Item allowed army-wide — currently ${runeCount}.`);
+    }
+    return warnings;
+  }, [armyData, roster.characters, roster.regiments, totalPoints]);
+
   const runeWarnings = useMemo(() => {
     const warnings = [];
     if (!armyData.runeForge) return warnings;
@@ -11196,7 +11346,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} selectedId={selectedId} onSelect={selectAndAdvance} onRemove={removeUnit} onReorderSection={reorderSection} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} liberatedItemWarnings={liberatedItemWarnings} selectedId={selectedId} onSelect={selectAndAdvance} onRemove={removeUnit} onReorderSection={reorderSection} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
