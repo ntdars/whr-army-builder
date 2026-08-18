@@ -1612,7 +1612,7 @@ const EMPIRE = {
       champion: { name: "Empire Champion", baseCost: 20, magicItemSlots: 1, stat: "Empire Champion" },
     },
     {
-      id: "handgunners", name: "Hand gunners", perModel: 9, minSize: 5, stat: "State Trooper", command: "standard",
+      id: "handgunners", name: "Handgunners", perModel: 9, minSize: 5, stat: "State Trooper", command: "standard",
       note: "State Troops with handguns.",
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
@@ -1747,7 +1747,7 @@ const EMPIRE = {
     { id: "swordsmen", name: "Swordsmen (detachment)", perModel: 5.5, stat: "Swordsman" },
     { id: "freecompany", name: "Free Company, trained (detachment)", perModel: 6, stat: "Fighter" },
     { id: "crossbowmen", name: "Crossbowmen (detachment)", perModel: 9, stat: "State Trooper" },
-    { id: "handgunners", name: "Hand gunners (detachment)", perModel: 9, stat: "State Trooper" },
+    { id: "handgunners", name: "Handgunners (detachment)", perModel: 9, stat: "State Trooper" },
     { id: "archers", name: "Archers (detachment)", perModel: 7, stat: "State Trooper" },
   ],
   chariotsMonsters: [
@@ -6816,7 +6816,7 @@ const KISLEV = {
       champion: { name: "Champion", baseCost: 20, magicItemSlots: 1, stat: "Kislevite Champion" },
     },
     {
-      id: "handgunners-kis", name: "Hand Gunners", perModel: 10, minSize: 5, stat: "Kislevite Warrior", command: "standard",
+      id: "handgunners-kis", name: "Handgunners", perModel: 10, minSize: 5, stat: "Kislevite Warrior", command: "standard",
       note: "Strelti, trained by the legacy of Prince Boydinov of Erengrad. Warriors with hand guns, light armour, and a bardiche (short halberd used as a gun rest).",
       champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
     },
@@ -8876,15 +8876,25 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
   return tags;
 }
 
-function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData, bloodlineId }) {
+function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData, bloodlineId, dragHandlers, isDragging, isDragOver }) {
   const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   return (
-    <div className={`whr-card ${selected ? "whr-card-selected" : ""}`} style={{ marginBottom: 10, cursor: "pointer" }} onClick={onSelect}>
+    <div className={`whr-card ${selected ? "whr-card-selected" : ""}`}
+      style={{
+        marginBottom: 10, cursor: "pointer", opacity: isDragging ? 0.4 : 1,
+        boxShadow: isDragOver ? "inset 0 2px 0 0 var(--gold)" : undefined,
+      }}
+      onClick={onSelect} {...(dragHandlers || {})}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <div>
-          <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 17 }}>{unit.customName || def.name}</div>
-          {unit.customName && <div className="whr-serif-italic" style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: -2 }}>{def.name}</div>}
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
+          {dragHandlers && (
+            <span title="Drag to reorder" style={{ cursor: "grab", color: "var(--ink-faint)", fontSize: 15, lineHeight: "22px", userSelect: "none" }}>⠿⠿</span>
+          )}
+          <div>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 17 }}>{unit.customName || def.name}</div>
+            {unit.customName && <div className="whr-serif-italic" style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: -2 }}>{def.name}</div>}
+          </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span className="whr-badge-gold whr-badge">{fmtPts(cost)} pts</span>
@@ -8930,7 +8940,39 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, selectedId, onSelect, onRemove }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, selectedId, onSelect, onRemove, onReorderSection }) {
+  // Drag state is keyed by {section, index} rather than a plain index, since each of the four
+  // lists (characters/regiments/chariots/specials) reorders independently — dragging a card
+  // only ever makes sense within its own section, never across into a different one.
+  const [drag, setDrag] = useState(null);
+  const [dragOver, setDragOver] = useState(null);
+
+  function makeDragHandlers(section, idx) {
+    if (!onReorderSection) return null;
+    return {
+      draggable: true,
+      onDragStart: (e) => { e.stopPropagation(); setDrag({ section, index: idx }); },
+      onDragOver: (e) => {
+        e.preventDefault(); e.stopPropagation();
+        if (drag?.section !== section) return;
+        if (dragOver?.section !== section || dragOver?.index !== idx) setDragOver({ section, index: idx });
+      },
+      onDrop: (e) => {
+        e.preventDefault(); e.stopPropagation();
+        if (drag?.section === section && drag.index !== idx) {
+          const next = [...roster[section]];
+          const [moved] = next.splice(drag.index, 1);
+          next.splice(idx, 0, moved);
+          onReorderSection(section, next);
+        }
+        setDrag(null); setDragOver(null);
+      },
+      onDragEnd: (e) => { e.stopPropagation(); setDrag(null); setDragOver(null); },
+    };
+  }
+  const isDragging = (section, idx) => drag?.section === section && drag.index === idx;
+  const isDragOver = (section, idx) => dragOver?.section === section && dragOver.index === idx && drag && !(drag.section === section && drag.index === idx);
+
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
   const underHalf = totalPoints > 0 && regimentPct < 50 - 0.001;
@@ -9058,10 +9100,11 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
         {roster.characters.length > 0 && (
           <>
             <div className="whr-eyebrow" style={{ marginBottom: 8 }}>Characters</div>
-            {roster.characters.map((u) => {
+            {roster.characters.map((u, idx) => {
               const def = applyBloodline(armyData.characters.find((c) => c.id === u.defId), roster.armyTheme);
               return <RosterUnitCard key={u.instanceId} kind="character" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} bloodlineId={roster.armyTheme} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} bloodlineId={roster.armyTheme}
+                dragHandlers={makeDragHandlers("characters", idx)} isDragging={isDragging("characters", idx)} isDragOver={isDragOver("characters", idx)} />;
             })}
           </>
         )}
@@ -9069,14 +9112,15 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
         {roster.regiments.length > 0 && (
           <>
             <div className="whr-eyebrow" style={{ margin: "16px 0 8px" }}>Regiments</div>
-            {roster.regiments.map((u) => {
+            {roster.regiments.map((u, idx) => {
               const def = regDefFor(u, armyData);
               const srcArmyData = armyDataFor(u, armyData);
               const models = def.kind === "composite"
                 ? Object.values(u.composition || {}).reduce((a, b) => a + b, 0)
                 : u.size;
               return <RosterUnitCard key={u.instanceId} kind="regiment" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={models} armyData={srcArmyData} bloodlineId={roster.armyTheme} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={models} armyData={srcArmyData} bloodlineId={roster.armyTheme}
+                dragHandlers={makeDragHandlers("regiments", idx)} isDragging={isDragging("regiments", idx)} isDragOver={isDragOver("regiments", idx)} />;
             })}
           </>
         )}
@@ -9084,10 +9128,11 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
         {roster.chariots.length > 0 && (
           <>
             <div className="whr-eyebrow" style={{ margin: "16px 0 8px" }}>Chariots & Monsters</div>
-            {roster.chariots.map((u) => {
+            {roster.chariots.map((u, idx) => {
               const def = chariotDefFor(u, armyData);
               return <RosterUnitCard key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? u.qty : null} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? u.qty : null} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme}
+                dragHandlers={makeDragHandlers("chariots", idx)} isDragging={isDragging("chariots", idx)} isDragOver={isDragOver("chariots", idx)} />;
             })}
           </>
         )}
@@ -9095,10 +9140,11 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
         {roster.specials.length > 0 && (
           <>
             <div className="whr-eyebrow" style={{ margin: "16px 0 8px" }}>Special Characters</div>
-            {roster.specials.map((u) => {
+            {roster.specials.map((u, idx) => {
               const def = armyData.specialCharacters.find((s) => s.id === u.defId);
               return <RosterUnitCard key={u.instanceId} kind="special" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} bloodlineId={roster.armyTheme} />;
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} bloodlineId={roster.armyTheme}
+                dragHandlers={makeDragHandlers("specials", idx)} isDragging={isDragging("specials", idx)} isDragOver={isDragOver("specials", idx)} />;
             })}
           </>
         )}
@@ -10498,6 +10544,9 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     setRenameValue(roster.name);
     setRenaming(true);
   }
+  function reorderSection(section, next) {
+    setRoster((r) => ({ ...r, [section]: next }));
+  }
   function confirmRename() {
     const trimmed = renameValue.trim();
     if (trimmed && trimmed !== roster.name) setRoster((r) => ({ ...r, name: trimmed }));
@@ -11023,7 +11072,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} selectedId={selectedId} onSelect={selectAndAdvance} onRemove={removeUnit} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} selectedId={selectedId} onSelect={selectAndAdvance} onRemove={removeUnit} onReorderSection={reorderSection} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
