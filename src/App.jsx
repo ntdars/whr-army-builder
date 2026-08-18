@@ -10743,130 +10743,10 @@ function RosterCodeModal({ roster, onClose, onImport }) {
   );
 }
 
-function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport }) {
-  const armyData = getArmyData(roster.factionKey);
-  const [selectedId, setSelectedId] = useState(null);
-  const [renaming, setRenaming] = useState(false);
-  const [renameValue, setRenameValue] = useState(roster.name);
-  const [mobileIndex, setMobileIndex] = useState(0);
-  const [showCodeModal, setShowCodeModal] = useState(false);
-  const carouselRef = useRef(null);
-
-  // Mobile-only: the three builder columns (Regiments / Army / Upgrades) live in a single
-  // horizontally-scrolling flex row with scroll-snap (see .whr-builder-carousel media query below).
-  // On desktop this same ref/scroll code is inert — the grid isn't wider than its container so
-  // scrollTo has nothing to do, and the dot indicators are hidden via CSS.
-  function scrollToPanel(i) {
-    const el = carouselRef.current;
-    const panel = el?.children?.[i];
-    if (!el || !panel) return;
-    el.scrollTo({ left: panel.offsetLeft - el.offsetLeft - (el.clientWidth - panel.clientWidth) / 2, behavior: "smooth" });
-  }
-
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
-    function onScroll() {
-      const center = el.scrollLeft + el.clientWidth / 2;
-      let closest = 0, best = Infinity;
-      for (let i = 0; i < el.children.length; i++) {
-        const c = el.children[i];
-        const cc = c.offsetLeft - el.offsetLeft + c.clientWidth / 2;
-        const d = Math.abs(cc - center);
-        if (d < best) { best = d; closest = i; }
-      }
-      setMobileIndex(closest);
-    }
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
-
-  function selectAndAdvance(id) {
-    setSelectedId(id);
-    scrollToPanel(2);
-  }
-
-  function startRename() {
-    setRenameValue(roster.name);
-    setRenaming(true);
-  }
-  function reorderSection(section, next) {
-    setRoster((r) => ({ ...r, [section]: next }));
-  }
-  function confirmRename() {
-    const trimmed = renameValue.trim();
-    if (trimmed && trimmed !== roster.name) setRoster((r) => ({ ...r, name: trimmed }));
-    setRenaming(false);
-  }
-  function cancelRename() {
-    setRenameValue(roster.name);
-    setRenaming(false);
-  }
-
-  const totalPoints = useMemo(() => {
-    let t = 0;
-    roster.characters.forEach((u) => (t += unitCost(u, armyData, roster)));
-    roster.regiments.forEach((u) => (t += unitCost(u, armyData, roster)));
-    roster.chariots.forEach((u) => (t += unitCost(u, armyData, roster)));
-    roster.specials.forEach((u) => (t += unitCost(u, armyData, roster)));
-    return t;
-  }, [roster, armyData]);
-
-  const regimentPoints = useMemo(() => {
-    const bsbUnit = roster.characters.find((u) => {
-      const d = armyData.characters.find((c) => c.id === u.defId);
-      return d && (d.tags || []).includes("bsb");
-    });
-    const armyWideBannerOfChampions = !!bsbUnit && (bsbUnit.magicItemIds || []).includes("cm-bannerofchampions");
-    let t = 0;
-    roster.regiments.forEach((u) => {
-      const d = regDefFor(u, armyData);
-      let cost = unitCost(u, armyData, roster);
-      if (d) {
-        const champCost = regimentChampionCost(u, d, armyData);
-        if (champCost > 0) {
-          const eligible = championEligibleForBannerOfChampions(u, d, armyData);
-          const bannerApplies = eligible && (u.magicBannerId === "cm-bannerofchampions" || armyWideBannerOfChampions);
-          // Per the Banner of Champions rule, a champion's cost counts towards Characters/Monsters/
-          // War Machines/Chariots by default — it only counts towards Regiments (as this app's own
-          // regimentCost() always bakes it in) when that specific banner is in play for him.
-          if (!bannerApplies) cost -= champCost;
-        }
-      }
-      t += cost;
-    });
-    // The cheapest unit flagged countsAsFirstRegiment counts toward Regiments — but this splits
-    // two different ways depending on what "one unit" means for a given "quantity" def:
-    //   - Per-model/per-base (War Wagon, Giants, Mammoths, Jungle Swarms): each physical
-    //     model/base is its own "unit" per the rules text ("the first War Wagon...", "the
-    //     smallest base..."), so only ONE model's worth of a multi-bought group counts, even
-    //     if several were bought together in one roster entry — the rest count toward
-    //     Chariots/Monsters/War Machines instead.
-    //   - Whole-entry (Rat Swarm, Warplock Jezzail Team, flagged countsAsFirstRegimentWhole):
-    //     a "unit" here is the whole team/swarm as purchased (e.g. a 3-Jezzail team is one
-    //     unit at 75pts, not three 25pt units) — the split only happens ACROSS separate
-    //     roster entries (separate teams/swarms), never within one entry's quantity.
-    if (roster.chariots.length > 0) {
-      const flaggedUnits = roster.chariots.filter((u) => {
-        const d = armyData.chariotsMonsters.find((c) => c.id === u.defId);
-        return d && d.countsAsFirstRegiment;
-      });
-      if (flaggedUnits.length > 0) {
-        const candidateCosts = flaggedUnits.map((u) => {
-          const d = armyData.chariotsMonsters.find((c) => c.id === u.defId);
-          if (d.kind === "quantity" && !d.countsAsFirstRegimentWhole) {
-            let variantPerUnit = 0;
-            (d.variantOptions || []).forEach((o) => { if (u.variantSelections?.[o.id]) variantPerUnit += o.cost; });
-            return d.perUnit + variantPerUnit;
-          }
-          return unitCost(u, armyData, roster);
-        });
-        t += Math.min(...candidateCosts);
-      }
-    }
-    return t;
-  }, [roster, armyData]);
-
+// Bundles every roster-wide Rule Flag / warning computation into one hook, purely to keep
+// BuilderScreen from being a single 700-line function -- no behavior change, each memo below
+// is byte-for-byte the same as it was inline, just moved. See Project Anvil notes.
+function useRosterWarnings(roster, armyData, totalPoints) {
   const loreWarnings = useMemo(() => {
     const warnings = [];
     if (!armyData.loreOptions || armyData.loreOptions.length === 0) return warnings;
@@ -11124,6 +11004,136 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     if (totalPoints < gate.minPoints) return `${gate.label} requires an army of at least ${gate.minPoints}pts (this roster currently has ${totalPoints}pts of units — keep building to clear this).`;
     return null;
   }, [armyData, roster.armyTheme, roster.pointLimit, totalPoints]);
+
+  return { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning };
+}
+
+function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport }) {
+  const armyData = getArmyData(roster.factionKey);
+  const [selectedId, setSelectedId] = useState(null);
+  const [renaming, setRenaming] = useState(false);
+  const [renameValue, setRenameValue] = useState(roster.name);
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const [showCodeModal, setShowCodeModal] = useState(false);
+  const carouselRef = useRef(null);
+
+  // Mobile-only: the three builder columns (Regiments / Army / Upgrades) live in a single
+  // horizontally-scrolling flex row with scroll-snap (see .whr-builder-carousel media query below).
+  // On desktop this same ref/scroll code is inert — the grid isn't wider than its container so
+  // scrollTo has nothing to do, and the dot indicators are hidden via CSS.
+  function scrollToPanel(i) {
+    const el = carouselRef.current;
+    const panel = el?.children?.[i];
+    if (!el || !panel) return;
+    el.scrollTo({ left: panel.offsetLeft - el.offsetLeft - (el.clientWidth - panel.clientWidth) / 2, behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    function onScroll() {
+      const center = el.scrollLeft + el.clientWidth / 2;
+      let closest = 0, best = Infinity;
+      for (let i = 0; i < el.children.length; i++) {
+        const c = el.children[i];
+        const cc = c.offsetLeft - el.offsetLeft + c.clientWidth / 2;
+        const d = Math.abs(cc - center);
+        if (d < best) { best = d; closest = i; }
+      }
+      setMobileIndex(closest);
+    }
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  function selectAndAdvance(id) {
+    setSelectedId(id);
+    scrollToPanel(2);
+  }
+
+  function startRename() {
+    setRenameValue(roster.name);
+    setRenaming(true);
+  }
+  function reorderSection(section, next) {
+    setRoster((r) => ({ ...r, [section]: next }));
+  }
+  function confirmRename() {
+    const trimmed = renameValue.trim();
+    if (trimmed && trimmed !== roster.name) setRoster((r) => ({ ...r, name: trimmed }));
+    setRenaming(false);
+  }
+  function cancelRename() {
+    setRenameValue(roster.name);
+    setRenaming(false);
+  }
+
+  const totalPoints = useMemo(() => {
+    let t = 0;
+    roster.characters.forEach((u) => (t += unitCost(u, armyData, roster)));
+    roster.regiments.forEach((u) => (t += unitCost(u, armyData, roster)));
+    roster.chariots.forEach((u) => (t += unitCost(u, armyData, roster)));
+    roster.specials.forEach((u) => (t += unitCost(u, armyData, roster)));
+    return t;
+  }, [roster, armyData]);
+
+  const regimentPoints = useMemo(() => {
+    const bsbUnit = roster.characters.find((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      return d && (d.tags || []).includes("bsb");
+    });
+    const armyWideBannerOfChampions = !!bsbUnit && (bsbUnit.magicItemIds || []).includes("cm-bannerofchampions");
+    let t = 0;
+    roster.regiments.forEach((u) => {
+      const d = regDefFor(u, armyData);
+      let cost = unitCost(u, armyData, roster);
+      if (d) {
+        const champCost = regimentChampionCost(u, d, armyData);
+        if (champCost > 0) {
+          const eligible = championEligibleForBannerOfChampions(u, d, armyData);
+          const bannerApplies = eligible && (u.magicBannerId === "cm-bannerofchampions" || armyWideBannerOfChampions);
+          // Per the Banner of Champions rule, a champion's cost counts towards Characters/Monsters/
+          // War Machines/Chariots by default — it only counts towards Regiments (as this app's own
+          // regimentCost() always bakes it in) when that specific banner is in play for him.
+          if (!bannerApplies) cost -= champCost;
+        }
+      }
+      t += cost;
+    });
+    // The cheapest unit flagged countsAsFirstRegiment counts toward Regiments — but this splits
+    // two different ways depending on what "one unit" means for a given "quantity" def:
+    //   - Per-model/per-base (War Wagon, Giants, Mammoths, Jungle Swarms): each physical
+    //     model/base is its own "unit" per the rules text ("the first War Wagon...", "the
+    //     smallest base..."), so only ONE model's worth of a multi-bought group counts, even
+    //     if several were bought together in one roster entry — the rest count toward
+    //     Chariots/Monsters/War Machines instead.
+    //   - Whole-entry (Rat Swarm, Warplock Jezzail Team, flagged countsAsFirstRegimentWhole):
+    //     a "unit" here is the whole team/swarm as purchased (e.g. a 3-Jezzail team is one
+    //     unit at 75pts, not three 25pt units) — the split only happens ACROSS separate
+    //     roster entries (separate teams/swarms), never within one entry's quantity.
+    if (roster.chariots.length > 0) {
+      const flaggedUnits = roster.chariots.filter((u) => {
+        const d = armyData.chariotsMonsters.find((c) => c.id === u.defId);
+        return d && d.countsAsFirstRegiment;
+      });
+      if (flaggedUnits.length > 0) {
+        const candidateCosts = flaggedUnits.map((u) => {
+          const d = armyData.chariotsMonsters.find((c) => c.id === u.defId);
+          if (d.kind === "quantity" && !d.countsAsFirstRegimentWhole) {
+            let variantPerUnit = 0;
+            (d.variantOptions || []).forEach((o) => { if (u.variantSelections?.[o.id]) variantPerUnit += o.cost; });
+            return d.perUnit + variantPerUnit;
+          }
+          return unitCost(u, armyData, roster);
+        });
+        t += Math.min(...candidateCosts);
+      }
+    }
+    return t;
+  }, [roster, armyData]);
+
+  const { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning } = useRosterWarnings(roster, armyData, totalPoints);
+
 
   const compositionInfo = useMemo(() => {
     const rules = armyData.compositionRules;
