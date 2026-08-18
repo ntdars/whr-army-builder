@@ -5901,8 +5901,8 @@ const SKAVEN = {
   ],
   chariotsMonsters: [
     {
-      id: "ratswarm", name: "Rat Swarm", perUnit: 40, stat: "Rat Swarms", kind: "quantity", countsAsFirstRegiment: true,
-      note: "The cheapest Rat Swarm base counts toward Regiments; further bases count toward Chariots, Monsters, and War Machines. Follow the main-rulebook rules for Swarms. Priced per base.",
+      id: "ratswarm", name: "Rat Swarm", perUnit: 40, stat: "Rat Swarms", kind: "quantity", countsAsFirstRegiment: true, countsAsFirstRegimentWhole: true,
+      note: "The cheapest Rat Swarm unit counts toward Regiments; further units count toward Chariots, Monsters, and War Machines. Follow the main-rulebook rules for Swarms. Priced per base.",
     },
     {
       id: "doomwheel", name: "Doomwheel", perUnit: 125, stat: "Doomwheel", kind: "chariot",
@@ -5921,7 +5921,7 @@ const SKAVEN = {
       note: "Weapon Team, built as above (regular Clanrat Warrior statline, single model with 2 Wounds). Range 18\", 2D6 shots, S3 armour piercing (-1 save). On any double, fires in a random (scatter die) direction instead, hitting the first unit in its path within range — each shot then hits automatically.",
     },
     {
-      id: "jezzailteam", name: "Warplock Jezzail Team", perUnit: 25, stat: "Skaven Weapon Team", kind: "quantity", countsAsFirstRegiment: true, restriction: "0-5",
+      id: "jezzailteam", name: "Warplock Jezzail Team", perUnit: 25, stat: "Skaven Weapon Team", kind: "quantity", countsAsFirstRegiment: true, countsAsFirstRegimentWhole: true, restriction: "0-5",
       note: "Up to five Warplock Jezzails team together as one unit, working just like a skirmish regiment (one choice for the Clanrat-mainstay cap). The cheapest unit counts toward Regiments; further units count toward Chariots, Monsters, and War Machines. Uses the regular Clanrat Warrior statline, but functions as a single model with 2 Wounds. A Jezzail is a potent hand gun: fires as normal using BS, range 36\", S5 armour piercing, and any wound inflicted multiplies into 1D3.",
     },
   ],
@@ -10708,12 +10708,17 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
       }
       t += cost;
     });
-    // The cheapest unit flagged countsAsFirstRegiment counts toward Regiments — but for a
-    // "quantity" unit (War Wagon, Giants, Rat Swarms, etc.) bought as a group of several in one
-    // roster entry, only ONE unit's worth counts toward Regiments even if several were bought
-    // together; the rest count toward Chariots/Monsters/War Machines instead, per each unit's
-    // own note text. Using unitCost() directly here would wrongly scale the whole group's cost
-    // (e.g. 3 War Wagons at 100pts each) into the Regiments total instead of just one.
+    // The cheapest unit flagged countsAsFirstRegiment counts toward Regiments — but this splits
+    // two different ways depending on what "one unit" means for a given "quantity" def:
+    //   - Per-model/per-base (War Wagon, Giants, Mammoths, Jungle Swarms): each physical
+    //     model/base is its own "unit" per the rules text ("the first War Wagon...", "the
+    //     smallest base..."), so only ONE model's worth of a multi-bought group counts, even
+    //     if several were bought together in one roster entry — the rest count toward
+    //     Chariots/Monsters/War Machines instead.
+    //   - Whole-entry (Rat Swarm, Warplock Jezzail Team, flagged countsAsFirstRegimentWhole):
+    //     a "unit" here is the whole team/swarm as purchased (e.g. a 3-Jezzail team is one
+    //     unit at 75pts, not three 25pt units) — the split only happens ACROSS separate
+    //     roster entries (separate teams/swarms), never within one entry's quantity.
     if (roster.chariots.length > 0) {
       const flaggedUnits = roster.chariots.filter((u) => {
         const d = armyData.chariotsMonsters.find((c) => c.id === u.defId);
@@ -10722,7 +10727,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
       if (flaggedUnits.length > 0) {
         const candidateCosts = flaggedUnits.map((u) => {
           const d = armyData.chariotsMonsters.find((c) => c.id === u.defId);
-          if (d.kind === "quantity") {
+          if (d.kind === "quantity" && !d.countsAsFirstRegimentWhole) {
             let variantPerUnit = 0;
             (d.variantOptions || []).forEach((o) => { if (u.variantSelections?.[o.id]) variantPerUnit += o.cost; });
             return d.perUnit + variantPerUnit;
