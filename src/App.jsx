@@ -11119,6 +11119,103 @@ function useRosterInfo(roster, armyData) {
 // below). On desktop this same ref/scroll code is inert — the grid isn't wider than its
 // container so scrollTo has nothing to do, and the dot indicators are hidden via CSS.
 // No behavior change from extracting this — byte-for-byte the same as it was inline.
+// Pure roster-transformation helpers for switching an army's theme — no React, no side
+// effects, just (prevRoster, armyData, themeId) -> nextRoster. Extracted from BuilderScreen's
+// old ~105-line inline setArmyTheme; byte-for-byte the same logic, just relocated so the
+// selectedId-clearing side effect (which has to stay in BuilderScreen, since it needs
+// selectedId/setSelectedId) is the only thing left inline.
+function themePowerMismatch(def, themeId) {
+  if (!def || !themeId || themeId === "Mixed") return false;
+  if (def.markGroup) return !def.markGroup.options.includes(themeId);
+  if (def.impliedMark) return def.impliedMark !== themeId;
+  return false;
+}
+
+function applyArmyTheme(prevRoster, armyData, themeId) {
+  const keep = (list, defs) => list.filter((u) => {
+    const def = defs.find((d) => d.id === u.defId);
+    if (!def) return true;
+    if (def.theme && def.theme !== themeId) return false;
+    if (themePowerMismatch(def, themeId)) return false;
+    return true;
+  });
+  const stripThemedGear = (list, defs) => list.map((u) => {
+    const def = defs.find((d) => d.id === u.defId);
+    const themedOptions = (def?.options || []).filter((o) => o.theme && o.theme !== themeId);
+    if (themedOptions.length === 0 || !u.gearSelections) return u;
+    const gearSelections = { ...u.gearSelections };
+    themedOptions.forEach((o) => {
+      if (o.group) { if (gearSelections[o.group] === o.id) delete gearSelections[o.group]; }
+      else delete gearSelections[o.id];
+    });
+    return { ...u, gearSelections };
+  });
+  const clampRegimentChampionMarks = (list, defs) => list.map((u) => {
+    const def = defs.find((d) => d.id === u.defId);
+    const champ = def?.champion;
+    if (!champ?.markGroup || !themeId || themeId === "Mixed" || !champ.markGroup.options.includes(themeId)) return u;
+    if (u.championMark === themeId) return u;
+    const context = itemContext(champ, u, { regimentId: def.id, mark: themeId, tags: [...(champ.tags || []), themeId] });
+    const filteredItems = (u.championMagicItemIds || []).filter((id) => {
+      const mi = miById(armyData.magicItems, id);
+      return mi ? isItemAllowed(mi, context) : true;
+    });
+    return { ...u, championMark: themeId, championMagicItemIds: filteredItems };
+  });
+  const clampCharacters = (list, defs) => list.map((u) => {
+    const rawDef = defs.find((d) => d.id === u.defId);
+    if (!rawDef) return u;
+    let next = u;
+    if (next.mountId) {
+      const mountDef = (rawDef.mounts || []).find((m) => m.id === next.mountId);
+      if (mountDef?.theme && mountDef.theme !== themeId) next = { ...next, mountId: null };
+    }
+    if (rawDef.markGroup && themeId && themeId !== "Mixed" && rawDef.markGroup.options.includes(themeId) && next.mark !== themeId) {
+      next = { ...next, mark: themeId };
+      const lockedMountDef = (rawDef.mounts || []).find((m) => m.id === next.mountId);
+      if (lockedMountDef?.requiresMark && lockedMountDef.requiresMark !== themeId) next = { ...next, mountId: null };
+      const lockContext = itemContext(rawDef, next, { characterId: rawDef.id, mark: themeId, tags: [...(rawDef.tags || []), themeId] });
+      const lockFiltered = (next.magicItemIds || []).filter((id) => {
+        const mi = miById(armyData.magicItems, id);
+        return mi ? isItemAllowed(mi, lockContext) : true;
+      });
+      if (lockFiltered.length !== (next.magicItemIds || []).length) next = { ...next, magicItemIds: lockFiltered };
+    }
+    if (!rawDef.bloodlineOverrides) return next;
+    const def = applyBloodline(rawDef, themeId);
+    if (def.magicLevelOption) {
+      const min = def.magicLevelOption.min || 0;
+      const max = def.magicLevelOption.max;
+      const clamped = Math.max(min, Math.min(max, next.magicLevel ?? min));
+      if (clamped !== next.magicLevel) next = { ...next, magicLevel: clamped };
+    }
+    const context = itemContext(def, next, { characterId: def.id, tags: [...(def.tags || []), themeId] });
+    const filteredItems = (next.magicItemIds || []).filter((id) => {
+      const mi = miById(armyData.magicItems, id);
+      return mi ? isItemAllowed(mi, context) : true;
+    });
+    if (filteredItems.length !== (next.magicItemIds || []).length) next = { ...next, magicItemIds: filteredItems };
+    if (!def.bloodlinePowerSlots) {
+      if (next.bloodlinePowerIds?.length) next = { ...next, bloodlinePowerIds: [] };
+    } else {
+      const filteredPowers = (next.bloodlinePowerIds || []).filter((id) => {
+        const mi = miById(armyData.magicItems, id);
+        return mi ? isItemAllowed(mi, context) : true;
+      });
+      if (filteredPowers.length !== (next.bloodlinePowerIds || []).length) next = { ...next, bloodlinePowerIds: filteredPowers };
+    }
+    return next;
+  });
+  return {
+    ...prevRoster,
+    armyTheme: themeId,
+    characters: clampCharacters(keep(prevRoster.characters, armyData.characters), armyData.characters),
+    regiments: clampRegimentChampionMarks(stripThemedGear(keep(prevRoster.regiments, armyData.regiments), armyData.regiments), armyData.regiments),
+    chariots: keep(prevRoster.chariots, armyData.chariotsMonsters),
+    specials: keep(prevRoster.specials, armyData.specialCharacters),
+  };
+}
+
 function useMobileCarousel() {
   const [mobileIndex, setMobileIndex] = useState(0);
   const carouselRef = useRef(null);
@@ -11216,91 +11313,11 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
   }
 
   function setArmyTheme(themeId) {
-    const powerMismatch = (def) => {
-      if (!def || !themeId || themeId === "Mixed") return false;
-      if (def.markGroup) return !def.markGroup.options.includes(themeId);
-      if (def.impliedMark) return def.impliedMark !== themeId;
-      return false;
-    };
-    const keep = (list, defs) => list.filter((u) => {
-      const def = defs.find((d) => d.id === u.defId);
-      if (!def) return true;
-      if (def.theme && def.theme !== themeId) return false;
-      if (powerMismatch(def)) return false;
-      return true;
-    });
-    const stripThemedGear = (list, defs) => list.map((u) => {
-      const def = defs.find((d) => d.id === u.defId);
-      const themedOptions = (def?.options || []).filter((o) => o.theme && o.theme !== themeId);
-      if (themedOptions.length === 0 || !u.gearSelections) return u;
-      const gearSelections = { ...u.gearSelections };
-      themedOptions.forEach((o) => {
-        if (o.group) { if (gearSelections[o.group] === o.id) delete gearSelections[o.group]; }
-        else delete gearSelections[o.id];
-      });
-      return { ...u, gearSelections };
-    });
-    const clampRegimentChampionMarks = (list, defs) => list.map((u) => {
-      const def = defs.find((d) => d.id === u.defId);
-      const champ = def?.champion;
-      if (!champ?.markGroup || !themeId || themeId === "Mixed" || !champ.markGroup.options.includes(themeId)) return u;
-      if (u.championMark === themeId) return u;
-      const context = itemContext(champ, u, { regimentId: def.id, mark: themeId, tags: [...(champ.tags || []), themeId] });
-      const filteredItems = (u.championMagicItemIds || []).filter((id) => {
-        const mi = miById(armyData.magicItems, id);
-        return mi ? isItemAllowed(mi, context) : true;
-      });
-      return { ...u, championMark: themeId, championMagicItemIds: filteredItems };
-    });
-    const clampCharacters = (list, defs) => list.map((u) => {
-      const rawDef = defs.find((d) => d.id === u.defId);
-      if (!rawDef) return u;
-      let next = u;
-      if (next.mountId) {
-        const mountDef = (rawDef.mounts || []).find((m) => m.id === next.mountId);
-        if (mountDef?.theme && mountDef.theme !== themeId) next = { ...next, mountId: null };
-      }
-      if (rawDef.markGroup && themeId && themeId !== "Mixed" && rawDef.markGroup.options.includes(themeId) && next.mark !== themeId) {
-        next = { ...next, mark: themeId };
-        const lockedMountDef = (rawDef.mounts || []).find((m) => m.id === next.mountId);
-        if (lockedMountDef?.requiresMark && lockedMountDef.requiresMark !== themeId) next = { ...next, mountId: null };
-        const lockContext = itemContext(rawDef, next, { characterId: rawDef.id, mark: themeId, tags: [...(rawDef.tags || []), themeId] });
-        const lockFiltered = (next.magicItemIds || []).filter((id) => {
-          const mi = miById(armyData.magicItems, id);
-          return mi ? isItemAllowed(mi, lockContext) : true;
-        });
-        if (lockFiltered.length !== (next.magicItemIds || []).length) next = { ...next, magicItemIds: lockFiltered };
-      }
-      if (!rawDef.bloodlineOverrides) return next;
-      const def = applyBloodline(rawDef, themeId);
-      if (def.magicLevelOption) {
-        const min = def.magicLevelOption.min || 0;
-        const max = def.magicLevelOption.max;
-        const clamped = Math.max(min, Math.min(max, next.magicLevel ?? min));
-        if (clamped !== next.magicLevel) next = { ...next, magicLevel: clamped };
-      }
-      const context = itemContext(def, next, { characterId: def.id, tags: [...(def.tags || []), themeId] });
-      const filteredItems = (next.magicItemIds || []).filter((id) => {
-        const mi = miById(armyData.magicItems, id);
-        return mi ? isItemAllowed(mi, context) : true;
-      });
-      if (filteredItems.length !== (next.magicItemIds || []).length) next = { ...next, magicItemIds: filteredItems };
-      if (!def.bloodlinePowerSlots) {
-        if (next.bloodlinePowerIds?.length) next = { ...next, bloodlinePowerIds: [] };
-      } else {
-        const filteredPowers = (next.bloodlinePowerIds || []).filter((id) => {
-          const mi = miById(armyData.magicItems, id);
-          return mi ? isItemAllowed(mi, context) : true;
-        });
-        if (filteredPowers.length !== (next.bloodlinePowerIds || []).length) next = { ...next, bloodlinePowerIds: filteredPowers };
-      }
-      return next;
-    });
     const isRemoved = (list, defs) => {
       const u = list.find((x) => x.instanceId === selectedId);
       if (!u) return false;
       const def = defs.find((d) => d.id === u.defId);
-      return !!(def && ((def.theme && def.theme !== themeId) || powerMismatch(def)));
+      return !!(def && ((def.theme && def.theme !== themeId) || themePowerMismatch(def, themeId)));
     };
     if (selectedId && (
       isRemoved(roster.characters, armyData.characters) ||
@@ -11310,14 +11327,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     )) {
       setSelectedId(null);
     }
-    setRoster((r) => ({
-      ...r,
-      armyTheme: themeId,
-      characters: clampCharacters(keep(r.characters, armyData.characters), armyData.characters),
-      regiments: clampRegimentChampionMarks(stripThemedGear(keep(r.regiments, armyData.regiments), armyData.regiments), armyData.regiments),
-      chariots: keep(r.chariots, armyData.chariotsMonsters),
-      specials: keep(r.specials, armyData.specialCharacters),
-    }));
+    setRoster((r) => applyArmyTheme(r, armyData, themeId));
   }
 
   function removeUnit(instanceId) {
