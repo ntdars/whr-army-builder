@@ -10963,40 +10963,6 @@ function useRosterWarnings(roster, armyData, totalPoints) {
     return warnings;
   }, [roster, armyData]);
 
-  const auxiliaryInfo = useMemo(() => {
-    const totalRegiments = roster.regiments.length;
-    const auxCount = roster.regiments.filter((u) => {
-      const d = regDefFor(u, armyData);
-      return d && d.auxiliary;
-    }).length;
-    const hasAuxiliaryOption = armyData.regiments.some((r) => r.auxiliary);
-    return { totalRegiments, auxCount, allowed: Math.ceil(totalRegiments / 2), hasAuxiliaryOption };
-  }, [roster, armyData]);
-
-  const contingentInfo = useMemo(() => {
-    const rules = armyData.contingentRules;
-    if (!rules) return null;
-    const charUnits = roster.characters.filter((u) => {
-      const d = armyData.characters.find((c) => c.id === u.defId);
-      return d && d.contingentTag === rules.tag;
-    });
-    const regUnits = roster.regiments.filter((u) => {
-      const d = regDefFor(u, armyData);
-      return d && d.contingentTag === rules.tag;
-    });
-    if (charUnits.length === 0 && regUnits.length === 0) return { active: false };
-    const charCost = charUnits.reduce((s, u) => s + unitCost(u, armyData, roster), 0);
-    const regCost = regUnits.reduce((s, u) => s + unitCost(u, armyData, roster), 0);
-    const contingentCost = charCost + regCost;
-    const pctOfArmy = totalPoints > 0 ? (contingentCost / totalPoints) * 100 : 0;
-    const problems = [];
-    if (rules.minRegiments && regUnits.length < rules.minRegiments) problems.push(`needs at least ${rules.minRegiments} ${rules.label} regiment${rules.minRegiments > 1 ? "s" : ""} (has ${regUnits.length})`);
-    if (rules.minCharacters && charUnits.length < rules.minCharacters) problems.push(`needs at least ${rules.minCharacters} ${rules.label} character${rules.minCharacters > 1 ? "s" : ""} (has ${charUnits.length})`);
-    if (rules.charactersCostCappedByRegiments && charCost > regCost) problems.push(`character cost (${fmtPts(charCost)}pts) exceeds regiment cost (${fmtPts(regCost)}pts)`);
-    if (rules.maxPercentOfArmy && pctOfArmy > rules.maxPercentOfArmy) problems.push(`${fmtPts(contingentCost)}pts is ${pctOfArmy.toFixed(0)}% of the army, over the ${rules.maxPercentOfArmy}% cap`);
-    return { active: true, label: rules.label, regimentCount: regUnits.length, characterCount: charUnits.length, charCost, regCost, contingentCost, pctOfArmy, problems };
-  }, [roster, armyData, totalPoints]);
-
   const themeGateWarning = useMemo(() => {
     const gate = armyData.themeGates?.find((g) => g.themeId === (roster.armyTheme || armyData.themes?.default));
     if (!gate || !gate.minPoints) return null;
@@ -11005,69 +10971,15 @@ function useRosterWarnings(roster, armyData, totalPoints) {
     return null;
   }, [armyData, roster.armyTheme, roster.pointLimit, totalPoints]);
 
-  return { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, auxiliaryInfo, contingentInfo, themeGateWarning };
+  return { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning };
 }
 
-function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport }) {
-  const armyData = getArmyData(roster.factionKey);
-  const [selectedId, setSelectedId] = useState(null);
-  const [renaming, setRenaming] = useState(false);
-  const [renameValue, setRenameValue] = useState(roster.name);
-  const [mobileIndex, setMobileIndex] = useState(0);
-  const [showCodeModal, setShowCodeModal] = useState(false);
-  const carouselRef = useRef(null);
-
-  // Mobile-only: the three builder columns (Regiments / Army / Upgrades) live in a single
-  // horizontally-scrolling flex row with scroll-snap (see .whr-builder-carousel media query below).
-  // On desktop this same ref/scroll code is inert — the grid isn't wider than its container so
-  // scrollTo has nothing to do, and the dot indicators are hidden via CSS.
-  function scrollToPanel(i) {
-    const el = carouselRef.current;
-    const panel = el?.children?.[i];
-    if (!el || !panel) return;
-    el.scrollTo({ left: panel.offsetLeft - el.offsetLeft - (el.clientWidth - panel.clientWidth) / 2, behavior: "smooth" });
-  }
-
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
-    function onScroll() {
-      const center = el.scrollLeft + el.clientWidth / 2;
-      let closest = 0, best = Infinity;
-      for (let i = 0; i < el.children.length; i++) {
-        const c = el.children[i];
-        const cc = c.offsetLeft - el.offsetLeft + c.clientWidth / 2;
-        const d = Math.abs(cc - center);
-        if (d < best) { best = d; closest = i; }
-      }
-      setMobileIndex(closest);
-    }
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
-
-  function selectAndAdvance(id) {
-    setSelectedId(id);
-    scrollToPanel(2);
-  }
-
-  function startRename() {
-    setRenameValue(roster.name);
-    setRenaming(true);
-  }
-  function reorderSection(section, next) {
-    setRoster((r) => ({ ...r, [section]: next }));
-  }
-  function confirmRename() {
-    const trimmed = renameValue.trim();
-    if (trimmed && trimmed !== roster.name) setRoster((r) => ({ ...r, name: trimmed }));
-    setRenaming(false);
-  }
-  function cancelRename() {
-    setRenameValue(roster.name);
-    setRenaming(false);
-  }
-
+// Bundles the roster-wide point totals and composition-rule info that both the warnings
+// hook and the JSX need -- totalPoints/regimentPoints/auxiliaryInfo/contingentInfo were
+// previously scattered across BuilderScreen and (after the warnings extraction) partly
+// stuck inside useRosterWarnings; this consolidates them into one place. No behavior
+// change -- each memo below is byte-for-byte the same as it was, just relocated.
+function useRosterInfo(roster, armyData) {
   const totalPoints = useMemo(() => {
     let t = 0;
     roster.characters.forEach((u) => (t += unitCost(u, armyData, roster)));
@@ -11132,8 +11044,39 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     return t;
   }, [roster, armyData]);
 
-  const { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, auxiliaryInfo, contingentInfo, themeGateWarning } = useRosterWarnings(roster, armyData, totalPoints);
+  const auxiliaryInfo = useMemo(() => {
+    const totalRegiments = roster.regiments.length;
+    const auxCount = roster.regiments.filter((u) => {
+      const d = regDefFor(u, armyData);
+      return d && d.auxiliary;
+    }).length;
+    const hasAuxiliaryOption = armyData.regiments.some((r) => r.auxiliary);
+    return { totalRegiments, auxCount, allowed: Math.ceil(totalRegiments / 2), hasAuxiliaryOption };
+  }, [roster, armyData]);
 
+  const contingentInfo = useMemo(() => {
+    const rules = armyData.contingentRules;
+    if (!rules) return null;
+    const charUnits = roster.characters.filter((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      return d && d.contingentTag === rules.tag;
+    });
+    const regUnits = roster.regiments.filter((u) => {
+      const d = regDefFor(u, armyData);
+      return d && d.contingentTag === rules.tag;
+    });
+    if (charUnits.length === 0 && regUnits.length === 0) return { active: false };
+    const charCost = charUnits.reduce((s, u) => s + unitCost(u, armyData, roster), 0);
+    const regCost = regUnits.reduce((s, u) => s + unitCost(u, armyData, roster), 0);
+    const contingentCost = charCost + regCost;
+    const pctOfArmy = totalPoints > 0 ? (contingentCost / totalPoints) * 100 : 0;
+    const problems = [];
+    if (rules.minRegiments && regUnits.length < rules.minRegiments) problems.push(`needs at least ${rules.minRegiments} ${rules.label} regiment${rules.minRegiments > 1 ? "s" : ""} (has ${regUnits.length})`);
+    if (rules.minCharacters && charUnits.length < rules.minCharacters) problems.push(`needs at least ${rules.minCharacters} ${rules.label} character${rules.minCharacters > 1 ? "s" : ""} (has ${charUnits.length})`);
+    if (rules.charactersCostCappedByRegiments && charCost > regCost) problems.push(`character cost (${fmtPts(charCost)}pts) exceeds regiment cost (${fmtPts(regCost)}pts)`);
+    if (rules.maxPercentOfArmy && pctOfArmy > rules.maxPercentOfArmy) problems.push(`${fmtPts(contingentCost)}pts is ${pctOfArmy.toFixed(0)}% of the army, over the ${rules.maxPercentOfArmy}% cap`);
+    return { active: true, label: rules.label, regimentCount: regUnits.length, characterCount: charUnits.length, charCost, regCost, contingentCost, pctOfArmy, problems };
+  }, [roster, armyData, totalPoints]);
 
   const compositionInfo = useMemo(() => {
     const rules = armyData.compositionRules;
@@ -11167,6 +11110,73 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     });
     return problems.length > 0 ? { problems } : null;
   }, [roster, armyData]);
+
+  return { totalPoints, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo };
+}
+
+function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport }) {
+  const armyData = getArmyData(roster.factionKey);
+  const [selectedId, setSelectedId] = useState(null);
+  const [renaming, setRenaming] = useState(false);
+  const [renameValue, setRenameValue] = useState(roster.name);
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const [showCodeModal, setShowCodeModal] = useState(false);
+  const carouselRef = useRef(null);
+
+  // Mobile-only: the three builder columns (Regiments / Army / Upgrades) live in a single
+  // horizontally-scrolling flex row with scroll-snap (see .whr-builder-carousel media query below).
+  // On desktop this same ref/scroll code is inert — the grid isn't wider than its container so
+  // scrollTo has nothing to do, and the dot indicators are hidden via CSS.
+  function scrollToPanel(i) {
+    const el = carouselRef.current;
+    const panel = el?.children?.[i];
+    if (!el || !panel) return;
+    el.scrollTo({ left: panel.offsetLeft - el.offsetLeft - (el.clientWidth - panel.clientWidth) / 2, behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    function onScroll() {
+      const center = el.scrollLeft + el.clientWidth / 2;
+      let closest = 0, best = Infinity;
+      for (let i = 0; i < el.children.length; i++) {
+        const c = el.children[i];
+        const cc = c.offsetLeft - el.offsetLeft + c.clientWidth / 2;
+        const d = Math.abs(cc - center);
+        if (d < best) { best = d; closest = i; }
+      }
+      setMobileIndex(closest);
+    }
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  function selectAndAdvance(id) {
+    setSelectedId(id);
+    scrollToPanel(2);
+  }
+
+  function startRename() {
+    setRenameValue(roster.name);
+    setRenaming(true);
+  }
+  function reorderSection(section, next) {
+    setRoster((r) => ({ ...r, [section]: next }));
+  }
+  function confirmRename() {
+    const trimmed = renameValue.trim();
+    if (trimmed && trimmed !== roster.name) setRoster((r) => ({ ...r, name: trimmed }));
+    setRenaming(false);
+  }
+  function cancelRename() {
+    setRenameValue(roster.name);
+    setRenaming(false);
+  }
+
+  const { totalPoints, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo } = useRosterInfo(roster, armyData);
+  const { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning } = useRosterWarnings(roster, armyData, totalPoints);
+
 
   function addUnit(kind, defId, sourceFaction) {
     let inst;
