@@ -10693,7 +10693,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     const armyWideBannerOfChampions = !!bsbUnit && (bsbUnit.magicItemIds || []).includes("cm-bannerofchampions");
     let t = 0;
     roster.regiments.forEach((u) => {
-      const d = armyData.regiments.find((r) => r.id === u.defId);
+      const d = regDefFor(u, armyData);
       let cost = unitCost(u, armyData, roster);
       if (d) {
         const champCost = regimentChampionCost(u, d, armyData);
@@ -10796,7 +10796,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
       }
     });
     roster.regiments.forEach((u) => {
-      const d = armyData.regiments.find((r) => r.id === u.defId);
+      const d = regDefFor(u, armyData);
       if (!d) return;
       if (u.defId === "dragonprinces" && u.championIncluded && hasArmourItem(u.championMagicItemIds)) {
         warnings.push(`${u.customName ? `${u.customName} (${d.name})` : d.name}: Dragon Armour cannot be combined with Magic Armour.`);
@@ -10835,7 +10835,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
   const houseRuleWarnings = useMemo(() => {
     const warnings = [];
     roster.regiments.forEach((u) => {
-      const d = armyData.regiments.find((r) => r.id === u.defId);
+      const d = regDefFor(u, armyData);
       if (d?.extraOption?.unofficial && u.extraOptionCount) {
         warnings.push(`${d.name}: ${d.extraOption.label} are unofficial — needs your opponent's consent to field.`);
       }
@@ -10872,7 +10872,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     };
     roster.characters.forEach((u) => { const d = armyData.characters.find((c) => c.id === u.defId); if (d) collect(u, d.name); });
     roster.regiments.forEach((u) => {
-      const d = armyData.regiments.find((r) => r.id === u.defId);
+      const d = regDefFor(u, armyData);
       if (!d) return;
       collect(u, d.name, u.defId);
       if (u.championIncluded && d.champion) collectChampion(u, `${d.name} (${d.champion.name})`);
@@ -10922,7 +10922,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     roster.regiments.forEach((u) => {
       const mi = miById(armyData.magicItems, u.magicBannerId);
       if (!mi || !mi.regimentDiscount) return;
-      const d = armyData.regiments.find((r) => r.id === u.defId);
+      const d = regDefFor(u, armyData);
       if (!d) return;
       const size = u.size || d.minSize;
       const minSize = mi.minRegimentSize || 0;
@@ -10936,7 +10936,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
   const auxiliaryInfo = useMemo(() => {
     const totalRegiments = roster.regiments.length;
     const auxCount = roster.regiments.filter((u) => {
-      const d = armyData.regiments.find((r) => r.id === u.defId);
+      const d = regDefFor(u, armyData);
       return d && d.auxiliary;
     }).length;
     const hasAuxiliaryOption = armyData.regiments.some((r) => r.auxiliary);
@@ -10951,7 +10951,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
       return d && d.contingentTag === rules.tag;
     });
     const regUnits = roster.regiments.filter((u) => {
-      const d = armyData.regiments.find((r) => r.id === u.defId);
+      const d = regDefFor(u, armyData);
       return d && d.contingentTag === rules.tag;
     });
     if (charUnits.length === 0 && regUnits.length === 0) return { active: false };
