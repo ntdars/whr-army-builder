@@ -8876,20 +8876,19 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
   return tags;
 }
 
-function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData, bloodlineId, dragHandlers, isDragging, isDragOver }) {
+function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData, bloodlineId, cardRef, dragHandleProps }) {
   const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   return (
-    <div className={`whr-card ${selected ? "whr-card-selected" : ""}`}
-      style={{
-        marginBottom: 10, cursor: "pointer", opacity: isDragging ? 0.4 : 1,
-        boxShadow: isDragOver ? "inset 0 2px 0 0 var(--gold)" : undefined,
-      }}
-      onClick={onSelect} {...(dragHandlers || {})}>
+    <div ref={cardRef} className={`whr-card ${selected ? "whr-card-selected" : ""}`}
+      style={{ marginBottom: 10, cursor: "pointer" }}
+      onClick={onSelect}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
-          {dragHandlers && (
-            <span title="Drag to reorder" style={{ cursor: "grab", color: "var(--ink-faint)", fontSize: 15, lineHeight: "22px", userSelect: "none" }}>⠿⠿</span>
+          {dragHandleProps && (
+            <span {...dragHandleProps} title="Drag to reorder"
+              style={{ cursor: "grab", color: "var(--ink-faint)", fontSize: 15, lineHeight: "22px", userSelect: "none", touchAction: "none" }}
+              onClick={(e) => e.stopPropagation()}>⠿</span>
           )}
           <div>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 17 }}>{unit.customName || def.name}</div>
@@ -8941,37 +8940,105 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
 }
 
 function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, selectedId, onSelect, onRemove, onReorderSection }) {
-  // Drag state is keyed by {section, index} rather than a plain index, since each of the four
-  // lists (characters/regiments/chariots/specials) reorders independently — dragging a card
-  // only ever makes sense within its own section, never across into a different one.
-  const [drag, setDrag] = useState(null);
-  const [dragOver, setDragOver] = useState(null);
+  // Pointer-based reordering (not native HTML5 drag-and-drop — that requires
+  // dataTransfer.setData() to reliably fire onDrop in several browsers, and its default
+  // "ghost image follows cursor" look is flat and inconsistent across browsers). This
+  // implementation moves the DOM nodes directly via refs during the gesture (zero React
+  // re-renders until the drop, so it stays smooth), and only commits the actual reorder
+  // to roster state once, on release. As a bonus, pointer events unify mouse and touch,
+  // so this works on mobile too.
+  const cardRefs = useRef({}); // { [section]: { [idx]: HTMLElement } }
+  const dragRef = useRef(null); // transient per-gesture data, doesn't need to trigger renders
 
-  function makeDragHandlers(section, idx) {
+  function setCardRef(section, idx, el) {
+    if (!cardRefs.current[section]) cardRefs.current[section] = {};
+    if (el) cardRefs.current[section][idx] = el;
+  }
+
+  function startDrag(section, idx, e) {
+    if (!onReorderSection) return;
+    e.preventDefault();
+    const sectionRefs = cardRefs.current[section] || {};
+    const draggedEl = sectionRefs[idx];
+    if (!draggedEl) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+
+    const rects = Object.keys(sectionRefs).map((k) => {
+      const el = sectionRefs[k];
+      const r = el.getBoundingClientRect();
+      return { idx: Number(k), mid: r.top + r.height / 2 };
+    });
+    const draggedRect = draggedEl.getBoundingClientRect();
+
+    dragRef.current = {
+      section, fromIndex: idx, targetIndex: idx, pointerId: e.pointerId,
+      startY: e.clientY, rects, draggedHeight: draggedRect.height, draggedEl,
+    };
+
+    draggedEl.style.transition = "none";
+    draggedEl.style.zIndex = "10";
+    draggedEl.style.position = "relative";
+    draggedEl.style.boxShadow = "0 10px 24px var(--shadow)";
+    draggedEl.style.willChange = "transform";
+  }
+
+  function onDragPointerMove(e) {
+    const d = dragRef.current;
+    if (!d || e.pointerId !== d.pointerId) return;
+    const deltaY = e.clientY - d.startY;
+    d.draggedEl.style.transform = `translateY(${deltaY}px) scale(1.015)`;
+
+    const draggedRect = d.rects.find((r) => r.idx === d.fromIndex);
+    const draggedCenter = draggedRect.mid + deltaY;
+    const others = d.rects.filter((r) => r.idx !== d.fromIndex);
+    const newTarget = others.filter((r) => r.mid < draggedCenter).length;
+    if (newTarget === d.targetIndex) return;
+    d.targetIndex = newTarget;
+
+    const sectionRefs = cardRefs.current[d.section] || {};
+    others.forEach((r) => {
+      const el = sectionRefs[r.idx];
+      if (!el) return;
+      let shift = 0;
+      if (newTarget < d.fromIndex && r.idx >= newTarget && r.idx < d.fromIndex) shift = d.draggedHeight;
+      else if (newTarget > d.fromIndex && r.idx > d.fromIndex && r.idx <= newTarget) shift = -d.draggedHeight;
+      el.style.transition = "transform 150ms ease";
+      el.style.transform = shift ? `translateY(${shift}px)` : "";
+    });
+  }
+
+  function endDrag(e) {
+    const d = dragRef.current;
+    if (!d || e.pointerId !== d.pointerId) return;
+    dragRef.current = null;
+
+    const sectionRefs = cardRefs.current[d.section] || {};
+    Object.values(sectionRefs).forEach((el) => {
+      el.style.transition = "";
+      el.style.transform = "";
+      el.style.zIndex = "";
+      el.style.position = "";
+      el.style.boxShadow = "";
+      el.style.willChange = "";
+    });
+
+    if (d.targetIndex !== d.fromIndex) {
+      const next = [...roster[d.section]];
+      const [moved] = next.splice(d.fromIndex, 1);
+      next.splice(d.targetIndex, 0, moved);
+      onReorderSection(d.section, next);
+    }
+  }
+
+  function makeDragHandleProps(section, idx) {
     if (!onReorderSection) return null;
     return {
-      draggable: true,
-      onDragStart: (e) => { e.stopPropagation(); setDrag({ section, index: idx }); },
-      onDragOver: (e) => {
-        e.preventDefault(); e.stopPropagation();
-        if (drag?.section !== section) return;
-        if (dragOver?.section !== section || dragOver?.index !== idx) setDragOver({ section, index: idx });
-      },
-      onDrop: (e) => {
-        e.preventDefault(); e.stopPropagation();
-        if (drag?.section === section && drag.index !== idx) {
-          const next = [...roster[section]];
-          const [moved] = next.splice(drag.index, 1);
-          next.splice(idx, 0, moved);
-          onReorderSection(section, next);
-        }
-        setDrag(null); setDragOver(null);
-      },
-      onDragEnd: (e) => { e.stopPropagation(); setDrag(null); setDragOver(null); },
+      onPointerDown: (e) => startDrag(section, idx, e),
+      onPointerMove: onDragPointerMove,
+      onPointerUp: endDrag,
+      onPointerCancel: endDrag,
     };
   }
-  const isDragging = (section, idx) => drag?.section === section && drag.index === idx;
-  const isDragOver = (section, idx) => dragOver?.section === section && dragOver.index === idx && drag && !(drag.section === section && drag.index === idx);
 
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const overLimit = totalPoints > pointLimit;
@@ -9104,7 +9171,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
               const def = applyBloodline(armyData.characters.find((c) => c.id === u.defId), roster.armyTheme);
               return <RosterUnitCard key={u.instanceId} kind="character" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
                 onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} bloodlineId={roster.armyTheme}
-                dragHandlers={makeDragHandlers("characters", idx)} isDragging={isDragging("characters", idx)} isDragOver={isDragOver("characters", idx)} />;
+                cardRef={(el) => setCardRef("characters", idx, el)} dragHandleProps={makeDragHandleProps("characters", idx)} />;
             })}
           </>
         )}
@@ -9120,7 +9187,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
                 : u.size;
               return <RosterUnitCard key={u.instanceId} kind="regiment" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
                 onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={models} armyData={srcArmyData} bloodlineId={roster.armyTheme}
-                dragHandlers={makeDragHandlers("regiments", idx)} isDragging={isDragging("regiments", idx)} isDragOver={isDragOver("regiments", idx)} />;
+                cardRef={(el) => setCardRef("regiments", idx, el)} dragHandleProps={makeDragHandleProps("regiments", idx)} />;
             })}
           </>
         )}
@@ -9132,7 +9199,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
               const def = chariotDefFor(u, armyData);
               return <RosterUnitCard key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
                 onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? u.qty : null} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme}
-                dragHandlers={makeDragHandlers("chariots", idx)} isDragging={isDragging("chariots", idx)} isDragOver={isDragOver("chariots", idx)} />;
+                cardRef={(el) => setCardRef("chariots", idx, el)} dragHandleProps={makeDragHandleProps("chariots", idx)} />;
             })}
           </>
         )}
@@ -9144,7 +9211,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
               const def = armyData.specialCharacters.find((s) => s.id === u.defId);
               return <RosterUnitCard key={u.instanceId} kind="special" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
                 onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} bloodlineId={roster.armyTheme}
-                dragHandlers={makeDragHandlers("specials", idx)} isDragging={isDragging("specials", idx)} isDragOver={isDragOver("specials", idx)} />;
+                cardRef={(el) => setCardRef("specials", idx, el)} dragHandleProps={makeDragHandleProps("specials", idx)} />;
             })}
           </>
         )}
