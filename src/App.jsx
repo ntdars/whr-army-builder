@@ -6295,6 +6295,10 @@ const VAMPIRE_COUNTS = {
       note: "Living. Follows the main-rulebook rules for Swarms. Priced per base.",
     },
     {
+      id: "banshee", name: "Banshee", perUnit: 100, stat: "Banshee",
+      note: "An ethereal independent model. In the shooting phase, even if she marched, the Banshee may sound her ghostly howl. She may target living enemies that are not deaf (i.e. discount Dwarf Longbeards) within 8\". The unit suffers 2D6+2 minus their own Ld number of wounds (no armour save allowed). Randomise as normal if shooting into melee combat.",
+    },
+    {
       id: "ratswarm-necrarch", name: "Rat Swarm", perUnit: 40, stat: "Rat Swarms", kind: "quantity", countsAsFirstRegiment: true, theme: "necrarch",
       note: "Necrarch armies only. As described in the Skaven army book. The cheapest base counts toward Regiments; further bases count toward Chariots, Monsters, and War Machines. Priced per base.",
     },
