@@ -6286,9 +6286,9 @@ const VAMPIRE_COUNTS = {
   ],
   chariotsMonsters: [
     {
-      id: "blackcoach", name: "Black Coach", perUnit: 125, stat: "Black Coach", mountStat: "Wraith", mountLabel: "Wraith Driver",
+      id: "blackcoach", name: "Black Coach", perUnit: 125, stat: "Black Coach", mountStat: "Wraith", mountLabel: "Wraith",
       note: "Undead, large chariot pulled by two Undead Steeds and driven by a Wraith with a Wraith-Weapon (double handed, no armour save). The Wraith is a character — if slain, the Black Coach crumbles immediately. Causes terror, cannot be harmed by mundane weapons. Recovers one lost wound for every wound it causes in melee; once fully healed, gains scythed wheels instead for the rest of the battle.",
-      commanderCost: 0, commanderLabel: "Wraith driver takes a magic item", commanderMagicItemSlots: 1,
+      commanderAlwaysOn: true, commanderMagicItemSlots: 1,
     },
     {
       id: "batswarm", name: "Bat Swarm", kind: "quantity", perUnit: 40, stat: "Bat Swarm",
@@ -8124,8 +8124,8 @@ function chariotCost(inst, def, armyData) {
   total += (inst.extraCrew || 0) * (def.extraCrewCost || 0);
   total += crewArmourCost(inst, def);
   total += (inst.extraSteeds || 0) * (def.extraSteedCost || 0);
-  if (inst.commander && def.commanderCost != null) {
-    total += def.commanderCost;
+  if ((inst.commander || def.commanderAlwaysOn) && (def.commanderCost != null || def.commanderAlwaysOn)) {
+    total += def.commanderCost || 0;
     (inst.commanderMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   }
   if (inst.scythedWheels && def.scythedWheelsCost != null) total += def.scythedWheelsCost;
@@ -8835,8 +8835,8 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       if (unit.extraCrew) tags.push(`+${unit.extraCrew} ${def.extraCrewLabel || "crew"}`);
       if (unit.extraSteeds) tags.push(`+${unit.extraSteeds} ${def.extraSteedLabel || "steeds"}`);
       if (unit.scythedWheels) tags.push("Scythed wheels");
-      if (unit.commander) {
-        tags.push(def.commanderLabel || "Commander");
+      if (unit.commander || def.commanderAlwaysOn) {
+        if (!def.commanderAlwaysOn) tags.push(def.commanderLabel || "Commander");
         (unit.commanderMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
       }
       (def.variantOptions || []).forEach((o) => { if (unit.variantSelections?.[o.id]) tags.push(o.label); });
@@ -10393,7 +10393,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
           ))}
         </div>
       )}
-      {def.commanderCost != null && (
+      {def.commanderCost != null && !def.commanderAlwaysOn && (
         <label className="whr-opt-row whr-opt-label">
           <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <input type="checkbox" checked={!!unit.commander} onChange={(e) => updateUnit({ ...unit, commander: e.target.checked, commanderMagicItemIds: e.target.checked ? unit.commanderMagicItemIds : [] })} />
@@ -10402,9 +10402,10 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
           <span className="whr-opt-cost">+{def.commanderCost}pts</span>
         </label>
       )}
-      {unit.commander && def.commanderCost != null && (
+      {((unit.commander && def.commanderCost != null && !def.commanderAlwaysOn) || def.commanderAlwaysOn) && (
         <MagicItemPicker items={armyData.magicItems} selectedIds={unit.commanderMagicItemIds || []} maxSlots={def.commanderMagicItemSlots} usedElsewhere={usedElsewhere}
           context={itemContext(def, unit, { regimentId: def.id, tags: def.commanderTags || [] })}
+          label={def.commanderAlwaysOn ? (def.commanderPickerLabel || `${def.mountLabel || "Crew"}'s Magic Items`) : "Magic Items"}
           onToggle={(id) => toggleArrayField(unit, "commanderMagicItemIds", id, updateUnit)} />
       )}
     </div>
