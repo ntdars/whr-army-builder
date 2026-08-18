@@ -8887,7 +8887,11 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
         <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
           {dragHandleProps && (
             <span {...dragHandleProps} title="Drag to reorder"
-              style={{ cursor: "grab", color: "var(--ink-faint)", fontSize: 15, lineHeight: "22px", userSelect: "none", touchAction: "none" }}
+              style={{
+                cursor: "grab", color: "var(--ink-faint)", fontSize: 15, userSelect: "none", touchAction: "none",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                width: 44, height: 44, margin: "-11px -11px -11px -14px", flexShrink: 0,
+              }}
               onClick={(e) => e.stopPropagation()}>⠿</span>
           )}
           <div>
@@ -8948,6 +8952,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
   // to roster state once, on release. As a bonus, pointer events unify mouse and touch,
   // so this works on mobile too.
   const cardRefs = useRef({}); // { [section]: { [idx]: HTMLElement } }
+  const scrollRef = useRef(null); // the scrollable list container, for auto-scroll near edges
   const dragRef = useRef(null); // transient per-gesture data, doesn't need to trigger renders
 
   function setCardRef(section, idx, el) {
@@ -8972,7 +8977,8 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
 
     dragRef.current = {
       section, fromIndex: idx, targetIndex: idx, pointerId: e.pointerId,
-      startY: e.clientY, rects, draggedHeight: draggedRect.height, draggedEl,
+      startY: e.clientY, lastClientY: e.clientY, rects, draggedHeight: draggedRect.height, draggedEl,
+      initialScrollTop: scrollRef.current?.scrollTop || 0, autoScrollSpeed: 0, rafId: null,
     };
 
     draggedEl.style.transition = "none";
@@ -8980,37 +8986,78 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
     draggedEl.style.position = "relative";
     draggedEl.style.boxShadow = "0 10px 24px var(--shadow)";
     draggedEl.style.willChange = "transform";
+
+    // Auto-scroll loop runs continuously while dragging (not just on pointermove) so that
+    // holding the pointer still near the top/bottom edge of a long list keeps scrolling —
+    // matching how this works in most drag-reorder UIs.
+    function tick() {
+      const d = dragRef.current;
+      if (!d) return;
+      const scrollEl = scrollRef.current;
+      if (scrollEl && d.autoScrollSpeed) {
+        const prev = scrollEl.scrollTop;
+        const max = scrollEl.scrollHeight - scrollEl.clientHeight;
+        scrollEl.scrollTop = Math.max(0, Math.min(max, prev + d.autoScrollSpeed));
+        if (scrollEl.scrollTop !== prev) updateDragVisuals();
+      }
+      d.rafId = requestAnimationFrame(tick);
+    }
+    dragRef.current.rafId = requestAnimationFrame(tick);
+  }
+
+  function updateDragVisuals() {
+    const d = dragRef.current;
+    if (!d) return;
+    const scrollTop = scrollRef.current?.scrollTop || 0;
+    // Compensates for any auto-scroll that's happened since the drag started, so the
+    // dragged card keeps tracking the pointer's true position rather than drifting.
+    const effectiveDeltaY = (d.lastClientY - d.startY) + (scrollTop - d.initialScrollTop);
+    d.draggedEl.style.transform = `translateY(${effectiveDeltaY}px) scale(1.015)`;
+
+    const draggedRect = d.rects.find((r) => r.idx === d.fromIndex);
+    const draggedCenter = draggedRect.mid + effectiveDeltaY;
+    const others = d.rects.filter((r) => r.idx !== d.fromIndex);
+    const newTarget = others.filter((r) => r.mid < draggedCenter).length;
+    if (newTarget !== d.targetIndex) {
+      d.targetIndex = newTarget;
+      const sectionRefs = cardRefs.current[d.section] || {};
+      others.forEach((r) => {
+        const el = sectionRefs[r.idx];
+        if (!el) return;
+        let shift = 0;
+        if (newTarget < d.fromIndex && r.idx >= newTarget && r.idx < d.fromIndex) shift = d.draggedHeight;
+        else if (newTarget > d.fromIndex && r.idx > d.fromIndex && r.idx <= newTarget) shift = -d.draggedHeight;
+        el.style.transition = "transform 150ms ease";
+        el.style.transform = shift ? `translateY(${shift}px)` : "";
+      });
+    }
+
+    const scrollEl = scrollRef.current;
+    if (scrollEl) {
+      const scrollRect = scrollEl.getBoundingClientRect();
+      const EDGE = 48, MAX_SPEED = 14;
+      let speed = 0;
+      if (d.lastClientY < scrollRect.top + EDGE) {
+        speed = -MAX_SPEED * (1 - Math.max(0, d.lastClientY - scrollRect.top) / EDGE);
+      } else if (d.lastClientY > scrollRect.bottom - EDGE) {
+        speed = MAX_SPEED * (1 - Math.max(0, scrollRect.bottom - d.lastClientY) / EDGE);
+      }
+      d.autoScrollSpeed = speed;
+    }
   }
 
   function onDragPointerMove(e) {
     const d = dragRef.current;
     if (!d || e.pointerId !== d.pointerId) return;
-    const deltaY = e.clientY - d.startY;
-    d.draggedEl.style.transform = `translateY(${deltaY}px) scale(1.015)`;
-
-    const draggedRect = d.rects.find((r) => r.idx === d.fromIndex);
-    const draggedCenter = draggedRect.mid + deltaY;
-    const others = d.rects.filter((r) => r.idx !== d.fromIndex);
-    const newTarget = others.filter((r) => r.mid < draggedCenter).length;
-    if (newTarget === d.targetIndex) return;
-    d.targetIndex = newTarget;
-
-    const sectionRefs = cardRefs.current[d.section] || {};
-    others.forEach((r) => {
-      const el = sectionRefs[r.idx];
-      if (!el) return;
-      let shift = 0;
-      if (newTarget < d.fromIndex && r.idx >= newTarget && r.idx < d.fromIndex) shift = d.draggedHeight;
-      else if (newTarget > d.fromIndex && r.idx > d.fromIndex && r.idx <= newTarget) shift = -d.draggedHeight;
-      el.style.transition = "transform 150ms ease";
-      el.style.transform = shift ? `translateY(${shift}px)` : "";
-    });
+    d.lastClientY = e.clientY;
+    updateDragVisuals();
   }
 
   function endDrag(e) {
     const d = dragRef.current;
     if (!d || e.pointerId !== d.pointerId) return;
     dragRef.current = null;
+    if (d.rafId) cancelAnimationFrame(d.rafId);
 
     const sectionRefs = cardRefs.current[d.section] || {};
     Object.values(sectionRefs).forEach((el) => {
@@ -9156,7 +9203,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
       )}
       <div style={{ height: 1, background: "var(--line)", margin: "10px 0 16px" }} />
 
-      <div className="whr-scroll" style={{ overflowY: "auto", flex: 1, paddingRight: 4 }}>
+      <div className="whr-scroll" ref={scrollRef} style={{ overflowY: "auto", flex: 1, paddingRight: 4 }}>
         {roster.characters.length === 0 && roster.regiments.length === 0 && roster.chariots.length === 0 && roster.specials.length === 0 && (
           <div style={{ textAlign: "center", padding: "60px 10px", color: "var(--ink-faint)" }}>
             <p className="whr-eyebrow" style={{ color: "var(--ink-faint)" }}>The roster stands empty</p>
