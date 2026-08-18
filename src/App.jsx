@@ -11005,7 +11005,7 @@ function useRosterWarnings(roster, armyData, totalPoints) {
     return null;
   }, [armyData, roster.armyTheme, roster.pointLimit, totalPoints]);
 
-  return { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning };
+  return { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, auxiliaryInfo, contingentInfo, themeGateWarning };
 }
 
 function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport }) {
@@ -11132,7 +11132,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     return t;
   }, [roster, armyData]);
 
-  const { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning } = useRosterWarnings(roster, armyData, totalPoints);
+  const { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, auxiliaryInfo, contingentInfo, themeGateWarning } = useRosterWarnings(roster, armyData, totalPoints);
 
 
   const compositionInfo = useMemo(() => {
