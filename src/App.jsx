@@ -11114,19 +11114,15 @@ function useRosterInfo(roster, armyData) {
   return { totalPoints, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo };
 }
 
-function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport }) {
-  const armyData = getArmyData(roster.factionKey);
-  const [selectedId, setSelectedId] = useState(null);
-  const [renaming, setRenaming] = useState(false);
-  const [renameValue, setRenameValue] = useState(roster.name);
+// Mobile-only: the three builder columns (Regiments / Army / Upgrades) live in a single
+// horizontally-scrolling flex row with scroll-snap (see .whr-builder-carousel media query
+// below). On desktop this same ref/scroll code is inert — the grid isn't wider than its
+// container so scrollTo has nothing to do, and the dot indicators are hidden via CSS.
+// No behavior change from extracting this — byte-for-byte the same as it was inline.
+function useMobileCarousel() {
   const [mobileIndex, setMobileIndex] = useState(0);
-  const [showCodeModal, setShowCodeModal] = useState(false);
   const carouselRef = useRef(null);
 
-  // Mobile-only: the three builder columns (Regiments / Army / Upgrades) live in a single
-  // horizontally-scrolling flex row with scroll-snap (see .whr-builder-carousel media query below).
-  // On desktop this same ref/scroll code is inert — the grid isn't wider than its container so
-  // scrollTo has nothing to do, and the dot indicators are hidden via CSS.
   function scrollToPanel(i) {
     const el = carouselRef.current;
     const panel = el?.children?.[i];
@@ -11151,6 +11147,17 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
+
+  return { mobileIndex, carouselRef, scrollToPanel };
+}
+
+function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport }) {
+  const armyData = getArmyData(roster.factionKey);
+  const [selectedId, setSelectedId] = useState(null);
+  const [renaming, setRenaming] = useState(false);
+  const [renameValue, setRenameValue] = useState(roster.name);
+  const [showCodeModal, setShowCodeModal] = useState(false);
+  const { mobileIndex, carouselRef, scrollToPanel } = useMobileCarousel();
 
   function selectAndAdvance(id) {
     setSelectedId(id);
