@@ -6036,9 +6036,13 @@ const VC_BLOODLINE_POWERS = [
   { id: "bl-str-hellbeast", name: "Hell Beast", cost: 60, cat: "bloodlinepower", desc: "+1 wound, can fly, 40x40 base, may join a unit of Giant Bats (and receive a \"Look Out, Sir\" roll).", restrictedTo: [{ tags: ["strigoi"] }] },
 ];
 
-const VC_ARMOUR_OPTIONS = ["No armour (default)", "Shield & Light Armour", "Heavy Armour"];
+const VC_ARMOUR_OPTIONS = ["No armour (default)", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"];
 const VC_MELEE_OPTIONS = ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"];
-const vcCastingGate = (unit, def) => (unit.armour || VC_ARMOUR_OPTIONS[0]) === VC_ARMOUR_OPTIONS[0] && (unit.melee || VC_MELEE_OPTIONS[0]) !== "Double handed weapon";
+// A Vampire Count/Lord may only take a magic level while unencumbered — no armour of any kind,
+// and no weapon that occupies both hands (a flail, a second hand weapon, a halberd, or a double
+// handed weapon; spears and lances stay one-handed and don't block this).
+const VC_TWO_HANDED_MELEE = ["Flail", "Additional hand weapon", "Halberd", "Double handed weapon"];
+const vcCastingGate = (unit, def) => (unit.armour || VC_ARMOUR_OPTIONS[0]) === VC_ARMOUR_OPTIONS[0] && !VC_TWO_HANDED_MELEE.includes(unit.melee || VC_MELEE_OPTIONS[0]);
 
 // Shared between VAMPIRE_COUNTS and CLASSIC_UNDEAD — Classic Undead is the pre-split
 // 4th-edition army, built from the same Wight/Necromancer characters VC still uses today.
@@ -6116,7 +6120,7 @@ const VAMPIRE_COUNTS = {
       id: "vampirelord", name: "Vampire Lord", cost: 220, stat: "Vampire Lord", magicItemSlots: 2, bloodlinePowerSlots: 2, tags: ["vampire", "undeadCharacter"],
       armourGroup: { options: VC_ARMOUR_OPTIONS },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
-      magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 2, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for magic levels while wearing armour or wielding a double handed weapon." },
+      magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 2, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for magic levels while wearing any armour, or wielding a Flail, Additional Hand Weapon, Halberd, or Double Handed Weapon." },
       mounts: [
         { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 51, stat: "Undead Steed" },
         { id: "wingednightmare", name: "Winged Nightmare", cost: 105, stat: "Winged Nightmare" },
@@ -6139,7 +6143,7 @@ const VAMPIRE_COUNTS = {
       id: "vampirecount", name: "Vampire Count", cost: 154, stat: "Vampire Count", magicItemSlots: 2, tags: ["vampire", "undeadCharacter"],
       armourGroup: { options: VC_ARMOUR_OPTIONS },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
-      magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for a magic level while wearing armour or wielding a double handed weapon." },
+      magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for a magic level while wearing any armour, or wielding a Flail, Additional Hand Weapon, Halberd, or Double Handed Weapon." },
       gearNote: "May take up to two magic items or bloodline powers, freely mixed (shown together below).",
       mounts: [
         { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 36, stat: "Undead Steed" },
@@ -6573,7 +6577,7 @@ const CLASSIC_UNDEAD = {
       id: "vampirecount", name: "Von Carstein Vampire Count", cost: 154, stat: "Vampire Count", magicItemSlots: 2, tags: ["vampire", "undeadCharacter", "voncarstein"],
       armourGroup: { options: VC_ARMOUR_OPTIONS },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
-      magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for a magic level while wearing armour or wielding a double handed weapon." },
+      magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for a magic level while wearing any armour, or wielding a Flail, Additional Hand Weapon, Halberd, or Double Handed Weapon." },
       gearNote: "This army's Vampire option is always Von Carstein. May take up to two magic items or Von Carstein bloodline powers, freely mixed (shown together below).",
       mounts: [
         { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 36, stat: "Undead Steed" },
@@ -9076,7 +9080,7 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, liberatedItemWarnings, selectedId, onSelect, onRemove, onReorderSection }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, magicLevelWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, liberatedItemWarnings, selectedId, onSelect, onRemove, onReorderSection }) {
   // Pointer-based reordering (not native HTML5 drag-and-drop — that requires
   // dataTransfer.setData() to reliably fire onDrop in several browsers, and its default
   // "ghost image follows cursor" look is flat and inconsistent across browsers). This
@@ -9283,6 +9287,14 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Lore of Magic:</div>
           <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
             {loreWarnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
+      {magicLevelWarnings && magicLevelWarnings.length > 0 && (
+        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic level:</div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+            {magicLevelWarnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </div>
       )}
@@ -10839,6 +10851,25 @@ function useRosterWarnings(roster, armyData, totalPoints) {
     return warnings;
   }, [roster, armyData]);
 
+  // Catches a character stuck holding a magic level they're no longer eligible for — the level
+  // itself only gets picked while eligible (the Stepper is hidden otherwise, see CharacterDetail),
+  // but nothing clears magicLevel automatically if gear changes afterward make them ineligible
+  // (e.g. a Vampire Count takes a level unarmoured, then switches to Heavy Armour). Cost
+  // calculation already stops charging for it in that state, so this is purely a "you have an
+  // inconsistent selection" flag, not a points issue.
+  const magicLevelWarnings = useMemo(() => {
+    const warnings = [];
+    roster.characters.forEach((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      if (!d?.magicLevelOption?.eligible) return;
+      const level = u.magicLevel ?? d.magicLevelOption.min ?? 0;
+      if (level > 0 && !d.magicLevelOption.eligible(u, d)) {
+        warnings.push(`${d.name}: ${d.magicLevelOption.ineligibleNote || "Not eligible for a magic level with current wargear."}`);
+      }
+    });
+    return warnings;
+  }, [roster, armyData]);
+
   const auxiliaryWarnings = useMemo(() => {
     const warnings = [];
     if (!armyData.auxiliaryFactions) return warnings;
@@ -11042,7 +11073,7 @@ function useRosterWarnings(roster, armyData, totalPoints) {
     return null;
   }, [armyData, roster.armyTheme, roster.pointLimit, totalPoints]);
 
-  return { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning };
+  return { loreWarnings, magicLevelWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning };
 }
 
 // Bundles the roster-wide point totals and composition-rule info that both the warnings
@@ -11359,7 +11390,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
   }
 
   const { totalPoints, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo } = useRosterInfo(roster, armyData);
-  const { loreWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning } = useRosterWarnings(roster, armyData, totalPoints);
+  const { loreWarnings, magicLevelWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning } = useRosterWarnings(roster, armyData, totalPoints);
 
 
   function addUnit(kind, defId, sourceFaction) {
@@ -11463,7 +11494,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} liberatedItemWarnings={liberatedItemWarnings} selectedId={selectedId} onSelect={selectAndAdvance} onRemove={removeUnit} onReorderSection={reorderSection} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} magicLevelWarnings={magicLevelWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} liberatedItemWarnings={liberatedItemWarnings} selectedId={selectedId} onSelect={selectAndAdvance} onRemove={removeUnit} onReorderSection={reorderSection} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
