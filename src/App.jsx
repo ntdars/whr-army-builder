@@ -10262,48 +10262,59 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
-      {def.detachmentParent && (
-        <div style={{ marginTop: 14 }}>
-          <span className="whr-label">Detachments (max 2, combined ≤ {size} models)</span>
-          {detachments.map((d, i) => {
-            const dtype = (armyData.detachmentTypes || []).find((t) => t.id === d.defId);
-            const cost = dtype ? dtype.perModel * d.size : 0;
-            const under50 = cost < 50;
-            const maxForThis = size - (detachmentSizeUsed - d.size);
-            return (
-              <div key={i} className="whr-card" style={{ marginBottom: 8 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                  <span style={{ fontFamily: "var(--font-display-sc)", fontSize: 16.5 }}>{dtype ? dtype.name : "Unknown"}</span>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span className="whr-badge-gold whr-badge">{fmtPts(cost)} pts</span>
-                    <button className="whr-btn-ghost" style={{ cursor: "pointer", color: "var(--burgundy)", fontFamily: "var(--font-display)" }}
-                      onClick={() => updateUnit({ ...unit, detachments: detachments.filter((_, idx) => idx !== i) })}>✕</button>
-                  </div>
-                </div>
-                <div style={{ marginTop: 6 }}>
-                  <Stepper value={d.size} min={5} max={Math.max(5, maxForThis)} onChange={(v) => {
-                    const next = detachments.map((dd, idx) => (idx === i ? { ...dd, size: v } : dd));
-                    updateUnit({ ...unit, detachments: next });
-                  }} />
-                </div>
-                {under50 && <div style={{ fontSize: 13, color: "var(--burgundy)", marginTop: 6 }}>Below the 50pt regiment minimum</div>}
+      <DetachmentsSection def={def} unit={unit} armyData={armyData} updateUnit={updateUnit} />
+    </div>
+  );
+}
+
+// Extracted from RegimentDetail's standard-path JSX — genuinely self-contained (only reads
+// def/unit/armyData and values trivially derived from them), unlike most of the rest of that
+// function's sections, which share a lot of local state with each other. No behavior change.
+function DetachmentsSection({ def, unit, armyData, updateUnit }) {
+  if (!def.detachmentParent) return null;
+  const size = unit.size ?? def.minSize;
+  const detachments = unit.detachments || [];
+  const detachmentSizeUsed = detachments.reduce((s, d) => s + d.size, 0);
+  return (
+    <div style={{ marginTop: 14 }}>
+      <span className="whr-label">Detachments (max 2, combined ≤ {size} models)</span>
+      {detachments.map((d, i) => {
+        const dtype = (armyData.detachmentTypes || []).find((t) => t.id === d.defId);
+        const cost = dtype ? dtype.perModel * d.size : 0;
+        const under50 = cost < 50;
+        const maxForThis = size - (detachmentSizeUsed - d.size);
+        return (
+          <div key={i} className="whr-card" style={{ marginBottom: 8 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+              <span style={{ fontFamily: "var(--font-display-sc)", fontSize: 16.5 }}>{dtype ? dtype.name : "Unknown"}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span className="whr-badge-gold whr-badge">{fmtPts(cost)} pts</span>
+                <button className="whr-btn-ghost" style={{ cursor: "pointer", color: "var(--burgundy)", fontFamily: "var(--font-display)" }}
+                  onClick={() => updateUnit({ ...unit, detachments: detachments.filter((_, idx) => idx !== i) })}>✕</button>
               </div>
-            );
-          })}
-          {detachments.length < 2 && detachmentSizeUsed < size && (
-            <select className="whr-select" defaultValue="" onChange={(e) => {
-              if (!e.target.value) return;
-              const next = [...detachments, { defId: e.target.value, size: Math.min(5, size - detachmentSizeUsed) }];
-              updateUnit({ ...unit, detachments: next });
-              e.target.value = "";
-            }}>
-              <option value="">Add a detachment…</option>
-              {(armyData.detachmentTypes || []).map((t) => (
-                <option key={t.id} value={t.id}>{t.name} ({t.perModel}pts/model)</option>
-              ))}
-            </select>
-          )}
-        </div>
+            </div>
+            <div style={{ marginTop: 6 }}>
+              <Stepper value={d.size} min={5} max={Math.max(5, maxForThis)} onChange={(v) => {
+                const next = detachments.map((dd, idx) => (idx === i ? { ...dd, size: v } : dd));
+                updateUnit({ ...unit, detachments: next });
+              }} />
+            </div>
+            {under50 && <div style={{ fontSize: 13, color: "var(--burgundy)", marginTop: 6 }}>Below the 50pt regiment minimum</div>}
+          </div>
+        );
+      })}
+      {detachments.length < 2 && detachmentSizeUsed < size && (
+        <select className="whr-select" defaultValue="" onChange={(e) => {
+          if (!e.target.value) return;
+          const next = [...detachments, { defId: e.target.value, size: Math.min(5, size - detachmentSizeUsed) }];
+          updateUnit({ ...unit, detachments: next });
+          e.target.value = "";
+        }}>
+          <option value="">Add a detachment…</option>
+          {(armyData.detachmentTypes || []).map((t) => (
+            <option key={t.id} value={t.id}>{t.name} ({t.perModel}pts/model)</option>
+          ))}
+        </select>
       )}
     </div>
   );
