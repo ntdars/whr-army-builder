@@ -9927,53 +9927,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       </div>
 
-      {(() => {
-        const visibleOptions = (def.options || []).filter(themeOptionVisible);
-        if (visibleOptions.length === 0) return null;
-        return (
-          <div style={{ marginTop: 14 }}>
-            <span className="whr-label">Wargear</span>
-            {(() => {
-              const groups = {};
-              const singles = [];
-              visibleOptions.forEach((o) => { if (o.group) { groups[o.group] = groups[o.group] || []; groups[o.group].push(o); } else singles.push(o); });
-              return (
-                <>
-                  {Object.entries(groups).map(([g, opts]) => (
-                    <div key={g} style={{ marginBottom: 6 }}>
-                      {opts.map((o) => (
-                        <label key={o.id} className="whr-opt-row whr-opt-label">
-                          <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                            <input type="radio" name={`${g}-${unit.instanceId}`} checked={(gearSelections[g] || "") === o.id}
-                              onChange={() => updateUnit({ ...unit, gearSelections: { ...gearSelections, [g]: o.id } })} />
-                            {o.label}
-                          </span>
-                          <span className="whr-opt-cost">{o.cost ? `+${o.cost}/model` : "free"}</span>
-                        </label>
-                      ))}
-                      <label className="whr-opt-row whr-opt-label" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>
-                        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                          <input type="radio" name={`${g}-${unit.instanceId}`} checked={!gearSelections[g]} onChange={() => { const n = { ...gearSelections }; delete n[g]; updateUnit({ ...unit, gearSelections: n }); }} />
-                          None of the above (default)
-                        </span>
-                      </label>
-                    </div>
-                  ))}
-                  {singles.map((o) => (
-                    <label key={o.id} className="whr-opt-row whr-opt-label">
-                      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <input type="checkbox" checked={!!gearSelections[o.id]} onChange={(e) => updateUnit({ ...unit, gearSelections: { ...gearSelections, [o.id]: e.target.checked } })} />
-                        {o.label}
-                      </span>
-                      <span className="whr-opt-cost">{o.cost ? `+${o.cost}${o.per === "model" ? "/model" : ""}` : "free"}</span>
-                    </label>
-                  ))}
-                </>
-              );
-            })()}
-          </div>
-        );
-      })()}
+      <RegimentWargearSection def={def} unit={unit} updateUnit={updateUnit} themeOptionVisible={themeOptionVisible} />
 
       {def.command !== "none" && (
         <div style={{ marginTop: 14 }}>
@@ -10007,58 +9961,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
-      {def.multiChampion && (
-        <div style={{ marginTop: 14 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-            <span className="whr-label" style={{ marginBottom: 0 }}>{def.multiChampion.name}s</span>
-            <span className="whr-opt-cost">+{fmtPts(def.multiChampion.baseCost + regimentTrooperUnitCost(def, unit.gearSelections || {}))}pts each</span>
-          </div>
-          <Stepper value={unit.multiChampionCount || 0} min={0} max={20}
-            onChange={(v) => {
-              const items = [...(unit.multiChampionItems || [])];
-              const runes = [...(unit.multiChampionRuneItems || [])];
-              while (items.length < v) items.push([]);
-              while (runes.length < v) runes.push({});
-              items.length = v; runes.length = v;
-              updateUnit({ ...unit, multiChampionCount: v, multiChampionItems: items, multiChampionRuneItems: runes });
-            }} />
-          {Array.from({ length: unit.multiChampionCount || 0 }).map((_, i) => {
-            const mc = def.multiChampion;
-            const instItems = (unit.multiChampionItems || [])[i] || [];
-            const instRunes = (unit.multiChampionRuneItems || [])[i] || {};
-            const runeUsed = (instRunes.weapon || []).length > 0 ? 1 : 0;
-            const itemCtx = itemContext(mc, unit, { regimentId: def.id, tags: mc.tags || [] });
-            const setInstItems = (ids) => {
-              const items = [...(unit.multiChampionItems || [])];
-              items[i] = ids;
-              updateUnit({ ...unit, multiChampionItems: items });
-            };
-            const setInstRunes = (ids) => {
-              const runes = [...(unit.multiChampionRuneItems || [])];
-              runes[i] = { ...(runes[i] || {}), weapon: ids };
-              updateUnit({ ...unit, multiChampionRuneItems: runes });
-            };
-            return (
-              <div key={i} style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--line-soft)" }}>
-                <span style={{ fontSize: 13, fontWeight: 700 }}>{mc.name} #{i + 1}</span>
-                {mc.magicItemSlots > 0 && (
-                  <MagicItemPicker items={armyData.magicItems} selectedIds={instItems} maxSlots={Math.max(0, mc.magicItemSlots - runeUsed)}
-                    usedElsewhere={usedElsewhere} categoryFilter={mc.magicItemCategoryFilter}
-                    label={mc.itemSlotLabel || "Magic Item"}
-                    context={itemCtx}
-                    onToggle={(id) => setInstItems(instItems.includes(id) ? instItems.filter((x) => x !== id) : [...instItems, id])} />
-                )}
-                {armyData.runeForge && (mc.magicItemCategoryFilter || []).includes("weapon") && (
-                  <RunesSection>
-                    <RuneForge items={armyData.magicItems} cat="weapon" label="Forge a Weapon Rune" context={itemCtx}
-                      comboIds={instRunes.weapon} onChange={setInstRunes} />
-                  </RunesSection>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <RegimentMultiChampionSection def={def} unit={unit} updateUnit={updateUnit} armyData={armyData} usedElsewhere={usedElsewhere} />
 
       {def.extraOption && (
         <div style={{ marginTop: 14 }}>
@@ -10114,153 +10017,11 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
         );
       })()}
 
-      {def.champion && unit.championIncluded && (def.champion.markGroup || def.champion.magicItemSlots > 0) && (
-        <div style={{ marginTop: 14 }}>
-          {def.champion.markGroup && (
-            <div>
-              <span className="whr-label">Champion's Mark of Chaos</span>
-              {(roster.armyTheme && roster.armyTheme !== "Mixed" && def.champion.markGroup.options.includes(roster.armyTheme) ? [roster.armyTheme] : def.champion.markGroup.options).map((opt) => (
-                <label key={opt} className="whr-opt-row whr-opt-label">
-                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <input type="radio" name={`championmark-${unit.instanceId}`} checked={(unit.championMark || def.champion.markGroup.options[0]) === opt}
-                      onChange={() => {
-                        const context = itemContext(def.champion, unit, { regimentId: def.id, mark: opt, tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
-                        const filteredItems = (unit.championMagicItemIds || []).filter((id) => {
-                          const mi = miById(armyData.magicItems, id);
-                          return mi ? isItemAllowed(mi, context) : true;
-                        });
-                        updateUnit({ ...unit, championMark: opt, championMagicItemIds: filteredItems });
-                      }} />
-                    {opt}
-                  </span>
-                </label>
-              ))}
-            </div>
-          )}
-          {def.champion.magicItemSlots > 0 && (() => {
-            const championRuneItems = unit.championRuneItems || {};
-            const runeSlotsUsed = Object.values(championRuneItems).filter((arr) => arr && arr.length > 0).length;
-            const effFilter = def.champion.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
-            const itemCtx = itemContext(def.champion, unit, { regimentId: def.id, knightGroup: def.knightGroup, mark: unit.championMark || def.champion.markGroup?.options?.[0], tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
-            const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
-            const hasNamedOfCat = (c) => (unit.championMagicItemIds || []).some((id) => namedCatOf(id) === c);
-            return (
-              <>
-                <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={Math.max(0, def.champion.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
-                  categoryFilter={effFilter}
-                  context={itemCtx}
-                  onToggle={(id) => {
-                    const mi = miById(armyData.magicItems, id);
-                    const already = (unit.championMagicItemIds || []).includes(id);
-                    const newIds = already ? (unit.championMagicItemIds || []).filter((x) => x !== id) : [...(unit.championMagicItemIds || []), id];
-                    const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
-                    updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
-                  }} />
-                {armyData.key === "halflings" && (
-                  <div style={{ marginTop: 10 }}>
-                    <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
-                      onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
-                  </div>
-                )}
-                {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
-                  <RunesSection>
-                    {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
-                      <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "Forge a Weapon Rune", armour: "Forge an Armour Rune", enchanted: "Forge a Talisman Rune" }[c]}
-                        context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
-                        onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
-                    ))}
-                  </RunesSection>
-                )}
-              </>
-            );
-          })()}
-        </div>
-      )}
+      <RegimentChampionIncludedSection def={def} unit={unit} roster={roster} armyData={armyData} updateUnit={updateUnit} usedElsewhere={usedElsewhere} />
 
-      {def.championOptions && (
-        <div style={{ marginTop: 14 }}>
-          <span className="whr-label">Regimental Champion (optional)</span>
-          <label className="whr-opt-row whr-opt-label">
-            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <input type="radio" name={`championopt-${unit.instanceId}`} checked={!unit.championOptionId} onChange={() => updateUnit({ ...unit, championOptionId: null, championMagicItemIds: [] })} />
-              None
-            </span>
-          </label>
-          {def.championOptions.map((opt) => (
-            <label key={opt.id} className="whr-opt-row whr-opt-label">
-              <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <input type="radio" name={`championopt-${unit.instanceId}`} checked={unit.championOptionId === opt.id}
-                  onChange={() => updateUnit({ ...unit, championOptionId: opt.id, championMagicItemIds: [] })} />
-                {championOptionEffective(opt, roster.armyTheme).name}
-              </span>
-              <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
-            </label>
-          ))}
-          {def.championOptions.find((o) => o.id === unit.championOptionId)?.note && (
-            <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 2 }}>{def.championOptions.find((o) => o.id === unit.championOptionId).note}</p>
-          )}
-          {def.championOptions.find((o) => o.id === unit.championOptionId) && (() => {
-            const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
-            if (!opt.magicItemSlots) return null;
-            const championRuneItems = unit.championRuneItems || {};
-            const runeSlotsUsed = Object.values(championRuneItems).filter((arr) => arr && arr.length > 0).length;
-            const effFilter = opt.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
-            const itemCtx = itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
-            const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
-            const hasNamedOfCat = (c) => (unit.championMagicItemIds || []).some((id) => namedCatOf(id) === c);
-            return (
-              <>
-                <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={Math.max(0, opt.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
-                  categoryFilter={effFilter}
-                  label={opt.itemSlotLabel || "Magic Item"}
-                  context={itemCtx}
-                  onToggle={(id) => {
-                    const mi = miById(armyData.magicItems, id);
-                    const already = (unit.championMagicItemIds || []).includes(id);
-                    const newIds = already ? (unit.championMagicItemIds || []).filter((x) => x !== id) : [...(unit.championMagicItemIds || []), id];
-                    const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
-                    updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
-                  }} />
-                {armyData.key === "halflings" && (
-                  <div style={{ marginTop: 10 }}>
-                    <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
-                      onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
-                  </div>
-                )}
-                {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
-                  <RunesSection>
-                    {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
-                      <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "Forge a Weapon Rune", armour: "Forge an Armour Rune", enchanted: "Forge a Talisman Rune" }[c]}
-                        context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
-                        onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
-                    ))}
-                  </RunesSection>
-                )}
-              </>
-            );
-          })()}
-        </div>
-      )}
+      <RegimentChampionOptionsSection def={def} unit={unit} roster={roster} armyData={armyData} updateUnit={updateUnit} usedElsewhere={usedElsewhere} />
 
-      {def.branchWraith && (
-        <div style={{ marginTop: 14 }}>
-          <span className="whr-label">Join a Branch Wraith</span>
-          <label className="whr-opt-row whr-opt-label">
-            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <input type="checkbox" checked={!!unit.branchWraithIncluded} onChange={(e) => updateUnit({ ...unit, branchWraithIncluded: e.target.checked, branchWraithSpriteIds: e.target.checked ? unit.branchWraithSpriteIds : [] })} />
-              {def.branchWraith.name}
-            </span>
-            <span className="whr-opt-cost">+{def.branchWraith.cost}pts</span>
-          </label>
-          <p style={{ fontSize: 14, color: "var(--ink-faint)" }}>{def.branchWraith.note}</p>
-          {unit.branchWraithIncluded && (
-            <MagicItemPicker items={armyData.magicItems} selectedIds={unit.branchWraithSpriteIds || []} maxSlots={def.branchWraith.spriteSlots} usedElsewhere={usedElsewhere}
-              categoryFilter={["sprite"]}
-              context={{ regimentId: def.id, tags: ["spriteEligible"] }}
-              onToggle={(id) => toggleArrayField(unit, "branchWraithSpriteIds", id, updateUnit)} />
-          )}
-        </div>
-      )}
+      <RegimentBranchWraithSection def={def} unit={unit} armyData={armyData} updateUnit={updateUnit} usedElsewhere={usedElsewhere} />
 
       <DetachmentsSection def={def} unit={unit} armyData={armyData} updateUnit={updateUnit} />
     </div>
@@ -10270,6 +10031,268 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
 // Extracted from RegimentDetail's standard-path JSX — genuinely self-contained (only reads
 // def/unit/armyData and values trivially derived from them), unlike most of the rest of that
 // function's sections, which share a lot of local state with each other. No behavior change.
+// Extracted from RegimentDetail's standard-path JSX — self-contained (only reads
+// def/unit/updateUnit/themeOptionVisible). No behavior change.
+function RegimentWargearSection({ def, unit, updateUnit, themeOptionVisible }) {
+  const gearSelections = unit.gearSelections || {};
+  const visibleOptions = (def.options || []).filter(themeOptionVisible);
+  if (visibleOptions.length === 0) return null;
+  const groups = {};
+  const singles = [];
+  visibleOptions.forEach((o) => { if (o.group) { groups[o.group] = groups[o.group] || []; groups[o.group].push(o); } else singles.push(o); });
+  return (
+    <div style={{ marginTop: 14 }}>
+      <span className="whr-label">Wargear</span>
+      {Object.entries(groups).map(([g, opts]) => (
+        <div key={g} style={{ marginBottom: 6 }}>
+          {opts.map((o) => (
+            <label key={o.id} className="whr-opt-row whr-opt-label">
+              <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <input type="radio" name={`${g}-${unit.instanceId}`} checked={(gearSelections[g] || "") === o.id}
+                  onChange={() => updateUnit({ ...unit, gearSelections: { ...gearSelections, [g]: o.id } })} />
+                {o.label}
+              </span>
+              <span className="whr-opt-cost">{o.cost ? `+${o.cost}/model` : "free"}</span>
+            </label>
+          ))}
+          <label className="whr-opt-row whr-opt-label" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input type="radio" name={`${g}-${unit.instanceId}`} checked={!gearSelections[g]} onChange={() => { const n = { ...gearSelections }; delete n[g]; updateUnit({ ...unit, gearSelections: n }); }} />
+              None of the above (default)
+            </span>
+          </label>
+        </div>
+      ))}
+      {singles.map((o) => (
+        <label key={o.id} className="whr-opt-row whr-opt-label">
+          <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <input type="checkbox" checked={!!gearSelections[o.id]} onChange={(e) => updateUnit({ ...unit, gearSelections: { ...gearSelections, [o.id]: e.target.checked } })} />
+            {o.label}
+          </span>
+          <span className="whr-opt-cost">{o.cost ? `+${o.cost}${o.per === "model" ? "/model" : ""}` : "free"}</span>
+        </label>
+      ))}
+    </div>
+  );
+}
+
+// Extracted from RegimentDetail's standard-path JSX — self-contained. No behavior change.
+function RegimentMultiChampionSection({ def, unit, updateUnit, armyData, usedElsewhere }) {
+  if (!def.multiChampion) return null;
+  return (
+    <div style={{ marginTop: 14 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+        <span className="whr-label" style={{ marginBottom: 0 }}>{def.multiChampion.name}s</span>
+        <span className="whr-opt-cost">+{fmtPts(def.multiChampion.baseCost + regimentTrooperUnitCost(def, unit.gearSelections || {}))}pts each</span>
+      </div>
+      <Stepper value={unit.multiChampionCount || 0} min={0} max={20}
+        onChange={(v) => {
+          const items = [...(unit.multiChampionItems || [])];
+          const runes = [...(unit.multiChampionRuneItems || [])];
+          while (items.length < v) items.push([]);
+          while (runes.length < v) runes.push({});
+          items.length = v; runes.length = v;
+          updateUnit({ ...unit, multiChampionCount: v, multiChampionItems: items, multiChampionRuneItems: runes });
+        }} />
+      {Array.from({ length: unit.multiChampionCount || 0 }).map((_, i) => {
+        const mc = def.multiChampion;
+        const instItems = (unit.multiChampionItems || [])[i] || [];
+        const instRunes = (unit.multiChampionRuneItems || [])[i] || {};
+        const runeUsed = (instRunes.weapon || []).length > 0 ? 1 : 0;
+        const itemCtx = itemContext(mc, unit, { regimentId: def.id, tags: mc.tags || [] });
+        const setInstItems = (ids) => {
+          const items = [...(unit.multiChampionItems || [])];
+          items[i] = ids;
+          updateUnit({ ...unit, multiChampionItems: items });
+        };
+        const setInstRunes = (ids) => {
+          const runes = [...(unit.multiChampionRuneItems || [])];
+          runes[i] = { ...(runes[i] || {}), weapon: ids };
+          updateUnit({ ...unit, multiChampionRuneItems: runes });
+        };
+        return (
+          <div key={i} style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--line-soft)" }}>
+            <span style={{ fontSize: 13, fontWeight: 700 }}>{mc.name} #{i + 1}</span>
+            {mc.magicItemSlots > 0 && (
+              <MagicItemPicker items={armyData.magicItems} selectedIds={instItems} maxSlots={Math.max(0, mc.magicItemSlots - runeUsed)}
+                usedElsewhere={usedElsewhere} categoryFilter={mc.magicItemCategoryFilter}
+                label={mc.itemSlotLabel || "Magic Item"}
+                context={itemCtx}
+                onToggle={(id) => setInstItems(instItems.includes(id) ? instItems.filter((x) => x !== id) : [...instItems, id])} />
+            )}
+            {armyData.runeForge && (mc.magicItemCategoryFilter || []).includes("weapon") && (
+              <RunesSection>
+                <RuneForge items={armyData.magicItems} cat="weapon" label="Forge a Weapon Rune" context={itemCtx}
+                  comboIds={instRunes.weapon} onChange={setInstRunes} />
+              </RunesSection>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Extracted from RegimentDetail's standard-path JSX — self-contained. No behavior change.
+function RegimentChampionIncludedSection({ def, unit, roster, armyData, updateUnit, usedElsewhere }) {
+  if (!(def.champion && unit.championIncluded && (def.champion.markGroup || def.champion.magicItemSlots > 0))) return null;
+  return (
+    <div style={{ marginTop: 14 }}>
+      {def.champion.markGroup && (
+        <div>
+          <span className="whr-label">Champion's Mark of Chaos</span>
+          {(roster.armyTheme && roster.armyTheme !== "Mixed" && def.champion.markGroup.options.includes(roster.armyTheme) ? [roster.armyTheme] : def.champion.markGroup.options).map((opt) => (
+            <label key={opt} className="whr-opt-row whr-opt-label">
+              <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <input type="radio" name={`championmark-${unit.instanceId}`} checked={(unit.championMark || def.champion.markGroup.options[0]) === opt}
+                  onChange={() => {
+                    const context = itemContext(def.champion, unit, { regimentId: def.id, mark: opt, tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+                    const filteredItems = (unit.championMagicItemIds || []).filter((id) => {
+                      const mi = miById(armyData.magicItems, id);
+                      return mi ? isItemAllowed(mi, context) : true;
+                    });
+                    updateUnit({ ...unit, championMark: opt, championMagicItemIds: filteredItems });
+                  }} />
+                {opt}
+              </span>
+            </label>
+          ))}
+        </div>
+      )}
+      {def.champion.magicItemSlots > 0 && (() => {
+        const championRuneItems = unit.championRuneItems || {};
+        const runeSlotsUsed = Object.values(championRuneItems).filter((arr) => arr && arr.length > 0).length;
+        const effFilter = def.champion.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
+        const itemCtx = itemContext(def.champion, unit, { regimentId: def.id, knightGroup: def.knightGroup, mark: unit.championMark || def.champion.markGroup?.options?.[0], tags: [...(def.champion.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+        const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
+        const hasNamedOfCat = (c) => (unit.championMagicItemIds || []).some((id) => namedCatOf(id) === c);
+        return (
+          <>
+            <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={Math.max(0, def.champion.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
+              categoryFilter={effFilter}
+              context={itemCtx}
+              onToggle={(id) => {
+                const mi = miById(armyData.magicItems, id);
+                const already = (unit.championMagicItemIds || []).includes(id);
+                const newIds = already ? (unit.championMagicItemIds || []).filter((x) => x !== id) : [...(unit.championMagicItemIds || []), id];
+                const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
+                updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
+              }} />
+            {armyData.key === "halflings" && (
+              <div style={{ marginTop: 10 }}>
+                <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
+                  onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
+              </div>
+            )}
+            {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
+              <RunesSection>
+                {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
+                  <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "Forge a Weapon Rune", armour: "Forge an Armour Rune", enchanted: "Forge a Talisman Rune" }[c]}
+                    context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
+                    onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
+                ))}
+              </RunesSection>
+            )}
+          </>
+        );
+      })()}
+    </div>
+  );
+}
+
+// Extracted from RegimentDetail's standard-path JSX — self-contained. No behavior change.
+function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUnit, usedElsewhere }) {
+  if (!def.championOptions) return null;
+  return (
+    <div style={{ marginTop: 14 }}>
+      <span className="whr-label">Regimental Champion (optional)</span>
+      <label className="whr-opt-row whr-opt-label">
+        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <input type="radio" name={`championopt-${unit.instanceId}`} checked={!unit.championOptionId} onChange={() => updateUnit({ ...unit, championOptionId: null, championMagicItemIds: [] })} />
+          None
+        </span>
+      </label>
+      {def.championOptions.map((opt) => (
+        <label key={opt.id} className="whr-opt-row whr-opt-label">
+          <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <input type="radio" name={`championopt-${unit.instanceId}`} checked={unit.championOptionId === opt.id}
+              onChange={() => updateUnit({ ...unit, championOptionId: opt.id, championMagicItemIds: [] })} />
+            {championOptionEffective(opt, roster.armyTheme).name}
+          </span>
+          <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
+        </label>
+      ))}
+      {def.championOptions.find((o) => o.id === unit.championOptionId)?.note && (
+        <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 2 }}>{def.championOptions.find((o) => o.id === unit.championOptionId).note}</p>
+      )}
+      {def.championOptions.find((o) => o.id === unit.championOptionId) && (() => {
+        const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
+        if (!opt.magicItemSlots) return null;
+        const championRuneItems = unit.championRuneItems || {};
+        const runeSlotsUsed = Object.values(championRuneItems).filter((arr) => arr && arr.length > 0).length;
+        const effFilter = opt.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
+        const itemCtx = itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+        const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
+        const hasNamedOfCat = (c) => (unit.championMagicItemIds || []).some((id) => namedCatOf(id) === c);
+        return (
+          <>
+            <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={Math.max(0, opt.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
+              categoryFilter={effFilter}
+              label={opt.itemSlotLabel || "Magic Item"}
+              context={itemCtx}
+              onToggle={(id) => {
+                const mi = miById(armyData.magicItems, id);
+                const already = (unit.championMagicItemIds || []).includes(id);
+                const newIds = already ? (unit.championMagicItemIds || []).filter((x) => x !== id) : [...(unit.championMagicItemIds || []), id];
+                const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
+                updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
+              }} />
+            {armyData.key === "halflings" && (
+              <div style={{ marginTop: 10 }}>
+                <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
+                  onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
+              </div>
+            )}
+            {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
+              <RunesSection>
+                {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
+                  <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "Forge a Weapon Rune", armour: "Forge an Armour Rune", enchanted: "Forge a Talisman Rune" }[c]}
+                    context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
+                    onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
+                ))}
+              </RunesSection>
+            )}
+          </>
+        );
+      })()}
+    </div>
+  );
+}
+
+// Extracted from RegimentDetail's standard-path JSX — self-contained. No behavior change.
+function RegimentBranchWraithSection({ def, unit, armyData, updateUnit, usedElsewhere }) {
+  if (!def.branchWraith) return null;
+  return (
+    <div style={{ marginTop: 14 }}>
+      <span className="whr-label">Join a Branch Wraith</span>
+      <label className="whr-opt-row whr-opt-label">
+        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <input type="checkbox" checked={!!unit.branchWraithIncluded} onChange={(e) => updateUnit({ ...unit, branchWraithIncluded: e.target.checked, branchWraithSpriteIds: e.target.checked ? unit.branchWraithSpriteIds : [] })} />
+          {def.branchWraith.name}
+        </span>
+        <span className="whr-opt-cost">+{def.branchWraith.cost}pts</span>
+      </label>
+      <p style={{ fontSize: 14, color: "var(--ink-faint)" }}>{def.branchWraith.note}</p>
+      {unit.branchWraithIncluded && (
+        <MagicItemPicker items={armyData.magicItems} selectedIds={unit.branchWraithSpriteIds || []} maxSlots={def.branchWraith.spriteSlots} usedElsewhere={usedElsewhere}
+          categoryFilter={["sprite"]}
+          context={{ regimentId: def.id, tags: ["spriteEligible"] }}
+          onToggle={(id) => toggleArrayField(unit, "branchWraithSpriteIds", id, updateUnit)} />
+      )}
+    </div>
+  );
+}
+
 function DetachmentsSection({ def, unit, armyData, updateUnit }) {
   if (!def.detachmentParent) return null;
   const size = unit.size ?? def.minSize;
