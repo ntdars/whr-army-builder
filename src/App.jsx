@@ -3756,6 +3756,14 @@ const BRETONNIA = {
   name: "The Grand Army of Bretonnia",
   tagline: "Chivalrous knights and the peasant levy that bears the realm's weight",
   magicItems: [...COMMON_MAGIC_ITEMS, ...BRETONNIA_MAGIC_ITEMS],
+  themes: {
+    default: "core",
+    label: "Army Type",
+    options: [
+      { id: "core", name: "Core", desc: "The default Bretonnia army — includes Peasant levies (Rascals, Rapscallions, Zealots) and war machines (Balliste, Onagre/Mortier, Trébuchet, L'Ordonnance, Pistolet D'orgue) alongside the Men-at-Arms and Chevaliers regiments." },
+      { id: "heroic", name: "Heroic Army", desc: "The 5th-edition-style Heroic Bretonnia army — no Peasants or war machines, only Men-at-Arms and knights. Must include at least one Men-at-Arms regiment (Ribalds, Arbalestiers, or Archers) at least 20 models strong. Knights may deploy in Lance Formation and archers in Arrowhead Formation, and the army may call on the Lady's Blessing before battle — none of that is modeled here, since it's battlefield mechanics rather than list-building." },
+    ],
+  },
   compositionRules: [
     { kind: "requiresAtLeastOne", label: "At least one regiment of Chevaliers", refs: [
       { list: "regiments", id: "chevalierserrant", name: "Chevaliers Errant" },
@@ -3765,12 +3773,17 @@ const BRETONNIA = {
       { list: "regiments", id: "chevaliersapied", name: "Chevaliers á Pied" },
       { list: "regiments", id: "chevaliersvolants", name: "Chevaliers Volants" },
     ] },
+    { kind: "requiresMinSize", theme: "heroic", label: "Heroic Army", minSize: 20, refs: [
+      { list: "regiments", id: "ribalds", name: "Ribalds" },
+      { list: "regiments", id: "arbalestiers", name: "Arbalestiers" },
+      { list: "regiments", id: "archers", name: "Archers" },
+    ] },
   ],
   armyWideRules: [
     "Bretonnian Warhorses are bred for war over generations and don't suffer the usual -1 movement penalty for wearing barding.",
     "A Knight's Army: the general must be a knightly character (never a wizard), and the army must include at least one regiment of knights (a Chevaliers regiment). The regiment requirement is now flagged live by this builder (see the warning banner above the roster); the general-must-be-knightly part isn't, since the app doesn't track a designated general.",
     "Knightly Disdain: knightly regiments (Chevaliers) and knightly characters ignore panic caused by anything except other knightly regiments/characters (or regiments a knightly character has joined). Knightly characters will never join a Peasant regiment.",
-    "This builder models the default, darker version of Bretonnia (war machines and peasant levies). The alternate 'Heroic Army' variant (Lance Formation, no common peasants) is described in an appendix that wasn't in the provided text, so it isn't modeled here.",
+    "Heroic Army (Army Type above): the 5th-edition-style variant with no Peasants or war machines, and a 20+ model Men-at-Arms regiment required — both now flagged/enforced live by this builder. The Lady's Blessing, Lance Formation, and Arrowhead Formation from that variant are battlefield mechanics with no list-building effect, so they aren't modeled here.",
     "Knightly Virtues: each knightly character may take one Virtue, and each Virtue may only appear once in the army. A Virtue counts as, and takes up a slot from, the character's normal magic item allowance rather than being separate — this builder enforces the one-per-army uniqueness automatically, but doesn't hard-cap a character to exactly one Virtue if they have multiple item slots free, so keep that limit in mind yourself.",
   ],
   characters: [
@@ -3844,7 +3857,7 @@ const BRETONNIA = {
   ],
   regiments: [
     {
-      id: "rascals", name: "Rascals", perModel: 3, minSize: 5, stat: "Peasant", command: "standard",
+      id: "rascals", name: "Rascals", perModel: 3, minSize: 5, stat: "Peasant", command: "standard", theme: "core",
       note: "Peasants.",
       options: [
         { id: "spears", group: "melee", label: "Spears", cost: 0.5, per: "model" },
@@ -3854,7 +3867,7 @@ const BRETONNIA = {
       champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
     },
     {
-      id: "rapscallions", name: "Rapscallions", perModel: 5, minSize: 5, stat: "Peasant", command: "standard",
+      id: "rapscallions", name: "Rapscallions", perModel: 5, minSize: 5, stat: "Peasant", command: "standard", theme: "core",
       note: "Peasants with longbows.",
       options: [
         { id: "crossbows", group: null, label: "Crossbows instead of longbows", cost: 2, per: "model" },
@@ -3889,7 +3902,7 @@ const BRETONNIA = {
       champion: { name: "Commoner Champion", baseCost: 20, magicItemSlots: 1, stat: "Commoner Champion", tags: ["commoner"] },
     },
     {
-      id: "zealots", name: "Zealots", perModel: 5, minSize: 5, stat: "Peasant", command: "standard", restriction: "0-1",
+      id: "zealots", name: "Zealots", perModel: 5, minSize: 5, stat: "Peasant", command: "standard", restriction: "0-1", theme: "core",
       note: "Peasants with shields. Hate all enemies. If the regiment includes at least 4 Zealots (beyond command/champion/other characters) carrying the Reliquary, it's held aloft — the regiment is immune to fear and gains Ld10.",
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 1, per: "model" },
@@ -3958,27 +3971,27 @@ const BRETONNIA = {
   ],
   chariotsMonsters: [
     {
-      id: "balliste", name: "Balliste", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      id: "balliste", name: "Balliste", perUnit: 50, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "core",
       note: "Bolt thrower. Crewed by three Men-at-Arms.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
     },
     {
-      id: "onagremortier", name: "Onagre / Mortier", perUnit: 80, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      id: "onagremortier", name: "Onagre / Mortier", perUnit: 80, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "core",
       note: "Small stone thrower. Crewed by three Men-at-Arms.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
     },
     {
-      id: "trebuchet", name: "Trébuchet", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      id: "trebuchet", name: "Trébuchet", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "core",
       note: "Large stone thrower. Crewed by three Men-at-Arms.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
     },
     {
-      id: "lordonnance", name: "L'Ordonnance", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine",
+      id: "lordonnance", name: "L'Ordonnance", perUnit: 95, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", theme: "core",
       note: "Normal cannon. Crewed by three Men-at-Arms.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
     },
     {
-      id: "pistoletdorgue", name: "Pistolet D'orgue", perUnit: 150, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1",
+      id: "pistoletdorgue", name: "Pistolet D'orgue", perUnit: 150, stat: "War Machine (cannon, mortar, etc.)", kind: "warmachine", restriction: "0-1", theme: "core",
       note: "Organ gun. Crewed by three Men-at-Arms.",
       extraCrewCost: 5, extraCrewMax: 2, extraCrewLabel: "extra Men-at-Arms crew",
     },
@@ -11134,8 +11147,13 @@ function useRosterInfo(roster, armyData) {
     };
     const countRefs = (refs) => refs.reduce((n, ref) => n + (roster[ref.list] || []).filter((u) => matchesRef(u, ref)).length, 0);
     const rosterEmpty = roster.characters.length === 0 && roster.regiments.length === 0 && roster.chariots.length === 0 && roster.specials.length === 0;
+    const currentTheme = roster.armyTheme || armyData.themes?.default || null;
     const problems = [];
     rules.forEach((rule) => {
+      // Opt-in scoping: a rule with no theme field applies regardless of theme (matches every
+      // rule's behavior before this field existed, across all 23 factions). A rule with a
+      // theme field only applies when that theme is currently selected.
+      if (rule.theme && rule.theme !== currentTheme) return;
       if (rule.kind === "mutualExclusion") {
         const present = rule.refs.filter((ref) => countRefs([ref]) > 0);
         if (present.length > 1) problems.push(`${present.map((p) => p.name).join(", ")} can't be fielded together.`);
@@ -11148,6 +11166,10 @@ function useRosterInfo(roster, armyData) {
         if (countRefs(rule.refs) === 0) problems.push(`${rule.label}: needs at least one of ${rule.refs.map((r) => r.name).join(", ")}.`);
       } else if (rule.kind === "requiresIfPresent") {
         if (countRefs(rule.trigger) > 0 && countRefs(rule.requires) === 0) problems.push(`${rule.label} requires ${rule.requires.map((r) => r.name).join(" or ")} in the army.`);
+      } else if (rule.kind === "requiresMinSize" && !rosterEmpty) {
+        const matching = rule.refs.flatMap((ref) => (roster[ref.list] || []).filter((u) => matchesRef(u, ref)));
+        const hasLargeEnough = matching.some((u) => (u.size ?? 0) >= rule.minSize);
+        if (!hasLargeEnough) problems.push(`${rule.label}: needs at least one regiment of ${rule.refs.map((r) => r.name).join(", ")} with ${rule.minSize}+ models.`);
       }
     });
     return problems.length > 0 ? { problems } : null;
