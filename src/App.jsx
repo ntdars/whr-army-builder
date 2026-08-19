@@ -4675,7 +4675,7 @@ const ORCS_GOBLINS = {
       scythedWheelsCost: 20, commanderCost: 30, commanderLabel: "One crewman is a Common Orc Champion", commanderMagicItemSlots: 1,
     },
     {
-      id: "spiderswarm", name: "Spider Swarm", perUnit: 40, stat: "Spider Swarm", kind: "quantity", restriction: "0-1",
+      id: "spiderswarm", name: "Spider Swarm", perUnit: 40, stat: "Spider Swarm", kind: "quantity", minQty: 3, restriction: "0-1",
       note: "Requires at least one Forest Goblin regiment (Infantry or Spider Riders) in the army. Follows the main-rulebook Swarm rules. Priced per base.",
     },
     {
@@ -5914,7 +5914,7 @@ const SKAVEN = {
   ],
   chariotsMonsters: [
     {
-      id: "ratswarm", name: "Rat Swarm", perUnit: 40, stat: "Rat Swarms", kind: "quantity", countsAsFirstRegiment: true, countsAsFirstRegimentWhole: true,
+      id: "ratswarm", name: "Rat Swarm", perUnit: 40, stat: "Rat Swarms", kind: "quantity", minQty: 3, countsAsFirstRegiment: true, countsAsFirstRegimentWhole: true,
       note: "The cheapest Rat Swarm unit counts toward Regiments; further units count toward Chariots, Monsters, and War Machines. Follow the main-rulebook rules for Swarms. Priced per base.",
     },
     {
@@ -6308,7 +6308,7 @@ const VAMPIRE_COUNTS = {
       commanderAlwaysOn: true, commanderMagicItemSlots: 1,
     },
     {
-      id: "batswarm", name: "Bat Swarm", kind: "quantity", perUnit: 40, stat: "Bat Swarm",
+      id: "batswarm", name: "Bat Swarm", kind: "quantity", perUnit: 40, stat: "Bat Swarm", minQty: 3,
       note: "Living. Follows the main-rulebook rules for Swarms. Priced per base.",
     },
     {
@@ -6432,7 +6432,7 @@ const TOMB_KINGS = {
       ],
     },
     {
-      id: "carrion-tk", name: "Carrion", perModel: 50, minSize: 1, stat: "Carrion", command: "none", restriction: "0-1", tags: ["undead", "tombKings"],
+      id: "carrion-tk", name: "Carrion", perModel: 50, minSize: 3, stat: "Carrion", command: "none", restriction: "0-1", tags: ["undead", "tombKings"],
       note: "Undead, subject to the crumble rule. Monstrous flyers, always skirmishers. No upgrades. Priced per base/model — use the size stepper to buy multiple bases.",
     },
     {
@@ -6493,7 +6493,7 @@ const TOMB_KINGS = {
       note: "Living small monster. Follows the main-rulebook rules for Monstrous Scorpions/Spiders.",
     },
     {
-      id: "scorpionswarm", name: "Scorpion Swarm", kind: "quantity", perUnit: 40, stat: "Scorpion Swarm",
+      id: "scorpionswarm", name: "Scorpion Swarm", kind: "quantity", perUnit: 40, stat: "Scorpion Swarm", minQty: 3,
       note: "Living. Follows the main-rulebook rules for Swarms. Priced per base.",
     },
     {
@@ -6648,7 +6648,7 @@ const CLASSIC_UNDEAD = {
       championOptions: tkMummyChampion(60),
     },
     {
-      id: "carrion-cu", name: "Carrion", perModel: 50, minSize: 1, stat: "Carrion", command: "none", restriction: "0-1", tags: ["undead"],
+      id: "carrion-cu", name: "Carrion", perModel: 50, minSize: 3, stat: "Carrion", command: "none", restriction: "0-1", tags: ["undead"],
       note: "Undead, subject to the crumble rule. Flying undead birds of prey — cannot take any upgrades. As monstrous flyers they are always skirmishers. Priced per base/model — use the size stepper to buy multiple bases.",
     },
     {
@@ -6683,7 +6683,7 @@ const CLASSIC_UNDEAD = {
   ],
   chariotsMonsters: [
     {
-      id: "batswarm", name: "Bat Swarm", kind: "quantity", perUnit: 40, stat: "Bat Swarm",
+      id: "batswarm", name: "Bat Swarm", kind: "quantity", perUnit: 40, stat: "Bat Swarm", minQty: 3,
       note: "Living. Follows the main-rulebook rules for Swarms. Priced per base.",
     },
     {
@@ -7600,7 +7600,7 @@ const LIZARDMEN = {
       note: "A small monster. Follows the main-rulebook rules for Monstrous Spiders/Scorpions.",
     },
     {
-      id: "jungleswarms", name: "Jungle Swarm", kind: "quantity", perUnit: 40, stat: "Jungle Swarms", countsAsFirstRegiment: true,
+      id: "jungleswarms", name: "Jungle Swarm", kind: "quantity", perUnit: 40, stat: "Jungle Swarms", minQty: 3, countsAsFirstRegiment: true,
       note: "The smallest base counts toward Regiments; further bases count toward Monsters. Follows the main-rulebook rules for Swarms. Priced per base.",
     },
     {
@@ -7877,7 +7877,7 @@ const SLANN_EMPIRE = {
       note: "A small monster. Follows the main-rulebook rules for Monstrous Spiders/Scorpions.",
     },
     {
-      id: "jungleswarms-slann", name: "Jungle Swarm", kind: "quantity", perUnit: 40, stat: "Jungle Swarms", countsAsFirstRegiment: true,
+      id: "jungleswarms-slann", name: "Jungle Swarm", kind: "quantity", perUnit: 40, stat: "Jungle Swarms", minQty: 3, countsAsFirstRegiment: true,
       note: "The smallest base counts toward Regiments; further bases count toward Monsters. Follows the main-rulebook rules for Swarms. Priced per base.",
     },
     {
@@ -10491,7 +10491,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
         {def.maxQty !== 1 && (
           <div style={{ marginTop: 14 }}>
             <span className="whr-label">Quantity ({def.perUnit}pts each)</span>
-            <Stepper value={unit.qty || 1} min={1} onChange={(v) => updateUnit({ ...unit, qty: v })} />
+            <Stepper value={unit.qty || def.minQty || 1} min={def.minQty || 1} onChange={(v) => updateUnit({ ...unit, qty: v })} />
           </div>
         )}
         {(def.variantOptions || []).length > 0 && (
@@ -11410,7 +11410,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
     } else if (kind === "chariot") {
       const srcArmyData = sourceFaction ? FACTIONS[sourceFaction] : armyData;
       const def = srcArmyData.chariotsMonsters.find((x) => x.id === defId);
-      if (def.kind === "quantity") inst = { instanceId: uid("cm"), kind: "chariot", defId, qty: 1, variantSelections: {}, sourceFaction: sourceFaction || undefined };
+      if (def.kind === "quantity") inst = { instanceId: uid("cm"), kind: "chariot", defId, qty: def.minQty || 1, variantSelections: {}, sourceFaction: sourceFaction || undefined };
       else if (def.kind === "warmachine") inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraMagicItemIds: [], sourceFaction: sourceFaction || undefined };
       else if (def.kind === "abomination") inst = { instanceId: uid("cm"), kind: "chariot", defId, charUpgrades: {}, specialRules: {}, rider: "sorcererLord", sourceFaction: sourceFaction || undefined };
       else inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraSteeds: 0, commander: false, commanderMagicItemIds: [], scythedWheels: false, variantSelections: {}, sourceFaction: sourceFaction || undefined };
