@@ -8776,7 +8776,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
             const count = roster.chariots.filter((u) => u.defId === c.id).length;
             const atLimit = count >= limit;
             return (
-              <AddRow key={c.id} label={c.name + (c.restriction ? ` (${c.restriction})` : "")} sub={`${c.perUnit}pts each`}
+              <AddRow key={c.id} label={c.name + (c.restriction ? ` (${c.restriction})` : "")} sub={c.minQty ? `${fmtPts(c.perUnit * c.minQty)}pts, minimum ${c.minQty}` : `${c.perUnit}pts each`}
                 disabled={atLimit} disabledReason={`Limit reached (${c.restriction})`} onClick={() => onAdd("chariot", c.id)} />
             );
           })}
@@ -10490,8 +10490,13 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
         <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         {def.maxQty !== 1 && (
           <div style={{ marginTop: 14 }}>
-            <span className="whr-label">Quantity ({def.perUnit}pts each{def.minQty ? `, minimum ${def.minQty}` : ""})</span>
-            <Stepper value={unit.qty || def.minQty || 1} min={def.minQty || 1} onChange={(v) => updateUnit({ ...unit, qty: v })} />
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+              <span className="whr-label" style={{ marginBottom: 0 }}>Unit Size{def.minQty ? ` (min ${def.minQty})` : ""}</span>
+              <span className="whr-opt-cost">+{fmtPts(def.perUnit)}pts / model</span>
+            </div>
+            <div style={{ marginTop: 6 }}>
+              <Stepper value={unit.qty || def.minQty || 1} min={def.minQty || 1} onChange={(v) => updateUnit({ ...unit, qty: v })} />
+            </div>
           </div>
         )}
         {(def.variantOptions || []).length > 0 && (
