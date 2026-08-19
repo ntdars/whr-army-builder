@@ -7952,6 +7952,14 @@ const LIBERATED_MAGIC_ITEMS_BY_FACTION = (() => {
   });
   return groups;
 })();
+// A liberated item's own data lives in ITS source faction's magicItems array, not the current
+// army's — so miById(armyData.magicItems, id) alone can never find a liberated item's cost/name.
+// This flattens the whole catalog once for a fallback lookup wherever a liberatedMagicItemIds
+// or championLiberatedMagicItemIds field is read.
+const LIBERATED_MAGIC_ITEMS_FLAT = LIBERATED_MAGIC_ITEMS_BY_FACTION.flatMap((f) => [...f.items, ...f.runes]);
+function miByIdAnySource(armyData, id) {
+  return miById(armyData.magicItems, id) || miById(LIBERATED_MAGIC_ITEMS_FLAT, id);
+}
 
 // A handful of factions (currently just Halflings) can field a small number of allied "auxiliary"
 // regiments pulled wholesale from another faction's own army list (Empire Troops / Elven Troops).
@@ -8004,6 +8012,7 @@ function characterCost(inst, def, armyData) {
   if (def.anvilOption && inst.anvil) total += def.anvilOption.cost;
   if (def.chaosArmourOption && inst.chaosArmour) total += def.chaosArmourOption.cost;
   (inst.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+  (inst.liberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) total += mi.cost; });
   Object.values(inst.runeItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
   if (def.bloodlinePowerSlots) (inst.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   return total;
@@ -8034,6 +8043,7 @@ function regimentChampionCost(inst, def, armyData) {
   if (inst.championIncluded && def.champion) {
     total += def.champion.baseCost;
     (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+    (inst.championLiberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) total += mi.cost; });
     Object.values(inst.championRuneItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
   }
   if (inst.championOptionId && def.championOptions) {
@@ -8041,6 +8051,7 @@ function regimentChampionCost(inst, def, armyData) {
     if (opt) {
       total += opt.cost;
       (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+      (inst.championLiberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) total += mi.cost; });
       Object.values(inst.championRuneItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
     }
   }
@@ -8241,7 +8252,9 @@ function allUsedMagicItemIds(roster, excludeUnitId) {
   const collect = (arr) => arr.forEach((u) => {
     if (u.instanceId === excludeUnitId) return;
     (u.magicItemIds || []).forEach((id) => used.add(id));
+    (u.liberatedMagicItemIds || []).forEach((id) => used.add(id));
     (u.championMagicItemIds || []).forEach((id) => used.add(id));
+    (u.championLiberatedMagicItemIds || []).forEach((id) => used.add(id));
     (u.branchWraithSpriteIds || []).forEach((id) => used.add(id));
     (u.commanderMagicItemIds || []).forEach((id) => used.add(id));
     (u.extraMagicItemIds || []).forEach((id) => used.add(id));
@@ -8888,6 +8901,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       if (lore) tags.push(`Lore: ${lore}`);
     }
     (unit.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+    (unit.liberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) tags.push(mi.name); });
     Object.values(unit.runeItems || {}).forEach((ids) => {
       const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
       if (names.length > 0) tags.push(names.join(" + "));
@@ -8915,6 +8929,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       tags.push(def.champion.name);
       if (def.champion.markGroup) tags.push(`Mark of ${unit.championMark || def.champion.markGroup.options[0]}`);
       (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+      (unit.championLiberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) tags.push(mi.name); });
       Object.values(unit.championRuneItems || {}).forEach((ids) => {
         const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
         if (names.length > 0) tags.push(names.join(" + "));
@@ -8925,6 +8940,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       if (opt) {
         tags.push(opt.name);
         (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+        (unit.championLiberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) tags.push(mi.name); });
         Object.values(unit.championRuneItems || {}).forEach((ids) => {
           const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
           if (names.length > 0) tags.push(names.join(" + "));
