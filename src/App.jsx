@@ -8162,7 +8162,7 @@ function chariotCost(inst, def, armyData) {
   if (def.kind === "quantity") {
     let variantPerUnit = 0;
     (def.variantOptions || []).forEach((o) => { if (inst.variantSelections?.[o.id]) variantPerUnit += o.cost; });
-    return (inst.qty || 1) * (def.perUnit + variantPerUnit);
+    return (inst.qty || def.minQty || 1) * (def.perUnit + variantPerUnit);
   }
   if (def.kind === "warmachine") {
     let total = def.perUnit;
@@ -9406,7 +9406,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
             {roster.chariots.map((u, idx) => {
               const def = chariotDefFor(u, armyData);
               return <RosterUnitCard key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? u.qty : null} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme}
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.kind === "quantity" ? (u.qty || def.minQty || 1) : null} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme}
                 cardRef={(el) => setCardRef("chariots", idx, el)} dragHandleProps={makeDragHandleProps("chariots", idx)} />;
             })}
           </>
@@ -9517,7 +9517,7 @@ function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
           <h2>Chariots & Monsters</h2>
           {roster.chariots.map((u) => {
             const def = chariotDefFor(u, armyData);
-            return <PrintableUnitEntry key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} models={def.kind === "quantity" ? u.qty : null} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme} />;
+            return <PrintableUnitEntry key={u.instanceId} kind="chariot" unit={u} def={def} cost={unitCost(u, armyData, roster)} models={def.kind === "quantity" ? (u.qty || def.minQty || 1) : null} armyData={armyDataFor(u, armyData)} bloodlineId={roster.armyTheme} />;
           })}
         </div>
       )}
@@ -10490,7 +10490,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
         <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>
         {def.maxQty !== 1 && (
           <div style={{ marginTop: 14 }}>
-            <span className="whr-label">Quantity ({def.perUnit}pts each)</span>
+            <span className="whr-label">Quantity ({def.perUnit}pts each{def.minQty ? `, minimum ${def.minQty}` : ""})</span>
             <Stepper value={unit.qty || def.minQty || 1} min={def.minQty || 1} onChange={(v) => updateUnit({ ...unit, qty: v })} />
           </div>
         )}
