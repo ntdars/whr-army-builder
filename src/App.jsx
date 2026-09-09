@@ -9201,7 +9201,7 @@ function RuleFlagBanner({ label, items }) {
     <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
       <div className="whr-ruleflag-label-desktop" style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)" }}>{label}</div>
       <button type="button" className="whr-ruleflag-toggle" onClick={() => setCollapsed((c) => !c)} aria-expanded={!collapsed}
-        style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer", textAlign: "left", font: "inherit" }}>
+        style={{ width: "100%", justifyContent: "space-between", alignItems: "center", gap: 8, background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer", textAlign: "left", font: "inherit" }}>
         <span style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)" }}>{label}</span>
         <span aria-hidden="true" style={{ fontSize: 10, color: "var(--burgundy)", flexShrink: 0, transition: "transform 0.15s", transform: collapsed ? "rotate(0deg)" : "rotate(90deg)" }}>▶</span>
       </button>
@@ -11511,7 +11511,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
         <div className="whr-toolbar-actions" style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: 14, color: "var(--ink-soft)" }}>{saveState}</span>
           <button type="button" className="whr-toolbar-more-toggle" onClick={() => setMoreOpen((o) => !o)} aria-expanded={moreOpen}
-            style={{ background: "none", border: "1px solid var(--line)", borderRadius: 4, padding: "6px 10px", cursor: "pointer", fontFamily: "var(--font-display-sc)", fontSize: 12.5, letterSpacing: "0.03em", color: "var(--ink-soft)", display: "flex", alignItems: "center", gap: 5 }}>
+            style={{ background: "none", border: "1px solid var(--line)", borderRadius: 4, padding: "6px 10px", cursor: "pointer", fontFamily: "var(--font-display-sc)", fontSize: 12.5, letterSpacing: "0.03em", color: "var(--ink-soft)", alignItems: "center", gap: 5 }}>
             <span aria-hidden="true" style={{ display: "inline-block", fontSize: 9, transition: "transform 0.15s", transform: moreOpen ? "rotate(90deg)" : "rotate(0deg)" }}>▶</span>
             More actions
           </button>
