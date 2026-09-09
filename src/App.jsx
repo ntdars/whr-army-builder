@@ -5175,7 +5175,7 @@ const CHAOS_DWARFS = {
     "Greenskin slaves: the army may include enslaved Common Goblins, Common Orcs, and Black Orcs. Common Goblins/Orcs are subject to animosity; Black Orcs are immune to it and ignore panic from Common Orcs/Goblins; Black Orc characters joining a non-Black-Orc regiment quell its animosity. Common Goblins fear Elves they don't outnumber 2:1. Greenskin characters can't join Chaos Dwarf ranks generally — Black Orc/Common Orc/Goblin characters act alone or join their own kind's regiments (Black Orcs will only heed Black Orc or Chaos Dwarf leadership); Chaos Dwarf characters may join Black Orc/Common Orc/Goblin regiments but never Hobgoblins.",
     "Hobgoblins: function as slave-masters over the other greenskins rather than being enslaved themselves. They suffer animosity like Common Orcs/Goblins, but nearby Orcs/Goblins (within 12\" of a Hobgoblin regiment) don't test it themselves that turn. Orc/Goblin/Black Orc units don't panic when nearby Hobgoblins break, flee, or die — it's cause for celebration. No character but a Hobgoblin may join a Hobgoblin regiment, and Hobgoblin characters can't join anyone else's regiment either.",
     "Animosity: at the start of the turn (before movement), each not-fleeing, not-engaged Orc/Goblin/Hobgoblin regiment not within 12\" of a friendly Hobgoblin regiment (Orcs/Goblins only) rolls a die — on a 1, roll again: 1-5 the unit squabbles (immune to psychology, can't move/shoot/cast that turn, though wizards may still dispel), 6 the unit moves 2D6\" toward the nearest enemy and must charge it next turn if possible. This builder doesn't simulate animosity rolls turn-to-turn — it's a battle-phase mechanic, not a list-building one, same treatment as Orcs & Goblins.",
-    "Army Theme: pick Core, Old School Addendum, or Modern Stuff at the top of the left-hand sidebar — the book only allows one of the two supplements per army, never both, so picking a theme swaps in that supplement's units and hides the other's. Core units (Chaos Dwarf Warriors, Tower Guard, Bull Centaurs, Hobgoblins, the greenskin slave regiments, all the standard characters, etc.) stay available under every theme. Note the book also says a Modern Stuff army can't include the Black Orc/Common Orc/Common Goblin slave options at all — this builder doesn't hide those automatically when Modern Stuff is picked, so leave them out yourself if you're playing strictly RAW. The Fireglaive/Naphtha Bomb/Blood of Hashut upgrades for Chaos Dwarf Lords/Heroes aren't wired up as toggles (no clean slot for flat per-character extras in this engine yet) — add their points (+10/+10/+20 each, Blood of Hashut stacks) by hand if you take them.",
+    "Army Theme: pick Core, Old School Addendum, or Modern Stuff at the top of the left-hand sidebar — the book only allows one of the two supplements per army, never both, so picking a theme swaps in that supplement's units and hides the other's. Core units (Chaos Dwarf Warriors, Tower Guard, Bull Centaurs, Hobgoblins, all the standard characters, etc.) stay available under every theme. The Black Orc/Common Orc/Common Goblin slave regiments and their Hero characters are Core-only per the book and are now correctly hidden under Modern Stuff by this builder; a Modern army instead gets Magma Cannons (following the Dwarfs army book's Flame Cannon rules) alongside the Hell Cannon. The Fireglaive/Naphtha Bomb/Blood of Hashut upgrades for Chaos Dwarf Lords/Heroes aren't wired up as toggles (no clean slot for flat per-character extras in this engine yet) — add their points (+10/+10/+20 each, Blood of Hashut stacks) by hand if you take them.",
     "Hellcannon: the Chaos army book's version — a Daemon that fights as a war machine, crewed by Chaos Dwarfs — is already available under the Modern Stuff theme, listed below as 'Hellcannon (from the Chaos army book)'.",
   ],
   characters: [
@@ -5245,19 +5245,19 @@ const CHAOS_DWARFS = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
-      id: "blackorchero", name: "Black Orc Hero", cost: 89, stat: "Black Orc Hero", magicItemSlots: 2, tags: ["blackOrc"],
+      id: "blackorchero", name: "Black Orc Hero", cost: 89, stat: "Black Orc Hero", magicItemSlots: 2, tags: ["blackOrc"], theme: "core",
       gearNote: "Your army must include a Black Orc regiment to field this Hero (now flagged live by this builder). Quells animosity. May take a shield and either light armour or heavy armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
-      id: "commonorchero", name: "Common Orc Hero", cost: 60, stat: "Orc Hero", magicItemSlots: 2, tags: ["commonOrc"],
+      id: "commonorchero", name: "Common Orc Hero", cost: 60, stat: "Orc Hero", magicItemSlots: 2, tags: ["commonOrc"], theme: "core",
       gearNote: "Your army must include a Common Orc regiment to field this Hero (now flagged live by this builder). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
-      id: "commongoblinhero", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"],
+      id: "commongoblinhero", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"], theme: "core",
       gearNote: "Your army must include a Common Goblin regiment to field this Hero (now flagged live by this builder). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
@@ -5353,7 +5353,7 @@ const CHAOS_DWARFS = {
       champion: { name: "Bull Centaur Champion", baseCost: 30, magicItemSlots: 1, stat: "Bull Centaur Champion", tags: ["bullCentaur"] },
     },
     {
-      id: "orcslaves", name: "Orc Slave Warriors", perModel: 5, minSize: 5, stat: "Common Orc", command: "standard", tags: ["commonOrc"],
+      id: "orcslaves", name: "Orc Slave Warriors", perModel: 5, minSize: 5, stat: "Common Orc", command: "standard", tags: ["commonOrc"], theme: "core",
       note: "Comes with light armour.",
       options: [
         { id: "ahw", group: "melee", label: "Additional hand weapons", cost: 1, per: "model" },
@@ -5365,7 +5365,7 @@ const CHAOS_DWARFS = {
       champion: { name: "Common Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Common Orc Champion", tags: ["commonOrc"] },
     },
     {
-      id: "blackorcslaves", name: "Black Orc Slave Warriors", perModel: 9, minSize: 5, stat: "Black Orc", command: "standard", tags: ["blackOrc"],
+      id: "blackorcslaves", name: "Black Orc Slave Warriors", perModel: 9, minSize: 5, stat: "Black Orc", command: "standard", tags: ["blackOrc"], theme: "core",
       note: "Comes with light armour.",
       options: [
         { id: "ahw", group: "melee", label: "Additional hand weapons", cost: 2, per: "model" },
@@ -5378,7 +5378,7 @@ const CHAOS_DWARFS = {
       champion: { name: "Black Orc Champion", baseCost: 20, magicItemSlots: 1, stat: "Black Orc Champion", tags: ["blackOrc"] },
     },
     {
-      id: "goblinslaves", name: "Common Goblin Slave Warriors", perModel: 2.5, minSize: 5, stat: "Common Goblin", command: "standard", tags: ["commonGoblin"],
+      id: "goblinslaves", name: "Common Goblin Slave Warriors", perModel: 2.5, minSize: 5, stat: "Common Goblin", command: "standard", tags: ["commonGoblin"], theme: "core",
       options: [
         { id: "spears", group: "melee", label: "Spears", cost: 0.5, per: "model" },
         { id: "dhw", group: "melee", label: "Double handed weapons", cost: 2, per: "model" },
