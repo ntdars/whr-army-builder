@@ -5756,7 +5756,7 @@ const DARK_ELVES = {
       mounts: [
         { id: "blackdragon", name: "Black Dragon", cost: 0, stat: "Black Dragon" },
       ] },
-    { id: "morathi", name: "Morathi, The Hag Sorceress", cost: 300, stat: "Mage Lord", role: "Sorcerer Lord (level 4), using Slaanesh Magic",
+    { id: "morathi", name: "Morathi, The Hag Sorceress", cost: 300, stat: "Mage Lord", role: "Sorcerer Lord (level 4), using Slaanesh Magic", tags: ["wizard"],
       note: "May hand-pick her spells. May take four magic items.", extraMagicItemSlots: 4,
       mounts: [
         { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
