@@ -1,3 +1,10 @@
+2026-09-09
+Added a full Changelog page, linked from the Barracks footer.
+Fixed Dwarf Miners (and any future unit priced "X pts for the first N models") not correctly charging for per-model options like Shields or Heavy Armour.
+Fixed Bertrand the Brigand, Marksmen of Miragliano, Long Drong Slayer's Pirates, Birdmen of Catrazza, Ruglud's Armoured Orcs, Mengil Manhide's Company, Braganza's Besiegers, Vespero's Vendetta, Oglah Khan's Wolfboyz, and The Cursed Company showing "NaN pts" when added to a roster.
+Collapsed the toolbar's secondary buttons (Bug report, Import/Export, Rename, Print/PDF) behind a "More actions" toggle on mobile.
+Made Rule Flag warnings (composition, wargear, lore, house rules, etc.) individually collapsible on mobile.
+
 2026-08-19
 Fixed Bat Swarm, Rat Swarm, Spider Swarm, Scorpion Swarm, and Jungle Swarm to require a minimum of 3 models, matching the main-rulebook Swarms rule.
 Fixed Carrion to require a minimum of 3 models, matching other Monstrous Flyers like Warhawk Riders.
