@@ -8107,11 +8107,17 @@ function regimentCost(inst, def, armyData, roster) {
     (def.composition || []).forEach((c) => { total += (inst.composition?.[c.id] || 0) * c.cost; });
     return total;
   }
-  const size = inst.size || def.minSize;
+  const size = inst.size || def.minSize || def.tieredPricing?.baseSize;
   let total;
   if (def.tieredPricing) {
+    // tieredPricing's own extraPerModel only covers the unit's base loadout — any selected
+    // per-model options (shields, heavy armour, etc.) apply across every model in the unit,
+    // not just the ones beyond baseSize, so they're added separately here rather than folded
+    // into extraPerModel. regimentTrooperUnitCost() computes "base rate + selected per-model
+    // options"; subtracting the base rate isolates just the options' contribution per model.
     const tp = def.tieredPricing;
-    total = tp.baseCost + Math.max(0, size - tp.baseSize) * tp.extraPerModel;
+    const optionsPerModel = regimentTrooperUnitCost(def, inst.gearSelections || {}) - tp.extraPerModel;
+    total = tp.baseCost + Math.max(0, size - tp.baseSize) * tp.extraPerModel + size * optionsPerModel;
   } else {
     total = regimentTrooperUnitCost(def, inst.gearSelections || {}) * size;
   }
@@ -8829,7 +8835,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
               <AddRow
                 key={r.id}
                 label={r.name + (r.restriction ? ` (${r.restriction})` : "")}
-                sub={r.kind === "composite" ? "mixed unit, priced per model" : r.tieredPricing ? `${fmtPts(r.tieredPricing.baseCost)}pts, minimum ${r.minSize}` : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
+                sub={r.kind === "composite" ? "mixed unit, priced per model" : r.tieredPricing ? `${fmtPts(r.tieredPricing.baseCost)}pts, minimum ${r.minSize ?? r.tieredPricing.baseSize}` : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
                 disabled={atLimit}
                 disabledReason={`Limit reached (${r.restriction})`}
                 onClick={() => onAdd("regiment", r.id)}
@@ -8873,7 +8879,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
             <Section key={af.key} id={`aux-${af.key}`} title={af.label}>
               <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginBottom: 6 }}>1 per 2 Halfling regiments (currently {maxAux} allowed)</p>
               {eligible.map((r) => (
-                <AddRow key={r.id} label={r.name} sub={r.kind === "composite" ? "mixed unit, priced per model" : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
+                <AddRow key={r.id} label={r.name} sub={r.kind === "composite" ? "mixed unit, priced per model" : r.tieredPricing ? `${fmtPts(r.tieredPricing.baseCost)}pts, minimum ${r.minSize ?? r.tieredPricing.baseSize}` : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
                   onClick={() => onAdd("regiment", r.id, af.sourceKey)} />
               ))}
               {eligibleWarMachines.length > 0 && (
@@ -10011,7 +10017,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
     );
   }
 
-  const size = unit.size ?? def.minSize;
+  const size = unit.size ?? def.minSize ?? def.tieredPricing?.baseSize;
   const gearSelections = unit.gearSelections || {};
   const toggleFreeStandard = fastCavalryStandardFree(def, gearSelections);
   const autoStandard = def.command === "standard" || def.command === "special";
@@ -10035,11 +10041,11 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
 
       <div style={{ marginTop: 14 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-          <span className="whr-label" style={{ marginBottom: 0 }}>Regiment Size (min {def.minSize})</span>
+          <span className="whr-label" style={{ marginBottom: 0 }}>Regiment Size (min {def.minSize ?? def.tieredPricing?.baseSize})</span>
           <span className="whr-opt-cost">+{fmtPts(regimentTrooperUnitCost(def, gearSelections))}pts / model</span>
         </div>
         <div style={{ marginTop: 6 }}>
-          <Stepper value={size} min={def.minSize} onChange={(v) => updateUnit({ ...unit, size: v })} />
+          <Stepper value={size} min={def.minSize ?? def.tieredPricing?.baseSize} onChange={(v) => updateUnit({ ...unit, size: v })} />
         </div>
       </div>
 
@@ -10411,7 +10417,7 @@ function RegimentBranchWraithSection({ def, unit, armyData, updateUnit, usedElse
 
 function DetachmentsSection({ def, unit, armyData, updateUnit }) {
   if (!def.detachmentParent) return null;
-  const size = unit.size ?? def.minSize;
+  const size = unit.size ?? def.minSize ?? def.tieredPricing?.baseSize;
   const detachments = unit.detachments || [];
   const detachmentSizeUsed = detachments.reduce((s, d) => s + d.size, 0);
   return (
@@ -11128,7 +11134,7 @@ function useRosterWarnings(roster, armyData, totalPoints) {
       if (!mi || !mi.regimentDiscount) return;
       const d = regDefFor(u, armyData);
       if (!d) return;
-      const size = u.size || d.minSize;
+      const size = u.size || d.minSize || d.tieredPricing?.baseSize;
       const minSize = mi.minRegimentSize || 0;
       if (minSize && size < minSize) {
         warnings.push(`${d.name}: ${mi.name} requires a regiment of at least ${minSize} models (currently ${size}) and can't be given to a regiment carrying missile weapons — please verify.`);
@@ -11476,7 +11482,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
       if (def.kind === "composite") {
         inst = { instanceId: uid("reg"), kind: "regiment", defId, composition: {}, sourceFaction: sourceFaction || undefined };
       } else {
-        inst = { instanceId: uid("reg"), kind: "regiment", defId, size: def.minSize, gearSelections: {}, standard: def.command === "standard" || def.command === "special", magicBannerId: null, championIncluded: false, championMagicItemIds: [], branchWraithIncluded: false, branchWraithSpriteIds: [], detachments: [], sourceFaction: sourceFaction || undefined };
+        inst = { instanceId: uid("reg"), kind: "regiment", defId, size: def.minSize ?? def.tieredPricing?.baseSize, gearSelections: {}, standard: def.command === "standard" || def.command === "special", magicBannerId: null, championIncluded: false, championMagicItemIds: [], branchWraithIncluded: false, branchWraithSpriteIds: [], detachments: [], sourceFaction: sourceFaction || undefined };
       }
       setRoster((r) => ({ ...r, regiments: [...r.regiments, inst] }));
     } else if (kind === "chariot") {
