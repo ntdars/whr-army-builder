@@ -1,0 +1,18 @@
+2026-08-19
+Fixed Bat Swarm, Rat Swarm, Spider Swarm, Scorpion Swarm, and Jungle Swarm to require a minimum of 3 models, matching the main-rulebook Swarms rule.
+Fixed Carrion to require a minimum of 3 models, matching other Monstrous Flyers like Warhawk Riders.
+Fixed a missing "Shield & Heavy Armour" option for Vampire Counts and Von Carstein Vampire Counts.
+Added a Rule Flag for a Vampire Count/Lord holding a magic level while wearing armour or wielding a two-handed weapon.
+Fixed Liberated Magic Items (Halflings) not being added to a unit's points cost or shown as a tag on the roster card.
+Added a Rule Flag for Empire armies exceeding the auxiliary regiment limit.
+Added the Heroic Bretonnia Army theme, with its own composition requirements.
+
+2026-08-16
+Reworked drag-and-drop reordering to use pointer events instead of native HTML5 drag-and-drop, for reliability and mobile support.
+Added auto-scroll while dragging near the top/bottom of a long roster list.
+Enlarged the drag handle's tap target for touch devices.
+
+2026-08-14
+Added Import/Export via shareable roster codes.
+Added a mobile carousel layout for the builder screen.
+Fixed several magic item and special character point costs against the WHR Armies book.
