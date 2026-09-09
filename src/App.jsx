@@ -1953,6 +1953,7 @@ const CHAOS_WARRIORS = {
     "Chaos Gifts: an optional card-game subsystem (needs a physical 4th-edition Chaos Gift deck) usable on any model except Daemons and Chaos Spawn — not simulated here, play it at the table.",
     "Chaos Spawn: any model (friend or foe) can be transformed into a Chaos Spawn during the battle via the Eye of the God test after playing a Chaos Gift on a Marked character — not simulated here, see the rulebook.",
     "For armies under 2000pts, the general may be a regimental champion if no other character could fill the role, and — while ill-advised — may even be a Chaos Spawn General (who cannot impart Leadership to others).",
+    "Chaos Banners: the Chaos Battle Standard Bearer may take one, but only one matching whatever Mark he bears, and only if the whole army worships that same Chaos Power. This builder now lets the BSB pick a matching banner (previously missing), but since this army lets every character/champion take a different Mark freely with no theme system to lock that down, it can't verify the rest of your army actually shares one Power the way Chaos Warband's Core/Mixed theme choice does — track the single-Power requirement yourself.",
   ],
   magicItems: [...COMMON_MAGIC_ITEMS, ...CHAOS_MAGIC_ITEMS],
   characters: [
@@ -1995,7 +1996,7 @@ const CHAOS_WARRIORS = {
       ],
     },
     {
-      id: "chaosbsb", name: "Chaos Battle Standard Bearer", cost: 116, stat: "Chaos BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion", "bsb"],
+      id: "chaosbsb", name: "Chaos Battle Standard Bearer", cost: 116, stat: "Chaos BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["chaosChampion", "bsb"],
       gearNote: "Wears Chaos Armour. The one Chaos Reward or magic item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
@@ -2192,6 +2193,7 @@ const BEASTMEN = {
     "Minotaurs (character or regiment) that win a combat with an enemy casualty must gorge on the dead instead of pursuing/overrunning (unless subject to hatred or frenzy) — if charged before their next move while feasting, they become frenzied instead.",
     "Marks of Chaos are available to Beastmen characters exactly as for Chaos Warriors (see the Chaos Warriors army's rules text for what each Mark does); Dragon Ogre characters pay an additional +25pts for the Mark of Slaanesh.",
     "The Chaos Abomination is available if the army general is a Beastman/Minotaur/Dragon Ogre/Centaur Lord or Hero bearing the Mark of Chaos Undivided.",
+    "Chaos Banners: whichever BSB you take (Beastman/Minotaur/Centaur) may take one, but only one matching whatever Mark he bears, and only if the whole army worships that same Chaos Power. This builder now lets the BSB pick a matching banner (previously missing), but since this army — like Chaos Warriors — lets every character/champion take a different Mark freely with no theme system to lock that down, it can't verify the rest of your army actually shares one Power — track the single-Power requirement yourself.",
   ],
   magicItems: [...COMMON_MAGIC_ITEMS, ...CHAOS_MAGIC_ITEMS],
   characters: [
@@ -2290,7 +2292,7 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "beastmanbsb", name: "Beastman Battle Standard Bearer", cost: 96, stat: "Beastman BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES], tags: ["beastman", "bsb"],
+      id: "beastmanbsb", name: "Beastman Battle Standard Bearer", cost: 96, stat: "Beastman BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["beastman", "bsb"],
       gearNote: "0-1 slot shared with the Minotaur/Centaur BSB below — pick only one. May take light armour for free, or heavy armour for free. May take a Beastman Chariot for the price of the chariot. The one item may be a magic banner.",
       armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour"] },
       markGroup: { options: MARKS_WARRIOR },
@@ -2299,12 +2301,12 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "minotaurbsb", name: "Minotaur Battle Standard Bearer", cost: 132, stat: "Minotaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES], tags: ["beastman", "bsb"],
+      id: "minotaurbsb", name: "Minotaur Battle Standard Bearer", cost: 132, stat: "Minotaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["beastman", "bsb"],
       gearNote: "0-1 slot shared with the Beastman/Centaur BSB — pick only one. Monstrous model, causes fear. The one item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
     },
     {
-      id: "centaurbsb", name: "Centaur Battle Standard Bearer", cost: 108, stat: "Centaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES], tags: ["beastman", "bsb"],
+      id: "centaurbsb", name: "Centaur Battle Standard Bearer", cost: 108, stat: "Centaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["beastman", "bsb"],
       gearNote: "0-1 slot shared with the Beastman/Minotaur BSB — pick only one. Centaurs are cavalry. The one item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
     },
