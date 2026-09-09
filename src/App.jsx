@@ -195,6 +195,11 @@ body {
   display: flex; align-items: center; justify-content: center; background: var(--paper);
 }
 
+/* Desktop default: the "More actions" toggle only matters on narrow screens, so it's hidden
+   and the buttons it would reveal stay always-visible here — no JS involved at this size. */
+.whr-toolbar-more { display: flex; }
+.whr-toolbar-more-toggle { display: none; }
+
 @media (max-width: 900px) {
   /* SetupScreen's "Muster Forces" / "The Barracks" two-up grid — just stack full-width,
      matching desktop's per-section width instead of squeezing both into a shared row. */
@@ -203,6 +208,14 @@ body {
   /* BuilderScreen's toolbar (bug report / rename / export / save) wraps under the
      title on narrow screens — center it instead of leaving it hugging the left edge. */
   .whr-toolbar-actions { justify-content: center; flex-wrap: wrap; width: 100%; }
+
+  /* Collapse Bug report/feedback, Import/Export, Rename, and Print/PDF behind the toggle on
+     mobile — Save Roster stays outside this group since it's the one actually reached for
+     often. Class-based (not inline display) specifically so this plays nicely with the
+     desktop default above without needing !important in either direction. */
+  .whr-toolbar-more { display: none; }
+  .whr-toolbar-more.is-open { display: flex; }
+  .whr-toolbar-more-toggle { display: flex; }
 
   /* BuilderScreen's three-column carousel — a horizontally swipeable row instead, each
      column at 88% width so neighbors peek in on both edges. Deliberately a different
@@ -9153,6 +9166,33 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
   );
 }
 
+// Shared render for every Rule Flag banner (composition problems, wargear conflicts, lore
+// mismatches, etc.) — was 14 near-identical copies of the same markup, one per warning type.
+// Each instance gets its own independent collapse toggle (defaults open, so a fresh warning is
+// never missed) rather than one master toggle for all of them, since collapsing one you've
+// already dealt with shouldn't hide a different one you haven't seen yet. The early-return on
+// empty items happens inside the component (not by conditionally rendering <RuleFlagBanner> at
+// all from the caller), which keeps this component instance mounted across data changes and so
+// keeps the user's collapsed/expanded choice stable even as the underlying warnings come and go.
+function RuleFlagBanner({ label, items }) {
+  const [collapsed, setCollapsed] = useState(false);
+  if (!items || items.length === 0) return null;
+  return (
+    <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
+      <button type="button" onClick={() => setCollapsed((c) => !c)} aria-expanded={!collapsed}
+        style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer", textAlign: "left", font: "inherit" }}>
+        <span style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)" }}>{label}</span>
+        <span aria-hidden="true" style={{ fontSize: 10, color: "var(--burgundy)", flexShrink: 0, transition: "transform 0.15s", transform: collapsed ? "rotate(0deg)" : "rotate(90deg)" }}>▶</span>
+      </button>
+      {!collapsed && (
+        <ul style={{ margin: "3px 0 0", paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+          {items.map((w, i) => <li key={i}>{w}</li>)}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, magicLevelWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, liberatedItemWarnings, selectedId, onSelect, onRemove, onReorderSection }) {
   // Pointer-based reordering (not native HTML5 drag-and-drop — that requires
   // dataTransfer.setData() to reliably fire onDrop in several browsers, and its default
@@ -9323,118 +9363,20 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
           )}
         </div>
       </div>
-      {contingentInfo?.active && contingentInfo.problems.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>{contingentInfo.label} isn't legal yet:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {contingentInfo.problems.map((p, i) => <li key={i}>{p}</li>)}
-          </ul>
-        </div>
-      )}
-      {overAuxLimit && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Army composition:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            <li>Only half of the total number of regiments (rounded up) in the {armyData.name} army may be auxiliaries — currently {auxiliaryInfo.auxCount} of {auxiliaryInfo.totalRegiments} regiments ({auxiliaryInfo.allowed} allowed).</li>
-          </ul>
-        </div>
-      )}
-      {themeGateWarning && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Army theme:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            <li>{themeGateWarning}</li>
-          </ul>
-        </div>
-      )}
-      {endlessBannerWarnings && endlessBannerWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic Banner:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {endlessBannerWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {loreWarnings && loreWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Lore of Magic:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {loreWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {magicLevelWarnings && magicLevelWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic level:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {magicLevelWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {runeWarnings && runeWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Dwarf runes:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {runeWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {houseRuleWarnings && houseRuleWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>House rules:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {houseRuleWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {sharedPoolWarnings && sharedPoolWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Magic items / bloodline powers:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {sharedPoolWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {liberatedItemWarnings && liberatedItemWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Liberated Magic Items:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {liberatedItemWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {knightWarnings && knightWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Knightly Orders:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {knightWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {wargearWarnings && wargearWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Wargear:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {wargearWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {auxiliaryWarnings && auxiliaryWarnings.length > 0 && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Auxiliaries:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {auxiliaryWarnings.map((w, i) => <li key={i}>{w}</li>)}
-          </ul>
-        </div>
-      )}
-      {compositionInfo && (
-        <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)", marginBottom: 3 }}>Army composition:</div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-            {compositionInfo.problems.map((p, i) => <li key={i}>{p}</li>)}
-          </ul>
-        </div>
-      )}
+      <RuleFlagBanner label={contingentInfo ? `${contingentInfo.label} isn't legal yet:` : ""} items={contingentInfo?.active ? contingentInfo.problems : []} />
+      <RuleFlagBanner label="Army composition:" items={overAuxLimit ? [`Only half of the total number of regiments (rounded up) in the ${armyData.name} army may be auxiliaries — currently ${auxiliaryInfo.auxCount} of ${auxiliaryInfo.totalRegiments} regiments (${auxiliaryInfo.allowed} allowed).`] : []} />
+      <RuleFlagBanner label="Army theme:" items={themeGateWarning ? [themeGateWarning] : []} />
+      <RuleFlagBanner label="Magic Banner:" items={endlessBannerWarnings} />
+      <RuleFlagBanner label="Lore of Magic:" items={loreWarnings} />
+      <RuleFlagBanner label="Magic level:" items={magicLevelWarnings} />
+      <RuleFlagBanner label="Dwarf runes:" items={runeWarnings} />
+      <RuleFlagBanner label="House rules:" items={houseRuleWarnings} />
+      <RuleFlagBanner label="Magic items / bloodline powers:" items={sharedPoolWarnings} />
+      <RuleFlagBanner label="Liberated Magic Items:" items={liberatedItemWarnings} />
+      <RuleFlagBanner label="Knightly Orders:" items={knightWarnings} />
+      <RuleFlagBanner label="Wargear:" items={wargearWarnings} />
+      <RuleFlagBanner label="Auxiliaries:" items={auxiliaryWarnings} />
+      <RuleFlagBanner label="Army composition:" items={compositionInfo?.problems || []} />
       <div style={{ height: 1, background: "var(--line)", margin: "10px 0 16px" }} />
 
       <div className="whr-scroll" ref={scrollRef} style={{ overflowY: "auto", flex: 1, paddingRight: 4 }}>
@@ -11443,6 +11385,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
   const [renaming, setRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState(roster.name);
   const [showCodeModal, setShowCodeModal] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const { mobileIndex, carouselRef, scrollToPanel } = useMobileCarousel();
 
   function selectAndAdvance(id) {
@@ -11548,20 +11491,27 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
         </div>
         <div className="whr-toolbar-actions" style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: 14, color: "var(--ink-soft)" }}>{saveState}</span>
-          <button className="whr-btn whr-btn-stack" onClick={() => window.open("https://forms.gle/zrKUfgxMCgqeiMiA8", "_blank", "noopener,noreferrer")}>
-            <span>Bug report</span>
-            <span>/ feedback</span>
+          <button type="button" className="whr-toolbar-more-toggle" onClick={() => setMoreOpen((o) => !o)} aria-expanded={moreOpen}
+            style={{ background: "none", border: "1px solid var(--line)", borderRadius: 4, padding: "6px 10px", cursor: "pointer", fontFamily: "var(--font-display-sc)", fontSize: 12.5, letterSpacing: "0.03em", color: "var(--ink-soft)", display: "flex", alignItems: "center", gap: 5 }}>
+            <span aria-hidden="true" style={{ display: "inline-block", fontSize: 9, transition: "transform 0.15s", transform: moreOpen ? "rotate(90deg)" : "rotate(0deg)" }}>▶</span>
+            More actions
           </button>
-          <button className="whr-btn" onClick={() => setShowCodeModal(true)}>Import / Export</button>
-          {renaming ? (
-            <input className="whr-input" autoFocus value={renameValue} style={{ width: 180 }}
-              onChange={(e) => setRenameValue(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") confirmRename(); if (e.key === "Escape") cancelRename(); }}
-              onBlur={confirmRename} />
-          ) : (
-            <button className="whr-btn" onClick={startRename}>Rename</button>
-          )}
-          <button className="whr-btn" onClick={() => window.print()}>Print / PDF</button>
+          <div className={`whr-toolbar-more${moreOpen ? " is-open" : ""}`} style={{ alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+            <button className="whr-btn whr-btn-stack" onClick={() => window.open("https://forms.gle/zrKUfgxMCgqeiMiA8", "_blank", "noopener,noreferrer")}>
+              <span>Bug report</span>
+              <span>/ feedback</span>
+            </button>
+            <button className="whr-btn" onClick={() => setShowCodeModal(true)}>Import / Export</button>
+            {renaming ? (
+              <input className="whr-input" autoFocus value={renameValue} style={{ width: 180 }}
+                onChange={(e) => setRenameValue(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") confirmRename(); if (e.key === "Escape") cancelRename(); }}
+                onBlur={confirmRename} />
+            ) : (
+              <button className="whr-btn" onClick={startRename}>Rename</button>
+            )}
+            <button className="whr-btn" onClick={() => window.print()}>Print / PDF</button>
+          </div>
           <button className="whr-btn whr-btn-gold" onClick={onSave}>Save Roster</button>
         </div>
       </div>
