@@ -8258,6 +8258,8 @@ function abominationCost(inst) {
 function specialCost(inst, def, armyData) {
   let total = def.cost;
   if (def.mountOption && inst.mounted) total += def.mountOption.cost;
+  const mount = def.mounts?.find((m) => m.id === inst.mountId);
+  if (mount) total += mount.cost;
   (inst.extraMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   return total;
 }
