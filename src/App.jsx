@@ -8557,6 +8557,61 @@ function fmtPts(n) {
    SETUP / BARRACKS SCREEN
    ========================================================================== */
 
+// Fetches /changelog.txt at runtime and renders it as a collapsible footer section — kept as
+// a separate plain-text file (not baked into this component) specifically so it can be edited
+// directly on GitHub without touching App.jsx at all. Format is deliberately dead simple: blocks
+// separated by a blank line, the first line of each block is its heading (typically a date),
+// every line after that in the block becomes its own bullet. No markdown, no special syntax.
+// Fails silently (renders nothing) if the file is missing or empty — never shows a broken UI
+// just because changelog.txt hasn't been added to the deploy yet.
+function Changelog() {
+  const [text, setText] = useState(null);
+  const [failed, setFailed] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/changelog.txt")
+      .then((res) => { if (!res.ok) throw new Error("not found"); return res.text(); })
+      .then((t) => { if (!cancelled) setText(t); })
+      .catch(() => { if (!cancelled) setFailed(true); });
+    return () => { cancelled = true; };
+  }, []);
+
+  if (failed || text === null) return null;
+
+  const entries = text.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean).map((block) => {
+    const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+    return { heading: lines[0], items: lines.slice(1) };
+  }).filter((e) => e.heading);
+
+  if (entries.length === 0) return null;
+
+  return (
+    <div style={{ marginTop: 14 }}>
+      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open}
+        style={{ background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "var(--font-display-sc)", fontSize: 13, letterSpacing: "0.05em", color: "var(--ink-faint)", display: "inline-flex", alignItems: "center", gap: 5 }}>
+        <span aria-hidden="true" style={{ display: "inline-block", fontSize: 10, transition: "transform 0.15s", transform: open ? "rotate(90deg)" : "rotate(0deg)" }}>▶</span>
+        Changelog
+      </button>
+      {open && (
+        <div style={{ marginTop: 12, textAlign: "left", maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
+          {entries.map((e, i) => (
+            <div key={i} style={{ marginBottom: 12 }}>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 14, color: "var(--ink-soft)", marginBottom: 3 }}>{e.heading}</div>
+              {e.items.length > 0 && (
+                <ul style={{ margin: 0, paddingLeft: 18, fontSize: 13.5, color: "var(--ink-faint)" }}>
+                  {e.items.map((item, j) => <li key={j}>{item}</li>)}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
   const [listName, setListName] = useState("");
   const [pointLimit, setPointLimit] = useState(2000);
@@ -8665,6 +8720,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError }) {
 
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <p className="whr-serif-italic" style={{ fontSize: 14.5, color: "var(--ink-faint)" }}>Maintained by Turhan</p>
+        <Changelog />
       </div>
     </div>
   );
