@@ -6,6 +6,7 @@ Collapsed the toolbar's secondary buttons (Bug report, Import/Export, Rename, Pr
 Made Rule Flag warnings (composition, wargear, lore, house rules, etc.) individually collapsible on mobile.
 Fixed a bug where Morathi (Dark Elves) couldn't take Arcane Items.
 Fixed Chaos Warriors' and Beastmen's Battle Standard Bearers (Beastman/Minotaur/Centaur) not having access to Chaos Banners, matching Chaos Warband. Note: the "whole army must share one Chaos Power" part of that rule isn't cross-checked for these two armies, since neither has a theme system locking Mark selection the way Chaos Warband's does — track that part yourself.
+Fixed 19 Special Characters (Karl Franz, Malekith, Asarnil, Zhatan, Drazhoath, Morathi, Thanquol, and 13 others) not adding their mount's cost to their total points — a missing case in the special-character cost calculation, distinct from the (already-working) single-mount-toggle pattern used by a few others like Magnus the Pious.
 
 2026-08-19
 Fixed Bat Swarm, Rat Swarm, Spider Swarm, Scorpion Swarm, and Jungle Swarm to require a minimum of 3 models, matching the main-rulebook Swarms rule.
