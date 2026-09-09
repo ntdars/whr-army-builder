@@ -200,6 +200,12 @@ body {
 .whr-toolbar-more { display: flex; }
 .whr-toolbar-more-toggle { display: none; }
 
+/* Desktop default: Rule Flags aren't collapsible here — plenty of room, so just show the
+   plain label and the full list, exactly as before collapsing was ever added. */
+.whr-ruleflag-label-desktop { display: block; }
+.whr-ruleflag-toggle { display: none; }
+.whr-ruleflag-body { display: block; }
+
 @media (max-width: 900px) {
   /* SetupScreen's "Muster Forces" / "The Barracks" two-up grid — just stack full-width,
      matching desktop's per-section width instead of squeezing both into a shared row. */
@@ -216,6 +222,13 @@ body {
   .whr-toolbar-more { display: none; }
   .whr-toolbar-more.is-open { display: flex; }
   .whr-toolbar-more-toggle { display: flex; }
+
+  /* Mobile: Rule Flags become collapsible — hide the plain desktop label in favor of the
+     interactive toggle, and default the list to closed unless the user has opened it. */
+  .whr-ruleflag-label-desktop { display: none; }
+  .whr-ruleflag-toggle { display: flex; }
+  .whr-ruleflag-body { display: none; }
+  .whr-ruleflag-body.is-open { display: block; }
 
   /* BuilderScreen's three-column carousel — a horizontally swipeable row instead, each
      column at 88% width so neighbors peek in on both edges. Deliberately a different
@@ -9174,21 +9187,27 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
 // empty items happens inside the component (not by conditionally rendering <RuleFlagBanner> at
 // all from the caller), which keeps this component instance mounted across data changes and so
 // keeps the user's collapsed/expanded choice stable even as the underlying warnings come and go.
+// Collapsible only on mobile — desktop has plenty of room, so there it's just a plain label
+// and a full list, exactly as before this was ever collapsible. Both the toggle button and the
+// plain label render unconditionally; CSS (not JS) decides which one shows for the current
+// viewport, matching the same pattern as the toolbar's "More actions" toggle. The <ul> itself
+// is always rendered in the DOM (never conditionally skipped) so a pure CSS override can
+// control its visibility — if it were only rendered when !collapsed, there'd be nothing for a
+// desktop CSS rule to reveal.
 function RuleFlagBanner({ label, items }) {
   const [collapsed, setCollapsed] = useState(false);
   if (!items || items.length === 0) return null;
   return (
     <div style={{ background: "var(--burgundy-pale)", border: "1px solid var(--burgundy)", borderRadius: 6, padding: "8px 12px", marginBottom: 12 }}>
-      <button type="button" onClick={() => setCollapsed((c) => !c)} aria-expanded={!collapsed}
+      <div className="whr-ruleflag-label-desktop" style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)" }}>{label}</div>
+      <button type="button" className="whr-ruleflag-toggle" onClick={() => setCollapsed((c) => !c)} aria-expanded={!collapsed}
         style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, background: "none", border: "none", padding: 0, margin: 0, cursor: "pointer", textAlign: "left", font: "inherit" }}>
         <span style={{ fontSize: 14, fontWeight: 700, color: "var(--burgundy)" }}>{label}</span>
         <span aria-hidden="true" style={{ fontSize: 10, color: "var(--burgundy)", flexShrink: 0, transition: "transform 0.15s", transform: collapsed ? "rotate(0deg)" : "rotate(90deg)" }}>▶</span>
       </button>
-      {!collapsed && (
-        <ul style={{ margin: "3px 0 0", paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
-          {items.map((w, i) => <li key={i}>{w}</li>)}
-        </ul>
-      )}
+      <ul className={`whr-ruleflag-body${!collapsed ? " is-open" : ""}`} style={{ margin: "3px 0 0", paddingLeft: 18, fontSize: 14, color: "var(--burgundy)" }}>
+        {items.map((w, i) => <li key={i}>{w}</li>)}
+      </ul>
     </div>
   );
 }
