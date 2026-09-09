@@ -209,10 +209,10 @@ body {
      title on narrow screens — center it instead of leaving it hugging the left edge. */
   .whr-toolbar-actions { justify-content: center; flex-wrap: wrap; width: 100%; }
 
-  /* Collapse Bug report/feedback, Import/Export, Rename, and Print/PDF behind the toggle on
-     mobile — Save Roster stays outside this group since it's the one actually reached for
-     often. Class-based (not inline display) specifically so this plays nicely with the
-     desktop default above without needing !important in either direction. */
+  /* Collapse all five toolbar buttons — including Save Roster — behind the toggle on mobile,
+     so nothing but the toggle itself shows until it's expanded. Class-based (not inline
+     display) specifically so this plays nicely with the desktop default above without
+     needing !important in either direction. */
   .whr-toolbar-more { display: none; }
   .whr-toolbar-more.is-open { display: flex; }
   .whr-toolbar-more-toggle { display: flex; }
@@ -11511,8 +11511,8 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
               <button className="whr-btn" onClick={startRename}>Rename</button>
             )}
             <button className="whr-btn" onClick={() => window.print()}>Print / PDF</button>
+            <button className="whr-btn whr-btn-gold" onClick={onSave}>Save Roster</button>
           </div>
-          <button className="whr-btn whr-btn-gold" onClick={onSave}>Save Roster</button>
         </div>
       </div>
 
