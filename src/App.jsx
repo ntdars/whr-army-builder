@@ -11501,6 +11501,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
       else inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraSteeds: 0, commander: false, commanderMagicItemIds: [], scythedWheels: false, variantSelections: {}, sourceFaction: sourceFaction || undefined };
       setRoster((r) => ({ ...r, chariots: [...r.chariots, inst] }));
     } else if (kind === "special") {
+      const def = armyData.specialCharacters.find((x) => x.id === defId);
       inst = { instanceId: uid("sp"), kind: "special", defId, mounted: false, mountId: null, extraMagicItemIds: [], size: def.tieredPricing ? def.tieredPricing.baseSize : undefined };
       setRoster((r) => ({ ...r, specials: [...r.specials, inst] }));
     }
