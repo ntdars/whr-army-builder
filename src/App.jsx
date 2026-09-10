@@ -3991,11 +3991,6 @@ const BRETONNIA = {
       note: "Flying monstrous regiment. Knights with heavy armour, shields, and lances, on Pegasi.",
       champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
     },
-    {
-      id: "bertrandbowmen", name: "Bertrand the Brigand and the Bowmen of Bergerac", stat: "Bowmen of Bergerac", command: "skirmisher", restriction: "0-1",
-      tieredPricing: { baseCost: 75, baseSize: 5, extraPerModel: 9 },
-      note: "Counts toward Regiments, not Characters. The first five models are always: Bertrand the Brigand (longbow, the one-use Black Arrow — always hits, always wounds, no save), Hugo le Petit (shots resolve at S5), Gui le Gros (the regiment auto-passes its first Ld test), and at least two skirmishing elite-archer Bowmen of Bergerac. Further Bowmen may be added beyond the first five at the per-model rate.",
-    },
   ],
   chariotsMonsters: [
     {
@@ -4025,6 +4020,14 @@ const BRETONNIA = {
     },
   ],
   specialCharacters: [
+    { id: "bertrandbowmen", name: "Bertrand the Brigand and the Bowmen of Bergerac", cost: 75, stat: "Bertrand the Brigand", role: "Commoner Champion", restriction: "0-1", countsAsRegiment: true,
+      tieredPricing: { baseCost: 75, baseSize: 5, extraPerModel: 9 },
+      note: "Counts toward Regiments, not Characters, even though Bertrand is a character. Skirmishing elite archers. The first five models are always: Bertrand the Brigand (longbow, the one-use Black Arrow — always hits, always wounds, no save), Hugo le Petit (shots resolve at S5), Gui le Gros (the regiment auto-passes its first Ld test), and at least two more Bowmen of Bergerac. Further Bowmen may be added beyond the first five at +9pts each.",
+      extraStatlines: [
+        { label: "Hugo le Petit", stat: "Hugo le Petit" },
+        { label: "Gui le Gros", stat: "Gui le Gros" },
+        { label: "Bowmen of Bergerac", stat: "Bowmen of Bergerac" },
+      ] },
     { id: "hermitknight", name: "The Hermit Knight", cost: 80, stat: "The Hermit Knight", role: "Knightly Hero",
       note: "Heavy armour, shield, double handed weapon. Has the Virtue of Bravery (fixed). May not join a regiment of knights, but may join commoners (Peasants/Men-at-Arms).", extraMagicItemSlots: 1 },
     { id: "louen", name: "Louen Leoncoeur, The Lionhearted", cost: 350, stat: "Louen Leoncoeur, The Lionhearted", role: "Knightly Lord — must be the general",
@@ -8257,6 +8260,11 @@ function abominationCost(inst) {
 
 function specialCost(inst, def, armyData) {
   let total = def.cost;
+  if (def.tieredPricing) {
+    const tp = def.tieredPricing;
+    const size = inst.size || tp.baseSize;
+    total = tp.baseCost + Math.max(0, size - tp.baseSize) * tp.extraPerModel;
+  }
   if (def.mountOption && inst.mounted) total += def.mountOption.cost;
   const mount = def.mounts?.find((m) => m.id === inst.mountId);
   if (mount) total += mount.cost;
@@ -8891,7 +8899,7 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
               <AddRow
                 key={s.id}
                 label={s.name}
-                sub={`${s.cost}pts · ${s.role}`}
+                sub={s.tieredPricing ? `${fmtPts(s.tieredPricing.baseCost)}pts, minimum ${s.tieredPricing.baseSize} · ${s.role}` : `${s.cost}pts · ${s.role}`}
                 disabled={count >= 1}
                 disabledReason="Unique — already in roster"
                 onClick={() => onAdd("special", s.id)}
@@ -8978,8 +8986,10 @@ function resolveUnitStat(kind, unit, def, bloodlineId, armyData) {
   }
   if (kind === "special") {
     const mount = def.mounts?.find((m) => m.id === unit.mountId);
-    if (mount) return { statKey: def.stat, statNote: null, mountStatKey: mount.stat, charLabel: def.name, mountLabel: mount.name.replace(/\s*\([^)]*\)\s*$/, "") };
-    return { statKey: def.stat, statNote: null, mountStatKey: null };
+    const extraStatlines = (def.extraStatlines || []).map((es) => ({ statKey: es.stat, label: es.label }));
+    const charLabel = (mount || extraStatlines.length > 0) ? def.name : null;
+    if (mount) return { statKey: def.stat, statNote: null, mountStatKey: mount.stat, charLabel, mountLabel: mount.name.replace(/\s*\([^)]*\)\s*$/, ""), extraStatlines };
+    return { statKey: def.stat, statNote: null, mountStatKey: null, charLabel, extraStatlines };
   }
   return { statKey: null, statNote: null };
 }
@@ -9117,7 +9127,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
 }
 
 function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData, bloodlineId, cardRef, dragHandleProps }) {
-  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
+  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments, extraStatlines } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   return (
     <div ref={cardRef} className={`whr-card ${selected ? "whr-card-selected" : ""}`}
@@ -9168,6 +9178,12 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
             <React.Fragment key={i}>
               <div className="whr-eyebrow" style={{ fontSize: 12.5, margin: "6px 0 2px", color: "var(--gold)" }}>{d.label}</div>
               <StatBlock statKey={d.statKey} statNote={null} />
+            </React.Fragment>
+          ))}
+          {(extraStatlines || []).map((es, i) => (
+            <React.Fragment key={i}>
+              <div className="whr-eyebrow" style={{ fontSize: 12.5, margin: "6px 0 2px" }}>{es.label}</div>
+              <StatBlock statKey={es.statKey} statNote={null} />
             </React.Fragment>
           ))}
         </div>
@@ -9456,7 +9472,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
             {roster.specials.map((u, idx) => {
               const def = armyData.specialCharacters.find((s) => s.id === u.defId);
               return <RosterUnitCard key={u.instanceId} kind="special" unit={u} def={def} cost={unitCost(u, armyData, roster)} selected={selectedId === u.instanceId}
-                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} armyData={armyData} bloodlineId={roster.armyTheme}
+                onSelect={() => onSelect(u.instanceId)} onRemove={() => onRemove(u.instanceId)} models={def.tieredPricing ? (u.size || def.tieredPricing.baseSize) : null} armyData={armyData} bloodlineId={roster.armyTheme}
                 cardRef={(el) => setCardRef("specials", idx, el)} dragHandleProps={makeDragHandleProps("specials", idx)} />;
             })}
           </>
@@ -9472,7 +9488,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
 // resolveUnitStat/resolveUnitTags/StatBlock helpers RosterUnitCard uses) in a plain black-on-white
 // document layout instead of the app's interactive cards.
 function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodlineId }) {
-  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
+  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments, extraStatlines } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   const hasStats = !!(statKey || statNote);
   return (
@@ -9503,6 +9519,12 @@ function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodline
                 <React.Fragment key={i}>
                   <div className="whr-print-stat-label">{d.label}</div>
                   <StatBlock statKey={d.statKey} statNote={null} />
+                </React.Fragment>
+              ))}
+              {(extraStatlines || []).map((es, i) => (
+                <React.Fragment key={i}>
+                  <div className="whr-print-stat-label">{es.label}</div>
+                  <StatBlock statKey={es.statKey} statNote={null} />
                 </React.Fragment>
               ))}
             </div>
@@ -9565,7 +9587,7 @@ function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
           <h2>Special Characters</h2>
           {roster.specials.map((u) => {
             const def = armyData.specialCharacters.find((s) => s.id === u.defId);
-            return <PrintableUnitEntry key={u.instanceId} kind="special" unit={u} def={def} cost={unitCost(u, armyData, roster)} armyData={armyData} bloodlineId={roster.armyTheme} />;
+            return <PrintableUnitEntry key={u.instanceId} kind="special" unit={u} def={def} cost={unitCost(u, armyData, roster)} models={def.tieredPricing ? (u.size || def.tieredPricing.baseSize) : null} armyData={armyData} bloodlineId={roster.armyTheme} />;
           })}
         </div>
       )}
@@ -10675,6 +10697,18 @@ function SpecialDetail({ def, unit, roster, updateUnit, armyData }) {
       {def.note && <p style={{ fontSize: 15, marginTop: 10, color: "var(--ink-soft)" }}>{def.note}</p>}
       {def.items && <p style={{ fontSize: 14.5, marginTop: 8, fontStyle: "italic", color: "var(--ink-soft)" }}>{def.items}</p>}
 
+      {def.tieredPricing && (
+        <div style={{ marginTop: 14 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <span className="whr-label" style={{ marginBottom: 0 }}>Unit Size (min {def.tieredPricing.baseSize})</span>
+            <span className="whr-opt-cost">+{fmtPts(def.tieredPricing.extraPerModel)}pts / model beyond {def.tieredPricing.baseSize}</span>
+          </div>
+          <div style={{ marginTop: 6 }}>
+            <Stepper value={unit.size || def.tieredPricing.baseSize} min={def.tieredPricing.baseSize} onChange={(v) => updateUnit({ ...unit, size: v })} />
+          </div>
+        </div>
+      )}
+
       {def.mounts && def.mounts.length > 0 && (
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">Mount</span>
@@ -11157,6 +11191,13 @@ function useRosterInfo(roster, armyData) {
       }
       t += cost;
     });
+    // A handful of Special Characters (Bertrand the Brigand and the Bowmen of Bergerac) are
+    // whole regiments in disguise — flagged countsAsRegiment so their full cost lands in the
+    // Regiments bucket rather than sitting outside it as a "Character."
+    roster.specials.forEach((u) => {
+      const d = armyData.specialCharacters?.find((s) => s.id === u.defId);
+      if (d?.countsAsRegiment) t += unitCost(u, armyData, roster);
+    });
     // The cheapest unit flagged countsAsFirstRegiment counts toward Regiments — but this splits
     // two different ways depending on what "one unit" means for a given "quantity" def:
     //   - Per-model/per-base (War Wagon, Giants, Mammoths, Jungle Swarms): each physical
@@ -11460,7 +11501,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
       else inst = { instanceId: uid("cm"), kind: "chariot", defId, extraCrew: 0, extraSteeds: 0, commander: false, commanderMagicItemIds: [], scythedWheels: false, variantSelections: {}, sourceFaction: sourceFaction || undefined };
       setRoster((r) => ({ ...r, chariots: [...r.chariots, inst] }));
     } else if (kind === "special") {
-      inst = { instanceId: uid("sp"), kind: "special", defId, mounted: false, mountId: null, extraMagicItemIds: [] };
+      inst = { instanceId: uid("sp"), kind: "special", defId, mounted: false, mountId: null, extraMagicItemIds: [], size: def.tieredPricing ? def.tieredPricing.baseSize : undefined };
       setRoster((r) => ({ ...r, specials: [...r.specials, inst] }));
     }
     setSelectedId(inst.instanceId);
