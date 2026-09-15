@@ -4135,16 +4135,12 @@ const ORCS_GOBLINS = {
     ], requires: [
       { list: "regiments", id: "orcboyz", name: "Orc Boyz" }, { list: "regiments", id: "orcarrerboyz", name: "Orc Arrer Boyz" }, { list: "regiments", id: "orcboarboyz", name: "Orc Boar Boyz" },
       { list: "regiments", id: "orcbiguns", name: "Orc Big'uns" }, { list: "regiments", id: "orcbigunarrerboyz", name: "Orc Big'un Arrer Boyz" }, { list: "regiments", id: "orcbigunboarboyz", name: "Orc Big'un Boar Boyz" },
-      { list: "regiments", id: "blackorcs", name: "Black Orcs" }, { list: "regiments", id: "savageorcs", name: "Savage Orcs" }, { list: "regiments", id: "savageorcarrerboyz", name: "Savage Orc Arrer Boyz" }, { list: "regiments", id: "savageorcboarboyz", name: "Savage Orc Boar Boyz" },
     ] },
     { kind: "requiresIfPresent", label: "Goblin-crewed war machines/chariots", trigger: [
       { list: "chariots", id: "spearchukkasgoblins", name: "Spear Chukkas (Goblin crew)" }, { list: "chariots", id: "smallrocklobbersgoblins", name: "Small Rock Lobbers (Goblin crew)" },
       { list: "chariots", id: "largerocklobbersgoblins", name: "Large Rock Lobbers (Goblin crew)" }, { list: "chariots", id: "goblindoomdivers", name: "Goblin Doom Divers" }, { list: "chariots", id: "goblinwolfchariots", name: "Goblin Wolf Chariot" },
     ], requires: [
       { list: "regiments", id: "commongoblininfantry", name: "Common Goblin Infantry" }, { list: "regiments", id: "commongoblinwolfriders", name: "Common Goblin Wolf Riders" },
-      { list: "regiments", id: "forestgoblinspiderriders", name: "Forest Goblin Spider Riders" }, { list: "regiments", id: "forestgoblininfantry", name: "Forest Goblin Infantry" },
-      { list: "regiments", id: "nightgoblininfantry", name: "Night Goblin Infantry" }, { list: "regiments", id: "nightgoblinsquighoppers", name: "Night Goblin Squig-Hoppers" },
-      { list: "regiments", id: "nightgoblinsquighunters", name: "Night Goblin Squig-Hunters" }, { list: "regiments", id: "nightgoblinnettersclubbers", name: "Night Goblin Netters and Clubbers" },
     ] },
   ],
   armyWideRules: [
