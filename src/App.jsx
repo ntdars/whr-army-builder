@@ -1282,12 +1282,12 @@ const WOOD_ELVES = {
   regiments: [
     {
       id: "archers", name: "Wood Elf Archers", perModel: 10, minSize: 5, stat: "Wood Elf Warriors",
-      command: "standard", note: "Warriors with Wood Elf Longbows.",
+      command: "standard", note: "Warriors with Wood Elf Longbows.", baseGear: ["Wood Elf Longbows"],
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
       id: "warriors", name: "Wood Elf Warriors", perModel: 7, minSize: 5, stat: "Wood Elf Warriors", theme: "core",
-      command: "standard", note: "Warriors with shields.",
+      command: "standard", note: "Warriors with shields.", baseGear: ["Shields"],
       options: [
         { id: "spear", group: "melee", label: "Spears", cost: 0.5, per: "model" },
         { id: "ahw", group: "melee", label: "Additional hand weapons instead of shield", cost: 0, per: "model" },
@@ -1335,13 +1335,13 @@ const WOOD_ELVES = {
     },
     {
       id: "scouts", name: "Wood Elf Scouts", perModel: 14, minSize: 5, stat: "Wood Elf Scouts & Way Watchers",
-      command: "standard", note: "Scouts with Wood Elf Longbows. May scout. May skirmish.",
+      command: "standard", note: "Scouts with Wood Elf Longbows. May scout. May skirmish.", baseGear: ["Wood Elf Longbows"],
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
       id: "lords", name: "Wood Elf Lords", perModel: 20, minSize: 5, stat: "Wood Elf Lords", mountStat: "Elven Steed", mountLabel: "Elven Steed", theme: "core",
       command: "fastCavalry", fastCavalryToggleOption: "barding",
-      note: "Lords riding Elven Steeds with light armour, shields and lances. Fast cavalry.",
+      note: "Lords riding Elven Steeds with light armour, shields and lances. Fast cavalry.", baseGear: ["Lances", "Shields"],
       options: [
         { id: "barding", group: null, label: "Barding — free (loses fast cavalry, -1M, free standard bearer, save improves 4+\u21923+)", cost: 0, per: "flat" },
       ],
@@ -1350,7 +1350,7 @@ const WOOD_ELVES = {
     {
       id: "gladeriders", name: "Wood Elf Glade Riders", perModel: 22, minSize: 5, stat: "Wood Elf Warriors", mountStat: "Elven Steed", mountLabel: "Elven Steed",
       command: "fastCavalry",
-      note: "Warriors on Elven Steeds with light armour, spears & bows. Fast Cavalry, may skirmish, may Vanguard, may Fire & Flee as a charge reaction.",
+      note: "Warriors on Elven Steeds with light armour, spears & bows. Fast Cavalry, may skirmish, may Vanguard, may Fire & Flee as a charge reaction.", baseGear: ["Bows", "Spears"],
       options: [
         { id: "shield", group: null, label: "Shields", cost: 2, per: "model" },
         { id: "longbow", group: null, label: "Upgrade bows to Wood Elf Longbows", cost: 2, per: "model" },
@@ -1381,31 +1381,31 @@ const WOOD_ELVES = {
     },
     {
       id: "eternalguards", name: "Wood Elf Eternal Guards", perModel: 13, minSize: 5, stat: "Eternal Guards", command: "standard", theme: "savage", restriction: "0-1",
-      note: "Fight with a staff combining spear, light armour, and shield (effectively spearmen with a 5+ armour save). Immune to psychology and stubborn.",
+      note: "Fight with a staff combining spear, light armour, and shield (effectively spearmen with a 5+ armour save). Immune to psychology and stubborn.", baseGear: ["Spears", "Shields"],
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
     },
     {
       id: "rangers", name: "Wood Elf Rangers", perModel: 15, minSize: 5, stat: "Rangers", command: "standard", theme: "savage", restriction: "0-1",
-      note: "Light armour and double handed weapons — ignore the always-strike-last rule for double handed weapons. Immune to psychology and stubborn.",
+      note: "Light armour and double handed weapons — ignore the always-strike-last rule for double handed weapons. Immune to psychology and stubborn.", baseGear: ["Double handed weapons"],
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
     },
     {
       id: "wildriders", name: "Wood Elf Wild Riders", perModel: 28, minSize: 5, stat: "Wild Riders", mountStat: "Stag", mountLabel: "Stag", command: "fastCavalry", theme: "savage", restriction: "0-1",
-      note: "Spears, riding Stags. Fast cavalry. Eternal Frenzy (don't lose frenzy even if broken in melee). Cause fear. All their attacks count as magical.",
+      note: "Spears, riding Stags. Fast cavalry. Eternal Frenzy (don't lose frenzy even if broken in melee). Cause fear. All their attacks count as magical.", baseGear: ["Spears"],
       options: [
       ],
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
     },
     {
       id: "sistersofthethorn", name: "Wood Elf Sisters of the Thorn", perModel: 28, minSize: 5, stat: "Sisters of the Thorn", mountStat: "Stag", mountLabel: "Stag", command: "fastCavalry", theme: "savage", restriction: "0-1",
-      note: "Spears, riding Stags. Fast cavalry. Ward save 4+, natural dispel 4+, immune to psychology. Cause fear. All their attacks count as magical.",
+      note: "Spears, riding Stags. Fast cavalry. Ward save 4+, natural dispel 4+, immune to psychology. Cause fear. All their attacks count as magical.", baseGear: ["Spears"],
       options: [
       ],
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
     },
     {
       id: "zoatwarrior", name: "Zoat Warrior", perModel: 55, minSize: 3, stat: "Zoat Warrior", command: "none", theme: "core", tags: ["zoat"], contingentTag: "zoat",
-      note: "Monstrous models on 40x40 or 40x60mm bases. Cause fear, 5+ armour save (scaly skin), move through forests without penalty. Carry double handed weapons. Cannot include a standard bearer or musician. Part of the allied Zoat contingent — see army-wide rules for its composition requirements.",
+      note: "Monstrous models on 40x40 or 40x60mm bases. Cause fear, 5+ armour save (scaly skin), move through forests without penalty. Carry double handed weapons. Cannot include a standard bearer or musician. Part of the allied Zoat contingent — see army-wide rules for its composition requirements.", baseGear: ["Double handed weapons"],
     },
   ],
   chariotsMonsters: [
@@ -2082,7 +2082,7 @@ const CHAOS_WARRIORS = {
     },
     {
       id: "maraduers", name: "Chaos Marauders", perModel: 11, minSize: 5, stat: "Chaos Marauder", command: "standard",
-      note: "Also called Chaos Thugs. Light armour and shields by default.",
+      note: "Also called Chaos Thugs. Light armour and shields by default.", baseGear: ["Shields"],
       options: [
         { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon", cost: 1.5, per: "model" },
         { id: "heavy", group: "melee", label: "Swap shield for double handed weapon or flail", cost: 3, per: "model" },
@@ -2092,7 +2092,7 @@ const CHAOS_WARRIORS = {
     },
     {
       id: "marauderhorsemen", name: "Chaos Marauder Horsemen", perModel: 23, minSize: 5, stat: "Chaos Marauder", mountStat: "Chaos Warhorse", mountLabel: "Warhorse", command: "fastCavalry",
-      note: "Also called Chaos Thug Horsemen. Fast cavalry. Light armour, shields, spears, on Warhorses.",
+      note: "Also called Chaos Thug Horsemen. Fast cavalry. Light armour, shields, spears, on Warhorses.", baseGear: ["Spears", "Shields"],
       options: [
         { id: "flails", group: null, label: "Swap spears & shields for flails", cost: 2, per: "model" },
       ],
@@ -2100,7 +2100,7 @@ const CHAOS_WARRIORS = {
     },
     {
       id: "chaoswarriors", name: "Chaos Warriors", perModel: 18, minSize: 5, stat: "Chaos Warrior", command: "standard",
-      note: "Chaos Armour and shields by default.",
+      note: "Chaos Armour and shields by default.", baseGear: ["Shields"],
       options: [
         { id: "halberdahw", group: "melee", label: "Swap shield for halberd or additional hand weapon", cost: 2, per: "model" },
         { id: "dhw", group: "melee", label: "Swap shield for double handed weapon", cost: 4, per: "model" },
@@ -2109,7 +2109,7 @@ const CHAOS_WARRIORS = {
     },
     {
       id: "chaosknights", name: "Chaos Knights", perModel: 45, minSize: 5, stat: "Chaos Warrior", mountStat: "Chaos Warhorse", mountLabel: "Chaos Warhorse (barded)", command: "standard",
-      note: "Chaos Warriors on barded Chaos Warhorses, with Chaos Armour, shields, and lances.",
+      note: "Chaos Warriors on barded Chaos Warhorses, with Chaos Armour, shields, and lances.", baseGear: ["Lances", "Shields"],
       champion: { name: "Chaos Champion (with Mark of Chaos, mounted)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
     },
     {
@@ -2314,7 +2314,7 @@ const BEASTMEN = {
   regiments: [
     {
       id: "beastmengors", name: "Beastmen Gors", perModel: 9, minSize: 5, stat: "Beastmen Gors", command: "standard",
-      note: "Shields by default. Unruly.",
+      note: "Shields by default. Unruly.", baseGear: ["Shields"],
       options: [
         { id: "halberds", group: "melee", label: "Swap shield for halberd", cost: 2, per: "model" },
         { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon", cost: 2, per: "model" },
@@ -2325,7 +2325,7 @@ const BEASTMEN = {
     },
     {
       id: "beastmenbestigors", name: "Beastmen Bestigors", perModel: 17, minSize: 5, stat: "Beastmen Bestigors", command: "standard",
-      note: "Halberds and heavy armour by default. Not unruly.",
+      note: "Halberds and heavy armour by default. Not unruly.", baseGear: ["Halberds"],
       options: [
         { id: "dhw", group: null, label: "Swap halberds for double handed weapons", cost: 2, per: "model" },
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
@@ -2362,7 +2362,7 @@ const BEASTMEN = {
     },
     {
       id: "minotaursregiment", name: "Minotaurs", perModel: 26, minSize: 3, stat: "Minotaurs", command: "monstrous",
-      note: "Additional hand weapons by default. Monstrous, causes fear. After a won combat with an enemy casualty, must gorge on the dead (no pursuit/overrun unless hatred/frenzy); charged before their next move while feasting, they become frenzied.",
+      note: "Additional hand weapons by default. Monstrous, causes fear. After a won combat with an enemy casualty, must gorge on the dead (no pursuit/overrun unless hatred/frenzy); charged before their next move while feasting, they become frenzied.", baseGear: ["Additional hand weapons"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 2, per: "model" },
         { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons", cost: 2, per: "model" },
@@ -2875,7 +2875,7 @@ const CHAOS_WARBAND = {
     },
     {
       id: "maraduers", name: "Chaos Marauders", perModel: 11, minSize: 5, stat: "Chaos Marauder", command: "standard",
-      note: "Also called Chaos Thugs. Light armour and shields by default.",
+      note: "Also called Chaos Thugs. Light armour and shields by default.", baseGear: ["Shields"],
       options: [
         { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon", cost: 1.5, per: "model" },
         { id: "heavy", group: "melee", label: "Swap shield for double handed weapon or flail", cost: 3, per: "model" },
@@ -2885,7 +2885,7 @@ const CHAOS_WARBAND = {
     },
     {
       id: "marauderhorsemen", name: "Chaos Marauder Horsemen", perModel: 23, minSize: 5, stat: "Chaos Marauder", mountStat: "Chaos Warhorse", mountLabel: "Warhorse", command: "fastCavalry",
-      note: "Also called Chaos Thug Horsemen. Fast cavalry. Light armour, shields, spears, on Warhorses.",
+      note: "Also called Chaos Thug Horsemen. Fast cavalry. Light armour, shields, spears, on Warhorses.", baseGear: ["Spears", "Shields"],
       options: [
         { id: "flails", group: null, label: "Swap spears & shields for flails", cost: 2, per: "model" },
       ],
@@ -2893,7 +2893,7 @@ const CHAOS_WARBAND = {
     },
     {
       id: "chaoswarriors", name: "Chaos Warriors", perModel: 18, minSize: 5, stat: "Chaos Warrior", command: "standard",
-      note: "Chaos Armour and shields by default.",
+      note: "Chaos Armour and shields by default.", baseGear: ["Shields"],
       options: [
         { id: "halberdahw", group: "melee", label: "Swap shield for halberd or additional hand weapon", cost: 2, per: "model" },
         { id: "dhw", group: "melee", label: "Swap shield for double handed weapon", cost: 4, per: "model" },
@@ -2902,7 +2902,7 @@ const CHAOS_WARBAND = {
     },
     {
       id: "chaosknights", name: "Chaos Knights", perModel: 45, minSize: 5, stat: "Chaos Warrior", mountStat: "Chaos Warhorse", mountLabel: "Chaos Warhorse (barded)", command: "standard",
-      note: "Chaos Warriors on barded Chaos Warhorses, with Chaos Armour, shields, and lances.",
+      note: "Chaos Warriors on barded Chaos Warhorses, with Chaos Armour, shields, and lances.", baseGear: ["Lances", "Shields"],
       champion: { name: "Chaos Champion (with Mark of Chaos, mounted)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
     },
     {
@@ -2917,7 +2917,7 @@ const CHAOS_WARBAND = {
     },
     {
       id: "beastmengors", name: "Beastmen Gors", perModel: 9, minSize: 5, stat: "Beastmen Gors", command: "standard",
-      note: "Shields by default. Unruly.",
+      note: "Shields by default. Unruly.", baseGear: ["Shields"],
       options: [
         { id: "halberds", group: "melee", label: "Swap shield for halberd", cost: 2, per: "model" },
         { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon", cost: 2, per: "model" },
@@ -2928,7 +2928,7 @@ const CHAOS_WARBAND = {
     },
     {
       id: "beastmenbestigors", name: "Beastmen Bestigors", perModel: 17, minSize: 5, stat: "Beastmen Bestigors", command: "standard",
-      note: "Halberds and heavy armour by default. Not unruly.",
+      note: "Halberds and heavy armour by default. Not unruly.", baseGear: ["Halberds"],
       options: [
         { id: "dhw", group: null, label: "Swap halberds for double handed weapons", cost: 2, per: "model" },
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
@@ -2965,7 +2965,7 @@ const CHAOS_WARBAND = {
     },
     {
       id: "minotaursregiment", name: "Minotaurs", perModel: 26, minSize: 3, stat: "Minotaurs", command: "monstrous",
-      note: "Additional hand weapons by default. Monstrous, causes fear. After a won combat with an enemy casualty, must gorge on the dead (no pursuit/overrun unless hatred/frenzy); charged before their next move while feasting, they become frenzied.",
+      note: "Additional hand weapons by default. Monstrous, causes fear. After a won combat with an enemy casualty, must gorge on the dead (no pursuit/overrun unless hatred/frenzy); charged before their next move while feasting, they become frenzied.", baseGear: ["Additional hand weapons"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 2, per: "model" },
         { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons", cost: 2, per: "model" },
@@ -3318,7 +3318,7 @@ const HIGH_ELVES = {
   regiments: [
     {
       id: "spearmen", name: "Elven Spearmen", perModel: 8, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
-      note: "Light armour, shields and spears.",
+      note: "Light armour, shields and spears.", baseGear: ["Spears", "Shields"],
       options: [
         { id: "heavyarmour", group: null, label: "Heavy armour instead of light", cost: 2, per: "model" },
       ],
@@ -3326,7 +3326,7 @@ const HIGH_ELVES = {
     },
     {
       id: "warriors", name: "Elven Warriors", perModel: 7, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
-      note: "Warriors with shields.",
+      note: "Warriors with shields.", baseGear: ["Shields"],
       options: [
         { id: "ahw", group: "melee", label: "Swap shield for additional hand weapon", cost: 0, per: "model" },
         { id: "dhw", group: "melee", label: "Swap shield for double handed weapon", cost: 2, per: "model" },
@@ -3336,7 +3336,7 @@ const HIGH_ELVES = {
     },
     {
       id: "archers", name: "Elven Archers", perModel: 9, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
-      note: "Warriors with longbows.",
+      note: "Warriors with longbows.", baseGear: ["Longbows"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -3344,7 +3344,7 @@ const HIGH_ELVES = {
     },
     {
       id: "silverhelms", name: "Silver Helm Knights", perModel: 20, minSize: 5, stat: "Elven Elite", mountStat: "Elven Steed", mountLabel: "Elven Steed", command: "fastCavalry", fastCavalryToggleOption: "heavyarmour",
-      note: "Elven Elite on Elven Steeds, light armour, shields, lances. Fast cavalry (as long as no armour upgrade is taken).",
+      note: "Elven Elite on Elven Steeds, light armour, shields, lances. Fast cavalry (as long as no armour upgrade is taken).", baseGear: ["Lances", "Shields"],
       options: [
         { id: "heavyarmour", group: null, label: "Heavy armour instead of light — loses fast cavalry, standard bearer becomes free", cost: 7, per: "model" },
       ],
@@ -3352,7 +3352,7 @@ const HIGH_ELVES = {
     },
     {
       id: "reaverknights", name: "Reaver Knights", perModel: 22, minSize: 5, stat: "Elven Warriors (High Elf)", mountStat: "Elven Steed", mountLabel: "Elven Steed", command: "fastCavalry",
-      note: "Warriors on Elven Steeds, light armour, spears, and bows. Fast Cavalry. May skirmish, act as Vanguard, and Fire & Flee as a charge reaction.",
+      note: "Warriors on Elven Steeds, light armour, spears, and bows. Fast Cavalry. May skirmish, act as Vanguard, and Fire & Flee as a charge reaction.", baseGear: ["Bows", "Spears"],
       options: [
         { id: "shields", group: null, label: "Shields", cost: 2, per: "model" },
         { id: "longbows", group: null, label: "Upgrade bows to longbows", cost: 2, per: "model" },
@@ -3361,7 +3361,7 @@ const HIGH_ELVES = {
     },
     {
       id: "swordmasters", name: "Sword Masters of Hoeth", perModel: 12, minSize: 5, stat: "Sword Masters", command: "standard", restriction: "0-1",
-      note: "Light armour, double handed weapons. Ignore \"double handed weapons strike last.\" Parry: -1 to hit vs S4-or-less missiles targeting their front (if 50%+ of the shooters are in the Sword Masters' front zone).",
+      note: "Light armour, double handed weapons. Ignore \"double handed weapons strike last.\" Parry: -1 to hit vs S4-or-less missiles targeting their front (if 50%+ of the shooters are in the Sword Masters' front zone).", baseGear: ["Double handed weapons"],
       options: [
         { id: "heavyarmour", group: null, label: "Heavy armour instead of light", cost: 2, per: "model" },
       ],
@@ -3369,12 +3369,12 @@ const HIGH_ELVES = {
     },
     {
       id: "dragonprinces", name: "Dragon Princes of Caledor", perModel: 27, minSize: 5, stat: "Elven Elite", mountStat: "Elven Steed", mountLabel: "Elven Steed (barded)", command: "standard", restriction: "0-1",
-      note: "Elven Elite on barded Elven Steeds, Dragon Armour, shields, and lances.",
+      note: "Elven Elite on barded Elven Steeds, Dragon Armour, shields, and lances.", baseGear: ["Lances", "Shields"],
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
     },
     {
       id: "lothernseaguard", name: "Lothern Sea Guard", perModel: 10, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
-      note: "Light armour, shields, spear, and bows.",
+      note: "Light armour, shields, spear, and bows.", baseGear: ["Bows", "Spears", "Shields"],
       options: [
         { id: "longbows", group: null, label: "Upgrade bows to longbows", cost: 2, per: "model" },
       ],
@@ -3382,12 +3382,12 @@ const HIGH_ELVES = {
     },
     {
       id: "shadowwarriors", name: "Shadow Warriors", perModel: 15, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard",
-      note: "Light armour, shields, longbows. May skirmish. May scout. Hate Dark Elves.",
+      note: "Light armour, shields, longbows. May skirmish. May scout. Hate Dark Elves.", baseGear: ["Longbows", "Shields"],
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion (High Elf)" },
     },
     {
       id: "phoenixguards", name: "Phoenix Guards", perModel: 10, minSize: 5, stat: "Elven Elite", command: "standard", restriction: "0-1",
-      note: "Light armour and halberds. Immune to psychology.",
+      note: "Light armour and halberds. Immune to psychology.", baseGear: ["Halberds"],
       options: [
         { id: "heavyarmour", group: null, label: "Heavy armour instead of light", cost: 2, per: "model" },
       ],
@@ -3395,12 +3395,12 @@ const HIGH_ELVES = {
     },
     {
       id: "handmaidens", name: "Hand Maidens of the Everqueen", perModel: 13, minSize: 5, stat: "Hand Maidens", command: "standard", restriction: "0-1",
-      note: "Light armour, spears, and longbows.",
+      note: "Light armour, spears, and longbows.", baseGear: ["Longbows", "Spears"],
       champion: { name: "Shield Maiden of the Everqueen (Elven Commander)", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
     },
     {
       id: "whitelions", name: "White Lions of Chrace", perModel: 14, minSize: 5, stat: "White Lions", command: "standard", restriction: "0-1",
-      note: "Light armour, lion pelts, double handed weapons. Ignore woods movement penalty (even with foot characters attached). Lion cloaks: +2 armour save vs shooting. Lion Rampant: -1 to hit against them and their characters when charged. Lion Leaping: engaged enemies lose 1 attack when the Lions charge. Lion's Claw (default): 1 wound becomes D3 wounds (not for attached independent characters).",
+      note: "Light armour, lion pelts, double handed weapons. Ignore woods movement penalty (even with foot characters attached). Lion cloaks: +2 armour save vs shooting. Lion Rampant: -1 to hit against them and their characters when charged. Lion Leaping: engaged enemies lose 1 attack when the Lions charge. Lion's Claw (default): 1 wound becomes D3 wounds (not for attached independent characters).", baseGear: ["Double handed weapons"],
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander (High Elf)" },
     },
   ],
@@ -3602,7 +3602,7 @@ const DWARFS = {
   regiments: [
     {
       id: "hammerers", name: "Hammerers", perModel: 15, minSize: 5, stat: "Dwarf Elite Soldier", command: "standard", restriction: "0-1",
-      note: "Gromril Armour and double handed weapons.",
+      note: "Gromril Armour and double handed weapons.", baseGear: ["Double handed weapons"],
       options: [
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
       ],
@@ -3610,12 +3610,12 @@ const DWARFS = {
     },
     {
       id: "ironbreakers", name: "Iron Breakers", perModel: 15, minSize: 5, stat: "Dwarf Elite Soldier", command: "standard", restriction: "0-1",
-      note: "Gromril Armour and shields — inscribed with a Rune of Stone, +1 armour save (2+ total combined with the shield).",
+      note: "Gromril Armour and shields — inscribed with a Rune of Stone, +1 armour save (2+ total combined with the shield).", baseGear: ["Shields"],
       champion: { name: "Dwarf Commander", baseCost: 30, magicItemSlots: 1, stat: "Dwarf Commander" },
     },
     {
       id: "longbeards", name: "Longbeards", perModel: 13, minSize: 5, stat: "Dwarf Elite Soldier", command: "standard", restriction: "0-1",
-      note: "Gromril Armour and shields.",
+      note: "Gromril Armour and shields.", baseGear: ["Shields"],
       options: [
         { id: "dhw", group: null, label: "Double handed weapons", cost: 3, per: "model" },
       ],
@@ -3623,7 +3623,7 @@ const DWARFS = {
     },
     {
       id: "trollslayers", name: "Troll Slayers", perModel: 13, minSize: 5, stat: "Troll Slayer", command: "standard",
-      note: "Additional hand weapons by default. Unbreakable, never armoured or shielded, always wound on 4+ regardless of toughness. May be joined by any number of Giant Slayers, each equipped like the rest of the regiment.",
+      note: "Additional hand weapons by default. Unbreakable, never armoured or shielded, always wound on 4+ regardless of toughness. May be joined by any number of Giant Slayers, each equipped like the rest of the regiment.", baseGear: ["Additional hand weapons"],
       options: [
         { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons", cost: 0, per: "model" },
       ],
@@ -3632,7 +3632,7 @@ const DWARFS = {
     },
     {
       id: "dwarfcrossbowmen", name: "Dwarf Crossbowmen", perModel: 11, minSize: 5, stat: "Dwarf Soldier", command: "standard",
-      note: "Crossbows and light armour.",
+      note: "Crossbows and light armour.", baseGear: ["Crossbows"],
       options: [
         { id: "heavyarmour", group: "armourshield", label: "Heavy armour instead of light", cost: 1, per: "model" },
         { id: "shields", group: "armourshield", label: "Shields", cost: 1, per: "model" },
@@ -3642,7 +3642,7 @@ const DWARFS = {
     },
     {
       id: "dwarfrangers", name: "Dwarf Rangers", perModel: 16, minSize: 5, stat: "Dwarf Soldier", command: "standard", restriction: "0-1",
-      note: "Crossbows, light armour, shields. May skirmish and use the scout special rules.",
+      note: "Crossbows, light armour, shields. May skirmish and use the scout special rules.", baseGear: ["Crossbows", "Shields"],
       options: [
         { id: "heavyarmour", group: null, label: "Heavy armour instead of light", cost: 2, per: "model" },
         { id: "dhw", group: null, label: "Double handed weapons", cost: 2, per: "model" },
@@ -3672,7 +3672,7 @@ const DWARFS = {
     },
     {
       id: "dwarfthunderers", name: "Dwarf Thunderers", perModel: 11, minSize: 5, stat: "Dwarf Soldier", command: "standard",
-      note: "Hand guns and light armour.",
+      note: "Hand guns and light armour.", baseGear: ["Hand guns"],
       options: [
         { id: "heavyarmour", group: "armourshield", label: "Heavy armour instead of light", cost: 1, per: "model" },
         { id: "shields", group: "armourshield", label: "Shields", cost: 1, per: "model" },
@@ -3896,7 +3896,7 @@ const BRETONNIA = {
     },
     {
       id: "rapscallions", name: "Rapscallions", perModel: 5, minSize: 5, stat: "Peasant", command: "standard", theme: "core",
-      note: "Peasants with longbows.",
+      note: "Peasants with longbows.", baseGear: ["Longbows"],
       options: [
         { id: "crossbows", group: null, label: "Crossbows instead of longbows", cost: 2, per: "model" },
       ],
@@ -3914,7 +3914,7 @@ const BRETONNIA = {
     },
     {
       id: "arbalestiers", name: "Arbalestiers", perModel: 9, minSize: 5, stat: "Man-at-Arms", command: "standard",
-      note: "Men-at-Arms with crossbows.",
+      note: "Men-at-Arms with crossbows.", baseGear: ["Crossbows"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
         { id: "pavise", group: null, label: "Pavise — 5+ save vs shooting only, 4+ combined with light armour", cost: 1, per: "model" },
@@ -3923,7 +3923,7 @@ const BRETONNIA = {
     },
     {
       id: "archers", name: "Archers", perModel: 7, minSize: 5, stat: "Man-at-Arms", command: "standard",
-      note: "Men-at-Arms with longbows. May skirmish.",
+      note: "Men-at-Arms with longbows. May skirmish.", baseGear: ["Longbows"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -3931,7 +3931,7 @@ const BRETONNIA = {
     },
     {
       id: "zealots", name: "Zealots", perModel: 5, minSize: 5, stat: "Peasant", command: "standard", restriction: "0-1", theme: "core",
-      note: "Peasants with shields. Hate all enemies. If the regiment includes at least 4 Zealots (beyond command/champion/other characters) carrying the Reliquary, it's held aloft — the regiment is immune to fear and gains Ld10.",
+      note: "Peasants with shields. Hate all enemies. If the regiment includes at least 4 Zealots (beyond command/champion/other characters) carrying the Reliquary, it's held aloft — the regiment is immune to fear and gains Ld10.", baseGear: ["Shields"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 1, per: "model" },
         { id: "reliquary", group: null, label: "Four Zealots carry the Reliquary", cost: 20, per: "flat" },
@@ -3951,7 +3951,7 @@ const BRETONNIA = {
     },
     {
       id: "chevalierserrant", name: "Chevaliers Errant", perModel: 18, minSize: 5, stat: "Bretonnian Knight", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard", restriction: "0-1",
-      note: "Young Knights with heavy armour, shields, and lances, on Warhorses. Unbreakable while accompanied by a living unmarried female wizard.",
+      note: "Young Knights with heavy armour, shields, and lances, on Warhorses. Unbreakable while accompanied by a living unmarried female wizard.", baseGear: ["Lances", "Shields"],
       options: [
         { id: "barding", group: null, label: "Barding", cost: 3, per: "model" },
       ],
@@ -3959,7 +3959,7 @@ const BRETONNIA = {
     },
     {
       id: "chevaliersfeodaux", name: "Chevaliers Féodaux", perModel: 22, minSize: 5, stat: "Bretonnian Knight", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
-      note: "Knights with heavy armour, shields, and lances, on Warhorses.",
+      note: "Knights with heavy armour, shields, and lances, on Warhorses.", baseGear: ["Lances", "Shields"],
       options: [
         { id: "barding", group: null, label: "Barding", cost: 3, per: "model" },
       ],
@@ -3967,7 +3967,7 @@ const BRETONNIA = {
     },
     {
       id: "chevaliersenquete", name: "Chevaliers en Quête", perModel: 17, minSize: 5, stat: "Bretonnian Knight", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard", restriction: "0-1",
-      note: "Knights with heavy armour and double handed weapons, on Warhorses.",
+      note: "Knights with heavy armour and double handed weapons, on Warhorses.", baseGear: ["Double handed weapons"],
       options: [
         { id: "barding", group: null, label: "Barding", cost: 3, per: "model" },
       ],
@@ -3975,12 +3975,12 @@ const BRETONNIA = {
     },
     {
       id: "chevaliersdhonneur", name: "Chevaliers D'Honneur", perModel: 35, minSize: 5, stat: "Elite Knight", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard", restriction: "0-1",
-      note: "Barding, heavy armour, shields, and lances, on Warhorses.",
+      note: "Barding, heavy armour, shields, and lances, on Warhorses.", baseGear: ["Lances", "Shields"],
       champion: { name: "The King's Champion", baseCost: 30, magicItemSlots: 1, stat: "The King's Champion", tags: ["knightly"] },
     },
     {
       id: "chevaliersapied", name: "Chevaliers á Pied", perModel: 10, minSize: 5, stat: "Bretonnian Knight", command: "standard", restriction: "0-1",
-      note: "Knights with heavy armour and shields (on foot).",
+      note: "Knights with heavy armour and shields (on foot).", baseGear: ["Shields"],
       options: [
         { id: "dhw", group: null, label: "Swap shields for double handed weapons", cost: 2, per: "model" },
       ],
@@ -3988,7 +3988,7 @@ const BRETONNIA = {
     },
     {
       id: "chevaliersvolants", name: "Chevaliers Volants", perModel: 55, minSize: 3, stat: "Bretonnian Knight", mountStat: "Pegasus", mountLabel: "Pegasus", command: "monstrous", restriction: "0-1",
-      note: "Flying monstrous regiment. Knights with heavy armour, shields, and lances, on Pegasi.",
+      note: "Flying monstrous regiment. Knights with heavy armour, shields, and lances, on Pegasi.", baseGear: ["Lances", "Shields"],
       champion: { name: "Knightly Champion", baseCost: 30, magicItemSlots: 1, stat: "Knightly Champion", tags: ["knightly"] },
     },
   ],
@@ -4504,7 +4504,7 @@ const ORCS_GOBLINS = {
     },
     {
       id: "orcarrerboyz", theme: "core", name: "Orc Arrer Boyz", perModel: 7, minSize: 5, stat: "Common Orc", command: "standard",
-      note: "Bows. Ignore panic caused by Goblins.",
+      note: "Bows. Ignore panic caused by Goblins.", baseGear: ["Bows"],
       options: [
         { id: "crossbows", group: null, label: "Crossbows instead of bows", cost: 2, per: "model" },
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
@@ -4513,7 +4513,7 @@ const ORCS_GOBLINS = {
     },
     {
       id: "orcboarboyz", theme: "core", name: "Orc Boar Boyz", perModel: 15, minSize: 5, stat: "Common Orc", mountStat: "War Boar", mountLabel: "War Boar", command: "standard",
-      note: "Common Orcs with light armour and shields on War Boars (barded-equivalent save with no movement penalty; can't be fast cavalry; boars grant +2S on the charge). Ignore panic caused by Goblins.",
+      note: "Common Orcs with light armour and shields on War Boars (barded-equivalent save with no movement penalty; can't be fast cavalry; boars grant +2S on the charge). Ignore panic caused by Goblins.", baseGear: ["Shields"],
       options: [
         { id: "spear", group: null, label: "Spears", cost: 2, per: "model" },
       ],
@@ -4533,7 +4533,7 @@ const ORCS_GOBLINS = {
     },
     {
       id: "orcbigunarrerboyz", theme: "core", name: "Orc Big'un Arrer Boyz", perModel: 9, minSize: 5, stat: "Orc Big'un", command: "standard",
-      note: "Bows. Ignore panic caused by Goblins.",
+      note: "Bows. Ignore panic caused by Goblins.", baseGear: ["Bows"],
       options: [
         { id: "crossbows", group: null, label: "Crossbows instead of bows", cost: 2, per: "model" },
         { id: "armour", group: null, label: "Armour", cost: 0.5, per: "model" },
@@ -4542,7 +4542,7 @@ const ORCS_GOBLINS = {
     },
     {
       id: "orcbigunboarboyz", theme: "core", name: "Orc Big'un Boar Boyz", perModel: 18, minSize: 5, stat: "Orc Big'un", mountStat: "War Boar", mountLabel: "War Boar", command: "standard",
-      note: "Big'uns with light armour and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge). Ignore panic caused by Goblins.",
+      note: "Big'uns with light armour and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge). Ignore panic caused by Goblins.", baseGear: ["Shields"],
       options: [
         { id: "spear", group: null, label: "Spears", cost: 2, per: "model" },
       ],
@@ -4561,12 +4561,12 @@ const ORCS_GOBLINS = {
     },
     {
       id: "savageorcarrerboyz", theme: "core", name: "Savage Orc Arrer Boyz", perModel: 10, minSize: 5, stat: "Savage Orc", command: "standard",
-      note: "Magic tattoos and bows. Frenzied; still ignore Goblin panic even without frenzy.",
+      note: "Magic tattoos and bows. Frenzied; still ignore Goblin panic even without frenzy.", baseGear: ["Bows"],
       champion: { name: "Savage Orc Champion", baseCost: 30, magicItemSlots: 1, stat: "Savage Orc Champion", tags: ["savageOrc"] },
     },
     {
       id: "savageorcboarboyz", theme: "core", name: "Savage Orc Boar Boyz", perModel: 20, minSize: 5, stat: "Savage Orc", mountStat: "War Boar", mountLabel: "War Boar", command: "standard",
-      note: "Savage Orcs with magic tattoos and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge). Frenzied; still ignore Goblin panic even without frenzy.",
+      note: "Savage Orcs with magic tattoos and shields on War Boars (barded-equivalent save, no fast cavalry, +2S charge). Frenzied; still ignore Goblin panic even without frenzy.", baseGear: ["Shields"],
       options: [
         { id: "spear", group: null, label: "Spears", cost: 3, per: "model" },
         { id: "bows", group: null, label: "Bows", cost: 2, per: "model" },
@@ -4659,7 +4659,7 @@ const ORCS_GOBLINS = {
     },
     {
       id: "nightgoblinnettersclubbers", name: "Night Goblin Netters and Clubbers", perModel: 6, minSize: 5, stat: "Night Goblin", command: "standard", tags: ["nightGoblin"],
-      note: "Nets and clubs — treated as double handed weapons that strike first (the net effect stacks with itself, so they strike first twice over, not just cancelling the double-handed-weapon strike-last penalty).",
+      note: "Nets and clubs — treated as double handed weapons that strike first (the net effect stacks with itself, so they strike first twice over, not just cancelling the double-handed-weapon strike-last penalty).", baseGear: ["Double handed weapons"],
       champion: { name: "Night Goblin Champion", baseCost: 10, magicItemSlots: 1, stat: "Night Goblin Champion", tags: ["nightGoblin"] },
     },
     {
@@ -4967,7 +4967,7 @@ const DOGS_OF_WAR = {
     },
     {
       id: "humanknights", name: "Human Knights", perModel: 20, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse", command: "standard", tags: ["human"],
-      note: "Elite Human Soldiers with heavy armour, shields, and lances riding Warhorses.",
+      note: "Elite Human Soldiers with heavy armour, shields, and lances riding Warhorses.", baseGear: ["Lances", "Shields"],
       options: [
         { id: "barding", group: null, label: "Barding", cost: 3, per: "model" },
       ],
@@ -4984,7 +4984,7 @@ const DOGS_OF_WAR = {
     },
     {
       id: "seaelves", name: "Sea Elf Mercenaries", perModel: 10, minSize: 5, stat: "Elven Warriors (High Elf)", command: "standard", tags: ["seaelf"],
-      note: "Elven Warriors with light armour, shields, spear and bows.",
+      note: "Elven Warriors with light armour, shields, spear and bows.", baseGear: ["Bows", "Spears", "Shields"],
       options: [
         { id: "longbows", group: null, label: "Upgrade bows to longbows", cost: 2, per: "model" },
       ],
@@ -4992,7 +4992,7 @@ const DOGS_OF_WAR = {
     },
     {
       id: "halflingmilitia", name: "Halfling Militia", perModel: 2.5, minSize: 5, stat: "Halfling", command: "standard", tags: ["halfling"],
-      note: "Halflings with light armour and shields. Foresters — move through woods without penalty.",
+      note: "Halflings with light armour and shields. Foresters — move through woods without penalty.", baseGear: ["Shields"],
       options: [
         { id: "spears", group: null, label: "Spears", cost: 0.5, per: "model" },
       ],
@@ -5000,7 +5000,7 @@ const DOGS_OF_WAR = {
     },
     {
       id: "halflingbowmen", name: "Halfling Bowmen", perModel: 7, minSize: 5, stat: "Halfling", command: "skirmisher", tags: ["halfling"],
-      note: "Halflings with bows. May skirmish; foresters even if not skirmishing.",
+      note: "Halflings with bows. May skirmish; foresters even if not skirmishing.", baseGear: ["Bows"],
       champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion", tags: ["halfling"] },
     },
     {
@@ -5305,7 +5305,7 @@ const CHAOS_DWARFS = {
     },
     {
       id: "cdblunderbusses", name: "Chaos Dwarf Blunderbusses", perModel: 12, minSize: 5, stat: "Chaos Dwarf Warriors", command: "standard",
-      note: "Comes with heavy armour and Blunderbusses (may be reflavored as crossbows instead, under Old School Addendum — same points and profile). Fires even after moving, in a 12\" x (unit width) firing zone ahead of the regiment, hitting every model whose base is more than half within it (friend and foe alike). Hits are S3, rising to S4 with two full ranks or S5 with three-plus. No long-range/skirmisher penalty; normal cover and move-and-shoot penalties apply. Joined characters count as armed with Blunderbusses for strength purposes even if they aren't. May stand & shoot against distant chargers, hitting the charging unit only (no area effect on that reaction).",
+      note: "Comes with heavy armour and Blunderbusses (may be reflavored as crossbows instead, under Old School Addendum — same points and profile). Fires even after moving, in a 12\" x (unit width) firing zone ahead of the regiment, hitting every model whose base is more than half within it (friend and foe alike). Hits are S3, rising to S4 with two full ranks or S5 with three-plus. No long-range/skirmisher penalty; normal cover and move-and-shoot penalties apply. Joined characters count as armed with Blunderbusses for strength purposes even if they aren't. May stand & shoot against distant chargers, hitting the charging unit only (no area effect on that reaction).", baseGear: ["Crossbows"],
       options: [
         { id: "shields", group: null, label: "Shields", cost: 2, per: "model" },
       ],
@@ -5323,7 +5323,7 @@ const CHAOS_DWARFS = {
     },
     {
       id: "hobgoblinwarriors", name: "Hobgoblin Warriors", perModel: 4, minSize: 5, stat: "Hobgoblin (CD)", command: "standard", tags: ["hobgoblin"],
-      note: "Comes with shields.",
+      note: "Comes with shields.", baseGear: ["Shields"],
       options: [
         { id: "spears", group: "melee", label: "Spears", cost: 1, per: "model" },
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
@@ -5332,7 +5332,7 @@ const CHAOS_DWARFS = {
     },
     {
       id: "hobgoblinarchers", name: "Hobgoblin Archers", perModel: 5, minSize: 5, stat: "Hobgoblin (CD)", command: "standard", tags: ["hobgoblin"],
-      note: "Comes with bows.",
+      note: "Comes with bows.", baseGear: ["Bows"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
         { id: "crossbows", group: null, label: "Upgrade bows to crossbows", cost: 2, per: "model", theme: "oldschool" },
@@ -5660,7 +5660,7 @@ const DARK_ELVES = {
     },
     {
       id: "elvenwarriors", name: "Elven Warriors", perModel: 7, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
-      note: "Elven Warriors with shields.",
+      note: "Elven Warriors with shields.", baseGear: ["Shields"],
       options: [
         { id: "spears", group: null, label: "Spears", cost: 0.5, per: "model" },
         { id: "ahw", group: "melee2", label: "Swap shield for additional hand weapon", cost: 0, per: "model" },
@@ -5673,7 +5673,7 @@ const DARK_ELVES = {
     },
     {
       id: "elvencrossbowmen", name: "Elven Crossbowmen", perModel: 10, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
-      note: "Elven Warriors with repeating crossbows.",
+      note: "Elven Warriors with repeating crossbows.", baseGear: ["Repeating crossbows"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -5681,17 +5681,17 @@ const DARK_ELVES = {
     },
     {
       id: "executioners", name: "Executioners of Har Ganeth", perModel: 14, minSize: 5, stat: "Dark Elf Executioners", command: "standard", restriction: "0-1",
-      note: "Executioners equipped with double handed weapons and heavy armour. Wounds dealt with their great axes multiply into 1D3 wounds.",
+      note: "Executioners equipped with double handed weapons and heavy armour. Wounds dealt with their great axes multiply into 1D3 wounds.", baseGear: ["Double handed weapons"],
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
     },
     {
       id: "blackguard", name: "Black Guard of Naggaroth", perModel: 13, minSize: 5, stat: "Wood Elf Lords", command: "standard", restriction: "0-1",
-      note: "Black Guard equipped with halberds and heavy armour. They hate all enemies.",
+      note: "Black Guard equipped with halberds and heavy armour. They hate all enemies.", baseGear: ["Halberds"],
       champion: { name: "Elven Commander", baseCost: 30, magicItemSlots: 1, stat: "Elven Commander" },
     },
     {
       id: "coldoneriders", name: "Cold One Riders", perModel: 27, minSize: 5, stat: "Wood Elf Lords", mountStat: "Cold One", mountLabel: "Cold One", command: "standard",
-      note: "Elven Lords equipped with heavy armour, shields and lances, riding Cold Ones. Since Cold Ones are stupid, the whole regiment suffers from stupidity.",
+      note: "Elven Lords equipped with heavy armour, shields and lances, riding Cold Ones. Since Cold Ones are stupid, the whole regiment suffers from stupidity.", baseGear: ["Lances", "Shields"],
       options: [
         { id: "crossbows", group: null, label: "Repeating crossbows", cost: 3, per: "model" },
       ],
@@ -5699,7 +5699,7 @@ const DARK_ELVES = {
     },
     {
       id: "blackarccorsairs", name: "Black Arc Corsairs", perModel: 10, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
-      note: "Elven Warriors with additional hand weapons and Sea Dragon Cloaks — a 5+ armour save that cannot be modified (not a ward save, and is cancelled by save-ignoring attacks).",
+      note: "Elven Warriors with additional hand weapons and Sea Dragon Cloaks — a 5+ armour save that cannot be modified (not a ward save, and is cancelled by save-ignoring attacks).", baseGear: ["Additional hand weapons"],
       options: [
         { id: "crossbows", group: null, label: "Repeating crossbows", cost: 4, per: "model" },
       ],
@@ -5712,7 +5712,7 @@ const DARK_ELVES = {
     },
     {
       id: "darkriders", name: "Dark Riders", perModel: 24, minSize: 5, stat: "Wood Elf Warriors", mountStat: "Elven Steed", mountLabel: "Elven Steed", command: "fastCavalry",
-      note: "Warriors riding Elven Steeds, equipped with light armour, spears, and repeating crossbows. Fast Cavalry. May skirmish, act as Vanguard troops, and Fire & Flee as a charge reaction (resolve a Stand & Shoot, then flee as normal — rallies automatically if not caught, unless below 25% of original size). Fire & Flee is lost if joined by characters other than the unit champion.",
+      note: "Warriors riding Elven Steeds, equipped with light armour, spears, and repeating crossbows. Fast Cavalry. May skirmish, act as Vanguard troops, and Fire & Flee as a charge reaction (resolve a Stand & Shoot, then flee as normal — rallies automatically if not caught, unless below 25% of original size). Fire & Flee is lost if joined by characters other than the unit champion.", baseGear: ["Repeating crossbows", "Spears"],
       options: [
         { id: "shields", group: null, label: "Shields", cost: 2, per: "model" },
       ],
@@ -5720,7 +5720,7 @@ const DARK_ELVES = {
     },
     {
       id: "shades", name: "Dark Elf Shades", perModel: 18, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
-      note: "Shades with light armour, additional hand weapons and repeating crossbows. May skirmish and scout.",
+      note: "Shades with light armour, additional hand weapons and repeating crossbows. May skirmish and scout.", baseGear: ["Repeating crossbows", "Additional hand weapons"],
       champion: { name: "Elven Champion", baseCost: 20, magicItemSlots: 1, stat: "Elven Champion" },
     },
   ],
@@ -5881,7 +5881,7 @@ const SKAVEN = {
   regiments: [
     {
       id: "clanratwarriors", name: "Clanrat Warriors", perModel: 4, minSize: 5, stat: "Clanrat Warriors", command: "standard",
-      note: "Equipped with shields.",
+      note: "Equipped with shields.", baseGear: ["Shields"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
         { id: "spears", group: null, label: "Spears", cost: 1, per: "model" },
@@ -5900,12 +5900,12 @@ const SKAVEN = {
     },
     {
       id: "plaguemonks", name: "Plague Monks", perModel: 8, minSize: 5, stat: "Plague Monks", command: "standard",
-      note: "Frenzy. Equipped with light armour and additional hand weapons.",
+      note: "Frenzy. Equipped with light armour and additional hand weapons.", baseGear: ["Additional hand weapons"],
       champion: { name: "Plague Acolyte", baseCost: 20, magicItemSlots: 1, stat: "Plague Acolyte" },
     },
     {
       id: "stormvermin", name: "Stormvermin", perModel: 8, minSize: 5, stat: "Stormvermin", command: "standard",
-      note: "Equipped with light armour and halberds.",
+      note: "Equipped with light armour and halberds.", baseGear: ["Halberds"],
       options: [
         { id: "shields", group: null, label: "Shields", cost: 0.5, per: "model" },
       ],
@@ -5913,7 +5913,7 @@ const SKAVEN = {
     },
     {
       id: "gutterrunners", name: "Gutter Runners", perModel: 15, minSize: 5, stat: "Gutter Runners", command: "skirmisher",
-      note: "Light armour, additional hand weapons, and poisoned throwing stars (a light thrown weapon). May scout; must skirmish.",
+      note: "Light armour, additional hand weapons, and poisoned throwing stars (a light thrown weapon). May scout; must skirmish.", baseGear: ["Additional hand weapons"],
       champion: { name: "Gutter Runner Champion", baseCost: 20, magicItemSlots: 1, stat: "Gutter Runner Champion" },
     },
     {
@@ -5927,7 +5927,7 @@ const SKAVEN = {
     },
     {
       id: "plaguecenserbearers", name: "Plague Censer Bearers", perModel: 20, minSize: 5, stat: "Plague Censer Bearers", command: "none",
-      note: "Cannot take a standard bearer, musician, or regimental champion. Must skirmish. Enemies suffer -2 to hit them when shooting (including the skirmisher bonus). Frenzied and hate all enemies. In melee the censer works as a flail; additionally, everyone (friend and foe) in base contact with a Censer Bearer tests Toughness at the start of the melee phase or suffers a wound with no armour save (the Bearer himself only fails on a 6, having built up resistance). Fumes won't affect troops immune to poison.",
+      note: "Cannot take a standard bearer, musician, or regimental champion. Must skirmish. Enemies suffer -2 to hit them when shooting (including the skirmisher bonus). Frenzied and hate all enemies. In melee the censer works as a flail; additionally, everyone (friend and foe) in base contact with a Censer Bearer tests Toughness at the start of the melee phase or suffers a wound with no armour save (the Bearer himself only fails on a 6, having built up resistance). Fumes won't affect troops immune to poison.", baseGear: ["Flails"],
     },
     {
       id: "packmasterpack", name: "Skaven Packmasters, Giant Rats & Rat Ogres", perModel: 0, minSize: 1, kind: "composite", command: "none",
@@ -6258,7 +6258,7 @@ const VAMPIRE_COUNTS = {
     },
     {
       id: "skeletonhorsemen", name: "Skeleton Horsemen", perModel: 14, minSize: 5, stat: "Skeleton", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "fastCavalry", fastCavalryToggleOption: "heavyarmour", tags: ["undead", "skeletonHorsemen", "skeletonBanner"],
-      note: "Undead, subject to the crumble rule. Skeletons with light armour and shields, riding Undead Steeds. Fast cavalry.",
+      note: "Undead, subject to the crumble rule. Skeletons with light armour and shields, riding Undead Steeds. Fast cavalry.", baseGear: ["Shields"],
       options: [
         { id: "heavyarmour", group: null, label: "Heavy armour instead of light — loses fast cavalry, standard bearer becomes free", cost: 3, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 2, per: "model" },
@@ -6278,7 +6278,7 @@ const VAMPIRE_COUNTS = {
     },
     {
       id: "wightknights", name: "Wight Knights", perModel: 22, minSize: 5, stat: "Wight", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "standard", tags: ["undead"],
-      note: "Undead, subject to the crumble rule. Wights with Wight-Blades, heavy armour, shields, riding Undead Steeds.",
+      note: "Undead, subject to the crumble rule. Wights with Wight-Blades, heavy armour, shields, riding Undead Steeds.", baseGear: ["Shields"],
       options: [
         { id: "barding", group: null, label: "Barding", cost: 3, per: "model" },
         { id: "lances", group: null, label: "Non-magical lances", cost: 3, per: "model" },
@@ -6309,7 +6309,7 @@ const VAMPIRE_COUNTS = {
     },
     {
       id: "sylvaniaarchers", name: "Sylvania Archers", perModel: 5, minSize: 5, stat: "Sylvania Peasant", command: "standard", theme: "voncarstein",
-      note: "Von Carstein armies only. Peasants with longbows.",
+      note: "Von Carstein armies only. Peasants with longbows.", baseGear: ["Longbows"],
       options: [
         { id: "crossbows", group: null, label: "Swap longbows for crossbows", cost: 2, per: "model" },
       ],
@@ -6317,7 +6317,7 @@ const VAMPIRE_COUNTS = {
     },
     {
       id: "vampireknights", name: "Vampire Knights", perModel: 55, minSize: 5, stat: "Vampire Knight", mountStat: "War Horse", mountLabel: "War Horse", command: "standard", theme: "blooddragon", restriction: "0-1", tags: ["undead"],
-      note: "Blood Dragon armies only, 0-1 regiment. Undead, subject to the crumble rule. Lances, Full Plate Armour, shields, living War Horses. May march even if not within 12\" of the general.",
+      note: "Blood Dragon armies only, 0-1 regiment. Undead, subject to the crumble rule. Lances, Full Plate Armour, shields, living War Horses. May march even if not within 12\" of the general.", baseGear: ["Lances", "Shields"],
       options: [
         { id: "barding", group: null, label: "Barding", cost: 0, per: "model" },
       ],
@@ -6450,7 +6450,7 @@ const TOMB_KINGS = {
   regiments: [
     {
       id: "tombguards", name: "Tomb Guards", perModel: 7, minSize: 5, stat: "Tomb Guard", command: "standard", tags: ["undead", "tombKings", "tombGuard"],
-      note: "Undead, subject to the crumble rule. Elite Skeletons with light armour and shields.",
+      note: "Undead, subject to the crumble rule. Elite Skeletons with light armour and shields.", baseGear: ["Shields"],
       options: [
         { id: "dhw", group: null, label: "Swap shields for double handed weapons", cost: 1, per: "model" },
       ],
@@ -6473,7 +6473,7 @@ const TOMB_KINGS = {
     },
     {
       id: "skeletonlightchariots", name: "Skeleton Light Chariots", perModel: 50, minSize: 3, stat: "Light Chariot", mountStat: "Skeleton", mountLabel: "Skeleton Crew", command: "monstrous", tags: ["undead", "tombKings"],
-      note: "Undead, subject to the crumble rule. Each chariot pulled by two Undead Steeds, crewed by two Skeleton Warriors with light armour, spears, shields, and bows (5+ save). Moves and fights as a single monstrous-style regiment — no rank bonus, no fighting in several ranks.",
+      note: "Undead, subject to the crumble rule. Each chariot pulled by two Undead Steeds, crewed by two Skeleton Warriors with light armour, spears, shields, and bows (5+ save). Moves and fights as a single monstrous-style regiment — no rank bonus, no fighting in several ranks.", baseGear: ["Bows", "Spears", "Shields"],
       commanderCost: 50, commanderLabel: "Replace a crewman with a Mummy Champion (light armour, double handed weapon)", commanderMagicItemSlots: 1, commanderTags: ["mummy"],
     },
     {
@@ -6491,12 +6491,12 @@ const TOMB_KINGS = {
     },
     {
       id: "skeletonlighthorsemen", name: "Skeleton Light Horsemen", perModel: 14, minSize: 5, stat: "Skeleton", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "fastCavalry", tags: ["undead", "tombKings", "skeletonHorsemen"],
-      note: "Undead, subject to the crumble rule. Skeletons armed with bows, riding Undead Steeds. Fast Cavalry.",
+      note: "Undead, subject to the crumble rule. Skeletons armed with bows, riding Undead Steeds. Fast Cavalry.", baseGear: ["Bows"],
       championOptions: tkMummyChampion(80),
     },
     {
       id: "skeletonheavyhorsemen", name: "Skeleton Heavy Horsemen", perModel: 16, minSize: 5, stat: "Skeleton", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "fastCavalry", tags: ["undead", "tombKings", "skeletonHorsemen"],
-      note: "Undead, subject to the crumble rule. Skeletons armed with spears, light armour, and shields, riding Undead Steeds. Despite the name, still act as fast cavalry.",
+      note: "Undead, subject to the crumble rule. Skeletons armed with spears, light armour, and shields, riding Undead Steeds. Despite the name, still act as fast cavalry.", baseGear: ["Spears", "Shields"],
       championOptions: tkMummyChampion(80),
     },
     {
@@ -6682,7 +6682,7 @@ const CLASSIC_UNDEAD = {
     },
     {
       id: "skeletonhorsemen", name: "Skeleton Horsemen", perModel: 14, minSize: 5, stat: "Skeleton", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "fastCavalry", fastCavalryToggleOption: "heavyarmour", tags: ["undead", "skeletonHorsemen", "skeletonBanner"],
-      note: "Undead, subject to the crumble rule. Skeletons with light armour and shields, riding Undead Steeds. Fast cavalry.",
+      note: "Undead, subject to the crumble rule. Skeletons with light armour and shields, riding Undead Steeds. Fast cavalry.", baseGear: ["Shields"],
       options: [
         { id: "heavyarmour", group: null, label: "Heavy armour instead of light — loses fast cavalry, standard bearer becomes free", cost: 3, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 2, per: "model" },
@@ -6702,7 +6702,7 @@ const CLASSIC_UNDEAD = {
     },
     {
       id: "wightknights", name: "Wight Knights", perModel: 22, minSize: 5, stat: "Wight", mountStat: "Undead Steed", mountLabel: "Undead Steed", command: "standard", tags: ["undead"],
-      note: "Undead, subject to the crumble rule. Wights with Wight-Blades, heavy armour, shields, riding Undead Steeds.",
+      note: "Undead, subject to the crumble rule. Wights with Wight-Blades, heavy armour, shields, riding Undead Steeds.", baseGear: ["Shields"],
       options: [
         { id: "barding", group: null, label: "Barding", cost: 3, per: "model" },
         { id: "lances", group: null, label: "Non-magical lances", cost: 3, per: "model" },
@@ -6744,7 +6744,7 @@ const CLASSIC_UNDEAD = {
 
 const KISLEV_MELEE_OPTIONS = ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon", "Lance"];
 const KISLEV_PRIEST_MELEE_OPTIONS = ["Hand weapon (default)", "Additional hand weapon", "Double handed weapon"];
-const KISLEV_MISSILE_OPTIONS = { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Hand Gun", "Pistol", "Two Pistols"] };
+const KISLEV_MISSILE_OPTIONS = { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Hand Gun", "Pistol", "Two pistols"] };
 
 const KISLEV_MAGIC_ITEMS = [
   { id: "kis-shardblade", name: "Shard Blade", cost: 15, cat: "weapon", desc: "Any living model wounded by this blade cannot heal and continues to bleed — must be removed as a casualty at the end of the battle." },
@@ -6847,12 +6847,12 @@ const KISLEV = {
   regiments: [
     {
       id: "gryphonlegion", name: "Gryphon Legion", perModel: 25, minSize: 5, stat: "Kislevite Knight", mountStat: "War Horse", mountLabel: "Barded Warhorse", command: "standard", restriction: "0-1",
-      note: "Formed as a token of eternal friendship between Kislev and the Empire, trained and garrisoned in the Empire. Knights with full plate armour (4+ heavy armour), shields, and lances, riding barded warhorses — a combined 1+ armour save.",
+      note: "Formed as a token of eternal friendship between Kislev and the Empire, trained and garrisoned in the Empire. Knights with full plate armour (4+ heavy armour), shields, and lances, riding barded warhorses — a combined 1+ armour save.", baseGear: ["Lances", "Shields"],
       champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
     },
     {
       id: "brotherhoodofthebear", name: "Brotherhood of the Bear", perModel: 18, minSize: 5, stat: "Kislevite Knight", mountStat: "War Horse", mountLabel: "Warhorse", command: "fastCavalry", restriction: "0-1",
-      note: "Ranger-Templars specializing in ambush and guerrilla warfare, formed by Tzarina Tiara Pavlovna. Knights riding warhorses, armed with light armour, shields, spears, and bows. Subject to hatred against Chaos (not hard-enforced). Fast cavalry.",
+      note: "Ranger-Templars specializing in ambush and guerrilla warfare, formed by Tzarina Tiara Pavlovna. Knights riding warhorses, armed with light armour, shields, spears, and bows. Subject to hatred against Chaos (not hard-enforced). Fast cavalry.", baseGear: ["Bows", "Spears", "Shields"],
       champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
     },
     {
@@ -6862,37 +6862,37 @@ const KISLEV = {
     },
     {
       id: "kossars", name: "Kislev Kossars", perModel: 9, minSize: 5, stat: "Kislevite Warrior", command: "standard",
-      note: "A numerous people unafraid to die. Warriors with bows, double handed weapons, and light armour.",
+      note: "A numerous people unafraid to die. Warriors with bows, double handed weapons, and light armour.", baseGear: ["Bows", "Double handed weapons"],
       champion: { name: "Champion", baseCost: 20, magicItemSlots: 1, stat: "Kislevite Champion" },
     },
     {
       id: "handgunners-kis", name: "Handgunners", perModel: 10, minSize: 5, stat: "Kislevite Warrior", command: "standard",
-      note: "Strelti, trained by the legacy of Prince Boydinov of Erengrad. Warriors with hand guns, light armour, and a bardiche (short halberd used as a gun rest).",
+      note: "Strelti, trained by the legacy of Prince Boydinov of Erengrad. Warriors with hand guns, light armour, and a bardiche (short halberd used as a gun rest).", baseGear: ["Hand guns", "Halberds"],
       champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
     },
     {
       id: "hunters", name: "Hunters", perModel: 11, minSize: 5, stat: "Kislevite Warrior", command: "skirmisher",
-      note: "Patient trappers of the harsh Taiga. Warriors with bows. May skirmish and scout.",
+      note: "Patient trappers of the harsh Taiga. Warriors with bows. May skirmish and scout.", baseGear: ["Bows"],
       champion: { name: "Champion", baseCost: 20, magicItemSlots: 1, stat: "Kislevite Champion" },
     },
     {
       id: "guards", name: "Guards", perModel: 10, minSize: 5, stat: "Kislevite Knight", command: "standard",
-      note: "Hand-picked elite of the Kislevite infantry, forming the bodyguard of the Tzars and Tzarinas. Knights with heavy armour and halberds.",
+      note: "Hand-picked elite of the Kislevite infantry, forming the bodyguard of the Tzars and Tzarinas. Knights with heavy armour and halberds.", baseGear: ["Halberds"],
       champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
     },
     {
       id: "roadwardens", name: "Road Wardens", perModel: 17, minSize: 5, stat: "Kislevite Warrior", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry",
-      note: "Rarely spoken of openly — they root out corruption of Chaos (and opposition to the Tzar). Warriors with light armour, armed with two pistols, riding normal horses. Fast cavalry, may skirmish.",
+      note: "Rarely spoken of openly — they root out corruption of Chaos (and opposition to the Tzar). Warriors with light armour, armed with two pistols, riding normal horses. Fast cavalry, may skirmish.", baseGear: ["Two pistols"],
       champion: { name: "Champion", baseCost: 20, magicItemSlots: 1, stat: "Kislevite Champion" },
     },
     {
       id: "horsearchers-kis", name: "Kislev Horse Archers", perModel: 10, minSize: 5, stat: "Kislevite Warrior", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry",
-      note: "Fierce mounted nomads from the plains of Kislev and beyond the World Edge Mountains. Warriors with bows, riding normal horses. Fast cavalry, may skirmish.",
+      note: "Fierce mounted nomads from the plains of Kislev and beyond the World Edge Mountains. Warriors with bows, riding normal horses. Fast cavalry, may skirmish.", baseGear: ["Bows"],
       champion: { name: "Champion", baseCost: 20, magicItemSlots: 1, stat: "Kislevite Champion" },
     },
     {
       id: "wingedlancers", name: "Kislev Winged Lancers", perModel: 17, minSize: 5, stat: "Kislevite Lancer", mountStat: "War Horse", mountLabel: "Warhorse", command: "fastCavalry",
-      note: "Young sons of Boyars, always prepared for war. Lancers with light armour, shields, lances, riding warhorses. Fast cavalry.",
+      note: "Young sons of Boyars, always prepared for war. Lancers with light armour, shields, lances, riding warhorses. Fast cavalry.", baseGear: ["Lances", "Shields"],
       options: [
         { id: "shriekingbanners", group: null, label: "Shrieking back banners — unit causes fear on the turn it charges", cost: 3, per: "model" },
       ],
@@ -7103,7 +7103,7 @@ const NORSE = {
     },
     {
       id: "norsehunters", name: "Norse Hunters", perModel: 14, minSize: 5, stat: "Norse Hunter", command: "skirmisher",
-      note: "Hunters with bows. May skirmish and scout.",
+      note: "Hunters with bows. May skirmish and scout.", baseGear: ["Bows"],
       options: [
         { id: "armourahw", group: null, label: "Light armour AND additional hand weapons", cost: 2, per: "model" },
       ],
@@ -7124,7 +7124,7 @@ const NORSE = {
     },
     {
       id: "trollslayers-norse", name: "Norse Dwarf Troll Slayers", perModel: 13, minSize: 5, stat: "Troll Slayer", command: "none",
-      note: "Subject to the special rules explained in the Dwarfs army book. May carry a runic standard per the Dwarfs army book guidelines. Troll Slayers with additional hand weapons.",
+      note: "Subject to the special rules explained in the Dwarfs army book. May carry a runic standard per the Dwarfs army book guidelines. Troll Slayers with additional hand weapons.", baseGear: ["Additional hand weapons"],
       options: [
         { id: "dhw", group: null, label: "Swap additional hand weapon for double handed weapon", cost: 0, per: "model" },
       ],
@@ -7264,17 +7264,17 @@ const HALFLINGS = {
   regiments: [
     {
       id: "halflingbowmen-main", name: "Halfling Bowmen", perModel: 7, minSize: 5, stat: "Halfling", command: "skirmisher",
-      note: "Halflings with bows. May skirmish.",
+      note: "Halflings with bows. May skirmish.", baseGear: ["Bows"],
       champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
     },
     {
       id: "halflingslingers", name: "Halfling Slingers", perModel: 6, minSize: 5, stat: "Halfling", command: "skirmisher",
-      note: "Halflings with slings. May skirmish.",
+      note: "Halflings with slings. May skirmish.", baseGear: ["Slings"],
       champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
     },
     {
       id: "halflingmilitia-main", name: "Halfling Militia", perModel: 2.5, minSize: 5, stat: "Halfling", command: "standard",
-      note: "Halflings with light armour and shields.",
+      note: "Halflings with light armour and shields.", baseGear: ["Shields"],
       options: [
         { id: "spears", group: null, label: "Spears", cost: 0.5, per: "model" },
       ],
@@ -7291,7 +7291,7 @@ const HALFLINGS = {
     },
     {
       id: "halflingriders", name: "Halfling Riders", perModel: 12, minSize: 5, stat: "Halfling Elite", mountStat: "Livestock Beast", mountLabel: "Livestock Beast", command: "fastCavalry",
-      note: "Halfling Elite with light armour and shields, mounted on Livestock Beasts. Fast cavalry.",
+      note: "Halfling Elite with light armour and shields, mounted on Livestock Beasts. Fast cavalry.", baseGear: ["Shields"],
       options: [
         { id: "spears", group: null, label: "Spears", cost: 1, per: "model" },
       ],
@@ -7307,7 +7307,7 @@ const HALFLINGS = {
     },
     {
       id: "fieldwardens", name: "Halfling Field Wardens", perModel: 12, minSize: 5, stat: "Halfling Field Wardens", command: "skirmisher",
-      note: "Field Wardens with bows. May skirmish and scout.",
+      note: "Field Wardens with bows. May skirmish and scout.", baseGear: ["Bows"],
       champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
     },
   ],
@@ -7567,7 +7567,7 @@ const LIZARDMEN = {
   regiments: [
     {
       id: "skinkwarriors", name: "Skink Warriors", perModel: 4, minSize: 5, stat: "Lizardman Skink Warrior", command: "standard", tags: ["skink"],
-      note: "Armed with short bows. May skirmish (mandatory if missiles are poisoned — not hard-enforced).",
+      note: "Armed with short bows. May skirmish (mandatory if missiles are poisoned — not hard-enforced).", baseGear: ["Short bows"],
       options: [
         { id: "javelins", group: "weapon", label: "Swap short bows for javelins and shields", cost: 0, per: "model" },
         { id: "blowpipes", group: "weapon", label: "Swap short bows for blowpipes", cost: 1, per: "model" },
@@ -7578,7 +7578,7 @@ const LIZARDMEN = {
     },
     {
       id: "saurustempleguard", name: "Saurus Temple Guard", perModel: 18, minSize: 5, stat: "Lizardman Saurus Temple Guard", command: "standard", tags: ["saurus"],
-      note: "Armed with halberds.",
+      note: "Armed with halberds.", baseGear: ["Halberds"],
       options: [
         { id: "lightarmour", group: null, label: "Light armour", cost: 1, per: "model" },
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
@@ -7587,7 +7587,7 @@ const LIZARDMEN = {
     },
     {
       id: "saruswarriors", name: "Saurus Warriors", perModel: 15, minSize: 5, stat: "Lizardman Saurus Warrior", command: "standard", tags: ["saurus"],
-      note: "Armed with hand weapons and shields.",
+      note: "Armed with hand weapons and shields.", baseGear: ["Shields"],
       options: [
         { id: "spears", group: null, label: "Spears", cost: 3, per: "model" },
       ],
@@ -7595,12 +7595,12 @@ const LIZARDMEN = {
     },
     {
       id: "sauruscoldoneriders", name: "Saurus Cold One Riders", perModel: 36, minSize: 5, stat: "Lizardman Saurus Warrior", mountStat: "Cold One", mountLabel: "Cold One", command: "standard", tags: ["saurus"],
-      note: "Armed with spears and shields, riding Cold Ones. Not classified as fast cavalry.",
+      note: "Armed with spears and shields, riding Cold Ones. Not classified as fast cavalry.", baseGear: ["Spears", "Shields"],
       champion: { name: "Saurus Champion", baseCost: 20, magicItemSlots: 1, stat: "Lizardman Saurus Champion", note: "May exchange his Cold One for a Horned One for +10pts (not toggled here — add by hand)." },
     },
     {
       id: "greatcrestedcoldoneriders", name: "Great Crested Skink Cold One Riders", perModel: 18, minSize: 5, stat: "Lizardman Great Crested Skink Warrior", mountStat: "Cold One", mountLabel: "Cold One", command: "standard", tags: ["skink"],
-      note: "Great Crested Skink Warriors armed with spears and shields, riding Cold Ones. Not classified as fast cavalry.",
+      note: "Great Crested Skink Warriors armed with spears and shields, riding Cold Ones. Not classified as fast cavalry.", baseGear: ["Spears", "Shields"],
       champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion", note: "May exchange his Cold One for a Horned One for +10pts (not toggled here — add by hand)." },
     },
     {
@@ -7811,7 +7811,7 @@ const SLANN_EMPIRE = {
   regiments: [
     {
       id: "lobotomisedslaves", name: "Lobotomised Human Slaves", perModel: 4, minSize: 5, stat: "Lobotomised Human Slave", command: "standard", tags: ["lobotomised"],
-      note: "Equipped with shields. Immune to psychology, subject to stupidity.",
+      note: "Equipped with shields. Immune to psychology, subject to stupidity.", baseGear: ["Shields"],
       options: [
         { id: "spears", group: null, label: "Spears", cost: 1, per: "model" },
       ],
@@ -7819,7 +7819,7 @@ const SLANN_EMPIRE = {
     },
     {
       id: "slannwarriors", name: "Slann Warriors", perModel: 8, minSize: 5, stat: "Slann Warrior", command: "standard", tags: ["slann"],
-      note: "Light armour and shields.",
+      note: "Light armour and shields.", baseGear: ["Shields"],
       options: [
         { id: "spears", group: null, label: "Spears", cost: 2, per: "model" },
       ],
@@ -7840,21 +7840,21 @@ const SLANN_EMPIRE = {
     },
     {
       id: "slanntotemwarriors", name: "Slann Totem Warriors", perModel: 10, minSize: 5, stat: "Slann Totem Warrior", command: "standard", tags: ["slann"],
-      note: "Light armour and shields.",
+      note: "Light armour and shields.", baseGear: ["Shields"],
       champion: { name: "Slann Spawn Master", baseCost: 30, magicItemSlots: 1, stat: "Slann Spawn Master" },
     },
     {
       id: "slanntotemcoldoneriders", name: "Slann Totem Warrior Cold One Riders", perModel: 25, minSize: 5, stat: "Slann Totem Warrior", mountStat: "Cold One", mountLabel: "Cold One", command: "standard", tags: ["slann"],
-      note: "Light armour, spears, and shields, riding Cold Ones.",
+      note: "Light armour, spears, and shields, riding Cold Ones.", baseGear: ["Spears", "Shields"],
       champion: { name: "Slann Spawn Master", baseCost: 30, magicItemSlots: 1, stat: "Slann Spawn Master", note: "May exchange his Cold One for a Horned One for +10pts (not toggled here — add by hand)." },
     },
     {
       id: "kroxigors-slann", name: "Kroxigors", perModel: 50, minSize: 3, stat: "Lizardman Kroxigor", command: "none",
-      note: "Monstrous models that cause fear, armed with double handed weapons. 4+ armour save (floor 6+). Cannot take a standard bearer, musician, or regimental champion.",
+      note: "Monstrous models that cause fear, armed with double handed weapons. 4+ armour save (floor 6+). Cannot take a standard bearer, musician, or regimental champion.", baseGear: ["Double handed weapons"],
     },
     {
       id: "saurustempleguard-slann", name: "Saurus Temple Guard", perModel: 18, minSize: 5, stat: "Lizardman Saurus Temple Guard", command: "standard", tags: ["saurus"],
-      note: "Armed with halberds.",
+      note: "Armed with halberds.", baseGear: ["Halberds"],
       options: [
         { id: "lightarmour", group: null, label: "Light armour", cost: 1, per: "model" },
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
@@ -7863,7 +7863,7 @@ const SLANN_EMPIRE = {
     },
     {
       id: "sauruswarriors-slann", name: "Saurus Warriors", perModel: 15, minSize: 5, stat: "Lizardman Saurus Warrior", command: "standard", tags: ["saurus"],
-      note: "Armed with hand weapons and shields.",
+      note: "Armed with hand weapons and shields.", baseGear: ["Shields"],
       options: [
         { id: "spears", group: null, label: "Spears", cost: 3, per: "model" },
       ],
@@ -7893,7 +7893,7 @@ const SLANN_EMPIRE = {
     },
     {
       id: "amazonwarriors", name: "Amazon Warriors", perModel: 15, minSize: 5, stat: "Amazon Warrior", command: "skirmisher", restriction: "0-1", tags: ["nativetribe"],
-      note: "A tribe of female human warriors with a bad temper, armed with additional hand weapons and bows. Re-roll panic tests, hate all enemies. One of four mutually-exclusive Native Tribe options — see army-wide rules.",
+      note: "A tribe of female human warriors with a bad temper, armed with additional hand weapons and bows. Re-roll panic tests, hate all enemies. One of four mutually-exclusive Native Tribe options — see army-wide rules.", baseGear: ["Bows", "Additional hand weapons"],
       champion: { name: "Amazon Champion", baseCost: 20, magicItemSlots: 1, stat: "Amazon Champion" },
     },
     {
