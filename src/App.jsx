@@ -1581,7 +1581,7 @@ const EMPIRE = {
   regiments: [
     {
       id: "halberdiers", name: "Halberdiers", perModel: 5, minSize: 5, stat: "State Trooper", command: "standard", detachmentParent: true,
-      note: "State Troops with halberds.",
+      note: "State Troops with halberds.", baseWeapons: ["Halberd"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
         { id: "shield", group: null, label: "Shields", cost: 0.5, per: "model" },
@@ -1590,7 +1590,7 @@ const EMPIRE = {
     },
     {
       id: "spearmen", name: "Spearmen", perModel: 5, minSize: 5, stat: "State Trooper", command: "standard", detachmentParent: true,
-      note: "State Troops with spears.",
+      note: "State Troops with spears.", baseWeapons: ["Spear"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
         { id: "shield", group: null, label: "Shields", cost: 0.5, per: "model" },
@@ -1599,7 +1599,7 @@ const EMPIRE = {
     },
     {
       id: "pikemen", name: "Pikemen", perModel: 8, minSize: 5, stat: "State Trooper", command: "standard", detachmentParent: true,
-      note: "State Troops with pikes.",
+      note: "State Troops with pikes.", baseWeapons: ["Pike"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -1607,7 +1607,7 @@ const EMPIRE = {
     },
     {
       id: "greatswords", name: "Greatswords", perModel: 6, minSize: 5, stat: "State Trooper", command: "standard", detachmentParent: true,
-      note: "State Troops with double handed weapons.",
+      note: "State Troops with double handed weapons.", baseWeapons: ["Double handed weapon"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -1623,7 +1623,7 @@ const EMPIRE = {
     },
     {
       id: "archers", name: "Archers", perModel: 7, minSize: 5, stat: "State Trooper", command: "standard",
-      note: "State Troops with longbows. May skirmish (loses standard bearer while skirmishing).",
+      note: "State Troops with longbows. May skirmish (loses standard bearer while skirmishing).", baseWeapons: ["Longbow"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -1631,7 +1631,7 @@ const EMPIRE = {
     },
     {
       id: "crossbowmen", name: "Crossbowmen", perModel: 9, minSize: 5, stat: "State Trooper", command: "standard",
-      note: "State Troops with crossbows.",
+      note: "State Troops with crossbows.", baseWeapons: ["Crossbow"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -1639,7 +1639,7 @@ const EMPIRE = {
     },
     {
       id: "handgunners", name: "Handgunners", perModel: 9, minSize: 5, stat: "State Trooper", command: "standard",
-      note: "State Troops with handguns.",
+      note: "State Troops with handguns.", baseWeapons: ["Hand gun"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
       ],
@@ -1647,35 +1647,35 @@ const EMPIRE = {
     },
     {
       id: "pistoliers", name: "Pistoliers", perModel: 17, minSize: 5, stat: "State Trooper", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry",
-      note: "State Troops in light armour with two pistols, on Normal Horses. Fast cavalry. May skirmish.",
+      note: "State Troops in light armour with two pistols, on Normal Horses. Fast cavalry. May skirmish.", baseWeapons: ["Two pistols"],
       champion: { name: "Empire Captain", baseCost: 20, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
       id: "outriders", name: "Outriders", perModel: 17, minSize: 5, stat: "State Trooper", mountStat: "Normal Horse", mountLabel: "Normal Horse (barded)", command: "standard",
-      note: "State Troops in light armour with repeating handguns, on barded Normal Horses.",
+      note: "State Troops in light armour with repeating handguns, on barded Normal Horses.", baseWeapons: ["Repeating handgun"],
       champion: { name: "Empire Captain", baseCost: 20, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
       id: "whitewolf", name: "Knights of the White Wolf", perModel: 20, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
-      note: "Knights with barded warhorses, full plate armour, and double handed weapons.",
+      note: "Knights with barded warhorses, full plate armour, and double handed weapons.", baseWeapons: ["Double handed weapon"],
       knightGroup: "whiteWolf",
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
       id: "teutogen", name: "Teutogen Foot Knights", perModel: 13, minSize: 5, stat: "Knight (Empire)", command: "standard",
-      note: "Knights with full plate armour and double handed weapons.",
+      note: "Knights with full plate armour and double handed weapons.", baseWeapons: ["Double handed weapon"],
       knightGroup: "whiteWolf", detachmentParent: true,
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
       id: "panther", name: "Knights Panther", perModel: 25, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
-      note: "Knights with barded warhorses, full plate armour, shields, and lances.",
+      note: "Knights with barded warhorses, full plate armour, shields, and lances.", baseWeapons: ["Lance"],
       knightGroup: "panther",
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
     {
       id: "blazingsun", name: "Knights of the Blazing Sun", perModel: 25, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
-      note: "Knights with barded warhorses, full plate armour, shields, and lances. Can alternatively represent a lesser Knightly Order of your own design.",
+      note: "Knights with barded warhorses, full plate armour, shields, and lances. Can alternatively represent a lesser Knightly Order of your own design.", baseWeapons: ["Lance"],
       knightGroup: "blazingSun",
       champion: { name: "Empire Captain", baseCost: 30, magicItemSlots: 1, stat: "Empire Captain" },
     },
@@ -1690,7 +1690,7 @@ const EMPIRE = {
     },
     {
       id: "reiksguardmounted", name: "Mounted Reiksguard Knights", perModel: 25, minSize: 5, stat: "Knight (Empire)", mountStat: "Warhorse", mountLabel: "Warhorse (barded)", command: "standard",
-      note: "Knights with barded warhorses, full plate armour, shields, and lances.",
+      note: "Knights with barded warhorses, full plate armour, shields, and lances.", baseWeapons: ["Lance"],
       knightGroup: "reiksguard",
       champion: { name: "Grand Commander", baseCost: 50, magicItemSlots: 1, stat: "Grand Commander" },
     },
@@ -1704,7 +1704,7 @@ const EMPIRE = {
     },
     {
       id: "kislevlancers", name: "Kislev Winged Lancers", perModel: 17, minSize: 5, stat: "Kislev Winged Lancer", mountStat: "Warhorse", mountLabel: "Warhorse", command: "fastCavalry", auxiliary: true,
-      note: "Warhorses, light armour, shields, and lances. Fast cavalry.",
+      note: "Warhorses, light armour, shields, and lances. Fast cavalry.", baseWeapons: ["Lance"],
       options: [
         { id: "shrieking", group: null, label: "Shrieking back banners — causes fear on the charge turn", cost: 3, per: "model" },
       ],
@@ -1712,17 +1712,17 @@ const EMPIRE = {
     },
     {
       id: "kislevkossars", name: "Kislev Kossars", perModel: 9, minSize: 5, stat: "Fighter", command: "standard", auxiliary: true,
-      note: "Fighters with bows, double handed weapons, and light armour.",
+      note: "Fighters with bows, double handed weapons, and light armour.", baseWeapons: ["Bow", "Double handed weapon"],
       champion: { name: "Fighter Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion" },
     },
     {
       id: "kislevhorsearchers", name: "Kislev Horse Archers", perModel: 10, minSize: 5, stat: "Fighter", mountStat: "Normal Horse", mountLabel: "Normal Horse", command: "fastCavalry", auxiliary: true,
-      note: "Bows, on Normal Horses. Fast cavalry. May skirmish.",
+      note: "Bows, on Normal Horses. Fast cavalry. May skirmish.", baseWeapons: ["Bow"],
       champion: { name: "Fighter Champion", baseCost: 20, magicItemSlots: 1, stat: "Fighter Champion" },
     },
     {
       id: "freecompany", name: "Free Company", perModel: 5.5, minSize: 5, stat: "Fighter", command: "standard", auxiliary: true,
-      note: "Armed with various weapons that function as additional hand weapons.",
+      note: "Armed with various weapons that function as additional hand weapons.", baseWeapons: ["Additional hand weapon"],
       options: [
         { id: "armour", group: null, label: "Light armour", cost: 0.5, per: "model" },
         { id: "trained", group: null, label: "Trained as state troops — eligible as a detachment", cost: 0.5, per: "model" },
@@ -1731,7 +1731,7 @@ const EMPIRE = {
     },
     {
       id: "halflingbowmen", name: "Halfling Bowmen", perModel: 7, minSize: 5, stat: "Halfling", command: "standard", auxiliary: true,
-      note: "Bows. May skirmish. Foresters — move through woods without penalty regardless.",
+      note: "Bows. May skirmish. Foresters — move through woods without penalty regardless.", baseWeapons: ["Bow"],
       champion: { name: "Halfling Champion", baseCost: 10, magicItemSlots: 1, stat: "Halfling Champion" },
     },
     {
@@ -1766,15 +1766,15 @@ const EMPIRE = {
     },
   ],
   detachmentTypes: [
-    { id: "halberdiers", name: "Halberdiers (detachment)", perModel: 5, stat: "State Trooper" },
-    { id: "spearmen", name: "Spearmen (detachment)", perModel: 5, stat: "State Trooper" },
-    { id: "pikemen", name: "Pikemen (detachment)", perModel: 8, stat: "State Trooper" },
-    { id: "greatswords", name: "Greatswords (detachment)", perModel: 6, stat: "State Trooper" },
+    { id: "halberdiers", name: "Halberdiers (detachment)", perModel: 5, stat: "State Trooper", baseWeapons: ["Halberd"] },
+    { id: "spearmen", name: "Spearmen (detachment)", perModel: 5, stat: "State Trooper", baseWeapons: ["Spear"] },
+    { id: "pikemen", name: "Pikemen (detachment)", perModel: 8, stat: "State Trooper", baseWeapons: ["Pike"] },
+    { id: "greatswords", name: "Greatswords (detachment)", perModel: 6, stat: "State Trooper", baseWeapons: ["Double handed weapon"] },
     { id: "swordsmen", name: "Swordsmen (detachment)", perModel: 5.5, stat: "Swordsman" },
-    { id: "freecompany", name: "Free Company, trained (detachment)", perModel: 6, stat: "Fighter" },
-    { id: "crossbowmen", name: "Crossbowmen (detachment)", perModel: 9, stat: "State Trooper" },
-    { id: "handgunners", name: "Handgunners (detachment)", perModel: 9, stat: "State Trooper" },
-    { id: "archers", name: "Archers (detachment)", perModel: 7, stat: "State Trooper" },
+    { id: "freecompany", name: "Free Company, trained (detachment)", perModel: 6, stat: "Fighter", baseWeapons: ["Additional hand weapon"] },
+    { id: "crossbowmen", name: "Crossbowmen (detachment)", perModel: 9, stat: "State Trooper", baseWeapons: ["Crossbow"] },
+    { id: "handgunners", name: "Handgunners (detachment)", perModel: 9, stat: "State Trooper", baseWeapons: ["Hand gun"] },
+    { id: "archers", name: "Archers (detachment)", perModel: 7, stat: "State Trooper", baseWeapons: ["Longbow"] },
   ],
   chariotsMonsters: [
     {
@@ -9081,11 +9081,17 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       (def.composition || []).forEach((c) => { const n = unit.composition?.[c.id] || 0; if (n > 0) tags.push(`${n} ${c.label}`); });
       return tags;
     }
+    // Fixed/baked-in loadout, not a player choice — e.g. Spearmen's Spears. Shown first so it
+    // reads like the rest of the unit's identity. If nothing is set here and no weapon-choice
+    // option below already covers it, falls back to Hand weapon (the RAW default) so every
+    // regiment's actual loadout is represented somewhere, per rulebook p.54.
+    (def.baseWeapons || []).forEach((w) => tags.push(w));
     const gearSelections = unit.gearSelections || {};
     const groups = new Set();
     (def.options || []).forEach((o) => { if (o.group) groups.add(o.group); });
     groups.forEach((g) => { const label = optionLabelById(def.options, gearSelections[g]); if (label) tags.push(label); });
     (def.options || []).forEach((o) => { if (!o.group && gearSelections[o.id]) tags.push(o.label.replace(/\s*[+(][^)]*$/, "").trim()); });
+    if (!def.baseWeapons && !tags.some((t) => mundaneGearDesc(t))) tags.unshift("Hand weapon");
     const autoStandard = def.command === "standard" || def.command === "special";
     if (autoStandard) { tags.push("Musician"); tags.push("Standard Bearer"); }
     else if (unit.standard) tags.push("Standard Bearer");
@@ -9784,20 +9790,37 @@ const MUNDANE_GEAR_RULES = {
   halberd: "+1 Strength. Requires two hands. Infantry only. Can't be used inside a building.",
   lance: "If mounted, +2 Strength on the charge.",
   spear: "If mounted, +1 Strength on the charge. On foot, fights in 2 extra ranks to the front if the unit didn't move (up to 4 ranks total if it didn't charge and isn't flanked/rear-attacked). Can't be used inside a building.",
-  pistol: "Counts as an additional hand weapon (requires two hands to wield). One pistol grants an armour-piercing Strength 4 shot in the first round of melee in place of a normal attack; a second pistol replaces the hand weapon rather than adding another attack.",
+  pistol: "Missile: range 6\", Strength 4, no penalty for shooting at long range; two pistols allow shooting twice with no penalty. As a melee weapon, counts as an additional hand weapon (requires two hands): one pistol fires as a Strength 4 shot in the first round of melee in place of a normal attack; a second pistol replaces the hand weapon rather than adding another attack.",
   heavyarmour: "Armour save 5+ (4+ for Empire Full Plate, Dwarf Gromril, and Chaos Armour, which all count as heavy armour).",
   lightarmour: "Armour save 6+.",
   shield: "Improves armour save by +1. Can't be used in melee alongside a two-handed weapon — only against missile fire, and only when not engaged in combat.",
   barding: "Improves the mount's armour save by +1, but reduces its Movement by 1 (High Elf and Bretonnian barding don't reduce Movement).",
+  shortbow: "Missile: range 18\", Strength 3.",
+  bow: "Missile: range 24\", Strength 3.",
+  longbow: "Missile: range 30\", Strength 3. If the regiment didn't move, the three ranks behind the front rank may also shoot, at long range.",
+  woodelflongbow: "Missile: range 36\", Strength 3. As a normal longbow.",
+  crossbow: "Missile: range 30\", Strength 4. Can't shoot the turn it moved.",
+  repeatingcrossbow: "Missile: range 24\", Strength 3. May shoot twice, at -1 to hit.",
+  handgun: "Missile: range 24\", Strength 4. Can't shoot the turn it moved.",
+  sling: "Missile: range 18\", Strength 3. May shoot twice, at -1 to hit (short range only).",
+  lightthrown: "Missile: range 12\", Strength as the user's own.",
+  heavythrown: "Missile: range 6\", Strength as the user's own +1. No penalty for shooting at long range.",
 };
 // Longest/most-specific phrases first so e.g. "additional hand weapon" matches before the generic
-// "hand weapon" fallback, and "double handed weapon" before "halberd"-style single-word checks.
+// "hand weapon" fallback, and "double handed weapon" before "halberd"-style single-word checks. Same
+// logic for missile weapons: named variants (Wood Elf Longbow, repeating crossbow) and "longbow"/
+// "short bow" are checked before the generic "bow"/"crossbow" fallbacks they'd otherwise match inside.
 const MUNDANE_GEAR_MATCH_ORDER = [
   ["additional hand weapon", "ahw"], ["double handed weapon", "dhw"], ["double handed weapons", "dhw"],
   ["pike", "pike"], ["flail", "flail"], ["halberd", "halberd"], ["lance", "lance"], ["spear", "spear"], ["pistol", "pistol"],
   ["hand weapon", "handweapon"],
   ["heavy armour", "heavyarmour"], ["light armour", "lightarmour"],
   ["barding", "barding"], ["shield", "shield"],
+  ["wood elf longbow", "woodelflongbow"], ["longbow", "longbow"], ["short bow", "shortbow"], ["shortbow", "shortbow"],
+  ["repeating crossbow", "repeatingcrossbow"], ["crossbow", "crossbow"], ["bow", "bow"],
+  ["hand gun", "handgun"], ["handgun", "handgun"],
+  ["sling", "sling"],
+  ["light thrown weapon", "lightthrown"], ["heavy thrown weapon", "heavythrown"],
 ];
 function mundaneGearDesc(label) {
   if (!label) return undefined;
