@@ -1299,7 +1299,7 @@ const WOOD_ELVES = {
     {
       id: "wardancers", name: "Wood Elf War Dancers", perModel: 18, minSize: 5, stat: "Wood Elf War Dancers",
       command: "special",
-      note: "Shields give ward save 5+ instead of 6+. Immune to psychology, natural dispel 4+, ignore skirmish penalties, always may march. Each combat round choose a War Dance: Whirling Death (+1A), Woven Mist (enemies -1 to hit), The Shadows Coil (draw, no blows either way, needs 5+ models), or Storm of Blades (focus fire one model).",
+      note: "Shields give ward save 5+ instead of 6+. Immune to psychology, natural dispel 4+, ignore skirmish penalties, always may march. Each combat round choose a War Dance: Whirling Death (+1A), Woven Mist (enemies -1 to hit), The Shadows Coil (draw, no blows either way, needs 5+ models), or Storm of Blades (focus fire one model).", baseGear: ["Shields"],
       options: [
         { id: "ahw", group: null, label: "Swap shields for additional hand weapons", cost: 4, per: "model" },
       ],
@@ -3651,7 +3651,7 @@ const DWARFS = {
     },
     {
       id: "dwarfminers", name: "Dwarf Miners", minSize: 5, stat: "Dwarf Soldier", command: "standard", restriction: "0-1",
-      note: "Double handed weapons and light armour. May Ambush (arrive from a table edge on turn 2 instead of deploying, as if pursuing out of the table).",
+      note: "Double handed weapons and light armour. May Ambush (arrive from a table edge on turn 2 instead of deploying, as if pursuing out of the table).", baseGear: ["Double handed weapons"],
       tieredPricing: { baseCost: 80, baseSize: 5, extraPerModel: 11 },
       options: [
         { id: "heavyarmour", group: null, label: "Heavy armour instead of light", cost: 1, per: "model" },
@@ -5029,47 +5029,47 @@ const DOGS_OF_WAR = {
     {
       id: "marksmenmiragliano", name: "Marksmen of Miragliano", stat: "Marksmen of Miragliano", command: "standard", restriction: "0-1",
       tieredPricing: { baseCost: 130, baseSize: 9, extraPerModel: 11 },
-      note: "Regiment of Renown. At least nine Marksmen with a standard bearer and musician, plus Maximillian their leader (a Human Champion, may take one magic item), all with crossbows. Base cost includes the standard/musician and Maximillian; extra models beyond the first nine are bought at the per-model rate.",
+      note: "Regiment of Renown. At least nine Marksmen with a standard bearer and musician, plus Maximillian their leader (a Human Champion, may take one magic item), all with crossbows. Base cost includes the standard/musician and Maximillian; extra models beyond the first nine are bought at the per-model rate.", baseGear: ["Crossbows"],
     },
     {
       id: "longdrongpirates", name: "Long Drong Slayer's Pirates", stat: "Long Drong's Pirate", command: "standard", restriction: "0-1", tags: ["dwarf"],
       tieredPricing: { baseCost: 195, baseSize: 9, extraPerModel: 15 },
-      note: "Regiment of Renown. At least nine Dwarf Pirates with a standard bearer and musician, plus Long Drong their leader, all with two pistols. Follow all Dwarf rules; as Slayers they're unbreakable and wound on 4+ or better regardless of toughness (except with pistols). Long Drong may take one magic weapon, which may be a Dwarf runic item.",
+      note: "Regiment of Renown. At least nine Dwarf Pirates with a standard bearer and musician, plus Long Drong their leader, all with two pistols. Follow all Dwarf rules; as Slayers they're unbreakable and wound on 4+ or better regardless of toughness (except with pistols). Long Drong may take one magic weapon, which may be a Dwarf runic item.", baseGear: ["Two pistols"],
     },
     {
       id: "birdmencatrazza", name: "The Birdmen of Catrazza", stat: "Birdman of Catrazza", command: "skirmisher", restriction: "0-1",
       tieredPricing: { baseCost: 95, baseSize: 2, extraPerModel: 25 },
-      note: "Regiment of Renown. At least two Birdmen plus Dadallo their leader, all with crossbows. Fly and must skirmish; may shoot while flying (not on a ground move), and may shoot other units flying high while flying high themselves. Dadallo may take one magic item.",
+      note: "Regiment of Renown. At least two Birdmen plus Dadallo their leader, all with crossbows. Fly and must skirmish; may shoot while flying (not on a ground move), and may shoot other units flying high while flying high themselves. Dadallo may take one magic item.", baseGear: ["Crossbows"],
     },
     {
       id: "rugludsarmouredorcs", name: "Ruglud's Armoured Orcs", stat: "Ruglud's Orc", command: "standard", restriction: "0-1",
       tieredPricing: { baseCost: 177, baseSize: 9, extraPerModel: 13 },
-      note: "Regiment of Renown. At least nine Orcs with a standard bearer and musician, plus Ruglud their leader, all with heavy armour, halberd, and crossbow. Subject to animosity. Ruglud may take two magic items, which may be Orcs-only items from the Orcs & Goblins army book.",
+      note: "Regiment of Renown. At least nine Orcs with a standard bearer and musician, plus Ruglud their leader, all with heavy armour, halberd, and crossbow. Subject to animosity. Ruglud may take two magic items, which may be Orcs-only items from the Orcs & Goblins army book.", baseGear: ["Halberds", "Crossbows"],
     },
     {
       id: "mengilcompany", name: "Mengil Manhide's Dark Elf Company", stat: "Mengil's Dark Elf Shade", command: "skirmisher", restriction: "0-1",
       tieredPricing: { baseCost: 110, baseSize: 4, extraPerModel: 18 },
-      note: "Regiment of Renown. At least four Dark Elf Shades plus Mengil Manhide their leader, all with light armour, repeating crossbow, and an additional hand weapon. Hate High Elves; may skirmish and scout. High Elves will never fight alongside Mengil's company. Mengil may take one Dark Elf-only magic item from the Dark Elves army book.",
+      note: "Regiment of Renown. At least four Dark Elf Shades plus Mengil Manhide their leader, all with light armour, repeating crossbow, and an additional hand weapon. Hate High Elves; may skirmish and scout. High Elves will never fight alongside Mengil's company. Mengil may take one Dark Elf-only magic item from the Dark Elves army book.", baseGear: ["Repeating crossbows", "Additional hand weapons"],
     },
     {
       id: "braganzasbesiegers", name: "Braganza's Besiegers", stat: "Braganza's Besieger", command: "standard", restriction: "0-1",
       tieredPricing: { baseCost: 186, baseSize: 9, extraPerModel: 14 },
-      note: "Regiment of Renown. At least nine Besiegers with a standard bearer and musician, plus Braganza their leader, all with crossbow, heavy armour, and a pavise (3+ save vs shooting, 5+ vs melee). Braganza may take two magic items.",
+      note: "Regiment of Renown. At least nine Besiegers with a standard bearer and musician, plus Braganza their leader, all with crossbow, heavy armour, and a pavise (3+ save vs shooting, 5+ vs melee). Braganza may take two magic items.", baseGear: ["Crossbows", "Pavise"],
     },
     {
       id: "vesperosvendetta", name: "Vespero's Vendetta", stat: "Vespero's Duelist", command: "skirmisher", restriction: "0-1",
       tieredPricing: { baseCost: 120, baseSize: 4, extraPerModel: 15 },
-      note: "Regiment of Renown. Four Duelists plus Vespero their leader, all with an additional hand weapon, throwing knives, and a cloak (as light armour). Causes fear; must skirmish. Vespero may take two magic items.",
+      note: "Regiment of Renown. Four Duelists plus Vespero their leader, all with an additional hand weapon, throwing knives, and a cloak (as light armour). Causes fear; must skirmish. Vespero may take two magic items.", baseGear: ["Additional hand weapons"],
     },
     {
       id: "oglahkhanwolfboyz", name: "Oglah Khan's Wolfboyz", stat: "Oglah Khan's Hobgoblin", mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "standard", restriction: "0-1",
       tieredPricing: { baseCost: 145, baseSize: 4, extraPerModel: 17 },
-      note: "Regiment of Renown. At least four Hobgoblins with a standard bearer and musician, plus Oglah Khan their leader, all riding Giant Wolves with spear, shield, light armour, and bow. While Oglah Khan lives, the regiment ignores animosity and quells it in nearby allied Orcs & Goblins. The regiment's banner, the Pelt of Wulfag, adds 1D6\" to overrun/pursuit moves; the regiment may skirmish but forfeits the banner if so. Oglah Khan may take two magic items, which may be from the Chaos Dwarfs army book (not modeled in this builder).",
+      note: "Regiment of Renown. At least four Hobgoblins with a standard bearer and musician, plus Oglah Khan their leader, all riding Giant Wolves with spear, shield, light armour, and bow. While Oglah Khan lives, the regiment ignores animosity and quells it in nearby allied Orcs & Goblins. The regiment's banner, the Pelt of Wulfag, adds 1D6\" to overrun/pursuit moves; the regiment may skirmish but forfeits the banner if so. Oglah Khan may take two magic items, which may be from the Chaos Dwarfs army book (not modeled in this builder).", baseGear: ["Spears", "Shields", "Bows"],
     },
     {
       id: "cursedcompany", name: "The Cursed Company", stat: "Cursed Company Skeleton", command: "standard", restriction: "0-1", tags: ["undead"],
       tieredPricing: { baseCost: 145, baseSize: 9, extraPerModel: 7 },
-      note: "Regiment of Renown. At least nine Skeletons with a standard bearer and musician, plus Richter Kreugar their leader (follows Wight rules), all with heavy armour and halberd. Ordinary troops follow Skeleton rules. May march normally; the whole regiment crumbles to dust if Kreugar is slain. Kreugar may take two magic items besides his Wight Blade, which may be Undead-only items from the Undead army book (not modeled in this builder).",
+      note: "Regiment of Renown. At least nine Skeletons with a standard bearer and musician, plus Richter Kreugar their leader (follows Wight rules), all with heavy armour and halberd. Ordinary troops follow Skeleton rules. May march normally; the whole regiment crumbles to dust if Kreugar is slain. Kreugar may take two magic items besides his Wight Blade, which may be Undead-only items from the Undead army book (not modeled in this builder).", baseGear: ["Halberds"],
     },
   ],
   chariotsMonsters: [
@@ -5707,7 +5707,7 @@ const DARK_ELVES = {
     },
     {
       id: "witchelves", name: "Witch Elves", perModel: 12, minSize: 5, stat: "Wood Elf Warriors", command: "standard",
-      note: "Witch Elves with light armour and two poisoned hand weapons (+1 strength). Subject to frenzy.",
+      note: "Witch Elves with light armour and two poisoned hand weapons (+1 strength). Subject to frenzy.", baseGear: ["Additional hand weapons"],
       champion: { name: "Witch Elf Champion", baseCost: 30, magicItemSlots: 1, stat: "Elven Champion" },
     },
     {
@@ -5918,7 +5918,7 @@ const SKAVEN = {
     },
     {
       id: "nightrunners", name: "Night Runners", perModel: 8, minSize: 5, stat: "Night Runners", command: "skirmisher",
-      note: "Additional hand weapons. Must skirmish. May take a Vanguard move (a march move after scouts deploy, before turn 1).",
+      note: "Additional hand weapons. Must skirmish. May take a Vanguard move (a march move after scouts deploy, before turn 1).", baseGear: ["Additional hand weapons"],
       champion: { name: "Night Runner Champion", baseCost: 10, magicItemSlots: 1, stat: "Night Runner Champion" },
     },
     {
@@ -6857,7 +6857,7 @@ const KISLEV = {
     },
     {
       id: "sonsofursa", name: "Sons of Ursa", perModel: 50, minSize: 3, stat: "Kislevite Knight", mountStat: "Great Bear", mountLabel: "Great Bear", command: "monstrous", restriction: "0-1",
-      note: "A monstrous regiment from the great temple atop the sacred Ice Mountain. Knights with heavy armour, shields, and lances, riding Great Bears. Cause fear. Regimental troops and champions riding Great Bears can't be killed separately — all hits go to the Bear (which may use the rider's 4+ armour save); when the Bear dies, remove the whole model. Not hard-enforced by this builder.",
+      note: "A monstrous regiment from the great temple atop the sacred Ice Mountain. Knights with heavy armour, shields, and lances, riding Great Bears. Cause fear. Regimental troops and champions riding Great Bears can't be killed separately — all hits go to the Bear (which may use the rider's 4+ armour save); when the Bear dies, remove the whole model. Not hard-enforced by this builder.", baseGear: ["Lances", "Shields"],
       champion: { name: "Captain", baseCost: 30, magicItemSlots: 1, stat: "Kislevite Captain" },
     },
     {
@@ -7282,7 +7282,7 @@ const HALFLINGS = {
     },
     {
       id: "pantryguard", name: "Pantry Guard", perModel: 3, minSize: 5, stat: "Halfling Elite", command: "standard",
-      note: "Halfling Elite with light armour and shields. If equipped with bows instead of a weapon upgrade, the regiment may skirmish (not hard-enforced).",
+      note: "Halfling Elite with light armour and shields. If equipped with bows instead of a weapon upgrade, the regiment may skirmish (not hard-enforced).", baseGear: ["Shields"],
       options: [
         { id: "spears", group: "weapon", label: "Spears", cost: 1, per: "model" },
         { id: "bows", group: "weapon", label: "Bows instead, if no other weapon upgrade taken", cost: 7, per: "model" },
@@ -7299,7 +7299,7 @@ const HALFLINGS = {
     },
     {
       id: "halflingridersflying", name: "Halfling Riders (Flying Livestock)", perModel: 24, minSize: 3, stat: "Halfling Elite", mountStat: "Flying Livestock", mountLabel: "Flying Livestock", command: "skirmisher", restriction: "0-1",
-      note: "Halfling Elite with light armour and shields, riding Flying Livestock instead of ordinary Livestock Beasts — monstrous, can fly, and skirmish (so no standard bearer/banner). Only one Halfling Riders regiment army-wide may take this option (RAW models it as an upgrade to a Halfling Riders regiment; built here as its own 0-1 entry so the 3-model monstrous minimum and flying statline apply correctly).",
+      note: "Halfling Elite with light armour and shields, riding Flying Livestock instead of ordinary Livestock Beasts — monstrous, can fly, and skirmish (so no standard bearer/banner). Only one Halfling Riders regiment army-wide may take this option (RAW models it as an upgrade to a Halfling Riders regiment; built here as its own 0-1 entry so the 3-model monstrous minimum and flying statline apply correctly).", baseGear: ["Shields"],
       options: [
         { id: "spears", group: null, label: "Spears", cost: 1, per: "model" },
       ],
@@ -7605,7 +7605,7 @@ const LIZARDMEN = {
     },
     {
       id: "kroxigors", name: "Kroxigors", perModel: 50, minSize: 3, stat: "Lizardman Kroxigor", command: "none",
-      note: "Monstrous models that cause fear, armed with double handed weapons. 4+ armour save (floor 6+). May instead be embedded in the second/third rank of a Skink Warrior regiment (see that regiment's options) rather than fielded as their own regiment. Cannot take a standard bearer, musician, or regimental champion.",
+      note: "Monstrous models that cause fear, armed with double handed weapons. 4+ armour save (floor 6+). May instead be embedded in the second/third rank of a Skink Warrior regiment (see that regiment's options) rather than fielded as their own regiment. Cannot take a standard bearer, musician, or regimental champion.", baseGear: ["Double handed weapons"],
     },
     {
       id: "chameleonskinks", name: "Chameleon Skinks", perModel: 17, minSize: 5, stat: "Lizardman Chameleon Skink", command: "skirmisher", restriction: "0-1", tags: ["skink"],
@@ -9794,6 +9794,7 @@ const MUNDANE_GEAR_RULES = {
   heavyarmour: "Armour save 5+ (4+ for Empire Full Plate, Dwarf Gromril, and Chaos Armour, which all count as heavy armour).",
   lightarmour: "Armour save 6+.",
   shield: "Improves armour save by +1. Can't be used in melee alongside a two-handed weapon — only against missile fire, and only when not engaged in combat.",
+  pavise: "A large standing shield: grants a 3+ armour save against shooting, 5+ against melee.",
   barding: "Improves the mount's armour save by +1, but reduces its Movement by 1 (High Elf and Bretonnian barding don't reduce Movement).",
   shortbow: "Missile: range 18\", Strength 3.",
   bow: "Missile: range 24\", Strength 3.",
@@ -9815,7 +9816,7 @@ const MUNDANE_GEAR_MATCH_ORDER = [
   ["pike", "pike"], ["flail", "flail"], ["halberd", "halberd"], ["lance", "lance"], ["spear", "spear"], ["pistol", "pistol"],
   ["hand weapon", "handweapon"],
   ["heavy armour", "heavyarmour"], ["light armour", "lightarmour"],
-  ["barding", "barding"], ["shield", "shield"],
+  ["barding", "barding"], ["shield", "shield"], ["pavise", "pavise"],
   ["wood elf longbow", "woodelflongbow"], ["longbow", "longbow"], ["short bow", "shortbow"], ["shortbow", "shortbow"],
   ["repeating crossbow", "repeatingcrossbow"], ["crossbow", "crossbow"], ["bow", "bow"],
   ["hand gun", "handgun"], ["handgun", "handgun"],
@@ -9832,7 +9833,7 @@ function mundaneGearDesc(label) {
 }
 // Armour/shield/barding aren't weapons — excluded here so a Shield-only baseGear entry (e.g. a
 // Knight's Shields) doesn't stop the Hand weapons fallback from kicking in for their actual weapon.
-const MUNDANE_NON_WEAPON_KEYS = new Set(["heavyarmour", "lightarmour", "shield", "barding"]);
+const MUNDANE_NON_WEAPON_KEYS = new Set(["heavyarmour", "lightarmour", "shield", "barding", "pavise"]);
 function isMundaneWeaponTag(label) {
   if (!label) return false;
   const s = String(label).toLowerCase();
