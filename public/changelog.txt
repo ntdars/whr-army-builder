@@ -1,3 +1,7 @@
+2026-09-15
+Fixed Classic Undead's Wraiths and Mummies having a minimum regiment size of 3 instead of 5.
+Fixed Skeleton Warriors (Classic Undead and Vampire Counts) missing a "Heavy Armour and Shield" option — previously only available as light armour + shield, or heavy armour alone.
+
 2026-09-14
 Fixed the Dark Elf, Skaven, and Chaos Dwarfs (Hobgoblin) Assassins not counting their cheapest instance toward Regiments as their own rules describe.
 Fixed 30 characters (Vampire Count/Lord, Empire Lord/Hero, Tomb Kings' Mummy King, and 26 others across Skaven, Orcs & Goblins, and Chaos Dwarfs) missing standalone Light/Heavy/Full Plate Armour options — previously only offered combined with a shield, even for characters who can wield a weapon that precludes one.
