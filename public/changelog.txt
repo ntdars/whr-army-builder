@@ -1,6 +1,9 @@
 2026-09-15
 Fixed Classic Undead's Wraiths and Mummies having a minimum regiment size of 3 instead of 5.
 Fixed Skeleton Warriors (Classic Undead and Vampire Counts) missing a "Heavy Armour and Shield" option — previously only available as light armour + shield, or heavy armour alone.
+Fixed Banner of Champions eligibility check: champions carrying a rune combo or a liberated item are now correctly disqualified (previously only named magic items and spellcasting were checked).
+Fixed Branch Wraith (Wood Elves) cost bucketing: his points now correctly default to Characters instead of always counting as Regiments, since he's a spellcaster and can carry a Sprite — both make him ineligible for Banner of Champions per the rulebook.
+Added a new "Banner of Champions:" warning banner that explains why a champion doesn't qualify when the banner is in play but he isn't eligible (magic item / rune combo / liberated item / spellcaster).
 
 2026-09-14
 Fixed the Dark Elf, Skaven, and Chaos Dwarfs (Hobgoblin) Assassins not counting their cheapest instance toward Regiments as their own rules describe.
