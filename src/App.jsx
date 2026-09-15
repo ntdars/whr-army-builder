@@ -8773,7 +8773,7 @@ function SetupScreen({ onMuster, savedList, onLoad, onDelete, storageError, onOp
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
             <div>
               <h2 className="whr-h1" style={{ fontSize: 24, margin: 0 }}>The Barracks</h2>
-              <p className="whr-serif-italic" style={{ marginTop: 2 }}>Load an existing roster</p>
+              <p className="whr-serif-italic" style={{ marginTop: 2 }}>Load an existing roster (stored locally)</p>
             </div>
             <span className="whr-badge">{savedList.length} Saved</span>
           </div>
