@@ -9772,6 +9772,42 @@ function NicknameField({ unit, updateUnit }) {
   );
 }
 
+// Rules-text lookup for the standard (non-magical) melee weapons, missile weapons, and armour
+// options from the core rulebook — surfaced as hover tooltips anywhere these mundane options are
+// picked, mirroring the title={m.desc} pattern already used for magic items and runes.
+const MUNDANE_GEAR_RULES = {
+  handweapon: "Confers no special rules on its own. All models are assumed to carry one.",
+  ahw: "+1 Attack. Requires two hands. Infantry only. Can't be combined with a magic hand weapon (unless a special character allows it) — though a magic weapon labelled as an additional hand weapon still grants the extra attack.",
+  pike: "Fights in 3 extra ranks if the regiment didn't move (1 extra if it charged that turn); always strikes first; +1 Attack in the first turn fighting cavalry, and charging cavalry suffer -1 Attack. Can't be used with a shield or inside a building. Only applies when engaged to the front.",
+  flail: "+2 Strength in the first round of each combat engagement. Requires two hands. Can't be used inside a building.",
+  dhw: "+2 Strength. Always strikes last. Requires two hands. Can't be used inside a building.",
+  halberd: "+1 Strength. Requires two hands. Infantry only. Can't be used inside a building.",
+  lance: "If mounted, +2 Strength on the charge.",
+  spear: "If mounted, +1 Strength on the charge. On foot, fights in 2 extra ranks to the front if the unit didn't move (up to 4 ranks total if it didn't charge and isn't flanked/rear-attacked). Can't be used inside a building.",
+  pistol: "Counts as an additional hand weapon (requires two hands to wield). One pistol grants an armour-piercing Strength 4 shot in the first round of melee in place of a normal attack; a second pistol replaces the hand weapon rather than adding another attack.",
+  heavyarmour: "Armour save 5+ (4+ for Empire Full Plate, Dwarf Gromril, and Chaos Armour, which all count as heavy armour).",
+  lightarmour: "Armour save 6+.",
+  shield: "Improves armour save by +1. Can't be used in melee alongside a two-handed weapon — only against missile fire, and only when not engaged in combat.",
+  barding: "Improves the mount's armour save by +1, but reduces its Movement by 1 (High Elf and Bretonnian barding don't reduce Movement).",
+};
+// Longest/most-specific phrases first so e.g. "additional hand weapon" matches before the generic
+// "hand weapon" fallback, and "double handed weapon" before "halberd"-style single-word checks.
+const MUNDANE_GEAR_MATCH_ORDER = [
+  ["additional hand weapon", "ahw"], ["double handed weapon", "dhw"], ["double handed weapons", "dhw"],
+  ["pike", "pike"], ["flail", "flail"], ["halberd", "halberd"], ["lance", "lance"], ["spear", "spear"], ["pistol", "pistol"],
+  ["hand weapon", "handweapon"],
+  ["heavy armour", "heavyarmour"], ["light armour", "lightarmour"],
+  ["barding", "barding"], ["shield", "shield"],
+];
+function mundaneGearDesc(label) {
+  if (!label) return undefined;
+  const s = String(label).toLowerCase();
+  for (const [needle, key] of MUNDANE_GEAR_MATCH_ORDER) {
+    if (s.includes(needle)) return MUNDANE_GEAR_RULES[key];
+  }
+  return undefined;
+}
+
 function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
   const def = applyBloodline(rawDef, roster.armyTheme);
   const usedElsewhere = allUsedMagicItemIds(roster, unit.instanceId);
@@ -9813,7 +9849,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">Armour (free)</span>
           {def.armourGroup.options.map((opt) => (
-            <label key={opt} className="whr-opt-row whr-opt-label">
+            <label key={opt} className="whr-opt-row whr-opt-label" title={mundaneGearDesc(opt)}>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <input type="radio" name={`armour-${unit.instanceId}`} checked={(unit.armour || def.armourGroup.options[0]) === opt}
                   onChange={() => updateUnit({ ...unit, armour: opt })} />
@@ -9828,7 +9864,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">{def.meleeGroup.label}</span>
           {def.meleeGroup.options.map((opt) => (
-            <label key={opt} className="whr-opt-row whr-opt-label">
+            <label key={opt} className="whr-opt-row whr-opt-label" title={mundaneGearDesc(opt)}>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <input type="radio" name={`melee-${unit.instanceId}`} checked={(unit.melee || def.meleeGroup.options[0]) === opt}
                   onChange={() => updateUnit({ ...unit, melee: opt })} />
@@ -9855,7 +9891,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">{def.missileGroup.label}</span>
           {def.missileGroup.options.map((opt) => (
-            <label key={opt} className="whr-opt-row whr-opt-label">
+            <label key={opt} className="whr-opt-row whr-opt-label" title={mundaneGearDesc(opt)}>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <input type="radio" name={`missile-${unit.instanceId}`} checked={(unit.missile || def.missileGroup.options[0]) === opt}
                   onChange={() => updateUnit({ ...unit, missile: opt })} />
@@ -9871,7 +9907,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">{def.experimentalMissileGroup.label}</span>
           {def.experimentalMissileGroup.options.map((opt) => (
-            <label key={opt} className="whr-opt-row whr-opt-label">
+            <label key={opt} className="whr-opt-row whr-opt-label" title={mundaneGearDesc(opt)}>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <input type="radio" name={`expmissile-${unit.instanceId}`} checked={(unit.experimentalMissile || def.experimentalMissileGroup.options[0]) === opt}
                   onChange={() => updateUnit({ ...unit, experimentalMissile: opt })} />
@@ -10213,7 +10249,7 @@ function RegimentWargearSection({ def, unit, updateUnit, themeOptionVisible }) {
       {Object.entries(groups).map(([g, opts]) => (
         <div key={g} style={{ marginBottom: 6 }}>
           {opts.map((o) => (
-            <label key={o.id} className="whr-opt-row whr-opt-label">
+            <label key={o.id} className="whr-opt-row whr-opt-label" title={mundaneGearDesc(o.label)}>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <input type="radio" name={`${g}-${unit.instanceId}`} checked={(gearSelections[g] || "") === o.id}
                   onChange={() => updateUnit({ ...unit, gearSelections: { ...gearSelections, [g]: o.id } })} />
@@ -10231,7 +10267,7 @@ function RegimentWargearSection({ def, unit, updateUnit, themeOptionVisible }) {
         </div>
       ))}
       {singles.map((o) => (
-        <label key={o.id} className="whr-opt-row whr-opt-label">
+        <label key={o.id} className="whr-opt-row whr-opt-label" title={mundaneGearDesc(o.label)}>
           <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <input type="checkbox" checked={!!gearSelections[o.id]} onChange={(e) => updateUnit({ ...unit, gearSelections: { ...gearSelections, [o.id]: e.target.checked } })} />
             {o.label}
@@ -10579,7 +10615,7 @@ function CrewArmourGroup({ def, unit, updateUnit }) {
       <div style={{ marginTop: 14 }}>
         <span className="whr-label">Crew Armour</span>
         {def.crewArmourOptions.map((o) => (
-          <label key={o.id} className="whr-opt-row whr-opt-label">
+          <label key={o.id} className="whr-opt-row whr-opt-label" title={mundaneGearDesc(o.label)}>
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <input type="radio" name={`crewarmour-${unit.instanceId}`} checked={selectedId === o.id}
                 onChange={() => updateUnit({ ...unit, crewArmourId: o.id })} />
@@ -10673,7 +10709,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
           <div style={{ marginTop: 14 }}>
             <span className="whr-label">Variants</span>
             {def.variantOptions.map((o) => (
-              <label key={o.id} className="whr-opt-row whr-opt-label">
+              <label key={o.id} className="whr-opt-row whr-opt-label" title={mundaneGearDesc(o.label)}>
                 <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <input type="checkbox" checked={!!unit.variantSelections?.[o.id]}
                     onChange={(e) => updateUnit({ ...unit, variantSelections: { ...(unit.variantSelections || {}), [o.id]: e.target.checked } })} />
@@ -10767,7 +10803,7 @@ function ChariotDetail({ def, unit, roster, updateUnit, armyData }) {
         <div style={{ marginTop: 14 }}>
           <span className="whr-label">{def.variantGroupLabel || "Variants (choose at most one)"}</span>
           {def.variantOptions.map((o) => (
-            <label key={o.id} className="whr-opt-row whr-opt-label">
+            <label key={o.id} className="whr-opt-row whr-opt-label" title={mundaneGearDesc(o.label)}>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <input type="checkbox" checked={!!unit.variantSelections?.[o.id]}
                   onChange={(e) => updateUnit({ ...unit, variantSelections: { ...(unit.variantSelections || {}), [o.id]: e.target.checked } })} />
