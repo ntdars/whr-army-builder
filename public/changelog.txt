@@ -6,6 +6,8 @@ Fixed Branch Wraith (Wood Elves) cost bucketing: his points now correctly defaul
 Added a new "Banner of Champions:" warning banner that explains why a champion doesn't qualify when the banner is in play but he isn't eligible (magic item / rune combo / liberated item / spellcaster).
 Fixed "Orc-crewed war machines/chariots" composition rule: now correctly requires a Common Orc regiment (Orc Boyz/Arrer Boyz/Boar Boyz or their Big'un variants) — previously any Orc-type regiment (Black Orcs, Savage Orcs) was wrongly accepted.
 Fixed "Goblin-crewed war machines/chariots" composition rule: now correctly requires a Common Goblin regiment (Infantry or Wolf Riders) — previously Forest Goblin and Night Goblin regiments were wrongly accepted.
+Added a shared rules-text lookup for the standard (non-magical) melee weapons, missile weapons, and armour from the core rulebook (Hand Weapon, Additional Hand Weapon, Pike, Flail, Double Handed Weapon, Halberd, Lance, Spear, Pistol, Light/Heavy Armour, Shield, Barding), with a keyword-matching helper that handles the many label variants used across factions ("Additional hand weapons instead of shield", "Heavy armour instead of light", etc.).
+Wired hover tooltips into every place these are picked: character-level weapon/armour/missile radios, regiment wargear checkboxes, war-machine/chariot crew armour options, and chariot variant checkboxes — same title pattern already used for magic items and runes.
 
 2026-09-14
 Fixed the Dark Elf, Skaven, and Chaos Dwarfs (Hobgoblin) Assassins not counting their cheapest instance toward Regiments as their own rules describe.
