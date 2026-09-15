@@ -1176,7 +1176,7 @@ const WOOD_ELVES = {
     {
       id: "warlord", name: "Wood Elf Warlord", cost: 124, stat: "Wood Elf Warlord", magicItemSlots: 3,
       gearNote: "May take a shield and light armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Wood Elf Longbow", cost: 10 },
       mounts: [
@@ -1191,7 +1191,7 @@ const WOOD_ELVES = {
     {
       id: "hero", name: "Wood Elf Hero", cost: 74, stat: "Wood Elf Hero", magicItemSlots: 2,
       gearNote: "May take a shield and light armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Wood Elf Longbow", cost: 10 },
       mounts: [
@@ -1504,7 +1504,7 @@ const EMPIRE = {
     {
       id: "empirelord", name: "Empire Lord", cost: 100, stat: "Empire Lord", magicItemSlots: 3,
       gearNote: "May take a shield and either light armour, heavy armour, or full plate armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Full Plate Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour", "Full Plate Armour", "Shield & Full Plate Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Handgun", "Pistol", "Two pistols"] },
       mounts: [
@@ -1516,7 +1516,7 @@ const EMPIRE = {
     {
       id: "empirehero", name: "Empire Hero", cost: 60, stat: "Empire Hero", magicItemSlots: 2,
       gearNote: "May take a shield and either light armour, heavy armour, or full plate armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour", "Shield & Full Plate Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour", "Full Plate Armour", "Shield & Full Plate Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Handgun", "Pistol", "Two pistols"] },
       experimentalMissileGroup: { label: "Experimental missile weapon — foot only (any one)", cost: 10, options: ["None (default)", "Hochland Long Rifle", "Repeating handgun", "Repeating pistol"] },
@@ -1570,7 +1570,7 @@ const EMPIRE = {
     {
       id: "warriorpriest", name: "Warrior Priest", cost: 65, stat: "Warrior Priest", magicItemSlots: 1,
       gearNote: "May take a shield and either light or heavy armour for free (not full plate). Any regiment of Swordsmen or State Troops he joins (including detachments within 8\") becomes immune to fear and hates all enemies — as does the Priest himself.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Double handed weapon"] },
       mounts: [
         { id: "warhorse", name: "Warhorse (may take barding free)", cost: 10, stat: "Warhorse" },
@@ -3236,7 +3236,7 @@ const HIGH_ELVES = {
     {
       id: "elvenprince", name: "Elven Prince", cost: 124, stat: "Elven Prince", magicItemSlots: 3,
       gearNote: "May take a shield and either light armour or Dragon Armour for free (Dragon Armour grants immunity to fire/flaming attacks).",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Dragon Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Dragon Armour", "Shield & Dragon Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Longbow", cost: 10 },
       mounts: [
@@ -3252,7 +3252,7 @@ const HIGH_ELVES = {
     {
       id: "elvenhero", name: "Elven Hero", cost: 74, stat: "Elven Hero (High Elf)", magicItemSlots: 2,
       gearNote: "May take a shield and either light armour or Dragon Armour for free (Dragon Armour grants immunity to fire/flaming attacks).",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Dragon Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Dragon Armour", "Shield & Dragon Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Longbow", cost: 10 },
       mounts: [
@@ -3818,7 +3818,7 @@ const BRETONNIA = {
     {
       id: "knightlylord", name: "Knightly Lord", cost: 100, stat: "Knightly Lord", magicItemSlots: 3, tags: ["knightly"],
       gearNote: "May take a shield and heavy armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
         { id: "warhorse", name: "Warhorse (may take barding free)", cost: 20, stat: "Warhorse" },
@@ -3829,7 +3829,7 @@ const BRETONNIA = {
     {
       id: "knightlyhero", name: "Knightly Hero", cost: 60, stat: "Knightly Hero", magicItemSlots: 2, tags: ["knightly"],
       gearNote: "May take a shield and heavy armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
         { id: "warhorse", name: "Warhorse (may take barding free)", cost: 15, stat: "Warhorse" },
@@ -4164,7 +4164,7 @@ const ORCS_GOBLINS = {
     {
       id: "blackorcwarlord", theme: "core", name: "Black Orc Warlord", cost: 148, stat: "Black Orc Warlord", magicItemSlots: 3, tags: ["blackOrc"],
       gearNote: "May take a shield and either light or heavy armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       mounts: [
         { id: "boar", name: "War Boar", cost: 33, stat: "War Boar" },
@@ -4174,7 +4174,7 @@ const ORCS_GOBLINS = {
     {
       id: "blackorchero", theme: "core", name: "Black Orc Hero", cost: 89, stat: "Black Orc Hero", magicItemSlots: 2, tags: ["blackOrc"],
       gearNote: "May take a shield and either light or heavy armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       mounts: [
         { id: "boar", name: "War Boar", cost: 24, stat: "War Boar" },
@@ -4192,7 +4192,7 @@ const ORCS_GOBLINS = {
     {
       id: "commonorcwarlord", theme: "core", name: "Common Orc Warlord", cost: 100, stat: "Orc Warlord", magicItemSlots: 3, tags: ["commonOrc"],
       gearNote: "May take a shield and light armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Crossbow"] },
       mounts: [
@@ -4204,7 +4204,7 @@ const ORCS_GOBLINS = {
     {
       id: "commonorchero", theme: "core", name: "Common Orc Hero", cost: 60, stat: "Orc Hero", magicItemSlots: 2, tags: ["commonOrc"],
       gearNote: "May take a shield and light armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Crossbow"] },
       mounts: [
@@ -4316,7 +4316,7 @@ const ORCS_GOBLINS = {
     {
       id: "commongoblinwarlord", name: "Common Goblin Warlord", cost: 60, stat: "Goblin Warlord", magicItemSlots: 3, tags: ["commonGoblin"],
       gearNote: "May take a shield and light armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Short bow", cost: 10 },
       mounts: [
@@ -4328,7 +4328,7 @@ const ORCS_GOBLINS = {
     {
       id: "commongoblinhero", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"],
       gearNote: "May take a shield and light armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       bowOption: { label: "Short bow", cost: 10 },
       mounts: [
@@ -4859,7 +4859,7 @@ const DOGS_OF_WAR = {
     {
       id: "mercenarylord", name: "Human Mercenary Lord", cost: 110, stat: "Human Mercenary Lord", magicItemSlots: 3, tags: ["human"],
       gearNote: "May take a shield and either light armour or heavy armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
       mounts: [
@@ -4870,7 +4870,7 @@ const DOGS_OF_WAR = {
     {
       id: "mercenaryhero", name: "Human Mercenary Hero", cost: 60, stat: "Empire Hero", magicItemSlots: 2, tags: ["human"],
       gearNote: "May take a shield and either light armour or heavy armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
       mounts: [
@@ -5265,19 +5265,19 @@ const CHAOS_DWARFS = {
     {
       id: "blackorchero", name: "Black Orc Hero", cost: 89, stat: "Black Orc Hero", magicItemSlots: 2, tags: ["blackOrc"], theme: "core",
       gearNote: "Your army must include a Black Orc regiment to field this Hero (now flagged live by this builder). Quells animosity. May take a shield and either light armour or heavy armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
       id: "commonorchero", name: "Common Orc Hero", cost: 60, stat: "Orc Hero", magicItemSlots: 2, tags: ["commonOrc"], theme: "core",
       gearNote: "Your army must include a Common Orc regiment to field this Hero (now flagged live by this builder). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
       id: "commongoblinhero", name: "Common Goblin Hero", cost: 36, stat: "Goblin Hero", magicItemSlots: 2, tags: ["commonGoblin"], theme: "core",
       gearNote: "Your army must include a Common Goblin regiment to field this Hero (now flagged live by this builder). May take a shield and light armour for free. May take 2 magic items, which may come from the Orcs & Goblins army book.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Additional hand weapon", "Spear", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon", cost: 10, options: ["None (default)", "Short bow"] },
     },
@@ -5548,7 +5548,7 @@ const DARK_ELVES = {
     {
       id: "firstamongequals", name: "First Among Equals", cost: 124, stat: "Elven Prince", magicItemSlots: 3,
       gearNote: "May take a shield and either light armour or heavy armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon", cost: 10, options: ["None (default)", "Repeating crossbow"] },
       mounts: [
@@ -5564,7 +5564,7 @@ const DARK_ELVES = {
     {
       id: "elvenhero", name: "Elven Hero", cost: 74, stat: "Elven Hero (High Elf)", magicItemSlots: 2,
       gearNote: "May take a shield and either light armour or heavy armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon", cost: 10, options: ["None (default)", "Repeating crossbow"] },
       mounts: [
@@ -5832,14 +5832,14 @@ const SKAVEN = {
     {
       id: "skavenwarlord", name: "Skaven Warlord", cost: 88, stat: "Skaven Warlord", magicItemSlots: 3,
       gearNote: "May take a shield and light armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon, magical bullets", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
     },
     {
       id: "skavenhero", name: "Skaven Hero", cost: 53, stat: "Skaven Hero", magicItemSlots: 2,
       gearNote: "May take a shield and light armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
       missileGroup: { label: "Missile weapon, magical bullets", cost: 10, options: ["None (default)", "Pistol", "Handgun"] },
     },
@@ -5874,7 +5874,7 @@ const SKAVEN = {
     {
       id: "plaguepriest", name: "Plague Priest", cost: 73, stat: "Clan Pestilens Plague Priest", magicItemSlots: 2,
       gearNote: "Subject to frenzy. May only join regiments of Plague Monks. May take a shield and light armour for free.",
-      armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
+      armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
@@ -6067,7 +6067,7 @@ const VC_BLOODLINE_POWERS = [
   { id: "bl-str-hellbeast", name: "Hell Beast", cost: 60, cat: "bloodlinepower", desc: "+1 wound, can fly, 40x40 base, may join a unit of Giant Bats (and receive a \"Look Out, Sir\" roll).", restrictedTo: [{ tags: ["strigoi"] }] },
 ];
 
-const VC_ARMOUR_OPTIONS = ["No armour (default)", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"];
+const VC_ARMOUR_OPTIONS = ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"];
 const VC_MELEE_OPTIONS = ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"];
 // A Vampire Count/Lord may only take a magic level while unencumbered — no armour of any kind,
 // and no weapon that occupies both hands (a flail, a second hand weapon, a halberd, or a double
@@ -6218,7 +6218,7 @@ const VAMPIRE_COUNTS = {
     {
       id: "swain", name: "Swain", cost: 60, stat: "Swain", magicItemSlots: 2, theme: "lahmia", tags: ["swain"],
       gearNote: "Lahmia armies only — a human hero enthralled by his Vampire mistress. May take a shield and light or heavy armour for free. If not carrying a shield or a weapon upgrade, may carry the army's battle standard for +20pts (one of his two item slots may then be a magic banner) — not modeled as a toggle, track by hand.",
-      armourGroup: { options: ["Shield & Light Armour (default)", "Shield & Heavy Armour"] },
+      armourGroup: { options: ["Light Armour", "Shield & Light Armour (default)", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow"] },
       mounts: [{ id: "warhorse", name: "Warhorse (barding free)", cost: 15, stat: "War Horse" }],
@@ -6391,7 +6391,7 @@ const TOMB_KINGS = {
     {
       id: "mummyking", name: "Mummy King", cost: 184, stat: "Mummy King", magicItemSlots: 3, tags: ["mummy", "undeadCharacter"],
       gearNote: "Flammable. May take a shield and light armour for free.",
-      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      armourGroup: { options: ["Light Armour", "Shield & Light Armour (default)"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: TK_MELEE_OPTIONS },
       mounts: [
         { id: "undeadsteed", name: "Undead Steed", cost: 42, stat: "Undead Steed" },
@@ -6401,7 +6401,7 @@ const TOMB_KINGS = {
     {
       id: "mummyprince", name: "Mummy Prince", cost: 129, stat: "Mummy Prince", magicItemSlots: 2, tags: ["mummy", "undeadCharacter"],
       gearNote: "Flammable. May take a shield and light armour for free.",
-      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      armourGroup: { options: ["Light Armour", "Shield & Light Armour (default)"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: TK_MELEE_OPTIONS },
       mounts: [
         { id: "undeadsteed", name: "Undead Steed", cost: 30, stat: "Undead Steed" },
@@ -6619,7 +6619,7 @@ const CLASSIC_UNDEAD = {
     {
       id: "mummyprince", name: "Mummy Prince", cost: 129, stat: "Mummy Prince", magicItemSlots: 2, tags: ["mummy", "undeadCharacter"],
       gearNote: "Flammable. May take a shield and light armour for free.",
-      armourGroup: { options: ["Shield & Light Armour (default)"] },
+      armourGroup: { options: ["Light Armour", "Shield & Light Armour (default)"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: TK_MELEE_OPTIONS },
       mounts: [
         { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 30, stat: "Undead Steed" },
