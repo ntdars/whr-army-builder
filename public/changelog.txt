@@ -10,6 +10,7 @@ Added a shared rules-text lookup for the standard (non-magical) melee weapons, m
 Wired hover tooltips into every place these are picked: character-level weapon/armour/missile radios, regiment wargear checkboxes, war-machine/chariot crew armour options, and chariot variant checkboxes — same title pattern already used for magic items and runes.
 Regiments now show their actual loadout (Spears, Shields, Longbows, etc.) as badges on the roster card, in print/export, and on hover with rules text — previously this only lived in flavor text. Defaults to "Hand weapons" when nothing else applies.
 Hover tooltips added for all standard melee/missile weapons and armour from the rulebook, wired in everywhere they're picked (including the roster list, not just the selection panel).
+[BETA] Added a new alphabetized "Wargear Reference" section at the bottom of Print/PDF exports, listing every weapon, armour item, shield, magic item, and rune across the whole roster (characters, regiments, chariots, specials) with its rules text, pulled live from the same data as the roster cards so it can't drift out of sync.
 
 2026-09-14
 Fixed the Dark Elf, Skaven, and Chaos Dwarfs (Hobgoblin) Assassins not counting their cheapest instance toward Regiments as their own rules describe.
