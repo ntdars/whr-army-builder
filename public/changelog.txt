@@ -2,6 +2,8 @@
 Fixed the Dark Elf, Skaven, and Chaos Dwarfs (Hobgoblin) Assassins not counting their cheapest instance toward Regiments as their own rules describe.
 Fixed 30 characters (Vampire Count/Lord, Empire Lord/Hero, Tomb Kings' Mummy King, and 26 others across Skaven, Orcs & Goblins, and Chaos Dwarfs) missing standalone Light/Heavy/Full Plate Armour options — previously only offered combined with a shield, even for characters who can wield a weapon that precludes one.
 Fixed 16 Arcane Items across Classic Undead, Empire, High Elves, Bretonnia, Lizardmen, and Slann Empire that could be taken by non-Wizard characters — Sword of Unholy Power, Staff of Damnation, Antler Totem (x2), Acolytes, Cloak of Stars, War Crown of Saphery, Book of the Phoenix, Bufo's Hex Scroll, Amulet of Itza (x2), The Itxi Grubs (x2), The Plaque of Tepec (x2), and Plaque of Knowledge.
+Added support for "any number of champions, each choosing their own type" — Norse Warriors, Berserkers, and Huscarls can now take any mix of Norse Champions, Shieldmaidens (Huscarls only), and Ulfhednar, each individually costed and correctly restricted from magic items where the book says so (Ulfhednar).
+Fixed Norse Warriors incorrectly allowing a Shieldmaiden as a champion — only Huscarls should have that option.
 
 2026-09-09
 Added a full Changelog page, linked from the Barracks footer.
