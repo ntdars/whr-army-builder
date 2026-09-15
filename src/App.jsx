@@ -8117,30 +8117,54 @@ function regimentChampionCost(inst, def, armyData) {
       Object.values((inst.multiChampionRuneItems || [])[i] || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
     }
   }
+  // Branch Wraith (Wood Elves) is its own regimental-champion mechanism, separate from
+  // def.champion/championOptions — folded in here so his cost is trackable/subtractable for
+  // Banner of Champions bucket-accounting the same way an ordinary champion's is.
+  if (inst.branchWraithIncluded && def.branchWraith) {
+    total += def.branchWraith.cost;
+    (inst.branchWraithSpriteIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+  }
   return total;
 }
 
-// A regiment's champion is eligible for the Banner of Champions' bucket swap only if he carries no
-// magic items, isn't mounted on a chariot/monstrous model, and doesn't cast spells (i.e. isn't a
-// wizard) — mirrors the item's own wording. Chariot/monstrous-mount champions and championOptions
-// that grant a genuinely different creature (Vampire Thrall, Wight Champion, etc., which already
-// aren't modeled as "baseCost adds a rider" but as a flat creature swap) are treated as eligible
-// unless they explicitly have a mount or are wizards, since the app has no notion of "champion rides
-// a chariot" beyond the regiment's own mount/kind.
-function championEligibleForBannerOfChampions(inst, def, armyData) {
+// Returns null if a regiment's champion is eligible for the Banner of Champions' bucket swap, or a
+// short human-readable reason why not (surfaced by bannerOfChampionsWarnings below). Per the item's
+// own wording, a champion is ineligible if he carries any magic item, a rune combo, or a liberated
+// item (all occupy his one magic item slot the same as a named item would), or if he casts spells.
+// Chariot/monstrous-mount champions aren't checked here since the app has no notion of "champion
+// rides a chariot" beyond the regiment's own mount/kind — championOptions that grant a genuinely
+// different creature (Vampire Thrall, Wight Champion, etc.) are already modeled as a flat creature
+// swap, not "baseCost adds a rider," so there's nothing mount-related to flag for them.
+function championBannerOfChampionsIneligibilityReason(inst, def, armyData) {
+  const itemsCheck = (championMagicItemIds, championRuneItems, championLiberatedMagicItemIds) => {
+    if ((championMagicItemIds || []).length > 0) return "carries a magic item";
+    if (Object.values(championRuneItems || {}).some((ids) => (ids || []).length > 0)) return "carries a rune combo";
+    if ((championLiberatedMagicItemIds || []).length > 0) return "carries a liberated item";
+    return null;
+  };
+  // Branch Wraith is always a level 1 wizard and may carry a Sprite (which occupies a magic item
+  // slot without being a magic item) — both independently disqualify him per the rule text, so
+  // he's always ineligible when included, regardless of which Sprite (if any) is picked.
+  if (inst.branchWraithIncluded && def.branchWraith) return "is a spellcaster (and may carry a Sprite)";
   if (inst.championIncluded && def.champion) {
-    if ((inst.championMagicItemIds || []).length > 0) return false;
-    if (isWizard(def.champion, inst)) return false;
-    return true;
+    const itemReason = itemsCheck(inst.championMagicItemIds, inst.championRuneItems, inst.championLiberatedMagicItemIds);
+    if (itemReason) return itemReason;
+    if (isWizard(def.champion, inst)) return "is a spellcaster";
+    return null;
   }
   if (inst.championOptionId && def.championOptions) {
     const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
-    if (!opt) return false;
-    if ((inst.championMagicItemIds || []).length > 0) return false;
-    if (isWizard(opt, inst)) return false;
-    return true;
+    if (!opt) return "has no valid champion option selected";
+    const itemReason = itemsCheck(inst.championMagicItemIds, inst.championRuneItems, inst.championLiberatedMagicItemIds);
+    if (itemReason) return itemReason;
+    if (isWizard(opt, inst)) return "is a spellcaster";
+    return null;
   }
-  return false;
+  return "isn't a recognised champion type";
+}
+
+function championEligibleForBannerOfChampions(inst, def, armyData) {
+  return !championBannerOfChampionsIneligibilityReason(inst, def, armyData);
 }
 
 function fastCavalryStandardFree(def, gearSelections) {
@@ -8194,11 +8218,10 @@ function regimentCost(inst, def, armyData, roster) {
   if (inst.standard) {
     (inst.runeItems?.banner || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   }
+  // Branch Wraith's cost (base + Sprites) is now folded into regimentChampionCost() above, so it's
+  // no longer added separately here — same total, just consolidated so Banner of Champions
+  // bucket-accounting can see and subtract it like any other champion's cost.
   total += regimentChampionCost(inst, def, armyData);
-  if (def.branchWraith && inst.branchWraithIncluded) {
-    total += def.branchWraith.cost;
-    (inst.branchWraithSpriteIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
-  }
   if (def.detachmentParent) {
     (inst.detachments || []).forEach((d) => { total += detachmentCost(d, armyData); });
   }
@@ -9270,7 +9293,7 @@ function RuleFlagBanner({ label, items }) {
   );
 }
 
-function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, loreWarnings, magicLevelWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, liberatedItemWarnings, selectedId, onSelect, onRemove, onReorderSection }) {
+function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo, themeGateWarning, endlessBannerWarnings, bannerOfChampionsWarnings, loreWarnings, magicLevelWarnings, runeWarnings, houseRuleWarnings, knightWarnings, wargearWarnings, auxiliaryWarnings, sharedPoolWarnings, liberatedItemWarnings, selectedId, onSelect, onRemove, onReorderSection }) {
   // Pointer-based reordering (not native HTML5 drag-and-drop — that requires
   // dataTransfer.setData() to reliably fire onDrop in several browsers, and its default
   // "ghost image follows cursor" look is flat and inconsistent across browsers). This
@@ -9444,6 +9467,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
       <RuleFlagBanner label="Army composition:" items={overAuxLimit ? [`Only half of the total number of regiments (rounded up) in the ${armyData.name} army may be auxiliaries — currently ${auxiliaryInfo.auxCount} of ${auxiliaryInfo.totalRegiments} regiments (${auxiliaryInfo.allowed} allowed).`] : []} />
       <RuleFlagBanner label="Army theme:" items={themeGateWarning ? [themeGateWarning] : []} />
       <RuleFlagBanner label="Magic Banner:" items={endlessBannerWarnings} />
+      <RuleFlagBanner label="Banner of Champions:" items={bannerOfChampionsWarnings} />
       <RuleFlagBanner label="Lore of Magic:" items={loreWarnings} />
       <RuleFlagBanner label="Magic level:" items={magicLevelWarnings} />
       <RuleFlagBanner label="Dwarf runes:" items={runeWarnings} />
@@ -11240,7 +11264,33 @@ function useRosterWarnings(roster, armyData, totalPoints) {
     return null;
   }, [armyData, roster.armyTheme, roster.pointLimit, totalPoints]);
 
-  return { loreWarnings, magicLevelWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning };
+  // Flags regiments where Banner of Champions is in play (either that regiment's own banner, or
+  // an army-wide grant via the BSB carrying it) but the champion doesn't actually qualify — soft
+  // warning explaining why his cost still counts towards Characters/Monsters/War Machines/Chariots
+  // rather than Regiments, per the item's own wording.
+  const bannerOfChampionsWarnings = useMemo(() => {
+    const warnings = [];
+    const bsbUnit = roster.characters.find((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      return d && (d.tags || []).includes("bsb");
+    });
+    const armyWideBannerOfChampions = !!bsbUnit && (bsbUnit.magicItemIds || []).includes("cm-bannerofchampions");
+    roster.regiments.forEach((u) => {
+      const d = regDefFor(u, armyData);
+      if (!d) return;
+      const bannerInPlay = u.magicBannerId === "cm-bannerofchampions" || armyWideBannerOfChampions;
+      if (!bannerInPlay) return;
+      const champCost = regimentChampionCost(u, d, armyData);
+      if (champCost <= 0) return;
+      const reason = championBannerOfChampionsIneligibilityReason(u, d, armyData);
+      if (reason) {
+        warnings.push(`${d.name}: champion ${reason}, so Banner of Champions doesn't apply to him — his cost still counts towards Characters/Monsters/War Machines/Chariots.`);
+      }
+    });
+    return warnings;
+  }, [roster, armyData]);
+
+  return { loreWarnings, magicLevelWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, bannerOfChampionsWarnings, themeGateWarning };
 }
 
 // Bundles the roster-wide point totals and composition-rule info that both the warnings
@@ -11574,7 +11624,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
   }
 
   const { totalPoints, regimentPoints, auxiliaryInfo, contingentInfo, compositionInfo } = useRosterInfo(roster, armyData);
-  const { loreWarnings, magicLevelWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, themeGateWarning } = useRosterWarnings(roster, armyData, totalPoints);
+  const { loreWarnings, magicLevelWarnings, auxiliaryWarnings, wargearWarnings, knightWarnings, houseRuleWarnings, sharedPoolWarnings, liberatedItemWarnings, runeWarnings, endlessBannerWarnings, bannerOfChampionsWarnings, themeGateWarning } = useRosterWarnings(roster, armyData, totalPoints);
 
 
   function addUnit(kind, defId, sourceFaction) {
@@ -11686,7 +11736,7 @@ function BuilderScreen({ roster, setRoster, onBack, onSave, saveState, onImport 
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <RosterPanel armyData={armyData} roster={roster} totalPoints={totalPoints} pointLimit={roster.pointLimit}
-            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} loreWarnings={loreWarnings} magicLevelWarnings={magicLevelWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} liberatedItemWarnings={liberatedItemWarnings} selectedId={selectedId} onSelect={selectAndAdvance} onRemove={removeUnit} onReorderSection={reorderSection} />
+            regimentPoints={regimentPoints} auxiliaryInfo={auxiliaryInfo} contingentInfo={contingentInfo} compositionInfo={compositionInfo} themeGateWarning={themeGateWarning} endlessBannerWarnings={endlessBannerWarnings} bannerOfChampionsWarnings={bannerOfChampionsWarnings} loreWarnings={loreWarnings} magicLevelWarnings={magicLevelWarnings} runeWarnings={runeWarnings} houseRuleWarnings={houseRuleWarnings} knightWarnings={knightWarnings} wargearWarnings={wargearWarnings} auxiliaryWarnings={auxiliaryWarnings} sharedPoolWarnings={sharedPoolWarnings} liberatedItemWarnings={liberatedItemWarnings} selectedId={selectedId} onSelect={selectAndAdvance} onRemove={removeUnit} onReorderSection={reorderSection} />
         </div>
         <div className="whr-panel whr-builder-col" style={{ padding: 18, minHeight: 0 }}>
           <DetailPanel armyData={armyData} roster={roster} selectedId={selectedId} updateUnit={updateUnit} />
