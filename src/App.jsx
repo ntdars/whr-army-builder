@@ -273,6 +273,10 @@ body {
   .whr-print-roster table.whr-stat-table th, .whr-print-roster table.whr-stat-table td { border: 1px solid #999; padding: 1px 5px; text-align: center; color: #000; }
   .whr-print-tags { flex: 1 1 auto; min-width: 0; margin: 0; padding-left: 16px; font-size: 12px; }
   .whr-print-tags li { margin-bottom: 1px; }
+  .whr-print-wargear-grid { columns: 2; column-gap: 20px; font-size: 11.5px; }
+  .whr-print-wargear-entry { break-inside: avoid; padding: 3px 0; border-top: 1px dotted #999; }
+  .whr-print-wargear-name { font-weight: 700; }
+  .whr-print-wargear-desc { color: #333; }
   @page { margin: 0.6in; }
 }
 `;
@@ -9051,6 +9055,89 @@ function optionLabelById(options, id) {
   return o ? o.label.replace(/\s*\([^)]*\)\s*$/, "").replace(/\s*[+][\d.]+.*$/, "").trim() : null;
 }
 
+// Gathers every genuine piece of equipment (weapons, armour, shields, magic items, runes) a unit
+// carries into a shared Map of name -> {desc}, for the print/export wargear reference appendix.
+// Deliberately narrower than resolveUnitTags: skips mounts, Marks, Lore, Standard Bearer/Musician,
+// detachment counts, and abomination upgrades/rider labels — those aren't "weapon/armour/item".
+function collectWargearItems(kind, unit, def, armyData, bloodlineId, itemsMap) {
+  const addMundane = (label) => {
+    if (!label || itemsMap.has(label)) return;
+    itemsMap.set(label, { desc: mundaneGearDesc(label) });
+  };
+  const addMagic = (mi) => {
+    if (!mi || itemsMap.has(mi.name)) return;
+    itemsMap.set(mi.name, { desc: mi.desc });
+  };
+  const addMagicIds = (ids) => (ids || []).forEach((id) => addMagic(miById(armyData.magicItems, id)));
+  const addLiberatedIds = (ids) => (ids || []).forEach((id) => addMagic(miByIdAnySource(armyData, id)));
+  const addRuneGroups = (runeItems) => Object.values(runeItems || {}).forEach((ids) => (ids || []).forEach((id) => addMagic(miById(armyData.magicItems, id))));
+
+  if (kind === "character") {
+    if (def.armourGroup && unit.armour && !unit.armour.includes("(default)")) addMundane(unit.armour);
+    if (unit.melee && !unit.melee.includes("(default)")) addMundane(unit.melee);
+    if (unit.bow && def.bowOption) addMundane(def.bowOption.label);
+    if (unit.missile && unit.missile !== "None (default)" && def.missileGroup) addMundane(unit.missile);
+    if (unit.experimentalMissile && unit.experimentalMissile !== "None (default)" && def.experimentalMissileGroup) addMundane(unit.experimentalMissile);
+    if (def.chaosArmourOption && unit.chaosArmour) addMundane(def.chaosArmourOption.label);
+    addMagicIds(unit.magicItemIds);
+    addLiberatedIds(unit.liberatedMagicItemIds);
+    addRuneGroups(unit.runeItems);
+    addMagicIds(unit.bloodlinePowerIds);
+  } else if (kind === "regiment") {
+    if (def.kind === "composite") return;
+    const localWeapons = [];
+    (def.baseGear || []).forEach((w) => localWeapons.push(w));
+    const gearSelections = unit.gearSelections || {};
+    const groups = new Set();
+    (def.options || []).forEach((o) => { if (o.group) groups.add(o.group); });
+    groups.forEach((g) => { const label = optionLabelById(def.options, gearSelections[g]); if (label) localWeapons.push(label); });
+    (def.options || []).forEach((o) => { if (!o.group && gearSelections[o.id]) localWeapons.push(o.label.replace(/\s*[+(][^)]*$/, "").trim()); });
+    if (!localWeapons.some((t) => isMundaneWeaponTag(t))) localWeapons.unshift("Hand weapons");
+    localWeapons.forEach(addMundane);
+    if (unit.magicBannerId) addMagic(miById(armyData.magicItems, unit.magicBannerId));
+    addRuneGroups({ banner: unit.runeItems?.banner });
+    if (unit.championIncluded && def.champion) {
+      addMagicIds(unit.championMagicItemIds);
+      addLiberatedIds(unit.championLiberatedMagicItemIds);
+      addRuneGroups(unit.championRuneItems);
+    }
+    if (unit.championOptionId && def.championOptions) {
+      addMagicIds(unit.championMagicItemIds);
+      addLiberatedIds(unit.championLiberatedMagicItemIds);
+      addRuneGroups(unit.championRuneItems);
+    }
+    if (unit.branchWraithIncluded && def.branchWraith) addMagicIds(unit.branchWraithSpriteIds);
+    if (def.championOptionsMulti && (unit.championInstances || []).length > 0) {
+      unit.championInstances.forEach((ci) => addMagicIds(ci.magicItemIds));
+    }
+  } else if (kind === "chariot") {
+    if (def.kind === "chariot") {
+      if (unit.scythedWheels) addMundane("Scythed wheels");
+      if (unit.commander || def.commanderAlwaysOn) addMagicIds(unit.commanderMagicItemIds);
+      (def.variantOptions || []).forEach((o) => { if (unit.variantSelections?.[o.id]) addMundane(o.label); });
+      if (def.crewArmourFixed) addMundane(def.crewArmourFixed);
+      else if (def.crewArmourOptions) {
+        const selectedId = unit.crewArmourId || def.crewArmourOptions[0].id;
+        const o = def.crewArmourOptions.find((x) => x.id === selectedId);
+        if (o) addMundane(o.label);
+      }
+    } else if (def.kind === "warmachine") {
+      addMagicIds(unit.extraMagicItemIds);
+      addRuneGroups(unit.runeItems);
+      if (def.crewArmourFixed) addMundane(def.crewArmourFixed);
+      else if (def.crewArmourOptions) {
+        const selectedId = unit.crewArmourId || def.crewArmourOptions[0].id;
+        const o = def.crewArmourOptions.find((x) => x.id === selectedId);
+        if (o) addMundane(o.label);
+      }
+    } else if (def.kind === "quantity" && def.variantOptions) {
+      (def.variantOptions || []).forEach((o) => { if (unit.variantSelections?.[o.id]) addMundane(o.label); });
+    }
+  } else if (kind === "special") {
+    addMagicIds(unit.extraMagicItemIds);
+  }
+}
+
 function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
   const tags = [];
   if (kind === "character") {
@@ -9604,6 +9691,46 @@ function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodline
   );
 }
 
+// Every weapon/armour/item across the whole roster (characters, regiments, chariots, specials),
+// deduplicated and alphabetised, for the print/export appendix. Descriptions come from the same
+// mundaneGearDesc lookup and magic item desc fields already used throughout the app, so this stays
+// in sync automatically as gear changes — nothing here is hand-maintained.
+function PrintableWargearReference({ armyData, roster }) {
+  const itemsMap = new Map();
+  const bloodlineId = roster.armyTheme;
+  roster.characters.forEach((u) => {
+    const def = applyBloodline(armyData.characters.find((c) => c.id === u.defId), roster.armyTheme);
+    if (def) collectWargearItems("character", u, def, armyDataFor(u, armyData), bloodlineId, itemsMap);
+  });
+  roster.regiments.forEach((u) => {
+    const def = regDefFor(u, armyData);
+    if (def) collectWargearItems("regiment", u, def, armyDataFor(u, armyData), bloodlineId, itemsMap);
+  });
+  roster.chariots.forEach((u) => {
+    const def = chariotDefFor(u, armyData);
+    if (def) collectWargearItems("chariot", u, def, armyDataFor(u, armyData), bloodlineId, itemsMap);
+  });
+  roster.specials.forEach((u) => {
+    const def = armyData.specialCharacters.find((s) => s.id === u.defId);
+    if (def) collectWargearItems("special", u, def, armyDataFor(u, armyData), bloodlineId, itemsMap);
+  });
+  const entries = [...itemsMap.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  if (entries.length === 0) return null;
+  return (
+    <div>
+      <h2>Wargear Reference</h2>
+      <div className="whr-print-wargear-grid">
+        {entries.map(([name, info]) => (
+          <div key={name} className="whr-print-wargear-entry">
+            <span className="whr-print-wargear-name">{name}</span>
+            {info.desc && <span className="whr-print-wargear-desc"> — {info.desc}</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
   const regimentPct = totalPoints > 0 ? (regimentPoints / totalPoints) * 100 : 0;
   const themeLabel = armyData.themes?.options?.find((o) => o.id === roster.armyTheme)?.name;
@@ -9655,6 +9782,8 @@ function PrintableRoster({ armyData, roster, totalPoints, regimentPoints }) {
           })}
         </div>
       )}
+
+      <PrintableWargearReference armyData={armyData} roster={roster} />
     </div>
   );
 }
