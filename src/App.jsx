@@ -6559,7 +6559,7 @@ const TOMB_KINGS = {
 
 function cuChampions(thrallCost, wightCost, wraithCost) {
   return [
-    { id: "vcthrall", name: "Von Carstein Vampire Thrall", cost: thrallCost, magicItemSlots: 1, tags: ["vampire", "voncarstein"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls. May take 1 magic item or Von Carstein bloodline power." },
+    { id: "vcthrall", name: "Von Carstein Vampire Thrall", cost: thrallCost, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire", "voncarstein"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls. May take 1 magic item or Von Carstein bloodline power." },
     { id: "wightchamp", name: "Wight Champion", cost: wightCost, stat: "Wight Champion", magicItemSlots: 1, tags: ["wight"], itemSlotLabel: "Magic Item", note: "Equipped as you see fit within the limits of a Wight Hero. Carries a free Wight-Blade (1D3 wounds) unless another magic weapon is taken." },
     { id: "wraithchamp", name: "Wraith Champion", cost: wraithCost, stat: "Wraith Champion", magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Ethereal, causes terror, cannot be harmed by mundane weapons. Carries a free Wraith-Weapon (double handed, no armour save) unless another magic weapon is taken." },
   ];
