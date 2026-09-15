@@ -7058,6 +7058,7 @@ const NORSE = {
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
         { id: "dhw", group: null, label: "Double handed weapons", cost: 3, per: "model" },
       ],
+      championOptionsMulti: true,
       championOptions: [
         { id: "champion", name: "Norse Champion", cost: 20, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
         { id: "shieldmaiden", name: "Shieldmaiden", cost: 30, magicItemSlots: 1, stat: "Shieldmaiden", note: "Equipped like the regiment. Immune to fear and panic — so is the whole regiment while she's alive." },
@@ -7071,6 +7072,7 @@ const NORSE = {
         { id: "ahw", group: "weapon", label: "Additional hand weapon", cost: 3, per: "model" },
         { id: "dhw", group: "weapon", label: "Double handed weapons", cost: 4, per: "model" },
       ],
+      championOptionsMulti: true,
       championOptions: [
         { id: "champion", name: "Norse Champion", cost: 20, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
         { id: "ulfhednar", name: "Ulfhednar", cost: 40, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
@@ -7086,9 +7088,9 @@ const NORSE = {
         { id: "dhw", group: null, label: "Double handed weapons", cost: 3, per: "model" },
         { id: "bows", group: null, label: "Bows", cost: 2, per: "model" },
       ],
+      championOptionsMulti: true,
       championOptions: [
         { id: "champion", name: "Norse Champion", cost: 20, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
-        { id: "shieldmaiden", name: "Shieldmaiden", cost: 30, magicItemSlots: 1, stat: "Shieldmaiden", note: "Equipped like the regiment. Immune to fear and panic — so is the whole regiment while she's alive." },
         { id: "ulfhednar", name: "Ulfhednar", cost: 40, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
       ],
     },
@@ -8090,6 +8092,20 @@ function regimentChampionCost(inst, def, armyData) {
       Object.values(inst.championRuneItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
     }
   }
+  // "Any number of champions, each independently choosing a type" (Norse Warriors/Berserkers/
+  // Huscarls) — distinct from both the single-championOptions case above (exactly one, picked
+  // from several types) and multiChampion below (any number, but all of one fixed type). Each
+  // instance in championInstances carries its own optionId, so a mix of e.g. 2 Norse Champions
+  // and 1 Ulfhednar prices and item-restricts each correctly rather than pooling them.
+  if (def.championOptionsMulti && def.championOptions) {
+    (inst.championInstances || []).forEach((ci) => {
+      const opt = def.championOptions.find((o) => o.id === ci.optionId);
+      if (!opt) return;
+      total += opt.cost;
+      (ci.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+      Object.values(ci.runeItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
+    });
+  }
   if (def.multiChampion) {
     const count = inst.multiChampionCount || 0;
     const trooperCost = regimentTrooperUnitCost(def, inst.gearSelections || {});
@@ -8307,6 +8323,7 @@ function allUsedMagicItemIds(roster, excludeUnitId) {
     (u.commanderMagicItemIds || []).forEach((id) => used.add(id));
     (u.extraMagicItemIds || []).forEach((id) => used.add(id));
     (u.multiChampionItems || []).forEach((arr) => (arr || []).forEach((id) => used.add(id)));
+    (u.championInstances || []).forEach((ci) => (ci.magicItemIds || []).forEach((id) => used.add(id)));
     if (u.magicBannerId) used.add(u.magicBannerId);
   });
   collect(roster.characters);
@@ -8974,6 +8991,20 @@ function resolveUnitStat(kind, unit, def, bloodlineId, armyData) {
         return { statKey: dtype.stat, label: `${baseName} (Detachment)` };
       }).filter(Boolean);
     }
+    // "Any number of champions, each picking their own type" (Norse Warriors/Berserkers/
+    // Huscarls) has no single "the" champion to put in the primary championStatKey/championLabel
+    // slot below — instead each distinct type present gets its own stacked statline here,
+    // grouped and counted (e.g. "Norse Champion ×2") rather than one row per individual model.
+    if (def.championOptionsMulti && (unit.championInstances || []).length > 0) {
+      const counts = {};
+      unit.championInstances.forEach((ci) => { counts[ci.optionId] = (counts[ci.optionId] || 0) + 1; });
+      const championStatlines = Object.entries(counts).map(([optId, count]) => {
+        const opt = championOptionEffective(def.championOptions.find((o) => o.id === optId), bloodlineId);
+        if (!opt?.stat) return null;
+        return { statKey: opt.stat, label: count > 1 ? `${opt.name} ×${count}` : opt.name };
+      }).filter(Boolean);
+      detachments = [...championStatlines, ...detachments];
+    }
     const hasExtra = !!(championStatKey || def.mountStat);
     const withChampion = { ...base, championStatKey, championLabel, charLabel: hasExtra ? (def.riderLabel || def.name) : null, detachments };
     if (def.mountStat) return { ...withChampion, mountStatKey: def.mountStat, mountLabel: def.mountLabel || def.mountStat };
@@ -9069,6 +9100,11 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       (unit.branchWraithSpriteIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
     }
     if (def.multiChampion && unit.multiChampionCount) tags.push(`${unit.multiChampionCount} ${def.multiChampion.name}${unit.multiChampionCount > 1 ? "s" : ""}`);
+    if (def.championOptionsMulti && (unit.championInstances || []).length > 0) {
+      unit.championInstances.forEach((ci) => {
+        (ci.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+      });
+    }
     if (def.extraOption && unit.extraOptionCount) tags.push(`${unit.extraOptionCount} ${def.extraOption.label}`);
     if (def.detachmentParent) {
       (unit.detachments || []).forEach((d) => {
@@ -10312,6 +10348,58 @@ function RegimentChampionIncludedSection({ def, unit, roster, armyData, updateUn
 // Extracted from RegimentDetail's standard-path JSX — self-contained. No behavior change.
 function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUnit, usedElsewhere }) {
   if (!def.championOptions) return null;
+  if (def.championOptionsMulti) {
+    const instances = unit.championInstances || [];
+    return (
+      <div style={{ marginTop: 14 }}>
+        <span className="whr-label">Regimental Champions (any number)</span>
+        {instances.map((ci, idx) => {
+          const opt = def.championOptions.find((o) => o.id === ci.optionId);
+          if (!opt) return null;
+          const effOpt = championOptionEffective(opt, roster.armyTheme);
+          const runeSlotsUsed = Object.values(ci.runeItems || {}).filter((arr) => arr && arr.length > 0).length;
+          const effFilter = opt.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
+          const itemCtx = itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+          return (
+            <div key={idx} style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--line-soft)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
+                <select className="whr-select" value={ci.optionId} style={{ flex: 1 }}
+                  onChange={(e) => {
+                    const newInstances = instances.map((x, i) => i === idx ? { optionId: e.target.value, magicItemIds: [], runeItems: {} } : x);
+                    updateUnit({ ...unit, championInstances: newInstances });
+                  }}>
+                  {def.championOptions.map((o) => <option key={o.id} value={o.id}>{championOptionEffective(o, roster.armyTheme).name}</option>)}
+                </select>
+                <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
+                <button type="button" className="whr-btn whr-btn-sm" onClick={() => updateUnit({ ...unit, championInstances: instances.filter((_, i) => i !== idx) })}>Remove</button>
+              </div>
+              {effOpt.note && <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 4 }}>{effOpt.note}</p>}
+              {opt.magicItemSlots > 0 && (
+                <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={ci.magicItemIds || []} maxSlots={Math.max(0, opt.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
+                  categoryFilter={effFilter}
+                  label={opt.itemSlotLabel || "Magic Item"}
+                  context={itemCtx}
+                  onToggle={(id) => {
+                    const already = (ci.magicItemIds || []).includes(id);
+                    const newIds = already ? (ci.magicItemIds || []).filter((x) => x !== id) : [...(ci.magicItemIds || []), id];
+                    const newInstances = instances.map((x, i) => i === idx ? { ...x, magicItemIds: newIds } : x);
+                    updateUnit({ ...unit, championInstances: newInstances });
+                  }} />
+              )}
+            </div>
+          );
+        })}
+        <div style={{ marginTop: 10, display: "flex", flexWrap: "wrap", gap: 8 }}>
+          {def.championOptions.map((opt) => (
+            <button key={opt.id} type="button" className="whr-btn whr-btn-sm"
+              onClick={() => updateUnit({ ...unit, championInstances: [...instances, { optionId: opt.id, magicItemIds: [], runeItems: {} }] })}>
+              + {championOptionEffective(opt, roster.armyTheme).name} (+{fmtPts(opt.cost)}pts)
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
   return (
     <div style={{ marginTop: 14 }}>
       <span className="whr-label">Regimental Champion (optional)</span>
