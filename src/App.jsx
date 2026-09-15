@@ -5292,7 +5292,7 @@ const CHAOS_DWARFS = {
       ],
     },
     {
-      id: "hobgoblinassassin", name: "Hobgoblin Assassin", cost: 50, stat: "Hobgoblin Assassin", magicItemSlots: 0, tags: ["hobgoblin"],
+      id: "hobgoblinassassin", name: "Hobgoblin Assassin", cost: 50, stat: "Hobgoblin Assassin", magicItemSlots: 0, tags: ["hobgoblin"], countsAsFirstRegimentCharacter: true,
       gearNote: "The first Assassin in the army counts toward Regiments, not Characters — subsequent ones count as Characters. May not take magic items. Conceals itself as an ordinary trooper in a Hobgoblin infantry regiment (only one per regiment) and is revealed on entering melee, replacing a trooper — in the first combat round it strikes before Always Strikes First models and before challenges are declared. Fights with two poisoned hand weapons (+1S; each wound multiplies into 1D3). Fights normally (no strike-first) in later rounds, and becomes a free-roaming independent character once that combat ends. Can never be the general, and nobody may use its Ld.",
     },
   ],
@@ -5601,7 +5601,7 @@ const DARK_ELVES = {
       ],
     },
     {
-      id: "assassin", name: "Dark Elf Assassin", cost: 60, stat: "Dark Elf Assassin", magicItemSlots: 1,
+      id: "assassin", name: "Dark Elf Assassin", cost: 60, stat: "Dark Elf Assassin", magicItemSlots: 1, countsAsFirstRegimentCharacter: true,
       gearNote: "The first Assassin in the army counts toward Regiments, not Characters — subsequent ones count as Characters. Conceals itself as an ordinary trooper in a Dark Elf infantry regiment (only one per regiment), revealed on entering melee, replacing a trooper — in the first combat round it strikes before Always-Strikes-First models and before challenges are declared. Fights with two poisoned hand weapons (+1S; each wound multiplies into 1D3). Fights normally (no strike-first) in later rounds, and becomes a free-roaming independent character once that combat ends. Can never be the general, and nobody may use its Ld. Dark Elf Assassins are the only type of Assassin that may take a magic item.",
     },
     {
@@ -5878,7 +5878,7 @@ const SKAVEN = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon"] },
     },
     {
-      id: "assassin", name: "Assassin", cost: 40, stat: "Clan Eshin Assassin", magicItemSlots: 0,
+      id: "assassin", name: "Assassin", cost: 40, stat: "Clan Eshin Assassin", magicItemSlots: 0, countsAsFirstRegimentCharacter: true,
       gearNote: "The first Assassin in the army counts toward Regiments, not Characters — subsequent ones count as Characters. Conceals itself as an ordinary trooper in a Skaven infantry regiment (only one per regiment), revealed on entering melee, replacing a trooper — in the first combat round it strikes before Always-Strikes-First models and before challenges are declared. Equipped with light armour and two poisoned hand weapons (+1S; each wound multiplies into 1D3). Fights normally (no strike-first) in later rounds, and becomes a free-roaming independent character once that combat ends. Can never be the general, and nobody may use its Ld.",
     },
   ],
@@ -11198,6 +11198,15 @@ function useRosterInfo(roster, armyData) {
       const d = armyData.specialCharacters?.find((s) => s.id === u.defId);
       if (d?.countsAsRegiment) t += unitCost(u, armyData, roster);
     });
+    // Assassins (Dark Elves, Skaven, Orcs & Goblins' Hobgoblin Assassin) are ordinary Characters
+    // that hide inside a regiment rather than being a regiment themselves — the book's rule is
+    // the opposite direction from the chariot/regiment cases above: only the CHEAPEST one counts
+    // toward Regiments, and any others stay counted as Characters (the normal default for this
+    // list), rather than the usual "first counts as X, rest count as Y" split.
+    const assassinCandidates = roster.characters
+      .filter((u) => armyData.characters.find((c) => c.id === u.defId)?.countsAsFirstRegimentCharacter)
+      .map((u) => unitCost(u, armyData, roster));
+    if (assassinCandidates.length > 0) t += Math.min(...assassinCandidates);
     // The cheapest unit flagged countsAsFirstRegiment counts toward Regiments — but this splits
     // two different ways depending on what "one unit" means for a given "quantity" def:
     //   - Per-model/per-base (War Wagon, Giants, Mammoths, Jungle Swarms): each physical
