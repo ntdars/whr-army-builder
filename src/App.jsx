@@ -6250,6 +6250,7 @@ const VAMPIRE_COUNTS = {
         { id: "shield", group: "armour", label: "Shield", cost: 0, per: "model" },
         { id: "both", group: "armour", label: "Light armour and shield", cost: 0.5, per: "model" },
         { id: "heavyarmour", group: "armour", label: "Heavy armour", cost: 1.5, per: "model" },
+        { id: "heavyshield", group: "armour", label: "Heavy armour and shield", cost: 2, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 1, per: "model" },
         { id: "halberds", group: "weapon", label: "Halberds", cost: 1, per: "model" },
         { id: "dhw", group: "weapon", label: "Double handed weapons", cost: 2, per: "model" },
@@ -6633,7 +6634,7 @@ const CLASSIC_UNDEAD = {
       note: "Living, cause fear, poisoned attacks (+1S). May skirmish; if not skirmishing, unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue or overrun after a won combat that inflicted a casualty (gorging on the fallen instead), except models with hatred/frenzy. Cannot be joined by characters.",
     },
     {
-      id: "wraiths", name: "Wraiths", perModel: 35, minSize: 3, stat: "Wraith", command: "none", restriction: "0-1", tags: ["undead"],
+      id: "wraiths", name: "Wraiths", perModel: 35, minSize: 5, stat: "Wraith", command: "none", restriction: "0-1", tags: ["undead"],
       note: "Ethereal, terror-causing, armed with double handed Wraith-Weapons (no armour save allowed). Cannot be harmed by mundane weapons.",
       options: [
         { id: "undeadsteeds", group: null, label: "Ride Undead Steeds — both riders and steeds ethereal", cost: 35, per: "model" },
@@ -6661,6 +6662,7 @@ const CLASSIC_UNDEAD = {
         { id: "shield", group: "armour", label: "Shield", cost: 0, per: "model" },
         { id: "both", group: "armour", label: "Light armour and shield", cost: 0.5, per: "model" },
         { id: "heavyarmour", group: "armour", label: "Heavy armour", cost: 1.5, per: "model" },
+        { id: "heavyshield", group: "armour", label: "Heavy armour and shield", cost: 2, per: "model" },
         { id: "spears", group: "weapon", label: "Spears", cost: 1, per: "model" },
         { id: "halberds", group: "weapon", label: "Halberds", cost: 1, per: "model" },
         { id: "dhw", group: "weapon", label: "Double handed weapons", cost: 2, per: "model" },
@@ -6671,7 +6673,7 @@ const CLASSIC_UNDEAD = {
       championOptions: cuChampions(70, 35, 60),
     },
     {
-      id: "mummies", name: "Mummies", perModel: 18, minSize: 3, stat: "Mummy", command: "standard", tags: ["undead", "mummy"],
+      id: "mummies", name: "Mummies", perModel: 18, minSize: 5, stat: "Mummy", command: "standard", tags: ["undead", "mummy"],
       note: "Undead, subject to the crumble rule. Flammable. Equipped with light armour.",
       options: [
         { id: "dhw", group: null, label: "Double handed weapons", cost: 6, per: "model" },
