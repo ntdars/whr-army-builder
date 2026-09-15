@@ -9085,13 +9085,14 @@ function collectWargearItems(kind, unit, def, armyData, bloodlineId, itemsMap) {
     addMagicIds(unit.bloodlinePowerIds);
   } else if (kind === "regiment") {
     if (def.kind === "composite") return;
-    const localWeapons = [];
-    (def.baseGear || []).forEach((w) => localWeapons.push(w));
+    let localWeapons = [...(def.baseGear || [])];
     const gearSelections = unit.gearSelections || {};
     const groups = new Set();
     (def.options || []).forEach((o) => { if (o.group) groups.add(o.group); });
-    groups.forEach((g) => { const label = optionLabelById(def.options, gearSelections[g]); if (label) localWeapons.push(label); });
-    (def.options || []).forEach((o) => { if (!o.group && gearSelections[o.id]) localWeapons.push(o.label.replace(/\s*[+(][^)]*$/, "").trim()); });
+    const activeOptionLabels = [];
+    groups.forEach((g) => { const label = optionLabelById(def.options, gearSelections[g]); if (label) { localWeapons.push(label); activeOptionLabels.push(label); } });
+    (def.options || []).forEach((o) => { if (!o.group && gearSelections[o.id]) { const label = o.label.replace(/\s*[+(][^)]*$/, "").trim(); localWeapons.push(label); activeOptionLabels.push(label); } });
+    localWeapons = suppressSwappedGear(localWeapons, activeOptionLabels);
     if (!localWeapons.some((t) => isMundaneWeaponTag(t))) localWeapons.unshift("Hand weapons");
     localWeapons.forEach(addMundane);
     if (unit.magicBannerId) addMagic(miById(armyData.magicItems, unit.magicBannerId));
@@ -9171,14 +9172,18 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
     // Fixed/baked-in loadout, not a player choice — e.g. Spearmen's Spears or a Knight's Shields.
     // Shown first so it reads like the rest of the unit's identity. If no weapon (not armour/shield)
     // turns up here or among the weapon-choice options below, falls back to Hand weapons (the RAW
-    // default) so every regiment's actual loadout is represented somewhere, per rulebook p.54.
-    (def.baseGear || []).forEach((w) => tags.push(w));
+    // default) so every regiment's actual loadout is represented somewhere, per rulebook p.54. A
+    // "Swap X for Y" option, once active, removes X from this list — see suppressSwappedGear.
     const gearSelections = unit.gearSelections || {};
     const groups = new Set();
     (def.options || []).forEach((o) => { if (o.group) groups.add(o.group); });
-    groups.forEach((g) => { const label = optionLabelById(def.options, gearSelections[g]); if (label) tags.push(label); });
-    (def.options || []).forEach((o) => { if (!o.group && gearSelections[o.id]) tags.push(o.label.replace(/\s*[+(][^)]*$/, "").trim()); });
-    if (!tags.some((t) => isMundaneWeaponTag(t))) tags.unshift("Hand weapons");
+    const activeOptionLabels = [];
+    let localGear = [...(def.baseGear || [])];
+    groups.forEach((g) => { const label = optionLabelById(def.options, gearSelections[g]); if (label) { localGear.push(label); activeOptionLabels.push(label); } });
+    (def.options || []).forEach((o) => { if (!o.group && gearSelections[o.id]) { const label = o.label.replace(/\s*[+(][^)]*$/, "").trim(); localGear.push(label); activeOptionLabels.push(label); } });
+    localGear = suppressSwappedGear(localGear, activeOptionLabels);
+    if (!localGear.some((t) => isMundaneWeaponTag(t))) localGear.unshift("Hand weapons");
+    localGear.forEach((w) => tags.push(w));
     const autoStandard = def.command === "standard" || def.command === "special";
     if (autoStandard) { tags.push("Musician"); tags.push("Standard Bearer"); }
     else if (unit.standard) tags.push("Standard Bearer");
@@ -9954,22 +9959,42 @@ const MUNDANE_GEAR_MATCH_ORDER = [
 ];
 function mundaneGearDesc(label) {
   if (!label) return undefined;
+  const key = resolveMundaneKey(label);
+  return key ? MUNDANE_GEAR_RULES[key] : undefined;
+}
+function resolveMundaneKey(label) {
+  if (!label) return null;
   const s = String(label).toLowerCase();
   for (const [needle, key] of MUNDANE_GEAR_MATCH_ORDER) {
-    if (s.includes(needle)) return MUNDANE_GEAR_RULES[key];
+    if (s.includes(needle)) return key;
   }
-  return undefined;
+  return null;
 }
 // Armour/shield/barding aren't weapons — excluded here so a Shield-only baseGear entry (e.g. a
 // Knight's Shields) doesn't stop the Hand weapons fallback from kicking in for their actual weapon.
 const MUNDANE_NON_WEAPON_KEYS = new Set(["heavyarmour", "lightarmour", "shield", "barding", "pavise"]);
 function isMundaneWeaponTag(label) {
-  if (!label) return false;
-  const s = String(label).toLowerCase();
-  for (const [needle, key] of MUNDANE_GEAR_MATCH_ORDER) {
-    if (s.includes(needle)) return !MUNDANE_NON_WEAPON_KEYS.has(key);
-  }
-  return false;
+  const key = resolveMundaneKey(label);
+  return !!key && !MUNDANE_NON_WEAPON_KEYS.has(key);
+}
+// A regiment's baseGear is its default loadout, but a "Swap X for Y" option (radio or checkbox)
+// means X is no longer carried once that option is active — e.g. Wood Elf War Dancers' baseGear
+// includes Shields, but "Swap shields for additional hand weapons" means Shields shouldn't still
+// show once that's picked. Strips any baseGear/default entry whose item matches the "away" side of
+// any currently-active swap option, by comparing resolved gear keys rather than exact text so
+// singular/plural and phrasing differences ("shield" vs "Shields") still match.
+function suppressSwappedGear(gearList, activeOptionLabels) {
+  const awayKeys = new Set();
+  activeOptionLabels.forEach((label) => {
+    const m = /^swap\s+(.+?)\s+for\s+/i.exec(label || "");
+    if (!m) return;
+    m[1].split(/,|&|\band\b/i).forEach((part) => {
+      const key = resolveMundaneKey(part.trim());
+      if (key) awayKeys.add(key);
+    });
+  });
+  if (awayKeys.size === 0) return gearList;
+  return gearList.filter((w) => !awayKeys.has(resolveMundaneKey(w)));
 }
 
 function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
