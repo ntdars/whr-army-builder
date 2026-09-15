@@ -9074,11 +9074,14 @@ function collectWargearItems(kind, unit, def, armyData, bloodlineId, itemsMap) {
 
   if (kind === "character") {
     if (def.armourGroup && unit.armour && !unit.armour.includes("(default)")) addMundane(unit.armour);
+    const hasMagicWeapon = (unit.magicItemIds || []).some((id) => miById(armyData.magicItems, id)?.cat === "weapon");
     if (unit.melee && !unit.melee.includes("(default)")) addMundane(unit.melee);
+    else if (def.meleeGroup && !hasMagicWeapon) addMundane(cleanDefaultGearLabel(def.meleeGroup.options[0]));
     if (unit.bow && def.bowOption) addMundane(def.bowOption.label);
     if (unit.missile && unit.missile !== "None (default)" && def.missileGroup) addMundane(unit.missile);
     if (unit.experimentalMissile && unit.experimentalMissile !== "None (default)" && def.experimentalMissileGroup) addMundane(unit.experimentalMissile);
     if (def.chaosArmourOption && unit.chaosArmour) addMundane(def.chaosArmourOption.label);
+    if (!def.meleeGroup && !hasMagicWeapon) addMundane("Hand weapon");
     addMagicIds(unit.magicItemIds);
     addLiberatedIds(unit.liberatedMagicItemIds);
     addRuneGroups(unit.runeItems);
@@ -9146,7 +9149,12 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
     if (def.armourGroup && unit.armour && !unit.armour.includes("(default)")) tags.push(unit.armour);
     const mount = def.mounts?.find((m) => m.id === unit.mountId);
     if (mount) tags.push(mount.name.replace(/\s*\([^)]*\)\s*$/, ""));
+    // A magic weapon (cat "weapon") counts as the character's hand weapon per the rulebook ("magic
+    // weapons are assumed to be hand weapons unless otherwise noted"), so the plain default isn't
+    // shown alongside one — avoids a redundant "Hand weapon" next to e.g. a Runefang.
+    const hasMagicWeapon = (unit.magicItemIds || []).some((id) => miById(armyData.magicItems, id)?.cat === "weapon");
     if (unit.melee && !unit.melee.includes("(default)")) tags.push(unit.melee);
+    else if (def.meleeGroup && !hasMagicWeapon) tags.push(cleanDefaultGearLabel(def.meleeGroup.options[0]));
     if (unit.bow && def.bowOption) tags.push(def.bowOption.label);
     if (unit.missile && unit.missile !== "None (default)" && def.missileGroup) tags.push(unit.missile);
     if (unit.experimentalMissile && unit.experimentalMissile !== "None (default)" && def.experimentalMissileGroup) tags.push(unit.experimentalMissile);
@@ -9164,6 +9172,10 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       if (names.length > 0) tags.push(names.join(" + "));
     });
     (unit.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+    // No meleeGroup at all (a handful of simple characters) and no magic weapon already covering
+    // it — still carries a Hand weapon by RAW default, same fallback principle as regiments. Not
+    // gated on other weapon tags (e.g. a bow) since a missile weapon doesn't replace melee backup.
+    if (!def.meleeGroup && !hasMagicWeapon) tags.unshift("Hand weapon");
   } else if (kind === "regiment") {
     if (def.kind === "composite") {
       (def.composition || []).forEach((c) => { const n = unit.composition?.[c.id] || 0; if (n > 0) tags.push(`${n} ${c.label}`); });
@@ -9969,6 +9981,12 @@ function resolveMundaneKey(label) {
     if (s.includes(needle)) return key;
   }
   return null;
+}
+// Strips a meleeGroup/armourGroup option's "(default)" marker so the character's actual default
+// weapon (e.g. "Hand weapon", or "Additional hand weapon" for characters whose default isn't plain
+// Hand Weapon) can be shown as a tag even when the player hasn't touched the selector.
+function cleanDefaultGearLabel(label) {
+  return String(label || "Hand weapon").replace(/\s*\(default\)\s*/i, "").trim();
 }
 // Armour/shield/barding aren't weapons — excluded here so a Shield-only baseGear entry (e.g. a
 // Knight's Shields) doesn't stop the Hand weapons fallback from kicking in for their actual weapon.
