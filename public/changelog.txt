@@ -4,6 +4,7 @@ Strigoi Thralls now correctly get their extra Attack (3 instead of 2).
 Fixed a bug where the same bloodline power could be selected on two different Vampires — it's now blocked the same way duplicate magic items already are.
 Beastmen Champions (regimental leaders for Beastman, Centaur, Minotaur, and Dragon Ogre units) can now take magic items like the Hunting Spear — they were previously missing access entirely.
 Beastmen can no longer take Chaos Rewards — those are correctly reserved for Chaos Warriors, Chaos Warband, and Chaos Warhost.
+Ran a full audit across all 23 factions for champions missing magic item access. Fixed: Beastmen Champions (Beastman/Centaur/Minotaur/Dragon Ogre) can now take items like the Hunting Spear; Chaos Champions can now take items like the Helm of Many Eyes; and Skink/Chameleon Skink Champions (Lizardmen and Slann Empire) can now take Skink-only items like the Dagger of Sotek. Also confirmed Beastmen can no longer take Chaos Rewards, which are reserved for Chaos Warriors, Chaos Warband, and Chaos Warhost.
 
 2026-09-15
 Fixed Classic Undead's Wraiths and Mummies having a minimum regiment size of 3 instead of 5.
