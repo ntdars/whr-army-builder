@@ -1,6 +1,8 @@
 2026-09-16
 Ghouls can now be led by a Strigoi Thrall (70pts) — matches the rulebook. Ghasts can no longer take this option, since Ghasts can't be joined by any character.
 Strigoi Thralls now correctly get their extra Attack (3 instead of 2).
+Regimental Vampire Thralls (on Zombies, Skeleton Warriors, Skeleton Horsemen, Wight Guardsmen, and Wight Knights) now correctly change based on your bloodline — Von Carstein and Blood Dragon get full equipment access, Lahmia and Necrarch are restricted to a hand weapon with no armour (Lahmia also gets Initiative 11), and none of them show up if you're playing Strigoi.
+Switching bloodlines now automatically clears out any champion pick that's no longer valid under your new bloodline.
 Fixed a bug where the same bloodline power could be selected on two different Vampires — it's now blocked the same way duplicate magic items already are.
 Beastmen Champions (regimental leaders for Beastman, Centaur, Minotaur, and Dragon Ogre units) can now take magic items like the Hunting Spear — they were previously missing access entirely.
 Beastmen can no longer take Chaos Rewards — those are correctly reserved for Chaos Warriors, Chaos Warband, and Chaos Warhost.
