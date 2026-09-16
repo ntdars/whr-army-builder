@@ -10729,7 +10729,7 @@ function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUni
                 onChange={() => updateUnit({ ...unit, championOptionId: opt.id, championMagicItemIds: [] })} />
               {effOpt.name}
             </span>
-            <span className="whr-opt-cost">+{fmtPts(minCost)}pts{minCost !== effOpt.cost ? " min" : ""}</span>
+            <span className="whr-opt-cost">+{fmtPts(minCost)}pts</span>
           </label>
         );
       })}
