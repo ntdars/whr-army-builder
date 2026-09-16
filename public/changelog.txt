@@ -2,6 +2,8 @@
 Ghouls can now be led by a Strigoi Thrall (70pts) — matches the rulebook. Ghasts can no longer take this option, since Ghasts can't be joined by any character.
 Strigoi Thralls now correctly get their extra Attack (3 instead of 2).
 Fixed a bug where the same bloodline power could be selected on two different Vampires — it's now blocked the same way duplicate magic items already are.
+Beastmen Champions (regimental leaders for Beastman, Centaur, Minotaur, and Dragon Ogre units) can now take magic items like the Hunting Spear — they were previously missing access entirely.
+Beastmen can no longer take Chaos Rewards — those are correctly reserved for Chaos Warriors, Chaos Warband, and Chaos Warhost.
 
 2026-09-15
 Fixed Classic Undead's Wraiths and Mummies having a minimum regiment size of 3 instead of 5.
