@@ -1867,6 +1867,11 @@ const CHAOS_CHAMPION_ITEM_CATEGORIES = ["weapon", "armour", "enchanted", "arcane
 // characters have no such regiment-level slot, so banner access on CHAOS_CHAMPION_ITEM_CATEGORIES
 // stays correct for them.
 const CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES = CHAOS_CHAMPION_ITEM_CATEGORIES.filter((c) => c !== "banner");
+// Chaos Rewards ("reward" category) are reserved for Chaos Warriors, Chaos Warband, and Chaos
+// Warhost per the rulebook — Beastmen characters/champions share the same magic item pool and
+// category-filter mechanism otherwise, so they need their own filter with "reward" stripped out.
+const BEASTMEN_CHAMPION_ITEM_CATEGORIES = CHAOS_CHAMPION_ITEM_CATEGORIES.filter((c) => c !== "reward");
+const BEASTMEN_REGIMENT_CHAMPION_ITEM_CATEGORIES = CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES.filter((c) => c !== "reward");
 // Chaos Banners are the reward for single-Power discipline — only ever available to a Chaos Warband's BSB (see Chaos Warband below), never to pure-faction characters.
 const CHAOS_WARBAND_BSB_ITEM_CATEGORIES = [...CHAOS_CHAMPION_ITEM_CATEGORIES, "chaosbanner"];
 
@@ -2202,7 +2207,7 @@ const BEASTMEN = {
   magicItems: [...COMMON_MAGIC_ITEMS, ...CHAOS_MAGIC_ITEMS],
   characters: [
     {
-      id: "beastmanlord", name: "Beastman Lord", cost: 148, stat: "Beastman Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
+      id: "beastmanlord", name: "Beastman Lord", cost: 148, stat: "Beastman Lord", magicItemSlots: 3, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Beastmen are infantry. May take light armour and a shield for free, or heavy armour for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour"] },
       markGroup: { options: MARKS_WARRIOR },
@@ -2212,7 +2217,7 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "beastmanhero", name: "Beastman Hero", cost: 89, stat: "Beastman Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
+      id: "beastmanhero", name: "Beastman Hero", cost: 89, stat: "Beastman Hero", magicItemSlots: 2, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Beastmen are infantry. May take light armour and a shield for free, or heavy armour for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour"] },
       markGroup: { options: MARKS_WARRIOR },
@@ -2222,49 +2227,49 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "minotaurlord", name: "Minotaur Lord", cost: 256, stat: "Minotaur Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
+      id: "minotaurlord", name: "Minotaur Lord", cost: 256, stat: "Minotaur Lord", magicItemSlots: 3, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Monstrous model, causes fear. After a won combat with an enemy casualty, must gorge on the dead (no pursuit/overrun unless hatred/frenzy). Charged before its next move while feasting, it becomes frenzied. May take light armour and a shield for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
-      id: "minotaurhero", name: "Minotaur Hero", cost: 168, stat: "Minotaur Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
+      id: "minotaurhero", name: "Minotaur Hero", cost: 168, stat: "Minotaur Hero", magicItemSlots: 2, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Monstrous model, causes fear. Same gorging/frenzy rule as the Minotaur Lord. May take light armour and a shield for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
-      id: "dragonogrelord", name: "Dragon Ogre Lord", cost: 400, stat: "Dragon Ogre Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
+      id: "dragonogrelord", name: "Dragon Ogre Lord", cost: 400, stat: "Dragon Ogre Lord", magicItemSlots: 3, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Large model, causes terror, immune to psychology, becomes frenzied if hit by enemy lightning, 5+ armour save from scaly skin. Mark of Slaanesh costs +25pts for Dragon Ogres. May take light armour and a shield for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
-      id: "dragonogrehero", name: "Dragon Ogre Hero", cost: 300, stat: "Dragon Ogre Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
+      id: "dragonogrehero", name: "Dragon Ogre Hero", cost: 300, stat: "Dragon Ogre Hero", magicItemSlots: 2, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Large model, causes terror, immune to psychology, becomes frenzied if hit by enemy lightning, 5+ armour save from scaly skin. Mark of Slaanesh costs +25pts for Dragon Ogres. May take light armour and a shield for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
-      id: "centaurlord", name: "Centaur Lord", cost: 184, stat: "Centaur Lord", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
+      id: "centaurlord", name: "Centaur Lord", cost: 184, stat: "Centaur Lord", magicItemSlots: 3, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Centaurs are cavalry. May take light armour and a shield for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
-      id: "centaurhero", name: "Centaur Hero", cost: 110, stat: "Centaur Hero", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
+      id: "centaurhero", name: "Centaur Hero", cost: 110, stat: "Centaur Hero", magicItemSlots: 2, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"],
       gearNote: "Centaurs are cavalry. May take light armour and a shield for free.",
       armourGroup: { options: ["No armour (default)", "Shield & Light Armour"] },
       markGroup: { options: MARKS_WARRIOR },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon"] },
     },
     {
-      id: "beastmanshamanlord", name: "Beastman Shaman Lord (level 4)", cost: 318, stat: "Beastman Shaman Lord", magicItemSlots: 4, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman", "shaman"],
+      id: "beastmanshamanlord", name: "Beastman Shaman Lord (level 4)", cost: 318, stat: "Beastman Shaman Lord", magicItemSlots: 4, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman", "shaman"],
       gearNote: "May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (4).",
       markGroup: { options: MARKS_WARRIOR },
       mounts: [
@@ -2272,7 +2277,7 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "beastmanmastershaman", name: "Master Beastman Shaman (level 3)", cost: 232, stat: "Beastman Master Shaman", magicItemSlots: 3, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman", "shaman"],
+      id: "beastmanmastershaman", name: "Master Beastman Shaman (level 3)", cost: 232, stat: "Beastman Master Shaman", magicItemSlots: 3, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman", "shaman"],
       gearNote: "May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (3).",
       markGroup: { options: MARKS_WARRIOR },
       mounts: [
@@ -2280,7 +2285,7 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "beastmanshamanchampion", name: "Beastman Shaman Champion (level 2)", cost: 154, stat: "Beastman Shaman Champion", magicItemSlots: 2, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman", "shaman"],
+      id: "beastmanshamanchampion", name: "Beastman Shaman Champion (level 2)", cost: 154, stat: "Beastman Shaman Champion", magicItemSlots: 2, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman", "shaman"],
       gearNote: "May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (2).",
       markGroup: { options: MARKS_WARRIOR },
       mounts: [
@@ -2288,7 +2293,7 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "beastmanshaman", name: "Beastman Shaman (level 1)", cost: 76, stat: "Beastman Shaman", magicItemSlots: 1, magicItemCategoryFilter: CHAOS_CHAMPION_ITEM_CATEGORIES, tags: ["beastman", "shaman"],
+      id: "beastmanshaman", name: "Beastman Shaman (level 1)", cost: 76, stat: "Beastman Shaman", magicItemSlots: 1, magicItemCategoryFilter: BEASTMEN_CHAMPION_ITEM_CATEGORIES, tags: ["beastman", "shaman"],
       gearNote: "May take Dark Magic (or Tzeentch/Nurgle/Slaanesh Magic matching their Mark). May take as many Chaos Rewards or magic items as levels (1).",
       markGroup: { options: MARKS_WARRIOR },
       mounts: [
@@ -2296,7 +2301,7 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "beastmanbsb", name: "Beastman Battle Standard Bearer", cost: 96, stat: "Beastman BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["beastman", "bsb"],
+      id: "beastmanbsb", name: "Beastman Battle Standard Bearer", cost: 96, stat: "Beastman BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...BEASTMEN_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["beastman", "bsb"],
       gearNote: "0-1 slot shared with the Minotaur/Centaur BSB below — pick only one. May take light armour for free, or heavy armour for free. May take a Beastman Chariot for the price of the chariot. The one item may be a magic banner.",
       armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour"] },
       markGroup: { options: MARKS_WARRIOR },
@@ -2305,12 +2310,12 @@ const BEASTMEN = {
       ],
     },
     {
-      id: "minotaurbsb", name: "Minotaur Battle Standard Bearer", cost: 132, stat: "Minotaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["beastman", "bsb"],
+      id: "minotaurbsb", name: "Minotaur Battle Standard Bearer", cost: 132, stat: "Minotaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...BEASTMEN_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["beastman", "bsb"],
       gearNote: "0-1 slot shared with the Beastman/Centaur BSB — pick only one. Monstrous model, causes fear. The one item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
     },
     {
-      id: "centaurbsb", name: "Centaur Battle Standard Bearer", cost: 108, stat: "Centaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...CHAOS_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["beastman", "bsb"],
+      id: "centaurbsb", name: "Centaur Battle Standard Bearer", cost: 108, stat: "Centaur BSB", magicItemSlots: 1, restriction: "0-1", magicItemCategoryFilter: [...BEASTMEN_CHAMPION_ITEM_CATEGORIES, "chaosbanner"], tags: ["beastman", "bsb"],
       gearNote: "0-1 slot shared with the Beastman/Minotaur BSB — pick only one. Centaurs are cavalry. The one item may be a magic banner.",
       markGroup: { options: MARKS_WARRIOR },
     },
@@ -2325,7 +2330,7 @@ const BEASTMEN = {
         { id: "dhw", group: "melee", label: "Swap shield for double handed weapon", cost: 4, per: "model" },
         { id: "armour", group: null, label: "Light armour", cost: 1, per: "model" },
       ],
-      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: BEASTMEN_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "beastmenbestigors", name: "Beastmen Bestigors", perModel: 17, minSize: 5, stat: "Beastmen Bestigors", command: "standard",
@@ -2334,7 +2339,7 @@ const BEASTMEN = {
         { id: "dhw", group: null, label: "Swap halberds for double handed weapons", cost: 2, per: "model" },
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
       ],
-      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 25, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 25, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: BEASTMEN_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "beastmenungors", name: "Beastmen Ungors", perModel: 5, minSize: 5, stat: "Beastmen Ungors", command: "standard",
@@ -2345,7 +2350,7 @@ const BEASTMEN = {
         { id: "shields", group: null, label: "Shields", cost: 0.5, per: "model" },
         { id: "shortbows", group: null, label: "Short bows instead of any other equipment, independent Beastmen army only", cost: 1, per: "model" },
       ],
-      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 35, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 35, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: BEASTMEN_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "centaursregiment", name: "Centaurs", perModel: 16, minSize: 5, stat: "Centaurs", command: "fastCavalry",
@@ -2358,7 +2363,7 @@ const BEASTMEN = {
         { id: "bows", group: "melee", label: "Bows instead of any other equipment, independent Beastmen army only", cost: 2, per: "model" },
         { id: "throwingspears", group: "melee", label: "Throwing spears instead of any other equipment, independent Beastmen army only", cost: 1, per: "model" },
       ],
-      champion: { name: "Centaur Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Centaur Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Centaur Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Centaur Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: BEASTMEN_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "harpies", name: "Harpies", perModel: 22, minSize: 5, stat: "Gargoyles", command: "none", restriction: "0-1",
@@ -2371,7 +2376,7 @@ const BEASTMEN = {
         { id: "armour", group: null, label: "Light armour", cost: 2, per: "model" },
         { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons", cost: 2, per: "model" },
       ],
-      champion: { name: "Minotaur Champion (with Mark of Chaos)", baseCost: 50, magicItemSlots: 1, stat: "Minotaur Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Minotaur Champion (with Mark of Chaos)", baseCost: 50, magicItemSlots: 1, stat: "Minotaur Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: BEASTMEN_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "dragonogresregiment", name: "Dragon Ogres", perModel: 56, minSize: 3, stat: "Dragon Ogres", command: "monstrous",
@@ -2381,7 +2386,7 @@ const BEASTMEN = {
         { id: "ahw", group: "melee", label: "Additional hand weapons", cost: 8, per: "model" },
         { id: "dhw", group: "melee", label: "Double handed weapons", cost: 12, per: "model" },
       ],
-      champion: { name: "Dragon Ogre Champion (with Mark of Chaos; +25pt if Mark of Slaanesh)", baseCost: 50, magicItemSlots: 1, stat: "Dragon Ogre Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Dragon Ogre Champion (with Mark of Chaos; +25pt if Mark of Slaanesh)", baseCost: 50, magicItemSlots: 1, stat: "Dragon Ogre Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: BEASTMEN_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "trolls", name: "Trolls", perModel: 40, minSize: 3, stat: "Trolls", command: "none",
@@ -2928,7 +2933,7 @@ const CHAOS_WARBAND = {
         { id: "dhw", group: "melee", label: "Swap shield for double handed weapon", cost: 4, per: "model" },
         { id: "armour", group: null, label: "Light armour", cost: 1, per: "model" },
       ],
-      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "beastmenbestigors", name: "Beastmen Bestigors", perModel: 17, minSize: 5, stat: "Beastmen Bestigors", command: "standard",
@@ -2937,7 +2942,7 @@ const CHAOS_WARBAND = {
         { id: "dhw", group: null, label: "Swap halberds for double handed weapons", cost: 2, per: "model" },
         { id: "shields", group: null, label: "Shields", cost: 1, per: "model" },
       ],
-      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 25, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 25, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "beastmenungors", name: "Beastmen Ungors", perModel: 5, minSize: 5, stat: "Beastmen Ungors", command: "standard",
@@ -2948,7 +2953,7 @@ const CHAOS_WARBAND = {
         { id: "shields", group: null, label: "Shields", cost: 0.5, per: "model" },
         { id: "shortbows", group: null, label: "Short bows instead of any other equipment, independent Beastmen army only", cost: 1, per: "model" },
       ],
-      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 35, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Beastman Champion (with Mark of Chaos)", baseCost: 35, magicItemSlots: 1, stat: "Beastmen Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "centaursregiment", name: "Centaurs", perModel: 16, minSize: 5, stat: "Centaurs", command: "fastCavalry",
@@ -2961,7 +2966,7 @@ const CHAOS_WARBAND = {
         { id: "bows", group: "melee", label: "Bows instead of any other equipment, independent Beastmen army only", cost: 2, per: "model" },
         { id: "throwingspears", group: "melee", label: "Throwing spears instead of any other equipment, independent Beastmen army only", cost: 1, per: "model" },
       ],
-      champion: { name: "Centaur Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Centaur Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Centaur Champion (with Mark of Chaos)", baseCost: 30, magicItemSlots: 1, stat: "Centaur Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "harpies", name: "Harpies", perModel: 22, minSize: 5, stat: "Gargoyles", command: "none", restriction: "0-1",
@@ -2974,7 +2979,7 @@ const CHAOS_WARBAND = {
         { id: "armour", group: null, label: "Light armour", cost: 2, per: "model" },
         { id: "dhw", group: null, label: "Swap additional hand weapons for double handed weapons", cost: 2, per: "model" },
       ],
-      champion: { name: "Minotaur Champion (with Mark of Chaos)", baseCost: 50, magicItemSlots: 1, stat: "Minotaur Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Minotaur Champion (with Mark of Chaos)", baseCost: 50, magicItemSlots: 1, stat: "Minotaur Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "dragonogresregiment", name: "Dragon Ogres", perModel: 56, minSize: 3, stat: "Dragon Ogres", command: "monstrous",
@@ -2984,7 +2989,7 @@ const CHAOS_WARBAND = {
         { id: "ahw", group: "melee", label: "Additional hand weapons", cost: 8, per: "model" },
         { id: "dhw", group: "melee", label: "Double handed weapons", cost: 12, per: "model" },
       ],
-      champion: { name: "Dragon Ogre Champion (with Mark of Chaos; +25pt if Mark of Slaanesh)", baseCost: 50, magicItemSlots: 1, stat: "Dragon Ogre Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Dragon Ogre Champion (with Mark of Chaos; +25pt if Mark of Slaanesh)", baseCost: 50, magicItemSlots: 1, stat: "Dragon Ogre Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["beastman"] },
     },
     {
       id: "trolls", name: "Trolls", perModel: 40, minSize: 3, stat: "Trolls", command: "none",
