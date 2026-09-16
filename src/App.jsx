@@ -6228,6 +6228,7 @@ const VAMPIRE_COUNTS = {
     {
       id: "ghouls", name: "Ghouls", perModel: 8, minSize: 5, stat: "Ghoul", command: "standard",
       note: "Living, cause fear, poisoned attacks (+1S). May skirmish; if not skirmishing, unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue or overrun after a won combat that inflicted a casualty (gorging on the fallen instead), except models with hatred/frenzy. Cannot be joined by characters (Strigoi Vampires excepted).",
+      championOptions: [{ id: "strigoithrall", name: "Strigoi Thrall", cost: 70, stat: "Vampire Thrall (Strigoi)", magicItemSlots: 1, tags: ["strigoi"], itemSlotLabel: "Bloodline Power", magicItemCategoryFilter: ["bloodlinepower"], note: "May take one bloodline power (no magic items or mundane weapons — Strigoi cannot carry equipment and fight with their claws)." }],
     },
     {
       id: "zombies", name: "Zombies", perModel: 3, minSize: 5, stat: "Zombie", command: "standard", tags: ["undead"],
@@ -6329,8 +6330,7 @@ const VAMPIRE_COUNTS = {
     },
     {
       id: "ghasts", name: "Ghasts", perModel: 35, minSize: 3, stat: "Ghast", command: "none", theme: "strigoi", restriction: "0-1",
-      note: "Strigoi armies only, 0-1 regiment. Monstrous, living, poisoned attacks (+1S), cause fear. Unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue/overrun after a won combat that inflicted a casualty, except models with hatred/frenzy. No standard or musician upgrades. Cannot be joined by characters except a Strigoi Thrall.",
-      championOptions: [{ id: "strigoithrall", name: "Strigoi Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["strigoi"], itemSlotLabel: "Bloodline Power", magicItemCategoryFilter: ["bloodlinepower"], note: "May take one bloodline power (no magic items — Strigoi cannot carry equipment)." }],
+      note: "Strigoi armies only, 0-1 regiment. Monstrous, living, poisoned attacks (+1S), cause fear. Unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue/overrun after a won combat that inflicted a casualty, except models with hatred/frenzy. No standard or musician upgrades. Cannot be joined by characters.",
     },
   ],
   chariotsMonsters: [
@@ -8347,6 +8347,7 @@ function allUsedMagicItemIds(roster, excludeUnitId) {
     (u.branchWraithSpriteIds || []).forEach((id) => used.add(id));
     (u.commanderMagicItemIds || []).forEach((id) => used.add(id));
     (u.extraMagicItemIds || []).forEach((id) => used.add(id));
+    (u.bloodlinePowerIds || []).forEach((id) => used.add(id));
     (u.multiChampionItems || []).forEach((arr) => (arr || []).forEach((id) => used.add(id)));
     (u.championInstances || []).forEach((ci) => (ci.magicItemIds || []).forEach((id) => used.add(id)));
     if (u.magicBannerId) used.add(u.magicBannerId);
