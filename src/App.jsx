@@ -10670,7 +10670,7 @@ function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUni
                   }}>
                   {def.championOptions.map((o) => <option key={o.id} value={o.id}>{championOptionEffective(o, roster.armyTheme).name}</option>)}
                 </select>
-                <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
+                <span className="whr-opt-cost">+{fmtPts(effOpt.cost + (effOpt.magicLevelOption ? (effOpt.magicLevelOption.min || 0) * effOpt.magicLevelOption.costPerLevel : 0))}pts</span>
                 <button type="button" className="whr-btn whr-btn-sm" onClick={() => updateUnit({ ...unit, championInstances: instances.filter((_, i) => i !== idx) })}>Remove</button>
               </div>
               {effOpt.note && <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 4 }}>{effOpt.note}</p>}
@@ -10690,12 +10690,16 @@ function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUni
           );
         })}
         <div style={{ marginTop: 10, display: "flex", flexWrap: "wrap", gap: 8 }}>
-          {def.championOptions.map((opt) => (
-            <button key={opt.id} type="button" className="whr-btn whr-btn-sm"
-              onClick={() => updateUnit({ ...unit, championInstances: [...instances, { optionId: opt.id, magicItemIds: [], runeItems: {} }] })}>
-              + {championOptionEffective(opt, roster.armyTheme).name} (+{fmtPts(opt.cost)}pts)
-            </button>
-          ))}
+          {def.championOptions.map((opt) => {
+            const effOpt = championOptionEffective(opt, roster.armyTheme);
+            const minCost = effOpt.cost + (effOpt.magicLevelOption ? (effOpt.magicLevelOption.min || 0) * effOpt.magicLevelOption.costPerLevel : 0);
+            return (
+              <button key={opt.id} type="button" className="whr-btn whr-btn-sm"
+                onClick={() => updateUnit({ ...unit, championInstances: [...instances, { optionId: opt.id, magicItemIds: [], runeItems: {} }] })}>
+                + {effOpt.name} (+{fmtPts(minCost)}pts)
+              </button>
+            );
+          })}
         </div>
       </div>
     );
@@ -10712,16 +10716,23 @@ function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUni
       {/* A "Swap X for Y" style option, or one hidden entirely for the current bloodline (e.g. no
           Vampire Thrall variant is offered here under Strigoi — that bloodline's Thrall only leads
           Ghouls, via that regiment's own dedicated championOptions entry), is left out below. */}
-      {def.championOptions.filter((opt) => !(opt.hiddenForBloodlines || []).includes(roster.armyTheme)).map((opt) => (
-        <label key={opt.id} className="whr-opt-row whr-opt-label">
-          <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <input type="radio" name={`championopt-${unit.instanceId}`} checked={unit.championOptionId === opt.id}
-              onChange={() => updateUnit({ ...unit, championOptionId: opt.id, championMagicItemIds: [] })} />
-            {championOptionEffective(opt, roster.armyTheme).name}
-          </span>
-          <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
-        </label>
-      ))}
+      {def.championOptions.filter((opt) => !(opt.hiddenForBloodlines || []).includes(roster.armyTheme)).map((opt) => {
+        const effOpt = championOptionEffective(opt, roster.armyTheme);
+        // The radio row shows the true minimum cost, not just the base — e.g. a Necrarch Vampire
+        // Thrall's mandatory first magic level (+60pts) has to show up here too, or the picker
+        // undersells what selecting it actually costs.
+        const minCost = effOpt.cost + (effOpt.magicLevelOption ? (effOpt.magicLevelOption.min || 0) * effOpt.magicLevelOption.costPerLevel : 0);
+        return (
+          <label key={opt.id} className="whr-opt-row whr-opt-label">
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input type="radio" name={`championopt-${unit.instanceId}`} checked={unit.championOptionId === opt.id}
+                onChange={() => updateUnit({ ...unit, championOptionId: opt.id, championMagicItemIds: [] })} />
+              {effOpt.name}
+            </span>
+            <span className="whr-opt-cost">+{fmtPts(minCost)}pts{minCost !== effOpt.cost ? " min" : ""}</span>
+          </label>
+        );
+      })}
       {(() => {
         const rawOpt = def.championOptions.find((o) => o.id === unit.championOptionId);
         if (!rawOpt || (rawOpt.hiddenForBloodlines || []).includes(roster.armyTheme)) return null;
