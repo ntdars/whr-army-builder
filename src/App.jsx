@@ -6008,7 +6008,8 @@ function vcChampions(thrallCost, wightCost, wraithCost) {
       bloodlineSwap: {
         voncarstein: { name: "Von Carstein Vampire Thrall", note: "May take any equipment normally available to Vampire characters." },
         lahmia: { name: "Lahmia Vampire Thrall", stat: "Vampire Thrall (Lahmia)", magicItemCategoryFilter: ["enchanted", "arcane", "bloodlinepower"], note: "Never takes any weapon but a single hand weapon, and never wears armour (already reflected: Initiative 11, always strikes first)." },
-        necrarch: { name: "Necrarch Vampire Thrall", magicItemCategoryFilter: ["enchanted", "arcane", "bloodlinepower"], note: "As a spellcaster, cannot carry any weapon but a single hand weapon, and never wears armour." },
+        necrarch: { name: "Necrarch Vampire Thrall", magicItemCategoryFilter: ["enchanted", "arcane", "bloodlinepower"], note: "As a spellcaster, cannot carry any weapon but a single hand weapon, and never wears armour. Must take at least one magic level, up to four.",
+          magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 4, min: 1 } },
         blooddragon: { name: "Blood Dragon Vampire Thrall", note: "May take any equipment normally available to Vampire characters, including Full Plate Armour." },
       },
       hiddenForBloodlines: ["strigoi"],
@@ -8097,7 +8098,7 @@ function detachmentCost(d, armyData) {
 // any magic items on the champion). Used both by regimentCost (champion is always added to the
 // regiment's total) and by the Banner of Champions bucket-accounting logic, which needs to know
 // how much of a regiment's cost came from its champion.
-function regimentChampionCost(inst, def, armyData) {
+function regimentChampionCost(inst, def, armyData, bloodlineId) {
   let total = 0;
   if (inst.championIncluded && def.champion) {
     total += def.champion.baseCost;
@@ -8106,12 +8107,16 @@ function regimentChampionCost(inst, def, armyData) {
     Object.values(inst.championRuneItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
   }
   if (inst.championOptionId && def.championOptions) {
-    const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
+    const rawOpt = def.championOptions.find((o) => o.id === inst.championOptionId);
+    const opt = championOptionEffective(rawOpt, bloodlineId);
     if (opt) {
       total += opt.cost;
       (inst.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
       (inst.championLiberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) total += mi.cost; });
       Object.values(inst.championRuneItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
+      // Necrarch Vampire Thralls (via bloodlineSwap) are the only current case of a regimental
+      // champion buying magic levels — same costPerLevel/min/max shape as characters use.
+      if (opt.magicLevelOption) total += (inst.championMagicLevel ?? opt.magicLevelOption.min ?? 0) * opt.magicLevelOption.costPerLevel;
     }
   }
   // "Any number of champions, each independently choosing a type" (Norse Warriors/Berserkers/
@@ -8155,7 +8160,7 @@ function regimentChampionCost(inst, def, armyData) {
 // rides a chariot" beyond the regiment's own mount/kind — championOptions that grant a genuinely
 // different creature (Vampire Thrall, Wight Champion, etc.) are already modeled as a flat creature
 // swap, not "baseCost adds a rider," so there's nothing mount-related to flag for them.
-function championBannerOfChampionsIneligibilityReason(inst, def, armyData) {
+function championBannerOfChampionsIneligibilityReason(inst, def, armyData, bloodlineId) {
   const itemsCheck = (championMagicItemIds, championRuneItems, championLiberatedMagicItemIds) => {
     if ((championMagicItemIds || []).length > 0) return "carries a magic item";
     if (Object.values(championRuneItems || {}).some((ids) => (ids || []).length > 0)) return "carries a rune combo";
@@ -8173,18 +8178,22 @@ function championBannerOfChampionsIneligibilityReason(inst, def, armyData) {
     return null;
   }
   if (inst.championOptionId && def.championOptions) {
-    const opt = def.championOptions.find((o) => o.id === inst.championOptionId);
-    if (!opt) return "has no valid champion option selected";
+    const rawOpt = def.championOptions.find((o) => o.id === inst.championOptionId);
+    if (!rawOpt) return "has no valid champion option selected";
+    const opt = championOptionEffective(rawOpt, bloodlineId);
     const itemReason = itemsCheck(inst.championMagicItemIds, inst.championRuneItems, inst.championLiberatedMagicItemIds);
     if (itemReason) return itemReason;
-    if (isWizard(opt, inst)) return "is a spellcaster";
+    // Necrarch Vampire Thralls are the one current case of a regimental champion casting spells
+    // (via magicLevelOption on the bloodline-swapped option) — checked against championMagicLevel,
+    // the champion-specific field, since isWizard's own default check reads unit.magicLevel.
+    if (isWizard(opt, inst) || (opt.magicLevelOption && (inst.championMagicLevel ?? opt.magicLevelOption.min ?? 0) > 0)) return "is a spellcaster";
     return null;
   }
   return "isn't a recognised champion type";
 }
 
-function championEligibleForBannerOfChampions(inst, def, armyData) {
-  return !championBannerOfChampionsIneligibilityReason(inst, def, armyData);
+function championEligibleForBannerOfChampions(inst, def, armyData, bloodlineId) {
+  return !championBannerOfChampionsIneligibilityReason(inst, def, armyData, bloodlineId);
 }
 
 function fastCavalryStandardFree(def, gearSelections) {
@@ -8241,7 +8250,7 @@ function regimentCost(inst, def, armyData, roster) {
   // Branch Wraith's cost (base + Sprites) is now folded into regimentChampionCost() above, so it's
   // no longer added separately here — same total, just consolidated so Banner of Champions
   // bucket-accounting can see and subtract it like any other champion's cost.
-  total += regimentChampionCost(inst, def, armyData);
+  total += regimentChampionCost(inst, def, armyData, roster?.armyTheme);
   if (def.detachmentParent) {
     (inst.detachments || []).forEach((d) => { total += detachmentCost(d, armyData); });
   }
@@ -9245,6 +9254,11 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
           const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
           if (names.length > 0) tags.push(names.join(" + "));
         });
+        if (opt.magicLevelOption && (unit.championMagicLevel ?? opt.magicLevelOption.min ?? 0) > 0) tags.push(`+${unit.championMagicLevel ?? opt.magicLevelOption.min} magic levels`);
+        if (isWizard(opt, { magicLevel: unit.championMagicLevel }) && armyData.loreOptions) {
+          const lore = resolveWizardLore(armyData, { lore: unit.championLore });
+          if (lore) tags.push(`Lore: ${lore}`);
+        }
       }
     }
     if (unit.branchWraithIncluded && def.branchWraith) {
@@ -10342,7 +10356,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
     <div>
       <h3 className="whr-h1" style={{ fontSize: 21, margin: "0 0 2px" }}>{def.name}</h3>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-        <span className="whr-badge-gold whr-badge">{fmtPts(regimentCost(unit, def, armyData))} pts</span>
+        <span className="whr-badge-gold whr-badge">{fmtPts(regimentCost(unit, def, armyData, roster))} pts</span>
         <span style={{ fontSize: 14.5, color: "var(--ink-soft)" }}>{size} Models{unit.championIncluded ? " (incl. champion)" : ""}</span>
       </div>
       <NicknameField unit={unit} updateUnit={updateUnit} />
@@ -10753,6 +10767,38 @@ function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUni
                 </>
               );
             })()}
+            {opt.magicLevelOption && (() => {
+              const min = opt.magicLevelOption.min || 0;
+              return (
+                <div style={{ marginTop: 14 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                    <span className="whr-label" style={{ marginBottom: 0 }}>{opt.magicLevelOption.label}</span>
+                    <span className="whr-opt-cost">+{opt.magicLevelOption.costPerLevel}pts/level</span>
+                  </div>
+                  <div style={{ marginTop: 6 }}>
+                    <Stepper value={unit.championMagicLevel ?? min} min={min} max={opt.magicLevelOption.max} onChange={(v) => updateUnit({ ...unit, championMagicLevel: v })} />
+                  </div>
+                  {min > 0 && <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 4 }}>Minimum {min} level{min > 1 ? "s" : ""} required.</p>}
+                </div>
+              );
+            })()}
+            {isWizard(opt, { magicLevel: unit.championMagicLevel }) && armyData.loreOptions && armyData.loreOptions.length > 0 && (
+              <div style={{ marginTop: 14 }}>
+                <span className="whr-label">Lore of Magic</span>
+                {armyData.loreOptions.length === 1 ? (
+                  <div className="whr-opt-row" style={{ opacity: 0.7 }}>
+                    <span>{armyData.loreOptions[0]}</span>
+                  </div>
+                ) : (
+                  <select className="whr-select" value={unit.championLore || ""} onChange={(e) => updateUnit({ ...unit, championLore: e.target.value || null })}>
+                    <option value="">Choose one</option>
+                    {armyData.loreOptions.map((lore) => (
+                      <option key={lore} value={lore}>{lore}</option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            )}
           </>
         );
       })()}
@@ -11307,6 +11353,28 @@ function useRosterWarnings(roster, armyData, totalPoints) {
         }
       });
     });
+    // Same check for a regimental champion who can cast (currently only Necrarch Vampire Thralls,
+    // via bloodlineSwap's magicLevelOption) — reads championMagicLevel/championLore rather than
+    // the character-level fields, via the same small-wrapper pattern used elsewhere for champions.
+    roster.regiments.forEach((u) => {
+      if (!u.championOptionId) return;
+      const d = regDefFor(u, armyData);
+      const rawOpt = d?.championOptions?.find((o) => o.id === u.championOptionId);
+      if (!rawOpt) return;
+      const opt = championOptionEffective(rawOpt, roster.armyTheme);
+      if (!isWizard(opt, { magicLevel: u.championMagicLevel })) return;
+      const lore = resolveWizardLore(armyData, { lore: u.championLore });
+      if (armyData.loreOptions.length > 1 && !lore) {
+        warnings.push(`${d.name} (${opt.name}): Lore must be chosen for your Wizard.`);
+        return;
+      }
+      (u.championMagicItemIds || []).forEach((id) => {
+        const mi = miById(armyData.magicItems, id);
+        if (mi && mi.requiresLore && mi.requiresLore !== lore) {
+          warnings.push(`${d.name} (${opt.name}): ${mi.name} requires ${mi.requiresLore} lore — bearer's lore is ${lore || "unset"}.`);
+        }
+      });
+    });
     return warnings;
   }, [roster, armyData]);
 
@@ -11548,9 +11616,9 @@ function useRosterWarnings(roster, armyData, totalPoints) {
       if (!d) return;
       const bannerInPlay = u.magicBannerId === "cm-bannerofchampions" || armyWideBannerOfChampions;
       if (!bannerInPlay) return;
-      const champCost = regimentChampionCost(u, d, armyData);
+      const champCost = regimentChampionCost(u, d, armyData, roster.armyTheme);
       if (champCost <= 0) return;
-      const reason = championBannerOfChampionsIneligibilityReason(u, d, armyData);
+      const reason = championBannerOfChampionsIneligibilityReason(u, d, armyData, roster.armyTheme);
       if (reason) {
         warnings.push(`${d.name}: champion ${reason}, so Banner of Champions doesn't apply to him — his cost still counts towards Characters/Monsters/War Machines/Chariots.`);
       }
@@ -11587,9 +11655,9 @@ function useRosterInfo(roster, armyData) {
       const d = regDefFor(u, armyData);
       let cost = unitCost(u, armyData, roster);
       if (d) {
-        const champCost = regimentChampionCost(u, d, armyData);
+        const champCost = regimentChampionCost(u, d, armyData, roster.armyTheme);
         if (champCost > 0) {
-          const eligible = championEligibleForBannerOfChampions(u, d, armyData);
+          const eligible = championEligibleForBannerOfChampions(u, d, armyData, roster.armyTheme);
           const bannerApplies = eligible && (u.magicBannerId === "cm-bannerofchampions" || armyWideBannerOfChampions);
           // Per the Banner of Champions rule, a champion's cost counts towards Characters/Monsters/
           // War Machines/Chariots by default — it only counts towards Regiments (as this app's own
@@ -11827,11 +11895,27 @@ function applyArmyTheme(prevRoster, armyData, themeId) {
     // for the champion slot specifically since it isn't itself a per-model gearSelections entry.
     return { ...u, championOptionId: null, championMagicItemIds: [], championRuneItems: {}, championLiberatedMagicItemIds: [] };
   });
+  const clampChampionMagicLevel = (list, defs) => list.map((u) => {
+    const def = defs.find((d) => d.id === u.defId);
+    const rawOpt = def?.championOptions?.find((o) => o.id === u.championOptionId);
+    if (!rawOpt) return u;
+    const opt = championOptionEffective(rawOpt, themeId);
+    if (!opt.magicLevelOption) {
+      // e.g. switching away from Necrarch — a Thrall's magic levels/lore no longer apply at all.
+      if (u.championMagicLevel == null && u.championLore == null) return u;
+      return { ...u, championMagicLevel: undefined, championLore: undefined };
+    }
+    const min = opt.magicLevelOption.min || 0;
+    const max = opt.magicLevelOption.max;
+    const clamped = Math.max(min, Math.min(max, u.championMagicLevel ?? min));
+    if (clamped === u.championMagicLevel) return u;
+    return { ...u, championMagicLevel: clamped };
+  });
   return {
     ...prevRoster,
     armyTheme: themeId,
     characters: clampCharacters(keep(prevRoster.characters, armyData.characters), armyData.characters),
-    regiments: clampHiddenChampionOptions(clampRegimentChampionMarks(stripThemedGear(keep(prevRoster.regiments, armyData.regiments), armyData.regiments), armyData.regiments), armyData.regiments),
+    regiments: clampChampionMagicLevel(clampHiddenChampionOptions(clampRegimentChampionMarks(stripThemedGear(keep(prevRoster.regiments, armyData.regiments), armyData.regiments), armyData.regiments), armyData.regiments), armyData.regiments),
     chariots: keep(prevRoster.chariots, armyData.chariotsMonsters),
     specials: keep(prevRoster.specials, armyData.specialCharacters),
   };
