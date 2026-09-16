@@ -789,6 +789,7 @@ const STATS = {
   "Vampire Lord (Strigoi)": { M: 6, WS: 8, BS: 6, S: 7, T: 6, W: 4, I: 9, A: 5, Ld: 10 },
   "Vampire Count (Strigoi)": { M: 6, WS: 7, BS: 5, S: 7, T: 6, W: 3, I: 8, A: 4, Ld: 9 },
   "Vampire Thrall (Strigoi)": { M: 6, WS: 6, BS: 4, S: 7, T: 5, W: 2, I: 7, A: 3, Ld: 8 },
+  "Vampire Thrall (Lahmia)": { M: 6, WS: 6, BS: 4, S: 7, T: 5, W: 2, I: 11, A: 2, Ld: 8 },
   "Lich Lord": { M: 4, WS: 7, BS: 7, S: 5, T: 4, W: 4, I: 6, A: 5, Ld: 10 },
   "Nagash": { M: 6, WS: 7, BS: 7, S: 8, T: 7, W: 7, I: 6, A: 6, Ld: 10 },
   "Krell": { M: 4, WS: 6, BS: 0, S: 5, T: 5, W: 3, I: 6, A: 4, Ld: 10 },
@@ -6000,7 +6001,18 @@ const SKAVEN = {
 
 function vcChampions(thrallCost, wightCost, wraithCost) {
   return [
-    { id: "thrall", name: "Vampire Thrall", cost: thrallCost, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped according to its bloodline. May take 1 magic item or bloodline power." },
+    { id: "thrall", name: "Vampire Thrall", cost: thrallCost, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped according to its bloodline. May take 1 magic item or bloodline power.",
+      // Every non-Strigoi bloodline gets its own name/stat/equipment rules on the same base Vampire
+      // Thrall statline — Strigoi is hidden entirely here since a Strigoi Thrall can only lead
+      // Ghouls (its own dedicated championOptions entry on that regiment), not these troop types.
+      bloodlineSwap: {
+        voncarstein: { name: "Von Carstein Vampire Thrall", note: "May take any equipment normally available to Vampire characters." },
+        lahmia: { name: "Lahmia Vampire Thrall", stat: "Vampire Thrall (Lahmia)", magicItemCategoryFilter: ["enchanted", "arcane", "bloodlinepower"], note: "Never takes any weapon but a single hand weapon, and never wears armour (already reflected: Initiative 11, always strikes first)." },
+        necrarch: { name: "Necrarch Vampire Thrall", magicItemCategoryFilter: ["enchanted", "arcane", "bloodlinepower"], note: "As a spellcaster, cannot carry any weapon but a single hand weapon, and never wears armour." },
+        blooddragon: { name: "Blood Dragon Vampire Thrall", note: "May take any equipment normally available to Vampire characters, including Full Plate Armour." },
+      },
+      hiddenForBloodlines: ["strigoi"],
+    },
     { id: "wightchamp", name: "Wight Champion", cost: wightCost, stat: "Wight Champion", magicItemSlots: 1, tags: ["wight"], itemSlotLabel: "Magic Item", note: "Equipped as you see fit within the limits of a Wight Hero. Carries a free Wight-Blade (1D3 wounds) unless another magic weapon is taken." },
     { id: "wraithchamp", name: "Wraith Champion", cost: wraithCost, stat: "Wraith Champion", magicItemSlots: 1, tags: ["wraith"], itemSlotLabel: "Magic Item", note: "Ethereal, causes terror, cannot be harmed by mundane weapons. Carries a free Wraith-Weapon (double handed, no armour save) unless another magic weapon is taken." },
   ];
@@ -6233,7 +6245,10 @@ const VAMPIRE_COUNTS = {
     {
       id: "ghouls", name: "Ghouls", perModel: 8, minSize: 5, stat: "Ghoul", command: "standard",
       note: "Living, cause fear, poisoned attacks (+1S). May skirmish; if not skirmishing, unbreakable in combat as long as the undead side outnumbers the enemy. Won't pursue or overrun after a won combat that inflicted a casualty (gorging on the fallen instead), except models with hatred/frenzy. Cannot be joined by characters (Strigoi Vampires excepted).",
-      championOptions: [{ id: "strigoithrall", name: "Strigoi Thrall", cost: 70, stat: "Vampire Thrall (Strigoi)", magicItemSlots: 1, tags: ["strigoi"], itemSlotLabel: "Bloodline Power", magicItemCategoryFilter: ["bloodlinepower"], note: "May take one bloodline power (no magic items or mundane weapons — Strigoi cannot carry equipment and fight with their claws)." }],
+      championOptions: [{ id: "strigoithrall", name: "Strigoi Thrall", cost: 70, stat: "Vampire Thrall (Strigoi)", magicItemSlots: 1, tags: ["strigoi"], itemSlotLabel: "Bloodline Power", magicItemCategoryFilter: ["bloodlinepower"], note: "May take one bloodline power (no magic items or mundane weapons — Strigoi cannot carry equipment and fight with their claws).",
+        // Ghouls themselves are available to every bloodline (unlike Peasant Levy etc.), but this
+        // champion is Strigoi-only — hidden under the other four rather than the regiment itself.
+        hiddenForBloodlines: ["voncarstein", "lahmia", "necrarch", "blooddragon"] }],
     },
     {
       id: "zombies", name: "Zombies", perModel: 3, minSize: 5, stat: "Zombie", command: "standard", tags: ["undead"],
@@ -6315,7 +6330,7 @@ const VAMPIRE_COUNTS = {
         { id: "dhw", group: "weapon", label: "Double handed weapons", cost: 2, per: "model" },
         { id: "shields", group: null, label: "Shields", cost: 0.5, per: "model" },
       ],
-      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls.", bloodlineSwap: { strigoi: { name: "Strigoi Thrall", stat: "Vampire Thrall (Strigoi)" } } }],
+      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
     },
     {
       id: "sylvaniaarchers", name: "Sylvania Archers", perModel: 5, minSize: 5, stat: "Sylvania Peasant", command: "standard", theme: "voncarstein",
@@ -6323,7 +6338,7 @@ const VAMPIRE_COUNTS = {
       options: [
         { id: "crossbows", group: null, label: "Swap longbows for crossbows", cost: 2, per: "model" },
       ],
-      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls.", bloodlineSwap: { strigoi: { name: "Strigoi Thrall", stat: "Vampire Thrall (Strigoi)" } } }],
+      championOptions: [{ id: "thrall", name: "Von Carstein Vampire Thrall", cost: 70, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped as you see fit within the limits for Von Carstein Thralls." }],
     },
     {
       id: "vampireknights", name: "Vampire Knights", perModel: 55, minSize: 5, stat: "Vampire Knight", mountStat: "War Horse", mountLabel: "War Horse", command: "standard", theme: "blooddragon", restriction: "0-1", tags: ["undead"],
@@ -6331,7 +6346,7 @@ const VAMPIRE_COUNTS = {
       options: [
         { id: "barding", group: null, label: "Barding", cost: 0, per: "model" },
       ],
-      championOptions: [{ id: "thrall", name: "Vampire Thrall", cost: 85, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped like the rest of the regiment.", bloodlineSwap: { strigoi: { name: "Strigoi Thrall", stat: "Vampire Thrall (Strigoi)" } } }],
+      championOptions: [{ id: "thrall", name: "Vampire Thrall", cost: 85, stat: "Vampire Thrall", magicItemSlots: 1, tags: ["vampire"], itemSlotLabel: "Magic Item or Bloodline Power", note: "Equipped like the rest of the regiment." }],
     },
     {
       id: "ghasts", name: "Ghasts", perModel: 35, minSize: 3, stat: "Ghast", command: "none", theme: "strigoi", restriction: "0-1",
@@ -10680,7 +10695,10 @@ function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUni
           None
         </span>
       </label>
-      {def.championOptions.map((opt) => (
+      {/* A "Swap X for Y" style option, or one hidden entirely for the current bloodline (e.g. no
+          Vampire Thrall variant is offered here under Strigoi — that bloodline's Thrall only leads
+          Ghouls, via that regiment's own dedicated championOptions entry), is left out below. */}
+      {def.championOptions.filter((opt) => !(opt.hiddenForBloodlines || []).includes(roster.armyTheme)).map((opt) => (
         <label key={opt.id} className="whr-opt-row whr-opt-label">
           <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <input type="radio" name={`championopt-${unit.instanceId}`} checked={unit.championOptionId === opt.id}
@@ -10690,46 +10708,51 @@ function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUni
           <span className="whr-opt-cost">+{fmtPts(opt.cost)}pts</span>
         </label>
       ))}
-      {def.championOptions.find((o) => o.id === unit.championOptionId)?.note && (
-        <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 2 }}>{def.championOptions.find((o) => o.id === unit.championOptionId).note}</p>
-      )}
-      {def.championOptions.find((o) => o.id === unit.championOptionId) && (() => {
-        const opt = def.championOptions.find((o) => o.id === unit.championOptionId);
-        if (!opt.magicItemSlots) return null;
-        const championRuneItems = unit.championRuneItems || {};
-        const runeSlotsUsed = Object.values(championRuneItems).filter((arr) => arr && arr.length > 0).length;
-        const effFilter = opt.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
-        const itemCtx = itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
-        const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
-        const hasNamedOfCat = (c) => (unit.championMagicItemIds || []).some((id) => namedCatOf(id) === c);
+      {(() => {
+        const rawOpt = def.championOptions.find((o) => o.id === unit.championOptionId);
+        if (!rawOpt || (rawOpt.hiddenForBloodlines || []).includes(roster.armyTheme)) return null;
+        const opt = championOptionEffective(rawOpt, roster.armyTheme);
         return (
           <>
-            <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={Math.max(0, opt.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
-              categoryFilter={effFilter}
-              label={opt.itemSlotLabel || "Magic Item"}
-              context={itemCtx}
-              onToggle={(id) => {
-                const mi = miById(armyData.magicItems, id);
-                const already = (unit.championMagicItemIds || []).includes(id);
-                const newIds = already ? (unit.championMagicItemIds || []).filter((x) => x !== id) : [...(unit.championMagicItemIds || []), id];
-                const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
-                updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
-              }} />
-            {armyData.key === "halflings" && (
-              <div style={{ marginTop: 10 }}>
-                <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
-                  onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
-              </div>
-            )}
-            {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
-              <RunesSection>
-                {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
-                  <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "Forge a Weapon Rune", armour: "Forge an Armour Rune", enchanted: "Forge a Talisman Rune" }[c]}
-                    context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
-                    onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
-                ))}
-              </RunesSection>
-            )}
+            {opt.note && <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginTop: 2 }}>{opt.note}</p>}
+            {opt.magicItemSlots > 0 && (() => {
+              const championRuneItems = unit.championRuneItems || {};
+              const runeSlotsUsed = Object.values(championRuneItems).filter((arr) => arr && arr.length > 0).length;
+              const effFilter = opt.magicItemCategoryFilter || NON_BANNER_CATEGORIES;
+              const itemCtx = itemContext(opt, unit, { regimentId: def.id, tags: [...(opt.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+              const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
+              const hasNamedOfCat = (c) => (unit.championMagicItemIds || []).some((id) => namedCatOf(id) === c);
+              return (
+                <>
+                  <MagicItemPickerWithBanner items={armyData.magicItems} selectedIds={unit.championMagicItemIds || []} maxSlots={Math.max(0, opt.magicItemSlots - runeSlotsUsed)} usedElsewhere={usedElsewhere}
+                    categoryFilter={effFilter}
+                    label={opt.itemSlotLabel || "Magic Item"}
+                    context={itemCtx}
+                    onToggle={(id) => {
+                      const mi = miById(armyData.magicItems, id);
+                      const already = (unit.championMagicItemIds || []).includes(id);
+                      const newIds = already ? (unit.championMagicItemIds || []).filter((x) => x !== id) : [...(unit.championMagicItemIds || []), id];
+                      const newRuneItems = (!already && mi) ? { ...championRuneItems, [mi.cat]: [] } : championRuneItems;
+                      updateUnit({ ...unit, championMagicItemIds: newIds, championRuneItems: newRuneItems });
+                    }} />
+                  {armyData.key === "halflings" && (
+                    <div style={{ marginTop: 10 }}>
+                      <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
+                        onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
+                    </div>
+                  )}
+                  {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
+                    <RunesSection>
+                      {["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).map((c) => (
+                        <RuneForge key={c} items={armyData.magicItems} cat={c} label={{ weapon: "Forge a Weapon Rune", armour: "Forge an Armour Rune", enchanted: "Forge a Talisman Rune" }[c]}
+                          context={itemCtx} comboIds={championRuneItems[c]} disabled={hasNamedOfCat(c)}
+                          onChange={(ids) => updateUnit({ ...unit, championRuneItems: { ...championRuneItems, [c]: ids }, championMagicItemIds: ids.length > 0 ? (unit.championMagicItemIds || []).filter((id) => namedCatOf(id) !== c) : unit.championMagicItemIds })} />
+                      ))}
+                    </RunesSection>
+                  )}
+                </>
+              );
+            })()}
           </>
         );
       })()}
@@ -11795,11 +11818,20 @@ function applyArmyTheme(prevRoster, armyData, themeId) {
     }
     return next;
   });
+  const clampHiddenChampionOptions = (list, defs) => list.map((u) => {
+    const def = defs.find((d) => d.id === u.defId);
+    const opt = def?.championOptions?.find((o) => o.id === u.championOptionId);
+    if (!opt || !(opt.hiddenForBloodlines || []).includes(themeId)) return u;
+    // e.g. switching away from Strigoi drops a selected "Strigoi Thrall"-only option on a regiment
+    // that no longer offers it under the new bloodline — same principle as stripThemedGear, just
+    // for the champion slot specifically since it isn't itself a per-model gearSelections entry.
+    return { ...u, championOptionId: null, championMagicItemIds: [], championRuneItems: {}, championLiberatedMagicItemIds: [] };
+  });
   return {
     ...prevRoster,
     armyTheme: themeId,
     characters: clampCharacters(keep(prevRoster.characters, armyData.characters), armyData.characters),
-    regiments: clampRegimentChampionMarks(stripThemedGear(keep(prevRoster.regiments, armyData.regiments), armyData.regiments), armyData.regiments),
+    regiments: clampHiddenChampionOptions(clampRegimentChampionMarks(stripThemedGear(keep(prevRoster.regiments, armyData.regiments), armyData.regiments), armyData.regiments), armyData.regiments),
     chariots: keep(prevRoster.chariots, armyData.chariotsMonsters),
     specials: keep(prevRoster.specials, armyData.specialCharacters),
   };
