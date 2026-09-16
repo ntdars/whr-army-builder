@@ -2097,7 +2097,7 @@ const CHAOS_WARRIORS = {
         { id: "heavy", group: "melee", label: "Swap shield for double handed weapon or flail", cost: 3, per: "model" },
         { id: "bows", group: "melee", label: "Give up armour & shield, take bows instead", cost: 0, per: "model" },
       ],
-      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"] },
     },
     {
       id: "marauderhorsemen", name: "Chaos Marauder Horsemen", perModel: 23, minSize: 5, stat: "Chaos Marauder", mountStat: "Chaos Warhorse", mountLabel: "Warhorse", command: "fastCavalry",
@@ -2105,7 +2105,7 @@ const CHAOS_WARRIORS = {
       options: [
         { id: "flails", group: null, label: "Swap spears & shields for flails", cost: 2, per: "model" },
       ],
-      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"] },
     },
     {
       id: "chaoswarriors", name: "Chaos Warriors", perModel: 18, minSize: 5, stat: "Chaos Warrior", command: "standard",
@@ -2114,12 +2114,12 @@ const CHAOS_WARRIORS = {
         { id: "halberdahw", group: "melee", label: "Swap shield for halberd or additional hand weapon", cost: 2, per: "model" },
         { id: "dhw", group: "melee", label: "Swap shield for double handed weapon", cost: 4, per: "model" },
       ],
-      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"] },
     },
     {
       id: "chaosknights", name: "Chaos Knights", perModel: 45, minSize: 5, stat: "Chaos Warrior", mountStat: "Chaos Warhorse", mountLabel: "Chaos Warhorse (barded)", command: "standard",
       note: "Chaos Warriors on barded Chaos Warhorses, with Chaos Armour, shields, and lances.", baseGear: ["Lances", "Shields"],
-      champion: { name: "Chaos Champion (with Mark of Chaos, mounted)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Chaos Champion (with Mark of Chaos, mounted)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"] },
     },
     {
       id: "ogremercenaries", name: "Ogre Mercenaries", perModel: 24, minSize: 3, stat: "Ogre", command: "monstrous",
@@ -2890,7 +2890,7 @@ const CHAOS_WARBAND = {
         { id: "heavy", group: "melee", label: "Swap shield for double handed weapon or flail", cost: 3, per: "model" },
         { id: "bows", group: "melee", label: "Give up armour & shield, take bows instead", cost: 0, per: "model" },
       ],
-      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"] },
     },
     {
       id: "marauderhorsemen", name: "Chaos Marauder Horsemen", perModel: 23, minSize: 5, stat: "Chaos Marauder", mountStat: "Chaos Warhorse", mountLabel: "Warhorse", command: "fastCavalry",
@@ -2898,7 +2898,7 @@ const CHAOS_WARBAND = {
       options: [
         { id: "flails", group: null, label: "Swap spears & shields for flails", cost: 2, per: "model" },
       ],
-      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"] },
     },
     {
       id: "chaoswarriors", name: "Chaos Warriors", perModel: 18, minSize: 5, stat: "Chaos Warrior", command: "standard",
@@ -2907,12 +2907,12 @@ const CHAOS_WARBAND = {
         { id: "halberdahw", group: "melee", label: "Swap shield for halberd or additional hand weapon", cost: 2, per: "model" },
         { id: "dhw", group: "melee", label: "Swap shield for double handed weapon", cost: 4, per: "model" },
       ],
-      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Chaos Champion (with Mark of Chaos)", baseCost: 60, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"] },
     },
     {
       id: "chaosknights", name: "Chaos Knights", perModel: 45, minSize: 5, stat: "Chaos Warrior", mountStat: "Chaos Warhorse", mountLabel: "Chaos Warhorse (barded)", command: "standard",
       note: "Chaos Warriors on barded Chaos Warhorses, with Chaos Armour, shields, and lances.", baseGear: ["Lances", "Shields"],
-      champion: { name: "Chaos Champion (with Mark of Chaos, mounted)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES },
+      champion: { name: "Chaos Champion (with Mark of Chaos, mounted)", baseCost: 80, magicItemSlots: 1, stat: "Chaos Champion", markGroup: { options: MARKS_WARRIOR }, magicItemCategoryFilter: CHAOS_REGIMENT_CHAMPION_ITEM_CATEGORIES, tags: ["chaosChampion"] },
     },
     {
       id: "ogremercenaries", name: "Ogre Mercenaries", perModel: 24, minSize: 3, stat: "Ogre", command: "monstrous",
@@ -7583,7 +7583,7 @@ const LIZARDMEN = {
         { id: "poison", group: null, label: "Poison missile weapons — forces skirmish formation (not enforced)", cost: 2, per: "model" },
       ],
       extraOption: { label: "Embedded Kroxigors (one per 8 Skinks — forces rank-and-file formation, not enforced)", cost: 50, max: 5 },
-      champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion" },
+      champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion", tags: ["skink"] },
     },
     {
       id: "saurustempleguard", name: "Saurus Temple Guard", perModel: 18, minSize: 5, stat: "Lizardman Saurus Temple Guard", command: "standard", tags: ["saurus"],
@@ -7610,7 +7610,7 @@ const LIZARDMEN = {
     {
       id: "greatcrestedcoldoneriders", name: "Great Crested Skink Cold One Riders", perModel: 18, minSize: 5, stat: "Lizardman Great Crested Skink Warrior", mountStat: "Cold One", mountLabel: "Cold One", command: "standard", tags: ["skink"],
       note: "Great Crested Skink Warriors armed with spears and shields, riding Cold Ones. Not classified as fast cavalry.", baseGear: ["Spears", "Shields"],
-      champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion", note: "May exchange his Cold One for a Horned One for +10pts (not toggled here — add by hand)." },
+      champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion", tags: ["skink"], note: "May exchange his Cold One for a Horned One for +10pts (not toggled here — add by hand)." },
     },
     {
       id: "kroxigors", name: "Kroxigors", perModel: 50, minSize: 3, stat: "Lizardman Kroxigor", command: "none",
@@ -7619,7 +7619,7 @@ const LIZARDMEN = {
     {
       id: "chameleonskinks", name: "Chameleon Skinks", perModel: 17, minSize: 5, stat: "Lizardman Chameleon Skink", command: "skirmisher", restriction: "0-1", tags: ["skink"],
       note: "Armed with blowpipes shooting poisonous darts. Must skirmish, may scout. Enemies shooting at them with BS suffer an extra -1 to hit (on top of the usual skirmisher penalty).",
-      champion: { name: "Chameleon Skink Champion", baseCost: 20, magicItemSlots: 1, stat: "Chameleon Skink Champion" },
+      champion: { name: "Chameleon Skink Champion", baseCost: 20, magicItemSlots: 1, stat: "Chameleon Skink Champion", tags: ["skink"] },
     },
     {
       id: "terradonriders", name: "Terradon Riders", perModel: 42, minSize: 3, stat: "Lizardman Skink Warrior", mountStat: "Terradon", mountLabel: "Terradon", command: "skirmisher", restriction: "0-1", tags: ["skink"],
@@ -7631,7 +7631,7 @@ const LIZARDMEN = {
         { id: "shortbows", group: "missile", label: "Short bows, for both riders", cost: 2, per: "model" },
         { id: "poison", group: null, label: "Poison missile weapons, for both riders", cost: 4, per: "model" },
       ],
-      champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion" },
+      champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion", tags: ["skink"] },
     },
   ],
   chariotsMonsters: [
@@ -7888,7 +7888,7 @@ const SLANN_EMPIRE = {
         { id: "shortbows", group: "missile", label: "Short bows, for both riders", cost: 2, per: "model" },
         { id: "poison", group: null, label: "Poison missile weapons, for both riders", cost: 4, per: "model" },
       ],
-      champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion" },
+      champion: { name: "Skink Champion", baseCost: 10, magicItemSlots: 1, stat: "Lizardman Skink Champion", tags: ["skink"] },
     },
     {
       id: "nativehalflings", name: "Native Halflings", perModel: 11, minSize: 5, stat: "Halfling", command: "skirmisher", restriction: "0-1", tags: ["nativetribe"],
@@ -7908,7 +7908,7 @@ const SLANN_EMPIRE = {
     {
       id: "chameleonskinks-slann", name: "Chameleon Skinks", perModel: 17, minSize: 5, stat: "Lizardman Chameleon Skink", command: "skirmisher", restriction: "0-1", tags: ["nativetribe", "skink"],
       note: "Armed with blowpipes. May scout, must skirmish. Enemies shooting at them with BS suffer an extra -1 to hit (on top of the usual skirmisher penalty). One of four mutually-exclusive Native Tribe options — see army-wide rules.",
-      champion: { name: "Chameleon Skink Champion", baseCost: 20, magicItemSlots: 1, stat: "Chameleon Skink Champion" },
+      champion: { name: "Chameleon Skink Champion", baseCost: 20, magicItemSlots: 1, stat: "Chameleon Skink Champion", tags: ["skink"] },
     },
   ],
   chariotsMonsters: [
