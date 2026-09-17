@@ -1492,6 +1492,15 @@ const EMPIRE = {
   name: "The Empire",
   tagline: "The disciplined might of humanity's bulwark against the dark",
   magicItems: [...COMMON_MAGIC_ITEMS, ...EMPIRE_MAGIC_ITEMS],
+  // "As an auxiliary option, the Empire army may include one regiment from the Dogs of War army.
+  // This may be one of the Regiments of Renown, provided it is human." — the ordinary DoW regiment
+  // choice carries no race restriction (only 4 of DoW's 9 Regiments of Renown are human, and only
+  // those 4 are eligible here); the flat 0-1 cap is enforced via capLabel + auxiliaryWarnings below.
+  auxiliaryFactions: [
+    { key: "dogsofwar", label: "Dogs of War Auxiliaries", sourceKey: "dogsofwar", maxCount: 1,
+      filter: (r) => !r.restriction || ["marksmenmiragliano", "birdmencatrazza", "braganzasbesiegers", "vesperosvendetta"].includes(r.id),
+      capLabel: (roster, sourceCount) => `0-1 regiment total (currently ${sourceCount} taken)` },
+  ],
   compositionRules: [
     { kind: "requiresIfPresent", label: "Halfling Hot-Pot", trigger: [{ list: "chariots", id: "hotpot", name: "Halfling Hot-Pot" }], requires: [{ list: "regiments", id: "halflingbowmen", name: "Halfling Bowmen" }, { list: "regiments", id: "halflingmilitia", name: "Halfling Militia" }] },
     { kind: "requiresIfPresent", label: "Tzarina Katarin", trigger: [{ list: "specials", id: "tzarinakatarin", name: "Tzarina Katarin" }], requires: [{ list: "regiments", id: "kislevlancers", name: "Kislev Winged Lancers" }, { list: "regiments", id: "kislevkossars", name: "Kislev Kossars" }, { list: "regiments", id: "kislevhorsearchers", name: "Kislev Horse Archers" }] },
@@ -7217,8 +7226,10 @@ const HALFLING_MAGIC_ITEMS = [
 const HALFLINGS = {
   key: "halflings",
   auxiliaryFactions: [
-    { key: "empire", label: "Empire Auxiliaries", sourceKey: "empire", filter: (r) => !r.auxiliary, warMachineIds: ["mortars", "cannons"] },
-    { key: "woodElves", label: "Wood Elf Auxiliaries", sourceKey: "woodElves", filter: (r) => ["archers", "warriors", "gladeriders", "lords"].includes(r.id) },
+    { key: "empire", label: "Empire Auxiliaries", sourceKey: "empire", filter: (r) => !r.auxiliary, warMachineIds: ["mortars", "cannons"],
+      capLabel: (roster) => `1 per 2 Halfling regiments (currently ${Math.floor(roster.regiments.filter((u) => !u.sourceFaction).length / 2)} allowed)` },
+    { key: "woodElves", label: "Wood Elf Auxiliaries", sourceKey: "woodElves", filter: (r) => ["archers", "warriors", "gladeriders", "lords"].includes(r.id),
+      capLabel: (roster) => `1 per 2 Halfling regiments (currently ${Math.floor(roster.regiments.filter((u) => !u.sourceFaction).length / 2)} allowed)` },
   ],
   loreOptions: [...COLLEGE_LORES],
   name: "Halflings of the Moot",
@@ -8983,11 +8994,14 @@ function Sidebar({ armyData, roster, onAdd, onSetTheme }) {
           const src = FACTIONS[af.sourceKey];
           const eligible = src.regiments.filter(af.filter);
           const eligibleWarMachines = (af.warMachineIds || []).map((id) => src.chariotsMonsters.find((c) => c.id === id)).filter(Boolean);
-          const halflingCount = roster.regiments.filter((u) => !u.sourceFaction).length;
-          const maxAux = Math.floor(halflingCount / 2);
+          // Two cap styles seen so far: a flat total (af.maxCount, e.g. Empire's "one regiment from
+          // Dogs of War") or a ratio tied to the army's own regiment count (Halflings' "1 per 2").
+          // af.capLabel computes the description generically so this render stays faction-agnostic.
+          const sourceCount = roster.regiments.filter((u) => u.sourceFaction === af.sourceKey).length;
+          const capLabel = af.capLabel ? af.capLabel(roster, sourceCount) : null;
           return (
             <Section key={af.key} id={`aux-${af.key}`} title={af.label}>
-              <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginBottom: 6 }}>1 per 2 Halfling regiments (currently {maxAux} allowed)</p>
+              {capLabel && <p style={{ fontSize: 12.5, color: "var(--ink-faint)", marginBottom: 6 }}>{capLabel}</p>}
               {eligible.map((r) => (
                 <AddRow key={r.id} label={r.name} sub={r.kind === "composite" ? "mixed unit, priced per model" : r.tieredPricing ? `${fmtPts(r.tieredPricing.baseCost)}pts, minimum ${r.minSize ?? r.tieredPricing.baseSize}` : `${fmtPts(r.perModel * r.minSize)}pts, minimum ${r.minSize}`}
                   onClick={() => onAdd("regiment", r.id, af.sourceKey)} />
@@ -11413,21 +11427,30 @@ function useRosterWarnings(roster, armyData, totalPoints) {
     if (!armyData.auxiliaryFactions) return warnings;
     const bySource = {};
     roster.regiments.forEach((u) => { if (u.sourceFaction) bySource[u.sourceFaction] = (bySource[u.sourceFaction] || 0) + 1; });
-    const halflingCount = roster.regiments.filter((u) => !u.sourceFaction).length;
-    const totalAux = Object.values(bySource).reduce((a, b) => a + b, 0);
-    if ((bySource.empire || 0) > 0 && (bySource.woodElves || 0) > 0) {
-      warnings.push("Wood Elf Auxiliaries cannot be taken with Empire troops.");
-    }
-    if (totalAux > Math.floor(halflingCount / 2)) {
-      warnings.push("Only one Auxiliary unit can be taken per two regiments of Halflings.");
-    }
-    if (roster.chariots.some((u) => u.defId === "treemen-halfling") && !(bySource.woodElves > 0)) {
-      warnings.push("Halfling Treemen require Wood Elf Auxiliaries in the army.");
-    }
-    const empireWarMachineIds = new Set((armyData.auxiliaryFactions.find((af) => af.sourceKey === "empire")?.warMachineIds) || []);
-    const empireWarMachineCount = roster.chariots.filter((u) => u.sourceFaction === "empire" && empireWarMachineIds.has(u.defId)).length;
-    if (empireWarMachineCount > (bySource.empire || 0)) {
-      warnings.push("Cannot take more Empire mortars/cannons than Empire troop regiments.");
+    // Generic flat-cap check (e.g. Empire's "one regiment from Dogs of War") — applies to any
+    // faction's auxiliaryFactions entries that set maxCount, not just Halflings' ratio-based rule.
+    armyData.auxiliaryFactions.forEach((af) => {
+      if (af.maxCount != null && (bySource[af.sourceKey] || 0) > af.maxCount) {
+        warnings.push(`${af.label}: only ${af.maxCount} regiment${af.maxCount === 1 ? "" : "s"} allowed.`);
+      }
+    });
+    if (armyData.key === "halflings") {
+      const halflingCount = roster.regiments.filter((u) => !u.sourceFaction).length;
+      const totalAux = Object.values(bySource).reduce((a, b) => a + b, 0);
+      if ((bySource.empire || 0) > 0 && (bySource.woodElves || 0) > 0) {
+        warnings.push("Wood Elf Auxiliaries cannot be taken with Empire troops.");
+      }
+      if (totalAux > Math.floor(halflingCount / 2)) {
+        warnings.push("Only one Auxiliary unit can be taken per two regiments of Halflings.");
+      }
+      if (roster.chariots.some((u) => u.defId === "treemen-halfling") && !(bySource.woodElves > 0)) {
+        warnings.push("Halfling Treemen require Wood Elf Auxiliaries in the army.");
+      }
+      const empireWarMachineIds = new Set((armyData.auxiliaryFactions.find((af) => af.sourceKey === "empire")?.warMachineIds) || []);
+      const empireWarMachineCount = roster.chariots.filter((u) => u.sourceFaction === "empire" && empireWarMachineIds.has(u.defId)).length;
+      if (empireWarMachineCount > (bySource.empire || 0)) {
+        warnings.push("Cannot take more Empire mortars/cannons than Empire troop regiments.");
+      }
     }
     return warnings;
   }, [roster, armyData]);
