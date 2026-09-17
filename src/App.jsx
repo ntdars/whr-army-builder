@@ -660,6 +660,7 @@ const STATS = {
   "Oglah Khan's Hobgoblin": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 6 },
   "Oglah Khan": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 4, A: 3, Ld: 7 },
   "Cursed Company Skeleton": { M: 4, WS: 2, BS: 2, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 5 },
+  "Kreugar": { M: 4, WS: 5, BS: 0, S: 5, T: 5, W: 2, I: 5, A: 3, Ld: 9 },
   "Richter Kreugar": { M: 4, WS: 5, BS: 0, S: 5, T: 5, W: 2, I: 5, A: 3, Ld: 9 },
   "Leonardo da Miragliano": { M: 4, WS: 4, BS: 4, S: 4, T: 3, W: 2, I: 4, A: 2, Ld: 7 },
   "Lucrezzia Belladonna": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 3, I: 5, A: 2, Ld: 7 },
@@ -5046,47 +5047,47 @@ const DOGS_OF_WAR = {
     },
     // --- Regiments of Renown: unique regiments, one of each per army, come with their leader baked into the base cost ---
     {
-      id: "marksmenmiragliano", name: "Marksmen of Miragliano", stat: "Marksmen of Miragliano", command: "standard", restriction: "0-1",
+      id: "marksmenmiragliano", name: "Marksmen of Miragliano", stat: "Marksmen of Miragliano", includedLeader: { name: "Maximillian", stat: "Maximillian", magicItemSlots: 1, tags: ["human"] }, command: "standard", restriction: "0-1",
       tieredPricing: { baseCost: 130, baseSize: 9, extraPerModel: 11 },
       note: "Regiment of Renown. At least nine Marksmen with a standard bearer and musician, plus Maximillian their leader (a Human Champion, may take one magic item), all with crossbows. Base cost includes the standard/musician and Maximillian; extra models beyond the first nine are bought at the per-model rate.", baseGear: ["Crossbows"],
     },
     {
-      id: "longdrongpirates", name: "Long Drong Slayer's Pirates", stat: "Long Drong's Pirate", command: "standard", restriction: "0-1", tags: ["dwarf"],
+      id: "longdrongpirates", name: "Long Drong Slayer's Pirates", stat: "Long Drong's Pirate", includedLeader: { name: "Long Drong", stat: "Long Drong", magicItemSlots: 1, magicItemCategoryFilter: ["weapon"], tags: ["dwarf"] }, command: "standard", restriction: "0-1", tags: ["dwarf"],
       tieredPricing: { baseCost: 195, baseSize: 9, extraPerModel: 15 },
       note: "Regiment of Renown. At least nine Dwarf Pirates with a standard bearer and musician, plus Long Drong their leader, all with two pistols. Follow all Dwarf rules; as Slayers they're unbreakable and wound on 4+ or better regardless of toughness (except with pistols). Long Drong may take one magic weapon, which may be a Dwarf runic item.", baseGear: ["Two pistols"],
     },
     {
-      id: "birdmencatrazza", name: "The Birdmen of Catrazza", stat: "Birdman of Catrazza", command: "skirmisher", restriction: "0-1",
+      id: "birdmencatrazza", name: "The Birdmen of Catrazza", stat: "Birdman of Catrazza", includedLeader: { name: "Dadallo", stat: "Dadallo", magicItemSlots: 1, tags: ["human"] }, command: "skirmisher", restriction: "0-1",
       tieredPricing: { baseCost: 95, baseSize: 2, extraPerModel: 25 },
       note: "Regiment of Renown. At least two Birdmen plus Dadallo their leader, all with crossbows. Fly and must skirmish; may shoot while flying (not on a ground move), and may shoot other units flying high while flying high themselves. Dadallo may take one magic item.", baseGear: ["Crossbows"],
     },
     {
-      id: "rugludsarmouredorcs", name: "Ruglud's Armoured Orcs", stat: "Ruglud's Orc", command: "standard", restriction: "0-1",
+      id: "rugludsarmouredorcs", name: "Ruglud's Armoured Orcs", stat: "Ruglud's Orc", includedLeader: { name: "Ruglud", stat: "Ruglud", magicItemSlots: 2 }, command: "standard", restriction: "0-1",
       tieredPricing: { baseCost: 177, baseSize: 9, extraPerModel: 13 },
-      note: "Regiment of Renown. At least nine Orcs with a standard bearer and musician, plus Ruglud their leader, all with heavy armour, halberd, and crossbow. Subject to animosity. Ruglud may take two magic items, which may be Orcs-only items from the Orcs & Goblins army book.", baseGear: ["Halberds", "Crossbows"],
+      note: "Regiment of Renown. At least nine Orcs with a standard bearer and musician, plus Ruglud their leader, all with heavy armour, halberd, and crossbow. Subject to animosity. Ruglud may take two magic items, which may be Orcs-only items from the Orcs & Goblins army book (not modeled in this builder — only the common pool is offered).", baseGear: ["Halberds", "Crossbows"],
     },
     {
-      id: "mengilcompany", name: "Mengil Manhide's Dark Elf Company", stat: "Mengil's Dark Elf Shade", command: "skirmisher", restriction: "0-1",
+      id: "mengilcompany", name: "Mengil Manhide's Dark Elf Company", stat: "Mengil's Dark Elf Shade", includedLeader: { name: "Mengil Manhide", stat: "Mengil Manhide", magicItemSlots: 1 }, command: "skirmisher", restriction: "0-1",
       tieredPricing: { baseCost: 110, baseSize: 4, extraPerModel: 18 },
-      note: "Regiment of Renown. At least four Dark Elf Shades plus Mengil Manhide their leader, all with light armour, repeating crossbow, and an additional hand weapon. Hate High Elves; may skirmish and scout. High Elves will never fight alongside Mengil's company. Mengil may take one Dark Elf-only magic item from the Dark Elves army book.", baseGear: ["Repeating crossbows", "Additional hand weapons"],
+      note: "Regiment of Renown. At least four Dark Elf Shades plus Mengil Manhide their leader, all with light armour, repeating crossbow, and an additional hand weapon. Hate High Elves; may skirmish and scout. High Elves will never fight alongside Mengil's company. Mengil may take one Dark Elf-only magic item from the Dark Elves army book (not modeled in this builder — only the common pool is offered).", baseGear: ["Repeating crossbows", "Additional hand weapons"],
     },
     {
-      id: "braganzasbesiegers", name: "Braganza's Besiegers", stat: "Braganza's Besieger", command: "standard", restriction: "0-1",
+      id: "braganzasbesiegers", name: "Braganza's Besiegers", stat: "Braganza's Besieger", includedLeader: { name: "Braganza", stat: "Braganza", magicItemSlots: 2, tags: ["human"] }, command: "standard", restriction: "0-1",
       tieredPricing: { baseCost: 186, baseSize: 9, extraPerModel: 14 },
       note: "Regiment of Renown. At least nine Besiegers with a standard bearer and musician, plus Braganza their leader, all with crossbow, heavy armour, and a pavise (3+ save vs shooting, 5+ vs melee). Braganza may take two magic items.", baseGear: ["Crossbows", "Pavise"],
     },
     {
-      id: "vesperosvendetta", name: "Vespero's Vendetta", stat: "Vespero's Duelist", command: "skirmisher", restriction: "0-1",
+      id: "vesperosvendetta", name: "Vespero's Vendetta", stat: "Vespero's Duelist", includedLeader: { name: "Vespero", stat: "Vespero", magicItemSlots: 2, tags: ["human"] }, command: "skirmisher", restriction: "0-1",
       tieredPricing: { baseCost: 120, baseSize: 4, extraPerModel: 15 },
       note: "Regiment of Renown. Four Duelists plus Vespero their leader, all with an additional hand weapon, throwing knives, and a cloak (as light armour). Causes fear; must skirmish. Vespero may take two magic items.", baseGear: ["Additional hand weapons"],
     },
     {
-      id: "oglahkhanwolfboyz", name: "Oglah Khan's Wolfboyz", stat: "Oglah Khan's Hobgoblin", mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "standard", restriction: "0-1",
+      id: "oglahkhanwolfboyz", name: "Oglah Khan's Wolfboyz", stat: "Oglah Khan's Hobgoblin", includedLeader: { name: "Oglah Khan", stat: "Oglah Khan", magicItemSlots: 2 }, mountStat: "Giant Wolf", mountLabel: "Giant Wolf", command: "standard", restriction: "0-1",
       tieredPricing: { baseCost: 145, baseSize: 4, extraPerModel: 17 },
       note: "Regiment of Renown. At least four Hobgoblins with a standard bearer and musician, plus Oglah Khan their leader, all riding Giant Wolves with spear, shield, light armour, and bow. While Oglah Khan lives, the regiment ignores animosity and quells it in nearby allied Orcs & Goblins. The regiment's banner, the Pelt of Wulfag, adds 1D6\" to overrun/pursuit moves; the regiment may skirmish but forfeits the banner if so. Oglah Khan may take two magic items, which may be from the Chaos Dwarfs army book (not modeled in this builder).", baseGear: ["Spears", "Shields", "Bows"],
     },
     {
-      id: "cursedcompany", name: "The Cursed Company", stat: "Cursed Company Skeleton", command: "standard", restriction: "0-1", tags: ["undead"],
+      id: "cursedcompany", name: "The Cursed Company", stat: "Cursed Company Skeleton", includedLeader: { name: "Kreugar", stat: "Kreugar", magicItemSlots: 2, innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" } }, command: "standard", restriction: "0-1", tags: ["undead"],
       tieredPricing: { baseCost: 145, baseSize: 9, extraPerModel: 7 },
       note: "Regiment of Renown. At least nine Skeletons with a standard bearer and musician, plus Richter Kreugar their leader (follows Wight rules), all with heavy armour and halberd. Ordinary troops follow Skeleton rules. May march normally; the whole regiment crumbles to dust if Kreugar is slain. Kreugar may take two magic items besides his Wight Blade, which may be Undead-only items from the Undead army book (not modeled in this builder).", baseGear: ["Halberds"],
     },
@@ -8262,6 +8263,12 @@ function regimentCost(inst, def, armyData, roster) {
   // no longer added separately here — same total, just consolidated so Banner of Champions
   // bucket-accounting can see and subtract it like any other champion's cost.
   total += regimentChampionCost(inst, def, armyData, roster?.armyTheme);
+  // A Regiment of Renown's included leader isn't optional (unlike def.champion/championOptions),
+  // so his magic items are added directly here rather than through the champion-cost path, which
+  // exists specifically for the Banner of Champions bucket split that doesn't apply to him.
+  if (def.includedLeader?.magicItemSlots) {
+    (inst.includedLeaderMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+  }
   if (def.detachmentParent) {
     (inst.detachments || []).forEach((d) => { total += detachmentCost(d, armyData); });
   }
@@ -8390,6 +8397,7 @@ function allUsedMagicItemIds(roster, excludeUnitId) {
     (u.bloodlinePowerIds || []).forEach((id) => used.add(id));
     (u.multiChampionItems || []).forEach((arr) => (arr || []).forEach((id) => used.add(id)));
     (u.championInstances || []).forEach((ci) => (ci.magicItemIds || []).forEach((id) => used.add(id)));
+    (u.includedLeaderMagicItemIds || []).forEach((id) => used.add(id));
     if (u.magicBannerId) used.add(u.magicBannerId);
   });
   collect(roster.characters);
@@ -9038,7 +9046,13 @@ function resolveUnitStat(kind, unit, def, bloodlineId, armyData) {
     if (def.kind === "composite") return { statKey: null, statNote: null };
     const base = { statKey: def.statNote ? null : def.stat, statNote: def.statNote || null };
     let championStatKey = null, championLabel = null;
-    if (unit.championIncluded && def.champion?.stat) {
+    if (def.includedLeader?.stat) {
+      // Regiments of Renown bake their unique leader's cost into the regiment's own base cost —
+      // no toggle needed (unlike an ordinary optional champion), so this takes priority and
+      // always shows, reusing the same champion-statline slot everything else already renders.
+      championStatKey = def.includedLeader.stat;
+      championLabel = def.includedLeader.name;
+    } else if (unit.championIncluded && def.champion?.stat) {
       championStatKey = def.champion.stat;
       championLabel = def.champion.name;
     } else if (unit.championOptionId && def.championOptions) {
@@ -9155,6 +9169,7 @@ function collectWargearItems(kind, unit, def, armyData, bloodlineId, itemsMap) {
       addRuneGroups(unit.championRuneItems);
     }
     if (unit.branchWraithIncluded && def.branchWraith) addMagicIds(unit.branchWraithSpriteIds);
+    if (def.includedLeader?.magicItemSlots) addMagicIds(unit.includedLeaderMagicItemIds);
     if (def.championOptionsMulti && (unit.championInstances || []).length > 0) {
       unit.championInstances.forEach((ci) => addMagicIds(ci.magicItemIds));
     }
@@ -9278,6 +9293,9 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
     if (unit.branchWraithIncluded && def.branchWraith) {
       tags.push(def.branchWraith.name);
       (unit.branchWraithSpriteIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+    }
+    if (def.includedLeader?.magicItemSlots) {
+      (unit.includedLeaderMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
     }
     if (def.multiChampion && unit.multiChampionCount) tags.push(`${unit.multiChampionCount} ${def.multiChampion.name}${unit.multiChampionCount > 1 ? "s" : ""}`);
     if (def.championOptionsMulti && (unit.championInstances || []).length > 0) {
@@ -10482,6 +10500,8 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
 
       <RegimentBranchWraithSection def={def} unit={unit} armyData={armyData} updateUnit={updateUnit} usedElsewhere={usedElsewhere} />
 
+      <RegimentIncludedLeaderSection def={def} unit={unit} armyData={armyData} updateUnit={updateUnit} usedElsewhere={usedElsewhere} />
+
       <DetachmentsSection def={def} unit={unit} armyData={armyData} updateUnit={updateUnit} />
     </div>
   );
@@ -10851,6 +10871,27 @@ function RegimentBranchWraithSection({ def, unit, armyData, updateUnit, usedElse
           context={{ regimentId: def.id, tags: ["spriteEligible"] }}
           onToggle={(id) => toggleArrayField(unit, "branchWraithSpriteIds", id, updateUnit)} />
       )}
+    </div>
+  );
+}
+
+// A Regiment of Renown's included leader (Maximillian, Braganza, etc.) always has his item slot(s)
+// available — no toggle, unlike def.champion/championOptions, since he's mandatory and already
+// baked into the regiment's base cost.
+function RegimentIncludedLeaderSection({ def, unit, armyData, updateUnit, usedElsewhere }) {
+  const leader = def.includedLeader;
+  if (!leader?.magicItemSlots) return null;
+  const itemCtx = itemContext(leader, unit, { regimentId: def.id });
+  return (
+    <div style={{ marginTop: 14 }}>
+      <span className="whr-label">{leader.name}'s Magic Items</span>
+      {leader.innateWeapon && (
+        <p style={{ fontSize: 14, color: "var(--ink-faint)", marginTop: 2 }}>Carries a {leader.innateWeapon.name} ({leader.innateWeapon.desc}) — free, doesn't use a magic item slot.</p>
+      )}
+      <MagicItemPicker items={armyData.magicItems} selectedIds={unit.includedLeaderMagicItemIds || []} maxSlots={leader.magicItemSlots} usedElsewhere={usedElsewhere}
+        categoryFilter={leader.magicItemCategoryFilter || NON_BANNER_CATEGORIES}
+        context={itemCtx}
+        onToggle={(id) => toggleArrayField(unit, "includedLeaderMagicItemIds", id, updateUnit)} />
     </div>
   );
 }
