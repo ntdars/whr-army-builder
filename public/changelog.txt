@@ -1,5 +1,6 @@
 2026-09-17
 All 10 of Dogs of War's normal regiments (Human Foot Soldiers, Elite Human Foot Soldiers, Human Cavalry Retainers, Human Knights, Norse Huscarls, Sea Elf Mercenaries, Halfling Militia, Halfling Bowmen, Ogre Mercenaries, Dwarf Mercenary Warriors), including the 4 human Regiments of Renown: Marksmen of Miragliano, Braganza's Besiegers, The Birdmen of Catrazza, Vespero's Vendetta, have been added to the Empire Auxiliary forces.
+Cross-checked every magic item across all 23 factions (568 total) against the full Armies PDF. Removed 10 fabricated items that don't exist in the book — the entire made-up Halfling item list (Cook's Cleaver, Liberated Ratcatcher's Blade, Poacher's Longbow, and five others) plus two fake "(Halfling)" duplicates of Icon of Magnus and Talisman of Ulric. "Standard of Devotion" → "Standard of Imperial Devotion," matching the book exactly.
 
 2026-09-16
 Ghouls can now be led by a Strigoi Thrall (70pts) — matches the rulebook. Ghasts can no longer take this option, since Ghasts can't be joined by any character.
