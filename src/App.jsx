@@ -4819,7 +4819,7 @@ const DOGS_OF_WAR_MAGIC_ITEMS = [
   { id: "dow-shieldofmyrmidia", name: "Shield of Myrmidia", cost: 25, cat: "enchanted", desc: "Human only. All melee opponents attacking the bearer lose two attacks.", restrictedTo: [{ tags: ["human"] }] },
   { id: "dow-acolytes", name: "Acolytes", cost: 10, cat: "arcane", desc: "Human wizards only, foot only. Casts one spell per phase for one less power card. Costs a magic item slot but can't be nullified.", restrictedTo: [{ tags: ["human", "wizard"] }] },
   { id: "dow-antlertotem", name: "Antler Totem", cost: 15, cat: "arcane", desc: "Human wizards only. Wizard using Amber or Jade magic may choose spells.", restrictedTo: [{ tags: ["human", "wizard"] }] },
-  { id: "dow-devotion", name: "Standard of Devotion", cost: 20, cat: "banner", desc: "Human regiments only. The regiment is immune to panic.", restrictedTo: [{ tags: ["human"] }] },
+  { id: "dow-devotion", name: "Standard of Imperial Devotion", cost: 20, cat: "banner", desc: "Human regiments only. The regiment is immune to panic.", restrictedTo: [{ tags: ["human"] }] },
   { id: "dow-defiance", name: "Banner of Defiance", cost: 80, cat: "banner", desc: "Human regiments only. Double rank bonus (max +6). Never pursues, overruns, or flees voluntarily. Nullifies hatred/frenzy in the regiment.", restrictedTo: [{ tags: ["human"] }] },
   // Sea Elf items (drawn from the High Elf army book)
   { id: "dow-bowoldworld", name: "Bow of the Old-World Colonies", cost: 20, cat: "weapon", desc: "Sea Elf only. Longbow. May shoot as many shots as bearer has attacks, at bearer's strength.", restrictedTo: [{ tags: ["seaelf"] }] },
@@ -4844,8 +4844,11 @@ const DOGS_OF_WAR_MAGIC_ITEMS = [
   { id: "dow-runewarding", name: "Rune of Warding", cost: 25, cat: "banner", desc: "Dwarf only. Rune of Protection. Natural dispel 4+ (multiple instances: roll more dice, take highest).", restrictedTo: [{ tags: ["dwarf"] }] },
   { id: "dow-runefear", name: "Rune of Fear", cost: 40, cat: "banner", desc: "Dwarf only. Rune of Protection. Causes fear.", restrictedTo: [{ tags: ["dwarf"] }] },
   // Halfling items (drawn from the Empire army book)
-  { id: "dow-hallucent", name: "Icon of Magnus (Halfling)", cost: 10, cat: "enchanted", desc: "Halfling only. Bearer and bearer's regiment are immune to fear.", restrictedTo: [{ tags: ["halfling"] }] },
-  { id: "dow-hallucky", name: "Talisman of Ulric (Halfling)", cost: 15, cat: "enchanted", desc: "Halfling only. Bearer recovers one wound at the start of each player turn.", restrictedTo: [{ tags: ["halfling"] }] },
+  // Note: no separate "(Halfling)" versions of Icon of Magnus / Talisman of Ulric — Halflings
+  // already get proper access to the real human-tagged items above via the Liberated Magic Items
+  // system (p.176: "may choose magic items from any army book... not bound by the specific
+  // restrictions mentioned on an item"), so a duplicate reskinned pair would be both non-canonical
+  // and redundant on top of a system that already covers this correctly.
 ];
 
 const DOGS_OF_WAR = {
@@ -7213,16 +7216,11 @@ const NORSE = {
   ],
 };
 
-const HALFLING_MAGIC_ITEMS = [
-  { id: "hfl-ratcatcher", name: "Liberated Ratcatcher's Blade", cost: 10, cat: "weapon", desc: "A hand weapon 'acquired' from somewhere south of the Moot. Always wounds a Skaven or rat-kin model on a 2+." },
-  { id: "hfl-poacherbow", name: "Poacher's Longbow", cost: 15, cat: "weapon", desc: "A bow that never suffers the long-range to-hit penalty." },
-  { id: "hfl-cookssword", name: "Cook's Cleaver", cost: 15, cat: "weapon", desc: "A hand weapon. +1 Strength when fighting in the first round of a combat the wielder charged into." },
-  { id: "hfl-travelmail", name: "Traveller's Light Mail", cost: 15, cat: "armour", desc: "Liberated light armour, oddly well-made. Grants a 5+ armour save." },
-  { id: "hfl-borrowedcloak", name: "Borrowed Cloak of Shadows", cost: 20, cat: "armour", desc: "Light armour. The wearer counts as having the Scout special rule if not already possessing it." },
-  { id: "hfl-luckcharm", name: "Borrowed Luck Charm", cost: 15, cat: "enchanted", desc: "The bearer may re-roll one failed armour save per game." },
-  { id: "hfl-signetring", name: "Purloined Signet Ring", cost: 20, cat: "enchanted", desc: "If carried by the general, all units within 12\" may use his or her Leadership." },
-  { id: "hfl-giftedspoon", name: "The Gifted Spoon", cost: 10, cat: "enchanted", desc: "Purely ceremonial, but no Halfling would go to war without a good spoon. No effect on the game — carried for luck." },
-];
+// Halflings have no dedicated named magic items of their own in the book — their actual magic item
+// rule (p.176, "Liberated Magic Items") is to pick from ANY army's pool (hand weapons, bows, light
+// armour, enchanted items only; one per 800pts; ignoring the item's own restrictions), which is
+// exactly what LiberatedMagicItemsPicker/LIBERATED_MAGIC_ITEMS_BY_FACTION already implement below —
+// so there's nothing faction-specific to add here beyond the shared common pool.
 
 const HALFLINGS = {
   key: "halflings",
@@ -7235,7 +7233,7 @@ const HALFLINGS = {
   loreOptions: [...COLLEGE_LORES],
   name: "Halflings of the Moot",
   tagline: "Rural, earthy, and expressive to a fault — good food, strong drink, and a casual relationship with other people's property",
-  magicItems: [...COMMON_MAGIC_ITEMS, ...HALFLING_MAGIC_ITEMS],
+  magicItems: [...COMMON_MAGIC_ITEMS],
   armyWideRules: [
     "Foresters: all Halfling regiments and characters (and Treemen) move through woods without any penalty to movement.",
     "Liberated Magic Items: beyond the small curated pool above, Halfling characters and regiment champions have a dedicated \"Liberated Magic Items\" section offering hand weapons, bows, light armour, and enchanted items from any other army book, ignoring that item's normal restrictions (a Halfling can carry a Chaos-Power-specific item or a Bretonnian-Commoner-only item freely, since Halflings are immune to the effects of Chaos), plus exactly one Dwarf Rune Item for the whole army. The one-per-800-points cap and the one-Rune-Item cap are both tracked army-wide and flagged as a Rule Flag if exceeded, rather than hard-blocked per unit.",
