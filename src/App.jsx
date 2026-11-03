@@ -7265,6 +7265,7 @@ const NORSE = {
       championOptionsMulti: true,
       championOptions: [
         { id: "champion", name: "Norse Champion", cost: 20, magicItemSlots: 1, stat: "Norse Champion", note: "Equipped like the regiment." },
+        { id: "shieldmaiden", name: "Shieldmaiden", cost: 30, magicItemSlots: 1, stat: "Shieldmaiden", note: "Equipped like the regiment. Immune to fear and panic — so is the whole regiment while she's alive." },
         { id: "ulfhednar", name: "Ulfhednar", cost: 40, stat: "Ulfhednar", note: "Equipped only with an additional hand weapon. Subject to frenzy, 4+ regeneration save. May NOT take magic items." },
       ],
     },
