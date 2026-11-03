@@ -1,3 +1,9 @@
+2026-11-03
+The Wraith Champion statline was incorrect and has been fixed.
+Added the missing Magical Instruments for Daemon regiments. 
+Warhorses and Barded Warhorses have been split into two different selections across all factions to be better represented on the army sheet. 
+Norse Warriors were missing their option to take a Shieldmaiden, this has been fixed.
+
 2026-09-17
 All 10 of Dogs of War's normal regiments (Human Foot Soldiers, Elite Human Foot Soldiers, Human Cavalry Retainers, Human Knights, Norse Huscarls, Sea Elf Mercenaries, Halfling Militia, Halfling Bowmen, Ogre Mercenaries, Dwarf Mercenary Warriors), including the 4 human Regiments of Renown: Marksmen of Miragliano, Braganza's Besiegers, The Birdmen of Catrazza, Vespero's Vendetta, have been added to the Empire Auxiliary forces.
 Cross-checked every magic item across all 23 factions (568 total) against the full Armies PDF. Removed 10 fabricated items that don't exist in the book — the entire made-up Halfling item list (Cook's Cleaver, Liberated Ratcatcher's Blade, Poacher's Longbow, and five others) plus two fake "(Halfling)" duplicates of Icon of Magnus and Talisman of Ulric. "Standard of Devotion" → "Standard of Imperial Devotion," matching the book exactly.
