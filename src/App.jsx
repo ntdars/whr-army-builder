@@ -324,6 +324,7 @@ const STATS = {
   "Mage": { M: 5, WS: 4, BS: 4, S: 3, T: 4, W: 1, I: 7, A: 1, Ld: 8 },
   "Shape Changer (beast form)": { M: 7, WS: 6, BS: 0, S: 6, T: 5, W: 4, I: 6, A: 4, Ld: 6 },
   "Elven Steed": { M: 9, WS: 3, BS: 0, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 5 },
+  "Elven Steed (Barded)": { M: 8, WS: 3, BS: 0, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 5 },
   "Giant Warhawk": { M: "2*", WS: 4, BS: 0, S: 3, T: 3, W: 1, I: 5, A: 1, Ld: 5 },
   "Unicorn": { M: 9, WS: 5, BS: 0, S: 4, T: 4, W: 1, I: 4, A: 2, Ld: 9 },
   "Great Eagle": { M: "2*", WS: 7, BS: 0, S: 5, T: 4, W: 3, I: 5, A: 2, Ld: 8 },
@@ -367,6 +368,7 @@ const STATS = {
   "Wizard Champion": { M: 4, WS: 3, BS: 3, S: 4, T: 4, W: 2, I: 4, A: 1, Ld: 7 },
   "Wizard": { M: 4, WS: 3, BS: 3, S: 3, T: 4, W: 1, I: 4, A: 1, Ld: 7 },
   "Warhorse": { M: 8, WS: 3, BS: 0, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 5 },
+  "Warhorse (Barded)": { M: 7, WS: 3, BS: 0, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 5 },
   "Pegasus": { M: 8, WS: 3, BS: 0, S: 4, T: 4, W: 1, I: 4, A: 2, Ld: 5 },
   "State Trooper": { M: 4, WS: 3, BS: 3, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 7 },
   "Swordsman": { M: 4, WS: 4, BS: 3, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 7 },
@@ -408,6 +410,7 @@ const STATS = {
   "Chaos Sorcerer Champion": { M: 4, WS: 6, BS: 6, S: 5, T: 5, W: 2, I: 7, A: 2, Ld: 8 },
   "Chaos Sorcerer": { M: 4, WS: 6, BS: 6, S: 4, T: 5, W: 1, I: 7, A: 2, Ld: 8 },
   "Chaos Warhorse": { M: 8, WS: 4, BS: 0, S: 4, T: 4, W: 1, I: 4, A: 1, Ld: 5 },
+  "Chaos Warhorse (Barded)": { M: 7, WS: 4, BS: 0, S: 4, T: 4, W: 1, I: 4, A: 1, Ld: 5 },
   "Manticore": { M: 6, WS: 6, BS: 0, S: 7, T: 7, W: 5, I: 4, A: 4, Ld: 8 },
   "Chimera": { M: 6, WS: 4, BS: 0, S: 7, T: 6, W: 6, I: 4, A: 6, Ld: 8 },
   "Chaos Dragon (two-headed)": { M: 6, WS: 6, BS: 0, S: 7, T: 7, W: 7, I: 6, A: 8, Ld: 8 },
@@ -416,6 +419,7 @@ const STATS = {
   "Beast of Nurgle": { M: "3D6", WS: 3, BS: 0, S: 3, T: 4, W: 4, I: 3, A: "1D6", Ld: 8 },
   "Steed of Slaanesh": { M: 12, WS: 3, BS: 0, S: 4, T: 4, W: 1, I: 6, A: 1, Ld: 8 },
   "Daemonic Steed": { M: 8, WS: 4, BS: 0, S: 4, T: 3, W: 1, I: 6, A: 3, Ld: 8 },
+  "Daemonic Steed (Barded)": { M: 7, WS: 4, BS: 0, S: 4, T: 3, W: 1, I: 6, A: 3, Ld: 8 },
   "Chaos Warrior": { M: 4, WS: 6, BS: 6, S: 4, T: 4, W: 1, I: 6, A: 2, Ld: 8 },
   "Chaos Beastmaster": { M: 5, WS: 6, BS: 6, S: 4, T: 5, W: 1, I: 6, A: 2, Ld: 8 },
   "Gor Beastmaster": { M: 5, WS: 4, BS: 3, S: 3, T: 5, W: 2, I: 3, A: 1, Ld: 7 },
@@ -767,6 +771,7 @@ const STATS = {
   "Wight Hero": { M: 4, WS: 5, BS: 0, S: 5, T: 5, W: 2, I: 5, A: 3, Ld: 9 },
   "Wight BSB": { M: 4, WS: 4, BS: 0, S: 5, T: 4, W: 2, I: 4, A: 2, Ld: 8 },
   "Undead Steed": { M: 8, WS: 2, BS: 0, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 5 },
+  "Undead Steed (Barded)": { M: 7, WS: 2, BS: 0, S: 3, T: 3, W: 1, I: 2, A: 1, Ld: 5 },
   "Winged Nightmare": { M: 8, WS: 3, BS: 0, S: 5, T: 5, W: 3, I: 2, A: 3, Ld: 5 },
   "Zombie Dragon": { M: 6, WS: 4, BS: 0, S: 7, T: 7, W: 7, I: 2, A: 7, Ld: 5 },
   "Ghoul": { M: 4, WS: 2, BS: 0, S: 3, T: 4, W: 1, I: 3, A: 2, Ld: 5 },
@@ -777,7 +782,7 @@ const STATS = {
   "Spirit Host": { M: 6, WS: 3, BS: 0, S: 3, T: 3, W: 4, I: 1, A: 4, Ld: 4 },
   "Vampire Thrall": { M: 6, WS: 6, BS: 4, S: 7, T: 5, W: 2, I: 7, A: 2, Ld: 8 },
   "Wight Champion": { M: 4, WS: 4, BS: 0, S: 5, T: 4, W: 1, I: 4, A: 2, Ld: 8 },
-  "Wraith Champion": { M: 4, WS: 3, BS: 0, S: 4, T: 4, W: 1, I: 3, A: 2, Ld: 8 },
+  "Wraith Champion": { M: 4, WS: 3, BS: 0, S: 3, T: 4, W: 3, I: 3, A: 2, Ld: 5 },
   "Wraith": { M: 4, WS: 3, BS: 0, S: 3, T: 4, W: 3, I: 3, A: 2, Ld: 5 },
   "Banshee": { M: 6, WS: 3, BS: 0, S: 3, T: 4, W: 2, I: 3, A: 2, Ld: 8 },
   "Black Coach": { M: "-", WS: "-", BS: "-", S: 6, T: 6, W: 4, I: "-", A: "-", Ld: "-" },
@@ -785,6 +790,7 @@ const STATS = {
   "Sylvania Peasant": { M: 4, WS: 2, BS: 2, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 6 },
   "Swain": { M: 4, WS: 5, BS: 5, S: 4, T: 4, W: 2, I: 5, A: 3, Ld: 8 },
   "War Horse": { M: 8, WS: 3, BS: 0, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 5 },
+  "War Horse (Barded)": { M: 7, WS: 3, BS: 0, S: 3, T: 3, W: 1, I: 3, A: 1, Ld: 5 },
   "Vampire Knight": { M: 6, WS: 5, BS: 3, S: 6, T: 5, W: 2, I: 6, A: 1, Ld: 8 },
   "Ghast": { M: 6, WS: 3, BS: 0, S: 4, T: 5, W: 3, I: 2, A: 3, Ld: 5 },
   "Vampire Lord (Strigoi)": { M: 6, WS: 8, BS: 6, S: 7, T: 6, W: 4, I: 9, A: 5, Ld: 10 },
@@ -1186,7 +1192,8 @@ const WOOD_ELVES = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Wood Elf Longbow", cost: 10 },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 27, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 27, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 27, stat: "Elven Steed (Barded)" },
         { id: "warhawk", name: "Giant Warhawk", cost: 51, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 69, stat: "Great Eagle" },
         { id: "griffon", name: "Griffon", cost: 181, stat: "Griffon" },
@@ -1201,7 +1208,8 @@ const WOOD_ELVES = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Wood Elf Longbow", cost: 10 },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 20, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 20, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 20, stat: "Elven Steed (Barded)" },
         { id: "warhawk", name: "Giant Warhawk", cost: 44, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 52, stat: "Great Eagle" },
         { id: "griffon", name: "Griffon", cost: 174, stat: "Griffon" },
@@ -1220,7 +1228,8 @@ const WOOD_ELVES = {
       gearNote: "May take light armour for free. The one magic item may be a magic banner.",
       armourGroup: { options: ["No armour (default)", "Light Armour"] },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 13, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 13, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 13, stat: "Elven Steed (Barded)" },
         { id: "stag", name: "Stag", cost: 19, stat: "Stag", theme: "savage" },
       ],
     },
@@ -1228,7 +1237,8 @@ const WOOD_ELVES = {
       id: "magelord", name: "Mage Lord (level 4)", cost: 264, stat: "Mage Lord", magicItemSlots: 4,
       gearNote: "May take College Magic or High Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Elven Steed (Barded)" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -1241,7 +1251,8 @@ const WOOD_ELVES = {
       id: "mastermage", name: "Master Mage (level 3)", cost: 186, stat: "Master Mage", magicItemSlots: 3,
       gearNote: "May take College Magic or High Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Elven Steed (Barded)" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -1252,7 +1263,8 @@ const WOOD_ELVES = {
       id: "magechampion", name: "Mage Champion (level 2)", cost: 122, stat: "Mage Champion", magicItemSlots: 2,
       gearNote: "May take College Magic or High Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Elven Steed (Barded)" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -1263,7 +1275,8 @@ const WOOD_ELVES = {
       id: "mage", name: "Mage (level 1)", cost: 58, stat: "Mage", magicItemSlots: 1,
       gearNote: "May take College Magic or High Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Elven Steed (Barded)" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "warhawk", name: "Giant Warhawk", cost: 30, stat: "Giant Warhawk" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -1445,7 +1458,10 @@ const WOOD_ELVES = {
       items: "Carries: Spear of Daith (enemies re-roll successful hits vs bearer), Magic War Paint (5+ ward melee / 3+ ward missiles, also protects Gwandor), Dispel Magic Scroll." },
     { id: "lothlann", name: "Lothlann the Brave", cost: 120, stat: "Lothlann the Brave", role: "Battle Standard Bearer",
       note: "Elven BSB with light armour.", items: "Carries: Royal Standard of Athel Loren (enemy spells targeting units within 12\" are dispelled on 4+).",
-      mountOption: { name: "Elven Steed (may take barding)", cost: 13 } },
+      mounts: [
+        { id: "steed", name: "Elven Steed", cost: 13, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 13, stat: "Elven Steed (Barded)" },
+      ] },
     { id: "wychwethyl", name: "Wychwethyl the Wardancer", cost: 60, stat: "Wychwethyl the Wardancer", role: "War Dancer Champion (alternative)",
       note: "Additional hand weapon or shield — must match the regiment he joins.", items: "Carries: Drums of Orcskin (regiments on foot add +1D6\" to charge move)." },
     { id: "sceolan", name: "Sceolan", cost: 80, stat: "Sceolan", role: "Elven Hero (alternative)",
@@ -1523,7 +1539,8 @@ const EMPIRE = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Handgun", "Pistol", "Two pistols"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 20, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 20, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 20, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 55, stat: "Pegasus" },
         { id: "griffon", name: "Griffon", cost: 175, stat: "Griffon" },
       ],
@@ -1536,7 +1553,8 @@ const EMPIRE = {
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Handgun", "Pistol", "Two pistols"] },
       experimentalMissileGroup: { label: "Experimental missile weapon — foot only (any one)", cost: 10, options: ["None (default)", "Hochland Long Rifle", "Repeating handgun", "Repeating pistol"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 15, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 15, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 15, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 50, stat: "Pegasus" },
         { id: "griffon", name: "Griffon", cost: 170, stat: "Griffon" },
       ],
@@ -1546,14 +1564,16 @@ const EMPIRE = {
       gearNote: "May take either light armour, heavy armour, or full plate armour for free. The one magic item may be a magic banner.",
       armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour", "Full Plate Armour"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 10, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 10, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 10, stat: "Warhorse (Barded)" },
       ],
     },
     {
       id: "wizardlord", name: "Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4,
       gearNote: "May take College Magic (and Ice Magic if the army includes Kislev regiments). May take as many magic items as levels (4).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "griffon", name: "Griffon", cost: 160, stat: "Griffon" },
       ],
@@ -1562,7 +1582,8 @@ const EMPIRE = {
       id: "masterwizard", name: "Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3,
       gearNote: "May take College Magic (and Ice Magic if the army includes Kislev regiments). May take as many magic items as levels (3).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -1570,7 +1591,8 @@ const EMPIRE = {
       id: "wizardchampion", name: "Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2,
       gearNote: "May take College Magic (and Ice Magic if the army includes Kislev regiments). May take as many magic items as levels (2).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -1578,7 +1600,8 @@ const EMPIRE = {
       id: "wizard", name: "Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1,
       gearNote: "May take College Magic (and Ice Magic if the army includes Kislev regiments). May take as many magic items as levels (1).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -1588,7 +1611,8 @@ const EMPIRE = {
       armourGroup: { options: ["No armour (default)", "Light Armour", "Shield & Light Armour", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Double handed weapon"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 10, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 10, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 10, stat: "Warhorse (Barded)" },
         { id: "chariot", name: "Large chariot (two barded Warhorses) — only if the Grand Theogonist isn't in the army; unbreakable while the Priest lives", cost: 80, stat: "War Wagon" },
       ],
     },
@@ -1847,7 +1871,10 @@ const EMPIRE = {
       note: "Rides a barded Warhorse. Carries full plate armour, a shield, a Runefang, and the Dragon Bow." },
     { id: "supremepatriarch", name: "The Supreme Patriarch of the Colleges of Magic", cost: 300, stat: "The Supreme Patriarch", role: "Wizard Lord", tags: ["wizard"],
       note: "Uses Bright Magic. Carries the Staff of Volans — once per game may cast a spell for free as if cast with Total Power.", extraMagicItemSlots: 3,
-      mountOption: { name: "Warhorse (may take Barding free)", cost: 0 } },
+      mounts: [
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Warhorse (Barded)" },
+      ] },
     { id: "grandtheogonist", name: "Grand Theogonist Volkmar", cost: 300, stat: "Grand Theogonist Volkmar", role: "Lord", tags: ["wizard"],
       note: "Rides the War Altar (a large chariot). Unbreakable. Carries the Horn of Sigismund (causes terror), The Jade Griffon (recovers all lost wounds after each phase), and the Staff of Command (becomes a level 2 wizard, any College Magic and High Magic) — all unique to him." },
     { id: "karlfranz", name: "The Emperor Karl Franz", cost: 260, stat: "The Emperor Karl Franz", role: "Lord (must be general)",
@@ -1984,8 +2011,10 @@ const CHAOS_WARRIORS = {
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take barding free)", cost: 49, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding free)", cost: 59, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 49, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 49, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 59, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 59, stat: "Daemonic Steed (Barded)" },
         { id: "griffon", name: "Griffon", cost: 202, stat: "Griffon" },
         { id: "manticore", name: "Manticore", cost: 242, stat: "Manticore" },
         { id: "chimera", name: "Chimera", cost: 292, stat: "Chimera" },
@@ -2003,8 +2032,10 @@ const CHAOS_WARRIORS = {
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take barding free)", cost: 35, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding free)", cost: 45, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 35, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 35, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 45, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 45, stat: "Daemonic Steed (Barded)" },
         { id: "griffon", name: "Griffon", cost: 188, stat: "Griffon" },
         { id: "manticore", name: "Manticore", cost: 228, stat: "Manticore" },
         { id: "chimera", name: "Chimera", cost: 278, stat: "Chimera" },
@@ -2021,8 +2052,10 @@ const CHAOS_WARRIORS = {
       markGroup: { options: MARKS_WARRIOR },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take barding free)", cost: 21, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding free)", cost: 31, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 21, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 21, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 31, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 31, stat: "Daemonic Steed (Barded)" },
         { id: "juggernaut", name: "Juggernaut of Khorne", cost: 24, stat: "Juggernaut of Khorne", requiresMark: "Khorne" },
         { id: "disc", name: "Disc of Tzeentch", cost: 54, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 34, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -2035,8 +2068,10 @@ const CHAOS_WARRIORS = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 10, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 10, stat: "Daemonic Steed (Barded)" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
         { id: "palanquin", name: "Palanquin of Nurgle (+4 Attacks, +4 Wounds; becomes a large model)", cost: 100, requiresMark: "Nurgle" },
@@ -2053,8 +2088,10 @@ const CHAOS_WARRIORS = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 10, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 10, stat: "Daemonic Steed (Barded)" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
         { id: "palanquin", name: "Palanquin of Nurgle (+4 Attacks, +4 Wounds; becomes a large model)", cost: 100, requiresMark: "Nurgle" },
@@ -2067,8 +2104,10 @@ const CHAOS_WARRIORS = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 10, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 10, stat: "Daemonic Steed (Barded)" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
         { id: "palanquin", name: "Palanquin of Nurgle (+4 Attacks, +4 Wounds; becomes a large model)", cost: 100, requiresMark: "Nurgle" },
@@ -2081,8 +2120,10 @@ const CHAOS_WARRIORS = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 10, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 10, stat: "Daemonic Steed (Barded)" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
         { id: "palanquin", name: "Palanquin of Nurgle (+4 Attacks, +4 Wounds; becomes a large model)", cost: 100, requiresMark: "Nurgle" },
@@ -2499,6 +2540,7 @@ const CHAOS_DAEMONS = {
       id: "bloodlettersfoot", name: "Bloodletters of Khorne", perModel: 16, minSize: 5, stat: "Bloodletters of Khorne", command: "standard",
       note: "Daemon blades: no armour save, 1 wound = 1D3.",
       champion: { name: "Bloodletter Champion", baseCost: 36, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
+      regimentItem: { id: "bloodhorn", name: "The Bloodhorn", cost: 20, note: "Allows the regiment to always march, regardless of enemy proximity or other normal restrictions." },
     },
     {
       id: "bloodlettersjuggernaut", name: "Bloodletters riding Juggernauts of Khorne", perModel: 86, minSize: 3, stat: "Bloodletters of Khorne", mountStat: "Juggernaut of Khorne", mountLabel: "Juggernaut of Khorne", command: "monstrous",
@@ -2513,6 +2555,7 @@ const CHAOS_DAEMONS = {
       id: "pinkhorrors", name: "Pink Horrors of Tzeentch", perModel: 19, minSize: 5, stat: "Pink Horrors of Tzeentch", command: "standard",
       note: "No Daemonic Save — when slain, place two Blue Horrors at the back instead (not simulated as separate models here; treat the unit as a single pool of points).",
       champion: { name: "Pink Horror Champion", baseCost: 39, magicItemSlots: 1, stat: "Pink Horror Champion", magicItemCategoryFilter: ["daemonicreward"] },
+      regimentItem: { id: "drumofchange", name: "The Drum of Change", cost: 30, note: "Draw 1 Tzeentch spell card per full 5 models in the regiment, as a wizard would. Once per magic phase, the drummer may attempt to cast one of these stored spells as a bound spell; once successfully cast, it's discarded." },
     },
     {
       id: "discsoftzeentch", name: "(Unridden) Discs of Tzeentch", perModel: 30, minSize: 3, stat: "Disc of Tzeentch", command: "skirmisher", restriction: "0-1",
@@ -2535,6 +2578,7 @@ const CHAOS_DAEMONS = {
       id: "plaguebearersfoot", name: "Plaguebearers of Nurgle", perModel: 18, minSize: 5, stat: "Plaguebearers of Nurgle", command: "standard",
       note: "Wounded living models are automatically slain. Enemies in base contact suffer -1 to hit.",
       champion: { name: "Plaguebearer Champion", baseCost: 38, magicItemSlots: 1, stat: "Plaguebearer Champion", magicItemCategoryFilter: ["daemonicreward"] },
+      regimentItem: { id: "gongofdespair", name: "The Gong of Despair", cost: 30, note: "The Plaguebearers always count as outnumbering any enemy they beat in melee combat, forcing the enemy to flee unless they are immune to fear themselves." },
     },
     {
       id: "beastsofnurgle", name: "Beasts of Nurgle", perModel: 45, minSize: 3, stat: "Beast of Nurgle", command: "none",
@@ -2547,6 +2591,7 @@ const CHAOS_DAEMONS = {
     {
       id: "daemonettesfoot", name: "Daemonettes of Slaanesh", perModel: 15, minSize: 5, stat: "Daemonettes of Slaanesh", command: "standard",
       champion: { name: "Daemonette Champion", baseCost: 35, magicItemSlots: 1, stat: "Daemonette Champion", magicItemCategoryFilter: ["daemonicreward"] },
+      regimentItem: { id: "sirenflute", name: "The Siren Flute", cost: 10, note: "Enemies may not stand and shoot as a charge reaction against this regiment." },
     },
     {
       id: "daemonettessteeds", name: "Daemonettes riding Steeds of Slaanesh", perModel: 30, minSize: 5, stat: "Daemonettes of Slaanesh", mountStat: "Steed of Slaanesh", mountLabel: "Steed of Slaanesh", command: "fastCavalry",
@@ -2658,8 +2703,10 @@ const CHAOS_WARBAND = {
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take barding free)", cost: 49, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding free)", cost: 59, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 49, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 49, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 59, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 59, stat: "Daemonic Steed (Barded)" },
         { id: "griffon", name: "Griffon", cost: 202, stat: "Griffon" },
         { id: "manticore", name: "Manticore", cost: 242, stat: "Manticore" },
         { id: "chimera", name: "Chimera", cost: 292, stat: "Chimera" },
@@ -2677,8 +2724,10 @@ const CHAOS_WARBAND = {
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take barding free)", cost: 35, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding free)", cost: 45, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 35, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 35, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 45, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 45, stat: "Daemonic Steed (Barded)" },
         { id: "griffon", name: "Griffon", cost: 188, stat: "Griffon" },
         { id: "manticore", name: "Manticore", cost: 228, stat: "Manticore" },
         { id: "chimera", name: "Chimera", cost: 278, stat: "Chimera" },
@@ -2695,8 +2744,10 @@ const CHAOS_WARBAND = {
       markGroup: { options: MARKS_WARRIOR },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take barding free)", cost: 21, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding free)", cost: 31, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 21, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 21, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 31, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 31, stat: "Daemonic Steed (Barded)" },
         { id: "juggernaut", name: "Juggernaut of Khorne", cost: 24, stat: "Juggernaut of Khorne", requiresMark: "Khorne" },
         { id: "disc", name: "Disc of Tzeentch", cost: 54, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 34, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
@@ -2709,8 +2760,10 @@ const CHAOS_WARBAND = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 10, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 10, stat: "Daemonic Steed (Barded)" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
         { id: "palanquin", name: "Palanquin of Nurgle (+4 Attacks, +4 Wounds; becomes a large model)", cost: 100, requiresMark: "Nurgle" },
@@ -2727,8 +2780,10 @@ const CHAOS_WARBAND = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 10, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 10, stat: "Daemonic Steed (Barded)" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
         { id: "palanquin", name: "Palanquin of Nurgle (+4 Attacks, +4 Wounds; becomes a large model)", cost: 100, requiresMark: "Nurgle" },
@@ -2741,8 +2796,10 @@ const CHAOS_WARBAND = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 10, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 10, stat: "Daemonic Steed (Barded)" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
         { id: "palanquin", name: "Palanquin of Nurgle (+4 Attacks, +4 Wounds; becomes a large model)", cost: 100, requiresMark: "Nurgle" },
@@ -2755,8 +2812,10 @@ const CHAOS_WARBAND = {
       markGroup: { options: MARKS_SORCERER },
       armourGroup: { options: CHAOS_ARMOUR_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Chaos Warhorse (may take Barding free)", cost: 0, stat: "Chaos Warhorse" },
-        { id: "daemonicsteed", name: "Daemonic Steed (may take barding)", cost: 10, stat: "Daemonic Steed" },
+        { id: "warhorse", name: "Chaos Warhorse", cost: 0, stat: "Chaos Warhorse" },
+        { id: "warhorsebarded", name: "Chaos Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Chaos Warhorse (Barded)" },
+        { id: "daemonicsteed", name: "Daemonic Steed", cost: 10, stat: "Daemonic Steed" },
+        { id: "daemonicsteedbarded", name: "Daemonic Steed with Barding (+1 armour save, -1M)", cost: 10, stat: "Daemonic Steed (Barded)" },
         { id: "disc", name: "Disc of Tzeentch", cost: 40, stat: "Disc of Tzeentch", requiresMark: "Tzeentch" },
         { id: "beast", name: "Beast of Nurgle", cost: 20, stat: "Beast of Nurgle", requiresMark: "Nurgle" },
         { id: "palanquin", name: "Palanquin of Nurgle (+4 Attacks, +4 Wounds; becomes a large model)", cost: 100, requiresMark: "Nurgle" },
@@ -3025,6 +3084,7 @@ const CHAOS_WARBAND = {
       id: "bloodlettersfoot", name: "Bloodletters of Khorne", perModel: 16, minSize: 5, stat: "Bloodletters of Khorne", command: "standard",
       note: "Daemon blades: no armour save, 1 wound = 1D3.",
       champion: { name: "Bloodletter Champion", baseCost: 36, magicItemSlots: 1, stat: "Bloodletter Champion", magicItemCategoryFilter: ["daemonicreward"] },
+      regimentItem: { id: "bloodhorn", name: "The Bloodhorn", cost: 20, note: "Allows the regiment to always march, regardless of enemy proximity or other normal restrictions." },
     },
     {
       id: "bloodlettersjuggernaut", name: "Bloodletters riding Juggernauts of Khorne", perModel: 86, minSize: 3, stat: "Bloodletters of Khorne", mountStat: "Juggernaut of Khorne", mountLabel: "Juggernaut of Khorne", command: "monstrous",
@@ -3039,6 +3099,7 @@ const CHAOS_WARBAND = {
       id: "pinkhorrors", name: "Pink Horrors of Tzeentch", perModel: 19, minSize: 5, stat: "Pink Horrors of Tzeentch", command: "standard",
       note: "No Daemonic Save — when slain, place two Blue Horrors at the back instead (not simulated as separate models here; treat the unit as a single pool of points).",
       champion: { name: "Pink Horror Champion", baseCost: 39, magicItemSlots: 1, stat: "Pink Horror Champion", magicItemCategoryFilter: ["daemonicreward"] },
+      regimentItem: { id: "drumofchange", name: "The Drum of Change", cost: 30, note: "Draw 1 Tzeentch spell card per full 5 models in the regiment, as a wizard would. Once per magic phase, the drummer may attempt to cast one of these stored spells as a bound spell; once successfully cast, it's discarded." },
     },
     {
       id: "discsoftzeentch", name: "(Unridden) Discs of Tzeentch", perModel: 30, minSize: 3, stat: "Disc of Tzeentch", command: "skirmisher", restriction: "0-1",
@@ -3061,6 +3122,7 @@ const CHAOS_WARBAND = {
       id: "plaguebearersfoot", name: "Plaguebearers of Nurgle", perModel: 18, minSize: 5, stat: "Plaguebearers of Nurgle", command: "standard",
       note: "Wounded living models are automatically slain. Enemies in base contact suffer -1 to hit.",
       champion: { name: "Plaguebearer Champion", baseCost: 38, magicItemSlots: 1, stat: "Plaguebearer Champion", magicItemCategoryFilter: ["daemonicreward"] },
+      regimentItem: { id: "gongofdespair", name: "The Gong of Despair", cost: 30, note: "The Plaguebearers always count as outnumbering any enemy they beat in melee combat, forcing the enemy to flee unless they are immune to fear themselves." },
     },
     {
       id: "beastsofnurgle", name: "Beasts of Nurgle", perModel: 45, minSize: 3, stat: "Beast of Nurgle", command: "none",
@@ -3073,6 +3135,7 @@ const CHAOS_WARBAND = {
     {
       id: "daemonettesfoot", name: "Daemonettes of Slaanesh", perModel: 15, minSize: 5, stat: "Daemonettes of Slaanesh", command: "standard",
       champion: { name: "Daemonette Champion", baseCost: 35, magicItemSlots: 1, stat: "Daemonette Champion", magicItemCategoryFilter: ["daemonicreward"] },
+      regimentItem: { id: "sirenflute", name: "The Siren Flute", cost: 10, note: "Enemies may not stand and shoot as a charge reaction against this regiment." },
     },
     {
       id: "daemonettessteeds", name: "Daemonettes riding Steeds of Slaanesh", perModel: 30, minSize: 5, stat: "Daemonettes of Slaanesh", mountStat: "Steed of Slaanesh", mountLabel: "Steed of Slaanesh", command: "fastCavalry",
@@ -3260,7 +3323,8 @@ const HIGH_ELVES = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Longbow", cost: 10 },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 27, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 27, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, no Movement penalty)", cost: 27, stat: "Elven Steed" },
         { id: "pegasus", name: "Pegasus", cost: 61, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 69, stat: "Great Eagle" },
         { id: "griffon", name: "Griffon", cost: 181, stat: "Griffon" },
@@ -3276,7 +3340,8 @@ const HIGH_ELVES = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       bowOption: { label: "Bow or Longbow", cost: 10 },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 20, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 20, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, no Movement penalty)", cost: 20, stat: "Elven Steed" },
         { id: "pegasus", name: "Pegasus", cost: 54, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 62, stat: "Great Eagle" },
         { id: "griffon", name: "Griffon", cost: 174, stat: "Griffon" },
@@ -3288,14 +3353,16 @@ const HIGH_ELVES = {
       gearNote: "May take either light armour or Dragon Armour for free. The one magic item may be a magic banner.",
       armourGroup: { options: ["No armour (default)", "Light Armour", "Dragon Armour"] },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 13, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 13, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, no Movement penalty)", cost: 13, stat: "Elven Steed" },
       ],
     },
     {
       id: "magelord", name: "Mage Lord (level 4)", cost: 264, stat: "Mage Lord", magicItemSlots: 4, tags: ["mage"],
       gearNote: "May take College Magic and High Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, no Movement penalty)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -3308,7 +3375,8 @@ const HIGH_ELVES = {
       id: "mastermage", name: "Master Mage (level 3)", cost: 186, stat: "Master Mage", magicItemSlots: 3, tags: ["mage"],
       gearNote: "May take College Magic and High Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, no Movement penalty)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -3318,7 +3386,8 @@ const HIGH_ELVES = {
       id: "magechampion", name: "Mage Champion (level 2)", cost: 122, stat: "Mage Champion", magicItemSlots: 2, tags: ["mage"],
       gearNote: "May take College Magic and High Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, no Movement penalty)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -3328,7 +3397,8 @@ const HIGH_ELVES = {
       id: "mage", name: "Mage (level 1)", cost: 58, stat: "Mage", magicItemSlots: 1, tags: ["mage"],
       gearNote: "May take College Magic and High Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, no Movement penalty)", cost: 0, stat: "Elven Steed" },
         { id: "unicorn", name: "Unicorn", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "eagle", name: "Great Eagle", cost: 48, stat: "Great Eagle" },
@@ -3841,7 +3911,8 @@ const BRETONNIA = {
       armourGroup: { options: ["No armour (default)", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 20, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 20, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, no Movement penalty)", cost: 20, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 55, stat: "Pegasus" },
         { id: "hippogriff", name: "Hippogriff", cost: 155, stat: "Hippogriff" },
       ],
@@ -3852,7 +3923,8 @@ const BRETONNIA = {
       armourGroup: { options: ["No armour (default)", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 15, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 15, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, no Movement penalty)", cost: 15, stat: "Warhorse" },
         { id: "pegasus", name: "Pegasus", cost: 50, stat: "Pegasus" },
         { id: "hippogriff", name: "Hippogriff", cost: 150, stat: "Hippogriff" },
       ],
@@ -3862,14 +3934,16 @@ const BRETONNIA = {
       gearNote: "May take heavy armour for free. The one item may be a magic banner, or may instead be a knightly Virtue.",
       armourGroup: { options: ["No armour (default)", "Heavy Armour"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 10, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 10, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, no Movement penalty)", cost: 10, stat: "Warhorse" },
       ],
     },
     {
       id: "wizardlord", name: "Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4,
       gearNote: "May take College Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, no Movement penalty)", cost: 0, stat: "Warhorse" },
         { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
         { id: "hippogriff", name: "Hippogriff", cost: 140, stat: "Hippogriff" },
@@ -3879,7 +3953,8 @@ const BRETONNIA = {
       id: "masterwizard", name: "Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3,
       gearNote: "May take College Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, no Movement penalty)", cost: 0, stat: "Warhorse" },
         { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
@@ -3888,7 +3963,8 @@ const BRETONNIA = {
       id: "wizardchampion", name: "Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2,
       gearNote: "May take College Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, no Movement penalty)", cost: 0, stat: "Warhorse" },
         { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
@@ -3897,7 +3973,8 @@ const BRETONNIA = {
       id: "wizard", name: "Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1,
       gearNote: "May take College Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, no Movement penalty)", cost: 0, stat: "Warhorse" },
         { id: "unicorn", name: "Unicorn (unmarried female wizards only)", cost: 30, stat: "Unicorn" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
@@ -4882,7 +4959,8 @@ const DOGS_OF_WAR = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 20, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 20, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 20, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 55, stat: "Pegasus" },
       ],
     },
@@ -4893,7 +4971,8 @@ const DOGS_OF_WAR = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow", "Hand gun", "Pistol", "Two pistols"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take barding free)", cost: 15, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 15, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 15, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 50, stat: "Pegasus" },
       ],
     },
@@ -4914,7 +4993,8 @@ const DOGS_OF_WAR = {
       id: "wizardlord", name: "Human Hireling Wizard Lord (level 4)", cost: 240, stat: "Wizard Lord", magicItemSlots: 4, tags: ["human", "wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -4922,7 +5002,8 @@ const DOGS_OF_WAR = {
       id: "masterwizard", name: "Human Hireling Master Wizard (level 3)", cost: 170, stat: "Master Wizard", magicItemSlots: 3, tags: ["human", "wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -4930,7 +5011,8 @@ const DOGS_OF_WAR = {
       id: "wizardchampion", name: "Human Hireling Wizard Champion (level 2)", cost: 110, stat: "Wizard Champion", magicItemSlots: 2, tags: ["human", "wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -4938,7 +5020,8 @@ const DOGS_OF_WAR = {
       id: "wizard", name: "Human Hireling Wizard (level 1)", cost: 50, stat: "Wizard", magicItemSlots: 1, tags: ["human", "wizard"],
       gearNote: "May take College Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (may take Barding free)", cost: 0, stat: "Warhorse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "Warhorse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "Warhorse (Barded)" },
         { id: "pegasus", name: "Pegasus", cost: 40, stat: "Pegasus" },
       ],
     },
@@ -5571,7 +5654,8 @@ const DARK_ELVES = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon", cost: 10, options: ["None (default)", "Repeating crossbow"] },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 27, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 27, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 27, stat: "Elven Steed (Barded)" },
         { id: "coldone", name: "Cold One", cost: 30, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 53, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 61, stat: "Pegasus" },
@@ -5587,7 +5671,8 @@ const DARK_ELVES = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: ["Hand weapon (default)", "Flail", "Additional hand weapon", "Spear", "Halberd", "Double handed weapon", "Lance"] },
       missileGroup: { label: "Missile weapon", cost: 10, options: ["None (default)", "Repeating crossbow"] },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 20, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 20, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 20, stat: "Elven Steed (Barded)" },
         { id: "coldone", name: "Cold One", cost: 23, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 46, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 54, stat: "Pegasus" },
@@ -5601,7 +5686,8 @@ const DARK_ELVES = {
       gearNote: "Subject to frenzy. Comes with light armour and two poisoned hand weapons by default — may forfeit all weapons and armour for free.",
       armourGroup: { options: ["Light Armour (default)", "No armour or weapons (forfeited)"] },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 20, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 20, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 20, stat: "Elven Steed (Barded)" },
         { id: "coldone", name: "Cold One", cost: 23, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 46, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 54, stat: "Pegasus" },
@@ -5615,7 +5701,8 @@ const DARK_ELVES = {
       gearNote: "May take light armour or heavy armour for free. The one magic item may be a magic banner.",
       armourGroup: { options: ["No armour (default)", "Light Armour", "Heavy Armour"] },
       mounts: [
-        { id: "steed", name: "Elven Steed (may take barding free)", cost: 13, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 13, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 13, stat: "Elven Steed (Barded)" },
         { id: "coldone", name: "Cold One", cost: 16, stat: "Cold One" },
       ],
     },
@@ -5627,7 +5714,8 @@ const DARK_ELVES = {
       id: "sorcererlord", name: "Sorcerer Lord (level 4)", cost: 264, stat: "Mage Lord", magicItemSlots: 4, tags: ["wizard"],
       gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Elven Steed (Barded)" },
         { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
@@ -5640,7 +5728,8 @@ const DARK_ELVES = {
       id: "mastersorcerer", name: "Master Sorcerer (level 3)", cost: 186, stat: "Master Mage", magicItemSlots: 3, tags: ["wizard"],
       gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (3).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Elven Steed (Barded)" },
         { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
@@ -5650,7 +5739,8 @@ const DARK_ELVES = {
       id: "sorcererchampion", name: "Sorcerer Champion (level 2)", cost: 122, stat: "Mage Champion", magicItemSlots: 2, tags: ["wizard"],
       gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (2).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Elven Steed (Barded)" },
         { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
@@ -5660,7 +5750,8 @@ const DARK_ELVES = {
       id: "sorcerer", name: "Sorcerer (level 1)", cost: 58, stat: "Mage", magicItemSlots: 1, tags: ["wizard"],
       gearNote: "May take College Magic and Dark Magic. May take as many magic items as levels (1).",
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Elven Steed (Barded)" },
         { id: "coldone", name: "Cold One", cost: 0, stat: "Cold One" },
         { id: "spider", name: "Monstrous Spider", cost: 32, stat: "Monstrous Spider" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
@@ -5796,7 +5887,8 @@ const DARK_ELVES = {
     { id: "morathi", name: "Morathi, The Hag Sorceress", cost: 300, stat: "Mage Lord", role: "Sorcerer Lord (level 4), using Slaanesh Magic", tags: ["wizard"],
       note: "May hand-pick her spells. May take four magic items.", extraMagicItemSlots: 4,
       mounts: [
-        { id: "steed", name: "Elven Steed (may take Barding free)", cost: 0, stat: "Elven Steed" },
+        { id: "steed", name: "Elven Steed", cost: 0, stat: "Elven Steed" },
+        { id: "steedbarded", name: "Elven Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Elven Steed (Barded)" },
         { id: "pegasus", name: "Dark Pegasus", cost: 40, stat: "Pegasus" },
       ] },
     { id: "hellebron", name: "Crone Hellebron, The Hag Queen", cost: 450, stat: "Elven Prince", role: "Lord",
@@ -6115,7 +6207,8 @@ const WIGHT_HERO_BASE = {
   armourGroup: { options: ["Shield & Light Armour (default)", "Heavy Armour"] },
   meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
   mounts: [
-    { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 22, stat: "Undead Steed" },
+    { id: "undeadsteed", name: "Undead Steed", cost: 22, stat: "Undead Steed" },
+    { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 22, stat: "Undead Steed (Barded)" },
     { id: "wingednightmare", name: "Winged Nightmare", cost: 76, stat: "Winged Nightmare" },
     { id: "zombiedragon", name: "Zombie Dragon", cost: 316, stat: "Zombie Dragon" },
   ],
@@ -6124,24 +6217,34 @@ const NECROMANCER_LORD_BASE = {
   id: "necromancerlord", name: "Necromancer Lord (level 4)", cost: 240, stat: "Necromancer Lord", magicItemSlots: 4, tags: ["wizard", "necromancer"],
   gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (4).",
   mounts: [
-    { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" },
+    { id: "undeadsteed", name: "Undead Steed", cost: 0, stat: "Undead Steed" },
+    { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Undead Steed (Barded)" },
     { id: "manticore", name: "Manticore (living)", cost: 200, stat: "Manticore" },
   ],
 };
 const MASTER_NECROMANCER_BASE = {
   id: "masternecromancer", name: "Master Necromancer (level 3)", cost: 170, stat: "Master Necromancer", magicItemSlots: 3, tags: ["wizard", "necromancer"],
   gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (3).",
-  mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+  mounts: [
+    { id: "undeadsteed", name: "Undead Steed", cost: 0, stat: "Undead Steed" },
+    { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Undead Steed (Barded)" },
+  ],
 };
 const NECROMANCER_CHAMPION_BASE = {
   id: "necromancerchampion", name: "Necromancer Champion (level 2)", cost: 110, stat: "Necromancer Champion", magicItemSlots: 2, tags: ["wizard", "necromancer"],
   gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (2).",
-  mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+  mounts: [
+    { id: "undeadsteed", name: "Undead Steed", cost: 0, stat: "Undead Steed" },
+    { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Undead Steed (Barded)" },
+  ],
 };
 const NECROMANCER_BASE = {
   id: "necromancer", name: "Necromancer (level 1)", cost: 50, stat: "Necromancer", magicItemSlots: 1, tags: ["wizard", "necromancer"],
   gearNote: "Living. May take Necromancy or Dark Magic Spells. May take as many magic items as levels (1).",
-  mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 0, stat: "Undead Steed" }],
+  mounts: [
+    { id: "undeadsteed", name: "Undead Steed", cost: 0, stat: "Undead Steed" },
+    { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Undead Steed (Barded)" },
+  ],
 };
 
 const VAMPIRE_COUNTS = {
@@ -6184,7 +6287,8 @@ const VAMPIRE_COUNTS = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
       magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 2, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for magic levels while wearing any armour, or wielding a Flail, Additional Hand Weapon, Halberd, or Double Handed Weapon." },
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 51, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed", cost: 51, stat: "Undead Steed" },
+        { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 51, stat: "Undead Steed (Barded)" },
         { id: "wingednightmare", name: "Winged Nightmare", cost: 105, stat: "Winged Nightmare" },
         { id: "zombiedragon", name: "Zombie Dragon", cost: 345, stat: "Zombie Dragon" },
       ],
@@ -6192,8 +6296,10 @@ const VAMPIRE_COUNTS = {
         lahmia: { armourGroup: null, meleeGroup: null, magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 2, min: 0 }, gearNote: "Lahmia Vampires never take weapons beyond a single hand weapon and never wear armour. I11, always strikes first." },
         necrarch: { magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 4, min: 1 }, gearNote: "Necrarch Vampires may cast regardless of wargear, but must take at least one magic level." },
         blooddragon: { magicLevelOption: null, armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour", "Full Plate Armour (4+ save, no shield)"] }, mounts: [
-          { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 51, stat: "Undead Steed" },
-          { id: "warhorse", name: "Warhorse (living, barding free)", cost: 51, stat: "War Horse" },
+          { id: "undeadsteed", name: "Undead Steed", cost: 51, stat: "Undead Steed" },
+          { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 51, stat: "Undead Steed (Barded)" },
+          { id: "warhorse", name: "Warhorse (living)", cost: 51, stat: "War Horse" },
+          { id: "warhorsebarded", name: "Warhorse (living) with Barding (+1 armour save, -1M)", cost: 51, stat: "War Horse (Barded)" },
           { id: "wingednightmare", name: "Winged Nightmare", cost: 105, stat: "Winged Nightmare" },
           { id: "zombiedragon", name: "Zombie Dragon", cost: 345, stat: "Zombie Dragon" },
         ], gearNote: "Blood Dragon Vampires cannot become spellcasters. May exchange heavy armour for Full Plate Armour, and an Undead Steed for a living Warhorse." },
@@ -6208,7 +6314,8 @@ const VAMPIRE_COUNTS = {
       magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for a magic level while wearing any armour, or wielding a Flail, Additional Hand Weapon, Halberd, or Double Handed Weapon." },
       gearNote: "May take up to two magic items or bloodline powers, freely mixed (shown together below).",
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 36, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed", cost: 36, stat: "Undead Steed" },
+        { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 36, stat: "Undead Steed (Barded)" },
         { id: "wingednightmare", name: "Winged Nightmare", cost: 90, stat: "Winged Nightmare" },
         { id: "zombiedragon", name: "Zombie Dragon", cost: 330, stat: "Zombie Dragon" },
       ],
@@ -6216,8 +6323,10 @@ const VAMPIRE_COUNTS = {
         lahmia: { armourGroup: null, meleeGroup: null, magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0 }, gearNote: "Lahmia Vampires never take weapons beyond a single hand weapon and never wear armour. I11, always strikes first." },
         necrarch: { magicLevelOption: { label: "Magic levels (Necromancy or Dark Magic)", costPerLevel: 60, max: 4, min: 1 }, gearNote: "Necrarch Vampires may cast regardless of wargear, but must take at least one magic level." },
         blooddragon: { magicLevelOption: null, armourGroup: { options: ["No armour (default)", "Shield & Light Armour", "Heavy Armour", "Full Plate Armour (4+ save, no shield)"] }, mounts: [
-          { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 36, stat: "Undead Steed" },
-          { id: "warhorse", name: "Warhorse (living, barding free)", cost: 36, stat: "War Horse" },
+          { id: "undeadsteed", name: "Undead Steed", cost: 36, stat: "Undead Steed" },
+          { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 36, stat: "Undead Steed (Barded)" },
+          { id: "warhorse", name: "Warhorse (living)", cost: 36, stat: "War Horse" },
+          { id: "warhorsebarded", name: "Warhorse (living) with Barding (+1 armour save, -1M)", cost: 36, stat: "War Horse (Barded)" },
           { id: "wingednightmare", name: "Winged Nightmare", cost: 90, stat: "Winged Nightmare" },
           { id: "zombiedragon", name: "Zombie Dragon", cost: 330, stat: "Zombie Dragon" },
         ], gearNote: "Blood Dragon Vampires cannot become spellcasters. May exchange heavy armour for Full Plate Armour, and an Undead Steed for a living Warhorse." },
@@ -6235,13 +6344,19 @@ const VAMPIRE_COUNTS = {
       innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
       gearNote: "0-1 Battle Standard Bearer total across the army — a Wight BSB and Vampire BSB can't both be taken. The one magic item may be a magic banner.",
       armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
-      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 14, stat: "Undead Steed" }],
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed", cost: 14, stat: "Undead Steed" },
+        { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 14, stat: "Undead Steed (Barded)" },
+      ],
     },
     {
       id: "vampirebsb", name: "Vampire Battle Standard Bearer", cost: 80, stat: "Vampire BSB", magicItemSlots: 1, restriction: "0-1", tags: ["vampire", "undeadCharacter", "bsb"],
       gearNote: "0-1 Battle Standard Bearer total across the army — a Wight BSB and Vampire BSB can't both be taken. May take one bloodline power or one magic item, which may be a magic banner (shown together below). Strigoi Vampires cannot be Battle Standard Bearers.",
       armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
-      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 21, stat: "Undead Steed" }],
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed", cost: 21, stat: "Undead Steed" },
+        { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 21, stat: "Undead Steed (Barded)" },
+      ],
       bloodlineOverrides: {
         blooddragon: { armourGroup: { options: ["Light armour (default)", "Heavy Armour", "Full Plate Armour (4+ save)"] } },
       },
@@ -6252,7 +6367,10 @@ const VAMPIRE_COUNTS = {
       armourGroup: { options: ["Light Armour", "Shield & Light Armour (default)", "Heavy Armour", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: VC_MELEE_OPTIONS },
       missileGroup: { label: "Missile weapon (any one)", cost: 10, options: ["None (default)", "Bow", "Longbow", "Crossbow"] },
-      mounts: [{ id: "warhorse", name: "Warhorse (barding free)", cost: 15, stat: "War Horse" }],
+      mounts: [
+        { id: "warhorse", name: "Warhorse", cost: 15, stat: "War Horse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 15, stat: "War Horse (Barded)" },
+      ],
     },
   ],
   regiments: [
@@ -6621,7 +6739,8 @@ const CLASSIC_UNDEAD = {
       id: "lichlord", name: "Lich Lord", cost: 360, stat: "Lich Lord", magicItemSlots: 4, tags: ["undeadCharacter", "wizard", "lichLord"],
       gearNote: "Undead, subject to the crumble rule. A level 4 wizard. May use Dark Magic or Necromancy Spells.",
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (may take Barding free)", cost: 0, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed", cost: 0, stat: "Undead Steed" },
+        { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 0, stat: "Undead Steed (Barded)" },
         { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
         { id: "wingednightmare", name: "Winged Nightmare", cost: 60, stat: "Winged Nightmare" },
         { id: "zombiedragon", name: "Zombie Dragon", cost: 300, stat: "Zombie Dragon" },
@@ -6636,7 +6755,10 @@ const CLASSIC_UNDEAD = {
       innateWeapon: { name: "Wight-Blade", desc: "1D3 wounds" },
       gearNote: "0-1 per army. The one magic item may be a magic banner.",
       armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
-      mounts: [{ id: "undeadsteed", name: "Undead Steed (barding free)", cost: 14, stat: "Undead Steed" }],
+      mounts: [
+        { id: "undeadsteed", name: "Undead Steed", cost: 14, stat: "Undead Steed" },
+        { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 14, stat: "Undead Steed (Barded)" },
+      ],
     },
     { ...WIGHT_HERO_BASE },
     {
@@ -6646,7 +6768,8 @@ const CLASSIC_UNDEAD = {
       magicLevelOption: { label: "Magic level (Necromancy or Dark Magic)", costPerLevel: 60, max: 1, min: 0, eligible: vcCastingGate, ineligibleNote: "Not eligible for a magic level while wearing any armour, or wielding a Flail, Additional Hand Weapon, Halberd, or Double Handed Weapon." },
       gearNote: "This army's Vampire option is always Von Carstein. May take up to two magic items or Von Carstein bloodline powers, freely mixed (shown together below).",
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 36, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed", cost: 36, stat: "Undead Steed" },
+        { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 36, stat: "Undead Steed (Barded)" },
         { id: "wingednightmare", name: "Winged Nightmare", cost: 90, stat: "Winged Nightmare" },
         { id: "zombiedragon", name: "Zombie Dragon", cost: 330, stat: "Zombie Dragon" },
       ],
@@ -6657,7 +6780,8 @@ const CLASSIC_UNDEAD = {
       armourGroup: { options: ["Light Armour", "Shield & Light Armour (default)"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: TK_MELEE_OPTIONS },
       mounts: [
-        { id: "undeadsteed", name: "Undead Steed (barding free)", cost: 30, stat: "Undead Steed" },
+        { id: "undeadsteed", name: "Undead Steed", cost: 30, stat: "Undead Steed" },
+        { id: "undeadsteedbarded", name: "Undead Steed with Barding (+1 armour save, -1M)", cost: 30, stat: "Undead Steed (Barded)" },
         { id: "heavychariot", name: "Skeleton Heavy Chariot (approx., base cost)", cost: 60, stat: "Heavy Chariot" },
       ],
     },
@@ -6825,7 +6949,8 @@ const KISLEV = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: KISLEV_MELEE_OPTIONS },
       missileGroup: KISLEV_MISSILE_OPTIONS,
       mounts: [
-        { id: "warhorse", name: "Warhorse (barding free)", cost: 20, stat: "War Horse" },
+        { id: "warhorse", name: "Warhorse", cost: 20, stat: "War Horse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 20, stat: "War Horse (Barded)" },
         { id: "greatbear", name: "Great Bear", cost: 45, stat: "Great Bear" },
       ],
     },
@@ -6834,7 +6959,8 @@ const KISLEV = {
       gearNote: "The one magic item may be a magic banner.",
       armourGroup: { options: ["Light armour (default)", "Heavy Armour"] },
       mounts: [
-        { id: "warhorse", name: "Warhorse (barding free)", cost: 10, stat: "War Horse" },
+        { id: "warhorse", name: "Warhorse", cost: 10, stat: "War Horse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 10, stat: "War Horse (Barded)" },
         { id: "greatbear", name: "Great Bear", cost: 35, stat: "Great Bear" },
       ],
     },
@@ -6844,7 +6970,8 @@ const KISLEV = {
       meleeGroup: { label: "Melee weapon (choose one, free)", options: KISLEV_MELEE_OPTIONS },
       missileGroup: KISLEV_MISSILE_OPTIONS,
       mounts: [
-        { id: "warhorse", name: "Warhorse (barding free)", cost: 15, stat: "War Horse" },
+        { id: "warhorse", name: "Warhorse", cost: 15, stat: "War Horse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 15, stat: "War Horse (Barded)" },
         { id: "greatbear", name: "Great Bear", cost: 40, stat: "Great Bear" },
       ],
     },
@@ -6854,7 +6981,8 @@ const KISLEV = {
       armourGroup: { options: ["Shield & Light Armour (default)", "Shield & Heavy Armour"] },
       meleeGroup: { label: "Melee weapon (choose one, free)", options: KISLEV_PRIEST_MELEE_OPTIONS },
       mounts: [
-        { id: "warhorse", name: "Warhorse (barding free)", cost: 50, stat: "War Horse" },
+        { id: "warhorse", name: "Warhorse", cost: 50, stat: "War Horse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 50, stat: "War Horse (Barded)" },
         { id: "greatbear", name: "Great Bear", cost: 75, stat: "Great Bear" },
       ],
     },
@@ -6862,24 +6990,34 @@ const KISLEV = {
       id: "icewitchlady", name: "Ice Witch Lady (level 4)", cost: 240, stat: "Ice Witch Lady", magicItemSlots: 4, tags: ["wizard"],
       gearNote: "May only take Ice Magic. May take as many magic items as levels (4).",
       mounts: [
-        { id: "warhorse", name: "Warhorse (barding optional, free)", cost: 0, stat: "War Horse" },
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "War Horse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "War Horse (Barded)" },
         { id: "greatbear", name: "Great Bear", cost: 30, stat: "Great Bear" },
       ],
     },
     {
       id: "icewitchmistress", name: "Ice Witch Mistress (level 3)", cost: 170, stat: "Ice Witch Mistress", magicItemSlots: 3, tags: ["wizard"],
       gearNote: "May only take Ice Magic. May take as many magic items as levels (3).",
-      mounts: [{ id: "warhorse", name: "Warhorse (barding optional, free)", cost: 0, stat: "War Horse" }],
+      mounts: [
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "War Horse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "War Horse (Barded)" },
+      ],
     },
     {
       id: "icewitchchampion", name: "Ice Witch Champion (level 2)", cost: 110, stat: "Ice Witch Champion", magicItemSlots: 2, tags: ["wizard"],
       gearNote: "May only take Ice Magic. May take as many magic items as levels (2).",
-      mounts: [{ id: "warhorse", name: "Warhorse (barding optional, free)", cost: 0, stat: "War Horse" }],
+      mounts: [
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "War Horse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "War Horse (Barded)" },
+      ],
     },
     {
       id: "icewitch", name: "Ice Witch (level 1)", cost: 50, stat: "Ice Witch", magicItemSlots: 1, tags: ["wizard"],
       gearNote: "May only take Ice Magic. May take as many magic items as levels (1).",
-      mounts: [{ id: "warhorse", name: "Warhorse (barding optional, free)", cost: 0, stat: "War Horse" }],
+      mounts: [
+        { id: "warhorse", name: "Warhorse", cost: 0, stat: "War Horse" },
+        { id: "warhorsebarded", name: "Warhorse with Barding (+1 armour save, -1M)", cost: 0, stat: "War Horse (Barded)" },
+      ],
     },
   ],
   regiments: [
@@ -8270,6 +8408,7 @@ function regimentCost(inst, def, armyData, roster) {
   if (def.detachmentParent) {
     (inst.detachments || []).forEach((d) => { total += detachmentCost(d, armyData); });
   }
+  if (def.regimentItem && inst.regimentItemId === def.regimentItem.id) total += def.regimentItem.cost;
   return total;
 }
 
@@ -8402,6 +8541,20 @@ function allUsedMagicItemIds(roster, excludeUnitId) {
   collect(roster.regiments);
   collect(roster.chariots);
   collect(roster.specials);
+  return used;
+}
+
+// Daemon "instrument" items (The Bloodhorn, The Drum of Change, The Gong of Despair, The Siren
+// Flute) are regiment-specific magic items, not generic magic items, so they're tracked separately
+// from allUsedMagicItemIds. Each is restricted to 0-1 per army by the book ("One regiment may
+// take..."), scoped per item id (so e.g. taking the Bloodhorn on one Bloodletters unit doesn't
+// block the Drum of Change on a Pink Horrors unit elsewhere in the same roster).
+function allUsedRegimentItemIds(roster, excludeUnitId) {
+  const used = new Set();
+  (roster.regiments || []).forEach((u) => {
+    if (u.instanceId === excludeUnitId) return;
+    if (u.regimentItemId) used.add(u.regimentItemId);
+  });
   return used;
 }
 
@@ -9156,6 +9309,7 @@ function collectWargearItems(kind, unit, def, armyData, bloodlineId, itemsMap) {
     localWeapons.forEach(addMundane);
     if (unit.magicBannerId) addMagic(miById(armyData.magicItems, unit.magicBannerId));
     addRuneGroups({ banner: unit.runeItems?.banner });
+    if (def.regimentItem && unit.regimentItemId === def.regimentItem.id) addMagic({ name: def.regimentItem.name, desc: def.regimentItem.note });
     if (unit.championIncluded && def.champion) {
       addMagicIds(unit.championMagicItemIds);
       addLiberatedIds(unit.championLiberatedMagicItemIds);
@@ -9261,6 +9415,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       const names = unit.runeItems.banner.map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
       if (names.length > 0) tags.push(names.join(" + "));
     }
+    if (def.regimentItem && unit.regimentItemId === def.regimentItem.id) tags.push(def.regimentItem.name);
     if (unit.championIncluded && def.champion) {
       tags.push(def.champion.name);
       if (def.champion.markGroup) tags.push(`Mark of ${unit.championMark || def.champion.markGroup.options[0]}`);
@@ -10339,6 +10494,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
 
 function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
   const usedElsewhere = allUsedMagicItemIds(roster, unit.instanceId);
+  const usedRegimentItemIds = allUsedRegimentItemIds(roster, unit.instanceId);
   const currentTheme = roster.armyTheme || armyData.themes?.default || null;
   const themeOptionVisible = (o) => !armyData.themes || !o.theme || o.theme === currentTheme;
 
@@ -10403,6 +10559,7 @@ function RegimentDetail({ def, unit, roster, updateUnit, armyData }) {
       </div>
 
       <RegimentWargearSection def={def} unit={unit} updateUnit={updateUnit} themeOptionVisible={themeOptionVisible} />
+      <RegimentItemSection def={def} unit={unit} updateUnit={updateUnit} usedElsewhere={usedRegimentItemIds} />
 
       {def.command !== "none" && (
         <div style={{ marginTop: 14 }}>
@@ -10549,6 +10706,33 @@ function RegimentWargearSection({ def, unit, updateUnit, themeOptionVisible }) {
           <span className="whr-opt-cost">{o.cost ? `+${o.cost}${o.per === "model" ? "/model" : ""}` : "free"}</span>
         </label>
       ))}
+    </div>
+  );
+}
+
+// Daemon regiment-specific "instrument" items (The Bloodhorn, The Drum of Change, The Gong of
+// Despair, The Siren Flute) — a single checkbox gated 0-1 per army per item, via usedElsewhere
+// (allUsedRegimentItemIds). Only rendered when def.regimentItem exists (the four foot Daemon
+// troop regiments); mounted/chariot/monstrous variants and every other faction have no such field.
+function RegimentItemSection({ def, unit, updateUnit, usedElsewhere }) {
+  if (!def.regimentItem) return null;
+  const item = def.regimentItem;
+  const selected = unit.regimentItemId === item.id;
+  const blockedElsewhere = !selected && usedElsewhere.has(item.id);
+  return (
+    <div style={{ marginTop: 14 }}>
+      <span className="whr-label">Regiment Item</span>
+      <label className="whr-opt-row whr-opt-label" style={blockedElsewhere ? { color: "var(--ink-faint)", cursor: "not-allowed" } : undefined}>
+        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <input type="checkbox" checked={selected} disabled={blockedElsewhere}
+            onChange={(e) => updateUnit({ ...unit, regimentItemId: e.target.checked ? item.id : null })} />
+          {item.name}
+        </span>
+        <span className="whr-opt-cost">+{fmtPts(item.cost)}pts</span>
+      </label>
+      {blockedElsewhere
+        ? <p style={{ fontSize: 14, fontStyle: "italic", color: "var(--ink-faint)", margin: "2px 0 0 28px" }}>Already taken by another {def.name} regiment — only one {item.name} may be carried per army.</p>
+        : <p style={{ fontSize: 14, fontStyle: "italic", color: "var(--ink-soft)", margin: "2px 0 0 28px" }}>{item.note}</p>}
     </div>
   );
 }
