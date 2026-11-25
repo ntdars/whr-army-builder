@@ -8177,6 +8177,33 @@ const LIBERATED_MAGIC_ITEMS_BY_FACTION = (() => {
 // This flattens the whole catalog once for a fallback lookup wherever a liberatedMagicItemIds
 // or championLiberatedMagicItemIds field is read.
 const LIBERATED_MAGIC_ITEMS_FLAT = LIBERATED_MAGIC_ITEMS_BY_FACTION.flatMap((f) => [...f.items, ...f.runes]);
+const LIBERATED_RUNES = LIBERATED_MAGIC_ITEMS_BY_FACTION.flatMap((f) => f.runes);
+const LIBERATED_RUNE_IDS = new Set(LIBERATED_RUNES.map((m) => m.id));
+// A liberated Dwarf Rune Item is built like any Dwarf rune item: up to 3 runes (max 1 Master) forged
+// into ONE weapon, armour or enchanted item. The rune ids sit in the same flat liberated-ids array as
+// the other liberated items, so this regroups them per category — each non-empty group is one item.
+function liberatedRuneGroups(ids) {
+  const groups = {};
+  (ids || []).forEach((id) => {
+    if (!LIBERATED_RUNE_IDS.has(id)) return;
+    const mi = LIBERATED_RUNES.find((m) => m.id === id);
+    (groups[mi.cat] = groups[mi.cat] || []).push(id);
+  });
+  return groups;
+}
+// Display tags for a liberated-ids array: ordinary items by name, each rune item as one
+// combined "Rune A + Rune B ×2" entry (matching how Dwarf rune items are shown).
+function liberatedItemTags(armyData, ids) {
+  const tags = [];
+  (ids || []).forEach((id) => { if (LIBERATED_RUNE_IDS.has(id)) return; const mi = miByIdAnySource(armyData, id); if (mi) tags.push(mi.name); });
+  Object.values(liberatedRuneGroups(ids)).forEach((group) => {
+    const counts = {};
+    group.forEach((id) => { const nm = LIBERATED_RUNES.find((m) => m.id === id)?.name; if (nm) counts[nm] = (counts[nm] || 0) + 1; });
+    const label = Object.entries(counts).map(([nm, n]) => (n > 1 ? `${nm} ×${n}` : nm)).join(" + ");
+    if (label) tags.push(label);
+  });
+  return tags;
+}
 function miByIdAnySource(armyData, id) {
   return miById(armyData.magicItems, id) || miById(LIBERATED_MAGIC_ITEMS_FLAT, id);
 }
@@ -8779,7 +8806,7 @@ function MagicItemPickerWithBanner({ items, selectedIds, onToggle, maxSlots, use
 // for a budget that's shared army-wide across every character/champion in the roster (1 per
 // 800pts of the army, plus exactly 1 rune item total). A roster-wide Rule Flag
 // (liberatedItemWarnings, in BuilderScreen) catches going over either budget instead.
-function LiberatedMagicItemsPicker({ selectedIds, onToggle, usedElsewhere }) {
+function LiberatedMagicItemsPicker({ selectedIds, onToggle, onSetIds, usedElsewhere }) {
   const [openFactions, setOpenFactions] = useState({});
   const isOpen = (key, arr) => {
     if (openFactions[key] !== undefined) return openFactions[key];
@@ -8823,18 +8850,35 @@ function LiberatedMagicItemsPicker({ selectedIds, onToggle, usedElsewhere }) {
       </div>
     );
   };
-  const allRunes = LIBERATED_MAGIC_ITEMS_BY_FACTION.flatMap((f) => f.runes);
+  const runeGroups = liberatedRuneGroups(selectedIds);
+  const runeCats = ["weapon", "armour", "enchanted"].filter((c) => LIBERATED_RUNES.some((m) => m.cat === c));
+  const runeCatInUse = Object.keys(runeGroups)[0];
+  const itemCount = selectedIds.filter((id) => !LIBERATED_RUNE_IDS.has(id)).length + Object.keys(runeGroups).length;
+  const setRunesFor = (cat, ids) => {
+    const keep = selectedIds.filter((id) => !(LIBERATED_RUNE_IDS.has(id) && LIBERATED_RUNES.find((m) => m.id === id)?.cat === cat));
+    onSetIds([...keep, ...ids]);
+  };
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 2 }}>
         <span className="whr-label" style={{ marginBottom: 0, color: "var(--gold)" }}>Liberated Magic Items</span>
-        <span className="whr-opt-cost">{selectedIds.length} taken</span>
+        <span className="whr-opt-cost">{itemCount} taken</span>
       </div>
       <p className="whr-serif-italic" style={{ fontSize: 12.5, color: "var(--ink-faint)", margin: "0 0 8px" }}>
         Any army book's hand weapons, bows, light armour, or enchanted items — one per 800pts of the army (rounded up), plus one Dwarf Rune Item. Tracked army-wide, not per unit.
       </p>
       {LIBERATED_MAGIC_ITEMS_BY_FACTION.map((f) => renderGroup(f.key, f.label, f.items))}
-      {renderGroup("runes", "Dwarf Rune Item (1 total)", allRunes)}
+      <div style={{ marginTop: 10 }}>
+        <span className="whr-label" style={{ marginBottom: 2 }}>Dwarf Rune Item (1 total)</span>
+        <p className="whr-serif-italic" style={{ fontSize: 12.5, color: "var(--ink-faint)", margin: "0 0 6px" }}>
+          Forge one weapon, armour or enchanted item from up to 3 runes (max 1 Master Rune).
+        </p>
+        {runeCats.map((cat) => (
+          <RuneForge key={cat} items={LIBERATED_RUNES} cat={cat} label={MI_CATEGORY_LABEL[cat]} context={{}}
+            comboIds={runeGroups[cat] || []} disabled={!!runeCatInUse && runeCatInUse !== cat}
+            onChange={(ids) => setRunesFor(cat, ids)} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -9398,7 +9442,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
     }
     (unit.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
     (unit.scrollFamiliarIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(`${mi.name} (Familiar)`); });
-    (unit.liberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) tags.push(mi.name); });
+    liberatedItemTags(armyData, unit.liberatedMagicItemIds).forEach((t) => tags.push(t));
     Object.values(unit.runeItems || {}).forEach((ids) => {
       const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
       if (names.length > 0) tags.push(names.join(" + "));
@@ -9441,7 +9485,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       tags.push(def.champion.name);
       if (def.champion.markGroup) tags.push(`Mark of ${unit.championMark || def.champion.markGroup.options[0]}`);
       (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
-      (unit.championLiberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) tags.push(mi.name); });
+      liberatedItemTags(armyData, unit.championLiberatedMagicItemIds).forEach((t) => tags.push(t));
       Object.values(unit.championRuneItems || {}).forEach((ids) => {
         const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
         if (names.length > 0) tags.push(names.join(" + "));
@@ -9452,7 +9496,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       if (opt) {
         tags.push(opt.name);
         (unit.championMagicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
-        (unit.championLiberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) tags.push(mi.name); });
+        liberatedItemTags(armyData, unit.championLiberatedMagicItemIds).forEach((t) => tags.push(t));
         Object.values(unit.championRuneItems || {}).forEach((ids) => {
           const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
           if (names.length > 0) tags.push(names.join(" + "));
@@ -10588,7 +10632,8 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
       {armyData.key === "halflings" && (
         <div style={{ marginTop: 14 }}>
           <LiberatedMagicItemsPicker selectedIds={unit.liberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
-            onToggle={(id) => toggleArrayField(unit, "liberatedMagicItemIds", id, updateUnit)} />
+            onToggle={(id) => toggleArrayField(unit, "liberatedMagicItemIds", id, updateUnit)}
+            onSetIds={(ids) => updateUnit({ ...unit, liberatedMagicItemIds: ids })} />
         </div>
       )}
 
@@ -10954,7 +10999,8 @@ function RegimentChampionIncludedSection({ def, unit, roster, armyData, updateUn
             {armyData.key === "halflings" && (
               <div style={{ marginTop: 10 }}>
                 <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
-                  onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
+                  onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)}
+                  onSetIds={(ids) => updateUnit({ ...unit, championLiberatedMagicItemIds: ids })} />
               </div>
             )}
             {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
@@ -11091,7 +11137,8 @@ function RegimentChampionOptionsSection({ def, unit, roster, armyData, updateUni
                   {armyData.key === "halflings" && (
                     <div style={{ marginTop: 10 }}>
                       <LiberatedMagicItemsPicker selectedIds={unit.championLiberatedMagicItemIds || []} usedElsewhere={usedElsewhere}
-                        onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)} />
+                        onToggle={(id) => toggleArrayField(unit, "championLiberatedMagicItemIds", id, updateUnit)}
+                        onSetIds={(ids) => updateUnit({ ...unit, championLiberatedMagicItemIds: ids })} />
                     </div>
                   )}
                   {armyData.runeForge && ["weapon", "armour", "enchanted"].filter((c) => effFilter.includes(c)).length > 0 && (
@@ -11881,12 +11928,14 @@ function useRosterWarnings(roster, armyData, totalPoints) {
   // Rule Flag rather than a hard per-unit slot block. See LiberatedMagicItemsPicker.
   const liberatedItemWarnings = useMemo(() => {
     if (armyData.key !== "halflings") return [];
-    const allIds = [];
-    roster.characters.forEach((u) => allIds.push(...(u.liberatedMagicItemIds || [])));
-    roster.regiments.forEach((u) => allIds.push(...(u.championLiberatedMagicItemIds || [])));
-    const runeIds = new Set(LIBERATED_MAGIC_ITEMS_BY_FACTION.flatMap((f) => f.runes).map((m) => m.id));
-    const nonRuneCount = allIds.filter((id) => !runeIds.has(id)).length;
-    const runeCount = allIds.filter((id) => runeIds.has(id)).length;
+    // Runes are counted as forged items (one per unit per category), not one per rune —
+    // a 3-rune weapon is a single Dwarf Rune Item.
+    const perUnit = [
+      ...roster.characters.map((u) => u.liberatedMagicItemIds || []),
+      ...roster.regiments.map((u) => u.championLiberatedMagicItemIds || []),
+    ];
+    const nonRuneCount = perUnit.reduce((n, ids) => n + ids.filter((id) => !LIBERATED_RUNE_IDS.has(id)).length, 0);
+    const runeCount = perUnit.reduce((n, ids) => n + Object.keys(liberatedRuneGroups(ids)).length, 0);
     const warnings = [];
     const maxNonRune = Math.ceil(totalPoints / 800);
     if (nonRuneCount > maxNonRune) {
