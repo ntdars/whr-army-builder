@@ -8157,19 +8157,33 @@ const FACTIONS = { woodElves: WOOD_ELVES, empire: EMPIRE, chaoswarriors: CHAOS_W
 const LIBERATED_ITEM_CATEGORIES = ["weapon", "armour", "enchanted"];
 const LIBERATED_MAGIC_ITEMS_BY_FACTION = (() => {
   const halflingIds = new Set((HALFLINGS.magicItems || []).map((m) => m.id));
-  const seen = new Set();
+  // Several factions share one item pool (Undead x3, Chaos x4). Each item is listed once, under
+  // the first faction that has it, and every other faction sharing that pool is added to that
+  // group's label — so e.g. Tomb Kings shows up as "Vampire Counts / Tomb Kings / Classic Undead"
+  // instead of silently vanishing from the list.
+  const groupOfItem = new Map();
   const groups = [];
   Object.entries(FACTIONS).forEach(([key, fd]) => {
     if (key === "halflings") return;
     const items = [], runes = [];
+    const sharedGroups = new Set();
     (fd.magicItems || []).forEach((m) => {
       if (!LIBERATED_ITEM_CATEGORIES.includes(m.cat)) return;
-      if (halflingIds.has(m.id) || seen.has(m.id)) return;
-      seen.add(m.id);
+      if (halflingIds.has(m.id)) return;
+      if (groupOfItem.has(m.id)) { sharedGroups.add(groupOfItem.get(m.id)); return; }
       (m.isRune ? runes : items).push(m);
     });
-    if (items.length > 0 || runes.length > 0) groups.push({ key, label: fd.name, items, runes });
+    const hasOwnGroup = items.length > 0 || runes.length > 0;
+    // Only credit a shared group when this faction has no group of its own (Chaos Dwarfs also carry
+    // the O&G pool for their Hobgoblins, but they're still listed under their own name).
+    if (!hasOwnGroup) sharedGroups.forEach((g) => { if (!g.names.includes(fd.name)) g.names.push(fd.name); });
+    if (hasOwnGroup) {
+      const g = { key, names: [fd.name], items, runes };
+      [...items, ...runes].forEach((m) => groupOfItem.set(m.id, g));
+      groups.push(g);
+    }
   });
+  groups.forEach((g) => { g.label = g.names.join(" / "); });
   return groups;
 })();
 // A liberated item's own data lives in ITS source faction's magicItems array, not the current
