@@ -1,9 +1,11 @@
 2026-11-25
 Unit special rules are now shown on the PDF during exporting. Note, units with long descriptions are omitted to maintain page formatting, but have a reference to their page within the armies book.
 Fixed Halfling Liberated Magic Items — a Dwarf Rune Item is now forged from up to 3 runes (like the Dwarf army's Rune Forge) and counts as one item, instead of each rune counting separately.
+Halfling Liberated Magic Items: armies that share an item list (Undead, Chaos) are now all named in the picker, so Tomb Kings, Beastmen, Daemons and Chaos Warband items no longer appear to be missing.
 Lizardmen: Slann Mage Priests (Lord/Master Mage/Champion/base, not the Mummified Lord) can now elect to carry the battle standard for +75pts, mutually exclusive with a separate Lizardman Saurus BSB, with a roster warning if both are taken.
 Familiars (Scroll/Warrior/Spell) now show their statline on the roster card when selected, same mechanism as Mounts.
 Scroll Familiar can now pick its 2 scrolls (Power Scroll, Dispel Magic Scroll ×2, Destroy Magic Scroll — the generic ones any wizard can take, no faction-specific scrolls yet).
+
 
 2026-11-03
 The Wraith Champion statline was incorrect and has been fixed.
