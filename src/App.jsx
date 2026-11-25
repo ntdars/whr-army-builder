@@ -273,6 +273,8 @@ body {
   .whr-print-roster table.whr-stat-table th, .whr-print-roster table.whr-stat-table td { border: 1px solid #999; padding: 1px 5px; text-align: center; color: #000; }
   .whr-print-tags { flex: 1 1 auto; min-width: 0; margin: 0; padding-left: 16px; font-size: 12px; }
   .whr-print-tags li { margin-bottom: 1px; }
+  .whr-print-unit-body.has-rules .whr-print-tags { flex: 0 1 auto; max-width: 30%; }
+  .whr-print-rules { flex: 1 1 0; min-width: 0; margin: 0; font-size: 10.5px; line-height: 1.3; color: #222; border-left: 1px solid #ccc; padding-left: 10px; }
   .whr-print-wargear-grid { columns: 2; column-gap: 20px; font-size: 11.5px; }
   .whr-print-wargear-entry { break-inside: avoid; padding: 3px 0; border-top: 1px dotted #999; }
   .whr-print-wargear-name { font-weight: 700; }
@@ -2231,7 +2233,7 @@ const CHAOS_WARRIORS = {
       note: "Army always deploys last. Equipped with Chaos Armour, Mark of Tzeentch, and the Crystal Skull. Rides a Chaos Dragon.", extraMagicItemSlots: 3 },
     { id: "valnir", name: "Valnir the Reaper", cost: 250, stat: "Valnir the Reaper", role: "Hero", impliedMark: "Nurgle",
       note: "Nominate an enemy regiment at battle start for a random ailment (Red Plague, Brain Fever, or Black Rot). Causes fear, immune to psychology, hates all living enemies, regenerates on 4+. Equipped with Chaos Armour, Mark of Nurgle, and the Gatherer of Souls (magic flail: always +2S, may boost WS/S/A per 3 wounds inflicted)." },
-    { id: "archaon", name: "Archaon, Lord of Chaos", cost: 550, stat: "Archaon", role: "Lord",
+    { id: "archaon", name: "Archaon, Lord of Chaos", rulesPage: 100, cost: 550, stat: "Archaon", role: "Lord",
       note: "Mark of Chaos Undivided; regiments he joins become unbreakable. Requires 4 roughly-equal Chaos Warrior regiments, one per major Power, each carrying that Power's Chaos Banner, plus a BSB. May cast a free random Dark Magic/Chaos God spell each own magic phase. Equipped with a shield, the Slayer of Kings (WS10 S7 A7), Armour of Morkar (1+ unmodifiable save, -2S vs him), the Eye of Sheerian (random battle-start effect), and rides the barded warhorse W'soraych." },
     { id: "arbaal", name: "Arbaal the Undefeated", cost: 350, stat: "Arbaal the Undefeated", role: "Lord", impliedMark: "Khorne",
       note: "Must always issue challenges in Khorne's name; becomes a Chaos Spawn if he flees. Not subject to frenzy despite being a Champion of Khorne. Immune to psychology, 2D6 attacks/round. Chaos Armour. Rides the Hound of Khorne (small Daemonic monster, immune to magic weapons, dispels spells targeting it/Arbaal/his regiment; vanishes if Arbaal dies)." },
@@ -2247,7 +2249,7 @@ const CHAOS_WARRIORS = {
       note: "Mark of Tzeentch. Chaos Armour. His Fused Twin acts as a Spell Familiar without needing an extra model. If he dispels an enemy spell (targeting him or his unit) with a Dispel card, he keeps the power used to cast it. If an enemy wizard's Dispel card fails against his spell, he takes that card into his own hand.", extraMagicItemSlots: 2 },
     { id: "festus", name: "Festus the Leechlord", cost: 359, stat: "Festus the Leechlord", role: "Chaos Sorcerer Champion — not official WHR, needs opponent's agreement", impliedMark: "Nurgle", tags: ["wizard"],
       note: "Mark of Nurgle (in profile). Chaos Armour, Regeneration 4+. He and any unit he joins only pursue 1D6\" (binding captives), but captured units are worth double victory points. Pestilent Potions: a unit he joins gains a 5+ regeneration save and poisoned attacks (including his own) while he's with them." },
-    { id: "galrauch", name: "Galrauch, The Great Drake", cost: 640, stat: "Galrauch", role: "Two-Headed Chaos Dragon — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch", tags: ["wizard"],
+    { id: "galrauch", name: "Galrauch, The Great Drake", rulesPage: 116, cost: 640, stat: "Galrauch", role: "Two-Headed Chaos Dragon — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch", tags: ["wizard"],
       note: "Large monster, flies, causes terror, 4+ scaly skin save. Mark of Tzeentch. A level 4 wizard (Tzeentch Magic). One head breathes fire (S4) or poison (S3, no save) each shooting phase; once per battle one head may instead breathe the Breath of Change (teardrop template, failed Toughness test on 1D6 removes the model from play) while the other head can't breathe that phase. Each turn, a failed Ld test makes the ancient Dragon spirit surface: no move/spells/breath, half his attacks turn on himself that phase (added to the enemy's combat res if already in combat)." },
   ],
 };
@@ -2480,7 +2482,7 @@ const BEASTMEN = {
       scythedWheelsCost: 20, commanderCost: 42, commanderLabel: "One crewman is a Gor Beastman Champion (with Mark of Chaos)", commanderMagicItemSlots: 1,
     },
     {
-      id: "jabberslythe", name: "Jabberslythe", perUnit: 225, stat: "Jabberslythe", kind: "quantity", restriction: "0-1",
+      id: "jabberslythe", name: "Jabberslythe", rulesPage: 104, perUnit: 225, stat: "Jabberslythe", kind: "quantity", restriction: "0-1",
       note: "Large monster, causes terror, immune to psychology. 10\" fly move (can't fly high), 5+ armour save. Aura of Madness: enemies within 12\" that can see it test Ld each enemy turn, taking 1 wound per point failed by (no save; doesn't affect psychology-immune units). Spurting Bile-blood: each wound landed on it in melee hits the attacker with a S4 hit. Slithery Tongue: 12\" shooting attack, S4, auto-hits, swallows whole any man-sized model that takes a wound (counts as slain, no Look Out Sir).",
     },
     {
@@ -2492,9 +2494,9 @@ const BEASTMEN = {
     { id: "kholek", name: "Kholek Suneater", cost: 485, stat: "Kholek Suneater", role: "Dragon Ogre Lord — not official WHR, needs opponent's agreement", impliedMark: "Chaos Undivided",
       note: "Large monster, causes terror, immune to psychology, 5+ scaly-skin save, frenzied if hit by enemy lightning. Mark of Chaos Undivided (in profile). In the shooting phase, targets an unengaged visible enemy unit: on 2-6 it takes 1D6 S6 lightning hits, on a 1 Kholek is hit instead. Lightning-based spells targeting a unit within 12\" of him are redirected to him instead.",
       items: "Carries: Starcrusher (magic weapon, 1 wound = D3 wounds), Armour of the Storm (heavy armour, immune to lightning attacks, becomes frenzied if struck by lightning anyway)." },
-    { id: "gorthor", name: "Gorthor the Beastlord", cost: 550, stat: "Gorthor the Beastlord", role: "Master Beastman Shaman", impliedMark: "Chaos Undivided",
+    { id: "gorthor", name: "Gorthor the Beastlord", rulesPage: 105, cost: 550, stat: "Gorthor the Beastlord", role: "Master Beastman Shaman", impliedMark: "Chaos Undivided",
       note: "If Gorthor is the army general, all Gor and Ungor regiments within 12\" automatically pass their unruly tests. Rides a Beastman Chariot with scythed wheels, and pursues an extra 1D6\" while mounted. The Impaler: magic spear granting +2S on the charge (instead of the usual +1), no armour save; if all four attacks hit, the enemy model is slain outright. The Skull of Mugrar: attacks against Gorthor himself (not his chariot) suffer -1 to hit and -1 to wound. The Cloak of the Beastlord: roll 1D6 before the battle — the cloak absorbs that many wounds before Gorthor takes any himself." },
-    { id: "khazrak", name: "Khazrak the One-Eye and Redmaw", cost: 120, stat: "Khazrak the One-Eye", mountStat: "Redmaw", mountLabel: "Redmaw (Chaos Hound)", role: "Hero", impliedMark: "Chaos Undivided",
+    { id: "khazrak", name: "Khazrak the One-Eye and Redmaw", rulesPage: 105, cost: 120, stat: "Khazrak the One-Eye", mountStat: "Redmaw", mountLabel: "Redmaw (Chaos Hound)", role: "Hero", impliedMark: "Chaos Undivided",
       note: "Heavy armour, and the magic whip Scourge, which grants one additional attack (at -1 to armour save) against any model in the regiment Khazrak is in base contact with. Redmaw the Chaos Hound stays with Khazrak unless sent to attack an enemy unit within its charge range (it then rejoins Khazrak once that enemy is destroyed). While together they share one psychology test rather than testing separately. If either is slain, the other becomes subject to frenzy." },
     { id: "throgg", name: "Throgg, King of Trolls", cost: 200, stat: "Throgg, King of Trolls", role: "Unique Troll", impliedMark: "Chaos Undivided",
       note: "A Troll, and may join any unit of Trolls; all normal Troll rules apply to him. When vomiting, makes 1D6+1 hits instead of one. Once per game may make a breath attack, S5, no armour save. Has no Mark of Chaos of his own but is treated as Chaos Undivided for army-building purposes." },
@@ -2634,7 +2636,7 @@ const CHAOS_DAEMONS = {
       variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
     },
     {
-      id: "hellcannon", name: "Hellcannon", perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine",
+      id: "hellcannon", name: "Hellcannon", rulesPage: 114, perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine",
       note: "House rule / optional — ask your opponent's permission before including it, primarily meant for Siege Battles. A Daemon that works as a war machine, crewed by three Chaos Dwarfs in heavy armour. Shoots like a large stone thrower; any regiment losing even one model to it must take a panic test; shots count as magical. A misfire eats 1D3 crew instead of firing; if all crew die, it becomes an independent monster with random movement that charges the nearest model each turn (friend or foe), following normal Daemon rules — and still defends itself if charged.",
       extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
       crewArmourFixed: "Heavy armour",
@@ -2657,11 +2659,11 @@ const CHAOS_DAEMONS = {
       note: "Large, causes terror, Cloud of Flies, Stream of Corruption breath. A level 1 wizard (Nurgle Magic), hates Dwarfs. A Nurgling base within 6\" auto-regenerates D3 wounds each of his turns. Once/shooting phase, Nurglings may burst from him as a small-stone-thrower shooting attack (may move but not march while firing; a misfire does nothing)." },
     { id: "masqueofslaanesh", name: "The Masque of Slaanesh", cost: 95, stat: "The Masque of Slaanesh", role: "Unique Daemonette Champion (0-1) — not official WHR, needs opponent's agreement", impliedMark: "Slaanesh",
       note: "Can't join any unit. 3+ Daemonic Save (not the usual 4+). Each of her melee phases, picks one dance targeting an enemy unit within 12\" (no LoS needed): Dance of Dreaming (-1 Ld), Fleshspasm Polka (-1 S), or Waltz of Lethargy (-1 I), to a minimum of 1, until end of phase." },
-    { id: "belakor", name: "Be'lakor, The Dark Master", cost: 650, stat: "Belakor", role: "Daemon Prince of Chaos Undivided — not official WHR, needs opponent's agreement", impliedMark: "Chaos Undivided",
+    { id: "belakor", name: "Be'lakor, The Dark Master", rulesPage: 118, cost: 650, stat: "Belakor", role: "Daemon Prince of Chaos Undivided — not official WHR, needs opponent's agreement", impliedMark: "Chaos Undivided",
       note: "Mark of Chaos Undivided (in profile). Large, causes terror (permanently — units never become immune to it), flies. A level 4 wizard (Dark Magic). All enemies suffer -1 Ld when rallying anywhere; living enemies within 6\" of him suffer an extra -1 Ld (cumulative). Enemy shooting at him or his army suffers -1 to hit. Each turn, a failed Ld test forces him to charge the nearest visible enemy if in range, or move toward the nearest enemy model (stopping 1\" short if it would overshoot)." },
-    { id: "amonchakai", name: "Amon 'Chakai", cost: 825, stat: "Amon 'Chakai", role: "Lord of Change", impliedMark: "Tzeentch",
+    { id: "amonchakai", name: "Amon 'Chakai", rulesPage: 109, cost: 825, stat: "Amon 'Chakai", role: "Lord of Change", impliedMark: "Tzeentch",
       note: "Causes terror, can fly. A level 5 wizard using Tzeentch spells. Hates Nurgle Daemons and Nurgle-marked Champions. At battle start, nominate one enemy model doomed to perish — that model is automatically hit in melee by all attackers for the rest of the battle. The All-Seeing Eye of Tzeentch: at battle start, the enemy must reveal all hidden objects on the battlefield (magic items, spells, Rewards, Bloodline Powers, Virtues, Assassins, Fanatics, etc.)." },
-    { id: "azazel", name: "Azazel, Prince of Damnation", cost: 550, stat: "Azazel", role: "Daemon Prince of Slaanesh", impliedMark: "Slaanesh",
+    { id: "azazel", name: "Azazel, Prince of Damnation", rulesPage: 109, cost: 550, stat: "Azazel", role: "Daemon Prince of Slaanesh", impliedMark: "Slaanesh",
       note: "Causes terror, can fly. A level 2 wizard using Slaanesh spells. Wields a Daemonblade allowing no armour save, plus a seventh attack worked out at S8 (1 wound = 1D3). Dark Halo grants a 4+ ward save (replaces his Daemonic Save). A model in base contact loses 1 attack each melee round. At the start of the Chaos player's turn, one enemy character in base contact must pass an Ld test (unless immune to psychology) or now serves Slaanesh — award victory points for a turned character depending on whether it's later slain or survives the battle." },
     { id: "scylaanfingrim", name: "Scyla Anfingrim", cost: 200, stat: "Scyla Anfingrim", role: "Large Chaos Spawn — not official WHR, needs opponent's agreement", impliedMark: "Khorne",
       note: "Unbreakable, causes fear. Unlike normal Chaos Spawn, doesn't move randomly and doesn't have a random number of attacks. 4+ armour save unmodified by Strength — a successful save against a magic weapon destroys it. 4+ natural dispel; a successful dispel destroys the enemy spell. A former Champion of Khorne, still counted as a follower of Khorne for army selection; may be the army general in small (under 2000pt) armies." },
@@ -3194,7 +3196,7 @@ const CHAOS_WARBAND = {
       scythedWheelsCost: 20, commanderCost: 42, commanderLabel: "One crewman is a Gor Beastman Champion (with Mark of Chaos)", commanderMagicItemSlots: 1,
     },
     {
-      id: "jabberslythe", name: "Jabberslythe", perUnit: 225, stat: "Jabberslythe", kind: "quantity", restriction: "0-1",
+      id: "jabberslythe", name: "Jabberslythe", rulesPage: 104, perUnit: 225, stat: "Jabberslythe", kind: "quantity", restriction: "0-1",
       note: "Large monster, causes terror, immune to psychology. 10\" fly move (can't fly high), 5+ armour save. Aura of Madness: enemies within 12\" that can see it test Ld each enemy turn, taking 1 wound per point failed by (no save; doesn't affect psychology-immune units). Spurting Bile-blood: each wound landed on it in melee hits the attacker with a S4 hit. Slithery Tongue: 12\" shooting attack, S4, auto-hits, swallows whole any man-sized model that takes a wound (counts as slain, no Look Out Sir).",
     },
     {
@@ -3218,7 +3220,7 @@ const CHAOS_WARBAND = {
       variantOptions: [{ id: "scythedwheels", label: "Scythed wheels", cost: 20 }],
     },
     {
-      id: "hellcannon", name: "Hellcannon", perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine",
+      id: "hellcannon", name: "Hellcannon", rulesPage: 114, perUnit: 120, stat: "Hellcannon Daemon", kind: "warmachine",
       note: "House rule / optional — ask your opponent's permission before including it, primarily meant for Siege Battles. A Daemon that works as a war machine, crewed by three Chaos Dwarfs in heavy armour. Shoots like a large stone thrower; any regiment losing even one model to it must take a panic test; shots count as magical. A misfire eats 1D3 crew instead of firing; if all crew die, it becomes an independent monster with random movement that charges the nearest model each turn (friend or foe), following normal Daemon rules — and still defends itself if charged.",
       extraCrewCost: 10, extraCrewMax: 2, extraCrewLabel: "extra Chaos Dwarf crew",
       crewArmourFixed: "Heavy armour",
@@ -3233,7 +3235,7 @@ const CHAOS_WARBAND = {
       note: "Army always deploys last. Equipped with Chaos Armour, Mark of Tzeentch, and the Crystal Skull. Rides a Chaos Dragon.", extraMagicItemSlots: 3 },
     { id: "valnir", name: "Valnir the Reaper", cost: 250, stat: "Valnir the Reaper", role: "Hero", impliedMark: "Nurgle",
       note: "Nominate an enemy regiment at battle start for a random ailment (Red Plague, Brain Fever, or Black Rot). Causes fear, immune to psychology, hates all living enemies, regenerates on 4+. Equipped with Chaos Armour, Mark of Nurgle, and the Gatherer of Souls (magic flail: always +2S, may boost WS/S/A per 3 wounds inflicted)." },
-    { id: "archaon", name: "Archaon, Lord of Chaos", cost: 550, stat: "Archaon", role: "Lord",
+    { id: "archaon", name: "Archaon, Lord of Chaos", rulesPage: 100, cost: 550, stat: "Archaon", role: "Lord",
       note: "Mark of Chaos Undivided; regiments he joins become unbreakable. Requires 4 roughly-equal Chaos Warrior regiments, one per major Power, each carrying that Power's Chaos Banner, plus a BSB. May cast a free random Dark Magic/Chaos God spell each own magic phase. Equipped with a shield, the Slayer of Kings (WS10 S7 A7), Armour of Morkar (1+ unmodifiable save, -2S vs him), the Eye of Sheerian (random battle-start effect), and rides the barded warhorse W'soraych." },
     { id: "arbaal", name: "Arbaal the Undefeated", cost: 350, stat: "Arbaal the Undefeated", role: "Lord", impliedMark: "Khorne",
       note: "Must always issue challenges in Khorne's name; becomes a Chaos Spawn if he flees. Not subject to frenzy despite being a Champion of Khorne. Immune to psychology, 2D6 attacks/round. Chaos Armour. Rides the Hound of Khorne (small Daemonic monster, immune to magic weapons, dispels spells targeting it/Arbaal/his regiment; vanishes if Arbaal dies)." },
@@ -3249,14 +3251,14 @@ const CHAOS_WARBAND = {
       note: "Mark of Tzeentch. Chaos Armour. His Fused Twin acts as a Spell Familiar without needing an extra model. If he dispels an enemy spell (targeting him or his unit) with a Dispel card, he keeps the power used to cast it. If an enemy wizard's Dispel card fails against his spell, he takes that card into his own hand.", extraMagicItemSlots: 2 },
     { id: "festus", name: "Festus the Leechlord", cost: 359, stat: "Festus the Leechlord", role: "Chaos Sorcerer Champion — not official WHR, needs opponent's agreement", impliedMark: "Nurgle", tags: ["wizard"],
       note: "Mark of Nurgle (in profile). Chaos Armour, Regeneration 4+. He and any unit he joins only pursue 1D6\" (binding captives), but captured units are worth double victory points. Pestilent Potions: a unit he joins gains a 5+ regeneration save and poisoned attacks (including his own) while he's with them." },
-    { id: "galrauch", name: "Galrauch, The Great Drake", cost: 640, stat: "Galrauch", role: "Two-Headed Chaos Dragon — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch", tags: ["wizard"],
+    { id: "galrauch", name: "Galrauch, The Great Drake", rulesPage: 116, cost: 640, stat: "Galrauch", role: "Two-Headed Chaos Dragon — not official WHR, needs opponent's agreement", impliedMark: "Tzeentch", tags: ["wizard"],
       note: "Large monster, flies, causes terror, 4+ scaly skin save. Mark of Tzeentch. A level 4 wizard (Tzeentch Magic). One head breathes fire (S4) or poison (S3, no save) each shooting phase; once per battle one head may instead breathe the Breath of Change (teardrop template, failed Toughness test on 1D6 removes the model from play) while the other head can't breathe that phase. Each turn, a failed Ld test makes the ancient Dragon spirit surface: no move/spells/breath, half his attacks turn on himself that phase (added to the enemy's combat res if already in combat)." },
     { id: "kholek", name: "Kholek Suneater", cost: 485, stat: "Kholek Suneater", role: "Dragon Ogre Lord — not official WHR, needs opponent's agreement", impliedMark: "Chaos Undivided",
       note: "Large monster, causes terror, immune to psychology, 5+ scaly-skin save, frenzied if hit by enemy lightning. Mark of Chaos Undivided (in profile). In the shooting phase, targets an unengaged visible enemy unit: on 2-6 it takes 1D6 S6 lightning hits, on a 1 Kholek is hit instead. Lightning-based spells targeting a unit within 12\" of him are redirected to him instead.",
       items: "Carries: Starcrusher (magic weapon, 1 wound = D3 wounds), Armour of the Storm (heavy armour, immune to lightning attacks, becomes frenzied if struck by lightning anyway)." },
-    { id: "gorthor", name: "Gorthor the Beastlord", cost: 550, stat: "Gorthor the Beastlord", role: "Master Beastman Shaman", impliedMark: "Chaos Undivided",
+    { id: "gorthor", name: "Gorthor the Beastlord", rulesPage: 105, cost: 550, stat: "Gorthor the Beastlord", role: "Master Beastman Shaman", impliedMark: "Chaos Undivided",
       note: "If Gorthor is the army general, all Gor and Ungor regiments within 12\" automatically pass their unruly tests. Rides a Beastman Chariot with scythed wheels, and pursues an extra 1D6\" while mounted. The Impaler: magic spear granting +2S on the charge (instead of the usual +1), no armour save; if all four attacks hit, the enemy model is slain outright. The Skull of Mugrar: attacks against Gorthor himself (not his chariot) suffer -1 to hit and -1 to wound. The Cloak of the Beastlord: roll 1D6 before the battle — the cloak absorbs that many wounds before Gorthor takes any himself." },
-    { id: "khazrak", name: "Khazrak the One-Eye and Redmaw", cost: 120, stat: "Khazrak the One-Eye", mountStat: "Redmaw", mountLabel: "Redmaw (Chaos Hound)", role: "Hero", impliedMark: "Chaos Undivided",
+    { id: "khazrak", name: "Khazrak the One-Eye and Redmaw", rulesPage: 105, cost: 120, stat: "Khazrak the One-Eye", mountStat: "Redmaw", mountLabel: "Redmaw (Chaos Hound)", role: "Hero", impliedMark: "Chaos Undivided",
       note: "Heavy armour, and the magic whip Scourge, which grants one additional attack (at -1 to armour save) against any model in the regiment Khazrak is in base contact with. Redmaw the Chaos Hound stays with Khazrak unless sent to attack an enemy unit within its charge range (it then rejoins Khazrak once that enemy is destroyed). While together they share one psychology test rather than testing separately. If either is slain, the other becomes subject to frenzy." },
     { id: "throgg", name: "Throgg, King of Trolls", cost: 200, stat: "Throgg, King of Trolls", role: "Unique Troll", impliedMark: "Chaos Undivided",
       note: "A Troll, and may join any unit of Trolls; all normal Troll rules apply to him. When vomiting, makes 1D6+1 hits instead of one. Once per game may make a breath attack, S5, no armour save. Has no Mark of Chaos of his own but is treated as Chaos Undivided for army-building purposes." },
@@ -3276,11 +3278,11 @@ const CHAOS_WARBAND = {
       note: "Large, causes terror, Cloud of Flies, Stream of Corruption breath. A level 1 wizard (Nurgle Magic), hates Dwarfs. A Nurgling base within 6\" auto-regenerates D3 wounds each of his turns. Once/shooting phase, Nurglings may burst from him as a small-stone-thrower shooting attack (may move but not march while firing; a misfire does nothing)." },
     { id: "masqueofslaanesh", name: "The Masque of Slaanesh", cost: 95, stat: "The Masque of Slaanesh", role: "Unique Daemonette Champion (0-1) — not official WHR, needs opponent's agreement", impliedMark: "Slaanesh",
       note: "Can't join any unit. 3+ Daemonic Save (not the usual 4+). Each of her melee phases, picks one dance targeting an enemy unit within 12\" (no LoS needed): Dance of Dreaming (-1 Ld), Fleshspasm Polka (-1 S), or Waltz of Lethargy (-1 I), to a minimum of 1, until end of phase." },
-    { id: "belakor", name: "Be'lakor, The Dark Master", cost: 650, stat: "Belakor", role: "Daemon Prince of Chaos Undivided — not official WHR, needs opponent's agreement", impliedMark: "Chaos Undivided",
+    { id: "belakor", name: "Be'lakor, The Dark Master", rulesPage: 118, cost: 650, stat: "Belakor", role: "Daemon Prince of Chaos Undivided — not official WHR, needs opponent's agreement", impliedMark: "Chaos Undivided",
       note: "Mark of Chaos Undivided (in profile). Large, causes terror (permanently — units never become immune to it), flies. A level 4 wizard (Dark Magic). All enemies suffer -1 Ld when rallying anywhere; living enemies within 6\" of him suffer an extra -1 Ld (cumulative). Enemy shooting at him or his army suffers -1 to hit. Each turn, a failed Ld test forces him to charge the nearest visible enemy if in range, or move toward the nearest enemy model (stopping 1\" short if it would overshoot)." },
-    { id: "amonchakai", name: "Amon 'Chakai", cost: 825, stat: "Amon 'Chakai", role: "Lord of Change", impliedMark: "Tzeentch",
+    { id: "amonchakai", name: "Amon 'Chakai", rulesPage: 109, cost: 825, stat: "Amon 'Chakai", role: "Lord of Change", impliedMark: "Tzeentch",
       note: "Causes terror, can fly. A level 5 wizard using Tzeentch spells. Hates Nurgle Daemons and Nurgle-marked Champions. At battle start, nominate one enemy model doomed to perish — that model is automatically hit in melee by all attackers for the rest of the battle. The All-Seeing Eye of Tzeentch: at battle start, the enemy must reveal all hidden objects on the battlefield (magic items, spells, Rewards, Bloodline Powers, Virtues, Assassins, Fanatics, etc.)." },
-    { id: "azazel", name: "Azazel, Prince of Damnation", cost: 550, stat: "Azazel", role: "Daemon Prince of Slaanesh", impliedMark: "Slaanesh",
+    { id: "azazel", name: "Azazel, Prince of Damnation", rulesPage: 109, cost: 550, stat: "Azazel", role: "Daemon Prince of Slaanesh", impliedMark: "Slaanesh",
       note: "Causes terror, can fly. A level 2 wizard using Slaanesh spells. Wields a Daemonblade allowing no armour save, plus a seventh attack worked out at S8 (1 wound = 1D3). Dark Halo grants a 4+ ward save (replaces his Daemonic Save). A model in base contact loses 1 attack each melee round. At the start of the Chaos player's turn, one enemy character in base contact must pass an Ld test (unless immune to psychology) or now serves Slaanesh — award victory points for a turned character depending on whether it's later slain or survives the battle." },
     { id: "scylaanfingrim", name: "Scyla Anfingrim", cost: 200, stat: "Scyla Anfingrim", role: "Large Chaos Spawn — not official WHR, needs opponent's agreement", impliedMark: "Khorne",
       note: "Unbreakable, causes fear. Unlike normal Chaos Spawn, doesn't move randomly and doesn't have a random number of attacks. 4+ armour save unmodified by Strength — a successful save against a magic weapon destroys it. 4+ natural dispel; a successful dispel destroys the enemy spell. A former Champion of Khorne, still counted as a follower of Khorne for army selection; may be the army general in small (under 2000pt) armies." },
@@ -4165,7 +4167,7 @@ const BRETONNIA = {
     { id: "armand", name: "Armand D'Aquitaine", cost: 225, stat: "Armand d'Aquitaine", role: "Knightly Battle Standard Bearer",
       note: "Heavy armour, barded Warhorse. Virtue of Knightly Ardour (fixed).",
       items: "Carries the Banner of the Lady of the Lake (enemies in melee with this regiment can't claim rank bonus)." },
-    { id: "tristanjules", name: "Tristan le Troubadour and Jules le Jongleur", cost: 125, stat: "Tristan le Troubadour", role: "Knightly Hero + companion (125pts for both)",
+    { id: "tristanjules", name: "Tristan le Troubadour and Jules le Jongleur", rulesPage: 157, cost: 125, stat: "Tristan le Troubadour", role: "Knightly Hero + companion (125pts for both)",
       note: "Tristan wears heavy armour and a shield, rides a barded Warhorse, wields a lance, and hates enemy troops with missile weapons (incl. war machine crew). At the start of any Bretonnia turn he may sing one song until the next Bretonnia turn: +1 combat resolution, 3+ natural dispel, or Ld10 for his regiment. Jules (stat line: Jules le Jongleur) always stays at Tristan's side; all attacks at Jules are at -2 to hit, and while adjacent, enemies attacking Tristan must pass an Ld test or lose one attack." },
     { id: "jasperre", name: "Jasperre le'Beu Dragonslayer", cost: 150, stat: "Jasperre le'Beu Dragonslayer", role: "Knightly Hero",
       note: "Heavy armour, shield, rides a Pegasus. Immune to psychology.",
@@ -5230,7 +5232,7 @@ const DOGS_OF_WAR = {
     { id: "lucrezzia", name: "Lucrezzia Belladonna", cost: 250, stat: "Lucrezzia Belladonna", role: "Master Wizard",
       note: "All friendly units within 8\" auto-pass rally tests (as long as she isn't fleeing). Rides a Warhorse.",
       items: "Carries three poisonous items: the Phial of Poison (before battle, roll for each enemy character cheapest-to-most-expensive — the first to roll a 1 suffers two wounds, no save), the Poisoned Stiletto (all successful hits wound automatically), and the Potion of Pavona (usable on any friendly character before battle, or drunk by Lucrezzia — +1D6 to one characteristic for the game, but a roll of 1 also inflicts a wound with no save)." },
-    { id: "myrdas", name: "Myrdas the Mean and Sheik Yadosh", cost: 200, stat: "Myrdas the Mean", role: "Paymaster (200pts for Myrdas, Sheik Yadosh, and five Bodyguards)",
+    { id: "myrdas", name: "Myrdas the Mean and Sheik Yadosh", rulesPage: 174, cost: 200, stat: "Myrdas the Mean", role: "Paymaster (200pts for Myrdas, Sheik Yadosh, and five Bodyguards)",
       note: "Myrdas the Mean is always accompanied by Sheik Yadosh (stats as a normal Human Mercenary Soldier, 5+ armour save) and five Bodyguards with halberds and light armour (stats as Elite Human Mercenary Soldiers). Extra Bodyguards cost +8pts/model. Myrdas wears heavy armour and a shield (4+ save) and carries the pay chest. He also carries a treasure map: after deployment but before battle, roll 1D6 — 1-2: bodyguards get +1 to hit; 3-4: the pay chest's aura increases to 18\"; 5-6: all Dogs of War regiments get +1 combat resolution." },
     { id: "lorenzo", name: "Lorenzo Lupo", cost: 250, stat: "Lorenzo Lupo", role: "Lord",
       note: "Inspiring leader — any regiment he leads gets +1 combat resolution. A mighty Athlete — before battle roll 1D6: 1-2 = +1T, 3-4 = +1A, 5-6 = +1S. Comes with heavy armour and a shield.",
@@ -5419,7 +5421,7 @@ const CHAOS_DWARFS = {
       champion: { name: "Chaos Dwarf Champion", baseCost: 20, magicItemSlots: 1, stat: "Chaos Dwarf Champion", tags: ["chaosDwarf"] },
     },
     {
-      id: "cdblunderbusses", name: "Chaos Dwarf Blunderbusses", perModel: 12, minSize: 5, stat: "Chaos Dwarf Warriors", command: "standard",
+      id: "cdblunderbusses", name: "Chaos Dwarf Blunderbusses", rulesPage: 123, perModel: 12, minSize: 5, stat: "Chaos Dwarf Warriors", command: "standard",
       note: "Comes with heavy armour and Blunderbusses (may be reflavored as crossbows instead, under Old School Addendum — same points and profile). Fires even after moving, in a 12\" x (unit width) firing zone ahead of the regiment, hitting every model whose base is more than half within it (friend and foe alike). Hits are S3, rising to S4 with two full ranks or S5 with three-plus. No long-range/skirmisher penalty; normal cover and move-and-shoot penalties apply. Joined characters count as armed with Blunderbusses for strength purposes even if they aren't. May stand & shoot against distant chargers, hitting the charging unit only (no area effect on that reaction).", baseGear: ["Crossbows"],
       options: [
         { id: "shields", group: null, label: "Shields", cost: 2, per: "model" },
@@ -5528,7 +5530,7 @@ const CHAOS_DWARFS = {
       champion: { name: "Bull Centaur Render Champion", baseCost: 50, magicItemSlots: 1, stat: "Bull Centaur Render Champion", tags: ["bullCentaur"] },
     },
     {
-      id: "kdaiifireborn", name: "K'daii Fireborn", perModel: 41, minSize: 3, stat: "K'daii Fireborn", command: "none", theme: "modern",
+      id: "kdaiifireborn", name: "K'daii Fireborn", rulesPage: 129, perModel: 41, minSize: 3, stat: "K'daii Fireborn", command: "none", theme: "modern",
       note: "Requires a Sorcerer elsewhere in the army (now flagged live by this builder). Monstrous; flaming attacks, immune to fire, regenerate 4+ (not cancelled by flaming, but is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit that doesn't count toward combat resolution. Count as Daemons in all regards: cause fear, magical attacks, immune to poison/living-only effects/psychology, never flee (exorcised — counts as slain — if forced to). Cannot take a standard bearer or musician; only Daemonic characters may join.",
       champion: { name: "K'daii Manburner", baseCost: 50, magicItemSlots: 0, stat: "K'daii Manburner", note: "May take one Daemonic Reward from the Chaos army book's Daemonic Rewards (All) section (not modeled in this builder — apply on paper)." },
     },
@@ -5553,7 +5555,7 @@ const CHAOS_DWARFS = {
     },
     // --- Old School Addendum war machines ---
     {
-      id: "flamethrowerteam", name: "Flame Thrower Team", perUnit: 60, stat: "Weapon Team", kind: "warmachine", theme: "oldschool",
+      id: "flamethrowerteam", name: "Flame Thrower Team", rulesPage: 127, perUnit: 60, stat: "Weapon Team", kind: "warmachine", theme: "oldschool",
       note: "Weapon Team: two Chaos Dwarf Warriors in heavy armour on one 25x50mm base, skirmisher-style (360° LoS, no facing when charged by flyers, can't move-and-fire, may stand & shoot). Guess up to 6\" plus the artillery die; on a misfire the team is destroyed. Otherwise place the teardrop template (small end at the hit point) — models more than half covered suffer a flaming S5 hit, 1 wound=1D3. Any casualty forces a panic test. If it blows up during a stand & shoot, the charge counts as failed.",
       crewArmourFixed: "Heavy armour",
     },
@@ -5563,7 +5565,7 @@ const CHAOS_DWARFS = {
       crewArmourFixed: "Heavy armour",
     },
     {
-      id: "cdjuggernaut", name: "Chaos Dwarf Juggernaut", perUnit: 200, stat: "Chaos Dwarf Juggernaut", kind: "chariot", restriction: "0-1", theme: "oldschool", crewArmourFixed: "Heavy armour",
+      id: "cdjuggernaut", name: "Chaos Dwarf Juggernaut", rulesPage: 127, perUnit: 200, stat: "Chaos Dwarf Juggernaut", kind: "chariot", restriction: "0-1", theme: "oldschool", crewArmourFixed: "Heavy armour",
       note: "Unbreakable large chariot pushed by a Bull Centaur (M8; only the crew fights in melee, not the Centaur). Can't pursue/overrun, doesn't double movement on the charge, and doesn't halve movement at one wound. Crewed by six Chaos Dwarf Warriors in heavy armour with crossbows. Front-mounted organ-gun variant: S7, 1D3 wounds, no armour save, guess range up to 36\", may fire even after moving, can't pivot to shoot, only two barrels fire per round (never needs reloading). First misfire (non-bounce): can't shoot this turn or next, can still move. Second misfire (non-bounce): gun and Juggernaut both explode.",
     },
     {
@@ -5588,15 +5590,15 @@ const CHAOS_DWARFS = {
       crewArmourFixed: "Heavy armour",
     },
     {
-      id: "kdaiidestroyer", name: "K'daii Destroyer", perUnit: 300, stat: "K'daii Destroyer", kind: "monster", theme: "modern",
+      id: "kdaiidestroyer", name: "K'daii Destroyer", rulesPage: 130, perUnit: 300, stat: "K'daii Destroyer", kind: "monster", theme: "modern",
       note: "Requires a Sorcerer elsewhere in the army (now flagged live by this builder). Large monster, causes Terror, flaming attacks, immune to fire, regenerates 4+ (not cancelled by flaming, is by magical attacks). At the start of every melee phase, any model in base contact (friend or foe) suffers an automatic flaming S3 hit not counting toward combat resolution. Counts as a Daemon in all regards: magical attacks, immune to poison/living-only effects/psychology, never flees (exorcised — counts as slain — if forced to).",
     },
     {
-      id: "chaossiegegiant", name: "Chaos Siege Giant", perUnit: 275, stat: "Chaos Siege Giant", kind: "monster", theme: "modern",
+      id: "chaossiegegiant", name: "Chaos Siege Giant", rulesPage: 130, perUnit: 275, stat: "Chaos Siege Giant", kind: "monster", theme: "modern",
       note: "Follows the rulebook Giant with exceptions: Siege Armour (5+ save, 3+ vs. shooting). May take Runes of Hate for +25pts flat (add by hand — not wired up as a toggle here). Has Frenzy, and re-rolls (must keep the second result) whenever rolling for a random number of attacks. Special attacks each turn (choose one): Legbreaker (opposed D6+S roll vs. a model in contact, D3 wounds no save per point of margin, and anyone else in contact must pass Initiative or take an automatic wound), Smash with Pick (target fails Initiative or suffers 2D6 wounds no save — buildings auto-fail; on a double the pick jams and the Giant skips its next combat round), Head Butt Large Target (automatic S7 hit, wounded models knocked unconscious — auto-hit until they wake at the end of the next melee phase), Yell and Bawl (no attack, but automatically wins combat resolution by 2 if the Giant survives the round), Flail and Crush on a man-sized regiment (take the fall-over test; if it stands, 1D6 S8 hits), Ripping Blades (2D6 automatic S6 hits on a unit in contact; double 6 adds the extra hits but forces a fall-over test, double 1 does nothing and costs the Giant D3 wounds no save plus a fall).",
     },
     {
-      id: "irondaemon", name: "The Iron Daemon", perUnit: 350, stat: "Iron Daemon", kind: "chariot", theme: "modern",
+      id: "irondaemon", name: "The Iron Daemon", rulesPage: 131, perUnit: 350, stat: "Iron Daemon", kind: "chariot", theme: "modern",
       note: "Large chariot with a unique profile, 3+ armour save, causes terror, unbreakable, crewed by three Chaos Dwarf Warriors (only they fight in melee). Auto-passes all characteristic tests except Initiative (always fails those). Chariots that charge it suffer 1D6 S7 impact hits themselves; Night Goblin Fanatics touching it are slain. Moves like a chariot but can't free-pivot, obliterates obstacles, can't pursue/overrun/flee (unbreakable)/march, and doesn't double its charge move — instead add 1D6\" to its Movement (on a 1, it stalls for the rest of that turn). Doesn't halve movement at one wound. Front-mounted steam cannonade (organ gun): range 24\", fires 2D6 (two Artillery dice) shots, halved beyond half range, S5 AP at short range / S4 AP at long range, may fire after moving, can't pivot to shoot, two barrels per round, never reloads. First misfire: the Iron Daemon suffers a wound. Second misfire: it explodes (counts as slain). Doesn't fight in melee itself, but deals 1D6+1 S8 impact hits on the charge, may always disengage, and once per turn may grind its wheels for another 1D6+1 S8 impact hits while engaged. For +10pts flat, the cannonade may be swapped for a skullcracker (2D6+2 impact hits, armour piercing) — add by hand, not wired up as a toggle here.",
     },
   ],
@@ -5859,7 +5861,7 @@ const DARK_ELVES = {
       note: "Monstrous Spiders are small monsters — follow the main-rulebook rules for Monstrous Spiders.",
     },
     {
-      id: "cauldronofblood", name: "Witch Elf Cauldron of Blood", perUnit: 64, stat: "Wood Elf Warriors", kind: "warmachine", restriction: "0-1",
+      id: "cauldronofblood", name: "Witch Elf Cauldron of Blood", rulesPage: 135, perUnit: 64, stat: "Wood Elf Warriors", kind: "warmachine", restriction: "0-1",
       note: "The cauldron itself is indestructible and causes terror (not represented by the crew's stat line above, which is shown only because the crew fights). Crewed by three Witch Elves with light armour and two poisoned hand weapons. While accompanying the cauldron, the crew doesn't have to charge or pursue despite being frenzied. If the cauldron hasn't moved and doesn't fight, the crew may perform unholy rituals — as long as maintained, all Witch Elf units within 24\" get an extra attack on top of frenzy.",
       extraCrewCost: 12, extraCrewMax: 2, extraCrewLabel: "extra Witch Elf crew",
       crewArmourFixed: "Light armour",
@@ -5906,7 +5908,7 @@ const DARK_ELVES = {
     { id: "kouran", name: "Kouran, Captain of the Black Guard", cost: 125, stat: "Elven Hero (High Elf)", role: "Hero",
       note: "Hates all enemies.",
       items: "Carries Blades of Ensorcelled Iron (two hand weapons, +1 to hit) and the Armour of Meteoric Iron (light armour, 2+ armour save that cannot be improved)." },
-    { id: "shadowblade", name: "Shadowblade, Master of Assassins", cost: 150, stat: "Shadowblade, Master Assassin", role: "Follows the Assassin rules, with a twist",
+    { id: "shadowblade", name: "Shadowblade, Master of Assassins", rulesPage: 137, cost: 150, stat: "Shadowblade, Master Assassin", role: "Follows the Assassin rules, with a twist",
       note: "Rather than hiding in a Dark Elf regiment, Shadowblade may instead deploy hidden in an enemy infantry regiment of Humans, Elves, Orcs, Beastmen Gors, Bestigors, Chaos Marauders, Chaos Warriors, Saurus Warriors, Zombies, Ghouls, or Hobgoblins. Reveal him at the start of any of your turns: roll 1D6 — on a 1 he was discovered before the battle (counts as slain); otherwise place him within 2D6\" of the nominated regiment, possibly directly into combat (counts as his move that turn).",
       items: "Carries two poisoned hand weapons (+1 strength, wounds multiply into 1D3), light armour, a Potion of Strength (+3 strength in one melee round, must be drunk just before attacking, one use), and the Heart of Woe (if slain in melee, all models within a radius equal to his original wounds suffer an automatic hit at his Strength +1D6, wounds multiply into 1D6, normal armour save applies)." },
     { id: "mallus", name: "Mallus Darkblade", cost: 250, stat: "Elven Prince", role: "Lord",
@@ -6050,11 +6052,11 @@ const SKAVEN = {
       note: "Cannot take a standard bearer, musician, or regimental champion. Must skirmish. A Globadier may throw a Poison Wind Globe 6\" using BS to hit (no long-range penalty) — hits cause one automatic wound, no armour save. A natural 1 to hit shatters the globe early; the Globadier suffers a wound on a 5+ (counts as slain, only has one wound). Poison Wind Globes won't affect troops immune to poison.",
     },
     {
-      id: "plaguecenserbearers", name: "Plague Censer Bearers", perModel: 20, minSize: 5, stat: "Plague Censer Bearers", command: "none",
+      id: "plaguecenserbearers", name: "Plague Censer Bearers", rulesPage: 66, perModel: 20, minSize: 5, stat: "Plague Censer Bearers", command: "none",
       note: "Cannot take a standard bearer, musician, or regimental champion. Must skirmish. Enemies suffer -2 to hit them when shooting (including the skirmisher bonus). Frenzied and hate all enemies. In melee the censer works as a flail; additionally, everyone (friend and foe) in base contact with a Censer Bearer tests Toughness at the start of the melee phase or suffers a wound with no armour save (the Bearer himself only fails on a 6, having built up resistance). Fumes won't affect troops immune to poison.", baseGear: ["Flails"],
     },
     {
-      id: "packmasterpack", name: "Skaven Packmasters, Giant Rats & Rat Ogres", perModel: 0, minSize: 1, kind: "composite", command: "none",
+      id: "packmasterpack", name: "Skaven Packmasters, Giant Rats & Rat Ogres", rulesPage: 66, perModel: 0, minSize: 1, kind: "composite", command: "none",
       note: "Follows the main-rulebook Beastmaster rules. Giant Rats (infantry) always pursue and fight one extra rank to the front; packs of Giant Rats move as fast cavalry (but can't cross water, being infantry). Rat Ogres (monstrous) cause fear and don't move as fast cavalry. Cannot take a standard bearer, musician, or regimental champion. Giant Rats and Rat Ogres count as two different regiment types for the Clanrat-mainstay cap — your army may include as many of each as you have Clanrat Warrior regiments.",
       composition: [
         { id: "packmaster", label: "Skaven Packmasters", cost: 11, stat: "Skaven Packmasters" },
@@ -6069,7 +6071,7 @@ const SKAVEN = {
       note: "The cheapest Rat Swarm unit counts toward Regiments; further units count toward Chariots, Monsters, and War Machines. Follow the main-rulebook rules for Swarms. Priced per base.",
     },
     {
-      id: "doomwheel", name: "Doomwheel", perUnit: 125, stat: "Doomwheel", kind: "chariot",
+      id: "doomwheel", name: "Doomwheel", rulesPage: 67, perUnit: 125, stat: "Doomwheel", kind: "chariot",
       note: "A large chariot ridden by an Engineer (statistics of a Skaven Champion). Moves unpredictably: in the compulsory movement phase, face any direction and move 3D6\" straight — contact with any unit counts as a charge, delivering 1D6 S6 impact hits. While the rider lives, it may fire a lightning bolt in the shooting phase at the nearest enemy within 12\" (or everyone in base contact): 2D6 hits at a Strength set by the artillery die (a misfire wounds the Doomwheel itself once). The rider fights normally in melee, but attackers other than large targets/flyers suffer -2 to hit him, and he's immune to psychology. If the rider dies, the Doomwheel scatters randomly each turn (unless engaged) and auto-fails any Ld test.",
     },
     {
@@ -6077,7 +6079,7 @@ const SKAVEN = {
       note: "Crewed by three Skaven. Fires a lightning bolt 1D6x10\" directly away from the muzzle — everything under the line suffers one hit at a Strength set by the artillery die, no armour save, 1 wound = 1D6 wounds. First misfire: no shot, can't fire next turn. Second misfire: the cannon explodes. The beam is blocked by hills, rocky outcrops, and building walls, but not by forests, obstacles, or other difficult/impassable terrain.",
     },
     {
-      id: "warpfirethrower", name: "Warpfire Thrower Team", perUnit: 50, stat: "Skaven Weapon Team", kind: "warmachine",
+      id: "warpfirethrower", name: "Warpfire Thrower Team", rulesPage: 69, perUnit: 50, stat: "Skaven Weapon Team", kind: "warmachine",
       note: "Weapon Team: two Skaven on one 25x50mm base, using the regular Clanrat Warrior statline but functioning as a single model with 2 Wounds, skirmisher-style (360° LoS, no facing when charged by flyers, can't move-and-fire, may stand & shoot). Guess up to 6\" plus the artillery die; a misfire destroys the team. Otherwise, the teardrop template (small end at the hit point) — models more than half covered suffer a S5 hit, 1 wound=1D3. Any casualty forces a panic test.",
     },
     {
@@ -6085,7 +6087,7 @@ const SKAVEN = {
       note: "Weapon Team, built as above (regular Clanrat Warrior statline, single model with 2 Wounds). Range 18\", 2D6 shots, S3 armour piercing (-1 save). On any double, fires in a random (scatter die) direction instead, hitting the first unit in its path within range — each shot then hits automatically.",
     },
     {
-      id: "jezzailteam", name: "Warplock Jezzail Team", perUnit: 25, stat: "Skaven Weapon Team", kind: "quantity", countsAsFirstRegiment: true, countsAsFirstRegimentWhole: true, restriction: "0-5",
+      id: "jezzailteam", name: "Warplock Jezzail Team", rulesPage: 69, perUnit: 25, stat: "Skaven Weapon Team", kind: "quantity", countsAsFirstRegiment: true, countsAsFirstRegimentWhole: true, restriction: "0-5",
       note: "Up to five Warplock Jezzails team together as one unit, working just like a skirmish regiment (one choice for the Clanrat-mainstay cap). The cheapest unit counts toward Regiments; further units count toward Chariots, Monsters, and War Machines. Uses the regular Clanrat Warrior statline, but functions as a single model with 2 Wounds. A Jezzail is a potent hand gun: fires as normal using BS, range 36\", S5 armour piercing, and any wound inflicted multiplies into 1D3.",
     },
   ],
@@ -6098,7 +6100,7 @@ const SKAVEN = {
     { id: "snikch", name: "Deathmaster Snikch, Chief Assassin of Clan Eshin", cost: 225, stat: "Chief Assassin Deathmaster Snikch", role: "Follows the Assassin rules, with a twist — cannot be the army general",
       note: "Wields three poisoned blades as Assassins' weapons, +2 attacks for 6 total per round. Instead of infiltrating, may Scout (alone or with a Gutter Runners regiment). 4+ ward save. May take one additional magic item.", extraMagicItemSlots: 1,
       items: "Carries poisoned throwing stars and the Cloak of Shadows (if at least 4\" from the enemy at the start of the turn, cannot be charged, shot at, or targeted by a spell unless the opponent rolls a 6 to spot him — they may pick another target on a fail; if he's blocking a unit from being charged, simply move him aside to let the charge through) and the Bands of Power (enchanted, bound spell — if cast successfully, doubles the wielder's Strength until the next magic phase)." },
-    { id: "ikitclaw", name: "Ikit Claw, Chief Warlock of Clan Skryre", cost: 450, stat: "Chief Warlock Ikit Claw", role: "Warlord and Grey Seer", tags: ["wizard"],
+    { id: "ikitclaw", name: "Ikit Claw, Chief Warlock of Clan Skryre", rulesPage: 70, cost: 450, stat: "Chief Warlock Ikit Claw", role: "Warlord and Grey Seer", tags: ["wizard"],
       note: "May use any spell deck except Waaagh Magic (as a Grey Seer, may use Grey-Seer-only spells; comes with four Warpstone Tokens). Unbreakable, but must flee along if his regiment flees. In the shooting phase, choose one: fire his pistol (magical warpstone bullets), cast Poison Wind Globes at double range (his high Strength), or fire his small Warpfire Thrower as a S4 breath weapon from his base (runs out on a preceding roll of 1-2 on a D6). May use all his gear and still cast spells. His mechanical claw's +1S is already reflected in his profile. May take three additional magic items.", extraMagicItemSlots: 3,
       items: "Carries the Storm Daemon, a magic halberd with a bound spell — may cast Warp Lightning (24\", 1D6 S5 hits, no armour save); after use, roll a die, on a 1 it's exhausted for the rest of the game (still counts as a magic halberd)." },
     { id: "skrolk", name: "Lord Skrolk, Plaguelord of Clan Pestilens", cost: 325, stat: "Plaguelord Lord Skrolk", role: "Lord", tags: ["wizard"],
@@ -7496,7 +7498,7 @@ const HALFLINGS = {
   ],
   chariotsMonsters: [
     {
-      id: "treemen-halfling", name: "Treemen", perUnit: 200, stat: "Treeman", kind: "quantity", countsAsFirstRegiment: true, maxQty: 1,
+      id: "treemen-halfling", name: "Treemen", rulesPage: 178, perUnit: 200, stat: "Treeman", kind: "quantity", countsAsFirstRegiment: true, maxQty: 1,
       note: "Only if the army also includes Wood Elf Auxiliaries. The first Treeman counts toward Regiments, further ones toward Monsters. Large, terror-causing, immune to psychology, flammable, hate Orcs/Goblins/Hobgoblins. 3+ natural armour save. Rooted to the spot — don't take break tests unless wounded that combat round. May forfeit normal attacks to deal 1D6 automatic wounds to a structure in base contact instead. Falls over like a Giant when killed (Felled Treeman Template, Initiative test to avoid, no armour saves). Battle-phase specifics not simulated beyond points cost.",
     },
     {
@@ -7513,7 +7515,7 @@ const HALFLINGS = {
       extraCrewCost: 5, extraCrewLabel: "extra Halfling crew",
     },
     {
-      id: "cockatrice-main", name: "The Cockatrice", perUnit: 200, stat: "Cockatrice", restriction: "0-1",
+      id: "cockatrice-main", name: "The Cockatrice", rulesPage: 178, perUnit: 200, stat: "Cockatrice", restriction: "0-1",
       note: "Only available if the general isn't already riding it as a Moot General mount (see army-wide rules — the army only ever has one Cockatrice, ridden or independent). Large, causes terror, can fly. Petrify: in the shooting phase, may target any one visible model within 8\" (no \"Look Out, Sir\" roll) — the target rolls 1D6 and must roll under its own Initiative to avoid being turned to stone and slain; a roll of 6 always affects the target regardless of Initiative.",
     },
   ],
@@ -7826,7 +7828,7 @@ const LIZARDMEN = {
       ],
     },
     {
-      id: "salamanders-liz", name: "Salamander", perUnit: 80, stat: "Salamander", mountStat: "Lizardman Skink Warrior", mountLabel: "Skink Handlers (4, with prodders)",
+      id: "salamanders-liz", name: "Salamander", rulesPage: 165, perUnit: 80, stat: "Salamander", mountStat: "Lizardman Skink Warrior", mountLabel: "Skink Handlers (4, with prodders)",
       note: "A four-legged reptile that shoots fireballs, accompanied by four Skink handlers. 4+ scaly-skin save (floor 6+). Moves as skirmishers, but enemies get no shooting penalty for it (too large to benefit) — if shot at, roll 1D6: 1-4 hits the Salamander, 5-6 hits a handler. If it hasn't marched, may shoot an artillery-die number of S4 no-armour-save flaming fireballs (range 24\"); a misfire means it eats 1D3 handlers instead. May stand-and-shoot as a charge reaction. Rolls on the Monster Reaction Table if all handlers are slain. Not aquatic, but may cross water at half speed. Battle-phase specifics documented, not simulated beyond points cost.",
     },
   ],
@@ -9900,18 +9902,47 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
 // sheet always matches what's actually in the roster, but renders full stat blocks (via the same
 // resolveUnitStat/resolveUnitTags/StatBlock helpers RosterUnitCard uses) in a plain black-on-white
 // document layout instead of the app's interactive cards.
+// Unit rules text for the print/export sheet. Reuses each entry's existing `note` field, minus the
+// app-specific caveats some notes carry ("not modeled in this builder", "add by hand", etc.) —
+// those are useful on screen but are noise on a sheet you take to the table.
+const PRINT_META_PAREN_RE = /builder|by hand|not simulated|not modeled|not toggled|hard-enforced|flagged live/i;
+const PRINT_META_SENTENCE_RE = /builder|not simulated|not modeled|hard-enforced/i;
+function printRulesText(note) {
+  if (!note) return "";
+  // Inside a parenthetical, drop only the caveat clauses ("mandatory if poisoned — not hard-enforced"
+  // keeps "mandatory if poisoned"); if nothing real is left, drop the whole parenthetical.
+  const noParens = note.replace(/\s*\(([^()]*)\)/g, (m, inner) => {
+    if (!PRINT_META_PAREN_RE.test(inner)) return m;
+    const kept = inner.split(/\s+—\s+|;\s+/).filter((part) => !PRINT_META_PAREN_RE.test(part) && !/^(no|not|here)\b/i.test(part.trim()));
+    return kept.length ? ` (${kept.join(" — ")})` : "";
+  });
+  const noDashClauses = noParens.replace(/\s+—\s+[^.—]*(?:by hand|not wired)[^.]*(?=\.)/gi, "");
+  return noDashClauses.split(/(?<=\.)\s+/).filter((sent) => !PRINT_META_SENTENCE_RE.test(sent)).join(" ").trim();
+}
+
+// Rules text longer than this prints as a book reference instead, so very long entries don't
+// stretch the sheet. Set `rulesPage` on a unit def to include its page number in the reference.
+const PRINT_RULES_MAX_CHARS = 450;
+const PRINT_RULES_BOOK = "Warhammer Renaissance Armies 26-27";
+function printRulesFor(def) {
+  const text = printRulesText(def?.note);
+  if (text.length <= PRINT_RULES_MAX_CHARS) return text;
+  return def.rulesPage ? `Refer to page ${def.rulesPage} in the ${PRINT_RULES_BOOK} book.` : `Refer to the ${PRINT_RULES_BOOK} book.`;
+}
+
 function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodlineId }) {
   const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments, extraStatlines, familiarStatKey, familiarLabel } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   const hasStats = !!(statKey || statNote);
+  const rulesText = printRulesFor(def);
   return (
     <div className="whr-print-unit">
       <div className="whr-print-unit-header">
         <span className="whr-print-unit-name">{unit.customName ? `${unit.customName} (${def.name})` : def.name}{models != null ? ` (${models})` : ""}</span>
         <span className="whr-print-unit-cost">{fmtPts(cost)} pts</span>
       </div>
-      {(hasStats || tags.length > 0) && (
-        <div className="whr-print-unit-body">
+      {(hasStats || tags.length > 0 || rulesText) && (
+        <div className={`whr-print-unit-body${rulesText && tags.length > 0 ? " has-rules" : ""}`}>
           {hasStats && (
             <div className="whr-print-stats-col">
               {charLabel && <div className="whr-print-stat-label">{charLabel}</div>}
@@ -9953,6 +9984,7 @@ function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodline
               {tags.map((t, i) => <li key={i}>{t}</li>)}
             </ul>
           )}
+          {rulesText && <p className="whr-print-rules">{rulesText}</p>}
         </div>
       )}
     </div>
