@@ -948,6 +948,10 @@ const STATS = {
   "Stag": { M: 9, WS: 3, BS: 0, S: 4, T: 3, W: 1, I: 4, A: 1, Ld: 5 },
   "Zoat Character": { M: 7, WS: 6, BS: 4, S: 5, T: 5, W: 3, I: 7, A: 3, Ld: 10 },
   "Zoat Warrior": { M: 7, WS: 5, BS: 3, S: 4, T: 5, W: 3, I: 6, A: 2, Ld: 8 },
+
+  "Scroll Familiar": { M: 5, WS: 3, BS: 2, S: 3, T: 3, W: 1, I: 4, A: 1, Ld: 8 },
+  "Warrior Familiar": { M: 5, WS: 5, BS: 0, S: 5, T: 5, W: 1, I: 6, A: 2, Ld: 10 },
+  "Spell Familiar": { M: 5, WS: 3, BS: 3, S: 2, T: 3, W: 1, I: 4, A: 1, Ld: 8 },
 };
 const STAT_ROW_ORDER = ["M", "WS", "BS", "S", "T", "W", "I", "A", "Ld"];
 
@@ -1078,9 +1082,9 @@ const COMMON_MAGIC_ITEMS = [
   { id: "cm-staffmanycolouredtraitor", name: "Staff of the Many Coloured Traitor", cost: 125, cat: "arcane", restrictedTo: [{ tags: ["wizard"] }], desc: "All successful rolls to dispel spells cast by the bearer of this item must be re-rolled. Does not include bound spells." },
 
   // Familiars (wizards on foot only)
-  { id: "cm-scrollfamiliar", name: "Scroll Familiar", cost: 10, cat: "familiar", restrictedTo: [{ tags: ["wizard"] }], footOnly: true, desc: "May carry two scrolls just as a character; usable by its master only while in base contact with it." },
-  { id: "cm-warriorfamiliar", name: "Warrior Familiar", cost: 30, cat: "familiar", restrictedTo: [{ tags: ["wizard"] }], footOnly: true, desc: "If its master is attacked in melee (even in a challenge), the Familiar interposes itself and must be killed before hits can be allocated against the wizard. Always strikes first. M5 WS5 BS0 S5 T5 W1 I6 A2 Ld10." },
-  { id: "cm-spellfamiliar", name: "Spell Familiar", cost: 30, cat: "familiar", restrictedTo: [{ tags: ["wizard"] }], footOnly: true, desc: "After spells are dealt, may pick a spell from its master's lore not already in its master's possession; the master may cast it while in base contact with the familiar. M5 WS3 BS3 S2 T3 W1 I4 A1 Ld8." },
+  { id: "cm-scrollfamiliar", name: "Scroll Familiar", cost: 10, cat: "familiar", stat: "Scroll Familiar", restrictedTo: [{ tags: ["wizard"] }], footOnly: true, desc: "May carry two scrolls just as a character; usable by its master only while in base contact with it." },
+  { id: "cm-warriorfamiliar", name: "Warrior Familiar", cost: 30, cat: "familiar", stat: "Warrior Familiar", restrictedTo: [{ tags: ["wizard"] }], footOnly: true, desc: "If its master is attacked in melee (even in a challenge), the Familiar interposes itself and must be killed before hits can be allocated against the wizard. Always strikes first." },
+  { id: "cm-spellfamiliar", name: "Spell Familiar", cost: 30, cat: "familiar", stat: "Spell Familiar", restrictedTo: [{ tags: ["wizard"] }], footOnly: true, desc: "After spells are dealt, may pick a spell from its master's lore not already in its master's possession; the master may cast it while in base contact with the familiar." },
 
   // Magic Banners
   { id: "cm-endlessbanner", name: "Endless Banner", cost: 0, cat: "banner", excludeTags: ["bsb"], regimentDiscount: { pct: 0.20, capNormal: 50, capLarge: 100, largeThreshold: 3000 }, minRegimentSize: 40,
@@ -1111,6 +1115,9 @@ const COMMON_MAGIC_ITEMS = [
 ];
 
 const COMMON_MAGIC_ITEMS_NO_ARCANE = COMMON_MAGIC_ITEMS.filter((i) => i.cat !== "arcane" && i.cat !== "familiar");
+// Scrolls the Scroll Familiar may carry (it "may carry two scrolls just as a character") — the
+// generic one-use arcane scrolls from the Common Magic Items list above, not faction-specific ones.
+const SCROLL_FAMILIAR_ITEM_IDS = ["cm-powerscroll", "cm-dispelmagicscroll", "cm-dispelmagicscroll2", "cm-destroymagicscroll"];
 
 const WOOD_ELVES_MAGIC_ITEMS = [
   { id: "mi-hagbane", name: "Hagbane Arrows", cost: 10, cat: "weapon", desc: "Requires a bow/longbow. Magic arrows wound on 4+, 1 wound = 1D3 wounds." },
@@ -1152,8 +1159,10 @@ const NON_ARCANE_CATEGORIES = Object.keys(MI_CATEGORY_LABEL).filter((c) => c !==
 const COLLEGE_LORES = ["Celestial", "Grey", "Bright", "Gold", "Jade", "Light", "Amber", "Amethyst"];
 // Battle Standard Bearers (tags include "bsb") are the one kind of plain character whose personal
 // item slot conventionally doubles as the unit's magic banner — give them NON_BANNER_CATEGORIES
-// plus "banner" back unless they already specify their own magicItemCategoryFilter.
-const defaultCategoryFilter = (def) => def?.magicItemCategoryFilter || ((def?.tags || []).includes("bsb") ? [...NON_BANNER_CATEGORIES, "banner"] : NON_BANNER_CATEGORIES);
+// plus "banner" back unless they already specify their own magicItemCategoryFilter. A character
+// with def.bannerOption (e.g. a Slann Mage Priest electing to carry the battle standard) gets the
+// same banner access, but only once the unit itself has actually toggled inst.carriesBanner on.
+const defaultCategoryFilter = (def, inst) => def?.magicItemCategoryFilter || (((def?.tags || []).includes("bsb") || (def?.bannerOption && inst?.carriesBanner)) ? [...NON_BANNER_CATEGORIES, "banner"] : NON_BANNER_CATEGORIES);
 const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 /* ============================================================================
@@ -7718,20 +7727,20 @@ const LIZARDMEN = {
       ],
     },
     {
-      id: "slannlord", name: "Slann Mage Priest Lord (level 4)", cost: 400, stat: "Slann Mage Priest Lord", magicItemSlots: 5, role: "Lord", tags: ["wizard", "slann"],
-      gearNote: "Carried atop a Palanquin, which makes him a large monster — normally moves and fights as a single model, but may instead be placed in the middle of a regiment's front rank (targetable separately by missile fire; rank bonus counts the space as regular troops). May use High Magic and College Magic. May carry the battle standard for +75pts (one item may then be a magic banner) — not toggled here, add the cost by hand. Gets one magic item more than his levels (already reflected: 5 slots for level 4).",
+      id: "slannlord", name: "Slann Mage Priest Lord (level 4)", cost: 400, stat: "Slann Mage Priest Lord", magicItemSlots: 5, role: "Lord", tags: ["wizard", "slann"], bannerOption: { cost: 75 },
+      gearNote: "Carried atop a Palanquin, which makes him a large monster — normally moves and fights as a single model, but may instead be placed in the middle of a regiment's front rank (targetable separately by missile fire; rank bonus counts the space as regular troops). May use High Magic and College Magic. May carry the battle standard for +75pts (one item may then be a magic banner) — cannot be taken alongside a separate Lizardman Saurus Battle Standard Bearer. Gets one magic item more than his levels (already reflected: 5 slots for level 4).",
     },
     {
-      id: "mastermageslann", name: "Master Slann Mage Priest (level 3)", cost: 250, stat: "Master Slann Mage Priest", magicItemSlots: 4, tags: ["wizard", "slann"],
-      gearNote: "Carried atop a Palanquin (large monster; may be placed in a regiment's front rank instead — see Lord's note). May use High Magic and College Magic. May carry the battle standard for +75pts (not toggled here). Gets one magic item more than his levels (already reflected).",
+      id: "mastermageslann", name: "Master Slann Mage Priest (level 3)", cost: 250, stat: "Master Slann Mage Priest", magicItemSlots: 4, tags: ["wizard", "slann"], bannerOption: { cost: 75 },
+      gearNote: "Carried atop a Palanquin (large monster; may be placed in a regiment's front rank instead — see Lord's note). May use High Magic and College Magic. May carry the battle standard for +75pts (one item may then be a magic banner) — cannot be taken alongside a separate Lizardman Saurus Battle Standard Bearer. Gets one magic item more than his levels (already reflected).",
     },
     {
-      id: "slannchampion", name: "Slann Mage Priest Champion (level 2)", cost: 150, stat: "Slann Mage Priest Champion", magicItemSlots: 3, tags: ["wizard", "slann"],
-      gearNote: "Carried atop a Palanquin (large monster; may be placed in a regiment's front rank instead). May use High Magic and College Magic. May carry the battle standard for +75pts (not toggled here). Gets one magic item more than his levels (already reflected).",
+      id: "slannchampion", name: "Slann Mage Priest Champion (level 2)", cost: 150, stat: "Slann Mage Priest Champion", magicItemSlots: 3, tags: ["wizard", "slann"], bannerOption: { cost: 75 },
+      gearNote: "Carried atop a Palanquin (large monster; may be placed in a regiment's front rank instead). May use High Magic and College Magic. May carry the battle standard for +75pts (one item may then be a magic banner) — cannot be taken alongside a separate Lizardman Saurus Battle Standard Bearer. Gets one magic item more than his levels (already reflected).",
     },
     {
-      id: "slannmagepriest", name: "Slann Mage Priest (level 1)", cost: 75, stat: "Slann Mage Priest", magicItemSlots: 2, tags: ["wizard", "slann"],
-      gearNote: "Carried atop a Palanquin (large monster; may be placed in a regiment's front rank instead). May use High Magic and College Magic. May carry the battle standard for +75pts (not toggled here). Gets one magic item more than his levels (already reflected).",
+      id: "slannmagepriest", name: "Slann Mage Priest (level 1)", cost: 75, stat: "Slann Mage Priest", magicItemSlots: 2, tags: ["wizard", "slann"], bannerOption: { cost: 75 },
+      gearNote: "Carried atop a Palanquin (large monster; may be placed in a regiment's front rank instead). May use High Magic and College Magic. May carry the battle standard for +75pts (one item may then be a magic banner) — cannot be taken alongside a separate Lizardman Saurus Battle Standard Bearer. Gets one magic item more than his levels (already reflected).",
     },
     {
       id: "mummifiedslann", name: "Mummified Slann Mage Priest Lord (level 5)", cost: 250, stat: "Slann Mage Priest Lord", magicItemSlots: 6, magicItemCategoryFilter: ["enchanted", "arcane", "banner"], tags: ["wizard", "slann"],
@@ -8221,9 +8230,11 @@ function characterCost(inst, def, armyData) {
   if (def.anvilOption && inst.anvil) total += def.anvilOption.cost;
   if (def.chaosArmourOption && inst.chaosArmour) total += def.chaosArmourOption.cost;
   (inst.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+  (inst.scrollFamiliarIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
   (inst.liberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) total += mi.cost; });
   Object.values(inst.runeItems || {}).forEach((ids) => (ids || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; }));
   if (def.bloodlinePowerSlots) (inst.bloodlinePowerIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) total += mi.cost; });
+  if (def.bannerOption && inst.carriesBanner) total += def.bannerOption.cost;
   return total;
 }
 
@@ -8533,6 +8544,7 @@ function allUsedMagicItemIds(roster, excludeUnitId) {
     (u.commanderMagicItemIds || []).forEach((id) => used.add(id));
     (u.extraMagicItemIds || []).forEach((id) => used.add(id));
     (u.bloodlinePowerIds || []).forEach((id) => used.add(id));
+    (u.scrollFamiliarIds || []).forEach((id) => used.add(id));
     (u.multiChampionItems || []).forEach((arr) => (arr || []).forEach((id) => used.add(id)));
     (u.championInstances || []).forEach((ci) => (ci.magicItemIds || []).forEach((id) => used.add(id)));
     (u.includedLeaderMagicItemIds || []).forEach((id) => used.add(id));
@@ -9190,9 +9202,12 @@ function championOptionEffective(opt, bloodlineId) {
 }
 function resolveUnitStat(kind, unit, def, bloodlineId, armyData) {
   if (kind === "character") {
+    const familiarMi = armyData ? (unit.magicItemIds || []).map((id) => miById(armyData.magicItems, id)).find((mi) => mi?.cat === "familiar" && mi.stat) : null;
+    const familiarStatKey = familiarMi?.stat || null;
+    const familiarLabel = familiarMi?.name || null;
     const mount = def.mounts?.find((m) => m.id === unit.mountId);
-    if (mount) return { statKey: def.stat, statNote: null, mountStatKey: mount.stat, charLabel: def.name, mountLabel: mount.name.replace(/\s*\([^)]*\)\s*$/, "") };
-    return { statKey: def.stat, statNote: null, mountStatKey: null };
+    if (mount) return { statKey: def.stat, statNote: null, mountStatKey: mount.stat, charLabel: def.name, mountLabel: mount.name.replace(/\s*\([^)]*\)\s*$/, ""), familiarStatKey, familiarLabel };
+    return { statKey: def.stat, statNote: null, mountStatKey: null, familiarStatKey, familiarLabel };
   }
   if (kind === "regiment") {
     if (def.kind === "composite") return { statKey: null, statNote: null };
@@ -9293,6 +9308,7 @@ function collectWargearItems(kind, unit, def, armyData, bloodlineId, itemsMap) {
     if (def.chaosArmourOption && unit.chaosArmour) addMundane(def.chaosArmourOption.label);
     if (!def.meleeGroup && !hasMagicWeapon) addMundane("Hand weapon");
     addMagicIds(unit.magicItemIds);
+    addMagicIds(unit.scrollFamiliarIds);
     addLiberatedIds(unit.liberatedMagicItemIds);
     addRuneGroups(unit.runeItems);
     addMagicIds(unit.bloodlinePowerIds);
@@ -9371,6 +9387,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
     if (unit.missile && unit.missile !== "None (default)" && def.missileGroup) tags.push(unit.missile);
     if (unit.experimentalMissile && unit.experimentalMissile !== "None (default)" && def.experimentalMissileGroup) tags.push(unit.experimentalMissile);
     if (def.wingsOption && unit.wings) tags.push("Wings");
+    if (def.bannerOption && unit.carriesBanner) tags.push("Carries the Battle Standard");
     if (def.chaosArmourOption && unit.chaosArmour) tags.push(def.chaosArmourOption.label);
     if (def.magicLevelOption && (unit.magicLevel ?? def.magicLevelOption.min ?? 0) > 0) tags.push(`+${unit.magicLevel ?? def.magicLevelOption.min} magic levels`);
     if (isWizard(def, unit) && armyData.loreOptions) {
@@ -9378,6 +9395,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
       if (lore) tags.push(`Lore: ${lore}`);
     }
     (unit.magicItemIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(mi.name); });
+    (unit.scrollFamiliarIds || []).forEach((id) => { const mi = miById(armyData.magicItems, id); if (mi) tags.push(`${mi.name} (Familiar)`); });
     (unit.liberatedMagicItemIds || []).forEach((id) => { const mi = miByIdAnySource(armyData, id); if (mi) tags.push(mi.name); });
     Object.values(unit.runeItems || {}).forEach((ids) => {
       const names = (ids || []).map((id) => miById(armyData.magicItems, id)?.name).filter(Boolean);
@@ -9515,7 +9533,7 @@ function resolveUnitTags(kind, unit, def, armyData, bloodlineId) {
 }
 
 function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, models, armyData, bloodlineId, cardRef, dragHandleProps }) {
-  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments, extraStatlines } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
+  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments, extraStatlines, familiarStatKey, familiarLabel } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   return (
     <div ref={cardRef} className={`whr-card ${selected ? "whr-card-selected" : ""}`}
@@ -9560,6 +9578,12 @@ function RosterUnitCard({ kind, unit, def, cost, selected, onSelect, onRemove, m
             <>
               <div className="whr-eyebrow" style={{ fontSize: 12.5, margin: "6px 0 2px" }}>{mountLabel}</div>
               <StatBlock statKey={mountStatKey} statNote={null} />
+            </>
+          )}
+          {familiarStatKey && (
+            <>
+              <div className="whr-eyebrow" style={{ fontSize: 12.5, margin: "6px 0 2px" }}>{familiarLabel}</div>
+              <StatBlock statKey={familiarStatKey} statNote={null} />
             </>
           )}
           {(detachments || []).map((d, i) => (
@@ -9877,7 +9901,7 @@ function RosterPanel({ armyData, roster, totalPoints, pointLimit, regimentPoints
 // resolveUnitStat/resolveUnitTags/StatBlock helpers RosterUnitCard uses) in a plain black-on-white
 // document layout instead of the app's interactive cards.
 function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodlineId }) {
-  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments, extraStatlines } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
+  const { statKey, statNote, championStatKey, championLabel, mountStatKey, charLabel, mountLabel, detachments, extraStatlines, familiarStatKey, familiarLabel } = resolveUnitStat(kind, unit, def, bloodlineId, armyData);
   const tags = resolveUnitTags(kind, unit, def, armyData, bloodlineId);
   const hasStats = !!(statKey || statNote);
   return (
@@ -9902,6 +9926,12 @@ function PrintableUnitEntry({ kind, unit, def, cost, models, armyData, bloodline
                 <>
                   <div className="whr-print-stat-label">{mountLabel}</div>
                   <StatBlock statKey={mountStatKey} statNote={null} />
+                </>
+              )}
+              {familiarStatKey && (
+                <>
+                  <div className="whr-print-stat-label">{familiarLabel}</div>
+                  <StatBlock statKey={familiarStatKey} statNote={null} />
                 </>
               )}
               {(detachments || []).map((d, i) => (
@@ -10371,6 +10401,35 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
         </div>
       )}
 
+      {def.bannerOption && (() => {
+        // A Mage Priest carrying the battle standard and a separate book-level Battle Standard
+        // Bearer character (tags include "bsb") are mutually exclusive per the rulebook ("you
+        // cannot take this option if a Slann Mage Priest carries the battle standard") — same
+        // army-wide slot, two different paths to it. Flagged inline rather than silently blocked,
+        // consistent with how this builder handles every other cross-unit restriction.
+        const otherBsbUnit = roster.characters.find((u) => {
+          if (u.instanceId === unit.instanceId) return false;
+          const d = armyData.characters.find((c) => c.id === u.defId);
+          return d && (d.tags || []).includes("bsb");
+        });
+        return (
+          <div style={{ marginTop: 8 }}>
+            <label className="whr-opt-row whr-opt-label">
+              <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <input type="checkbox" checked={!!unit.carriesBanner} onChange={(e) => updateUnit({ ...unit, carriesBanner: e.target.checked })} />
+                Carries the Battle Standard
+              </span>
+              <span className="whr-opt-cost">+{def.bannerOption.cost}pts</span>
+            </label>
+            {unit.carriesBanner && otherBsbUnit && (
+              <p style={{ fontSize: 14, color: "var(--burgundy)", marginTop: 4 }}>
+                You already have {otherBsbUnit.nickname || armyData.characters.find((c) => c.id === otherBsbUnit.defId)?.name} as your Battle Standard Bearer — per the book, you can't have both. Remove one.
+              </p>
+            )}
+          </div>
+        );
+      })()}
+
       {def.chaosArmourOption && (
         <div style={{ marginTop: 8 }}>
           <label className="whr-opt-row whr-opt-label">
@@ -10445,7 +10504,7 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
       {def.magicItemSlots > 0 && (() => {
         const runeItems = unit.runeItems || {};
         const runeSlotsUsed = Object.values(runeItems).filter((arr) => arr && arr.length > 0).length;
-        const effFilter = defaultCategoryFilter(def);
+        const effFilter = defaultCategoryFilter(def, unit);
         const itemCtx = itemContext(def, unit, { characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
         const namedCatOf = (id) => miById(armyData.magicItems, id)?.cat;
         const hasNamedOfCat = (cat) => (unit.magicItemIds || []).some((id) => namedCatOf(id) === cat);
@@ -10459,7 +10518,8 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
                 const already = (unit.magicItemIds || []).includes(id);
                 const newIds = already ? (unit.magicItemIds || []).filter((x) => x !== id) : [...(unit.magicItemIds || []), id];
                 const newRuneItems = (!already && mi) ? { ...runeItems, [mi.cat]: [] } : runeItems;
-                updateUnit({ ...unit, magicItemIds: newIds, runeItems: newRuneItems });
+                const newScrollFamiliarIds = (already && id === "cm-scrollfamiliar") ? [] : unit.scrollFamiliarIds;
+                updateUnit({ ...unit, magicItemIds: newIds, runeItems: newRuneItems, scrollFamiliarIds: newScrollFamiliarIds });
               }} />
             {armyData.runeForge && ["weapon", "armour", "enchanted", "banner"].filter((c) => effFilter.includes(c)).length > 0 && (
               <RunesSection>
@@ -10470,6 +10530,25 @@ function CharacterDetail({ def: rawDef, unit, roster, updateUnit, armyData }) {
                 ))}
               </RunesSection>
             )}
+          </div>
+        );
+      })()}
+
+      {(unit.magicItemIds || []).includes("cm-scrollfamiliar") && (() => {
+        const scrollItems = armyData.magicItems.filter((mi) => SCROLL_FAMILIAR_ITEM_IDS.includes(mi.id));
+        const itemCtx = itemContext(def, unit, { characterId: def.id, mark: unit.mark || def.markGroup?.options?.[0] || def.impliedMark, tags: [...(def.tags || []), ...(roster.armyTheme ? [roster.armyTheme] : [])] });
+        const scrollUsedElsewhere = new Set([...usedElsewhere, ...((unit.magicItemIds || []).filter((id) => id !== "cm-scrollfamiliar"))]);
+        return (
+          <div style={{ marginTop: 14 }}>
+            <MagicItemPicker items={scrollItems} selectedIds={unit.scrollFamiliarIds || []} maxSlots={2} usedElsewhere={scrollUsedElsewhere}
+              categoryFilter={["arcane"]}
+              context={itemCtx}
+              label="Scroll Familiar's Scrolls"
+              onToggle={(id) => {
+                const already = (unit.scrollFamiliarIds || []).includes(id);
+                const newIds = already ? (unit.scrollFamiliarIds || []).filter((x) => x !== id) : [...(unit.scrollFamiliarIds || []), id];
+                updateUnit({ ...unit, scrollFamiliarIds: newIds });
+              }} />
           </div>
         );
       })()}
@@ -11682,6 +11761,20 @@ function useRosterWarnings(roster, armyData, totalPoints) {
   const wargearWarnings = useMemo(() => {
     const warnings = [];
     const hasArmourItem = (ids) => (ids || []).some((id) => miById(armyData.magicItems, id)?.cat === "armour");
+    const bannerCarriers = roster.characters.filter((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      return d?.bannerOption && u.carriesBanner;
+    });
+    const trueBsbCount = roster.characters.filter((u) => {
+      const d = armyData.characters.find((c) => c.id === u.defId);
+      return d && (d.tags || []).includes("bsb");
+    }).length;
+    if (bannerCarriers.length > 0 && trueBsbCount > 0) {
+      const d = armyData.characters.find((c) => c.id === bannerCarriers[0].defId);
+      warnings.push(`${bannerCarriers[0].customName ? `${bannerCarriers[0].customName} (${d.name})` : d.name} is carrying the battle standard, but you also have a separate Battle Standard Bearer in the roster — per the book, you can only have one. Remove one of them.`);
+    } else if (bannerCarriers.length > 1) {
+      warnings.push(`More than one character is carrying the battle standard — per the book, only one can.`);
+    }
     roster.characters.forEach((u) => {
       const d = armyData.characters.find((c) => c.id === u.defId);
       if (!d) return;
@@ -11866,7 +11959,7 @@ function useRosterWarnings(roster, armyData, totalPoints) {
     const warnings = [];
     const bsbUnit = roster.characters.find((u) => {
       const d = armyData.characters.find((c) => c.id === u.defId);
-      return d && (d.tags || []).includes("bsb");
+      return d && ((d.tags || []).includes("bsb") || (d.bannerOption && u.carriesBanner));
     });
     const armyWideBannerOfChampions = !!bsbUnit && (bsbUnit.magicItemIds || []).includes("cm-bannerofchampions");
     roster.regiments.forEach((u) => {
@@ -11905,7 +11998,7 @@ function useRosterInfo(roster, armyData) {
   const regimentPoints = useMemo(() => {
     const bsbUnit = roster.characters.find((u) => {
       const d = armyData.characters.find((c) => c.id === u.defId);
-      return d && (d.tags || []).includes("bsb");
+      return d && ((d.tags || []).includes("bsb") || (d.bannerOption && u.carriesBanner));
     });
     const armyWideBannerOfChampions = !!bsbUnit && (bsbUnit.magicItemIds || []).includes("cm-bannerofchampions");
     let t = 0;
