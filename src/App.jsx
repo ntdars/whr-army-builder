@@ -1164,7 +1164,30 @@ const COLLEGE_LORES = ["Celestial", "Grey", "Bright", "Gold", "Jade", "Light", "
 // plus "banner" back unless they already specify their own magicItemCategoryFilter. A character
 // with def.bannerOption (e.g. a Slann Mage Priest electing to carry the battle standard) gets the
 // same banner access, but only once the unit itself has actually toggled inst.carriesBanner on.
-const defaultCategoryFilter = (def, inst) => def?.magicItemCategoryFilter || (((def?.tags || []).includes("bsb") || (def?.bannerOption && inst?.carriesBanner)) ? [...NON_BANNER_CATEGORIES, "banner"] : NON_BANNER_CATEGORIES);
+const defaultCategoryFilter = (def, inst) => {
+  const base = def?.magicItemCategoryFilter || (((def?.tags || []).includes("bsb") || (def?.bannerOption && inst?.carriesBanner)) ? [...NON_BANNER_CATEGORIES, "banner"] : NON_BANNER_CATEGORIES);
+  // A character with its own Bloodline Powers picker (e.g. Vampire Lord: 2 magic items AND 2
+  // powers) must not also be offered powers in the magic item picker, or they'd eat item slots.
+  return def?.bloodlinePowerSlots > 0 ? base.filter((c) => c !== "bloodlinepower") : base;
+};
+// Rosters saved before the fix above may hold bloodline powers in a magic-item field of a
+// character that has a separate powers picker — move them across so they show up (and stop
+// counting against magic item slots) when the roster is loaded or imported.
+function migrateRoster(roster) {
+  const armyData = FACTIONS[roster?.factionKey];
+  if (!armyData) return roster;
+  const isPower = (id) => miById(armyData.magicItems, id)?.cat === "bloodlinepower";
+  const move = (u, def, field) => {
+    if (!def?.bloodlinePowerSlots || !(u[field] || []).some(isPower)) return u;
+    const powers = [...new Set([...(u.bloodlinePowerIds || []), ...u[field].filter(isPower)])].slice(0, def.bloodlinePowerSlots);
+    return { ...u, [field]: u[field].filter((id) => !isPower(id)), bloodlinePowerIds: powers };
+  };
+  return {
+    ...roster,
+    characters: (roster.characters || []).map((u) => move(u, applyBloodline(armyData.characters.find((c) => c.id === u.defId), roster.armyTheme), "magicItemIds")),
+    specials: (roster.specials || []).map((u) => move(u, (armyData.specialCharacters || []).find((c) => c.id === u.defId), "extraMagicItemIds")),
+  };
+}
 const miById = (magicItems, id) => (magicItems || []).find((m) => m.id === id);
 
 /* ============================================================================
@@ -11592,7 +11615,7 @@ function SpecialDetail({ def, unit, roster, updateUnit, armyData }) {
       {def.extraMagicItemSlots > 0 && (
         <div style={{ marginTop: 14 }}>
           <MagicItemPicker items={armyData.magicItems} selectedIds={unit.extraMagicItemIds || []} maxSlots={def.extraMagicItemSlots} usedElsewhere={usedElsewhere}
-            categoryFilter={def.magicItemCategoryFilter}
+            categoryFilter={def.bloodlinePowerSlots > 0 ? (def.magicItemCategoryFilter || Object.keys(MI_CATEGORY_LABEL)).filter((c) => c !== "bloodlinepower") : def.magicItemCategoryFilter}
             context={itemContext(def, unit, { characterId: def.id, tags: def.tags || [] })}
             onToggle={(id) => toggleArrayField(unit, "extraMagicItemIds", id, updateUnit)} />
         </div>
@@ -12681,7 +12704,7 @@ export default function App() {
     try {
       const res = await storage.get(`roster:${id}`);
       if (res) {
-        setRoster(JSON.parse(res.value));
+        setRoster(migrateRoster(JSON.parse(res.value)));
         setView("builder");
       }
     } catch (e) {
@@ -12729,7 +12752,7 @@ export default function App() {
   async function handleImportRoster(decodedRoster) {
     const armyData = getArmyData(decodedRoster.factionKey);
     if (!armyData) throw new Error("That code is for a faction this builder doesn't have loaded.");
-    const imported = { ...decodedRoster, id: uid("roster") };
+    const imported = migrateRoster({ ...decodedRoster, id: uid("roster") });
     let totalPoints = 0;
     imported.characters.forEach((u) => (totalPoints += unitCost(u, armyData, imported)));
     imported.regiments.forEach((u) => (totalPoints += unitCost(u, armyData, imported)));
